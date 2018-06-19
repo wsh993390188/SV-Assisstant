@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Driver Files">
+      <UniqueIdentifier>{8E41214B-6785-4CFE-B992-037D68949A14}</UniqueIdentifier>
+      <Extensions>inf;inv;inx;mof;mc;</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Driver">
+      <UniqueIdentifier>{c0bae0b6-5efb-4e07-b8bc-67a81311abe8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DriverModule">
+      <UniqueIdentifier>{9363bd1e-50d9-45af-ad82-bedcdaa55ba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Kernel">
+      <UniqueIdentifier>{7b42af3e-55f0-4f4c-ac73-3c57049d90ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nerwork">
+      <UniqueIdentifier>{1bd6eb53-18a1-4b84-a859-f4613a0bbf22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Processor">
+      <UniqueIdentifier>{2a688b76-7d7e-4248-9886-a4703249a5c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Ring0Hook">
+      <UniqueIdentifier>{5bb61a4e-3510-4a8f-955b-bcc446b51312}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Ring3Hook">
+      <UniqueIdentifier>{c0ba2b3f-a142-4f39-ad10-36f16d655d81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Driver">
+      <UniqueIdentifier>{f0fd57ad-b2df-4073-ba84-61b6cfcbf719}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DriverModule">
+      <UniqueIdentifier>{15fbe530-9eb5-4b01-b95a-307228390a68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Kernel">
+      <UniqueIdentifier>{012a3dc0-bdc6-4987-bdbe-6b42153dfb44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nerwork">
+      <UniqueIdentifier>{e1997181-582f-4e36-a63d-3d044d3e4d43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Ring3Hook">
+      <UniqueIdentifier>{199ab96f-af8b-43c6-b17a-f81aead9ed81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Ring0Hook">
+      <UniqueIdentifier>{b9ac9326-cc8b-42c5-8d1b-330d26e374d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Processor">
+      <UniqueIdentifier>{a4d1f4cd-ae03-46df-9940-2f7d637798fd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Inf Include="SystemInfo.inf">
+      <Filter>Driver Files</Filter>
+    </Inf>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Public.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ioctl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Driver\defination.h">
+      <Filter>Header Files\Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="Driver\Device.h">
+      <Filter>Header Files\Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="Driver\Driver.h">
+      <Filter>Header Files\Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="Driver\func.h">
+      <Filter>Header Files\Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="DriverModule\module.h">
+      <Filter>Header Files\DriverModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\Callback\callback.h">
+      <Filter>Header Files\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\DPCTimer.h">
+      <Filter>Header Files\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\Filter.h">
+      <Filter>Header Files\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\GDTABLE.h">
+      <Filter>Header Files\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="NetWork\nsiproxy.h">
+      <Filter>Header Files\Nerwork</Filter>
+    </ClInclude>
+    <ClInclude Include="NetWork\Tcpip.h">
+      <Filter>Header Files\Nerwork</Filter>
+    </ClInclude>
+    <ClInclude Include="NetWork\Tdx.h">
+      <Filter>Header Files\Nerwork</Filter>
+    </ClInclude>
+    <ClInclude Include="Ring3Hook\MsgHook.h">
+      <Filter>Header Files\Ring3Hook</Filter>
+    </ClInclude>
+    <ClInclude Include="Ring0Hook\AcpiHook.h">
+      <Filter>Header Files\Ring0Hook</Filter>
+    </ClInclude>
+    <ClInclude Include="Ring0Hook\AtapiHook.h">
+      <Filter>Header Files\Ring0Hook</Filter>
+    </ClInclude>
+    <ClInclude Include="Ring0Hook\DiskHook.h">
+      <Filter>Header Files\Ring0Hook</Filter>
+    </ClInclude>
+    <ClInclude Include="Ring0Hook\FSDHOOK.h">
+      <Filter>Header Files\Ring0Hook</Filter>
+    </ClInclude>
+    <ClInclude Include="Ring0Hook\I8042prtHook.h">
+      <Filter>Header Files\Ring0Hook</Filter>
+    </ClInclude>
+    <ClInclude Include="Ring0Hook\IDTABLE.h">
+      <Filter>Header Files\Ring0Hook</Filter>
+    </ClInclude>
+    <ClInclude Include="Ring0Hook\KeybroadHook.h">
+      <Filter>Header Files\Ring0Hook</Filter>
+    </ClInclude>
+    <ClInclude Include="Ring0Hook\MouseHook.h">
+      <Filter>Header Files\Ring0Hook</Filter>
+    </ClInclude>
+    <ClInclude Include="Ring0Hook\PartmgrHook.h">
+      <Filter>Header Files\Ring0Hook</Filter>
+    </ClInclude>
+    <ClInclude Include="Ring0Hook\ScsiHook.h">
+      <Filter>Header Files\Ring0Hook</Filter>
+    </ClInclude>
+    <ClInclude Include="Ring0Hook\SSDTHook.h">
+      <Filter>Header Files\Ring0Hook</Filter>
+    </ClInclude>
+    <ClInclude Include="Procssor\processor.h">
+      <Filter>Header Files\Processor</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Driver\Device.c">
+      <Filter>Source Files\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="Driver\Driver.c">
+      <Filter>Source Files\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="Driver\func.c">
+      <Filter>Source Files\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="DriverModule\module.c">
+      <Filter>Source Files\DriverModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\DPCTimer.c">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\Filter.c">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\GDTABLE.c">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\Callback\callback.c">
+      <Filter>Source Files\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="NetWork\nsiproxy.c">
+      <Filter>Source Files\Nerwork</Filter>
+    </ClCompile>
+    <ClCompile Include="NetWork\Tcpip.c">
+      <Filter>Source Files\Nerwork</Filter>
+    </ClCompile>
+    <ClCompile Include="NetWork\Tdx.c">
+      <Filter>Source Files\Nerwork</Filter>
+    </ClCompile>
+    <ClCompile Include="Ring3Hook\MsgHook.c">
+      <Filter>Source Files\Ring3Hook</Filter>
+    </ClCompile>
+    <ClCompile Include="Ring0Hook\AcpiHook.c">
+      <Filter>Source Files\Ring0Hook</Filter>
+    </ClCompile>
+    <ClCompile Include="Ring0Hook\AtapiHook.c">
+      <Filter>Source Files\Ring0Hook</Filter>
+    </ClCompile>
+    <ClCompile Include="Ring0Hook\DiskHook.c">
+      <Filter>Source Files\Ring0Hook</Filter>
+    </ClCompile>
+    <ClCompile Include="Ring0Hook\FSDHOOK.c">
+      <Filter>Source Files\Ring0Hook</Filter>
+    </ClCompile>
+    <ClCompile Include="Ring0Hook\I8042prtHook.c">
+      <Filter>Source Files\Ring0Hook</Filter>
+    </ClCompile>
+    <ClCompile Include="Ring0Hook\IDTABLE.c">
+      <Filter>Source Files\Ring0Hook</Filter>
+    </ClCompile>
+    <ClCompile Include="Ring0Hook\KeybroadHook.c">
+      <Filter>Source Files\Ring0Hook</Filter>
+    </ClCompile>
+    <ClCompile Include="Ring0Hook\MouseHook.c">
+      <Filter>Source Files\Ring0Hook</Filter>
+    </ClCompile>
+    <ClCompile Include="Ring0Hook\PartmgrHook.c">
+      <Filter>Source Files\Ring0Hook</Filter>
+    </ClCompile>
+    <ClCompile Include="Ring0Hook\ScsiHook.c">
+      <Filter>Source Files\Ring0Hook</Filter>
+    </ClCompile>
+    <ClCompile Include="Ring0Hook\SSDTHOOK.c">
+      <Filter>Source Files\Ring0Hook</Filter>
+    </ClCompile>
+    <ClCompile Include="Procssor\processor.c">
+      <Filter>Source Files\Processor</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,86 @@
+;
+; SystemTest.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Sample ; TODO: edit Class
+ClassGuid={78A1C341-4539-11d3-B88D-00C04FAD5171} ; TODO: edit ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=SystemTest.cat
+DriverVer= ; TODO: set DriverVer in stampinf property pages
+
+[DestinationDirs]
+DefaultDestDir = 12
+SystemTest_Device_CoInstaller_CopyFiles = 11
+
+; ================= Class section =====================
+
+[ClassInstall32]
+Addreg=SampleClassReg
+
+[SampleClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+SystemTest.sys  = 1,,
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with SourceDisksNames
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[Standard.NT$ARCH$]
+%SystemTest.DeviceDesc%=SystemTest_Device, Root\SystemTest ; TODO: edit hw-id
+
+[SystemTest_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+SystemTest.sys
+
+;-------------- Service installation
+[SystemTest_Device.NT.Services]
+AddService = SystemTest,%SPSVCINST_ASSOCSERVICE%, SystemTest_Service_Inst
+
+; -------------- SystemTest driver install sections
+[SystemTest_Service_Inst]
+DisplayName    = %SystemTest.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\SystemTest.sys
+
+;
+;--- SystemTest_Device Coinstaller installation ------
+;
+
+[SystemTest_Device.NT.CoInstallers]
+AddReg=SystemTest_Device_CoInstaller_AddReg
+CopyFiles=SystemTest_Device_CoInstaller_CopyFiles
+
+[SystemTest_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,WdfCoInstaller"
+
+[SystemTest_Device_CoInstaller_CopyFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll
+
+[SystemTest_Device.NT.Wdf]
+KmdfService =  SystemTest, SystemTest_wdfsect
+[SystemTest_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="Shanghai Zhaoxin Semiconductor Co., Ltd" ;TODO: Replace with your manufacturer name
+ClassName="Samples" ; TODO: edit ClassName
+DiskName = "SystemTest Installation Disk"
+SystemTest.DeviceDesc = "SystemTest Device"
+SystemTest.SVCDESC = "SystemTest Service"

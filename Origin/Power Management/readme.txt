@@ -1,0 +1,2 @@
+获取当前所有的电源模式
+更改模式为High Performance

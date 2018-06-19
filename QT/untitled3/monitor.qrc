@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/Monitor/Monitor.png</file>
+        <file>resources/Monitor/MonitorPressed.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Generated Files\Debug">
+      <UniqueIdentifier>{a52980df-76e7-422d-b17d-6e7635a63ab8}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Release">
+      <UniqueIdentifier>{e8301452-988d-4340-81cf-4cbd72e05be6}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="UsbController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UsbDefination.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UsbHub.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UsbPort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="appinit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="closebutton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cpuusageqcharts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diskselectbutton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="edidterrwidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="edidtextbrowser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainctrlbutton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pcicombobox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pcitablewidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rw_qtablewidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rwbasebutton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="settingbutton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="smbiostextbrowser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="smbiostreewidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sv_hardware_pushbutton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="usbtestbrowser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="usbtreewidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_rw_qtablewidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_rw_qtablewidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="UsbController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UsbDefination.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UsbHub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UsbPort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="appinit.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="closebutton.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="cpuusageqcharts.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="diskselectbutton.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="edidterrwidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="edidtextbrowser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="mainctrlbutton.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="mainwindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="pcicombobox.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="pcitablewidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="rwbasebutton.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="settingbutton.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="smbiostextbrowser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="smbiostreewidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="sv_hardware_pushbutton.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="usbtestbrowser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="usbtreewidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="debug\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="release\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rw_qtablewidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="mainwindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\CPU\AMD.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Button.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Button">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\CPU\CPU">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\EXE\Computer.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Main\HardWareInfo.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\CPU\INTEL.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Disk\Left.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Main\Modification.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Monitor\Monitor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Monitor\MonitorPressed.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Pressed.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\QSS\QScroll.css">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Disk\Right.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Main\Synthesize.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Main\background.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Usb\bang.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Main\close.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <QtRcc Include="cpu.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtRcc Include="disk.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtRcc Include="exeicon.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <None Include="resources\Usb\hub.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <QtRcc Include="main.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <None Include="resources\Main\minsize_black.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Main\minsize_grey.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Usb\monitor.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <QtRcc Include="monitor.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <None Include="resources\Usb\port.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <QtRcc Include="qss.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <None Include="resources\Main\selectbutton.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Main\setting_black.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Main\setting_grey.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Usb\ssport.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Usb\ssusb.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Usb\usb.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <QtRcc Include="usb.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="exeicon.rc" />
+  </ItemGroup>
+</Project>

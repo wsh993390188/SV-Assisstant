@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/CPU/CPU Button Pressed.png</file>
+        <file>resources/CPU/CPU Button.png</file>
+        <file>resources/CPU/AMD.jpg</file>
+        <file>resources/CPU/INTEL.jpg</file>
+    </qresource>
+</RCC>
