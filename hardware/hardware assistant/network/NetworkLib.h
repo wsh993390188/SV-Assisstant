@@ -8,10 +8,12 @@ Description: 获取Net Card的信息
 #include <vector>
 #include <string>
 
+
 namespace SV_ASSIST
 {
 	namespace Net
 	{
+		struct NetStruct;
 		/**************************************************************
 		*@Function				Exec
 		*@brief					获取网卡信息
@@ -41,6 +43,6 @@ namespace SV_ASSIST
 		*@return
 			*@std::vector<std::wstring>	网卡名		
 		****************************************************************/
-		const std::vector<std::wstring>& GetData();
+		const std::vector<NetStruct>& GetData();
 	}
 }

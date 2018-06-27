@@ -25,7 +25,6 @@ public:
     virtual ~CDISKWMI(void);
 public:
     HRESULT ExcuteFun();
-protected:
 	VOID SetNamespace(wstring wstrNamespace);
 private:
     HRESULT InitialCom();

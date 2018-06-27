@@ -11,18 +11,14 @@ Description:从驱动中读取IO Memory PCI MSR SuperIO SPD等等信息
 #include <conio.h>
 #include <winioctl.h>
 #include <stdio.h>
-#include <tchar.h>
 #include <iostream>
 #include <iomanip>
-#include <vector>
-#include <string>
 #include <algorithm>
-#include <memory>
 #include "../../ZhaoxinRing0/ioctl.h"
 #include "../../ZhaoxinRing0/Public.h"
 #include "Load/Driver.h"
 #include "SuperIo.h"
-#include "Ring0Defination.h"
+
 
 using namespace std;
 
@@ -46,16 +42,6 @@ extern TCHAR gDriverPath[MAX_PATH];
 #define		BE_EC					0x82
 #define		BD_EC					0x83
 #define		QR_EC					0x84
-
-
-
-
-typedef struct _Pci_All_Config_Space
-{
-	std::vector<TCHAR*> Label;
-	std::vector<PCI_COMMON_CONFIG> Pci_Config_Space;
-
-}Pci_All_Config_Space, *PPci_All_Config_Space;
 
 class UnCopyable
 {
@@ -220,7 +206,7 @@ public:
 	*@return
 		Pci_All_Config_Space	PCI Config Space 全部信息
 	*********************************************************/
-	const Pci_All_Config_Space ReturnPCIConfigSpace();
+	const Pci_All_Config_Space& ReturnPCIConfigSpace();
 
 	/**************************************************
 	*@Function					GetECData

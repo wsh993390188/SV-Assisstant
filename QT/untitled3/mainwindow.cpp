@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include "diskselectbutton.h"
 #include "cpuusageqcharts.h"
+#include "NetworkLib.h"
+#include "CAudio.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -113,7 +115,7 @@ void MainWindow::Init()
                 ThreadAffinity = ui->MSRcorenumlineEdit->text().toUInt();
             QString a = ui->MSRADDRlineEdit->text();
             DWORD64 Data = 0;
-            if(RdMsrTx(a.toUInt(nullptr, 16), Data, ThreadAffinity))
+            if(SV_ASSIST::Ring0::RdMsrTx(a.toUInt(nullptr, 16), Data, ThreadAffinity))
             {
                 ui->MSRDATAlineEdit->setText(QString::number(Data, 16).toUpper());
                 int row_count = ui->rwmsrtableWidget->rowCount();
@@ -133,7 +135,7 @@ void MainWindow::Init()
                 ThreadAffinity = ui->MSRcorenumlineEdit->text().toUInt();
             QString a = ui->MSRADDRlineEdit->text();
             QString b = ui->MSRADDRlineEdit->text();
-            WrMsrTx(a.toUInt(nullptr, 16), b.toUInt(nullptr, 16), ThreadAffinity);
+			SV_ASSIST::Ring0::WrMsrTx(a.toUInt(nullptr, 16), b.toUInt(nullptr, 16), ThreadAffinity);
         }
     });
     ui->msrcorenumpushButton->hide();
@@ -145,10 +147,10 @@ void MainWindow::Init()
     ui->rwmsrtableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->rwmsrtableWidget->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     this->send();
+	this->OtherUpdateData();
     this->diskupdate();
     this->gpuupdate();
-    this->updateMemory();
-    ui->smbiostreeWidget->UpdateData();
+	ui->smbiostreeWidget->UpdateData();
     ui->edidtextBrowser->UpdateData();
     timeID = this->startTimer(1000);
     gputimeID = this->startTimer(1000);
@@ -174,12 +176,10 @@ void MainWindow::timerEvent(QTimerEvent *event)
 
 void MainWindow::send()
 {
-    char t[0x100];
-    memset(t, 0 ,0x100);
-    SV_ASSIST::CPU::GetCPUName(t);
-    QString cpuname(t);
-    ui->cpunamelineEdit->setText(QString(t));
-    ui->maincpulabel->setText(QString(t));
+    std::string t = SV_ASSIST::CPU::GetCPUName();
+    QString cpuname(t.c_str());
+    ui->cpunamelineEdit->setText(QString(t.c_str()));
+    ui->maincpulabel->setText(QString(t.c_str()));
     int num = SV_ASSIST::CPU::GetFamily();
     QString x = QString("%1").arg(num);
     ui->familylineEdit->setText(QString::number(num, 10));
@@ -193,19 +193,16 @@ void MainWindow::send()
     ui->revisionlineEdit->setText(QString::number(num, 16).toUpper());
     num = SV_ASSIST::CPU::GetStepping();
     ui->steppinglineEdit->setText(QString::number(num, 10));
-    memset(t, 0 ,0x100);
-    SV_ASSIST::CPU::GetManufacturer(t);
-    ui->manufacturelineEdit->setText(QString(t));
+    t = SV_ASSIST::CPU::GetManufacturer();
+    ui->manufacturelineEdit->setText(QString(t.c_str()));
     num = SV_ASSIST::CPU::GetCurrentClockSpeed();
     ui->currentclocklineEdit->setText(QString::number(num, 10) + tr("Mhz"));
     num = SV_ASSIST::CPU::GetExtClock();
     ui->busspeedlineEdit->setText(QString::number(num, 10) + tr("Mhz"));
-    memset(t, 0 ,0x100);
-    SV_ASSIST::CPU::GetProcessorID(t);
-    ui->processoridlineEdit->setText(QString(t));
-    memset(t, 0 ,0x100);
-    SV_ASSIST::CPU::GetSocketDesignation(t);
-    ui->PackagelineEdit->setText(QString(t));
+    t = SV_ASSIST::CPU::GetProcessorID();
+    ui->processoridlineEdit->setText(QString(t.c_str()));
+    t = SV_ASSIST::CPU::GetSocketDesignation();
+    ui->PackagelineEdit->setText(QString(t.c_str()));
     const Cache_info *a = SV_ASSIST::CPU::GetCache();
     if(cpuname.contains(tr("Intel")))
     {
@@ -467,13 +464,12 @@ void MainWindow::diskupdate()
 
 void MainWindow::gpuupdate()
 {
-    char x[1024] = {};
-    SV_ASSIST::GPU::GPUName(x);
-    ui->gpunamelineEdit->setText(QString(x));
-    ui->maingpulabel->setText(QString(x));
-    memset(x, 0, 1024);
-    SV_ASSIST::GPU::GPUBIOSVersion(x);
-    ui->gpubiosversionlineEdit->setText(QString(x));
+	std::string x;
+    x = SV_ASSIST::GPU::GPUName();
+    ui->gpunamelineEdit->setText(QString(x.c_str()));
+    ui->maingpulabel->setText(QString(x.c_str()));
+    x = SV_ASSIST::GPU::GPUBIOSVersion();
+    ui->gpubiosversionlineEdit->setText(QString(x.c_str()));
     double y = 0;
     int yy = 0;
     y = SV_ASSIST::GPU::GPUtemperature();
@@ -497,15 +493,77 @@ void MainWindow::gpuupdate()
     ui->gpuusedmemorylineEdit->setText(QString::number(z-y) + tr(" MB"));
 }
 
+void MainWindow::OtherUpdateData()
+{
+	ui->AudiotableWidget->setColumnCount(5);
+	ui->AudiotableWidget->setHorizontalHeaderLabels(QStringList() << tr("Name") << tr("ID") << tr("State") << tr("Desc") << tr("Audioif"));
+	ui->AudiotableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	ui->AudiotableWidget->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	ui->AudiotableWidget->setHidden(false);
+	ui->AudiotableWidget->setContentsMargins(0, 0, 0, 0);
+
+	ui->NetworktableWidget->setColumnCount(4);
+	ui->NetworktableWidget->setHorizontalHeaderLabels(QStringList() << tr("Name") << tr("MediaType") << tr("State") << tr("DeviceName"));
+	ui->NetworktableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	ui->NetworktableWidget->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	ui->NetworktableWidget->setHidden(false);
+	ui->NetworktableWidget->setContentsMargins(0, 0, 0, 0);
+	SV_ASSIST::AUDIO::Exec();
+	auto asd = SV_ASSIST::AUDIO::GetOutputAudio();
+	if (!asd.empty())
+	{
+		QString name = {};
+		for (const auto& i : asd)
+		{
+			name = QString::fromStdWString(i.name);
+			if(name.contains(tr("NVIDIA")) || name.contains(tr("AMD")))
+				break;
+		}
+		ui->mainaudiolabel->setText(name);
+		int row_count = -1;
+		int count = 0;
+		for (const auto& i : asd)
+		{
+			row_count = ui->AudiotableWidget->rowCount();
+			ui->AudiotableWidget->insertRow(row_count); //插入新行
+			ui->AudiotableWidget->setVerticalHeaderItem(row_count, new QTableWidgetItem(QString::number(++count)));
+			ui->AudiotableWidget->setItem(row_count, 0, new QTableWidgetItem(QString::fromStdWString(i.name)));
+			ui->AudiotableWidget->setItem(row_count, 1, new QTableWidgetItem(QString::fromStdWString(i.id)));
+			ui->AudiotableWidget->setItem(row_count, 2, new QTableWidgetItem(QString::fromStdWString(i.state)));
+			ui->AudiotableWidget->setItem(row_count, 3, new QTableWidgetItem(QString::fromStdWString(i.desc)));
+			ui->AudiotableWidget->setItem(row_count, 4, new QTableWidgetItem(QString::fromStdWString(i.audioif)));
+		}
+	}
+	SV_ASSIST::Net::Exec();
+	auto a = SV_ASSIST::Net::GetData();
+	this->updateMemory();
+	if (!a.empty())
+	{
+		ui->mainnetlabel->setText(QString::fromStdWString(a.at(0).DeviceName));
+		int row_count = -1;
+		int count = 0;
+		for (const auto& i : a)
+		{
+			row_count = ui->NetworktableWidget->rowCount();
+			ui->NetworktableWidget->insertRow(row_count); //插入新行
+			ui->NetworktableWidget->setVerticalHeaderItem(row_count, new QTableWidgetItem(QString::number(++count)));
+			ui->NetworktableWidget->setItem(row_count, 0, new QTableWidgetItem(QString::fromStdWString(i.Name)));
+			ui->NetworktableWidget->setItem(row_count, 1, new QTableWidgetItem(QString::fromStdWString(i.MediaType)));
+			ui->NetworktableWidget->setItem(row_count, 2, new QTableWidgetItem(QString::fromStdWString(i.state)));
+			ui->NetworktableWidget->setItem(row_count, 3, new QTableWidgetItem(QString::fromStdWString(i.DeviceName)));
+		}
+	}
+}
+
 void MainWindow::updateMemory()
 {
     DDR3_INFO ddr3 = {};
-	USHORT VendorID = GetPCIVendorID();
+	USHORT VendorID = SV_ASSIST::Ring0::GetPCIVendorID();
 	USHORT SMBASE = 0;
-	if(GetSMbusBaseAddr(VendorID, SMBASE))
+	if(SV_ASSIST::Ring0::GetSMbusBaseAddr(VendorID, SMBASE))
     //GetSMbusBaseAddr();
 	{
-        if(ReadSPD(SMBASE, 0xA0, ddr3))
+        if(SV_ASSIST::Ring0::ReadSPD(SMBASE, 0xA0, ddr3))
         {
             char a[20] = {};
             memcpy(a, ddr3.PartNumber, 18);

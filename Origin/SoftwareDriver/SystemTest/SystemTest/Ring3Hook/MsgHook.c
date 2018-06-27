@@ -35,9 +35,11 @@ NTSTATUS MsgHook_GetAddress(WDFREQUEST Request, size_t InputBufferLength, size_t
 	{
 		return STATUS_UNSUCCESSFUL;
 	}
+	return state;
 	__try {
-		DWORD64 rwkm_adr = *(PDWORD64)InputBuffer;
-		DWORD64 rwkm_len = *(PDWORD64)(rwkm_adr + 16);
+		DWORD64 rwkm_adr = (*(PDWORD64)InputBuffer) + 8;
+		DWORD64 rwkm_len = *(PDWORD64)(rwkm_adr + 8);
+
 		Destination = ExAllocatePool(PagedPool, rwkm_len);
 		if (!Destination)	return STATUS_NO_MEMORY;
 		state = VxkCopyMemory(Destination, (PVOID)rwkm_adr, rwkm_len);
@@ -60,12 +62,13 @@ NTSTATUS MsgHook_GetAddress(WDFREQUEST Request, size_t InputBufferLength, size_t
 						if (MmIsAddressValid((PHOOK_INFO)test))
 						{
 							PHOOK_INFO Hook = test;
-// 							KdPrint(("hHandle:     0x%llx\n", Hook->hHandle));
-// 							KdPrint(("iHookFlags:  %d\n", Hook->iHookFlags));
-// 							KdPrint(("iHookType:   %s\n", MSG_HOOOKTYPES[Hook->iHookType + 1]));
-// 							KdPrint(("OffPfn:      0x%llx\n", Hook->OffPfn));
-// 							KdPrint(("ETHREAD:     0x%llx\n", GetQWORD((UINT64)(Hook.Win32Thread)));
-// 							KdPrint(("ProcessName: %s\n\n", GetPNbyET(GetQWORD((UINT64)(Hook.Win32Thread))));
+							if (MmIsAddressValid(&Hook->hHandle) && MmIsAddressValid(&Hook->iHookFlags) && MmIsAddressValid(&Hook->OffPfn) && MmIsAddressValid(&Hook->iHookType) && Hook->iHookType < 0xf)
+							{
+								KdPrint(("hHandle:     0x%llx\n", Hook->hHandle));
+								KdPrint(("iHookFlags:  %d\n", Hook->iHookFlags));
+								KdPrint(("iHookType:   %s\n", MSG_HOOOKTYPES[Hook->iHookType + 1]));
+								KdPrint(("OffPfn:      0x%llx\n", Hook->OffPfn));
+							}
 						}
 					}
 				}

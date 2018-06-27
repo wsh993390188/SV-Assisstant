@@ -1,7 +1,7 @@
 // Driverdll.cpp : 定义 DLL 应用程序的导出函数。
 //
 
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "Driverdll.h"
 #include "Zhaoxin.h"
 
@@ -79,6 +79,16 @@ namespace SV_ASSIST
 			return ZhaoxinDriver::GetPCIVendorID();
 		}
 
+		DRIVERDLL_API BOOL GetPCIDeviceName(USHORT VenderID, USHORT DeviceID, std::string & VenderName, std::string & DeviceName)
+		{
+			return ZhaoxinDriver::GetPCIDeviceName(VenderID, DeviceID, VenderName, DeviceName);
+		}
+
+		DRIVERDLL_API const Pci_All_Config_Space & GetAllPciInfo()
+		{
+			return ZhaoxinDriver::GetAllPciInfo();
+		}
+
 		DRIVERDLL_API BOOL GetSMbusBaseAddr(const USHORT VendorID, USHORT& SMbusBaseAddress)
 		{
 			BOOL Success = FALSE;
@@ -99,6 +109,9 @@ namespace SV_ASSIST
 				Success = TRUE;
 				break;
 			case 0x1002:
+			case 0x1022:
+				SMbusBaseAddress = 0xB00;
+				Success = TRUE;
 				break;
 			default:
 				break;

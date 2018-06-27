@@ -1,7 +1,13 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "Zhaoxin.h"
+#include <fstream>
 
 shared_ptr<CRing0> ZhaoxinDriver::ring = make_shared<CRing0>();
+PCIDB ZhaoxinDriver::pciDB;
+ZhaoxinDriver::ZhaoxinDriver()
+{
+	InitPciDB();
+}
 
 BOOL ZhaoxinDriver::RdIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, OUT DWORD64 & IO_Data)
 {
@@ -96,4 +102,53 @@ BOOL ZhaoxinDriver::SetECData(BYTE EC_Addr, BYTE EC_Write_Data)
 USHORT ZhaoxinDriver::GetPCIVendorID()
 {
 	return ring->VendorID;
+}
+
+const Pci_All_Config_Space& ZhaoxinDriver::GetAllPciInfo()
+{
+	return ring->ReturnPCIConfigSpace();
+}
+
+BOOL ZhaoxinDriver::GetPCIDeviceName(USHORT VenderID, USHORT DeviceID, std::string & VenderName, std::string & DeviceName)
+{
+	VenderName = (pciDB.first.count(VenderID) > 0) ? pciDB.first.at(VenderID).c_str() : "unknown vendor";
+	DeviceName = (pciDB.second.count(VenderID) > 0 && pciDB.second.at(VenderID).count(DeviceID) > 0) ? pciDB.second.at(VenderID).at(DeviceID).c_str() : "unknown device";
+	return TRUE;
+}
+
+BOOL ZhaoxinDriver::InitPciDB()
+{
+	std::ifstream in("pci.ids");
+	std::string line, item;
+
+	if (!in.is_open())
+	{
+		std::cerr << "pci.ids file is not available. Download it from https://raw.githubusercontent.com/pciutils/pciids/master/pci.ids " << endl;
+		return FALSE;
+	}
+
+	int vendorID = -1;
+
+	while (std::getline(in, line)) {
+		// Ignore any line starting with #
+		if (line.size() == 0 || line[0] == '#')
+			continue;
+
+		if (line[0] == '\t' && line[1] == '\t')
+		{
+			// subvendor subdevice  subsystem_name
+			continue;
+		}
+		if (line[0] == '\t')
+		{
+			int deviceID = stoi(line.substr(1, 4), 0, 16);
+			//std::cout << vendorID << ";" << vendorName << ";" << deviceID << ";"<< line.substr(7) << endl;
+			pciDB.second[vendorID][deviceID] = line.substr(7);
+			continue;
+		}
+		// vendor
+		vendorID = stoi(line.substr(0, 4), 0, 16);
+		pciDB.first[vendorID] = line.substr(6);
+	}
+	return TRUE;
 }

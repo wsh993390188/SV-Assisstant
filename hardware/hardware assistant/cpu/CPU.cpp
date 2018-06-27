@@ -1,4 +1,4 @@
-// CPU.cpp : �������̨Ӧ�ó������ڵ㡣
+// CPU.cpp :
 //
 #include "stdafx.h"
 #include "CPU.h"
@@ -75,77 +75,77 @@ const std::string& SV_ASSIST::CPU::GetSocketDesignation()
 	return CPUDLL::GetSocketDesignation();
 }
 
- const UINT SV_ASSIST::CPU::GetCurrentClockSpeed()
+const UINT SV_ASSIST::CPU::GetCurrentClockSpeed()
 {
 	return CPUDLL::GetCurrentClockSpeed();
 }
 
- const UINT SV_ASSIST::CPU::GetExtClock()
+const UINT SV_ASSIST::CPU::GetExtClock()
 {
 	return CPUDLL::GetExtClock();
 }
 
- const UINT SV_ASSIST::CPU::GetCore()
+const UINT SV_ASSIST::CPU::GetCore()
 {
 	return CPUDLL::GetCore();
 }
 
- const UINT SV_ASSIST::CPU::GetThread()
+const UINT SV_ASSIST::CPU::GetThread()
 {
 	return CPUDLL::GetThread();
 }
 
- const UINT SV_ASSIST::CPU::GetRevision()
+const UINT SV_ASSIST::CPU::GetRevision()
 {
 	return CPUDLL::GetRevision();
 }
 
- const UINT SV_ASSIST::CPU::GetMaxClockSpeed()
+const UINT SV_ASSIST::CPU::GetMaxClockSpeed()
 {
 	return CPUDLL::GetMaxClockSpeed();
 }
 
- const UINT SV_ASSIST::CPU::GetUpgradeMethod()
+const UINT SV_ASSIST::CPU::GetUpgradeMethod()
 {
 	return CPUDLL::GetUpgradeMethod();
 }
 
 const std::string& SV_ASSIST::CPU::GetManufacturer()
 {
-	return CPUDLL::GetManufacturer();
+	 return CPUDLL::GetManufacturer();
 }
 
- const short SV_ASSIST::CPU::GetFamily()
+const short SV_ASSIST::CPU::GetFamily()
 {
 	return CPUDLL::GetFamily();
 }
 
- const short SV_ASSIST::CPU::GetModel()
+const short SV_ASSIST::CPU::GetModel()
 {
 	return CPUDLL::GetModel();
 }
 
- const short SV_ASSIST::CPU::GetStepping()
+const short SV_ASSIST::CPU::GetStepping()
 {
 	return CPUDLL::GetStepping();
 }
 
- const short SV_ASSIST::CPU::GetExtFamily()
+const short SV_ASSIST::CPU::GetExtFamily()
 {
 	return CPUDLL::GetExtFamily();
 }
 
- const short SV_ASSIST::CPU::GetExtModel()
+const short SV_ASSIST::CPU::GetExtModel()
 {
 	return CPUDLL::GetExtModel();
 }
 
- const CPUFeature& SV_ASSIST::CPU::GetFeature()
+const CPUFeature& SV_ASSIST::CPU::GetFeature()
 {
 	return CPUDLL::GetFeature();
 }
 
- const Cache_info * SV_ASSIST::CPU::GetCache()
+const Cache_info * SV_ASSIST::CPU::GetCache()
 {
 	return CPUDLL::GetCache();
 }

@@ -15,8 +15,6 @@
 #include <vector>
 #include <string>
 
-#pragma comment(lib, "SetupAPI.lib")
-
 using namespace std;
 #define USB_DESCRIPTOR_MAX_LENGTH 18
 

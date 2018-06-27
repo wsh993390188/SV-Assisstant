@@ -23,7 +23,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
@@ -94,13 +93,11 @@ win32: LIBS += -L$$PWD/Lib/ -lDriverdll
 INCLUDEPATH += $$PWD/Lib
 DEPENDPATH += $$PWD/Lib
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/Lib/ -lsv-assistant
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/Lib/ -lsv-assistantd
+
+win32: LIBS += -L$$PWD/Lib/ -lsv-assistant
 
 INCLUDEPATH += $$PWD/Lib
 DEPENDPATH += $$PWD/Lib
 
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/Lib/libsv-assistant.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/Lib/libsv-assistantd.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/Lib/sv-assistant.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/Lib/sv-assistantd.lib
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/Lib/sv-assistant.lib
+else:win32-g++: PRE_TARGETDEPS += $$PWD/Lib/libsv-assistant.a

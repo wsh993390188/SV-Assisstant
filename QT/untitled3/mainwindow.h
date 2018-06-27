@@ -35,10 +35,10 @@ protected:
 private:
     void Init();
     void keyPressEvent(QKeyEvent *event);
-    void updateuiedid();
     void diskupdate();
     void updateMemory();
     void gpuupdate();
+	void OtherUpdateData();
     bool cleardir(const QString &dirName);
 private slots:
     void send();

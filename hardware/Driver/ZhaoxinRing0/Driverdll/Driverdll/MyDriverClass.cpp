@@ -1,12 +1,16 @@
-//#include "stdafx.h"
-#include "Memory/DDR3/DDR3.h"
+#include "stdafx.h"
+#include "MyDriverClass.h"
 
 CRing0::CRing0():SuperIO_Ctrl_Port(0x2E),SuperIO_Data_Port(0x2F), hdevice(INVALID_HANDLE_VALUE)
 {
 	if(this->CRing0_Initialize())
 	{
 		this->ReadAllPci();
-		VendorID = Pci_Config_space.Pci_Config_Space[0].VendorID; 
+		if (Pci_Config_space.pciconfig.size())
+		{
+			auto a = Pci_Config_space.pciconfig.at(0);
+			VendorID = a.VendorID;
+		}
 	}
 }
 
@@ -262,12 +266,8 @@ BOOL CRing0::ReadAllPci()
 				this->ReadPci(bus, dev, func, Pci_Temp);
 				if (Pci_Temp.VendorID != 0xFFFF)
 				{
-					wstring temp = _T("bus:") + to_wstring((_ULonglong)bus) + _T(" dev:") + to_wstring((_ULonglong)dev) + _T(" func:") + to_wstring((_ULonglong)func);
-					unique_ptr<TCHAR[]> name_buffer(new TCHAR[temp.length() + 2]);
-					//memset(name_buffer,0,temp.length());
-					wcsncpy_s(name_buffer.get(), temp.length() + 2, temp.c_str(),temp.length() + 1);
-					Pci_Config_space.Label.emplace_back(name_buffer.get());
-					Pci_Config_space.Pci_Config_Space.emplace_back(Pci_Temp);
+					wstring temp = _T("bus:") + to_wstring(bus) + _T(" dev:") + to_wstring(dev) + _T(" func:") + to_wstring(func);
+					Pci_Config_space.pciconfig.insert(std::map<std::wstring, PCI_COMMON_CONFIG>::value_type(temp, Pci_Temp));
 				}
 			}
 		}
@@ -339,7 +339,7 @@ BOOL CRing0::ReadITE()
 	return TRUE;
 }
 
-const Pci_All_Config_Space CRing0::ReturnPCIConfigSpace()
+const Pci_All_Config_Space& CRing0::ReturnPCIConfigSpace()
 {
 	return this->Pci_Config_space;
 }

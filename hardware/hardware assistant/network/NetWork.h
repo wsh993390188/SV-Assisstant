@@ -1,24 +1,33 @@
 #pragma once
 
 #include <atlbase.h>
+#include <vector>
+#include <string>
 #include <NetCon.h>
 #include <locale>
-
-#pragma comment(lib,"Iphlpapi.lib")
-#pragma comment(lib,"Rpcrt4.lib")
-#pragma comment(lib,"ole32.lib")
+#include <wlanapi.h>
+#include <objbase.h>
+#include <wtypes.h>
 
 namespace SV_ASSIST
 {
 	namespace Net
 	{
+		struct NetStruct
+		{
+			std::wstring DeviceName;
+			std::wstring state;
+			std::wstring MediaType;
+			std::wstring Name;
+		};
+
 		class NetWorkInterface
 		{
 		public:
 			virtual ~NetWorkInterface();
 			virtual void Exec() = 0;
 			virtual void Update() = 0;
-			virtual const std::vector<std::wstring> & GetData() = 0;
+			virtual const std::vector<NetStruct> & GetData() = 0;
 		protected:
 			NetWorkInterface();
 		private:
@@ -31,14 +40,16 @@ namespace SV_ASSIST
 		public:
 			NetWork();
 			~NetWork();
-
 			void Exec();
-
+			BOOL EnumWlan();
 			void Update();
-			const std::vector<std::wstring> & GetData();
+			const std::vector<NetStruct> & GetData();
 
 		private:
-			std::vector<std::wstring> t;
+			std::wstring GetDeviceState(IN DWORD state);
+			std::wstring GetDeviceMediaType(IN DWORD state);
+			HRESULT hr;
+			std::vector<NetStruct> NetInfo;
 			CComPtr<INetConnectionManager>  pManager;
 			CComPtr<INetConnection> pConnection;
 			CComPtr<IEnumNetConnection> pEnum;

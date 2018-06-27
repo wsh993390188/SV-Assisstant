@@ -1,17 +1,5 @@
-// 下列 ifdef 块是创建使从 DLL 导出更简单的
-// 宏的标准方法。此 DLL 中的所有文件都是用命令行上定义的 DRIVERDLL_EXPORTS
-// 符号编译的。在使用此 DLL 的
-// 任何其他项目上不应定义此符号。这样，源文件中包含此文件的任何其他项目都会将
-// DRIVERDLL_API 函数视为是从 DLL 导入的，而此 DLL 则将用此宏定义的
-// 符号视为是被导出的。
-#ifdef DRIVERDLL_EXPORTS
-#define DRIVERDLL_API __declspec(dllexport)
-#else
-#define DRIVERDLL_API __declspec(dllimport)
-#endif
-
 #include <windows.h>
-#include "Ring0Defination.h"
+#include "Defination\Ring0Defination.h"
 
 namespace SV_ASSIST
 {
@@ -200,5 +188,29 @@ namespace SV_ASSIST
         *@USHORT					厂商pci代号，如1022、8086、1106
         ****************************************************/
         DRIVERDLL_API USHORT GetPCIVendorID();
+
+		/***************************************************
+		*@Function					GetPCIDeviceName
+		*@brief						获取Pci厂商名
+		*@author					王硕
+		*@param
+		*@VenderID					厂商ID号
+		*@DeviceID					设备ID号
+		*@VenderName				输出厂商名
+		*@DeviceName				输出设备名
+		*@return
+		*@USHORT					厂商pci代号，如1022、8086、1106
+		****************************************************/
+		DRIVERDLL_API BOOL GetPCIDeviceName(USHORT VenderID, USHORT DeviceID, std::string& VenderName, std::string& DeviceName);
+
+		/***************************************************
+		*@Function					GetAllPciInfo
+		*@brief						获取全部的PCI配置空间信息
+		*@author					王硕
+		*@param
+		*@return
+		*@Pci_All_Config_Space		Pci设备
+		****************************************************/
+		DRIVERDLL_API const Pci_All_Config_Space& GetAllPciInfo();
     }
 }

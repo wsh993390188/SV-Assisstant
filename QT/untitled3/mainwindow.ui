@@ -854,7 +854,7 @@
            <string notr="true">background-color: rgb(255, 255, 255);</string>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>6</number>
           </property>
           <widget class="QWidget" name="CPUPage">
            <property name="styleSheet">
@@ -6123,7 +6123,19 @@ p, li { white-space: pre-wrap; }
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="otherspage"/>
+          <widget class="QWidget" name="otherspage">
+           <layout class="QHBoxLayout" name="horizontalLayout_12">
+            <item>
+             <widget class="QSplitter" name="splitter">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <widget class="QTableWidget" name="AudiotableWidget"/>
+              <widget class="QTableWidget" name="NetworktableWidget"/>
+             </widget>
+            </item>
+           </layout>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -6479,7 +6491,7 @@ p, li { white-space: pre-wrap; }
               <item>
                <widget class="QPushButton" name="msrcorenumpushButton">
                 <property name="text">
-                 <string>WDMSR</string>
+                 <string>CLEAR</string>
                 </property>
                </widget>
               </item>

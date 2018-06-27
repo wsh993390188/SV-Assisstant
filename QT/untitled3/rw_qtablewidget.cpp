@@ -57,7 +57,7 @@ void RW_Qtablewidget::setIOMapping()
     for(int i = 0; i <=0xFF; i++)
     {
         DWORD64 IOData = 0;
-        RdIOPort(this->IOBase + i, 1, IOData);
+		SV_ASSIST::Ring0::RdIOPort(this->IOBase + i, 1, IOData);
         if(i%16 == 0)
         {
             row_count = this->rowCount();
@@ -75,7 +75,7 @@ void RW_Qtablewidget::setMemoryMapping()
     for(int i = 0; i <=0xFF; i++)
     {
         DWORD MemData = 0;
-        RdMemory(this->MemBase + i, 1, MemData);
+		SV_ASSIST::Ring0::RdMemory(this->MemBase + i, 1, MemData);
         if(i%16 == 0)
         {
             row_count = this->rowCount();
@@ -163,7 +163,7 @@ void RW_Qtablewidget::SetIOData(int row, int column)
         uint data = InputAddr->text().toUInt(nullptr, 16);
         uint baseaddr = this->IOBase + row * 16 + column;
         qDebug() << "Base Addr"<< baseaddr;
-        WrIOPort(baseaddr, 1, data);
+		SV_ASSIST::Ring0::WrIOPort(baseaddr, 1, data);
     }
 
 
@@ -245,7 +245,7 @@ void RW_Qtablewidget::SetMemoryData(int row, int column)
         uint data = InputAddr->text().toUInt(nullptr, 16);
         uint baseaddr = this->IOBase + row * 16 + column;
         qDebug() << "Base Addr"<< baseaddr;
-        WrMemory(baseaddr, 1, data);
+		SV_ASSIST::Ring0::WrMemory(baseaddr, 1, data);
     }
 }
 

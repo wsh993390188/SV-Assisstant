@@ -1,7 +1,13 @@
-SV-助手 分三大模块 硬件助手 软件助手 系统测试
+SV-助手 分 硬件助手 软件助手
 
 硬件助手 仿制cpuz gpuz aida64 hwinfo rweverthing
 软件助手 仿制PCHunter
-系统测试 无头绪
 
 开发中 只是个代码仓库 自己用着玩的
+
+参考开源软件or项目:
+https://github.com/skitaoka/windows-core-audio-api-samples
+https://github.com/opcm/pcm
+https://github.com/Microsoft/Windows-driver-samples
+https://github.com/hiyohiyo/CrystalDiskInfo
+https://sourceforge.net/projects/winring0/

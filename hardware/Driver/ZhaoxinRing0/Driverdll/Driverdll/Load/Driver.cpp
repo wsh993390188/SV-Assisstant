@@ -6,7 +6,8 @@
 //
 //                          Copyright 2007 OpenLibSys.org. All rights reserved.
 //-----------------------------------------------------------------------------
-//#include "stdafx.h"
+
+#include "stdafx.h"
 #include <DriverSpecs.h>
 _Analysis_mode_(_Analysis_code_type_user_code_)
 

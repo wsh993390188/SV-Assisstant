@@ -28,13 +28,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -76,14 +76,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\boost_1_67_0;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\boost_1_67_0;C:\Users\wsh\OneDrive\SV-Assisstant\hardware\hardware assistant\gpu\NVAPILIB;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x86;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;C:\Users\wsh\OneDrive\SV-ZhuShou\hardware\gpu\NVAPILIB;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>NVAPI.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x86;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;C:\Users\wsh\OneDrive\SV-Assisstant\hardware\hardware assistant\gpu\NVAPILIB;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wlanapi.lib;NVAPI.lib;propsys.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;Iphlpapi.lib;SetupAPI.lib;Rpcrt4.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -92,16 +92,16 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\boost_1_67_0;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\work\boost_1_67_0;$(DXSDK_DIR)\Include;D:\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
-      <AdditionalDependencies>nvapi64.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wlanapi.lib;nvapi64.lib;propsys.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;Iphlpapi.lib;Rpcrt4.lib;SetupAPI.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;C:\Users\wsh\OneDrive\SV-ZhuShou\hardware\gpu\NVAPILIB;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;E:\work\boost\bin1.63.0\VC14.0threading=multi\lib;C:\Users\Shuo\OneDrive\SV-Assisstant\hardware\hardware assistant\gpu\NVAPILIB;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;C:\Users\wsh\OneDrive\SV-Assisstant\hardware\hardware assistant\gpu\NVAPILIB;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -112,7 +112,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\boost_1_67_0;C:\Users\wsh\OneDrive\SV-Assisstant\hardware\hardware assistant\gpu\NVAPILIB;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -120,8 +120,8 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x86;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;C:\Users\wsh\OneDrive\SV-ZhuShou\hardware\gpu\NVAPILIB;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>NVAPI.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x86;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;C:\Users\wsh\OneDrive\SV-Assisstant\hardware\hardware assistant\gpu\NVAPILIB;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wlanapi.lib;NVAPI.lib;propsys.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;Iphlpapi.lib;SetupAPI.lib;Rpcrt4.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -132,7 +132,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\boost_1_67_0;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\work\boost_1_67_0;$(DXSDK_DIR)\Include;D:\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -140,16 +140,17 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>nvapi64.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wlanapi.lib;nvapi64.lib;propsys.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;Iphlpapi.lib;Rpcrt4.lib;SetupAPI.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;C:\Users\wsh\OneDrive\SV-ZhuShou\hardware\gpu\NVAPILIB;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;E:\work\boost\bin1.63.0\VC14.0threading=multi\lib;C:\Users\Shuo\OneDrive\SV-Assisstant\hardware\hardware assistant\gpu\NVAPILIB;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;C:\Users\wsh\OneDrive\SV-Assisstant\hardware\hardware assistant\gpu\NVAPILIB;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Audio\CAudio.h" />
     <ClInclude Include="..\..\cpu\amd.h" />
     <ClInclude Include="..\..\cpu\CPU.h" />
     <ClInclude Include="..\..\cpu\CPUBase.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Audio\CAudio.cpp" />
     <ClCompile Include="..\..\cpu\amd.cpp" />
     <ClCompile Include="..\..\cpu\CPU.cpp" />
     <ClCompile Include="..\..\cpu\CPUBase.cpp" />

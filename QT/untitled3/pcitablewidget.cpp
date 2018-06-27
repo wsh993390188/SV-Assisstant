@@ -11,7 +11,7 @@ pcitablewidget::pcitablewidget(QWidget *parent) : QTableWidget(parent)
     this->setHidden(false);
     this->setContentsMargins(0,0,0,0);
     PCI_COMMON_CONFIG pci = {};
-    ReadPci(0, 0, 0, pci);
+	SV_ASSIST::Ring0::ReadPci(0, 0, 0, pci);
     this->setRowCount(0);
     int row_count = -1;
     unsigned char a[0x100];
@@ -37,7 +37,7 @@ void pcitablewidget::RecivePCIName(QString PCIName)
     int bus, dev,func;
     sscanf(ch, "bus %d dev %d func %d", &bus, &dev, &func);
     PCI_COMMON_CONFIG pci = {};
-    ReadPci(bus, dev, func, pci);
+    SV_ASSIST::Ring0::ReadPci(bus, dev, func, pci);
     this->setRowCount(0);
     int row_count = -1;
     unsigned char a[0x100];

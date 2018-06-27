@@ -85,8 +85,8 @@
 	Cache Information Current SRAM Type:		
 	Cache Information Cache Configuration:		0281
 	Cache Information Maximum Cache Size:		0100
-	Cache Information System Cache Type:		
 	Cache Information Cache Speed:		00
+	Cache Information System Cache Type:		
 	Cache Information Installed Size:		0100
 	Cache Information SRAM Type:		
 	Cache Information Error Correction Type:		
@@ -445,25 +445,25 @@
 	Physical Memory Array Error Information Handle:		FFFE
 	Physical Memory Array Extended Maximum Capacity:		0000000000000008
 [Memory Device Information #1]
-	Memory Device Size:		0000
+	Memory Device Size:		2000
 	Memory Device Physical Memory Array Handle:		0037
 	Memory Bank Locator:		ChannelA
-	Memory Device Locator:		ChannelA_Dimm1
 	Memory Device Total Width:		0048
-	Memory Device Error Information Handle:		FFFE
+	Memory Device Locator:		ChannelA_Dimm1
 	Memory Device Extended Size:		00000000
+	Memory Device Error Information Handle:		FFFE
 	Memory Device Data Width:		0040
 	Memory Device Form Factor:		
-	Memory Device Set:		00
-	Memory Device Type:		
 	Memory Device Asset Tag:		ChannelA_Dimm1_AssetTag
+	Memory Device Type:		
+	Memory Device Set:		00
 	Memory Device Type Detail:		0080
-	Memory Device Speed:		0000
-	Memory Device Manufacturer:		ChannelA_Dimm1_Manufacturer
-	Memory Device Attributes:		00
-	Memory Device Serial Number:		ChannelA_Dimm1_SerNum
-	Memory Device Part Number:		ChannelA_Dimm1_PartNum
-	Memory Device Configured Memory Clock Speed:		0000
+	Memory Device Speed:		0640
+	Memory Device Attributes:		02
+	Memory Device Manufacturer:		Transcend                  
+	Memory Device Serial Number:		213D6D47             
+	Memory Device Part Number:		JM1600KED-8G          
+	Memory Device Configured Memory Clock Speed:		0640
 [Memory Device Information #2]
 	Memory Device Size:		0000
 	Memory Device Physical Memory Array Handle:		0037
@@ -485,25 +485,25 @@
 	Memory Device Part Number:		ChannelA_Dimm2_PartNum
 	Memory Device Configured Memory Clock Speed:		0000
 [Memory Device Information #3]
-	Memory Device Size:		0000
+	Memory Device Size:		2000
 	Memory Device Physical Memory Array Handle:		0037
 	Memory Bank Locator:		ChannelB
-	Memory Device Locator:		ChannelB_Dimm1
 	Memory Device Total Width:		0048
-	Memory Device Error Information Handle:		FFFE
+	Memory Device Locator:		ChannelB_Dimm1
 	Memory Device Extended Size:		00000000
+	Memory Device Error Information Handle:		FFFE
 	Memory Device Data Width:		0040
 	Memory Device Form Factor:		
-	Memory Device Set:		00
-	Memory Device Type:		
 	Memory Device Asset Tag:		ChannelB_Dimm1_AssetTag
+	Memory Device Type:		
+	Memory Device Set:		00
 	Memory Device Type Detail:		0080
-	Memory Device Speed:		0000
-	Memory Device Manufacturer:		ChannelB_Dimm1_Manufacturer
-	Memory Device Attributes:		00
-	Memory Device Serial Number:		ChannelB_Dimm1_SerNum
-	Memory Device Part Number:		ChannelB_Dimm1_PartNum
-	Memory Device Configured Memory Clock Speed:		0000
+	Memory Device Speed:		0640
+	Memory Device Attributes:		02
+	Memory Device Manufacturer:		Transcend                  
+	Memory Device Serial Number:		2D061182             
+	Memory Device Part Number:		TS1GLK72V6H           
+	Memory Device Configured Memory Clock Speed:		0640
 [Memory Device Information #4]
 	Memory Device Size:		0000
 	Memory Device Physical Memory Array Handle:		0037
@@ -528,44 +528,44 @@
 	Memory Device Size:		2000
 	Memory Device Physical Memory Array Handle:		0037
 	Memory Bank Locator:		ChannelC
+	Memory Device Total Width:		0048
 	Memory Device Locator:		ChannelC_Dimm1
-	Memory Device Total Width:		0040
-	Memory Device Error Information Handle:		FFFE
 	Memory Device Extended Size:		00000000
+	Memory Device Error Information Handle:		FFFE
 	Memory Device Data Width:		0040
 	Memory Device Form Factor:		
-	Memory Device Set:		00
-	Memory Device Type:		
 	Memory Device Asset Tag:		ChannelC_Dimm1_AssetTag
+	Memory Device Type:		
+	Memory Device Set:		00
 	Memory Device Type Detail:		0080
-	Memory Device Speed:		0535
-	Memory Device Manufacturer:		Undefined                  
+	Memory Device Speed:		0640
 	Memory Device Attributes:		02
-	Memory Device Serial Number:		AD02B576             
-	Memory Device Part Number:		BLT8G3D1608ET3LX0     
-	Memory Device Configured Memory Clock Speed:		0535
+	Memory Device Manufacturer:		Transcend                  
+	Memory Device Serial Number:		2D061182             
+	Memory Device Part Number:		TS1GLK72V6H           
+	Memory Device Configured Memory Clock Speed:		0640
 [Memory Device Information #6]
 	Memory Device Size:		0000
 	Memory Device Physical Memory Array Handle:		0037
 	Memory Bank Locator:		ChannelC
-	Memory Device Locator:		ChannelC_Dimm2
 	Memory Device Total Width:		0048
-	Memory Device Error Information Handle:		FFFE
+	Memory Device Locator:		ChannelC_Dimm2
 	Memory Device Extended Size:		00000000
+	Memory Device Error Information Handle:		FFFE
 	Memory Device Data Width:		0040
 	Memory Device Form Factor:		
-	Memory Device Set:		00
-	Memory Device Type:		
 	Memory Device Asset Tag:		ChannelC_Dimm2_AssetTag
+	Memory Device Type:		
+	Memory Device Set:		00
 	Memory Device Type Detail:		0080
 	Memory Device Speed:		0000
-	Memory Device Manufacturer:		ChannelC_Dimm2_Manufacturer
 	Memory Device Attributes:		00
+	Memory Device Manufacturer:		ChannelC_Dimm2_Manufacturer
 	Memory Device Serial Number:		ChannelC_Dimm2_SerNum
 	Memory Device Part Number:		ChannelC_Dimm2_PartNum
 	Memory Device Configured Memory Clock Speed:		0000
 [Memory Device Information #7]
-	Memory Device Size:		0000
+	Memory Device Size:		2000
 	Memory Device Physical Memory Array Handle:		0037
 	Memory Bank Locator:		ChannelD
 	Memory Device Locator:		ChannelD_Dimm1
@@ -578,12 +578,12 @@
 	Memory Device Type:		
 	Memory Device Asset Tag:		ChannelD_Dimm1_AssetTag
 	Memory Device Type Detail:		0080
-	Memory Device Speed:		0000
-	Memory Device Manufacturer:		ChannelD_Dimm1_Manufacturer
-	Memory Device Attributes:		00
-	Memory Device Serial Number:		ChannelD_Dimm1_SerNum
-	Memory Device Part Number:		ChannelD_Dimm1_PartNum
-	Memory Device Configured Memory Clock Speed:		0000
+	Memory Device Speed:		0640
+	Memory Device Manufacturer:		Transcend                  
+	Memory Device Attributes:		02
+	Memory Device Serial Number:		2D061182             
+	Memory Device Part Number:		TS1GLK72V6H           
+	Memory Device Configured Memory Clock Speed:		0640
 [Memory Device Information #8]
 	Memory Device Size:		0000
 	Memory Device Physical Memory Array Handle:		0037
@@ -608,13 +608,43 @@
 	Memory Array Mapped Address Starting Address:		00000000
 	Memory Array Mapped Address Memory Array Handle:		0037
 	Memory Array Mapped Address Extended Ending Address:		0000000000000000
-	Memory Array Mapped Address Ending Address:		007FFFFF
+	Memory Array Mapped Address Ending Address:		01FFFFFF
 	Memory Array Mapped Address Extended Starting Address:		0000000000000000
 	Memory Array Mapped Address Partition Width:		01
 [Memory Device Mapped Address Information #1]
 	Memory Device Mapped Address Starting Address:		00000000
-	Memory Device Mapped Address Memory Device Handle:		0041
+	Memory Device Mapped Address Memory Device Handle:		0039
 	Memory Device Mapped Address Ending Address:		007FFFFF
+	Memory Device Mapped Address Extended Starting Address:		0000000000000000
+	Memory Device Mapped Address Memory Array Mapped Handle:		0038
+	Memory Device Mapped Address Interleaved Data Depth:		FF
+	Memory Device Mapped Address Partition Row Width:		FF
+	Memory Device Mapped Address Extended Ending Address:		0000000000000000
+	Memory Device Mapped Address Interleave Position:		FF
+[Memory Device Mapped Address Information #2]
+	Memory Device Mapped Address Starting Address:		00800000
+	Memory Device Mapped Address Memory Device Handle:		003D
+	Memory Device Mapped Address Ending Address:		00FFFFFF
+	Memory Device Mapped Address Extended Starting Address:		0000000000000000
+	Memory Device Mapped Address Memory Array Mapped Handle:		0038
+	Memory Device Mapped Address Interleaved Data Depth:		FF
+	Memory Device Mapped Address Partition Row Width:		FF
+	Memory Device Mapped Address Extended Ending Address:		0000000000000000
+	Memory Device Mapped Address Interleave Position:		FF
+[Memory Device Mapped Address Information #3]
+	Memory Device Mapped Address Starting Address:		01000000
+	Memory Device Mapped Address Memory Device Handle:		0041
+	Memory Device Mapped Address Ending Address:		017FFFFF
+	Memory Device Mapped Address Extended Starting Address:		0000000000000000
+	Memory Device Mapped Address Memory Array Mapped Handle:		0038
+	Memory Device Mapped Address Interleaved Data Depth:		FF
+	Memory Device Mapped Address Partition Row Width:		FF
+	Memory Device Mapped Address Extended Ending Address:		0000000000000000
+	Memory Device Mapped Address Interleave Position:		FF
+[Memory Device Mapped Address Information #4]
+	Memory Device Mapped Address Starting Address:		01800000
+	Memory Device Mapped Address Memory Device Handle:		0045
+	Memory Device Mapped Address Ending Address:		01FFFFFF
 	Memory Device Mapped Address Extended Starting Address:		0000000000000000
 	Memory Device Mapped Address Memory Array Mapped Handle:		0038
 	Memory Device Mapped Address Interleaved Data Depth:		FF
@@ -635,8 +665,8 @@
 [Voltage Probe Information #2]
 	Voltage Probe Description:		LM78B
 	Voltage Probe Location:		00
-	Voltage Probe Resolution:		8000
 	Voltage Probe Status:		00
+	Voltage Probe Resolution:		8000
 	Voltage Probe Tolerance:		8000
 	Voltage Probe Maximum Value:		8000
 	Voltage Probe Minimum Value:		8000
@@ -656,9 +686,9 @@
 	Voltage Probe Nominal Value:		8000
 [Cooling Device Information #1]
 	Cooling Device Temperature Probe Handle:		004E
-	Cooling Device Device Type:		12
-	Cooling Device Status:		12
 	Cooling Device Description:		Cooling Dev 1
+	Cooling Device Status:		12
+	Cooling Device Device Type:		12
 	Cooling Device Cooling Unit Group:		01
 	Cooling Device OEM-defined:		00000000
 	Cooling Device Nominal Speed:		8000
@@ -672,9 +702,9 @@
 	Cooling Device Nominal Speed:		8000
 [Cooling Device Information #3]
 	Cooling Device Temperature Probe Handle:		0062
-	Cooling Device Device Type:		12
-	Cooling Device Status:		12
 	Cooling Device Description:		Cooling Dev 2
+	Cooling Device Status:		12
+	Cooling Device Device Type:		12
 	Cooling Device Cooling Unit Group:		01
 	Cooling Device OEM-defined:		00000000
 	Cooling Device Nominal Speed:		8000
@@ -738,8 +768,8 @@
 	Electrical Current Probe Tolerance:		8000
 	Electrical Current Probe Location:		00
 	Electrical Current Probe Maximum Value:		8000
-	Electrical Current Probe Accuracy:		8000
 	Electrical Current Probe Nominal Value:		8000
+	Electrical Current Probe Accuracy:		8000
 	Electrical Current Probe Minimum Value:		8000
 [Electrical Current Probe Information #3]
 	Electrical Current Probe Resolution:		8000
@@ -756,9 +786,9 @@
 	System Boot Status:		00000000000000000000
 [Management Device Information #1]
 	Management Device Description:		Nuvoton NCT6776F
-	Management Device Type:		
-	Management Device Address Type:		
 	Management Device Address:		00000295
+	Management Device Address Type:		
+	Management Device Type:		
 [Management Device Information #2]
 	Management Device Description:		2
 	Management Device Type:		
@@ -772,8 +802,8 @@
 [Management Device Component Information #2]
 	Management Device Component Description:		To Be Filled By O.E.M.
 	Management Device Component Management Device Handle:		004A
-	Management Device Component Component Handle:		004D
 	Management Device Component Threshold Handle:		004E
+	Management Device Component Component Handle:		004D
 [Management Device Component Information #3]
 	Management Device Component Description:		To Be Filled By O.E.M.
 	Management Device Component Management Device Handle:		004A
@@ -782,8 +812,8 @@
 [Management Device Component Information #4]
 	Management Device Component Description:		To Be Filled By O.E.M.
 	Management Device Component Management Device Handle:		004A
-	Management Device Component Component Handle:		0053
 	Management Device Component Threshold Handle:		0054
+	Management Device Component Component Handle:		0053
 [Management Device Component Information #5]
 	Management Device Component Description:		To Be Filled By O.E.M.
 	Management Device Component Management Device Handle:		004A
@@ -797,18 +827,18 @@
 [Management Device Component Information #7]
 	Management Device Component Description:		To Be Filled By O.E.M.
 	Management Device Component Management Device Handle:		005B
-	Management Device Component Component Handle:		005E
 	Management Device Component Threshold Handle:		005F
+	Management Device Component Component Handle:		005E
 [Management Device Component Information #8]
 	Management Device Component Description:		To Be Filled By O.E.M.
 	Management Device Component Management Device Handle:		005B
-	Management Device Component Component Handle:		0061
 	Management Device Component Threshold Handle:		0062
+	Management Device Component Component Handle:		0061
 [Management Device Component Information #9]
 	Management Device Component Description:		To Be Filled By O.E.M.
 	Management Device Component Management Device Handle:		005B
-	Management Device Component Component Handle:		0064
 	Management Device Component Threshold Handle:		0065
+	Management Device Component Component Handle:		0064
 [Management Device Component Information #10]
 	Management Device Component Description:		To Be Filled By O.E.M.
 	Management Device Component Management Device Handle:		005B
@@ -924,8 +954,8 @@
 	System Power Supply Power Unit Group:		01
 	System Power Supply Revision Level:		To Be Filled By O.E.M.
 	System Power Supply Location:		To Be Filled By O.E.M.
-	System Power Supply Max Power Capacity:		8000
 	System Power Supply Serial Number:		To Be Filled By O.E.M.
+	System Power Supply Max Power Capacity:		8000
 	System Power Supply Device Name:		To Be Filled By O.E.M.
 	System Power Supply Asset Tag Number:		To Be Filled By O.E.M.
 	System Power Supply Manufacturer:		To Be Filled By O.E.M.
@@ -968,18 +998,6 @@
 	Inactive Type:		7E
 	Inactive Handle:		
 [Inactive Information #4]
-	Inactive Length:		23
-	Inactive Type:		7E
-	Inactive Handle:		
-[Inactive Information #5]
-	Inactive Length:		23
-	Inactive Type:		7E
-	Inactive Handle:		
-[Inactive Information #6]
-	Inactive Length:		23
-	Inactive Type:		7E
-	Inactive Handle:		
-[Inactive Information #7]
 	Inactive Length:		23
 	Inactive Type:		7E
 	Inactive Handle:		

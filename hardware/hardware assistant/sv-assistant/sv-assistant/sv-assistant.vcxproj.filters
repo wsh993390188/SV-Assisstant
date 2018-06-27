@@ -55,6 +55,12 @@
     <Filter Include="头文件\network">
       <UniqueIdentifier>{bdf94465-9261-43b3-b5ee-283dc4f45dfd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Audio">
+      <UniqueIdentifier>{e27213ad-5bd0-4b08-815d-f8a414c1f611}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Audio">
+      <UniqueIdentifier>{6a258193-6899-45ef-9115-c917b42a0514}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -153,6 +159,9 @@
     <ClInclude Include="..\..\gpu\Igpu.h">
       <Filter>头文件\gpu</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Audio\CAudio.h">
+      <Filter>头文件\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -235,6 +244,9 @@
     </ClCompile>
     <ClCompile Include="..\..\gpu\Igpu.cpp">
       <Filter>源文件\gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Audio\CAudio.cpp">
+      <Filter>源文件\Audio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

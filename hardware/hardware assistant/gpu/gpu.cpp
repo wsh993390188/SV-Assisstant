@@ -7,11 +7,12 @@
 class GPU
 {
 public:
-	static const string& GPUName()
+	static const string GPUName()
 	{
 		if (gpudata.amdinfo)
 		{
-			return gpudata.amdinfo->adapterInfo.strAdapterName;
+			string tt(gpudata.amdinfo->adapterInfo.strAdapterName);
+			return tt;
 		}
 		else if (gpudata.nvinfo)
 		{
@@ -23,11 +24,12 @@ public:
 		}
 	}
 
-	static const string& GetGPUBIOSVersion()
+	static const string GetGPUBIOSVersion()
 	{
 		if (gpudata.amdinfo)
 		{
-			return gpudata.amdinfo->biosInfo.strVersion;
+			string tt(gpudata.amdinfo->biosInfo.strVersion);
+			return tt;
 		}
 		else if (gpudata.nvinfo)
 		{
@@ -208,12 +210,12 @@ private:
 
 GPUData GPU::gpudata;
 
-const std::string& SV_ASSIST::GPU::GPUName()
+const std::string SV_ASSIST::GPU::GPUName()
 {
 	return ::GPU::GPUName();
 }
 
-const std::string& SV_ASSIST::GPU::GPUBIOSVersion()
+const std::string SV_ASSIST::GPU::GPUBIOSVersion()
 {
 	return ::GPU::GetGPUBIOSVersion();
 }

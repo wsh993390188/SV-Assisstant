@@ -18,7 +18,7 @@ namespace SV_ASSIST
  			NetInstance->Update();
 		}
 
-		const std::vector<std::wstring>& GetData()
+		const std::vector<NetStruct>& GetData()
 		{
 			return NetInstance->GetData();
 		}

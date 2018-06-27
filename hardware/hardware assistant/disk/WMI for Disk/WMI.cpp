@@ -5,7 +5,6 @@
 #pragma warning(pop)
 
 #include <objbase.h>
-#pragma comment(lib,"wbemuuid.lib")
 
 CDISKWMI::CDISKWMI()
 {}
@@ -39,9 +38,7 @@ HRESULT CDISKWMI::SetComSecLevels()
     // a SOLE_AUTHENTICATION_LIST structure in the pAuthList ----
     // parameter of CoInitializeSecurity ------------------------
 
-    HRESULT hr = E_FAIL;
-    do {
-        hr = CoInitializeSecurity(
+    CoInitializeSecurity(
             NULL, 
             -1,                          // COM negotiates service
             NULL,                        // Authentication services
@@ -52,10 +49,7 @@ HRESULT CDISKWMI::SetComSecLevels()
             EOAC_NONE,                   // Additional capabilities 
             NULL                         // Reserved
             );
-        CHECKHR(hr);
-
-    } while (0);
-    return hr;
+    return S_OK;
 }
 
 HRESULT CDISKWMI::ObtainLocator2WMI(CComPtr<IWbemLocator>& pLoc)
@@ -131,6 +125,5 @@ HRESULT CDISKWMI::ExcuteFun()
 
 		} while (0);
 	}
-	CoUninitialize();
     return hr;
 }

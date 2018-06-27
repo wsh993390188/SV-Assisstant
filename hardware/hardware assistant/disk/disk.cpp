@@ -430,7 +430,12 @@ VOID Disk::UpdateDate()
 	SMARTinfo.clear();
 	PATA_SMART_INFO Infotmp = NULL;
 	CDiskQuery diskQuery(L"root\\CIMV2", L"SELECT * FROM Win32_SCSIController");
-	diskQuery.ExcuteFun();
+	auto hr = diskQuery.ExcuteFun();
+	if (FAILED(hr))
+	{
+		diskQuery.SetNamespace(L"Win32_IDEController");
+		diskQuery.ExcuteFun();
+	}
 	Infotmp = new ATA_SMART_INFO[diskQuery.wmi_info.size()];
 	for (USHORT i = 0; i < diskQuery.wmi_info.size(); ++i)
 	{

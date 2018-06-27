@@ -7,7 +7,6 @@
 // #pragma warning(pop)
 
 #include <objbase.h>
-#pragma comment(lib,"wbemuuid.lib")
 
 CWMI::CWMI() : m_wstrNamespace("root\\CIMV2"), Name("Unknown"), ProcessorId("Unknown"), SocketDesignation("Unknown"),
 CurrentClockSpeed(0), ExtClock(0), Core(0), Thread(0), Revision(0), MaxClockSpeed(0), UpgradeMethod(0)
@@ -37,9 +36,7 @@ HRESULT CWMI::SetComSecLevels()
 	// a SOLE_AUTHENTICATION_LIST structure in the pAuthList ----
 	// parameter of CoInitializeSecurity ------------------------
 
-	HRESULT hr = E_FAIL;
-	do {
-		hr = CoInitializeSecurity(
+	CoInitializeSecurity(
 			NULL,
 			-1,                          // COM negotiates service
 			NULL,                        // Authentication services
@@ -50,10 +47,7 @@ HRESULT CWMI::SetComSecLevels()
 			EOAC_NONE,                   // Additional capabilities 
 			NULL                         // Reserved
 		);
-		CHECKHR(hr);
-
-	} while (0);
-	return hr;
+	return S_OK;
 }
 
 HRESULT CWMI::ObtainLocator2WMI(CComPtr<IWbemLocator>& pLoc)
@@ -214,6 +208,5 @@ HRESULT CWMI::ExcuteFun()
 			CHECKHR(hr);
 		} while (0);
 	}
-	CoUninitialize();
 	return hr;
 }

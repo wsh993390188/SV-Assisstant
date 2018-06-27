@@ -254,7 +254,6 @@ VOID
 			InputBufferLength
 		);
 		break;
-
 	case READ_PCI_CONFIG:
 		status = ReadPciConfig(
 			Request,

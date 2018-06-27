@@ -24,7 +24,7 @@ namespace SV_ASSIST
 		*@return
 			*@string			显卡名字							
 		****************************************************************/
-		const std::string& GPUName();
+		const std::string GPUName();
 		/**************************************************************
 		*@Function				GPUBIOSVersion
 		*@brief					获取显卡BIOS信息
@@ -34,7 +34,7 @@ namespace SV_ASSIST
 		*@return
 			*@string			显卡BIOS信息					
 		****************************************************************/
-		const std::string& GPUBIOSVersion();
+		const std::string GPUBIOSVersion();
 
 		/**************************************************************
 		*@Function				GPUtemperature

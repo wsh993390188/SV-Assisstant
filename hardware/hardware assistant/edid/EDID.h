@@ -18,7 +18,7 @@ namespace SV_ASSIST
 		*@param
 			*@Num				????????????EDID
 		*@return
-			*@EDID				EDID?????	
+			*@EDID				EDID?????
 		****************************************************************/
 		const EDID& GetEDID(const UINT Num);
 
