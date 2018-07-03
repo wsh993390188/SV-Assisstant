@@ -57,11 +57,11 @@ public:
 	virtual void UpDateData(void) = 0;
 	virtual ~CPUBASE();
 	static CPU_Brands GetCPUBrands();
-	CWMI wmi;
 	//CPUID解析后数据
 	//0
 	std::string Manufacturer;
-	std::string CodeName;
+	std::string microarchitecture;
+	std::string Brand;
 	unsigned int Technology;
 	//1
 	short Family;
@@ -70,6 +70,16 @@ public:
 	short ExtFamily;
 	short ExtModel;
 	CPUFeature Feature;
+
+	string ProcessorId;
+	string SocketDesignation;
+	UINT CurrentClockSpeed;
+	UINT ExtClock;
+	UINT Core;
+	UINT Thread;
+	UINT Revision;
+	UINT MaxClockSpeed;
+	UINT UpgradeMethod;
 	//cache
 	Cache_info Cache[4];
 protected:

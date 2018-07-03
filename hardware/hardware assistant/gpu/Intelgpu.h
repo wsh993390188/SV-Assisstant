@@ -5,13 +5,15 @@ class CIntelGPU : public CGPU
 {
 public:
 	CIntelGPU();
+	using CGPU::CGPU;
 	~CIntelGPU();
 	bool CheckdllStatus();
-	CGPU::GPUTypes exec();
+	long getIntelDeviceInfo(unsigned int VendorId, IntelDeviceInfoHeader * pIntelDeviceInfoHeader, void * pIntelDeviceInfoBuffer);
+	GPUTypes exec();
 	const void* Returninfo();
-	CGPU::GPUTypes UpdateData();
+	GPUTypes UpdateData();
 private:
-	IntelGPUInfo Intelinfo;
+	vector<IntelGPUInfo> Intelinfo;
 	bool getGraphicsDeviceInfo(unsigned int* VendorId,
 		unsigned int* DeviceId,
 		unsigned __int64* VideoMemory,

@@ -22,6 +22,16 @@ const std::string & IgpuSensor::GetGPUBiosVersion()
 	return this->GPUBiosVersion;
 }
 
+const std::string & IgpuSensor::GetGPUDriverVersion()
+{
+	return this->GPUDriverVersion;
+}
+
+const std::string & IgpuSensor::GetGPUBranchVersion()
+{
+	return this->GPUBranchVersion;
+}
+
 INT IgpuSensor::GetTemperature()
 {
 	return this->Temperature;
@@ -47,79 +57,18 @@ ULONG IgpuSensor::GetGPUfans()
 	return this->fans;
 }
 
-BOOL IgpuSensor::SetGPUName(std::string name)
+size_t IgpuSensor::GetdedicatedVideoMemory()
 {
-	BOOL status = FALSE;
-	if (name.size())
-	{
-		this->GPUname = name;
-		status = TRUE;
-	}
-	return status;
+	return this->dedicatedVideoMemory;
 }
 
-BOOL IgpuSensor::SetGPUBiosVersion(std::string biosversion)
+size_t IgpuSensor::GetsystemVideoMemory()
 {
-	BOOL status = FALSE;
-	if (biosversion.size())
-	{
-		this->GPUBiosVersion = biosversion;
-		status = TRUE;
-	}
-	return status;
+	return this->systemVideoMemory;
 }
 
-BOOL IgpuSensor::SetTemperature(INT Temperature)
+size_t IgpuSensor::GetsharedSystemMemory()
 {
-	BOOL status = FALSE;
-	if (Temperature)
-	{
-		this->Temperature = Temperature;
-		status = TRUE;
-	}
-	return status;
+	return this->sharedSystemMemory;
 }
 
-BOOL IgpuSensor::SetGPUClock(double gpuclock)
-{
-	BOOL status = FALSE;
-	if (gpuclock)
-	{
-		this->GPUClock = gpuclock;
-		status = TRUE;
-	}
-	return status;
-}
-
-BOOL IgpuSensor::SetGPUMemoryClock(double gpumemoryclock)
-{
-	BOOL status = FALSE;
-	if (gpumemoryclock)
-	{
-		this->GPUMemclock = gpumemoryclock;
-		status = TRUE;
-	}
-	return status;
-}
-
-BOOL IgpuSensor::SetGPUusage(ULONG gpusage)
-{
-	BOOL status = FALSE;
-	if (gpusage)
-	{
-		this->GPUusage = gpusage;
-		status = TRUE;
-	}
-	return status;
-}
-
-BOOL IgpuSensor::SetGPUfans(ULONG fans)
-{
-	BOOL status = FALSE;
-	if (fans)
-	{
-		this->fans = fans;
-		status = TRUE;
-	}
-	return status;
-}

@@ -12,7 +12,7 @@ BOOLEAN SV_ASSIST::Software::Origin::EnumFolderTaskScheduler(std::list<TaskSched
 {
 	//  ------------------------------------------------------
 	//  Initialize COM.
-	HRESULT hr = CoInitializeEx(NULL, COINIT_MULTITHREADED);
+	HRESULT hr = CoInitialize(nullptr);
 	if (FAILED(hr))
 	{
 		OutputDebugPrintf("\nCoInitializeEx failed: %x", hr);
@@ -20,7 +20,7 @@ BOOLEAN SV_ASSIST::Software::Origin::EnumFolderTaskScheduler(std::list<TaskSched
 	}
 
 	//  Set general COM security levels.
-	hr = CoInitializeSecurity(
+	CoInitializeSecurity(
 		NULL,
 		-1,
 		NULL,
@@ -30,14 +30,6 @@ BOOLEAN SV_ASSIST::Software::Origin::EnumFolderTaskScheduler(std::list<TaskSched
 		NULL,
 		0,
 		NULL);
-
-	if (FAILED(hr))
-	{
-		OutputDebugPrintf("\nCoInitializeSecurity failed: %x", hr);
-		CoUninitialize();
-		return FALSE;
-	}
-
 
 	CComPtr<ITaskService> m_pService = NULL;
 
@@ -144,7 +136,7 @@ BOOLEAN SV_ASSIST::Software::Origin::EnumRuningTaskScheduler(std::list<TaskSched
 {
 	//  ------------------------------------------------------
 	//  Initialize COM.
-	HRESULT hr = CoInitializeEx(NULL, COINIT_MULTITHREADED);
+	HRESULT hr = CoInitialize(nullptr);
 	if (FAILED(hr))
 	{
 		OutputDebugPrintf("\nCoInitializeEx failed: %x", hr);
@@ -162,13 +154,6 @@ BOOLEAN SV_ASSIST::Software::Origin::EnumRuningTaskScheduler(std::list<TaskSched
 		NULL,
 		0,
 		NULL);
-
-	if (FAILED(hr))
-	{
-		OutputDebugPrintf("\nCoInitializeSecurity failed: %x", hr);
-		CoUninitialize();
-		return FALSE;
-	}
 
 	//  ------------------------------------------------------
 	//  Create an instance of the Task Service. 

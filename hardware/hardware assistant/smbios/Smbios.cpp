@@ -10,6 +10,56 @@ Smbios::~Smbios()
 {
 }
 
+void Smbios::UpdateData()
+{
+	this->BIOSinfo.clear();
+	this->Sysyteminfo.clear();
+	this->BaseBroadinfo.clear();
+	this->SystemEorC.clear();
+	this->Processorinfo.clear();
+	this->MemoryCtrlinfo.clear();
+	this->MemoryModinfo.clear();
+	this->Cacheinfo.clear();
+	this->Portinfo.clear();
+	this->SystemSlotinfo.clear();
+	this->BroadDevinfo.clear();
+	this->OEMString.clear();
+	this->SystemConfigOption.clear();
+	this->BIOSLanginfo.clear();
+	this->GroupAssociations.clear();
+	this->SysEventLog.clear();
+	this->PhysicalMemoryArray.clear();
+	this->MemoryDev.clear();
+	this->MemoryErrinfo.clear();
+	this->MemArrayMappedAddress.clear();
+	this->MemDevMappedAddress.clear();
+	this->Pointing_Dev.clear();
+	this->Portable_Battery.clear();
+	this->System_Reset.clear();
+	this->Hardware_Security.clear();
+	this->System_Power_Controls.clear();
+	this->Voltage_Probe.clear();
+	this->CoolingDev.clear();
+	this->TemperatureProbe.clear();
+	this->ElectricalCurrentProbe.clear();
+	this->BandRemoteAccess.clear();
+	this->Systembootstatus.clear();
+	this->MemoryError64Bit.clear();
+	this->ManagementDevice.clear();
+	this->ManagementDeviceComponent.clear();
+	this->ManagementDeviceComponentThresholdData.clear();
+	this->MemoryChannel.clear();
+	this->IPMIDeviceinfo.clear();
+	this->SystemPowerSupply.clear();
+	this->Additionalinfo.clear();
+	this->BroadDevExtendedinfo.clear();
+	this->ManagementControllerHostInterface.clear();
+	this->TPMDevice.clear();
+	this->Inactive.clear();
+	this->EndofTable.clear();
+	this->GetSmbiosinfo();
+}
+
 BOOL Smbios::GetSmbiosinfo()
 {
 	PUCHAR SmbiosADDR = new UCHAR;

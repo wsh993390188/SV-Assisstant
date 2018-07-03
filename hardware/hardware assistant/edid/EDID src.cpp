@@ -5,22 +5,8 @@ namespace SV_ASSIST
 {
 	namespace Display
 	{
-		_EDID_INFO::_EDID_INFO()
+		_EDID_INFO::_EDID_INFO() : Driver{}, Model{}
 		{
-			EDID buffer;
-			DWORD ByteRead = sizeof(EDID);
-			buffer = { 0 };
-			Model = _T("");
-			Driver = _T("");
-			GetCurrentMonitor(Monitor);
-			for (UINT i = 0; i < Monitor.size(); ++i)
-			{
-				GetModelandDriver(Monitor[i].DeviceID, Model, Driver);
-				if (GetEDID(Model, Driver, &buffer, &ByteRead))
-					Edid.emplace_back(buffer);
-				Model.clear();
-				Driver.clear();
-			}
 		}
 		_EDID_INFO::~_EDID_INFO()
 		{
@@ -269,7 +255,24 @@ namespace SV_ASSIST
 
 		DWORD _EDID_INFO::ReturnNum() const
 		{
-			return Edid.size();
+			return (DWORD)Edid.size();
+		}
+		VOID _EDID_INFO::UpdateData()
+		{
+			EDID buffer = {};
+			Edid.clear();
+			DWORD ByteRead = sizeof(EDID);
+			Model = _T("");
+			Driver = _T("");
+			GetCurrentMonitor(Monitor);
+			for (UINT i = 0; i < Monitor.size(); ++i)
+			{
+				GetModelandDriver(Monitor[i].DeviceID, Model, Driver);
+				if (GetEDID(Model, Driver, &buffer, &ByteRead))
+					Edid.emplace_back(buffer);
+				Model.clear();
+				Driver.clear();
+			}
 		}
 	}
 }

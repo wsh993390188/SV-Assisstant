@@ -7,8 +7,15 @@ smbiostreewidget::smbiostreewidget(QWidget *parent) : QTreeWidget(parent), fathe
 
 void smbiostreewidget::UpdateData()
 {
-    SV_ASSIST::DMI_SMBIOS::Updatesmbios();
-    QFile file("smbios.txt");
+	SV_ASSIST::DMI_SMBIOS::Updatesmbios();
+	currentdir.append(tr("\\HardWare\\DMI"));
+	QDir dir(currentdir);
+	if (!dir.exists())
+	{
+		qDebug() << currentdir << tr("No Exists");
+		return;
+	}
+	QFile file(currentdir.append(tr("\\smbios.txt")));
     if(!file.open(QFile::ReadOnly | QFile::Text))
     {
         qDebug() << "Can not open smbios.txt";
@@ -25,7 +32,12 @@ void smbiostreewidget::UpdateData()
        }
     }
     file.close();
-    emit SMBIOSReady(true);
+    emit SMBIOSReady(true, currentdir);
+}
+
+void smbiostreewidget::SetCurrentdir(const QString x)
+{
+	currentdir = x;
 }
 
 smbiostreewidget::~smbiostreewidget()

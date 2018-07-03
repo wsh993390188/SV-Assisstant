@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "zhaoxin.h"
 #include  <math.h>
+#include <boost/algorithm/string.hpp>
 
 //L1 Cache and TLB Information CPUID = 0x80000005
 //EAX
@@ -203,17 +204,27 @@ void Zhaoxin::UpDateData(void)
 	}
 	if (nIds_ > 7)
 	{
-		int t = findcpuid(0x00070000);
+		size_t t = findcpuid(0x00070000);
 		if (t != -1)
 		{
 			f7_ecx = data__[t][2];
 			f7_ebx = data__[t][1];
 		}
 	}
-	if (nExIds_ > 1)
+	if (nExIds_ > 0x80000001)
 	{
 		f81_ecx = extdata__[1][2];
 		f81_edx = extdata__[1][3];
+	}
+	// Interpret CPU brand string if reported  
+	if (nExIds_ >= 0x80000004)
+	{
+		char brand[0x40] = {};
+		memcpy(brand, extdata__[2].data(), sizeof(std::array<int, 4>));
+		memcpy(brand + 16, extdata__[3].data(), sizeof(std::array<int, 4>));
+		memcpy(brand + 32, extdata__[4].data(), sizeof(std::array<int, 4>));
+		Brand = brand;
+		boost::trim(Brand);
 	}
 	ExecFeature();
 
@@ -289,7 +300,7 @@ void Zhaoxin::ExecCache()
 	Cache[3].Cache_Size = ((extdata__[6][3] & L3_INSTRUCTION_CACHE_SIZE) >> 18);
 }
 
-inline int Zhaoxin::findcpuid(int value)
+inline size_t Zhaoxin::findcpuid(int value)
 {
 	auto& it = find(nIdsLeaf.begin(), nIdsLeaf.end(), value);
 	if (it != nIdsLeaf.end())

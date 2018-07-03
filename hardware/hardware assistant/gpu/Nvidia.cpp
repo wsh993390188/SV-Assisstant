@@ -9,7 +9,6 @@ CNvidia::CNvidia()
 {
 	ZeroMemory(&hDisplay, sizeof(hDisplay));
 	ZeroMemory(&phys, sizeof(phys));
-	nvinfo = {};
 	m_succeed_Nvidia = NvAPI_Initialize();
 }
 
@@ -27,106 +26,119 @@ bool CNvidia::CheckdllStatus()
 }
 const void* CNvidia::Returninfo()
 {
-	return &this->nvinfo;
+	return &this->realnv;
 }
 
-CGPU::GPUTypes CNvidia::UpdateData()
+GPUTypes CNvidia::UpdateData()
 {
 	if (NVAPI_OK == m_succeed_Nvidia)
 	{
-		NV_DISPLAY_DRIVER_MEMORY_INFO mem = {};
-		this->GetGPUMem(mem, 0);
-		nvinfo.dedicatedVideoMemory = mem.dedicatedVideoMemory;
-		nvinfo.availableDedicatedVideoMemory = mem.availableDedicatedVideoMemory;
-		nvinfo.dedicatedVideoMemoryEvictionCount = mem.dedicatedVideoMemoryEvictionCount;
-		nvinfo.dedicatedVideoMemoryEvictionsSize = mem.dedicatedVideoMemoryEvictionsSize;
-		nvinfo.curAvailableDedicatedVideoMemory = mem.curAvailableDedicatedVideoMemory;
-		nvinfo.sharedSystemMemory = mem.sharedSystemMemory;
-		nvinfo.systemVideoMemory = mem.systemVideoMemory;
+		for (UINT i = 0; i < this->physcount; i++)
+		{
+			NV_DISPLAY_DRIVER_MEMORY_INFO mem = {};
+			this->GetGPUMem(mem, i);
+			realnv[i].dedicatedVideoMemory = mem.dedicatedVideoMemory;
+			realnv[i].availableDedicatedVideoMemory = mem.availableDedicatedVideoMemory;
+			realnv[i].dedicatedVideoMemoryEvictionCount = mem.dedicatedVideoMemoryEvictionCount;
+			realnv[i].dedicatedVideoMemoryEvictionsSize = mem.dedicatedVideoMemoryEvictionsSize;
+			realnv[i].curAvailableDedicatedVideoMemory = mem.curAvailableDedicatedVideoMemory;
+			realnv[i].sharedSystemMemory = mem.sharedSystemMemory;
+			realnv[i].systemVideoMemory = mem.systemVideoMemory;
 
-		this->GetGPUFans(0, nvinfo.fans);
-		this->GetGPUClock(0);
-		this->GetDynamicPstatesInfo(0, nvinfo.percentage);
-		this->GetDynamicInfo(0);
+			this->GetGPUFans(i, realnv[i].fans);
+			this->GetGPUClock(i, realnv[i].Device_clock);
+			this->GetDynamicPstatesInfo(i, realnv[i].percentage);
+			this->GetDynamicInfo(i, realnv[i].Nvidia_Usage);
+			this->GetCurrentPState(i, realnv[i].CurrentPState);
+		}
+
 	}
-	return CGPU::GPUTypes::NVIDIA_GPU;
+	return GPUTypes::NVIDIA_GPU;
 }
 
-CGPU::GPUTypes CNvidia::exec()
+GPUTypes CNvidia::exec()
 {
-	CGPU::GPUTypes re = CGPU::OTHERS_GPU;
+	GPUTypes re = OTHERS_GPU;
 	if (NVAPI_OK == m_succeed_Nvidia)
 	{
-		re = CGPU::NVIDIA_GPU;
+		re = NVIDIA_GPU;
 		BOOL status = NVAPI_ERROR;
-		NV_DISPLAY_DRIVER_MEMORY_INFO mem = {};
 		status = this->EnumPhysicalGPUs();
 		if (status != NVAPI_OK)
 		{
 			NvAPI_ShortString str;
 			NvAPI_GetErrorMessage((NvAPI_Status)status, str);
+#ifdef _DEBUG
+			OutputDebugStringA(str);
+#endif // _DEBUG
 		}
 		status = this->EnumNvidiaDisplayHandle();
 		if (status != NVAPI_OK)
 		{
 			NvAPI_ShortString str;
 			NvAPI_GetErrorMessage((NvAPI_Status)status, str);
+#ifdef _DEBUG
+			OutputDebugStringA(str);
+#endif // _DEBUG
 		}
-		nvinfo.physcount = this->physcount;
-		this->GetInterfaceVersion(nvinfo.InterfaceVersion);
-		this->GetsysDriverbranchVersion(nvinfo.DriverVersion, nvinfo.BranchVersion);
-		this->GetGPUtemperature(0, nvinfo.Device_Tem.GPUMinTem, nvinfo.Device_Tem.GPUCurrTem, nvinfo.Device_Tem.GPUMAXtem);
-		this->GetGPUFullName(nvinfo.FUllName, 0);
-		this->GetGpuType(0, nvinfo.GPUType);
-		this->GetGPUMem(mem, 0);
-		nvinfo.dedicatedVideoMemory = mem.dedicatedVideoMemory;
-		nvinfo.availableDedicatedVideoMemory = mem.availableDedicatedVideoMemory;
-		nvinfo.dedicatedVideoMemoryEvictionCount = mem.dedicatedVideoMemoryEvictionCount;
-		nvinfo.dedicatedVideoMemoryEvictionsSize = mem.dedicatedVideoMemoryEvictionsSize;
-		nvinfo.curAvailableDedicatedVideoMemory = mem.curAvailableDedicatedVideoMemory;
-		nvinfo.sharedSystemMemory = mem.sharedSystemMemory;
-		nvinfo.systemVideoMemory = mem.systemVideoMemory;
-		this->GetGPUFans(0, nvinfo.fans);
-		this->GetGPUClock(0);
-		this->GetHDCPSupport(0, nvinfo.HDCP);
-		this->GetGpuCoreCount(0, nvinfo.corecount);
-		this->GetDynamicPstatesInfo(0, nvinfo.percentage);
-		this->GetVbiosOEMRevision(0, nvinfo.VbiosOEMRevision);
-		this->GetVbiosRevision(0, nvinfo.VbiosRevision);
-		this->GetVbiosVersion(0, nvinfo.VbiosVersion);
-		this->GetBUSID(0, nvinfo.BusID);
-		this->GetBUSSlotID(0, nvinfo.BuSlotID);
-		this->GetBusType(0, nvinfo.BusType);
-		this->GetAGPAperture(0, nvinfo.AGPAperture);
-		this->GetCurrentAGPRate(0, nvinfo.AGPRate);
-		this->GetSysType(0, nvinfo.SysType);
-		this->GetPhysicalFrameBufferSize(0, nvinfo.PhysicalFrame);
-		this->GetVirtualFrameBufferSize(0, nvinfo.VirtualFrame);
-		this->GetGPUPState(0);
-		this->GetCurrentPState(0, nvinfo.CurrentPState);
+
+		//this->GetInterfaceVersion(InterfaceVersion);
+		this->GetsysDriverbranchVersion(DriverVer, BranchVersion);
 		this->GetChipInfo();
-		this->GetECCConfigurationInfo(0);
-		this->GetPCIEWidth(0);
-		this->GetDynamicInfo(0);
+		for (UINT i = 0; i < this->physcount; i++)
+		{
+			//temp
+			NvidiaInfo nvinfo = {};
+			this->GetGPUtemperature(i, nvinfo.Device_Tem.GPUMinTem, nvinfo.Device_Tem.GPUCurrTem, nvinfo.Device_Tem.GPUMAXtem);
+			this->GetGPUFullName(nvinfo.FUllName, i);
+			this->GetGpuType(i, nvinfo.GPUType);
+			NV_DISPLAY_DRIVER_MEMORY_INFO mem = {};
+			if (this->GetGPUMem(mem, i))
+			{
+				nvinfo.dedicatedVideoMemory = mem.dedicatedVideoMemory;
+				nvinfo.availableDedicatedVideoMemory = mem.availableDedicatedVideoMemory;
+				nvinfo.dedicatedVideoMemoryEvictionCount = mem.dedicatedVideoMemoryEvictionCount;
+				nvinfo.dedicatedVideoMemoryEvictionsSize = mem.dedicatedVideoMemoryEvictionsSize;
+				nvinfo.curAvailableDedicatedVideoMemory = mem.curAvailableDedicatedVideoMemory;
+				nvinfo.sharedSystemMemory = mem.sharedSystemMemory;
+				nvinfo.systemVideoMemory = mem.systemVideoMemory;
+			}
+			this->GetGPUFans(i, nvinfo.fans);
+			this->GetGPUClock(i, nvinfo.Device_clock);
+			this->GetHDCPSupport(i, nvinfo.HDCP);
+			this->GetGpuCoreCount(i, nvinfo.corecount);
+			this->GetDynamicPstatesInfo(i, nvinfo.percentage);
+			this->GetVbiosOEMRevision(i, nvinfo.VbiosOEMRevision);
+			this->GetVbiosRevision(i, nvinfo.VbiosRevision);
+			this->GetVbiosVersion(i, nvinfo.VbiosVersion);
+			this->GetBUSID(i, nvinfo.BusID);
+			this->GetBUSSlotID(i, nvinfo.BuSlotID);
+			this->GetBusType(i, nvinfo.BusType);
+			this->GetAGPAperture(i, nvinfo.AGPAperture);
+			this->GetCurrentAGPRate(i, nvinfo.AGPRate);
+			this->GetSysType(i, nvinfo.SysType);
+			this->GetPhysicalFrameBufferSize(i, nvinfo.PhysicalFrame);
+			this->GetVirtualFrameBufferSize(i, nvinfo.VirtualFrame);
+			this->GetGPUPState(i, nvinfo.PState.NV_PState);
+			this->GetCurrentPState(i, nvinfo.CurrentPState);
+			this->GetPCIEWidth(i, nvinfo.CurrentPCIEWidth);
+			this->GetDynamicInfo(i, nvinfo.Nvidia_Usage);
+			this->realnv.emplace_back(nvinfo);
+		}
+
 	}
 	return re;
 }
 
-BOOL CNvidia::EnumPhysicalGPUs()
+NvAPI_Status CNvidia::EnumPhysicalGPUs()
 {
 	NvAPI_Status status = NVAPI_ERROR;
 	if (NVAPI_OK == m_succeed_Nvidia)
-	{
 		status = NvAPI_EnumPhysicalGPUs(phys, &physcount);
-		if (status == NVAPI_OK)
-		{
-			return TRUE;
-		}
-	}
 	return status;
 }
 
-BOOL CNvidia::EnumNvidiaDisplayHandle()
+NvAPI_Status CNvidia::EnumNvidiaDisplayHandle()
 {
 	NvAPI_Status status = NVAPI_ERROR;
 	if (NVAPI_OK == m_succeed_Nvidia)
@@ -139,7 +151,7 @@ BOOL CNvidia::EnumNvidiaDisplayHandle()
 		} while (status == NVAPI_OK);
 		if (i > 0)
 		{
-			return TRUE;
+			return NVAPI_OK;
 		}
 	}
 	return status;
@@ -311,7 +323,7 @@ BOOL CNvidia::GetGPUFans(INT Index, ULONG & FansValue)
 	return FALSE;
 }
 
-BOOL CNvidia::GetGPUClock(INT Index)
+BOOL CNvidia::GetGPUClock(INT Index, DEVICE_CLOCK& Device_clock)
 {
 	bool CurrentClock = false, BaseClock = false, BoostClock = false;
 	if (NVAPI_OK == m_succeed_Nvidia)
@@ -324,8 +336,8 @@ BOOL CNvidia::GetGPUClock(INT Index)
 		status = NvAPI_GPU_GetAllClockFrequencies(phys[Index], &Fres);
 		if (status == NVAPI_OK)
 		{
-			nvinfo.Device_clock.GraphicsCurrent = Fres.domain[NVAPI_GPU_PUBLIC_CLOCK_GRAPHICS].frequency;
-			nvinfo.Device_clock.MemoryCurrent = Fres.domain[NVAPI_GPU_PUBLIC_CLOCK_MEMORY].frequency;
+			Device_clock.GraphicsCurrent = Fres.domain[NVAPI_GPU_PUBLIC_CLOCK_GRAPHICS].frequency;
+			Device_clock.MemoryCurrent = Fres.domain[NVAPI_GPU_PUBLIC_CLOCK_MEMORY].frequency;
 			CurrentClock = true;
 		}
 		ZeroMemory(&Fres, sizeof(Fres));
@@ -334,8 +346,8 @@ BOOL CNvidia::GetGPUClock(INT Index)
 		status = NvAPI_GPU_GetAllClockFrequencies(phys[Index], &Fres);
 		if (status == NVAPI_OK)
 		{
-			nvinfo.Device_clock.GraphicsBase = Fres.domain[NVAPI_GPU_PUBLIC_CLOCK_GRAPHICS].frequency;
-			nvinfo.Device_clock.MemoryBase = Fres.domain[NVAPI_GPU_PUBLIC_CLOCK_MEMORY].frequency;
+			Device_clock.GraphicsBase = Fres.domain[NVAPI_GPU_PUBLIC_CLOCK_GRAPHICS].frequency;
+			Device_clock.MemoryBase = Fres.domain[NVAPI_GPU_PUBLIC_CLOCK_MEMORY].frequency;
 			BaseClock = true;
 		}
 		ZeroMemory(&Fres, sizeof(Fres));
@@ -344,8 +356,8 @@ BOOL CNvidia::GetGPUClock(INT Index)
 		status = NvAPI_GPU_GetAllClockFrequencies(phys[Index], &Fres);
 		if (status == NVAPI_OK)
 		{
-			nvinfo.Device_clock.GraphicsBoost = Fres.domain[NVAPI_GPU_PUBLIC_CLOCK_GRAPHICS].frequency;
-			nvinfo.Device_clock.MemoryBoost = Fres.domain[NVAPI_GPU_PUBLIC_CLOCK_MEMORY].frequency;
+			Device_clock.GraphicsBoost = Fres.domain[NVAPI_GPU_PUBLIC_CLOCK_GRAPHICS].frequency;
+			Device_clock.MemoryBoost = Fres.domain[NVAPI_GPU_PUBLIC_CLOCK_MEMORY].frequency;
 			BoostClock = true;
 		}
 		if (CurrentClock && BaseClock && BoostClock)
@@ -642,7 +654,7 @@ BOOL CNvidia::GetVirtualFrameBufferSize(INT Index, ULONG & VirtualFrame)
 	return FALSE;
 }
 
-BOOL CNvidia::GetGPUPState(INT Index )
+BOOL CNvidia::GetGPUPState(INT Index, NV_GPU_PERF_PSTATES20_INFO& NV_PState)
 {
 	if (NVAPI_OK == m_succeed_Nvidia)
 	{
@@ -659,7 +671,7 @@ BOOL CNvidia::GetGPUPState(INT Index )
 		}
 		else if (status == NVAPI_OK)
 		{
-			this->nvinfo.PState.NV_PState = PState;
+			NV_PState = PState;
 			return TRUE;
 		}
 	}
@@ -708,32 +720,32 @@ BOOL CNvidia::GetChipInfo()
 					status = NvAPI_SYS_GetChipSetInfo(&chipset_info);
 					if (NVAPI_OK == status)
 					{
-						this->nvinfo.Chipset = chipset_info;
+						this->Chipset = chipset_info;
 						return TRUE;
 					}
 				}
 				else if (NVAPI_OK == status)
 				{
-					this->nvinfo.Chipset = chipset_info;
+					this->Chipset = chipset_info;
 					return TRUE;
 				}
 			}
 			else if(NVAPI_OK == status)
 			{
-				this->nvinfo.Chipset = chipset_info;
+				this->Chipset = chipset_info;
 				return TRUE;
 			}
 		}
 		else if(NVAPI_OK == status)
 		{
-			this->nvinfo.Chipset = chipset_info;
+			this->Chipset = chipset_info;
 			return TRUE;
 		}
 	}
 	return FALSE;
 }
 
-BOOL CNvidia::GetDynamicInfo(INT Index)
+BOOL CNvidia::GetDynamicInfo(INT Index, NVIDIA_USAGE& Nvidia_Usage)
 {
 	if (NVAPI_OK == m_succeed_Nvidia)
 	{
@@ -744,20 +756,20 @@ BOOL CNvidia::GetDynamicInfo(INT Index)
 		if (NVAPI_OK == status)
 		{
 			if (Dynamic_Pstates.utilization[NVAPI_GPU_UTILIZATION_DOMAIN_GPU].bIsPresent)
-				this->nvinfo.Nvidia_Usage.GPUUsage = Dynamic_Pstates.utilization[NVAPI_GPU_UTILIZATION_DOMAIN_GPU].percentage;
+				Nvidia_Usage.GPUUsage = Dynamic_Pstates.utilization[NVAPI_GPU_UTILIZATION_DOMAIN_GPU].percentage;
 			if (Dynamic_Pstates.utilization[NVAPI_GPU_UTILIZATION_DOMAIN_FB].bIsPresent)
-				this->nvinfo.Nvidia_Usage.FrameBufferUsage = Dynamic_Pstates.utilization[NVAPI_GPU_UTILIZATION_DOMAIN_FB].percentage;
+				Nvidia_Usage.FrameBufferUsage = Dynamic_Pstates.utilization[NVAPI_GPU_UTILIZATION_DOMAIN_FB].percentage;
 			if (Dynamic_Pstates.utilization[NVAPI_GPU_UTILIZATION_DOMAIN_VID].bIsPresent)
-				this->nvinfo.Nvidia_Usage.VideoEngineUsage = Dynamic_Pstates.utilization[NVAPI_GPU_UTILIZATION_DOMAIN_VID].percentage;
+				Nvidia_Usage.VideoEngineUsage = Dynamic_Pstates.utilization[NVAPI_GPU_UTILIZATION_DOMAIN_VID].percentage;
 			if (Dynamic_Pstates.utilization[NVAPI_GPU_UTILIZATION_DOMAIN_BUS].bIsPresent)
-				this->nvinfo.Nvidia_Usage.BUSInterFaceUsage = Dynamic_Pstates.utilization[NVAPI_GPU_UTILIZATION_DOMAIN_BUS].percentage;
+				Nvidia_Usage.BUSInterFaceUsage = Dynamic_Pstates.utilization[NVAPI_GPU_UTILIZATION_DOMAIN_BUS].percentage;
 			return TRUE;
 		}
 	}
 	return FALSE;
 }
 
-BOOL CNvidia::GetPCIEWidth(INT Index)
+BOOL CNvidia::GetPCIEWidth(INT Index, ULONG& CurrentPCIEWidth)
 {
 	if (NVAPI_OK == m_succeed_Nvidia)
 	{
@@ -766,24 +778,7 @@ BOOL CNvidia::GetPCIEWidth(INT Index)
 		status = NvAPI_GPU_GetCurrentPCIEDownstreamWidth(phys[Index], &PCIEWIdth);
 		if (NVAPI_OK == status)
 		{
-			nvinfo.CurrentPCIEWidth = PCIEWIdth;
-			return TRUE;
-		}
-	}
-	return FALSE;
-}
-
-BOOL CNvidia::GetECCConfigurationInfo(INT Index)
-{
-	if (NVAPI_OK == m_succeed_Nvidia)
-	{
-		NvAPI_Status status = NVAPI_OK;
-		NV_GPU_ECC_CONFIGURATION_INFO Ecc_info = {};
-		Ecc_info.version = NV_GPU_ECC_CONFIGURATION_INFO_VER;
-		status = NvAPI_GPU_GetECCConfigurationInfo(phys[Index], &Ecc_info);
-		if (NVAPI_OK == status)
-		{
-			this->nvinfo.ECC_Config = Ecc_info;
+			CurrentPCIEWidth = PCIEWIdth;
 			return TRUE;
 		}
 	}

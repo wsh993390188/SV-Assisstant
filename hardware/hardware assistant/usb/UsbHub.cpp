@@ -109,7 +109,9 @@ BOOL _EnumUsbHub::EnumRootUsbHub(const wstring HubName, bool IsRootHub)
 	UsbRootHubInfo.DeviceInfoType = RootHubInfo;
 	UsbRootHubInfo.HubName = HubName;
 	UsbRootHubInfo.HubInfo = *hubInfo;
+	if(hubInfoEx)
 	UsbRootHubInfo.HubInfoEx = *hubInfoEx;
+	if(hubCapabilityEx)
 	UsbRootHubInfo.HubCapabilityEx = *hubCapabilityEx;
 	Root_Hub_Tmp.emplace_back(UsbRootHubInfo);
 EnumerateHubError:
@@ -200,7 +202,9 @@ BOOL _EnumUsbHub::EnumExternalUsbHub(
 	UsbExternalHubInfo.DeviceInfoType = ExternalHubInfo;
 	UsbExternalHubInfo.HubName = HubName;
 	UsbExternalHubInfo.HubInfo = *hubInfo;
+	if(hubInfoEx)
 	UsbExternalHubInfo.HubInfoEx = *hubInfoEx;
+	if(hubCapabilityEx)
 	UsbExternalHubInfo.HubCapabilityEx = *hubCapabilityEx;
 	UsbExternalHubInfo.ConnectionInfo = ConnectionInfo;
 	UsbExternalHubInfo.ConnectionInfoV2 = ConnectionInfoV2;
@@ -893,7 +897,7 @@ BOOL _EnumUsbHub::FindMatchingDeviceNodeForDriverName(wstring DriverKeyName, DEV
 	else
 	{
 		if (this->Usb_Device_info.empty())	return FALSE;
-		for (USHORT i = 0; i < Usb_Hub_info.size(); ++i)
+		for (USHORT i = 0; i < Usb_Device_info.size(); ++i)
 		{
 			if (DriverKeyName.compare(this->Usb_Device_info[i].DeviceDriverName) == 0)
 			{

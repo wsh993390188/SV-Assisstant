@@ -26,10 +26,10 @@ namespace SV_ASSIST
 	{
 		class CEDID {
 		public:
-			static const _EDID_INFO EDIDData;
+			static _EDID_INFO EDIDData;
 		};
 
-		const _EDID_INFO CEDID::EDIDData;
+		_EDID_INFO CEDID::EDIDData;
 
 
 		const EDID& GetEDID(const UINT Num)
@@ -74,6 +74,7 @@ namespace SV_ASSIST
 					}
 				}
 			}
+			CEDID::EDIDData.UpdateData();
 			UINT Num = GetEDIDNum();
 			for(DWORD a = 0; a < Num; a++)
 			{
@@ -312,5 +313,13 @@ namespace SV_ASSIST
 		{
 			return CEDID::EDIDData.ReturnNum();
 		}
+
+		void UpdateData()
+		{
+			CEDID::EDIDData.UpdateData();
+			Exec();
+		}
+
+
 	}
 }

@@ -21,7 +21,7 @@ HRESULT CWMI::InitialCom()
 {
 	HRESULT hr = E_FAIL;
 	do {
-		hr = CoInitializeEx(0, COINIT_MULTITHREADED);
+		hr = CoInitialize(0);
 		CHECKHR(hr);
 
 	} while (0);

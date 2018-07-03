@@ -11,22 +11,25 @@ class CNvidia : public CGPU
 {
 public:
 	CNvidia();
+	using CGPU::CGPU;
 	~CNvidia();
 	bool CheckdllStatus();
-	CGPU::GPUTypes exec();
+	GPUTypes exec();
 	const void* Returninfo();
-	CGPU::GPUTypes UpdateData();
+	GPUTypes UpdateData();
 private:
-	BOOL EnumPhysicalGPUs();
-	BOOL EnumNvidiaDisplayHandle();
+	NvAPI_Status EnumPhysicalGPUs();
+	NvAPI_Status EnumNvidiaDisplayHandle();
 
 	BOOL GetInterfaceVersion(string& version);
 	BOOL GetsysDriverbranchVersion(string& driver, string& Branch);
+	BOOL GetChipInfo();
+
 	BOOL GetGPUFullName(string& GPUName, INT Index);
 	BOOL GetGPUMem(NV_DISPLAY_DRIVER_MEMORY_INFO& mem, INT Index);
 	BOOL GetGPUtemperature(INT Index, INT& MinTemp, INT& CurrentTemp, INT& MaxTemp);
 	BOOL GetGPUFans(INT Index, ULONG& FansValue);
-	BOOL GetGPUClock(INT Index);
+	BOOL GetGPUClock(INT Index, DEVICE_CLOCK& Device_clock);
 	BOOL GetHDCPSupport(INT Index, BOOL& HDCPState);
 	BOOL GetGpuCoreCount(INT Index, UINT& corecount);
 	BOOL GetDynamicPstatesInfo(INT Index, NV_GPU_DYNAMIC_PSTATES_INFO_EX& percentage);
@@ -42,16 +45,17 @@ private:
 	BOOL GetBusType(INT Index, string& BusType);
 	BOOL GetPhysicalFrameBufferSize(INT Index, ULONG& PhysicalFrame);
 	BOOL GetVirtualFrameBufferSize(INT Index, ULONG& VirtualFrame);
-	BOOL GetGPUPState(INT Index);
+	BOOL GetGPUPState(INT Index, NV_GPU_PERF_PSTATES20_INFO& NV_PState);
 	BOOL GetCurrentPState(INT Index, UINT& CurrentPState);
-	BOOL GetChipInfo();
-	BOOL GetDynamicInfo(INT Index);
-	BOOL GetPCIEWidth(INT Index);
-	BOOL GetECCConfigurationInfo(INT Index);
+	BOOL GetDynamicInfo(INT Index, NVIDIA_USAGE& Nvidia_Usage);
+	BOOL GetPCIEWidth(INT Index, ULONG& CurrentPCIEWidth);
 	private:
 	NvAPI_Status m_succeed_Nvidia;	//判断加载dll是否成功
 	NvDisplayHandle hDisplay[NVAPI_MAX_PHYSICAL_GPUS * 2];
 	NvPhysicalGpuHandle phys[NVAPI_MAX_PHYSICAL_GPUS];	//物理GPU的总数
 	NvU32 physcount;
-	NvidiaInfo nvinfo;
+	//out
+	vector<NvidiaInfo> realnv;
+
+	NV_CHIPSET_INFO Chipset;
 };

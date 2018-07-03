@@ -16,8 +16,10 @@ public:
 signals:
 
 public slots:
-    void ReciveSMBIOSReady(bool ready);
+    void ReciveSMBIOSReady(bool ready, QString x);
     void ReciveSMBIOSloc(QTreeWidgetItem *item, int columns);
+private:
+	QString currentdir;
 };
 
 #endif // SMBIOSTEXTBROWSER_H

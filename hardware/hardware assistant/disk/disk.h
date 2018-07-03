@@ -507,8 +507,11 @@ private:
 class Diskinfo
 {
 public:
-	static void updatedisk();
+	static Diskinfo* Instance();
+	void updatedisk();
+	Diskinfo();
 private:
-	static void ChartoWchar(std::wstring & des, const char * src);
-	static Disk m_disk;
-};
+	void ChartoWchar(std::wstring & des, const char * src);
+	std::shared_ptr<Disk> m_disk;
+	static std::shared_ptr<Diskinfo> m_diskinfo;
+}; 

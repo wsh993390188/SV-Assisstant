@@ -1744,6 +1744,7 @@ class Smbios : private UnCopyable
 public:
 	Smbios();
 	~Smbios();
+	void UpdateData();
 	MapString BIOSinfo;	//Type0
 	MapString Sysyteminfo;//Type1
 	MapString BaseBroadinfo;//Type2

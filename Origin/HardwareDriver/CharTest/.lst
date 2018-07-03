@@ -1,0 +1,119 @@
+Microsoft (R) Macro Assembler (x64) Version 14.00.24210.0   11/14/17 09:29:35
+E820.asm						     Page 1 - 1
+
+
+				.model flat,stdcall	  ;				//使用flat模式,(4GB平坦内存模式),stdcall标准调用约定
+E820.asm(1) : error A2008:syntax error : .
+				public Memory_Map
+ 00000000			.code 
+ 00000000			Memory_Map PROC
+				Init
+E820.asm(5) : error A2008:syntax error : Init
+					pushad;
+E820.asm(6) : error A2008:syntax error : pushad
+ 00000000  8B C4			mov eax,esp;
+ 00000002  83 C0 08			add eax, 8;						//第一个参数传递给edi
+ 00000005  8B F8			mov edi, eax;					// input address	
+ 00000007  8B C4			mov eax,esp;
+ 00000009  83 C0 0C			add eax, 12;					//第二个参数传递给edi
+ 0000000C  8B F0			mov esi, eax;					// input address
+ 0000000E			do_e820:
+
+ 0000000E  33 DB			xor ebx, ebx;					// ebx must be 0 to start
+ 00000010  66| 33 ED			xor bp, bp;						// keep an entry count in bp
+					mov edx, 0x534D4150;			// Place "SMAP" into edx
+E820.asm(17) : error A2206:missing operator in expression
+					mov eax, 0xE820;
+E820.asm(18) : error A2206:missing operator in expression
+					mov [es:edi + 20], 1;			// force a valid ACPI 3.X entry
+E820.asm(19) : error A2032:invalid use of register
+ 00000013  B9 00000018			mov ecx, 24;					// ask for 24 bytes
+					int 0x15;
+E820.asm(21) : error A2206:missing operator in expression
+ 00000018  72 00			jc short memory_map_failed;	// carry set on first call means "unsupported function"
+					mov edx, 0x534D4150;			// Some BIOSes apparently trash this register?
+E820.asm(23) : error A2206:missing operator in expression
+ 0000001A  3B C2			cmp eax, edx;					// on success, eax must have been reset to "SMAP"
+ 0000001C  75 00			jnz short memory_map_failed;
+ 0000001E  85 DB			test ebx, ebx;					// ebx = 0 implies list is only 1 entry long (worthless)
+ 00000020  74 00			jz short memory_map_failed;
+ 00000022  EB 58			jmp short jmpin;
+
+ 00000052			e820lp:
+					mov eax, 0xE820;				// eax, ecx get trashed on every int 0x15 call
+E820.asm(31) : error A2206:missing operator in expression
+					mov [es:edi + 20], 1;			// force a valid ACPI 3.X entry
+E820.asm(32) : error A2032:invalid use of register
+ 00000052  B9 00000018			mov ecx, 24;					// ask for 24 bytes again
+					int 0x15;
+E820.asm(34) : error A2206:missing operator in expression
+ 00000057  72 65			jc short e820f;				// carry set means "end of list already reached"
+					mov edx, 0x534D4150;			// repair potentially trashed register
+E820.asm(36) : error A2206:missing operator in expression
+
+ 0000007C			jmpin:
+					jcxz skipent;					// skip any 0 length entries
+E820.asm(39) : error A2008:syntax error : jcxz
+ 0000007C  80 F9 14			cmp cl, 20;						// got a 24 byte ACPI 3.X response?
+ 0000007F  76 17			jbe short notext;
+					test [es:edi + 20], 1;			// if so: is the "ignore this data" bit clear?
+E820.asm(42) : error A2032:invalid use of register
+					jz short .skipent;	
+E820.asm(43) : error A2016:expression expected
+
+ 00000098			notext:
+					mov ecx, [es:edi + 8];			// get lower uint32_t of memory region length
+E820.asm(46) : error A2032:invalid use of register
+					or ecx, [es:edi + 12];			// "or" it with upper uint32_t to test for zero
+E820.asm(47) : error A2032:invalid use of register
+ 00000098  74 20			jz skipent;					// if length uint64_t is 0, skip entry
+ 0000009A  66| FF C5			inc bp;							// got a good entry: ++count, move to next storage spot
+ 0000009D  83 C7 18			add edi, 24;
+
+ 000000BA			skipent:
+ 000000BA  85 DB			test ebx, ebx;					// if ebx resets to 0, list is complete
+ 000000BC  75 94			jnz short e820lp;
+
+ 000000BE			e820f:
+					mov [es:si], bp;	// store the entry count
+E820.asm(57) : error A2032:invalid use of register
+ 000000BE  F8				clc; 							// there is "jc" on end of list to this point, so the carry must be cleared
+ 000000BF  EB 0E			jmp E820exit;					// emulator works well 
+ 000000CC			memory_map_failed:
+ 000000CC  F9				stc;							// "function unsupported" error exit
+ 000000CD  EB 00			jmp E820exit;	
+ 000000CF			E820exit:
+					popad;
+E820.asm(64) : error A2008:syntax error : popad
+ 000000CF  C3				ret;
+ 000000D0			Memory_Map ENDP
+				end
+						
+Microsoft (R) Macro Assembler (x64) Version 14.00.24210.0   11/14/17 09:29:35
+E820.asm						     Symbols 2 - 1
+
+
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+Memory_Map . . . . . . . . . . .	P 	 00000000 _TEXT	Length= 000000D0 Public
+  do_e820  . . . . . . . . . . .	L 	 0000000E _TEXT	
+  e820lp . . . . . . . . . . . .	L 	 00000052 _TEXT	
+  jmpin  . . . . . . . . . . . .	L 	 0000007C _TEXT	
+  notext . . . . . . . . . . . .	L 	 00000098 _TEXT	
+  skipent  . . . . . . . . . . .	L 	 000000BA _TEXT	
+  e820f  . . . . . . . . . . . .	L 	 000000BE _TEXT	
+  memory_map_failed  . . . . . .	L 	 000000CC _TEXT	
+  E820exit . . . . . . . . . . .	L 	 000000CF _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+
+	   0 Warnings
+	   19 Errors

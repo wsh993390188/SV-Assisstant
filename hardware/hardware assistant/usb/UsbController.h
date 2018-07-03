@@ -1,6 +1,8 @@
 #pragma once
 #include "UsbDefination.h"
 
+void OutputDebugPrintf(const char* strOutputString, ...);
+
 class _EnumUsbController
 {
 public:

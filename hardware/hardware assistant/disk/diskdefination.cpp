@@ -8,7 +8,7 @@ namespace SV_ASSIST
 	{
 		void updatediskinfo()
 		{
-			Diskinfo::updatedisk();
+			Diskinfo::Instance()->updatedisk();
 		}
 	}
 }

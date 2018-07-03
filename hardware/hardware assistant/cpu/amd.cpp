@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "amd.h"
 #include  <math.h>
+#include <boost/algorithm/string.hpp>
 
 using namespace std;
 
@@ -163,17 +164,28 @@ void AMD::UpDateData(void)
 	}
 	if (nIds_ > 7)
 	{
-		int t = findcpuid(0x00070000);
+		__int64 t = findcpuid(0x00070000);
 		if (t != -1)
 		{
 			f7_ecx = data__[t][2];
 			f7_ebx = data__[t][1];
 		}
 	}
-	if (nExIds_ > 1)
+	if (nExIds_ > 0x80000001)
 	{
 		f81_ecx = extdata__[1][2];
 		f81_edx = extdata__[1][3];
+	}
+
+	// Interpret CPU brand string if reported  
+	if (nExIds_ >= 0x80000004)
+	{
+		char brand[0x40] = {};
+		memcpy(brand, extdata__[2].data(), sizeof(std::array<int, 4>));
+		memcpy(brand + 16, extdata__[3].data(), sizeof(std::array<int, 4>));
+		memcpy(brand + 32, extdata__[4].data(), sizeof(std::array<int, 4>));
+		Brand = brand;
+		boost::trim(Brand);
 	}
 	ExecFeature();
 
@@ -285,7 +297,7 @@ void AMD::ExecCache()
 	Cache[3].Cache_Size = ((extdata__[6][3] & L3_INSTRUCTION_CACHE_SIZE) >> 18) * 512;
 }
 
-inline int AMD::findcpuid(int value)
+inline __int64 AMD::findcpuid(int value)
 {
 	auto& it = find(nIdsLeaf.begin(), nIdsLeaf.end(), value);
 	if (it != nIdsLeaf.end())

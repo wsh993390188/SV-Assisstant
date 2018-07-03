@@ -4,274 +4,236 @@
 #include "Gpudata.h"
 #include "Igpu.h"
 
+class GPUSensor : public IgpuSensor
+{
+public:
+	using IgpuSensor::IgpuSensor;
+	BOOL SetGPUName(const std::string& name)
+	{
+		BOOL status = FALSE;
+		if (name.size())
+		{
+			this->GPUname = name;
+			status = TRUE;
+		}
+		return status;
+	}
+
+	BOOL SetGPUBiosVersion(const std::string& biosversion)
+	{
+		BOOL status = FALSE;
+		if (biosversion.size())
+		{
+			this->GPUBiosVersion = biosversion;
+			status = TRUE;
+		}
+		return status;
+	}
+
+	BOOL SetGPUTemperature(INT Temperature)
+	{
+		BOOL status = FALSE;
+		if (Temperature)
+		{
+			this->Temperature = Temperature;
+			status = TRUE;
+		}
+		return status;
+	}
+
+	BOOL SetGPUClock(double gpuclock)
+	{
+		BOOL status = FALSE;
+		if (gpuclock)
+		{
+			this->GPUClock = gpuclock;
+			status = TRUE;
+		}
+		return status;
+	}
+
+	BOOL SetGPUMemoryClock(double gpumemoryclock)
+	{
+		BOOL status = FALSE;
+		if (gpumemoryclock)
+		{
+			this->GPUMemclock = gpumemoryclock;
+			status = TRUE;
+		}
+		return status;
+	}
+	BOOL SetGPUusage(ULONG gpusage)
+	{
+		BOOL status = FALSE;
+		if (gpusage)
+		{
+			this->GPUusage = gpusage;
+			status = TRUE;
+		}
+		return status;
+	}
+	BOOL SetGPUfans(ULONG fans)
+	{
+		BOOL status = FALSE;
+		if (fans)
+		{
+			this->fans = fans;
+			status = TRUE;
+		}
+		return status;
+	}
+
+	BOOL SetGPUDriverVersion(const std::string& DriverVer)
+	{
+		BOOL status = FALSE;
+		if (!DriverVer.empty())
+		{
+			this->GPUDriverVersion = DriverVer;
+			status = TRUE;
+		}
+		return status;
+	}
+
+	BOOL SetGPUBranchVersion(const std::string& BranchVer)
+	{
+		BOOL status = FALSE;
+		if (!BranchVer.empty())
+		{
+			this->GPUBranchVersion = BranchVer;
+			status = TRUE;
+		}
+		return status;
+	}
+
+	BOOL SetsharedSystemMemory(size_t mem)
+	{
+		BOOL status = FALSE;
+		if (mem)
+		{
+			this->sharedSystemMemory = mem;
+			status = TRUE;
+		}
+		return status;
+	}
+
+	BOOL SetsystemVideoMemory(size_t mem)
+	{
+		BOOL status = FALSE;
+		if (mem)
+		{
+			this->systemVideoMemory = mem;
+			status = TRUE;
+		}
+		return status;
+	}
+
+	BOOL SetdedicatedVideoMemory(size_t mem)
+	{
+		BOOL status = FALSE;
+		if (mem)
+		{
+			this->dedicatedVideoMemory = mem;
+			status = TRUE;
+		}
+		return status;
+	}
+private:
+};
+
 class GPU
 {
 public:
-	static const string GPUName()
+	static GPU Instance;
+	void UpdateData()
 	{
-		if (gpudata.amdinfo)
-		{
-			string tt(gpudata.amdinfo->adapterInfo.strAdapterName);
-			return tt;
-		}
-		else if (gpudata.nvinfo)
-		{
-			return gpudata.nvinfo->FUllName;
-		}
-		else
-		{
-			return "";
-		}
+		gpuinfo.clear();
+		gpudata->UpdateData();
+		GetInfo();
 	}
-
-	static const string GetGPUBIOSVersion()
+	const std::vector<IgpuSensor>& ReturnGPUInfo()
 	{
-		if (gpudata.amdinfo)
-		{
-			string tt(gpudata.amdinfo->biosInfo.strVersion);
-			return tt;
-		}
-		else if (gpudata.nvinfo)
-		{
-			return gpudata.nvinfo->VbiosVersion;
-		}
-		else
-		{
-			return "";
-		}
-	}
-
-	static double GetGPUtemperature()
-	{
-		if (gpudata.amdinfo)
-		{
-			return gpudata.amdinfo->OverDrive5.TemperatureAndFans.adlTemperature.iTemperature / 1000.0;
-		}
-		else if (gpudata.nvinfo)
-		{
-			return gpudata.nvinfo->Device_Tem.GPUCurrTem;
-		}
-		else
-		{
-			return 0;
-		}
-	}
-
-	static int GetGPUFans(SV_ASSIST::GPU::FanTypes & type)
-	{
-		type = SV_ASSIST::GPU::FanTypes::RPM;
-		if (gpudata.amdinfo)
-		{
-			if (gpudata.amdinfo->OverDrive5.TemperatureAndFans.fanSpeedValue.iSpeedType == ADL_DL_FANCTRL_SPEED_TYPE_PERCENT)
-				type = SV_ASSIST::GPU::FanTypes::Percent;
-			return gpudata.amdinfo->OverDrive5.TemperatureAndFans.fanSpeedValue.iFanSpeed;
-		}
-		else if (gpudata.nvinfo)
-		{
-			return gpudata.nvinfo->fans;
-		}
-		else
-		{
-			return 0;
-		}
-	}
-
-	static double GetGPUCurrentClock()
-	{
-		if (gpudata.amdinfo)
-		{
-			return gpudata.amdinfo->OverDrive5.activity.iEngineClock / 100.0;
-		}
-		else if (gpudata.nvinfo)
-		{
-			return gpudata.nvinfo->Device_clock.GraphicsCurrent / 1000.0;
-		}
-		else
-		{
-			return 0;
-		}
-	}
-
-	static double GetGPUMemoryClock()
-	{
-		if (gpudata.amdinfo)
-		{
-			return gpudata.amdinfo->OverDrive5.activity.iMemoryClock / 100.0;
-		}
-		else if (gpudata.nvinfo)
-		{
-			return gpudata.nvinfo->Device_clock.MemoryCurrent / 1000.0;
-		}
-		else
-		{
-			return 0;
-		}
-	}
-
-	static double GetGPUPhysicalMemory()
-	{
-		if (gpudata.amdinfo)
-		{
-			return 0;
-		}
-		else if (gpudata.nvinfo)
-		{
-			return gpudata.nvinfo->dedicatedVideoMemory / 1024.0;
-		}
-		else
-		{
-			return 0;
-		}
-	}
-
-	static double GetGPUAvailableMemory()
-	{
-		if (gpudata.amdinfo)
-			return 0;
-		else if (gpudata.nvinfo)
-			return gpudata.nvinfo->curAvailableDedicatedVideoMemory / 1024.0;
-		else
-			return 0;
-	}
-
-	static double GetGPUVirtualMemory()
-	{
-		if (gpudata.amdinfo)
-		{
-			return 0;
-		}
-		else if (gpudata.nvinfo)
-		{
-			return gpudata.nvinfo->sharedSystemMemory / 1024.0;
-		}
-		else
-		{
-			return 0;
-		}
-	}
-
-	static int GetGPUUsasge()
-	{
-		if (gpudata.amdinfo)
-			return gpudata.amdinfo->OverDrive5.activity.iActivityPercent;
-		else if (gpudata.nvinfo)
-		{
-			if (gpudata.nvinfo->percentage.utilization[0].bIsPresent)
-				return gpudata.nvinfo->percentage.utilization[0].percentage;
-			else
-				return gpudata.nvinfo->Nvidia_Usage.GPUUsage;
-		}
-		return 0;
-	}
-
-	static int GetGPUMemoryControlUsasge()
-	{
-		if (gpudata.amdinfo)
-		{
-			return 0;
-		}
-		else if (gpudata.nvinfo)
-		{
-			if (gpudata.nvinfo->percentage.utilization[1].bIsPresent)
-				return gpudata.nvinfo->percentage.utilization[1].percentage;
-			else
-				return gpudata.nvinfo->Nvidia_Usage.FrameBufferUsage;
-		}
-		return 0;
-	}
-
-	static int GetGPUVideoEngineUsasge()
-	{
-		if (gpudata.amdinfo)
-		{
-			return 0;
-		}
-		else if (gpudata.nvinfo)
-		{
-			if (gpudata.nvinfo->percentage.utilization[2].bIsPresent)
-				return gpudata.nvinfo->percentage.utilization[2].percentage;
-			else
-				return gpudata.nvinfo->Nvidia_Usage.VideoEngineUsage;
-		}
-		return 0;
-	}
-
-	static void UpdateDate()
-	{
-		gpudata.UpdateData();
+		return this->gpuinfo;
 	}
 private:
-	static GPUData gpudata;
+	void GetInfo()
+	{
+		if(gpudata->nvinfo)
+		for(auto var : *(gpudata->nvinfo))
+		{
+			GPUSensor temp = {};
+			temp.SetGPUDriverVersion(gpudata->NV_DriverVer);
+			temp.SetGPUBranchVersion(gpudata->NV_BranchVersion);
+			temp.SetGPUName(var.FUllName);
+			temp.SetGPUBiosVersion(var.VbiosVersion);
+			temp.SetGPUTemperature(var.Device_Tem.GPUCurrTem);
+			temp.SetGPUfans(var.fans);
+			temp.SetGPUClock(var.Device_clock.GraphicsCurrent / 1000.0);
+			temp.SetGPUMemoryClock(var.Device_clock.MemoryCurrent / 1000.0);
+			temp.SetGPUusage(var.percentage.utilization[0].bIsPresent ? var.percentage.utilization[0].percentage : var.Nvidia_Usage.GPUUsage);
+			temp.SetsharedSystemMemory(var.sharedSystemMemory);
+			temp.SetdedicatedVideoMemory(var.dedicatedVideoMemory);
+			temp.SetsystemVideoMemory(var.systemVideoMemory);
+			this->gpuinfo.emplace_back(temp);
+		}
+		if (gpudata->amdinfo)
+		for (auto var : *(gpudata->amdinfo))
+		{
+			GPUSensor temp = {};
+			temp.SetGPUBranchVersion(gpudata->AMD_BranchVersion);
+			temp.SetGPUDriverVersion(gpudata->AMD_DriverVer);
+			temp.SetGPUName(var.FullName);
+			temp.SetGPUBiosVersion(var.biosInfo.strVersion);
+			temp.SetGPUTemperature(var.OverDrive5.TemperatureAndFans.adlTemperature.iTemperature / 1000);
+			temp.SetGPUfans(var.OverDrive5.TemperatureAndFans.fanSpeedValue.iFanSpeed);
+			temp.SetGPUClock(var.OverDrive5.activity.iEngineClock / 100.0);
+			temp.SetGPUMemoryClock(var.OverDrive5.activity.iMemoryClock / 1000.0);
+			temp.SetGPUusage(var.OverDrive5.activity.iActivityPercent);
+			temp.SetsharedSystemMemory(var.sharedSystemMemory);
+			temp.SetdedicatedVideoMemory(var.dedicatedVideoMemory);
+			temp.SetsystemVideoMemory(var.systemVideoMemory);
+			this->gpuinfo.emplace_back(temp);
+		}
+
+		if (gpudata->Intelinfo)
+			for (auto var : *(gpudata->Intelinfo))
+			{
+				GPUSensor temp = {};
+				temp.SetGPUBranchVersion(gpudata->AMD_BranchVersion);
+				temp.SetGPUDriverVersion(gpudata->AMD_DriverVer);
+				temp.SetGPUName(WStringToString(var.FUllName));
+				this->gpuinfo.emplace_back(temp);
+			}
+	}
+
+	std::string WStringToString(const std::wstring &wstr)
+	{
+		std::string str;
+		int nLen = (int)wstr.length();
+		str.resize(nLen, '\0');
+		int nResult = WideCharToMultiByte(CP_ACP, 0, (LPCWSTR)wstr.c_str(), nLen, (LPSTR)str.c_str(), nLen, NULL, NULL);
+		if (nResult == 0)
+		{
+			return "";
+		}
+		return str;
+	}
+	std::vector<IgpuSensor> gpuinfo;
+	shared_ptr<GPUData> gpudata;
 	explicit GPU(const GPU& x);
 	GPU& operator=(const GPU& x);
-	GPU() {}
+	GPU() : gpudata(make_shared<GPUData>()) { }
 	~GPU() {}
 };
 
-GPUData GPU::gpudata;
+GPU GPU::Instance;
 
-const std::string SV_ASSIST::GPU::GPUName()
+const std::vector<IgpuSensor>& SV_ASSIST::GPU::GetGpuInfo()
 {
-	return ::GPU::GPUName();
-}
-
-const std::string SV_ASSIST::GPU::GPUBIOSVersion()
-{
-	return ::GPU::GetGPUBIOSVersion();
-}
-
-double SV_ASSIST::GPU::GPUtemperature()
-{
-	return ::GPU::GetGPUtemperature();
-}
-
-int SV_ASSIST::GPU::GPUFans(FanTypes & type)
-{
-	return ::GPU::GetGPUFans(type);
-}
-
-double SV_ASSIST::GPU::GPUCurrentClock()
-{
-	return ::GPU::GetGPUCurrentClock();
-}
-
-double SV_ASSIST::GPU::GPUMemoryClock()
-{
-	return ::GPU::GetGPUMemoryClock();
-}
-
-double SV_ASSIST::GPU::GPUPhysicalMemory()
-{
-	return ::GPU::GetGPUPhysicalMemory();
-}
-
-double SV_ASSIST::GPU::GPUVirtualMemory()
-{
-	return ::GPU::GetGPUVirtualMemory();
-}
-
-double SV_ASSIST::GPU::GetGPUAvailableMemory()
-{
-	return ::GPU::GetGPUAvailableMemory();
-}
-
-int SV_ASSIST::GPU::GetGPUUsasge()
-{
-	return ::GPU::GetGPUUsasge();
-}
-
-int SV_ASSIST::GPU::GetGPUMemoryControlUsasge()
-{
-	return ::GPU::GetGPUMemoryControlUsasge();
-}
-
-int SV_ASSIST::GPU::GetGPUVideoEngineUsasge()
-{
-	return ::GPU::GetGPUVideoEngineUsasge();
+	return ::GPU::Instance.ReturnGPUInfo();
 }
 
 void SV_ASSIST::GPU::UpdateDate()
 {
-	::GPU::UpdateDate();
+	::GPU::Instance.UpdateData();
 }
 

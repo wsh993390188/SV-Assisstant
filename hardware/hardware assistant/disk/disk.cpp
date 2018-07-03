@@ -439,6 +439,7 @@ VOID Disk::UpdateDate()
 	Infotmp = new ATA_SMART_INFO[diskQuery.wmi_info.size()];
 	for (USHORT i = 0; i < diskQuery.wmi_info.size(); ++i)
 	{
+		Infotmp[i] = {};
 		Infotmp[i].model = (CStringW)diskQuery.wmi_info[i].model;
 		Infotmp[i].deviceid = (CStringW)diskQuery.wmi_info[i].deviceid;
 		Infotmp[i].diskSize = (CStringW)diskQuery.wmi_info[i].diskSize;
@@ -451,44 +452,45 @@ VOID Disk::UpdateDate()
 		Infotmp[i].scsiPort = diskQuery.wmi_info[i].scsiPort;
 		Infotmp[i].scsiTargetId = diskQuery.wmi_info[i].scsiTargetId;
 		SMARTinfo.emplace_back(Infotmp[i]);
-		GetPhysicalDriveInfoInNT(SMARTinfo[i].physicalDriveId, &(SMARTinfo[i].Identify));
-
-
-		SMARTinfo[i].Major = GetAtaMajorVersion(SMARTinfo[i].Identify.wMajorVersion.MajorVersion, SMARTinfo[i].MajorVersion);
-		GetAtaMinorVersion(SMARTinfo[i].Identify.wMinorVersion, SMARTinfo[i].MinorVersion);
-		SMARTinfo[i].TransferModeType = GetTransferMode(
-			SMARTinfo[i].Identify.wMultiWordDMA.MultiWordDMA,
-			SMARTinfo[i].Identify.wReserved69[7],
-			SMARTinfo[i].Identify.wReserved69[8],
-			SMARTinfo[i].Identify.wUltraDMA.UltraDMA,
-			SMARTinfo[i].CurrentTransferMode,
-			SMARTinfo[i].MaxTransferMode,
-			SMARTinfo[i].Interface);
-
-		SMARTinfo[i].DetectedTimeUnitType = GetTimeUnitType(SMARTinfo[i].model, SMARTinfo[i].firmware, SMARTinfo[i].Major, SMARTinfo[i].TransferModeType);
-
-		if (SMARTinfo[i].DetectedTimeUnitType == POWER_ON_MILLI_SECONDS)
+		if(GetPhysicalDriveInfoInNT(SMARTinfo[i].physicalDriveId, &(SMARTinfo[i].Identify)))
 		{
-			SMARTinfo[i].MeasuredTimeUnitType = POWER_ON_MILLI_SECONDS;
-		}
-		else if (SMARTinfo[i].DetectedTimeUnitType == POWER_ON_10_MINUTES)
-		{
-			SMARTinfo[i].MeasuredTimeUnitType = POWER_ON_10_MINUTES;
+			SMARTinfo[i].Major = GetAtaMajorVersion(SMARTinfo[i].Identify.wMajorVersion.MajorVersion, SMARTinfo[i].MajorVersion);
+			GetAtaMinorVersion(SMARTinfo[i].Identify.wMinorVersion, SMARTinfo[i].MinorVersion);
+			SMARTinfo[i].TransferModeType = GetTransferMode(
+				SMARTinfo[i].Identify.wMultiWordDMA.MultiWordDMA,
+				SMARTinfo[i].Identify.wReserved69[7],
+				SMARTinfo[i].Identify.wReserved69[8],
+				SMARTinfo[i].Identify.wUltraDMA.UltraDMA,
+				SMARTinfo[i].CurrentTransferMode,
+				SMARTinfo[i].MaxTransferMode,
+				SMARTinfo[i].Interface);
+
+			SMARTinfo[i].DetectedTimeUnitType = GetTimeUnitType(SMARTinfo[i].model, SMARTinfo[i].firmware, SMARTinfo[i].Major, SMARTinfo[i].TransferModeType);
+
+			if (SMARTinfo[i].DetectedTimeUnitType == POWER_ON_MILLI_SECONDS)
+			{
+				SMARTinfo[i].MeasuredTimeUnitType = POWER_ON_MILLI_SECONDS;
+			}
+			else if (SMARTinfo[i].DetectedTimeUnitType == POWER_ON_10_MINUTES)
+			{
+				SMARTinfo[i].MeasuredTimeUnitType = POWER_ON_10_MINUTES;
+			}
+
+			CString firmwareRevInt(SMARTinfo[i].firmware.c_str());
+			firmwareRevInt.Replace(_T("."), _T(""));
+			if (SMARTinfo[i].model.find(_T("ADATA SSD")) == 0 && _ttoi(firmwareRevInt) == 346)
+			{
+				SMARTinfo[i].TemperatureMultiplier = 0.5;
+			}
 		}
 
-		CString firmwareRevInt(SMARTinfo[i].firmware.c_str());
-		firmwareRevInt.Replace(_T("."), _T(""));
-		if (SMARTinfo[i].model.find(_T("ADATA SSD")) == 0 && _ttoi(firmwareRevInt) == 346)
+		if(GetPhysicalSMARTInfo(SMARTinfo[i].physicalDriveId, 0xA0, SMARTinfo[i]) && GetPhysicalThresholdInfo(SMARTinfo[i].physicalDriveId, 0xA0, SMARTinfo[i]))
 		{
-			SMARTinfo[i].TemperatureMultiplier = 0.5;
+			FillSmartData(&SMARTinfo[i]);
+			CheckSsdSupport(SMARTinfo[i]);
+			GetSMARTIDINFO(&SMARTinfo[i]);
+			FillSmartThreshold(&SMARTinfo[i]);
 		}
-
-		GetPhysicalSMARTInfo(SMARTinfo[i].physicalDriveId, 0xA0, SMARTinfo[i]);
-		GetPhysicalThresholdInfo(SMARTinfo[i].physicalDriveId, 0xA0, SMARTinfo[i]);
-		FillSmartData(&SMARTinfo[i]);
-		CheckSsdSupport(SMARTinfo[i]);
-		GetSMARTIDINFO(&SMARTinfo[i]);
-		FillSmartThreshold(&SMARTinfo[i]);
 	}
 	delete[] Infotmp;
 	Infotmp = NULL;
@@ -2065,7 +2067,12 @@ Disk::~Disk()
 {
 }
 
-Disk Diskinfo::m_disk;
+Diskinfo * Diskinfo::Instance()
+{
+	if (!m_diskinfo.get())
+		m_diskinfo = std::make_shared<Diskinfo>();
+	return m_diskinfo.get();
+}
 
 void Diskinfo::updatedisk()
 {
@@ -2083,7 +2090,7 @@ void Diskinfo::updatedisk()
 	{
 		OutputDebugString(dir.c_str());
 		OutputDebugString(L" is not existing;\n now make it");
-		for(int i = 0; i < dir.size(); i++)
+		for(UINT i = 0; i < dir.size(); i++)
 		{
 			if (dir[i] == '\\')
 			{
@@ -2104,74 +2111,83 @@ void Diskinfo::updatedisk()
 			}
 		}
 	}
-	m_disk.UpdateDate();
-	for (const auto& i : m_disk.SMARTinfo)
+	m_disk->UpdateDate();
+	for (const auto& i : m_disk->SMARTinfo)
 	{
 		wstring filedir(dir);
 		wstring temp;
-		ChartoWchar(temp, i.Identify.sModelNumber);
-		filedir.append(temp);
-		if (_waccess(filedir.c_str(), 0) == -1)
+		if (!string(i.Identify.sModelNumber).empty())
 		{
-			OutputDebugString(filedir.c_str());
-			OutputDebugString(L" is not existing;\n now make it");
-			int flag = _wmkdir(filedir.c_str());
-			if (flag == 0)
+			ChartoWchar(temp, i.Identify.sModelNumber);
+			filedir.append(temp);
+			if (_waccess(filedir.c_str(), 0) == -1)
 			{
-				OutputDebugString(L"make successfully");
+				OutputDebugString(filedir.c_str());
+				OutputDebugString(L" is not existing;\n now make it");
+				int flag = _wmkdir(filedir.c_str());
+				if (flag == 0)
+				{
+					OutputDebugString(L"make successfully");
+				}
+				else {
+					OutputDebugString(L"make errorly");
+					continue;
+				}
 			}
-			else {
-				OutputDebugString(L"make errorly");
-				continue;
-			}
-		}
-		wofstream outfile;
-		outfile.open(filedir + L"\\DiskName");
-		outfile << i.Identify.sModelNumber;
-		outfile.close();
-		outfile.open(filedir + L"\\DiskSize");
-		outfile << i.diskSize << _T("Bytes");
-		outfile.close();
-		outfile.open(filedir + L"\\SerialNumber");
-		outfile << i.Identify.sSerialNumber;
-		outfile.close();
-		outfile.open(filedir + L"\\Firmware");
-		outfile << i.firmware;
-		outfile.close();
-		outfile.open(filedir + L"\\Interface");
-		outfile << i.Interface;
-		outfile.close();
-		outfile.open(filedir + L"\\Standard");
-		outfile << i.MajorVersion << _T(" | ") << i.MinorVersion;
-		outfile.close();
-		outfile.open(filedir + L"\\TransferMode");
-		outfile << i.CurrentTransferMode << _T(" | ") << i.MaxTransferMode;
-		outfile.close();
-		outfile.open(filedir + L"\\PowerOnCount");
-		outfile << i.PowerOnCount;
-		outfile.close();
-		outfile.open(filedir + L"\\PowerOnHours");
-		outfile << ((i.PowerOnStartRawValue == -1) ? i.PowerOnRawValue : i.PowerOnStartRawValue);
-		outfile.close();
-		outfile.open(filedir + L"\\Temperature");
-		outfile << i.Temperature;
-		outfile.close();
-		for (DWORD j = 0; j < i.AttributeCount; j++)
-		{
-			WCHAR wID[10];
-			swprintf(wID, L"%02X",i.Attribute[j].Id);
-			outfile.open(filedir + L'\\' + wID);
-			//			outfile << hex << setw(2) << setfill(_T('0')) << i.Attribute[j].Id << _T(" ");
-			outfile << dec << i.Attribute[j].CurrentValue << endl\
-				<< i.Attribute[j].WorstValue << endl << i.Threshold[j].ThresholdValue << endl;
-			for (int k = 5; k >= 0; k--)
-			{
-				outfile << hex << setw(2) << setfill(_T('0')) << i.Attribute[j].RawValue[k];
-			}
+			wofstream outfile;
+			outfile.open(filedir + L"\\DiskName");
+			outfile << i.Identify.sModelNumber;
 			outfile.close();
+			outfile.open(filedir + L"\\DiskSize");
+			outfile << i.diskSize << _T("Bytes");
+			outfile.close();
+			outfile.open(filedir + L"\\SerialNumber");
+			outfile << i.Identify.sSerialNumber;
+			outfile.close();
+			outfile.open(filedir + L"\\Firmware");
+			outfile << i.firmware;
+			outfile.close();
+			outfile.open(filedir + L"\\Interface");
+			outfile << i.Interface;
+			outfile.close();
+			outfile.open(filedir + L"\\Standard");
+			outfile << i.MajorVersion << _T(" | ") << i.MinorVersion;
+			outfile.close();
+			outfile.open(filedir + L"\\TransferMode");
+			outfile << i.CurrentTransferMode << _T(" | ") << i.MaxTransferMode;
+			outfile.close();
+			outfile.open(filedir + L"\\PowerOnCount");
+			outfile << i.PowerOnCount;
+			outfile.close();
+			outfile.open(filedir + L"\\PowerOnHours");
+			outfile << ((i.PowerOnStartRawValue == -1) ? i.PowerOnRawValue : i.PowerOnStartRawValue);
+			outfile.close();
+			outfile.open(filedir + L"\\Temperature");
+			outfile << i.Temperature;
+			outfile.close();
+			for (DWORD j = 0; j < i.AttributeCount; j++)
+			{
+				WCHAR wID[10];
+				swprintf_s(wID, L"%02X", i.Attribute[j].Id);
+				outfile.open(filedir + L'\\' + wID);
+				//			outfile << hex << setw(2) << setfill(_T('0')) << i.Attribute[j].Id << _T(" ");
+				outfile << dec << i.Attribute[j].CurrentValue << endl\
+					<< i.Attribute[j].WorstValue << endl << i.Threshold[j].ThresholdValue << endl;
+				for (int k = 5; k >= 0; k--)
+				{
+					outfile << hex << setw(2) << setfill(_T('0')) << i.Attribute[j].RawValue[k];
+				}
+				outfile.close();
+			}
 		}
 	}
 }
+
+Diskinfo::Diskinfo() : m_disk(make_shared<Disk>())
+{
+}
+
+std::shared_ptr<Diskinfo> Diskinfo::m_diskinfo = nullptr;
 
 void Diskinfo::ChartoWchar(std::wstring& des, const char* src)
 {

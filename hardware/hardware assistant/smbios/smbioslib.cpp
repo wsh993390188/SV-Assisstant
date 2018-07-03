@@ -15,12 +15,13 @@ namespace SV_ASSIST
 		{
 		public:
 			static void outtofile();
+			static void Updatedata();
 		protected:
 		private:
-			const static Smbios sm;
+			static Smbios sm;
 		};
 
-		const Smbios execSMBIOS::sm;
+		Smbios execSMBIOS::sm;
 
 		void execSMBIOS::outtofile()
 		{
@@ -586,8 +587,14 @@ namespace SV_ASSIST
 			outfile.close();
 		}
 
+		void execSMBIOS::Updatedata()
+		{
+			sm.UpdateData();
+		}
+
 		void Updatesmbios()
 		{
+			execSMBIOS::Updatedata();
 			execSMBIOS::outtofile();
 		}
 	}

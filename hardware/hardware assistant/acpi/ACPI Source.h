@@ -130,6 +130,7 @@ public:
 	ACPI_MCFG_STRUCTURE				mcfg;
 	PACPI_FPDT_STRUCTURE			fpdt;
 	ACPI_BGRT_STRUCTURE				bgrt;
+	ACPI_RSDT_STRUCTURE				rsdt;
 	bool isSupportACPI;	//是否支持获取ACPI表
 private:
 	vector<DWORD> FirmwareTableID;	//可获取的ACPI表头的名称

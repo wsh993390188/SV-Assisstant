@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="源文件\Driver">
+      <UniqueIdentifier>{3a55cebb-a409-465f-9e4e-664a73ccfd63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Export">
+      <UniqueIdentifier>{d78773cf-894b-47a0-9151-2ac13adfb49c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Function">
+      <UniqueIdentifier>{d9bff7c0-b770-4a16-9aa6-67ae71b61706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Function\AMD">
+      <UniqueIdentifier>{97c81c41-a5f7-4471-8958-38f8d4cd3dca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Driver">
+      <UniqueIdentifier>{3874df16-1956-49bf-9f8a-ed90f4146287}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Export">
+      <UniqueIdentifier>{e4d211ce-6dd8-4d63-a196-ea6486c1ba86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Function">
+      <UniqueIdentifier>{3b6d57f0-85d9-4338-9bc5-0daa642a216f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Defination">
+      <UniqueIdentifier>{7f3ee017-7019-4119-a4fd-d41d6b963f1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Function\AMD">
+      <UniqueIdentifier>{abfeebde-4abf-41cc-a69b-99806a060b76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Function\Zhaoxin">
+      <UniqueIdentifier>{65f9f7d3-adea-4b5f-8f98-e3d36ddac613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Function\Zhaoxin">
+      <UniqueIdentifier>{b80395a0-ba39-439a-8697-4536a78f39aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Function\Intel">
+      <UniqueIdentifier>{32c2cc68-c3a3-44ca-b095-658daff92331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Function\Intel">
+      <UniqueIdentifier>{67335cff-50f1-4dc5-972d-c62a21371fc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Function\PCI">
+      <UniqueIdentifier>{7c66e470-dd45-4692-9094-d9b7ded9fbb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\PCI">
+      <UniqueIdentifier>{e970a1a5-a57c-44e2-8329-f7f8aecaadb2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Load\Driver.h">
+      <Filter>头文件\Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDriverClass.h">
+      <Filter>头文件\Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperIO.h">
+      <Filter>头文件\Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="Zhaoxin.h">
+      <Filter>头文件\Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="Driverdll.h">
+      <Filter>头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="Defination\Ring0Defination.h">
+      <Filter>头文件\Defination</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\AMD\AMDMSR.h">
+      <Filter>头文件\Function\AMD</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\Zhaoxin\ZhaoxinMSR.h">
+      <Filter>头文件\Function\Zhaoxin</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\Intel\IntelMSR.h">
+      <Filter>头文件\Function\Intel</Filter>
+    </ClInclude>
+    <ClInclude Include="PCI-E.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Load\Driver.cpp">
+      <Filter>源文件\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDriverClass.cpp">
+      <Filter>源文件\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="Zhaoxin.cpp">
+      <Filter>源文件\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="Driverdll.cpp">
+      <Filter>源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\AMD\AMDMSR.cpp">
+      <Filter>源文件\Function\AMD</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\Zhaoxin\ZhaoxinMSR.cpp">
+      <Filter>源文件\Function\Zhaoxin</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\Intel\IntelMSR.cpp">
+      <Filter>源文件\Function\Intel</Filter>
+    </ClCompile>
+    <ClCompile Include="PCI-E.cpp">
+      <Filter>源文件\Driver</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

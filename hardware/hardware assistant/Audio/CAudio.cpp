@@ -58,31 +58,36 @@ public:
 	void Exec();
 	void UpdateData();
 	const std::vector<AudioStruct>& GetOutputAudio();
-	static std::shared_ptr<CAudio> AudioInstance;
+	static CAudio* Instance()
+	{
+		if (!AudioInstance.get())
+			AudioInstance = std::make_shared<CAudio>();
+		return AudioInstance.get();
+	}
 private:
+	static std::shared_ptr<CAudio> AudioInstance;
 	std::vector<AudioStruct> Output;
 };
 
-std::shared_ptr<CAudio> CAudio::AudioInstance = std::make_shared<CAudio>();
-
+std::shared_ptr<CAudio> CAudio::AudioInstance = nullptr;
 void SV_ASSIST::AUDIO::Exec()
 {
-	CAudio::AudioInstance->Exec();
+	CAudio::Instance()->Exec();
 }
 
 void SV_ASSIST::AUDIO::UpdateData()
 {
-	CAudio::AudioInstance->UpdateData();
+	CAudio::Instance()->UpdateData();
 }
 
 const std::vector<AudioStruct>& SV_ASSIST::AUDIO::GetOutputAudio()
 {
-	return CAudio::AudioInstance->GetOutputAudio();
+	return CAudio::Instance()->GetOutputAudio();
 }
 
 void CAudio::Exec()
 {
-	if SUCCEEDED(::CoInitializeEx(nullptr, COINIT_MULTITHREADED))
+	if SUCCEEDED(::CoInitialize(nullptr))
 	{
 		{
 			Microsoft::WRL::ComPtr<IMMDeviceEnumerator> enumerator;

@@ -2,14 +2,15 @@
 
 smbiostextbrowser::smbiostextbrowser(QWidget *parent) : QTextBrowser(parent)
 {
-
 }
 
-void smbiostextbrowser::ReciveSMBIOSReady(bool Ready)
+void smbiostextbrowser::ReciveSMBIOSReady(bool Ready, QString x)
 {
+	if (currentdir.isEmpty())
+		currentdir = x;
     if(Ready)
     {
-        QFile file("smbios.txt");
+        QFile file(currentdir.append(tr("\\smbios.txt")));
         if(!file.open(QFile::ReadOnly | QFile::Text))
         {
             qDebug() << "Can not open";
@@ -34,7 +35,7 @@ void smbiostextbrowser::ReciveSMBIOSloc(QTreeWidgetItem *item, int columns)
 	Q_UNUSED(columns)
     this->clear();
     bool set = false, exit = false;
-    QFile file("smbios.txt");
+    QFile file(currentdir.append(tr("\\smbios.txt")));
     if(!file.open(QFile::ReadOnly | QFile::Text))
     {
         qDebug() << "Can not open";

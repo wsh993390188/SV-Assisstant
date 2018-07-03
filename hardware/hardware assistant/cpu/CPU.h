@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 /*************************************************
 Copyright: 2017 Zhaoxin BJ-SV
@@ -7,9 +7,7 @@ Date:2017-12-13
 Description: 获取CPU的信息
 **************************************************/
 
-#include "Intel.h"
-#include "amd.h"
-#include "zhaoxin.h"
+#include "defination.h"
 
 namespace SV_ASSIST
 {
@@ -211,5 +209,28 @@ namespace SV_ASSIST
 			*@Cache_info		一、二、三级Cache(若没3级需要自己判断)		
 		****************************************************************/
 		const Cache_info* GetCache();
+
+		//以下仅支持Inte部分cpu
+		/**************************************************************
+		*@Function				GetCodeName
+		*@brief					获取处理器的代号
+		*@author				王硕
+		*@param
+		*@
+		*@return
+		*@string				Intel未知代号返回Unknown，其他未知代号返回空
+		****************************************************************/
+		const std::string& GetCodeName();
+
+		/**************************************************************
+		*@Function				GetTechnology
+		*@brief					获取处理器的工艺
+		*@author				王硕
+		*@param
+		*@
+		*@return
+		*@Cache_info			未知返回0
+		****************************************************************/
+		const unsigned int GetTechnology();
 	}
 }

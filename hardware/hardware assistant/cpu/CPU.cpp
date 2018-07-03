@@ -2,33 +2,46 @@
 //
 #include "stdafx.h"
 #include "CPU.h"
+#include "Intel.h"
+#include "amd.h"
+#include "zhaoxin.h"
 
 class CPUDLL
 {
 	class CPUDLLDATA;
 public:
-	static const string& GetManufacturer() { return data.cpu->Manufacturer; }
-	static const short GetFamily() { return data.cpu->Family; }
-	static const short GetModel() { return data.cpu->Model; }
-	static const short GetStepping() { return data.cpu->Stepping; }
-	static const short GetExtFamily() { return data.cpu->ExtFamily; }
-	static const short GetExtModel() { return data.cpu->ExtModel; }
-	static const CPUFeature& GetFeature() { return data.cpu->Feature; }
-	static const Cache_info* GetCache() { return data.cpu->Cache; }
+	static CPUDLL* Instance() {
+		if (!ttt.get())
+			ttt = std::make_shared<CPUDLL>();
+		return ttt.get();
+	}
+	const string& GetManufacturer() { return data->cpu->Manufacturer; }
+	const short GetFamily() { return data->cpu->Family; }
+	const short GetModel() { return data->cpu->Model; }
+	const short GetStepping() { return data->cpu->Stepping; }
+	const short GetExtFamily() { return data->cpu->ExtFamily; }
+	const short GetExtModel() { return data->cpu->ExtModel; }
+	const CPUFeature& GetFeature() { return data->cpu->Feature; }
+	const Cache_info* GetCache() { return data->cpu->Cache; }
 
-	static const string& GetCPUName() { return data.cpu->wmi.Name; }
-	static const string& GetProcessorID() { return data.cpu->wmi.ProcessorId; }
-	static const string& GetSocketDesignation() { return data.cpu->wmi.SocketDesignation; }
-	static const UINT GetCurrentClockSpeed() { return data.cpu->wmi.CurrentClockSpeed; }
-	static const UINT GetExtClock() { return data.cpu->wmi.ExtClock; }
-	static const UINT GetCore() { return data.cpu->wmi.Core; }
-	static const UINT GetThread() { return data.cpu->wmi.Thread; }
-	static const UINT GetRevision() { return data.cpu->wmi.Revision; }
-	static const UINT GetMaxClockSpeed() { return data.cpu->wmi.MaxClockSpeed; }
-	static const UINT GetUpgradeMethod() { return data.cpu->wmi.UpgradeMethod; }
-protected:
+	const string& GetCPUName() { return data->cpu->Brand; }
+	const string& GetProcessorID() { return data->cpu->ProcessorId; }
+	const string& GetSocketDesignation() { return data->cpu->SocketDesignation; }
+	const UINT GetCurrentClockSpeed() { return data->cpu->CurrentClockSpeed; }
+	const UINT GetExtClock() { return data->cpu->ExtClock; }
+	const UINT GetCore() { return data->cpu->Core; }
+	const UINT GetThread() { return data->cpu->Thread; }
+	const UINT GetRevision() { return data->cpu->Revision; }
+	const UINT GetMaxClockSpeed() { return data->cpu->MaxClockSpeed; }
+	const UINT GetUpgradeMethod() { return data->cpu->UpgradeMethod; }
+	const std::string& GetCodename() { return data->cpu->microarchitecture; }
+	const UINT GetTechonology() { return data->cpu->Technology; }
+	CPUDLL() : data(std::make_shared<CPUDLLDATA>())
+	{
+	}
 private:
-	static const CPUDLLDATA data;
+	static std::shared_ptr<CPUDLL> ttt;
+	std::shared_ptr<CPUDLLDATA> data;
 	class CPUDLLDATA
 	{
 	public:
@@ -59,94 +72,104 @@ private:
 	};
 };
 
-const CPUDLL::CPUDLLDATA CPUDLL::data;
+std::shared_ptr<CPUDLL> CPUDLL::ttt = nullptr;
 
 const std::string& SV_ASSIST::CPU::GetCPUName()
 {
-	return CPUDLL::GetCPUName();
+	return CPUDLL::Instance()->GetCPUName();
 }
 
 const std::string& SV_ASSIST::CPU::GetProcessorID()
 {
-	return ::CPUDLL::GetProcessorID();
+	return CPUDLL::Instance()->GetProcessorID();
 }
 const std::string& SV_ASSIST::CPU::GetSocketDesignation()
 {
-	return CPUDLL::GetSocketDesignation();
+	return CPUDLL::Instance()->GetSocketDesignation();
 }
 
 const UINT SV_ASSIST::CPU::GetCurrentClockSpeed()
 {
-	return CPUDLL::GetCurrentClockSpeed();
+	return CPUDLL::Instance()->GetCurrentClockSpeed();
 }
 
 const UINT SV_ASSIST::CPU::GetExtClock()
 {
-	return CPUDLL::GetExtClock();
+	return CPUDLL::Instance()->GetExtClock();
 }
 
 const UINT SV_ASSIST::CPU::GetCore()
 {
-	return CPUDLL::GetCore();
+	return CPUDLL::Instance()->GetCore();
 }
 
 const UINT SV_ASSIST::CPU::GetThread()
 {
-	return CPUDLL::GetThread();
+	return CPUDLL::Instance()->GetThread();
 }
 
 const UINT SV_ASSIST::CPU::GetRevision()
 {
-	return CPUDLL::GetRevision();
+	return CPUDLL::Instance()->GetRevision();
 }
 
 const UINT SV_ASSIST::CPU::GetMaxClockSpeed()
 {
-	return CPUDLL::GetMaxClockSpeed();
+	return CPUDLL::Instance()->GetMaxClockSpeed();
 }
 
 const UINT SV_ASSIST::CPU::GetUpgradeMethod()
 {
-	return CPUDLL::GetUpgradeMethod();
+	return CPUDLL::Instance()->GetUpgradeMethod();
 }
 
 const std::string& SV_ASSIST::CPU::GetManufacturer()
 {
-	 return CPUDLL::GetManufacturer();
+	 return CPUDLL::Instance()->GetManufacturer();
 }
 
 const short SV_ASSIST::CPU::GetFamily()
 {
-	return CPUDLL::GetFamily();
+	return CPUDLL::Instance()->GetFamily();
 }
 
 const short SV_ASSIST::CPU::GetModel()
 {
-	return CPUDLL::GetModel();
+	return CPUDLL::Instance()->GetModel();
 }
 
 const short SV_ASSIST::CPU::GetStepping()
 {
-	return CPUDLL::GetStepping();
+	return CPUDLL::Instance()->GetStepping();
 }
 
 const short SV_ASSIST::CPU::GetExtFamily()
 {
-	return CPUDLL::GetExtFamily();
+	return CPUDLL::Instance()->GetExtFamily();
 }
 
 const short SV_ASSIST::CPU::GetExtModel()
 {
-	return CPUDLL::GetExtModel();
+	return CPUDLL::Instance()->GetExtModel();
 }
 
 const CPUFeature& SV_ASSIST::CPU::GetFeature()
 {
-	return CPUDLL::GetFeature();
+	return CPUDLL::Instance()->GetFeature();
 }
 
 const Cache_info * SV_ASSIST::CPU::GetCache()
 {
-	return CPUDLL::GetCache();
+	return CPUDLL::Instance()->GetCache();
+}
+
+const std::string& SV_ASSIST::CPU::GetCodeName()
+{
+	return CPUDLL::Instance()->GetCodename();
+}
+
+const unsigned int SV_ASSIST::CPU::GetTechnology()
+{
+	return CPUDLL::Instance()->GetTechonology();
 }
 

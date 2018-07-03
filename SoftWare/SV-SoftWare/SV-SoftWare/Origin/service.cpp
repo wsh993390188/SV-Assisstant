@@ -36,7 +36,9 @@ void SV_ASSIST::Software::Origin::Enumservice(std::list<Service_Struct>& data)
 		for (size_t i = 0; i < ServicesReturned; i++)
 		{
 			Service_Struct temp = {};
+			if (service_status[i].lpDisplayName)
 			temp.ServiceDisplayName = service_status[i].lpDisplayName;
+			if (service_status[i].lpServiceName)
 			temp.ServiceName = service_status[i].lpServiceName;
 			switch (service_status[i].ServiceStatus.dwCurrentState)// ·þÎñ×´Ì¬   
 			{
@@ -81,6 +83,7 @@ void SV_ASSIST::Software::Origin::Enumservice(std::list<Service_Struct>& data)
 			dw_Ret = 0;
 			if (lpServiceConfig)
 			{
+				if(lpServiceConfig->lpBinaryPathName)
 				temp.ServicePath = lpServiceConfig->lpBinaryPathName;
 				switch (lpServiceConfig->dwStartType)
 				{
@@ -116,6 +119,7 @@ void SV_ASSIST::Software::Origin::Enumservice(std::list<Service_Struct>& data)
 
 			if (descripton)
 			{
+				if (descripton->lpDescription)
 				temp.descripton = descripton->lpDescription;
 				HeapFree(GetProcessHeap(), 0, descripton);
 				descripton = NULL;

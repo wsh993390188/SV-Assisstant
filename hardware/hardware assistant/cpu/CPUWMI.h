@@ -45,19 +45,3 @@ public:
 	UINT UpgradeMethod;
 };
 
-// class InstructionSet
-// {
-// public:
-// 	static const string GetCPUName();
-// 	static const string GetProcessorID();
-// 	static const string GetSocketDesignation();
-// 	static const UINT GetCurrentClockSpeed();
-// 	static const UINT GetExtClock();
-// 	static const UINT GetCore();
-// 	static const UINT GetThread();
-// 	static const UINT GetRevision();
-// 	static const UINT GetMaxClockSpeed();
-// 	static const UINT GetUpgradeMethod();
-// private:
-// 	static const CWMI wmi;
-// };

@@ -115,9 +115,19 @@ typedef struct _OVERDRIVE5
 
 typedef struct _AMDINFO
 {
-	AdapterInfo						adapterInfo;
+	/// The BUS number associated with this adapter.
+	int iBusNumber;
+	/// The driver number associated with this adapter.
+	int iDeviceNumber;
+	/// The function number.
+	int iFunctionNumber;
+	/// The vendor ID associated with this adapter.
+	int iVendorID;
+
+	int iDeviceId;
+	string							FullName;
 	string							adapterActive;
-	CHAR							Aspects[ADL_MAX_CHAR];
+	string							Aspects;
 	ADLBiosInfo						biosInfo;
 	int								ASICFamilyTypes;
 	int								ASICFamilyValids;
@@ -126,27 +136,14 @@ typedef struct _AMDINFO
 	string							AdapterAccessibility;
 	int								AdapterID;
 	ADLAdapterCapsX2				adapterCaps;
-
-	// Display
-// 	int								NumberOfControllers;
-// 	int								NumberOfDisplays;
-// 	int								Connections;
-// 	ADLDisplayInfo					DisplayInfo;
-// 	ADLDisplayDPMSTInfo				DisplayDPMSTInfo;
-// 	ADLAdapterODClockInfo			OdClockInfo;
-// 	ADLMVPUCaps						MvpuCaps;
-// 	ADLMVPUStatus					MvpuStatus;
-// 	ADLDisplayTarget				DisplayTarget;
-// 	ADLDisplayMap					DisplayMap;
 	OVERDRIVE5						OverDrive5;
-//	vector<AMDISPLAY>				Amdisplay;
+	size_t dedicatedVideoMemory;
+	size_t systemVideoMemory;
+	size_t sharedSystemMemory;
 }AMDINFO;
 
 typedef struct _NvidiaInfo
 {
-	string InterfaceVersion;
-	string DriverVersion;
-	string BranchVersion;
 	string FUllName;
 	string GPUType;
 	ULONG dedicatedVideoMemory;
@@ -160,7 +157,6 @@ typedef struct _NvidiaInfo
 	DEVICE_TEM Device_Tem;
 	DEVICE_CLOCK Device_clock;	//khz
 	BOOL HDCP;
-	ULONG physcount;
 	UINT corecount;
 	NV_GPU_DYNAMIC_PSTATES_INFO_EX percentage;
 	string VbiosVersion;
@@ -184,42 +180,68 @@ typedef struct _NvidiaInfo
 // 			P12 - Minimum idle power consumption
 	}PState;
 	UINT CurrentPState;
-	NV_CHIPSET_INFO Chipset;
 	ULONG CurrentPCIEWidth;
 	NVIDIA_USAGE Nvidia_Usage;
 	NV_GPU_ECC_CONFIGURATION_INFO ECC_Config;
 }NvidiaInfo;
 
+struct IntelDeviceInfoV1
+{
+	DWORD GPUMaxFreq;
+	DWORD GPUMinFreq;
+};
+
+struct IntelDeviceInfoV2
+{
+	DWORD GPUMaxFreq;
+	DWORD GPUMinFreq;
+	DWORD GTGeneration;
+	DWORD EUCount;
+	DWORD PackageTDP;
+	DWORD MaxFillRate;
+};
+
+struct IntelDeviceInfoHeader
+{
+	DWORD Size;
+	DWORD Version;
+};
+
 struct IntelGPUInfo
 {
 	wstring FUllName;
-	struct IntelDeviceInfoV2
-	{
-		DWORD GPUMaxFreq;
-		DWORD GPUMinFreq;
-		DWORD GTGeneration;
-		DWORD EUCount;
-		DWORD PackageTDP;
-		DWORD MaxFillRate;
-	};
+	unsigned int VendorId;
+	unsigned int DeviceId;
+	unsigned __int64 VideoMemory;
+	IntelDeviceInfoV2 DeviceInfo;
+};
+
+enum GPUTypes
+{
+	OTHERS_GPU = 0,
+	NVIDIA_GPU = 1,
+	AMD_GPU = 2,
+	INTEL_GPU = 4,
+	NVIDIA_AMD = 3,
+	NVIDIA_I = 5,
+	AMD_INTEL = 6,
+	N_A_INTEL = 7
 };
 
 class CGPU
 {
-public:
-	enum GPUTypes
-	{
-		NVIDIA_GPU = 0,
-		AMD_GPU = 1,
-		INTEL_GPU = 2,
-		OTHERS_GPU = 0xFF
-	};
 public:
 	CGPU();
 	virtual ~CGPU();
 	virtual GPUTypes exec() = 0;
 	virtual GPUTypes UpdateData() = 0;
 	virtual const void* Returninfo() = 0;
+	const std::string GetDriverVersion();
+	const std::string GetBranchVersion();
+protected:
+	GPUTypes types;
+	std::string DriverVer;
+	std::string BranchVersion;
 private:
 	explicit CGPU(const CGPU& x);
 	CGPU& operator=(const CGPU& x);
@@ -231,11 +253,22 @@ public:
 	GPUData(); 
 	~GPUData();
 	void UpdateData();
-	const AMDINFO* amdinfo;
-	const NvidiaInfo *nvinfo;
-	const IntelGPUInfo* Intelinfo;
+	const vector<AMDINFO>* amdinfo;
+	const vector<NvidiaInfo> *nvinfo;
+	const vector<IntelGPUInfo> *Intelinfo;
+	std::string NV_DriverVer;
+	std::string NV_BranchVersion;
+
+	std::string AMD_DriverVer;
+	std::string AMD_BranchVersion;
+
+	std::string IN_DriverVer;
+	std::string IN_BranchVersion;
 private:
-	tr1::shared_ptr<CGPU> m_gpu;
+	int 			Types;
+	std::shared_ptr<CGPU> nv_gpu;
+	std::shared_ptr<CGPU> amd_gpu;
+	std::shared_ptr<CGPU> intel_gpu;
 	explicit GPUData(const GPUData& x);
 	GPUData& operator=(const GPUData& x);
 };

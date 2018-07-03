@@ -1,6 +1,7 @@
 #ifndef SMBIOSTREEWIDGET_H
 #define SMBIOSTREEWIDGET_H
 
+#include <QDir>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <QFile>
@@ -17,10 +18,12 @@ class smbiostreewidget : public QTreeWidget
 public:
     explicit smbiostreewidget(QWidget *parent = nullptr);
     void UpdateData();
+	void SetCurrentdir(const QString x);
 signals:
-    void SMBIOSReady(bool);
+    void SMBIOSReady(bool, QString);
 public slots:
 private:
+	QString currentdir;
 	QTreeWidgetItem *father;
 	~smbiostreewidget();
 };

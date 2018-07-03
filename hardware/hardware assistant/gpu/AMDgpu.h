@@ -82,24 +82,25 @@ class CAMD : public CGPU
 {
 public:
 	CAMD();
+	using CGPU::CGPU;
 	~CAMD();
-	CGPU::GPUTypes exec();
+	GPUTypes exec();
 	const void* Returninfo();
-	CGPU::GPUTypes UpdateData();
+	GPUTypes UpdateData();
 protected:
 	BOOL InitializeADL();
-// 	void GetDisplay(int AdapterNum, AMDINFO& info);
-// 	void GetDisplayModes(const AdapterInfo adapterInfo, const int iNumberAdapters, AMDINFO& info);
 	void DestoryADL();
 	void GetBaseInfo();
 	void GetAdapterinfo();
 	BOOL GetOverDrive5(int adapterId, AMDINFO& info);
+	BOOL GetAdapterMemory(AMDINFO & info);
 private:
 	static void * __stdcall ADL_Main_Memory_Alloc(int iSize);
 	static void __stdcall ADL_Main_Memory_Free(void ** lpBuffer);
 private:
-	ADLVersionsInfo							Versioninfo;
-	AMDINFO									AmdInfo;
+	GPUTypes							re;
+	vector<AMDINFO>							AmdInfo;
+
 	ADL_MAIN_CONTROL_CREATE					ADL_Main_Control_Create;
 	ADL_MAIN_CONTROL_DESTROY				ADL_Main_Control_Destroy;
 	ADL_GRAPHICS_VERSIONS_GET				ADL_Graphics_Versions_Get;

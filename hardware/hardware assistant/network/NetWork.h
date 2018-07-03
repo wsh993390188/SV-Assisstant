@@ -8,19 +8,12 @@
 #include <wlanapi.h>
 #include <objbase.h>
 #include <wtypes.h>
+#include "NetworkLib.h"
 
 namespace SV_ASSIST
 {
 	namespace Net
 	{
-		struct NetStruct
-		{
-			std::wstring DeviceName;
-			std::wstring state;
-			std::wstring MediaType;
-			std::wstring Name;
-		};
-
 		class NetWorkInterface
 		{
 		public:

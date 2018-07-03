@@ -61,6 +61,12 @@
     <Filter Include="头文件\Audio">
       <UniqueIdentifier>{6a258193-6899-45ef-9115-c917b42a0514}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\ACPI">
+      <UniqueIdentifier>{e841245c-50c8-4ea7-aff0-f4c0195e9667}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\ACPI">
+      <UniqueIdentifier>{40568535-4542-4e65-bb4b-63d90cc4bea8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -144,9 +150,6 @@
     <ClInclude Include="..\..\cpu\zhaoxin.h">
       <Filter>头文件\cpu</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\gpu\Intelgpu.h">
-      <Filter>头文件\gpu</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\usb\Iusb.h">
       <Filter>头文件\usb</Filter>
     </ClInclude>
@@ -161,6 +164,18 @@
     </ClInclude>
     <ClInclude Include="..\..\Audio\CAudio.h">
       <Filter>头文件\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\acpi\ACPI Defination.h">
+      <Filter>头文件\ACPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\acpi\ACPI Source.h">
+      <Filter>头文件\ACPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\acpi\ACPI.h">
+      <Filter>头文件\ACPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gpu\Intelgpu.h">
+      <Filter>头文件\gpu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -230,9 +245,6 @@
     <ClCompile Include="..\..\cpu\zhaoxin.cpp">
       <Filter>源文件\cpu</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gpu\Intelgpu.cpp">
-      <Filter>源文件\gpu</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\usb\Iusb.cpp">
       <Filter>源文件\usb</Filter>
     </ClCompile>
@@ -247,6 +259,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Audio\CAudio.cpp">
       <Filter>源文件\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\acpi\ACPI Source.cpp">
+      <Filter>源文件\ACPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\acpi\ACPI.cpp">
+      <Filter>源文件\ACPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gpu\Intelgpu.cpp">
+      <Filter>源文件\gpu</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

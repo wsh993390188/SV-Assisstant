@@ -1,9 +1,26 @@
 #include "stdafx.h"
 #include "AMDgpu.h"
 
-CAMD::CAMD()
+#include <InitGuid.h>
+#include <D3D11.h>
+#include <D3DCommon.h>
+#ifdef _WIN32_WINNT_WIN10 
+#include <DXGI1_4.h>
+#else
+#include <DXGI1_3.h>
+#endif
+
+#include <oleauto.h>
+#include <wbemidl.h>
+#include <ObjBase.h>
+
+CAMD::CAMD() : re(OTHERS_GPU)
 {
 	AmdInfo = {};
+	if (InitializeADL() == ADL_OK)
+	{
+		re = AMD_GPU;
+	}
 }
 
 CAMD::~CAMD()
@@ -11,12 +28,10 @@ CAMD::~CAMD()
 	DestoryADL();
 }
 
-CGPU::GPUTypes CAMD::exec()
+GPUTypes CAMD::exec()
 {
-	CGPU::GPUTypes re = CGPU::OTHERS_GPU;
-	if (InitializeADL() == ADL_OK)
+	if(re == AMD_GPU)
 	{
-		re = CGPU::AMD_GPU;
 		GetBaseInfo();
 		GetAdapterinfo();
 	}
@@ -28,10 +43,12 @@ const void* CAMD::Returninfo()
 	return &this->AmdInfo;
 }
 
-CGPU::GPUTypes CAMD::UpdateData()
+GPUTypes CAMD::UpdateData()
 {
-	GetAdapterinfo();
-	return CGPU::AMD_GPU;
+	AmdInfo.clear();
+	if (re == AMD_GPU)
+		GetAdapterinfo();
+	return re;
 }
 
 // Memory allocation function
@@ -141,13 +158,10 @@ void CAMD::GetBaseInfo()
 {
 	if (NULL != ADL_Graphics_Versions_Get)
 	{
+		ADLVersionsInfo	Versioninfo = {};
 		ADL_Graphics_Versions_Get(&Versioninfo);
-// 		printf("\tVersions\n"
-// 			"\t\tCatalystVersion: %s\n"
-// 			"\t\tDriverVersion: %s\n",
-// 			Versioninfo.strCatalystVersion,
-// 			Versioninfo.strDriverVer
-// 		);
+		DriverVer = Versioninfo.strDriverVer;
+		BranchVersion = Versioninfo.strCatalystVersion;
 	}
 	int Platform = 0;
 	if (NULL != ADL_Graphics_Platform_Get)
@@ -175,91 +189,94 @@ void CAMD::GetAdapterinfo()
 			}
 			for (int i = 0; i < iAdapterNumbers; ++i)
 			{
+				bool pass = false;
 				AMDINFO info = {};
 				AdapterInfo adapterInfo = lpAdapterInfo[i];
 				int adapterActive = 0;
 				ADL_Adapter_Active_Get(adapterInfo.iAdapterIndex, &adapterActive);
-				if(adapterActive == 0) continue;
-
-				info.adapterInfo = adapterInfo;
-				info.adapterActive = "yes";
-
-				if (ADL_Adapter_Aspects_Get)
+				
+				if(adapterInfo.iVendorID == 1002 /*|| adapterInfo.iVendorID == 0x1022*/)
 				{
-					int iSize = ADL_MAX_CHAR;
-					CHAR lpAspects[ADL_MAX_CHAR];
-					ADL_ERROR_Code = ADL_Adapter_Aspects_Get(i, lpAspects, iSize);
-//					cout << "\tAspects:" << lpAspects << endl;
-					::CopyMemory(info.Aspects, lpAspects, ADL_MAX_CHAR);
-				}
 
-				if (ADL_Adapter_VideoBiosInfo_Get)
-				{
-					ADLBiosInfo biosInfo;
-					if (ADL_OK == ADL_Adapter_VideoBiosInfo_Get(i, &biosInfo)) {
-						info.biosInfo = biosInfo;
-					}
-				}
-
-				if (ADL_Adapter_ASICFamilyType_Get)
-				{
-					int lpAsicTypes = 0, lpValids = 0;
-					if (ADL_OK == ADL_Adapter_ASICFamilyType_Get(i, &lpAsicTypes, &lpValids))
+					for each (auto var in AmdInfo)
 					{
-						info.ASICFamilyTypes = lpAsicTypes;
-						info.ASICFamilyValids = lpValids;
+						if (var.iBusNumber == adapterInfo.iBusNumber &&
+							var.iDeviceNumber == adapterInfo.iDeviceNumber)
+							pass = true;
 					}
-				}
+					if(pass)
+						continue;
+					ULONG   ven, dev, subsys, rev;
+					ven = dev = subsys = rev = 0;
 
-				if (ADL_Adapter_Speed_Caps)
-				{
-					int lpCaps = 0, lpValid = 0;
-					if (ADL_OK == ADL_Adapter_Speed_Caps(i, &lpCaps, &lpValid))
+					sscanf_s(adapterInfo.strPNPString,
+						"PCI\\VEN_%x&DEV_%x&SUBSYS_%x&REV_%x",
+						&ven, &dev, &subsys, &rev);
+					info.iBusNumber = adapterInfo.iBusNumber;
+					info.iVendorID = ven;
+					info.iDeviceNumber = adapterInfo.iDeviceNumber;
+					info.iFunctionNumber = adapterInfo.iFunctionNumber;
+					info.FullName = adapterInfo.strAdapterName;
+					info.iDeviceId = dev;
+					adapterActive ? info.adapterActive = "yes" : info.adapterActive = "no";
+
+					GetAdapterMemory(info);
+
+					if (ADL_Adapter_Aspects_Get)
 					{
-						if (lpCaps)
-						{
-							if (ADL_Adapter_Speed_Get)
-							{
-								int lpCurrent = 0, lpDefault = 0;
-								ADL_Adapter_Speed_Get(i, &lpCurrent, &lpDefault);
-								info.AdapterSpeedCurrent = lpCurrent;
-								info.AdapterSpeedDefault = lpDefault;
-							}
+						int iSize = ADL_MAX_CHAR;
+						CHAR lpAspects[ADL_MAX_CHAR];
+						ADL_ERROR_Code = ADL_Adapter_Aspects_Get(i, lpAspects, iSize);
+						info.Aspects = lpAspects;
+					}
+
+					if (ADL_Adapter_VideoBiosInfo_Get)
+					{
+						ADLBiosInfo biosInfo;
+						if (ADL_OK == ADL_Adapter_VideoBiosInfo_Get(i, &biosInfo)) {
+							info.biosInfo = biosInfo;
 						}
 					}
-				}
 
-				if (ADL_Adapter_Accessibility_Get)
-				{
-					int lpAccessibility = 0;
-					if (ADL_OK == ADL_Adapter_Accessibility_Get(i, &lpAccessibility))
+					if (ADL_Adapter_ASICFamilyType_Get)
 					{
-//						cout << "Adapter Accessibility setting" << endl;
-						lpAccessibility ? info.AdapterAccessibility = "yes" : info.AdapterAccessibility = "no";
+						int lpAsicTypes = 0, lpValids = 0;
+						if (ADL_OK == ADL_Adapter_ASICFamilyType_Get(i, &lpAsicTypes, &lpValids))
+						{
+							info.ASICFamilyTypes = lpAsicTypes;
+							info.ASICFamilyValids = lpValids;
+						}
 					}
-				}
 
-				if (ADL_Adapter_ID_Get)
-				{
-					int lpAdapterID = 0;
-					if (ADL_OK == ADL_Adapter_ID_Get(i, &lpAdapterID))
+					if (ADL_Adapter_Accessibility_Get)
 					{
-//						cout << "Adapter ID:" << lpAdapterID << endl;
-						info.AdapterID = lpAdapterID;
+						int lpAccessibility = 0;
+						if (ADL_OK == ADL_Adapter_Accessibility_Get(i, &lpAccessibility))
+						{
+							lpAccessibility ? info.AdapterAccessibility = "yes" : info.AdapterAccessibility = "no";
+						}
 					}
-				}
 
-				if (ADL_AdapterX2_Caps)
-				{
-					ADLAdapterCapsX2 adapterCaps;
-					if (ADL_OK == ADL_AdapterX2_Caps(i, &adapterCaps))
+					if (ADL_Adapter_ID_Get)
 					{
-						info.adapterCaps = adapterCaps;
+						int lpAdapterID = 0;
+						if (ADL_OK == ADL_Adapter_ID_Get(i, &lpAdapterID))
+						{
+							info.AdapterID = lpAdapterID;
+						}
 					}
+
+					if (ADL_AdapterX2_Caps)
+					{
+						ADLAdapterCapsX2 adapterCaps;
+						if (ADL_OK == ADL_AdapterX2_Caps(i, &adapterCaps))
+						{
+							info.adapterCaps = adapterCaps;
+						}
+					}
+					GetOverDrive5(i, info);
+					AmdInfo.emplace_back(info);
 				}
-//				GetDisplay(i, info);
-				GetOverDrive5(i, info);
-				AmdInfo = info;
 			}
 		}
 	}
@@ -299,12 +316,6 @@ BOOL CAMD::GetOverDrive5(int adapterId, AMDINFO& info)
 			break;
 		}
 
-// 		if (ADL_Err == ADL_WARNING_NO_DATA)
-// 		{
-// 			printf("Failed to enumerate thermal devices\n");
-// 			return 0;
-// 		}
-
 		if (termalControllerInfo.iThermalDomain == ADL_DL_THERMAL_DOMAIN_GPU)
 		{
 			ADLTemperature adlTemperature = { 0 };
@@ -319,98 +330,54 @@ BOOL CAMD::GetOverDrive5(int adapterId, AMDINFO& info)
 			temandfan.temperatureInDegreesCelsius = temperatureInDegreesCelsius;
 
 			fanSpeedInfo.iSize = sizeof(ADLFanSpeedInfo);
-			if (ADL_OK != ADL_Overdrive5_FanSpeedInfo_Get(adapterId, iThermalControllerIndex, &fanSpeedInfo))
+			if (ADL_OK == ADL_Overdrive5_FanSpeedInfo_Get(adapterId, iThermalControllerIndex, &fanSpeedInfo))
 			{
-//				printf("Failed to get fan caps\n");
-				//return 0;
+				ADLFanSpeedValue fanSpeedValue = { 0 };
+				fanSpeedReportingMethod = ((fanSpeedInfo.iFlags & ADL_DL_FANCTRL_SUPPORTS_PERCENT_READ) == ADL_DL_FANCTRL_SUPPORTS_PERCENT_READ) ? ADL_DL_FANCTRL_SPEED_TYPE_PERCENT : ADL_DL_FANCTRL_SPEED_TYPE_RPM;
+				//Set to ADL_DL_FANCTRL_SPEED_TYPE_RPM or to ADL_DL_FANCTRL_SPEED_TYPE_PERCENT to request fan speed to be returned in rounds per minute or in percentage points.
+				//Note that the call might fail if requested fan speed reporting method is not supported by the GPU.
+				fanSpeedValue.iSpeedType = fanSpeedReportingMethod;
+				fanSpeedValue.iSize = sizeof(ADLFanSpeedValue);
+				ADL_Err = ADL_Overdrive5_FanSpeed_Get(adapterId, iThermalControllerIndex, &fanSpeedValue);
+				if (ADL_OK == ADL_Err)
+				{
+					temandfan.fanSpeedValue = fanSpeedValue;
+					info.OverDrive5.TemperatureAndFans = temandfan;
+				}
 			}
+		}
+	}
 
-			ADLFanSpeedValue fanSpeedValue = { 0 };
-			fanSpeedReportingMethod = ((fanSpeedInfo.iFlags & ADL_DL_FANCTRL_SUPPORTS_PERCENT_READ) == ADL_DL_FANCTRL_SUPPORTS_PERCENT_READ) ? ADL_DL_FANCTRL_SPEED_TYPE_PERCENT : ADL_DL_FANCTRL_SPEED_TYPE_RPM;
-			//Set to ADL_DL_FANCTRL_SPEED_TYPE_RPM or to ADL_DL_FANCTRL_SPEED_TYPE_PERCENT to request fan speed to be returned in rounds per minute or in percentage points.
-			//Note that the call might fail if requested fan speed reporting method is not supported by the GPU.
-			fanSpeedValue.iSpeedType = fanSpeedReportingMethod;
-			fanSpeedValue.iSize = sizeof(ADLFanSpeedValue);
-			ADL_Err = ADL_Overdrive5_FanSpeed_Get(adapterId, iThermalControllerIndex, &fanSpeedValue);
-			if (ADL_OK != ADL_Err)
+	if (ADL_OK == ADL_Overdrive5_PowerControl_Caps(adapterId, &powerControlSupported))
+	{
+		if (powerControlSupported)
+		{
+			if (ADL_OK == ADL_Overdrive5_PowerControlInfo_Get(adapterId, &powerControlInfo))
 			{
-//				printf("Failed to get fan speed\n");
-				//return 0;
+				if (ADL_OK == ADL_Overdrive5_PowerControl_Get(adapterId, &powerControlCurrent, &powerControlDefault))
+				{
+					info.OverDrive5.powerControlInfo = powerControlInfo;
+					info.OverDrive5.powerControlCurrent = powerControlCurrent;
+					info.OverDrive5.powerControlDefault = powerControlDefault;
+				}
 			}
-
-			if (fanSpeedReportingMethod == ADL_DL_FANCTRL_SPEED_TYPE_RPM)
-			{
-// 				printf("Current fan speed: %d rpm\n", fanSpeedValue.iFanSpeed);
-// 				printf("Minimum fan speed: %d rpm\n", fanSpeedInfo.iMinRPM);
-// 				printf("Maximum fan speed: %d rpm\n", fanSpeedInfo.iMaxRPM);
-			}
+#ifdef _DEBUG
 			else
-			{
-// 				printf("Current fan speed: %d percent\n", fanSpeedValue.iFanSpeed);
-// 				printf("Minimum fan speed: %d percent\n", fanSpeedInfo.iMinPercent);
-// 				printf("Maximum fan speed: %d percent\n", fanSpeedInfo.iMaxPercent);
-			}
-
-			temandfan.fanSpeedValue = fanSpeedValue;
-			info.OverDrive5.TemperatureAndFans = temandfan;
+				OutputDebugString(_T("Failed to get Power Controls Info\n"));
+#endif // _DEBUG
 		}
 	}
 
-	if (ADL_OK != ADL_Overdrive5_PowerControl_Caps(adapterId, &powerControlSupported))
-	{
-//		printf("Failed to get Power Controls support\n");
-		//return 0;
-	}
-
-	if (powerControlSupported)
-	{
-		if (ADL_OK != ADL_Overdrive5_PowerControlInfo_Get(adapterId, &powerControlInfo))
-		{
-//			printf("Failed to get Power Controls Info\n");
-			return 0;
-		}
-
-		if (ADL_OK != ADL_Overdrive5_PowerControl_Get(adapterId, &powerControlCurrent, &powerControlDefault))
-		{
-//			printf("Failed to get Power Control current value\n");
-			return 0;
-		}
-
-// 		printf("The Power Control threshold range is %d to %d with step of %d \n", powerControlInfo.iMinValue, powerControlInfo.iMaxValue, powerControlInfo.iStepValue);
-// 		printf("Current value of Power Control threshold is %d \n", powerControlCurrent);
-		info.OverDrive5.powerControlInfo = powerControlInfo;
-		info.OverDrive5.powerControlCurrent = powerControlCurrent;
-		info.OverDrive5.powerControlDefault = powerControlDefault;
-	}
-
+	
 
 
 	ADLODParameters overdriveParameters = { 0 };
 	overdriveParameters.iSize = sizeof(ADLODParameters);
 
-	if (ADL_OK != ADL_Overdrive5_ODParameters_Get(adapterId, &overdriveParameters))
+	if (ADL_OK == ADL_Overdrive5_ODParameters_Get(adapterId, &overdriveParameters))
 	{
-//		printf("Failed to get overdrive parameters\n");
-		//return 0;
+		info.OverDrive5.overdriveParameters = overdriveParameters;
 	}
-
-// 	printf("The GPU  Engine clock range is %d..%d MHz with step of %d Mhz \n",
-// 		overdriveParameters.sEngineClock.iMin / 100,
-// 		overdriveParameters.sEngineClock.iMax / 100,
-// 		overdriveParameters.sEngineClock.iStep / 100);
-// 
-// 	printf("The GPU  Memory clock range is %d..%d MHz with step of %d MHz\n",
-// 		overdriveParameters.sMemoryClock.iMin / 100,
-// 		overdriveParameters.sMemoryClock.iMax / 100,
-// 		overdriveParameters.sMemoryClock.iStep);
-// 
-// 
-// 	printf("The GPU  Core Voltage range is %d..%d with step of %d \n",
-// 		overdriveParameters.sVddc.iMin,
-// 		overdriveParameters.sVddc.iMax,
-// 		overdriveParameters.sVddc.iStep);
-
-	info.OverDrive5.overdriveParameters = overdriveParameters;
 
 	if (overdriveParameters.iNumberOfPerformanceLevels > 0)
 	{
@@ -419,80 +386,134 @@ BOOL CAMD::GetOverDrive5(int adapterId, AMDINFO& info)
 		//Performance level with highest index corresponds to highest performance system state ?3D game playing for example.
 		//Users are usually interested in overclocking highest index performance level.
 
-//		printf("The GPU supports %d performance levels: \n", overdriveParameters.iNumberOfPerformanceLevels);
-
 		int size = sizeof(ADLODPerformanceLevels) + sizeof(ADLODPerformanceLevel) * (overdriveParameters.iNumberOfPerformanceLevels - 1);
 		void* performanceLevelsBuffer = malloc(size);
 		memset(performanceLevelsBuffer, 0, size);
 		performanceLevels = (ADLODPerformanceLevels*)performanceLevelsBuffer;
 		performanceLevels->iSize = size;
 
-
-		if (ADL_OK != ADL_Overdrive5_ODPerformanceLevels_Get(adapterId, 1/*Getting default values first*/, performanceLevels))
+		if (ADL_OK == ADL_Overdrive5_ODPerformanceLevels_Get(adapterId, 1/*Getting default values first*/, performanceLevels))
 		{
-//			printf("Failed to get information about supported performance levels.  \n");
-			//return 0;
-		}
+			for (int i = 0; i < overdriveParameters.iNumberOfPerformanceLevels; i++)
+			{
+				info.OverDrive5.DefaultperformanceLevels[i] = performanceLevels->aLevels[i];
+			}
+			memset(performanceLevelsBuffer, 0, size);
+			performanceLevels->iSize = size;
 
-		for (int i = 0; i < overdriveParameters.iNumberOfPerformanceLevels; i++)
-		{
-// 			printf("Performance level %d - Default Engine Clock:%d MHz, Default Memory Clock:%d MHz, Default Core Voltage:%d \n",
-// 				i,
-// 				performanceLevels->aLevels[i].iEngineClock / 100,
-// 				performanceLevels->aLevels[i].iMemoryClock / 100,
-// 				performanceLevels->aLevels[i].iVddc);
-			info.OverDrive5.DefaultperformanceLevels[i] = performanceLevels->aLevels[i];
-		}
-
-		memset(performanceLevelsBuffer, 0, size);
-		performanceLevels->iSize = size;
-
-		if (ADL_OK != ADL_Overdrive5_ODPerformanceLevels_Get(adapterId, 0/*Getting current values first*/, performanceLevels))
-		{
-//			printf("Failed to get information about supported performance levels.  \n");
-			//return 0;
-		}
-
-		for (int i = 0; i < overdriveParameters.iNumberOfPerformanceLevels; i++)
-		{
-// 			printf("Performance level %d - Current Engine Clock:%d MHz, Current Memory Clock:%d MHz, Current Core Voltage:%d \n",
-// 				i,
-// 				performanceLevels->aLevels[i].iEngineClock / 100,
-// 				performanceLevels->aLevels[i].iMemoryClock / 100,
-// 				performanceLevels->aLevels[i].iVddc);
-			info.OverDrive5.CurrentperformanceLevels[i] = performanceLevels->aLevels[i];
-		}
-
-
-		if (performanceLevelsBuffer)
-		{
-			free(performanceLevelsBuffer);
-			performanceLevelsBuffer = NULL;
+			if (ADL_OK == ADL_Overdrive5_ODPerformanceLevels_Get(adapterId, 0/*Getting current values first*/, performanceLevels))
+			{
+				for (int i = 0; i < overdriveParameters.iNumberOfPerformanceLevels; i++)
+				{
+					info.OverDrive5.CurrentperformanceLevels[i] = performanceLevels->aLevels[i];
+				}
+			}
+			if (performanceLevelsBuffer)
+			{
+				free(performanceLevelsBuffer);
+				performanceLevelsBuffer = NULL;
+			}
 		}
 	}
 
 	//Getting real current values for clocks, performance levels, voltage effective in the system.
 	ADLPMActivity activity = { 0 };
 	activity.iSize = sizeof(ADLPMActivity);
-	if (ADL_OK != ADL_Overdrive5_CurrentActivity_Get(adapterId, &activity))
+	if (ADL_OK == ADL_Overdrive5_CurrentActivity_Get(adapterId, &activity))
 	{
-//		printf("Failed to get current GPU activity.  \n");
-		//return 0;
+		info.OverDrive5.activity = activity;
 	}
-// 	printf("Current Engine Clock: %d MHz\n", activity.iEngineClock / 100);
-// 	printf("Current Memory Clock: %d MHz\n", activity.iMemoryClock / 100);
-// 	printf("Current Core Voltage: %d \n", activity.iVddc);
-// 	printf("Current Performance Level: %d \n", activity.iCurrentPerformanceLevel);
 
-	info.OverDrive5.activity = activity;
-
-	if (overdriveParameters.iActivityReportingSupported)
-	{
-//		printf("Current Engine Clock: %d persent\n", activity.iActivityPercent);
-	}
+// 	if (overdriveParameters.iActivityReportingSupported)
+// 	{
+// 		printf("Current Engine Clock: %d persent\n", activity.iActivityPercent);
+// 	}
 	return TRUE;
 }
 
+BOOL CAMD::GetAdapterMemory(AMDINFO& info)
+{
+	//
+	// DXGI is supported on Windows Vista and later. Define a function pointer to the
+	// CreateDXGIFactory function. DXGIFactory1 is supported by Windows Store Apps so
+	// try that first.
+	//
+	HMODULE hDXGI = LoadLibrary(L"dxgi.dll");
+	if (hDXGI == NULL) {
+		return false;
+	}
+
+	typedef HRESULT(WINAPI*LPCREATEDXGIFACTORY)(REFIID riid, void** ppFactory);
+
+	LPCREATEDXGIFACTORY pCreateDXGIFactory = (LPCREATEDXGIFACTORY)GetProcAddress(hDXGI, "CreateDXGIFactory1");
+	if (pCreateDXGIFactory == NULL) {
+		pCreateDXGIFactory = (LPCREATEDXGIFACTORY)GetProcAddress(hDXGI, "CreateDXGIFactory");
+
+		if (pCreateDXGIFactory == NULL) {
+			FreeLibrary(hDXGI);
+			return false;
+		}
+	}
+
+	//
+	// We have the CreateDXGIFactory function so use it to actually create the factory and enumerate
+	// through the adapters. Here, we are specifically looking for the Intel gfx adapter. 
+	//
+	IDXGIAdapter*     pAdapter;
+	IDXGIFactory*     pFactory;
+	DXGI_ADAPTER_DESC AdapterDesc;
+	if (FAILED((*pCreateDXGIFactory)(__uuidof(IDXGIFactory), (void**)(&pFactory)))) {
+		FreeLibrary(hDXGI);
+		return false;
+	}
+
+	if (FAILED(pFactory->EnumAdapters(0, (IDXGIAdapter**)&pAdapter))) {
+		FreeLibrary(hDXGI);
+		return false;
+	}
+
+	unsigned int intelAdapterIndex = 0;
+	while (pFactory->EnumAdapters(intelAdapterIndex, &pAdapter) != DXGI_ERROR_NOT_FOUND) {
+		pAdapter->GetDesc(&AdapterDesc);
+		if (AdapterDesc.VendorId == info.iVendorID && AdapterDesc.DeviceId == info.iDeviceId) {
+			break;
+		}
+		intelAdapterIndex++;
+	}
+
+	if (pAdapter == NULL) {
+		FreeLibrary(hDXGI);
+		return false;
+	}
+
+	//
+	// If we are on Windows 10 then the Adapter3 interface should be available. This is recommended over using
+	// the AdapterDesc for getting the amount of memory available.
+	//
+// #ifdef _WIN32_WINNT_WIN10
+// 	IDXGIAdapter3* pAdapter3;
+// 	pAdapter->QueryInterface(IID_IDXGIAdapter3, (void**)&pAdapter3);
+// 	if (pAdapter3) {
+// 		DXGI_QUERY_VIDEO_MEMORY_INFO memInfo;
+// 		pAdapter3->QueryVideoMemoryInfo(intelAdapterIndex, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &memInfo);
+// 		info.sharedSystemMemory = memInfo.;
+// 		info.dedicatedVideoMemory = AdapterDesc.DedicatedVideoMemory;
+// 		info.systemVideoMemory = AdapterDesc.DedicatedSystemMemory;
+// 		pAdapter3->Release();
+// 	}
+// 	else
+// #endif // DEBUG
+	{
+		info.sharedSystemMemory = AdapterDesc.SharedSystemMemory;
+		info.dedicatedVideoMemory = AdapterDesc.DedicatedVideoMemory;
+		info.systemVideoMemory = AdapterDesc.DedicatedSystemMemory;
+	}
+
+
+	pAdapter->Release();
+	FreeLibrary(hDXGI);
+	return true;
+}
 // void CAMD::GetDisplay(int AdapterNum, AMDINFO& info)
 // {
 // 	int lpNumDisplays = 0;

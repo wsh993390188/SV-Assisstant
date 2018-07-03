@@ -1,6 +1,3 @@
-// ACPI.cpp : 定义 DLL 应用程序的导出函数。
-//
-
 #include "stdafx.h"
 #include "ACPI Source.h"
 #include "ACPI.h"
@@ -13,21 +10,37 @@ namespace SV_ASSIST
 	{
 		class CACPI_info {
 		public:
-			static CACPI_info* Instance();
+			static CACPI_info* Instance() 
+			{ 
+				if (!temp.get())
+					temp.reset(new CACPI_info);
+				return temp.get();
+			}
 			CACPI_info(void);
-			~CACPI_info();	
+			~CACPI_info();
 			BOOL Excute();
+			const ACPI_MCFG_STRUCTURE& GetMCFG()
+			{
+				return acpi->mcfg;
+			}
+
+			const ACPI_RSDT_STRUCTURE& GetRSDT()
+			{
+				return acpi->rsdt;
+			}
 		private:
+			static std::shared_ptr<CACPI_info> temp;
 			std::shared_ptr<CACPI> acpi;
 		};
+
+		std::shared_ptr<CACPI_info> CACPI_info::temp = std::make_shared<CACPI_info>();
 
 		CACPI_info::CACPI_info() : acpi(new CACPI())
 		{
 		}
 
 		CACPI_info::~CACPI_info()
-		{
-		}
+		{	}
 
 		BOOL CACPI_info::Excute()
 		{
@@ -38,14 +51,24 @@ namespace SV_ASSIST
 			return acpi->isSupportACPI;
 		}
 
-		const ACPI_MCFG_STRUCTURE& GetMCFG()
+		BOOL Excute()
 		{
-			return acpi->mcfg;
+			return CACPI_info::Instance()->Excute();
 		}
 
-		const ACPI_MCFG_STRUCTURE& GetRSDT()
+		const ACPI_MCFG_STRUCTURE& GetMCFG()
 		{
-			return acpi->rsdt;
+			return CACPI_info::Instance()->GetMCFG();
+		}
+
+		const ACPI_RSDT_STRUCTURE& GetRSDT()
+		{
+			return CACPI_info::Instance()->GetRSDT();
+		}
+
+		const DWORD64 GetPCIEBaseAddress()
+		{
+			return CACPI_info::Instance()->GetMCFG().Configuration_space_base_address.Base_Address;
 		}
 	}
 }

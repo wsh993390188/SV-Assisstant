@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Intel.h"
 #include <algorithm>
-
+#include <boost/algorithm/string.hpp>
 using namespace std;
 Intel::Intel() :f1_ecx{ 0 }, f1_edx{ 0 }, f7_ebx{ 0 }, f7_ecx{ 0 }
 {
@@ -162,23 +162,31 @@ void Intel::UpDateData(void)
 		f1_edx = data__[1][3];
 
 		int DisplayFamily, DisplayModel;
-		int DF_DM;
-		 
 		if (this->Family != 0x0F)		DisplayFamily = this->Family;
 		else	DisplayFamily = this->ExtFamily;
 		if (this->Family == 0x06 || this->Family == 0x0F)	DisplayModel = this->ExtModel;
 		else	DisplayModel = this->Model;
-		DF_DM = (DisplayFamily << 8) + DisplayModel;
-		this->ExecProcessorOtherInfo(DF_DM);
+		this->ExecProcessorOtherInfo(DisplayFamily, DisplayModel);
 	}
 	if (nIds_ > 7)
 	{
-		int t = findcpuid(0x00070000);
+		size_t t = findcpuid(0x00070000);
 		if (t != -1)
 		{
 			f7_ecx = data__[t][2];
 			f7_ebx = data__[t][1];
 		}
+	}
+
+	// Interpret CPU brand string if reported  
+	if (nExIds_ >= 0x80000004)
+	{
+		char brand[0x40] = {};
+		memcpy(brand, extdata__[2].data(), sizeof(std::array<int, 4>));
+		memcpy(brand + 16, extdata__[3].data(), sizeof(std::array<int, 4>));
+		memcpy(brand + 32, extdata__[4].data(), sizeof(std::array<int, 4>));
+		Brand = brand;
+		boost::trim(Brand);
 	}
 	ExecFeature();
 
@@ -285,7 +293,7 @@ void Intel::ExecCache()
 {
 	for (int i = 0; i < 4; i++)
 	{
-		int t = findcpuid(0x00040000 | i);
+		size_t t = findcpuid(0x00040000 | i);
 		if (t != -1)
 		{
 			switch (data__[t][0] & 0x1F)
@@ -312,79 +320,134 @@ void Intel::ExecCache()
 	}
 }
 
-bool Intel::ExecProcessorOtherInfo(int DF_DM)
+bool Intel::ExecProcessorOtherInfo(int Family, int Model)
 {
 	bool state = true;
-	switch (DF_DM)
-	{
-	case 0x0685:	
-		this->CodeName = "Knights Mill";
-		break;
-	case 0x0657:	
-		this->CodeName = "Knights Landing";
-		break;
-	case 0x0666:	
-		this->CodeName = "Knights Mill";
-		break;
-	case 0x069E:
-	case 0x068E:	
-		this->CodeName = "Cannon Lake";
-		break;
-	case 0x0655:	
-	case 0x064E:	
-	case 0x065E:	
-		this->CodeName = "Skylake";
-		break;
-	case 0x064F:
-	case 0x0656:	
-	case 0x0647:
-	case 0x063D:
-		this->CodeName = "Broadwell";
-		break;
-	case 0x063F:	
-		this->CodeName = "Haswell-E";
-		break;
-	case 0x063C:
-	case 0x0645:
-	case 0x0646:	
-		this->CodeName = "Haswell";
-		break;
-	case 0x063A:
-	case 0x063E:	
-		this->CodeName = "Ivy Bridge-E";
-		this->Technology = 22;
-		break;
-	case 0x062A:
-		this->CodeName = "Sandy Bridge";
-		this->Technology = 32;
-		break;
-	case 0x062D:	
-		this->CodeName = "Sandy Bridge-E";
-		this->Technology = 32;
-		break;
-	case 0x0625:
-	case 0x062F:
-	case 0x062C:
-		this->CodeName = "Westmere";
-		this->Technology = 32;
-		break;
-	case 0x067A:	this->CodeName = "Goldmont Plus";
-		break;
-	case 0x065F:
-	case 0x065C:	this->CodeName = "Goldmont";
-		break;
-	case 0x064C:	this->CodeName = "Airmont";
-		break;
-	case 0x065D:	this->CodeName = "Silvermont";
-		break;
+	switch (Family) {
+	case 0x06: {
+		switch (Model) {
+		case 0x0F: // Intel Core 2 (65nm)
+			Technology = 65;
+			microarchitecture = "Core";
+			break;
+		case 0x17: // Intel Core 2 (45nm)
+			Technology = 45;
+			microarchitecture = "Core";
+			break;
+		case 0x1C: // Intel Atom (45nm)
+			Technology = 45;
+			microarchitecture = "Atom";
+			break;
+		case 0x1F: // Intel Core i5, i7 
+			microarchitecture = "Nehalem";
+			break;
+		case 0x1A: // Intel Core i7 LGA1366 (45nm)
+		case 0x1E: // Intel Core i5, i7 LGA1156 (45nm)
+		case 0x2E: // Intel Xeon Processor 7500 series (45nm)
+			Technology = 45;
+			microarchitecture = "Nehalem";
+			break;
+		case 0x25: // Intel Core i3, i5, i7 LGA1156 (32nm)
+		case 0x2C: // Intel Core i7 LGA1366 (32nm) 6 Core
+		case 0x2F: // Intel Xeon Processor (32nm)
+			Technology = 32;
+			microarchitecture = "Nehalem";
+			break;
+		case 0x2A: // Intel Core i5, i7 2xxx LGA1155 (32nm)
+		case 0x2D: // Next Generation Intel Xeon, i7 3xxx LGA2011 (32nm)
+			Technology = 32;
+			microarchitecture = "SandyBridge";
+			break;
+		case 0x3A: // Intel Core i5, i7 3xxx LGA1155 (22nm)
+		case 0x3E: // Intel Core i7 4xxx LGA2011 (22nm)
+			Technology = 22;
+			microarchitecture = "IvyBridge";
+			break;
+		case 0x3C: // Intel Core i5, i7 4xxx LGA1150 (22nm)              
+		case 0x3F: // Intel Xeon E5-2600/1600 v3, Core i7-59xx
+				   // LGA2011-v3, Haswell-E (22nm)
+		case 0x45: // Intel Core i5, i7 4xxxU (22nm)
+		case 0x46:
+			Technology = 22;
+			microarchitecture = "Haswell";
+			break;
+		case 0x3D: // Intel Core M-5xxx (14nm)
+		case 0x47: // Intel i5, i7 5xxx, Xeon E3-1200 v4 (14nm)
+			Technology = 14;
+			microarchitecture = "Broadwell";
+			break;
+		case 0x4F: // Intel Xeon E5-26xx v4
+		case 0x56: // Intel Xeon D-15xx
+			microarchitecture = "Broadwell";
+			break;
+		case 0x36: // Intel Atom S1xxx, D2xxx, N2xxx (32nm)
+			Technology = 32;
+			microarchitecture = "Atom";
+			break;
+		case 0x37: // Intel Atom E3xxx, Z3xxx (22nm)
+		case 0x4D: // Intel Atom C2xxx (22nm)
+			Technology = 22;
+			microarchitecture = "Silvermont";
+			break;
+		case 0x4A:
+		case 0x5A:
+		case 0x5D:
+			microarchitecture = "Silvermont";
+			break;
+		case 0x4E:
+		case 0x5E: // Intel Core i5, i7 6xxxx LGA1151 (14nm)
+		case 0x55: // Intel Core i7, i9 7xxxx LGA2066 (14nm)
+			Technology = 14;
+			microarchitecture = "Skylake";
+			break;
+		case 0x4C:
+			microarchitecture = "Airmont";
+			break;
+		case 0x8E:
+		case 0x9E: // Intel Core i5, i7 7xxxx (14nm)
+			Technology = 14;
+			microarchitecture = "KabyLake";
+			break;
+		case 0x5C: // Intel Atom processors
+			microarchitecture = "ApolloLake";
+			break;
+		default:
+			microarchitecture = "Unknown";
+			break;
+		}
+	} break;
+	case 0x0F: {
+		switch (Model) {
+		case 0x00: // Pentium 4 (180nm)
+			Technology = 180;
+			microarchitecture = "NetBurst";
+			break;
+		case 0x01: // Pentium 4 (130nm)
+		case 0x02: // Pentium 4 (130nm)
+			Technology = 130;
+			microarchitecture = "NetBurst";
+			break;
+		case 0x03: // Pentium 4, Celeron D (90nm)
+		case 0x04: // Pentium 4, Pentium D, Celeron D (90nm)
+			Technology = 90;
+			microarchitecture = "NetBurst";
+			break;
+		case 0x06: // Pentium 4, Pentium D, Celeron D (65nm)
+			Technology = 65;
+			microarchitecture = "NetBurst";
+			break;
+		default:
+			microarchitecture = "Unknown";
+			break;
+		}
+	} break;
 	default:
-		this->CodeName = "Unknown";
-		state = false;
+		microarchitecture = "Unknown";
 		break;
 	}
 	return state;
 }
-inline int Intel::findcpuid(int value)
+inline size_t Intel::findcpuid(int value)
 {
 	auto& it = find(nIdsLeaf.begin(), nIdsLeaf.end(), value);
 	if (it != nIdsLeaf.end())

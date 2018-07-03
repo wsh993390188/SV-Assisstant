@@ -59,7 +59,7 @@ protected:
 	void ExecFeature();
 	void ExecCache();
 private:
-	inline int findcpuid(int value);
+	inline __int64 findcpuid(int value);
 	std::bitset<32> f1_ecx;
 	std::bitset<32> f1_edx;
 	std::bitset<32> f7_ebx;

@@ -1,31 +1,32 @@
-#pragma once
+#pragma once 
 class IgpuSensor
 {
-protected:
-	IgpuSensor();
-	~IgpuSensor();
+public:
 	const std::string& GetGPUName();
 	const std::string& GetGPUBiosVersion();
+	const std::string& GetGPUDriverVersion();
+	const std::string& GetGPUBranchVersion();
 	INT GetTemperature();
 	double GetGPUClock();
 	double GetGPUMemoryClock();
 	ULONG GetGPUusage();
 	ULONG GetGPUfans();
-
-	BOOL SetGPUName(std::string name);
-	BOOL SetGPUBiosVersion(std::string biosversion);
-	BOOL SetTemperature(INT Temperature);
-	BOOL SetGPUClock(double gpuclock);
-	BOOL SetGPUMemoryClock(double gpumemoryclock);
-	BOOL SetGPUusage(ULONG gpusage);
-	BOOL SetGPUfans(ULONG fans);
-private:
+	size_t GetdedicatedVideoMemory();
+	size_t GetsystemVideoMemory();
+	size_t GetsharedSystemMemory();
+	~IgpuSensor();
+protected:
+	IgpuSensor();
 	std::string GPUname;
 	std::string GPUBiosVersion;
+	std::string GPUDriverVersion;
+	std::string GPUBranchVersion;
 	INT	Temperature;
 	double GPUClock;
 	double GPUMemclock;
 	ULONG GPUusage;
 	ULONG fans;
+	size_t dedicatedVideoMemory;
+	size_t systemVideoMemory;
+	size_t sharedSystemMemory;
 };
-
