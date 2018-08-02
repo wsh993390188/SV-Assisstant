@@ -4,7 +4,7 @@
 
 std::shared_ptr<ZhaoxinDriver> ZhaoxinDriver::ring0_temp = nullptr;
 
-ZhaoxinDriver::ZhaoxinDriver() : ring(make_shared<CRing0>())
+ZhaoxinDriver::ZhaoxinDriver() : ring(make_shared<CRing0>()), ring0_mutex{}
 {
 	InitPciDB();
 }
@@ -12,15 +12,19 @@ ZhaoxinDriver::ZhaoxinDriver() : ring(make_shared<CRing0>())
 ZhaoxinDriver * ZhaoxinDriver::Instance()
 {
 	if (!ring0_temp.get())
-		ring0_temp = std::make_shared<ZhaoxinDriver>();
+	{
+		ring0_temp = make_shared<ZhaoxinDriver>();
+	}
 	return ring0_temp.get();
 }
 
 BOOL ZhaoxinDriver::RdIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, OUT DWORD & IO_Data)
 {
-//	ring0_mutex.lock();
-	return ring->RdIOPort(IO_Port_Addr, IO_DataSize, IO_Data);
-//	ring0_mutex.unlock();
+	BOOL state = FALSE;
+// 	ring0_mutex.lock();
+	state = ring->RdIOPort(IO_Port_Addr, IO_DataSize, IO_Data);
+	//ring0_mutex.unlock();
+	return state;
 }
 
 BOOL ZhaoxinDriver::WrIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, IN ULONG IO_Data)
@@ -40,45 +44,20 @@ BOOL ZhaoxinDriver::WrMsr(IN DWORD Index, IN DWORD64 Data)
 
 BOOL ZhaoxinDriver::RdMsrTx(IN DWORD Index, OUT DWORD64 & Data, IN DWORD threadAffinityMask)
 {
-// 	BOOL		result = FALSE;
-// 	DWORD_PTR	mask = 0;
-// 	HANDLE		hThread = NULL;
-// 
-// 	hThread = GetCurrentThread();
-// 	mask = SetThreadAffinityMask(hThread, threadAffinityMask);
-// 
-// 	if (mask == 0)
-// 	{
-// 		return FALSE;
-// 	}
-// 
-// 	return ring->RdMsr(Index, Data);
 	return ring->RdMsrTx(Index, threadAffinityMask, Data);
 }
 
 BOOL ZhaoxinDriver::WrMsrTx(IN DWORD Index, IN DWORD64 Data, IN DWORD threadAffinityMask)
 {
-// 	BOOL		result = FALSE;
-// 	DWORD_PTR	mask = 0;
-// 	HANDLE		hThread = NULL;
-// 
-// 	hThread = GetCurrentThread();
-// 	mask = SetThreadAffinityMask(hThread, threadAffinityMask);
-// 	if (mask == 0)
-// 	{
-// 		return FALSE;
-// 	}
-// 
-// 	return ring->WrMsr(Index, Data);
 	return ring->WrMsrTx(Index, threadAffinityMask, Data);
 }
 
-BOOL ZhaoxinDriver::RdMemory(IN LONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT ULONG & Memory_Data)
+BOOL ZhaoxinDriver::RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT ULONG & Memory_Data)
 {
 	return ring->RdMemory(Memory_Addr, Mem_DataSize, Memory_Data);
 }
 
-BOOL ZhaoxinDriver::WrMemory(IN LONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN ULONG Memory_Data)
+BOOL ZhaoxinDriver::WrMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN ULONG Memory_Data)
 {
 	return ring->WrMemory(Memory_Addr, Mem_DataSize, Memory_Data);
 }
@@ -132,7 +111,7 @@ BOOL ZhaoxinDriver::InitPciDB()
 
 	if (!in.is_open())
 	{
-		std::cerr << "pci.ids file is not available. Download it from https://raw.githubusercontent.com/pciutils/pciids/master/pci.ids " << endl;
+		std::cerr << "pci.ids file is not available. Download it from https://raw.githubusercontent.com/pciutils/pciids/master/pci.ids" << endl;
 		return FALSE;
 	}
 
@@ -151,7 +130,6 @@ BOOL ZhaoxinDriver::InitPciDB()
 		if (line[0] == '\t')
 		{
 			int deviceID = stoi(line.substr(1, 4), 0, 16);
-			//std::cout << vendorID << ";" << vendorName << ";" << deviceID << ";"<< line.substr(7) << endl;
 			pciDB.second[vendorID][deviceID] = line.substr(7);
 			continue;
 		}

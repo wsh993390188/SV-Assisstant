@@ -8,16 +8,21 @@
 //而不是在此文件中引用
 
 #ifdef _DEBUG
-void OutputDebugPrintf(const char* strOutputString, ...)
+void OutputDebugPrintf(const TCHAR* strOutputString, ...)
 {
-	char strBuffer[4096] = { 0 };
+	TCHAR strBuffer[4096] = { 0 };
 	va_list vlArgs;
 	va_start(vlArgs, strOutputString);
+#ifdef UNICODE
+	_vsnwprintf_s(strBuffer, sizeof(strBuffer) - 1, strOutputString, vlArgs);
+#else
 	_vsnprintf_s(strBuffer, sizeof(strBuffer) - 1, strOutputString, vlArgs);
+#endif
+
 	//vsprintf(strBuffer,strOutputString,vlArgs);
 	va_end(vlArgs);
-	OutputDebugStringA(strBuffer);
+	OutputDebugString(strBuffer);
 }
 #else
-void OutputDebugPrintf(const char* strOutputString, ...) {}
+void OutputDebugPrintf(const TCHAR* strOutputString, ...) {}
 #endif

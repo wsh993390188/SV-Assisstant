@@ -1,5 +1,21 @@
 #pragma once
-#include "PCI//PCI defination.h"
+#include <map>
+#include <string>
+
+#define DIMMSlotNum 8	//暂时定义为8 应该是从SMBIOS中获取到DIMM插槽数量
+
+const USHORT DIMMADDR[DIMMSlotNum] = 
+{
+	0xA0,
+	0xA2,
+	0xA4,
+	0xA6,
+	0xA8,
+	0xAA,
+	0xAC,
+	0xAE,
+};
+
 typedef struct _DDR3_INFO
 {
 	union
@@ -218,6 +234,7 @@ struct Embedded_Controller_Data
 #define PCI_TYPE0_ADDRESSES             6
 #define PCI_TYPE1_ADDRESSES             2
 #define PCI_TYPE2_ADDRESSES             5
+
 typedef struct _PCI_COMMON_HEADER {
 	USHORT  VendorID;                   // (ro)
 	USHORT  DeviceID;                   // (ro)
@@ -319,3 +336,8 @@ typedef struct _PCI_SLOT_NUMBER {
 	} u;
 } PCI_SLOT_NUMBER, *PPCI_SLOT_NUMBER;
 #endif // !IOCTL_H
+
+typedef struct _Pci_All_Config_Space
+{
+	std::map<std::wstring, PCI_COMMON_CONFIG> pciconfig;
+}Pci_All_Config_Space, *PPci_All_Config_Space;

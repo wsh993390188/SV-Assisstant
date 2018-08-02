@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\cpu">
+      <UniqueIdentifier>{51251c16-693e-4608-b612-0d56909cd976}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\cpu">
+      <UniqueIdentifier>{ea254c31-f27b-4ba1-999d-9ef2545fe13d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\edid">
+      <UniqueIdentifier>{a585c843-c7fb-41f9-be1a-769c0ba680e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\disk">
+      <UniqueIdentifier>{344a5527-50ac-4c97-b9e8-31af8e01e8a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\smbios">
+      <UniqueIdentifier>{7e2ebfc1-f305-447a-8516-344f8cc392e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\usb">
+      <UniqueIdentifier>{5551c3c6-f4c4-42c8-b6c4-89e28350352a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\usb">
+      <UniqueIdentifier>{f675108f-1519-4e11-b69e-f9356094137c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\gpu">
+      <UniqueIdentifier>{154f1cbb-e9b4-4faf-a444-ff1afc1cc290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\smbios">
+      <UniqueIdentifier>{88114bad-55f4-4376-b7e6-437260fe1ff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\edid">
+      <UniqueIdentifier>{afc94dc0-2c90-4733-88f6-e0fe45f48099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\disk">
+      <UniqueIdentifier>{f982320c-404f-48b0-ac61-8b7ca6051db9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\gpu">
+      <UniqueIdentifier>{59dba6ee-ae4c-4953-9e87-7e4f48d38aa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\network">
+      <UniqueIdentifier>{beab4d5a-cdf4-44b9-a6e2-1888d3938583}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\network">
+      <UniqueIdentifier>{bdf94465-9261-43b3-b5ee-283dc4f45dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Audio">
+      <UniqueIdentifier>{e27213ad-5bd0-4b08-815d-f8a414c1f611}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Audio">
+      <UniqueIdentifier>{6a258193-6899-45ef-9115-c917b42a0514}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\ACPI">
+      <UniqueIdentifier>{e841245c-50c8-4ea7-aff0-f4c0195e9667}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\ACPI">
+      <UniqueIdentifier>{40568535-4542-4e65-bb4b-63d90cc4bea8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\log">
+      <UniqueIdentifier>{a9ec676a-43fa-4e1e-85c1-f0c93d388498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\log">
+      <UniqueIdentifier>{78ebeefe-7123-4020-a268-f9dceb75581d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\superio">
+      <UniqueIdentifier>{55dea2c3-910c-4854-8c95-654766c126a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\superio">
+      <UniqueIdentifier>{8bf3c589-19a6-4215-986b-0bb462067c21}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\cpu\amd.h">
+      <Filter>头文件\cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\cpu\CPU.h">
+      <Filter>头文件\cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\cpu\CPUBase.h">
+      <Filter>头文件\cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\cpu\CPUWMI.h">
+      <Filter>头文件\cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\cpu\defination.h">
+      <Filter>头文件\cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\cpu\Intel.h">
+      <Filter>头文件\cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edid\EDID src.h">
+      <Filter>头文件\edid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edid\EDID.h">
+      <Filter>头文件\edid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\disk\disk.h">
+      <Filter>头文件\disk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\disk\diskdefination.h">
+      <Filter>头文件\disk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\disk\WMI for Disk\SynQuery.h">
+      <Filter>头文件\disk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\disk\WMI for Disk\WMI.h">
+      <Filter>头文件\disk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\disk\WMI for Disk\WMIExtern.h">
+      <Filter>头文件\disk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\usb\UsbController.h">
+      <Filter>头文件\usb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\usb\UsbDefination.h">
+      <Filter>头文件\usb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\usb\UsbHub.h">
+      <Filter>头文件\usb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gpu\Gpudata.h">
+      <Filter>头文件\gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gpu\Nvidia.h">
+      <Filter>头文件\gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\smbios\smbioslib.h">
+      <Filter>头文件\smbios</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\smbios\Smbios.h">
+      <Filter>头文件\smbios</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\edid\EDIDdefination.h">
+      <Filter>头文件\edid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gpu\AMDgpu.h">
+      <Filter>头文件\gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gpu\gpu.h">
+      <Filter>头文件\gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\cpu\zhaoxin.h">
+      <Filter>头文件\cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\usb\Iusb.h">
+      <Filter>头文件\usb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\network\NetWork.h">
+      <Filter>头文件\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\network\NetworkLib.h">
+      <Filter>头文件\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gpu\Igpu.h">
+      <Filter>头文件\gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Audio\CAudio.h">
+      <Filter>头文件\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\acpi\ACPI Defination.h">
+      <Filter>头文件\ACPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\acpi\ACPI Source.h">
+      <Filter>头文件\ACPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\acpi\ACPI.h">
+      <Filter>头文件\ACPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gpu\Intelgpu.h">
+      <Filter>头文件\gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="log\easylogging++.h">
+      <Filter>头文件\log</Filter>
+    </ClInclude>
+    <ClInclude Include="log\sv_log.h">
+      <Filter>头文件\log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\superio\SioChip.h">
+      <Filter>头文件\superio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\superio\SuperIOStruct.h">
+      <Filter>头文件\superio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\superio\SuperIoEntry.h">
+      <Filter>头文件\superio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\superio\Superio.h">
+      <Filter>头文件\superio</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\cpu\amd.cpp">
+      <Filter>源文件\cpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\cpu\CPU.cpp">
+      <Filter>源文件\cpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\cpu\CPUBase.cpp">
+      <Filter>源文件\cpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\cpu\CPUWMI.cpp">
+      <Filter>源文件\cpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\cpu\Intel.cpp">
+      <Filter>源文件\cpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\edid\EDID src.cpp">
+      <Filter>源文件\edid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\edid\EDID.cpp">
+      <Filter>源文件\edid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\disk\disk.cpp">
+      <Filter>源文件\disk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\disk\diskdefination.cpp">
+      <Filter>源文件\disk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\disk\WMI for Disk\SynQuery.cpp">
+      <Filter>源文件\disk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\disk\WMI for Disk\WMI.cpp">
+      <Filter>源文件\disk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\usb\UsbController.cpp">
+      <Filter>源文件\usb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\usb\UsbHub.cpp">
+      <Filter>源文件\usb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gpu\Gpudata.cpp">
+      <Filter>源文件\gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gpu\Nvidia.cpp">
+      <Filter>源文件\gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\smbios\Smbios.cpp">
+      <Filter>源文件\smbios</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\smbios\smbioslib.cpp">
+      <Filter>源文件\smbios</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gpu\AMDgpu.cpp">
+      <Filter>源文件\gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gpu\gpu.cpp">
+      <Filter>源文件\gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\cpu\zhaoxin.cpp">
+      <Filter>源文件\cpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\usb\Iusb.cpp">
+      <Filter>源文件\usb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\network\NetWork.cpp">
+      <Filter>源文件\network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\network\NetworkLib.cpp">
+      <Filter>源文件\network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gpu\Igpu.cpp">
+      <Filter>源文件\gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Audio\CAudio.cpp">
+      <Filter>源文件\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\acpi\ACPI Source.cpp">
+      <Filter>源文件\ACPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\acpi\ACPI.cpp">
+      <Filter>源文件\ACPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gpu\Intelgpu.cpp">
+      <Filter>源文件\gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="log\easylogging++.cc">
+      <Filter>源文件\log</Filter>
+    </ClCompile>
+    <ClCompile Include="log\sv_log.cpp">
+      <Filter>源文件\log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\superio\SioChip.cpp">
+      <Filter>源文件\superio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\superio\SuperIOStruct.cpp">
+      <Filter>源文件\superio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\superio\SuperIoEntry.cpp">
+      <Filter>源文件\superio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\superio\Superio.cpp">
+      <Filter>源文件\superio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\superio\Fintek.cpp">
+      <Filter>源文件\superio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\superio\ITE.cpp">
+      <Filter>源文件\superio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\superio\Nuvoton.cpp">
+      <Filter>源文件\superio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\superio\SMSC.cpp">
+      <Filter>源文件\superio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\superio\Winbond.cpp">
+      <Filter>源文件\superio</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -22,6 +22,7 @@
 HANDLE gHandle = INVALID_HANDLE_VALUE;
 TCHAR gDriverPath[MAX_PATH];
 #define SYSTEM32_DRIVERS _T("\\System32\\Drivers\\")
+#define SYSTEM_TEMP _T("\\Temp\\")
 
 //-----------------------------------------------------------------------------
 //
@@ -31,6 +32,7 @@ TCHAR gDriverPath[MAX_PATH];
 
 static BOOL InstallDriver(SC_HANDLE hSCManager, LPCTSTR DriverId, LPCTSTR DriverPath);
 static BOOL RemoveDriver(SC_HANDLE hSCManager, LPCTSTR DriverId);
+static BOOL RemoveFile(LPCTSTR DriverId);
 static BOOL StartDriver(SC_HANDLE hSCManager, LPCTSTR DriverId);
 static BOOL StopDriver(SC_HANDLE hSCManager, LPCTSTR DriverId);
 static BOOL SystemInstallDriver(SC_HANDLE hSCManager, LPCTSTR DriverId, LPCTSTR DriverPath);
@@ -69,7 +71,7 @@ BuildDriversDirPath(
 	len = GetWindowsDirectory(dir, (UINT)remain);
 
 	if (len == 0 ||
-		(remain - len) < sizeof(SYSTEM32_DRIVERS)) {
+		(remain - len) < sizeof(SYSTEM_TEMP)) {
 		free(dir);
 		return NULL;
 	}
@@ -78,13 +80,13 @@ BuildDriversDirPath(
 	//
 	// Build dir to have "%windir%\System32\Drivers\<DriverName>".
 	//
-	if (FAILED(StringCchCat(dir, remain, SYSTEM32_DRIVERS))) {
+	if (FAILED(StringCchCat(dir, remain, SYSTEM_TEMP))) {
 		free(dir);
 		return NULL;
 	}
 
-	remain -= sizeof(SYSTEM32_DRIVERS);
-	len += sizeof(SYSTEM32_DRIVERS);
+	remain -= sizeof(SYSTEM_TEMP);
+	len += sizeof(SYSTEM_TEMP);
 	len += wcslen(DriverName);
 
 	if (remain < len) {
@@ -121,7 +123,7 @@ SetupDriverName(
 
 	if (!driverLocLen) {
 
-		OutputDebugPrintf("GetCurrentDirectory failed!  Error = %d \n",
+		OutputDebugPrintf(_T("GetCurrentDirectory failed!  Error = %d \n"),
 			GetLastError());
 
 		return FALSE;
@@ -146,7 +148,7 @@ SetupDriverName(
 		//
 		// Indicate failure.
 		//
-		OutputDebugPrintf("Driver: %ls.SYS is not in the %ls directory. \n",
+		OutputDebugPrintf(_T("Driver: %ls.SYS is not in the %ls directory. \n"),
 			DRIVER_NAME, DriverLocation);
 		return FALSE;
 	}
@@ -158,14 +160,14 @@ SetupDriverName(
 	driversDir = BuildDriversDirPath(DRIVER_NAME);
 
 	if (!driversDir) {
-		OutputDebugPrintf("BuildDriversDirPath failed!\n");
+		OutputDebugPrintf(_T("BuildDriversDirPath failed!\n"));
 		return FALSE;
 	}
 
 	ok = CopyFile(DriverLocation, driversDir, FALSE);
 
 	if (!ok) {
-		OutputDebugPrintf("CopyFile failed: error(%d) - \"%ls\"\n",
+		OutputDebugPrintf(_T("CopyFile failed: error(%d) - \"%ls\"\n"),
 			GetLastError(), driversDir);
 		free(driversDir);
 		return FALSE;
@@ -281,7 +283,6 @@ BOOL ManageDriver(LPCTSTR DriverId, LPCTSTR DriverPath, USHORT Function)
 {
 	SC_HANDLE	hSCManager = NULL;
 	BOOL		rCode = FALSE;
-	DWORD		error = NO_ERROR;
 
 	if(DriverId == NULL || DriverPath == NULL)
 	{
@@ -308,6 +309,14 @@ BOOL ManageDriver(LPCTSTR DriverId, LPCTSTR DriverPath, USHORT Function)
 			StopDriver(hSCManager, DriverId);
 			rCode = RemoveDriver(hSCManager, DriverId);
 		}
+		break;
+	case OLS_DRIVER_EXIT:
+		if (!IsSystemInstallDriver(hSCManager, DriverId, DriverPath))
+		{
+			StopDriver(hSCManager, DriverId);
+			rCode = RemoveDriver(hSCManager, DriverId);
+		}
+		RemoveFile(DriverPath);
 		break;
 	case OLS_DRIVER_SYSTEM_INSTALL:
 		if(IsSystemInstallDriver(hSCManager, DriverId, DriverPath))
@@ -395,6 +404,12 @@ BOOL InstallDriver(SC_HANDLE hSCManager, LPCTSTR DriverId, LPCTSTR DriverPath)
 		{
 			rCode = TRUE;
         }
+#ifdef _DEBUG
+		else
+		{
+			OutputDebugPrintf(_T("CreateService Failed! Error Code: %d"), error);
+		}
+#endif
     }
 	else
 	{
@@ -463,6 +478,12 @@ BOOL RemoveDriver(SC_HANDLE hSCManager, LPCTSTR DriverId)
 	return rCode;
 }
 
+BOOL RemoveFile(LPCTSTR DriverId)
+{
+	OutputDebugPrintf(_T("Remove sys: %ls"), DriverId);
+	return _wremove(DriverId);
+}
+
 //-----------------------------------------------------------------------------
 //
 // Start Driver
@@ -486,6 +507,12 @@ BOOL StartDriver(SC_HANDLE hSCManager, LPCTSTR DriverId)
 			{
 				rCode = TRUE;
 			}
+#ifdef _DEBUG
+			else
+			{
+				OutputDebugPrintf(_T("StartService Failed! Error Code: %d"), error);
+			}
+#endif
 		}
 		else
 		{
@@ -530,6 +557,7 @@ BOOL StopDriver(SC_HANDLE hSCManager, LPCTSTR DriverId)
 
 BOOL IsSystemInstallDriver(SC_HANDLE hSCManager, LPCTSTR DriverId, LPCTSTR DriverPath)
 {
+	UNREFERENCED_PARAMETER(DriverPath);
 	SC_HANDLE				hService = NULL;
 	BOOL					rCode = FALSE;
 	DWORD					dwSize;

@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8C332A47-EB90-4E1A-A28E-4A82BAE1CDB9}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>svassistant</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>ZX_OutputLog;ELPP_UNICODE;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\boost_1_67_0;C:\Users\wsh\OneDrive\SV-Assisstant\hardware\hardware assistant\gpu\NVAPILIB;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x86;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;$(SolutionDir)hardware assistant\gpu\NVAPILIB;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wlanapi.lib;NVAPI.lib;propsys.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;Iphlpapi.lib;SetupAPI.lib;Rpcrt4.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>ZX_OutputLog;ELPP_UNICODE;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\boost_1_67_0;E:\work\boost_1_67_0;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>wlanapi.lib;nvapi64.lib;propsys.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;Iphlpapi.lib;Rpcrt4.lib;SetupAPI.lib;Winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\gpu\NVAPILIB;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>wlanapi.lib;nvapi64.lib;propsys.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;Iphlpapi.lib;Rpcrt4.lib;SetupAPI.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;E:\work\boost\bin1.63.0\VC14.0threading=multi\lib;$(SolutionDir)hardware assistant\gpu\NVAPILIB;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>ZX_OutputLog;ELPP_UNICODE;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\boost_1_67_0;C:\Users\wsh\OneDrive\SV-Assisstant\hardware\hardware assistant\gpu\NVAPILIB;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x86;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;$(SolutionDir)hardware assistant\gpu\NVAPILIB;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wlanapi.lib;NVAPI.lib;propsys.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;Iphlpapi.lib;SetupAPI.lib;Rpcrt4.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>ZX_OutputLog;ELPP_UNICODE;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\boost_1_67_0;E:\work\boost_1_67_0;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>wlanapi.lib;nvapi64.lib;propsys.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;Iphlpapi.lib;Rpcrt4.lib;SetupAPI.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;E:\work\boost\bin1.63.0\VC14.0threading=multi\lib;$(SolutionDir)hardware assistant\gpu\NVAPILIB;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\acpi\ACPI Defination.h" />
+    <ClInclude Include="..\..\acpi\ACPI Source.h" />
+    <ClInclude Include="..\..\acpi\ACPI.h" />
+    <ClInclude Include="..\..\Audio\CAudio.h" />
+    <ClInclude Include="..\..\cpu\amd.h" />
+    <ClInclude Include="..\..\cpu\CPU.h" />
+    <ClInclude Include="..\..\cpu\CPUBase.h" />
+    <ClInclude Include="..\..\cpu\CPUWMI.h" />
+    <ClInclude Include="..\..\cpu\defination.h" />
+    <ClInclude Include="..\..\cpu\Intel.h" />
+    <ClInclude Include="..\..\cpu\zhaoxin.h" />
+    <ClInclude Include="..\..\disk\disk.h" />
+    <ClInclude Include="..\..\disk\diskdefination.h" />
+    <ClInclude Include="..\..\disk\WMI for Disk\SynQuery.h" />
+    <ClInclude Include="..\..\disk\WMI for Disk\WMI.h" />
+    <ClInclude Include="..\..\disk\WMI for Disk\WMIExtern.h" />
+    <ClInclude Include="..\..\edid\EDID src.h" />
+    <ClInclude Include="..\..\edid\EDID.h" />
+    <ClInclude Include="..\..\edid\EDIDdefination.h" />
+    <ClInclude Include="..\..\gpu\AMDgpu.h" />
+    <ClInclude Include="..\..\gpu\Gpudata.h" />
+    <ClInclude Include="..\..\gpu\gpu.h" />
+    <ClInclude Include="..\..\gpu\Igpu.h" />
+    <ClInclude Include="..\..\gpu\Intelgpu.h" />
+    <ClInclude Include="..\..\gpu\Nvidia.h" />
+    <ClInclude Include="..\..\network\NetWork.h" />
+    <ClInclude Include="..\..\network\NetworkLib.h" />
+    <ClInclude Include="..\..\smbios\Smbios.h" />
+    <ClInclude Include="..\..\smbios\smbioslib.h" />
+    <ClInclude Include="..\..\superio\Superio.h" />
+    <ClInclude Include="..\..\superio\SuperIOStruct.h" />
+    <ClInclude Include="..\..\superio\SioChip.h" />
+    <ClInclude Include="..\..\superio\SuperIoEntry.h" />
+    <ClInclude Include="..\..\usb\Iusb.h" />
+    <ClInclude Include="..\..\usb\UsbController.h" />
+    <ClInclude Include="..\..\usb\UsbDefination.h" />
+    <ClInclude Include="..\..\usb\UsbHub.h" />
+    <ClInclude Include="log\easylogging++.h" />
+    <ClInclude Include="log\sv_log.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\acpi\ACPI Source.cpp" />
+    <ClCompile Include="..\..\acpi\ACPI.cpp" />
+    <ClCompile Include="..\..\Audio\CAudio.cpp" />
+    <ClCompile Include="..\..\cpu\amd.cpp" />
+    <ClCompile Include="..\..\cpu\CPU.cpp" />
+    <ClCompile Include="..\..\cpu\CPUBase.cpp" />
+    <ClCompile Include="..\..\cpu\CPUWMI.cpp" />
+    <ClCompile Include="..\..\cpu\Intel.cpp" />
+    <ClCompile Include="..\..\cpu\zhaoxin.cpp" />
+    <ClCompile Include="..\..\disk\disk.cpp" />
+    <ClCompile Include="..\..\disk\diskdefination.cpp" />
+    <ClCompile Include="..\..\disk\WMI for Disk\SynQuery.cpp" />
+    <ClCompile Include="..\..\disk\WMI for Disk\WMI.cpp" />
+    <ClCompile Include="..\..\edid\EDID src.cpp" />
+    <ClCompile Include="..\..\edid\EDID.cpp" />
+    <ClCompile Include="..\..\gpu\AMDgpu.cpp" />
+    <ClCompile Include="..\..\gpu\Gpudata.cpp" />
+    <ClCompile Include="..\..\gpu\gpu.cpp" />
+    <ClCompile Include="..\..\gpu\Igpu.cpp" />
+    <ClCompile Include="..\..\gpu\Intelgpu.cpp" />
+    <ClCompile Include="..\..\gpu\Nvidia.cpp" />
+    <ClCompile Include="..\..\network\NetWork.cpp" />
+    <ClCompile Include="..\..\network\NetworkLib.cpp" />
+    <ClCompile Include="..\..\smbios\Smbios.cpp" />
+    <ClCompile Include="..\..\smbios\smbioslib.cpp" />
+    <ClCompile Include="..\..\superio\Fintek.cpp" />
+    <ClCompile Include="..\..\superio\ITE.cpp" />
+    <ClCompile Include="..\..\superio\Nuvoton.cpp" />
+    <ClCompile Include="..\..\superio\SMSC.cpp" />
+    <ClCompile Include="..\..\superio\Superio.cpp" />
+    <ClCompile Include="..\..\superio\SuperIOStruct.cpp" />
+    <ClCompile Include="..\..\superio\SioChip.cpp" />
+    <ClCompile Include="..\..\superio\SuperIoEntry.cpp" />
+    <ClCompile Include="..\..\superio\Winbond.cpp" />
+    <ClCompile Include="..\..\usb\Iusb.cpp" />
+    <ClCompile Include="..\..\usb\UsbController.cpp" />
+    <ClCompile Include="..\..\usb\UsbHub.cpp" />
+    <ClCompile Include="log\easylogging++.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="log\sv_log.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Driverdll\Driverdll.vcxproj">
+      <Project>{bc32d43c-0e72-42fc-86a3-64fd91c5c4ec}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

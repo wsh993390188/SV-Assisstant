@@ -1,17 +1,19 @@
+#include <windows.h>
+#include "Ring0Defination.h"
+
+
 // 下列 ifdef 块是创建使从 DLL 导出更简单的
 // 宏的标准方法。此 DLL 中的所有文件都是用命令行上定义的 DRIVERDLL_EXPORTS
 // 符号编译的。在使用此 DLL 的
 // 任何其他项目上不应定义此符号。这样，源文件中包含此文件的任何其他项目都会将
 // DRIVERDLL_API 函数视为是从 DLL 导入的，而此 DLL 则将用此宏定义的
 // 符号视为是被导出的。
+
 #ifdef DRIVERDLL_EXPORTS
 #define DRIVERDLL_API __declspec(dllexport)
 #else
 #define DRIVERDLL_API __declspec(dllimport)
 #endif
-
-#include <windows.h>
-#include "Ring0Defination.h"
 
 namespace SV_ASSIST
 {
@@ -28,7 +30,7 @@ namespace SV_ASSIST
         *@return
         *@BOOL				是否成功
         **************************************************************************/
-        DRIVERDLL_API BOOL RdIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, OUT DWORD64& IO_Data);
+        DRIVERDLL_API BOOL RdIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, OUT DWORD& IO_Data);
         /**********************************************************************
         *@Function				WrIOPort
         *@brief				写入IO Port的值
@@ -52,7 +54,7 @@ namespace SV_ASSIST
         *@return
             *@BOOL				是否成功
         ***************************************************/
-        DRIVERDLL_API BOOL RdMsrTx(IN DWORD Index, OUT DWORD64& Data, IN DWORD_PTR threadAffinityMask);
+        DRIVERDLL_API BOOL RdMsrTx(IN DWORD Index, OUT DWORD64& Data, IN DWORD threadAffinityMask);
         /**************************************************
         *@Function				WrMsrTx
         *@brief					写MSR的值
@@ -64,7 +66,7 @@ namespace SV_ASSIST
         *@return
             *@BOOL				是否成功
         ***************************************************/
-        DRIVERDLL_API BOOL WrMsrTx(IN DWORD Index, IN DWORD64 Data, IN DWORD_PTR threadAffinityMask);
+        DRIVERDLL_API BOOL WrMsrTx(IN DWORD Index, IN DWORD64 Data, IN DWORD threadAffinityMask);
 
 
         /**************************************************
@@ -189,7 +191,7 @@ namespace SV_ASSIST
         *@return
         *@BOOL						设置是否成功
         ****************************************************/
-        DRIVERDLL_API BOOL GetSMbusBaseAddr(const USHORT VendorID,USHORT& SMbusBaseAddress);
+        DRIVERDLL_API BOOL GetSMbusBaseAddr(const USHORT VendorID, ULONG& SMbusBaseAddress);
 
         /***************************************************
         *@Function					GetPCIVendorID
@@ -200,5 +202,56 @@ namespace SV_ASSIST
         *@USHORT					厂商pci代号，如1022、8086、1106
         ****************************************************/
         DRIVERDLL_API USHORT GetPCIVendorID();
+
+		/**************************************************************
+		*@Function				GetPCIEInfo
+		*@brief					获取PCIE Configuration Space
+		*@author				王硕
+		*@param
+			*@PCIE_BaseAddress	IN PCIE内存地址
+			*@Data				INOut PCIE配置空间数组
+			*@DataSize			INOut PCIE配置空间大小4096
+		*@return
+			*@BOOL				获取Configuration Space是否成功
+		****************************************************************/
+		DRIVERDLL_API BOOL GetPCIEInfo(const ULONGLONG PCIE_BaseAddress, ULONG bus, ULONG dev, ULONG func, PVOID*& Data, size_t DataSize);
+
+		/***************************************************
+		*@Function					GetPCIDeviceName
+		*@brief						获取Pci厂商名
+		*@author					王硕
+		*@param
+		*@VenderID					厂商ID号
+		*@DeviceID					设备ID号
+		*@VenderName				输出厂商名
+		*@DeviceName				输出设备名
+		*@return
+		*@USHORT					厂商pci代号，如1022、8086、1106
+		****************************************************/
+		DRIVERDLL_API BOOL GetPCIDeviceName(USHORT VenderID, USHORT DeviceID, std::string& VenderName, std::string& DeviceName);
+
+		/***************************************************
+		*@Function					GetAllPciInfo
+		*@brief						获取全部的PCI配置空间信息
+		*@author					王硕
+		*@param
+		*@return
+		*@Pci_All_Config_Space		Pci设备
+		****************************************************/
+		DRIVERDLL_API const Pci_All_Config_Space& GetAllPciInfo();
+
+		/***************************************************
+		*@Function					PCIstringToBDF
+		*@brief						pci字符转换成bus dev func
+		*@author					王硕
+		*@param
+			*@pcistring				输入的pci字符串
+			*@bus					返回bus号
+			*@dev					返回dev号
+			*@func					返回func号
+		*@return
+		*@BOOL						是否成功
+		****************************************************/
+		DRIVERDLL_API const BOOL PCIstringToBDF(const std::wstring& pcistring, ULONG &bus, ULONG &dev, ULONG &func);
     }
 }

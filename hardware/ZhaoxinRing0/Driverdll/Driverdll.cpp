@@ -1,4 +1,4 @@
-// Driverdll.cpp : ¶¨Òå DLL Ó¦ÓÃ³ÌÐòµÄµ¼³öº¯Êý¡£
+ï»¿// Driverdll.cpp : å®šä¹‰ DLL åº”ç”¨ç¨‹åºçš„å¯¼å‡ºå‡½æ•°ã€‚
 //
 
 #include "stdafx.h"
@@ -116,7 +116,7 @@ namespace SV_ASSIST
 				if (ZhaoxinDriver::Instance()->ReadPci(0, 31, 3, pci))
 				{
 					tmp = pci.u.type0.BaseAddresses[4];
-					SMbusBaseAddress = ((tmp & 0x000FFFE));
+					SMbusBaseAddress = ((tmp & 0xFFFE));
 					Success = TRUE;
 				}
 				break;

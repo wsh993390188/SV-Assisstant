@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-// #include <mutex>
+#include <mutex>
 // #include <thread>
 #include "MyDriverClass.h"
 
@@ -16,8 +16,8 @@ public:
 	BOOL WrMsr(IN DWORD Index, IN DWORD64 Data);
 	BOOL RdMsrTx(IN DWORD Index, OUT DWORD64& Data, IN DWORD threadAffinityMask);
 	BOOL WrMsrTx(IN DWORD Index, IN DWORD64 Data, IN DWORD threadAffinityMask);
-	BOOL RdMemory(IN LONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT ULONG& Memory_Data);
-	BOOL WrMemory(IN LONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN ULONG Memory_Data);
+	BOOL RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT ULONG& Memory_Data);
+	BOOL WrMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN ULONG Memory_Data);
 	BOOL ReadPci(IN USHORT bus, IN USHORT dev, IN USHORT func, OUT PCI_COMMON_CONFIG& pci_config);
 	BOOL WritePci(IN USHORT bus, IN USHORT dev, IN USHORT func, IN UCHAR offset, IN ULONG Data);
 	BOOL ReadSPD(USHORT Base_Address, USHORT Slave_Address, DDR3_INFO & data);
@@ -30,7 +30,7 @@ public:
 private:
 	BOOL InitPciDB();
 	static std::shared_ptr<ZhaoxinDriver> ring0_temp;
-	//static std::mutex ring0_mutex;
+	std::mutex ring0_mutex;
 	PCIDB pciDB;
 	std::shared_ptr<CRing0> ring;
 };

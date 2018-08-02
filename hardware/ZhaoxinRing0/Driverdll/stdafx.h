@@ -24,14 +24,20 @@
 #define DRIVERDLL_API __declspec(dllimport)
 #endif
 
+#include <stdio.h>
+#include <iostream>
+#include <iomanip>
+#include <stdio.h>
 #include <memory>
 #include <tchar.h>
 #include <vector>
 #include <map>
 #include <string>
+#include <array>
+#include <bitset>
 #include "Defination\Ring0Defination.h"
 
-void OutputDebugPrintf(const char* strOutputString, ...);
+void OutputDebugPrintf(const TCHAR* strOutputString, ...);
 
 
 
