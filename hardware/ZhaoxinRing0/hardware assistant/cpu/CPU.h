@@ -33,6 +33,16 @@ namespace SV_ASSIST
 		****************************************************************/
 		const std::string& GetCPUName();
 		/**************************************************************
+		*@Function				GetCPUSpecification
+		*@brief					获取CPU的名字(Brand Name)
+		*@author				王硕
+		*@param
+		*@
+		*@return
+			*@string			CPU名字
+		****************************************************************/
+		const std::string& GetCPUSpecification();
+		/**************************************************************
 		*@Function				GetProcessorID
 		*@brief					获取处理器的ID 
 		*@author				王硕
@@ -109,18 +119,6 @@ namespace SV_ASSIST
 			*@uint				处理器的修订版本				
 		****************************************************************/
 		const unsigned int GetRevision(); //未做
-
-		//可能会废弃 采用msr形式
-		/**************************************************************
-		*@Function				GetUpgradeMethod
-		*@brief					获取处理器的封装形式 
-		*@author				王硕
-		*@param
-			*@null					
-		*@return
-			*@uint							
-		****************************************************************/
-		const unsigned int GetUpgradeMethod();
 
 		/**************************************************************
 		*@Function				GetManufacturer
@@ -236,9 +234,20 @@ namespace SV_ASSIST
 		*@param
 			*@null
 		*@return
-			*@UINT			未知返回0
+			*@UINT				未知返回0
 		****************************************************************/
 		const unsigned int GetTechnology();
+
+		/**************************************************************
+		*@Function				GetMaxTDP
+		*@brief					获取处理器的最大功率
+		*@author				王硕
+		*@param
+		*@null
+		*@return
+			*@UINT				未知返回0
+		****************************************************************/
+		const unsigned int GetMaxTDP();
 
 		/**************************************************************
 		*@Function				GetPackageTemperature

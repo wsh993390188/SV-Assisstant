@@ -33,15 +33,11 @@ public:
 private:
 	string m_wstrNamespace;
 public:
-	string Name;
 	string ProcessorId;
-	string SocketDesignation;
-	UINT CurrentClockSpeed;
 	UINT ExtClock;
 	UINT Core;
 	UINT Thread;
 	UINT Revision;
 	UINT MaxClockSpeed;
-	UINT UpgradeMethod;
 };
 

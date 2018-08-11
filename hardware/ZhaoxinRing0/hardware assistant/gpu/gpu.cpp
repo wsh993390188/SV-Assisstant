@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #pragma warning(disable:4996)
+#include <fstream>
+#include <map>
 #include "gpu.h"
 #include "Gpudata.h"
 #include "Igpu.h"
@@ -146,7 +148,7 @@ public:
 	static GPU* Instance()
 	{
 		if (!temp.get())
-			temp = make_shared<GPU>();
+			temp = std::make_shared<GPU>();
 		return temp.get();
 	}
 	void UpdateData()
@@ -159,13 +161,65 @@ public:
 	{
 		return &this->gpuinfo;
 	}
-	GPU() : gpudata(make_shared<GPUData>()) 
+	GPU() : gpudata(std::make_shared<GPUData>())
 	{
-			
+		this->InitGPUDB();
 	}
 private:
 	explicit GPU(const GPU& x);
 	GPU& operator=(const GPU& x);
+	void InitGPUDB()
+	{
+		std::ifstream in("gpu.ids");
+		std::string line, item;
+
+		if (!in.is_open())
+		{
+			return;
+		}
+		std::string cpuFM = {};
+		while (std::getline(in, line)) {
+			// Ignore any line starting with #
+			if (line.size() == 0 || line[0] == '#')
+				continue;
+
+			if (line[0] == '\t' && line[1] == '\t')
+			{
+				std::string temp = line.substr(2);
+				int technology = 0, TDP = 0;
+				char a[0x20] = {};
+				sscanf_s(temp.c_str(), "%s\t", a, _countof(a));
+				temp = temp.substr(strlen(a) + 1);
+				std::vector<std::string> itemlist;
+				this->split(temp, ",", itemlist);
+				GPUDB[cpuFM][std::string(a)] = itemlist;
+				continue;
+			}
+			if (line[0] == '\t')
+			{
+				cpuFM = line.substr(1);
+				continue;
+			}
+		}
+		in.close();
+	}
+
+	void split(const std::string & s, const std::string & delim, std::vector<std::string>& ret)
+	{
+		size_t last = 0;
+		size_t index = s.find_first_of(delim, last);
+		while (index != std::string::npos)
+		{
+			ret.emplace_back(s.substr(last, index - last));
+			last = index + 1;
+			index = s.find_first_of(delim, last);
+		}
+		if (index - last > 0)
+		{
+			ret.emplace_back(s.substr(last, index - last));
+		}
+	}
+
 	void GetInfo()
 	{
 		if(gpudata->nvinfo)
@@ -211,11 +265,10 @@ private:
 				GPUSensor temp = {};
 				temp.SetGPUBranchVersion(gpudata->AMD_BranchVersion);
 				temp.SetGPUDriverVersion(gpudata->AMD_DriverVer);
-				temp.SetGPUName(WStringToString(var.FUllName));
+				temp.SetGPUName(WStringToString(var.FullName));
 				this->gpuinfo.emplace_back(IgpuSensor(temp));
 			}
 	}
-
 	std::string WStringToString(const std::wstring &wstr)
 	{
 		std::string str;
@@ -229,11 +282,12 @@ private:
 		return str;
 	}
 	std::vector<IgpuSensor> gpuinfo;
-	shared_ptr<GPUData> gpudata;
-	static shared_ptr<GPU> temp;
+	std::shared_ptr<GPUData> gpudata;
+	std::map<std::string, std::map<std::string, std::vector<std::string>>> GPUDB; //gpuÊý¾Ý¿â
+	static std::shared_ptr<GPU> temp;
 };
 
-shared_ptr<GPU> GPU::temp = nullptr;
+std::shared_ptr<GPU> GPU::temp = nullptr;
 
 const std::vector<IgpuSensor>& SV_ASSIST::GPU::GetGpuInfo()
 {

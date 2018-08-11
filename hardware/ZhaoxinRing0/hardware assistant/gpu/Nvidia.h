@@ -21,11 +21,11 @@ private:
 	NvAPI_Status EnumPhysicalGPUs();
 	NvAPI_Status EnumNvidiaDisplayHandle();
 
-	BOOL GetInterfaceVersion(string& version);
-	BOOL GetsysDriverbranchVersion(string& driver, string& Branch);
+	BOOL GetInterfaceVersion(std::string& version);
+	BOOL GetsysDriverbranchVersion(std::string& driver, std::string& Branch);
 	BOOL GetChipInfo();
 
-	BOOL GetGPUFullName(string& GPUName, INT Index);
+	BOOL GetGPUFullName(std::string& GPUName, INT Index);
 	BOOL GetGPUMem(NV_DISPLAY_DRIVER_MEMORY_INFO& mem, INT Index);
 	BOOL GetGPUtemperature(INT Index, INT& MinTemp, INT& CurrentTemp, INT& MaxTemp);
 	BOOL GetGPUFans(INT Index, ULONG& FansValue);
@@ -33,16 +33,16 @@ private:
 	BOOL GetHDCPSupport(INT Index, BOOL& HDCPState);
 	BOOL GetGpuCoreCount(INT Index, UINT& corecount);
 	BOOL GetDynamicPstatesInfo(INT Index, NV_GPU_DYNAMIC_PSTATES_INFO_EX& percentage);
-	BOOL GetVbiosVersion(INT Index, string& VbiosVersion);
-	BOOL GetVbiosRevision(INT Index, string& VbiosRevision);
-	BOOL GetVbiosOEMRevision(INT Index, string& VbiosOEMRevision);
-	BOOL GetGpuType(INT Index, string& GPUType);
-	BOOL GetSysType(INT Index, string& SysType);
+	BOOL GetVbiosVersion(INT Index, std::string& VbiosVersion);
+	BOOL GetVbiosRevision(INT Index, std::string& VbiosRevision);
+	BOOL GetVbiosOEMRevision(INT Index, std::string& VbiosOEMRevision);
+	BOOL GetGpuType(INT Index, std::string& GPUType);
+	BOOL GetSysType(INT Index, std::string& SysType);
 	BOOL GetAGPAperture(INT Index, ULONG& AGPAperture);
 	BOOL GetCurrentAGPRate(INT Index, ULONG& AGPRate);
 	BOOL GetBUSID(INT Index, ULONG& BusID);
 	BOOL GetBUSSlotID(INT Index, ULONG& BusSlotID);
-	BOOL GetBusType(INT Index, string& BusType);
+	BOOL GetBusType(INT Index, std::string& BusType);
 	BOOL GetPhysicalFrameBufferSize(INT Index, ULONG& PhysicalFrame);
 	BOOL GetVirtualFrameBufferSize(INT Index, ULONG& VirtualFrame);
 	BOOL GetGPUPState(INT Index, NV_GPU_PERF_PSTATES20_INFO& NV_PState);
@@ -55,7 +55,7 @@ private:
 	NvPhysicalGpuHandle phys[NVAPI_MAX_PHYSICAL_GPUS];	//物理GPU的总数
 	NvU32 physcount;
 	//out
-	vector<NvidiaInfo> realnv;
+	std::vector<NvidiaInfo> realnv;
 
 	NV_CHIPSET_INFO Chipset;
 };

@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "..\..\Driverdll\Driverdll.h"
+#include "..\driver\Driverdll.h"
 #include "SuperIoEntry.h"
 #include <boost/format.hpp>
 

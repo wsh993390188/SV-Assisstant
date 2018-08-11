@@ -229,7 +229,7 @@ GPUTypes CIntelGPU::exec()
 {
 	GPUTypes re = OTHERS_GPU;
 	IntelGPUInfo temp = {};
-	if (true == getGraphicsDeviceInfo(&temp.VendorId, &temp.DeviceId, &temp.VideoMemory, &temp.FUllName))
+	if (true == getGraphicsDeviceInfo(&temp.VendorId, &temp.DeviceId, &temp.VideoMemory, &temp.FullName))
 	{
 		//
 		// In DirectX, Intel exposes additional information through the driver that can be obtained

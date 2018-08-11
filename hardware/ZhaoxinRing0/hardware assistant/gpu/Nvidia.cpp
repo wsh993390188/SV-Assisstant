@@ -172,7 +172,7 @@ NvAPI_Status CNvidia::EnumNvidiaDisplayHandle()
 /*                         Function Area                                */
 /************************************************************************/
 
-BOOL CNvidia::GetInterfaceVersion(string& version)
+BOOL CNvidia::GetInterfaceVersion(std::string& version)
 {
 	if (NVAPI_OK == m_succeed_Nvidia)
 	{
@@ -193,7 +193,7 @@ BOOL CNvidia::GetInterfaceVersion(string& version)
 	return FALSE;
 }
 
-BOOL CNvidia::GetsysDriverbranchVersion(string& driver, string& Branch)
+BOOL CNvidia::GetsysDriverbranchVersion(std::string& driver, std::string& Branch)
 {
 	if (NVAPI_OK == m_succeed_Nvidia)
 	{
@@ -203,7 +203,7 @@ BOOL CNvidia::GetsysDriverbranchVersion(string& driver, string& Branch)
 		status = NvAPI_SYS_GetDriverAndBranchVersion(&i, ver);
 		if (status == NVAPI_OK)
 		{
-			driver = to_string(i);
+			driver = std::to_string(i);
 			Branch = ver;
 			return TRUE;
 		}
@@ -217,7 +217,7 @@ BOOL CNvidia::GetsysDriverbranchVersion(string& driver, string& Branch)
 	return FALSE;
 }
 
-BOOL CNvidia::GetGPUFullName(string& GPUName, INT Index)
+BOOL CNvidia::GetGPUFullName(std::string& GPUName, INT Index)
 {
 	if (NVAPI_OK == m_succeed_Nvidia)
 	{
@@ -229,7 +229,7 @@ BOOL CNvidia::GetGPUFullName(string& GPUName, INT Index)
 			GPUName = "";
 			return FALSE;
 		}
-		GPUName = name;
+		GPUName = std::string("Nvidia ") + std::string(name);
 		if (GPUName.empty())
 		{
 			return FALSE;
@@ -431,7 +431,7 @@ BOOL CNvidia::GetDynamicPstatesInfo(INT Index, NV_GPU_DYNAMIC_PSTATES_INFO_EX& p
 	return FALSE;
 }
 
-BOOL CNvidia::GetVbiosVersion(INT Index, string & VbiosVersion)
+BOOL CNvidia::GetVbiosVersion(INT Index, std::string & VbiosVersion)
 {
 	if (NVAPI_OK == m_succeed_Nvidia)
 	{
@@ -447,7 +447,7 @@ BOOL CNvidia::GetVbiosVersion(INT Index, string & VbiosVersion)
 	return FALSE;
 }
 
-BOOL CNvidia::GetVbiosRevision(INT Index, string & VbiosRevision)
+BOOL CNvidia::GetVbiosRevision(INT Index, std::string & VbiosRevision)
 {
 	if (NVAPI_OK == m_succeed_Nvidia)
 	{
@@ -456,14 +456,14 @@ BOOL CNvidia::GetVbiosRevision(INT Index, string & VbiosRevision)
 		status = NvAPI_GPU_GetVbiosRevision(phys[Index], &Revision);
 		if (status == NVAPI_OK)
 		{
-			VbiosRevision = to_string((ULONG)Revision);
+			VbiosRevision = std::to_string((ULONG)Revision);
 			return TRUE;
 		}
 	}
 	return FALSE;
 }
 
-BOOL CNvidia::GetVbiosOEMRevision(INT Index, string & VbiosOEMRevision)
+BOOL CNvidia::GetVbiosOEMRevision(INT Index, std::string & VbiosOEMRevision)
 {
 	if (NVAPI_OK == m_succeed_Nvidia)
 	{
@@ -472,14 +472,14 @@ BOOL CNvidia::GetVbiosOEMRevision(INT Index, string & VbiosOEMRevision)
 		status = NvAPI_GPU_GetVbiosOEMRevision(phys[Index], &Revision);
 		if (status == NVAPI_OK)
 		{
-			VbiosOEMRevision = to_string(Revision);
+			VbiosOEMRevision = std::to_string(Revision);
 			return TRUE;
 		}
 	}
 	return FALSE;
 }
 
-BOOL CNvidia::GetGpuType(INT Index, string & GPUType)
+BOOL CNvidia::GetGpuType(INT Index, std::string & GPUType)
 {
 	if (NVAPI_OK == m_succeed_Nvidia)
 	{
@@ -506,7 +506,7 @@ BOOL CNvidia::GetGpuType(INT Index, string & GPUType)
 	return FALSE;
 }
 
-BOOL CNvidia::GetSysType(INT Index, string & SysType)
+BOOL CNvidia::GetSysType(INT Index, std::string & SysType)
 {
 	if (NVAPI_OK == m_succeed_Nvidia)
 	{
@@ -597,7 +597,7 @@ BOOL CNvidia::GetBUSSlotID(INT Index, ULONG & BusSlotID)
 	return FALSE;
 }
 
-BOOL CNvidia::GetBusType(INT Index, string & BusType)
+BOOL CNvidia::GetBusType(INT Index, std::string & BusType)
 {
 	if (NVAPI_OK == m_succeed_Nvidia)
 	{

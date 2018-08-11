@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Superio.h"
 #include "SioChip.h"
-#include "..\..\Driverdll\Driverdll.h"
+#include "..\driver\Driverdll.h"
 
 class SuperIOInterface
 {

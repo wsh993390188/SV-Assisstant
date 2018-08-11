@@ -15,6 +15,7 @@ public:
 			ttt = std::make_shared<CPUDLL>();
 		return ttt.get();
 	}
+	const std::string & GetCPUSpecification() { return data->cpu->Brand; }
 	const std::string& GetManufacturer() { return data->cpu->Manufacturer; }
 	const short GetFamily() { return data->cpu->Family; }
 	const short GetModel() { return data->cpu->Model; }
@@ -23,8 +24,8 @@ public:
 	const short GetExtModel() { return data->cpu->ExtModel; }
 	const CPUFeature& GetFeature() { return data->cpu->Feature; }
 	const Cache_info* GetCache() { return data->cpu->Cache; }
-
-	const std::string& GetCPUName() { return data->cpu->Brand; }
+	const UINT GetMaxTDP() { return data->cpu->MaxTDP; }
+	const std::string& GetCPUName() { return data->cpu->Name; }
 	const std::string& GetProcessorID() { return data->cpu->ProcessorId; }
 	const std::string& GetSocketDesignation() { return data->cpu->SocketDesignation; }
 	const std::vector<double>& GetCurrentClockSpeed() { return data->cpu->CurrentClockSpeed; }
@@ -38,7 +39,6 @@ public:
 	const UINT GetCore() { return data->cpu->Core; }
 	const UINT GetThread() { return data->cpu->Thread; }
 	const UINT GetRevision() { return data->cpu->Revision; }
-	const UINT GetUpgradeMethod() { return data->cpu->UpgradeMethod; }
 	const std::string& GetCodename() { return data->cpu->microarchitecture; }
 	const std::string& GetSouthbridgeName() { return data->cpu->SouthBridge; }
 	const UINT GetTechonology() { return data->cpu->Technology; }
@@ -87,10 +87,14 @@ private:
 #ifdef ZX_OutputLog
 			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Name: ") + cpu->Brand);
 			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Manufacturer: ") + cpu->Manufacturer);
+			Logger::Instance()->OutputLogInfo(el::Level::Debug, boost::str(boost::format("Family: %02X Model: %02X Stepping: %02X Ext.Family: %02X Ext.Model: %02X") % cpu->Family % cpu->Model % cpu->Stepping % cpu->ExtFamily % cpu->ExtModel));
 			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Codename: ") + cpu->microarchitecture);
 			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("SouthBridge: ") + cpu->SouthBridge);
-			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("UpgradeMethod: ") + to_string(cpu->UpgradeMethod));
 			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("SocketDesignation: ") + cpu->SocketDesignation);
+			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Cache L1 Data: ") + to_string(cpu->Cache[0].Cache_Size / 1024) + std::string(" KBytes, ") + to_string(cpu->Cache[0].Cache_Ways) + std::string(" -Ways"));
+			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Cache L1 Inst.: ") + to_string(cpu->Cache[1].Cache_Size / 1024) + std::string(" KBytes, ") + to_string(cpu->Cache[1].Cache_Ways) + std::string(" -Ways"));
+			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Cache L2: ") + to_string(cpu->Cache[2].Cache_Size / 1024) + std::string(" KBytes, ") + to_string(cpu->Cache[2].Cache_Ways) + std::string(" -Ways"));
+			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Cache L3: ") + to_string(cpu->Cache[3].Cache_Size / 1024) + std::string(" KBytes, ") + to_string(cpu->Cache[3].Cache_Ways) + std::string(" -Ways"));
 			Logger::Instance()->OutputLogInfo(el::Level::Debug, "********** End CPU info **********\n");
 #endif
 		}
@@ -112,6 +116,11 @@ void SV_ASSIST::CPU::Updatedata()
 const std::string& SV_ASSIST::CPU::GetCPUName()
 {
 	return CPUDLL::Instance()->GetCPUName();
+}
+
+const std::string & SV_ASSIST::CPU::GetCPUSpecification()
+{
+	return CPUDLL::Instance()->GetCPUSpecification();
 }
 
 const std::string& SV_ASSIST::CPU::GetProcessorID()
@@ -146,11 +155,6 @@ const UINT SV_ASSIST::CPU::GetThread()
 const UINT SV_ASSIST::CPU::GetRevision()
 {
 	return CPUDLL::Instance()->GetRevision();
-}
-
-const UINT SV_ASSIST::CPU::GetUpgradeMethod()
-{
-	return CPUDLL::Instance()->GetUpgradeMethod();
 }
 
 const std::string& SV_ASSIST::CPU::GetManufacturer()
@@ -208,6 +212,11 @@ const unsigned int SV_ASSIST::CPU::GetTechnology()
 	return CPUDLL::Instance()->GetTechonology();
 }
 
+const unsigned int SV_ASSIST::CPU::GetMaxTDP()
+{
+	return CPUDLL::Instance()->GetMaxTDP();
+}
+
 const double SV_ASSIST::CPU::GetPackageTemperature()
 {
 	return CPUDLL::Instance()->GetPackageTemperature();
@@ -217,4 +226,3 @@ const std::vector<double>& SV_ASSIST::CPU::GetTemperature()
 {
 	return CPUDLL::Instance()->GetTemperature();
 }
-

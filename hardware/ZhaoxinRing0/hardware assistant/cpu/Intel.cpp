@@ -1,17 +1,18 @@
+#pragma region Include Header
 #include "stdafx.h"
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 #include <algorithm>
 #include "Intel.h"
-#include "..\..\Driverdll\Driverdll.h"
-
+#include "..\driver\Driverdll.h"
 using namespace std;
+#pragma endregion
+
 #pragma region Initialize
-Intel::Intel() :f1_ecx{ 0 }, f1_edx{ 0 }, f7_ebx{ 0 }, f7_ecx{ 0 },
+Intel::Intel() :f1_ecx { 0 }, f1_edx{ 0 }, f7_ebx{ 0 }, f7_ecx{ 0 },
 IA32_THERM_STATUS_MSR{ 0x019C }, IA32_TEMPERATURE_TARGET{ 0x01A2 }, IA32_PERF_STATUS{ 0x198 }, MSR_PLATFORM_INFO{ 0xCE },
 IA32_PACKAGE_THERM_STATUS{ 0x1B1 }, MSR_RAPL_POWER_UNIT{ 0x606 }, MSR_PKG_ENERY_STATUS{ 0x611 }, MSR_DRAM_ENERGY_STATUS{ 0x619 },
 MSR_PP0_ENERY_STATUS{ 0x639 }, MSR_PP1_ENERY_STATUS{ 0x641 }, MaxNonTurboFre{0}
 {
+	this->Name += "Intel ";
 	for (int i = 0; i < Core; i++)
 	{
 		Temperature.emplace_back(INFINITY);
@@ -160,13 +161,23 @@ void Intel::Init(void)
 		extdata__.emplace_back(cpuid__);
 //		nIdsLeaf.emplace_back((i << 16) | (i & 0xFFFF0000));
 	}
+	{
 
-	char vendor[0x20];
-	memset(vendor, 0, 0x20);
-	*reinterpret_cast<int*>(vendor) = data__[0][1];
-	*reinterpret_cast<int*>(vendor + 4) = data__[0][3];
-	*reinterpret_cast<int*>(vendor + 8) = data__[0][2];
-	Manufacturer = vendor;
+		char vendor[0x20];
+		memset(vendor, 0, 0x20);
+		*reinterpret_cast<int*>(vendor) = data__[0][1];
+		*reinterpret_cast<int*>(vendor + 4) = data__[0][3];
+		*reinterpret_cast<int*>(vendor + 8) = data__[0][2];
+		Manufacturer = vendor;
+	}
+	{
+		char brand[0x40] = {};
+		memcpy(brand, extdata__[2].data(), sizeof(std::array<int, 4>));
+		memcpy(brand + 16, extdata__[3].data(), sizeof(std::array<int, 4>));
+		memcpy(brand + 32, extdata__[4].data(), sizeof(std::array<int, 4>));
+		Brand = brand;
+		boost::trim(Brand);
+	}
 	if (nIds_ > 1)
 	{
 		Family = (data__[1][0] & CPUID_Family) >> 8;
@@ -195,15 +206,7 @@ void Intel::Init(void)
 	}
 
 	// Interpret CPU brand string if reported  
-	if (nExIds_ >= 0x80000004)
-	{
-		char brand[0x40] = {};
-		memcpy(brand, extdata__[2].data(), sizeof(std::array<int, 4>));
-		memcpy(brand + 16, extdata__[3].data(), sizeof(std::array<int, 4>));
-		memcpy(brand + 32, extdata__[4].data(), sizeof(std::array<int, 4>));
-		Brand = brand;
-		boost::trim(Brand);
-	}
+
 	ExecFeature();
 
 	ExecCache();
@@ -353,133 +356,101 @@ void Intel::ExecCache()
 }
 #pragma endregion
 
-#pragma region SouthBridge CodeName Technology
+#pragma region SouthBridge CodeName Technology Package MaxTDP 
 bool Intel::ExecProcessorOtherInfo(int Family, int Model)
 {
 	bool state = true;
-	switch (Family) {
-	case 0x06: {
-		switch (Model) {
-		case 0x0F: // Intel Core 2 (65nm)
-			Technology = 65;
-			microarchitecture = "Core";
-			break;
-		case 0x17: // Intel Core 2 (45nm)
-			Technology = 45;
-			microarchitecture = "Core";
-			break;
-		case 0x1C: // Intel Atom (45nm)
-			Technology = 45;
-			microarchitecture = "Atom";
-			break;
-		case 0x1F: // Intel Core i5, i7 
-			microarchitecture = "Nehalem";
-			break;
-		case 0x1A: // Intel Core i7 LGA1366 (45nm)
-		case 0x1E: // Intel Core i5, i7 LGA1156 (45nm)
-		case 0x2E: // Intel Xeon Processor 7500 series (45nm)
-			Technology = 45;
-			microarchitecture = "Nehalem";
-			break;
-		case 0x25: // Intel Core i3, i5, i7 LGA1156 (32nm)
-		case 0x2C: // Intel Core i7 LGA1366 (32nm) 6 Core
-		case 0x2F: // Intel Xeon Processor (32nm)
-			Technology = 32;
-			microarchitecture = "Nehalem";
-			break;
-		case 0x2A: // Intel Core i5, i7 2xxx LGA1155 (32nm)
-		case 0x2D: // Next Generation Intel Xeon, i7 3xxx LGA2011 (32nm)
-			Technology = 32;
-			microarchitecture = "SandyBridge";
-			break;
-		case 0x3A: // Intel Core i5, i7 3xxx LGA1155 (22nm)
-		case 0x3E: // Intel Core i7 4xxx LGA2011 (22nm)
-			Technology = 22;
-			microarchitecture = "IvyBridge";
-			break;
-		case 0x3C: // Intel Core i5, i7 4xxx LGA1150 (22nm)              
-		case 0x3F: // Intel Xeon E5-2600/1600 v3, Core i7-59xx
-				   // LGA2011-v3, Haswell-E (22nm)
-		case 0x45: // Intel Core i5, i7 4xxxU (22nm)
-		case 0x46:
-			Technology = 22;
-			microarchitecture = "Haswell";
-			break;
-		case 0x3D: // Intel Core M-5xxx (14nm)
-		case 0x47: // Intel i5, i7 5xxx, Xeon E3-1200 v4 (14nm)
-			Technology = 14;
-			microarchitecture = "Broadwell";
-			break;
-		case 0x4F: // Intel Xeon E5-26xx v4
-		case 0x56: // Intel Xeon D-15xx
-			microarchitecture = "Broadwell";
-			break;
-		case 0x36: // Intel Atom S1xxx, D2xxx, N2xxx (32nm)
-			Technology = 32;
-			microarchitecture = "Atom";
-			break;
-		case 0x37: // Intel Atom E3xxx, Z3xxx (22nm)
-		case 0x4D: // Intel Atom C2xxx (22nm)
-			Technology = 22;
-			microarchitecture = "Silvermont";
-			break;
-		case 0x4A:
-		case 0x5A:
-		case 0x5D:
-			microarchitecture = "Silvermont";
-			break;
-		case 0x4E:
-		case 0x5E: // Intel Core i5, i7 6xxxx LGA1151 (14nm)
-		case 0x55: // Intel Core i7, i9 7xxxx LGA2066 (14nm)
-			Technology = 14;
-			microarchitecture = "Skylake";
-			break;
-		case 0x4C:
-			microarchitecture = "Airmont";
-			break;
-		case 0x8E:
-		case 0x9E: // Intel Core i5, i7 7xxxx (14nm)
-			Technology = 14;
-			microarchitecture = "KabyLake";
-			break;
-		case 0x5C: // Intel Atom processors
-			microarchitecture = "ApolloLake";
-			break;
-		default:
-			microarchitecture = "Unknown";
-			break;
-		}
-	} break;
-	case 0x0F: {
-		switch (Model) {
-		case 0x00: // Pentium 4 (180nm)
-			Technology = 180;
-			microarchitecture = "NetBurst";
-			break;
-		case 0x01: // Pentium 4 (130nm)
-		case 0x02: // Pentium 4 (130nm)
-			Technology = 130;
-			microarchitecture = "NetBurst";
-			break;
-		case 0x03: // Pentium 4, Celeron D (90nm)
-		case 0x04: // Pentium 4, Pentium D, Celeron D (90nm)
-			Technology = 90;
-			microarchitecture = "NetBurst";
-			break;
-		case 0x06: // Pentium 4, Pentium D, Celeron D (65nm)
-			Technology = 65;
-			microarchitecture = "NetBurst";
-			break;
-		default:
-			microarchitecture = "Unknown";
-			break;
-		}
-	} break;
-	default:
-		microarchitecture = "Unknown";
-		break;
-	}
 	this->ExecSouthBridge();
+	this->ExecCPUName();
+	if (this->Name.find("Core") != string::npos)
+	{
+		if (this->Name.find("i9") != string::npos)
+		{
+			string Model1 = {};
+			size_t Index = this->Name.find_last_of(" ");
+			Model1 = Name.substr(Index + 1);
+			if(CPUDB["Core i9"].count(Model1)) {microarchitecture = CPUDB["Core i9"][Model1].at(0); SocketDesignation = CPUDB["Core i9"][Model1].at(1); Technology = stoi(CPUDB["Core i9"][Model1].at(2)); MaxTDP = stoi(CPUDB["Core i9"][Model1].at(3)); }
+			else ExecCodeNameByFMS(Family, Model);
+		}
+		else if (this->Name.find("i7") != string::npos)
+		{
+			string Model1 = {  };
+			size_t Index = this->Name.find_last_of(" ");
+			Model1 = Name.substr(Index + 1);
+			if(CPUDB["Core i7"].count(Model1))
+			{microarchitecture = CPUDB["Core i7"][Model1].at(0); SocketDesignation = CPUDB["Core i7"][Model1].at(1); Technology = stoi(CPUDB["Core i7"][Model1].at(2)); MaxTDP = stoi(CPUDB["Core i7"][Model1].at(3)); } 
+			else ExecCodeNameByFMS(Family, Model);
+		}
+		else if (this->Name.find("i5") != string::npos)
+		{
+			string Model1 = {};
+			size_t Index = this->Name.find_last_of(" ");
+			Model1 = Name.substr(Index + 1);
+			if (CPUDB["Core i5"].count(Model1)) {microarchitecture = CPUDB["Core i5"][Model1].at(0); SocketDesignation = CPUDB["Core i5"][Model1].at(1); Technology = stoi(CPUDB["Core i5"][Model1].at(2)); MaxTDP = stoi(CPUDB["Core i5"][Model1].at(3)); } 
+			else ExecCodeNameByFMS(Family, Model);
+		}
+		else if (this->Name.find("i3") != string::npos)
+		{
+			string Model1 = {};
+			size_t Index = this->Name.find_last_of(" ");
+			Model1 = Name.substr(Index + 1);
+			if (CPUDB["Core i3"].count(Model1)) {microarchitecture = CPUDB["Core i3"][Model1].at(0); SocketDesignation = CPUDB["Core i3"][Model1].at(1); Technology = stoi(CPUDB["Core i3"][Model1].at(2)); MaxTDP = stoi(CPUDB["Core i3"][Model1].at(3)); } 
+			else ExecCodeNameByFMS(Family, Model);
+		}
+	}
+	else if (this->Name.find("Pentium Silver") != string::npos)
+	{
+		string Model1 = {};
+		size_t Index = this->Name.find_last_of(" ");
+		Model1 = Name.substr(Index + 1);
+		if (CPUDB["Pentium Silver"].count(Model1)) { microarchitecture = CPUDB["Pentium Silver"][Model1].at(0); SocketDesignation = CPUDB["Pentium Silver"][Model1].at(1); Technology = stoi(CPUDB["Pentium Silver"][Model1].at(2)); MaxTDP = stoi(CPUDB["Pentium Silver"][Model1].at(3)); }
+		else ExecCodeNameByFMS(Family, Model);
+	}
+	else if (this->Name.find("Pentium Gold") != string::npos)
+	{
+		string Model1 = {};
+		size_t Index = this->Name.find_last_of(" ");
+		Model1 = Name.substr(Index + 1);
+		if (CPUDB["Pentium Gold"].count(Model1)) { microarchitecture = CPUDB["Pentium Gold"][Model1].at(0); SocketDesignation = CPUDB["Pentium Gold"][Model1].at(1); Technology = stoi(CPUDB["Pentium Gold"][Model1].at(2)); MaxTDP = stoi(CPUDB["Pentium Gold"][Model1].at(3)); }
+		else ExecCodeNameByFMS(Family, Model);
+	}
+	else if (this->Name.find("Pentium") != string::npos)
+	{
+		string Model1 = {};
+		size_t Index = this->Name.find_last_of(" ");
+		Model1 = Name.substr(Index + 1);
+		if (CPUDB["Pentium"].count(Model1)) { microarchitecture = CPUDB["Pentium"][Model1].at(0); SocketDesignation = CPUDB["Pentium"][Model1].at(1); Technology = stoi(CPUDB["Pentium"][Model1].at(2)); MaxTDP = stoi(CPUDB["Pentium"][Model1].at(3)); }
+		else ExecCodeNameByFMS(Family, Model);
+	}
+	else if (this->Name.find("Celeron") != string::npos)
+	{
+		string Model1 = {};
+		size_t Index = this->Name.find_last_of(" ");
+		Model1 = Name.substr(Index + 1);
+		if (CPUDB["Celeron"].count(Model1)) { microarchitecture = CPUDB["Celeron"][Model1].at(0); SocketDesignation = CPUDB["Celeron"][Model1].at(1); Technology = stoi(CPUDB["Celeron"][Model1].at(2)); MaxTDP = stoi(CPUDB["Celeron"][Model1].at(3)); }
+		else ExecCodeNameByFMS(Family, Model);
+	}
+	else if (this->Name.find("Atom") != string::npos)
+	{
+		string Model1 = {};
+		size_t Index = this->Name.find_last_of(" ");
+		Model1 = Name.substr(Index + 1);
+		if (CPUDB["Atom"].count(Model1)) { microarchitecture = CPUDB["Atom"][Model1].at(0); SocketDesignation = CPUDB["Atom"][Model1].at(1); Technology = stoi(CPUDB["Atom"][Model1].at(2)); MaxTDP = stoi(CPUDB["Atom"][Model1].at(3)); }
+		else ExecCodeNameByFMS(Family, Model);
+	}
+	else if (this->Name.find("Xeon") != string::npos)
+	{
+		if (this->Name.find("E-") != string::npos)
+		{
+			string Model1 = {};
+			size_t Index = this->Name.find_last_of(" ");
+			Model1 = Name.substr(Index + 1);
+			if (CPUDB["Xeon E"].count(Model1)) { microarchitecture = CPUDB["Xeon E"][Model1].at(0); SocketDesignation = CPUDB["Xeon E"][Model1].at(1); Technology = stoi(CPUDB["Xeon E"][Model1].at(2)); MaxTDP = stoi(CPUDB["Xeon E"][Model1].at(3)); }
+			else ExecCodeNameByFMS(Family, Model);
+		}
+	}
+#pragma endregion
+
 	return state;
 }
 
@@ -934,6 +905,290 @@ bool Intel::ExecSouthBridge()
 		break;
 	}
 	return true;
+}
+
+void Intel::ExecCPUName()
+{
+	try
+	{
+		if (this->Brand.find("Core") != string::npos)
+		{
+			Name += "Core ";
+			if (this->Brand.find("i9") != string::npos || this->Brand.find("i7") != string::npos || this->Brand.find("i5") != string::npos || this->Brand.find("i3") != string::npos)
+			{
+				string Model1 = {};
+				size_t last = 0;
+				size_t Index = this->Brand.find_first_of(" ", last);
+				last = Index + 1;
+				Index = this->Brand.find_first_of(" ", last);
+				last = Index + 1;
+				Index = this->Brand.find_first_of(" ", last);
+				Model1 = Brand.substr(last, Index - last);
+				Index = Model1.find_first_of("-");
+				Name += Model1.substr(0, Index);
+				Name += " ";
+				Name += Model1.substr(Index + 1);
+			}
+		}
+		else if (this->Brand.find("Pentium Silver") != string::npos)
+		{
+			Name += "Pentium Silver ";
+			size_t last = 0;
+			size_t Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			Name += this->Brand.substr(last, Index - last);
+		}
+		else if (this->Brand.find("Pentium Gold") != string::npos)
+		{
+			Name += "Pentium Gold ";
+			size_t last = 0;
+			size_t Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			Name += this->Brand.substr(last, Index - last);
+		}
+		else if (this->Brand.find("Pentium") != string::npos)
+		{
+			Name += "Pentium ";
+			size_t last = 0;
+			size_t Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			Name += this->Brand.substr(last, Index - last);
+		}
+		else if (this->Brand.find("Celeron") != string::npos)
+		{
+			Name += "Celeron ";
+			size_t last = 0;
+			size_t Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			Name += this->Brand.substr(last, Index - last);
+		}
+		else if (this->Brand.find("Atom") != string::npos)
+		{
+			Name += "Atom ";
+			size_t last = 0;
+			size_t Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			last = Index + 1;
+			Index = this->Brand.find_first_of(" ", last);
+			Name += this->Brand.substr(last, Index - last);
+		}
+		else if (this->Brand.find("Xeon") != string::npos)
+		{
+			Name += "Xeon ";
+			if (this->Brand.find("E-") != string::npos || this->Brand.find("E3-") != string::npos || this->Brand.find("E5-") != string::npos || this->Brand.find("E7-") != string::npos)
+			{
+				string Model1 = {};
+				size_t last = 0, temp = 0;
+				size_t Index = Brand.find_first_of(" ", last);
+				last = Index + 1;
+				Index = Brand.find_first_of(" ", last);
+				last = Index + 1;
+				Index = Brand.find_first_of(" ", last);
+				last = Index + 1;
+				Index = Brand.find_first_of(" ", last);
+				temp = Index;
+				Model1 = Brand.substr(last, Index - last);
+				Index = Model1.find_first_of("-");
+				Name += Model1.substr(0, Index);
+				Name += " ";
+				Name += Model1.substr(Index + 1);
+				if (Brand.rfind("V2") != string::npos || Brand.rfind("V3") != string::npos || Brand.rfind("V6") != string::npos || Brand.rfind("V4") != string::npos || Brand.rfind("V5") != string::npos)
+				{
+					Name += " ";
+					last = temp + 1;
+					Index = Brand.find_first_of(" ", last);
+					Name += Brand.substr(last, Index - last);
+				}
+			}
+			else
+			{
+				if (this->Brand.find("Silver") != string::npos)
+					Name += "Silver ";
+				else if (this->Brand.find("Gold") != string::npos)
+					Name += "Gold ";
+				else if (this->Brand.find("Bronze") != string::npos)
+					Name += "Bronze ";
+				else if (this->Brand.find("Platinum") != string::npos)
+					Name += "Platinum ";
+				else if (this->Brand.find("MP") != string::npos)
+					Name += "MP ";
+				else if (this->Brand.find("Phi") != string::npos)
+					Name += "Phi ";
+				string Model1 = {};
+				size_t last = 0;
+				size_t Index = Brand.find_first_of(" ", last);
+				last = Index + 1;
+				Index = Brand.find_first_of(" ", last);
+				last = Index + 1;
+				Index = Brand.find_first_of(" ", last);
+				last = Index + 1;
+				Index = Brand.find_first_of(" ", last);
+				Name += Brand.substr(last, Index - last);
+			}
+		}
+		else
+		{
+			Name = "Intel Processor";
+		}
+	}
+	catch (const std::exception&)
+	{
+		Name = "Intel Processor";
+	}
+
+}
+
+void Intel::ExecCodeNameByFMS(int Family, int Model)
+{
+	switch (Family) {
+	case 0x06: {
+		switch (Model) {
+		case 0x0F: // Intel Core 2 (65nm)
+			Technology = 65;
+			microarchitecture = "Core";
+			break;
+		case 0x17: // Intel Core 2 (45nm)
+			Technology = 45;
+			microarchitecture = "Core";
+			break;
+		case 0x1C: // Intel Atom (45nm)
+			Technology = 45;
+			microarchitecture = "Atom";
+			break;
+		case 0x1F: // Intel Core i5, i7 
+			microarchitecture = "Nehalem";
+			break;
+		case 0x1A: // Intel Core i7 LGA1366 (45nm)
+		case 0x1E: // Intel Core i5, i7 LGA1156 (45nm)
+		case 0x2E: // Intel Xeon Processor 7500 series (45nm)
+			Technology = 45;
+			microarchitecture = "Nehalem";
+			break;
+		case 0x25: // Intel Core i3, i5, i7 LGA1156 (32nm)
+		case 0x2C: // Intel Core i7 LGA1366 (32nm) 6 Core
+		case 0x2F: // Intel Xeon Processor (32nm)
+			Technology = 32;
+			microarchitecture = "Nehalem";
+			break;
+		case 0x2A: // Intel Core i5, i7 2xxx LGA1155 (32nm)
+		case 0x2D: // Next Generation Intel Xeon, i7 3xxx LGA2011 (32nm)
+			Technology = 32;
+			microarchitecture = "SandyBridge";
+			break;
+		case 0x3A: // Intel Core i5, i7 3xxx LGA1155 (22nm)
+		case 0x3E: // Intel Core i7 4xxx LGA2011 (22nm)
+			Technology = 22;
+			microarchitecture = "IvyBridge";
+			break;
+		case 0x3C: // Intel Core i5, i7 4xxx LGA1150 (22nm)              
+		case 0x3F: // Intel Xeon E5-2600/1600 v3, Core i7-59xx
+				   // LGA2011-v3, Haswell-E (22nm)
+		case 0x45: // Intel Core i5, i7 4xxxU (22nm)
+		case 0x46:
+			Technology = 22;
+			microarchitecture = "Haswell";
+			break;
+		case 0x3D: // Intel Core M-5xxx (14nm)
+		case 0x47: // Intel i5, i7 5xxx, Xeon E3-1200 v4 (14nm)
+			Technology = 14;
+			microarchitecture = "Broadwell";
+			break;
+		case 0x4F: // Intel Xeon E5-26xx v4
+		case 0x56: // Intel Xeon D-15xx
+			microarchitecture = "Broadwell";
+			break;
+		case 0x36: // Intel Atom S1xxx, D2xxx, N2xxx (32nm)
+			Technology = 32;
+			microarchitecture = "Atom";
+			break;
+		case 0x37: // Intel Atom E3xxx, Z3xxx (22nm)
+		case 0x4D: // Intel Atom C2xxx (22nm)
+			Technology = 22;
+			microarchitecture = "Silvermont";
+			break;
+		case 0x4A:
+		case 0x5A:
+		case 0x5D:
+			microarchitecture = "Silvermont";
+			break;
+		case 0x4E:
+		case 0x5E: // Intel Core i5, i7 6xxxx LGA1151 (14nm)
+		case 0x55: // Intel Core i7, i9 7xxxx LGA2066 (14nm)
+			Technology = 14;
+			microarchitecture = "Skylake";
+			break;
+		case 0x4C:
+			microarchitecture = "Airmont";
+			break;
+		case 0x8E:
+		case 0x9E: // Intel Core i5, i7 7xxxx (14nm)
+			Technology = 14;
+			microarchitecture = "KabyLake";
+			break;
+		case 0x5C: // Intel Atom processors
+			microarchitecture = "ApolloLake";
+			break;
+		default:
+			microarchitecture = "Unknown";
+			break;
+		}
+	} break;
+	case 0x0F: {
+		switch (Model) {
+		case 0x00: // Pentium 4 (180nm)
+			Technology = 180;
+			microarchitecture = "NetBurst";
+			break;
+		case 0x01: // Pentium 4 (130nm)
+		case 0x02: // Pentium 4 (130nm)
+			Technology = 130;
+			microarchitecture = "NetBurst";
+			break;
+		case 0x03: // Pentium 4, Celeron D (90nm)
+		case 0x04: // Pentium 4, Pentium D, Celeron D (90nm)
+			Technology = 90;
+			microarchitecture = "NetBurst";
+			break;
+		case 0x06: // Pentium 4, Pentium D, Celeron D (65nm)
+			Technology = 65;
+			microarchitecture = "NetBurst";
+			break;
+		default:
+			microarchitecture = "Unknown";
+			break;
+		}
+	} break;
+	default:
+		microarchitecture = "Unknown";
+		break;
+	}
 }
 #pragma endregion
 

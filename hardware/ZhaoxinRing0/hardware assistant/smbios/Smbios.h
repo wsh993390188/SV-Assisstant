@@ -1,19 +1,8 @@
 ﻿#pragma once
-#include <windows.h>
-#include <tchar.h>
 #include <math.h>
-#include <stdio.h>
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include <unordered_map>
-#include <vector>
-
+#include "smbiosdefination.h"
 #pragma warning(disable : 4200)
 #pragma warning(disable : 4566) 
-using namespace std;
-
-typedef unordered_map<string, string> MapString;
 
 /************************************************************************/
 /*					 Type 0         BIOS Information					*/
@@ -1744,53 +1733,9 @@ class Smbios : private UnCopyable
 public:
 	Smbios();
 	~Smbios();
-	void UpdateData();
-	MapString BIOSinfo;	//Type0
-	MapString Sysyteminfo;//Type1
-	MapString BaseBroadinfo;//Type2
-	MapString SystemEorC;//Type3
-	MapString Processorinfo;//Type4
-	MapString MemoryCtrlinfo;//Type5
-	MapString MemoryModinfo;//Type6
-	vector<MapString > Cacheinfo;//Type7
-	vector<MapString > Portinfo;//Type8
-	vector<MapString > SystemSlotinfo;//Type9
-	MapString BroadDevinfo;//Type10
-	MapString OEMString;//Type11
-	MapString SystemConfigOption;//Type12
-	MapString BIOSLanginfo;//Type13
-	MapString GroupAssociations;//Type14
-	MapString SysEventLog;//Type15
-	vector<MapString > PhysicalMemoryArray;//Type16
-	vector<MapString > MemoryDev;//Type17
-	vector<MapString > MemoryErrinfo;//Type18
-	vector<MapString > MemArrayMappedAddress;//Type19
-	vector<MapString > MemDevMappedAddress;//Type20
-	MapString Pointing_Dev;//Type21
-	MapString Portable_Battery;//Type22
-	MapString System_Reset;//Type23
-	MapString Hardware_Security;//Type24
-	MapString System_Power_Controls;//Type25
-	vector<MapString > Voltage_Probe;//Type26
-	vector<MapString > CoolingDev;//Type27
-	vector<MapString > TemperatureProbe;//Type28
-	vector<MapString > ElectricalCurrentProbe;//Type29
-	vector<MapString > BandRemoteAccess;//Type30
-	vector<MapString > Systembootstatus;//Type32
-	vector<MapString > MemoryError64Bit;//Type33
-	vector<MapString > ManagementDevice;//Type34
-	vector<MapString > ManagementDeviceComponent;//Type35
-	vector<MapString > ManagementDeviceComponentThresholdData;//Type36
-	vector<MapString > MemoryChannel;//Type37
-	vector<MapString > IPMIDeviceinfo;//Type38
-	vector<MapString > SystemPowerSupply;//Type39
-	vector<MapString > Additionalinfo;//Type40
-	vector<MapString > BroadDevExtendedinfo;//Type41
-	vector<MapString > ManagementControllerHostInterface;//Type42
-	vector<MapString > TPMDevice;//Type43
-	vector<MapString > Inactive;//Type126
-	vector<MapString > EndofTable;//Type127
+	const SMBIOS_Struct& GetSmbiosInfo();
 private:
+	SMBIOS_Struct m_smbios;
 	template<typename T>
 	T BigEndian_to_LittleEndian(T Data);
 	const char* dmi_to_string(const DMI_Header *dmi, BYTE Source_string);
@@ -1799,6 +1744,5 @@ private:
 	template<class T>
 	void SafeDeleteData(T *& pVal);
 	BOOL GetSmbiosinfo();
-
 };
 

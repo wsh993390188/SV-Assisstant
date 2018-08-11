@@ -14,7 +14,8 @@ class SVAssistMainWindow : public QMainWindow
 public:
     explicit SVAssistMainWindow(QWidget *parent = 0);
     ~SVAssistMainWindow();
-
+private:
+    void InitWindow();
 private:
     Ui::SVAssistMainWindow *ui;
 };

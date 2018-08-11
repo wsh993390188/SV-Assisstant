@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "SioChip.h"
-#include "..\..\Driverdll\Driverdll.h"
+#include "..\driver\Driverdll.h"
 
 #pragma region Fintek
 F718XX::F718XX(std::pair<USHORT, std::string> chip, USHORT LPC_Address) : ADDRESS_REGISTER_OFFSET{ 0x05 }, DATA_REGISTER_OFFSET{ 0x06 }, VOLTAGE_BASE_REG{ 0x20 }, TEMPERATURE_CONFIG_REG{ 0x69 },

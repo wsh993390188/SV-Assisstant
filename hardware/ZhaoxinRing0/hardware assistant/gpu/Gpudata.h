@@ -1,14 +1,7 @@
 #pragma once
-#include <windows.h>
-#include <tchar.h>
-#include <string>
-#include <vector>
-#include <iostream>
-#include <memory>
 #include "NVAPI/nvapi.h"
 #include "ADL/adl_sdk.h"
 
-using namespace std;
 typedef struct _ALL_DEVICE_CLOCK
 {
 	ULONG GraphicsCurrent;
@@ -125,15 +118,15 @@ typedef struct _AMDINFO
 	int iVendorID;
 
 	int iDeviceId;
-	string							FullName;
-	string							adapterActive;
-	string							Aspects;
+	std::string						FullName;
+	std::string						adapterActive;
+	std::string						Aspects;
 	ADLBiosInfo						biosInfo;
 	int								ASICFamilyTypes;
 	int								ASICFamilyValids;
 	int								AdapterSpeedCurrent;
 	int								AdapterSpeedDefault;
-	string							AdapterAccessibility;
+	std::string						AdapterAccessibility;
 	int								AdapterID;
 	ADLAdapterCapsX2				adapterCaps;
 	OVERDRIVE5						OverDrive5;
@@ -144,8 +137,8 @@ typedef struct _AMDINFO
 
 typedef struct _NvidiaInfo
 {
-	string FullName;
-	string GPUType;
+	std::string FullName;
+	std::string GPUType;
 	ULONG dedicatedVideoMemory;
 	ULONG availableDedicatedVideoMemory;
 	ULONG systemVideoMemory;
@@ -159,15 +152,15 @@ typedef struct _NvidiaInfo
 	BOOL HDCP;
 	UINT corecount;
 	NV_GPU_DYNAMIC_PSTATES_INFO_EX percentage;
-	string VbiosVersion;
-	string VbiosRevision; 
-	string VbiosOEMRevision;
+	std::string VbiosVersion;
+	std::string VbiosRevision;
+	std::string VbiosOEMRevision;
 	ULONG BusID;
 	ULONG BuSlotID;
-	string BusType;
+	std::string BusType;
 	ULONG AGPAperture;
 	ULONG AGPRate;
-	string SysType;
+	std::string SysType;
 	ULONG PhysicalFrame;
 	ULONG VirtualFrame;
 	union 
@@ -209,7 +202,7 @@ struct IntelDeviceInfoHeader
 
 struct IntelGPUInfo
 {
-	wstring FUllName;
+	std::wstring FullName;
 	unsigned int VendorId;
 	unsigned int DeviceId;
 	unsigned __int64 VideoMemory;
@@ -253,9 +246,9 @@ public:
 	GPUData(); 
 	~GPUData();
 	void UpdateData();
-	const vector<AMDINFO>* amdinfo;
-	const vector<NvidiaInfo> *nvinfo;
-	const vector<IntelGPUInfo> *Intelinfo;
+	const std::vector<AMDINFO>* amdinfo;
+	const std::vector<NvidiaInfo> *nvinfo;
+	const std::vector<IntelGPUInfo> *Intelinfo;
 	std::string NV_DriverVer;
 	std::string NV_BranchVersion;
 

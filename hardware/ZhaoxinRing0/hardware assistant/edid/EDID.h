@@ -12,6 +12,16 @@ namespace SV_ASSIST
 	namespace Display
 	{
 		/**************************************************************
+		*@Function				GetMonitorName
+		*@brief					获得Mointor名称
+		*@author				王硕
+		*@param
+		*@return
+			*@string			Mointor的名称(制造商+型号)
+		****************************************************************/
+		const std::string GetMonitorName();
+
+		/**************************************************************
 		*@Function				GetEDID
 		*@brief					获得EDID的值
 		*@author				王硕
@@ -22,8 +32,8 @@ namespace SV_ASSIST
 		const std::vector<EDID>& GetEDID();
 
 		/**************************************************************
-		*@Function				Exec
-		*@brief					执行获取EDID值
+		*@Function				outputfile
+		*@brief					将EDID解析后信息输出到文件中
 		*@author				王硕
 		*@param
 			*@null
@@ -32,7 +42,7 @@ namespace SV_ASSIST
 		*@Other					
 								生成文件\\HardWare\\EDID\\edid%d.txt	
 		****************************************************************/
-		void Exec();
+		void outputfile();
 
 		/**************************************************************
 		*@Function				UpdateData
@@ -43,7 +53,6 @@ namespace SV_ASSIST
 		*@return
 			*@null				更新EDID 调用Exec前需调用本函数
 		****************************************************************/
-
 		void UpdateData();
 	}
 }

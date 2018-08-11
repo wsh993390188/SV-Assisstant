@@ -1,3 +1,10 @@
+/*---------------------------------------------------------------------------*/
+//       Author : hiyohiyo
+//         Mail : hiyohiyo@crystalmark.info
+//          Web : https://crystalmark.info/
+//      License : The MIT License
+/*---------------------------------------------------------------------------*/
+// Reference : http://www.usefullcode.net/2007/02/hddsmart.html (ja)
 #pragma once
 #pragma warning(disable:4035)
 #include <windows.h>
@@ -313,51 +320,51 @@ struct SMART_ATTRIBUTE
 //需要引起注意的是IDINFO第57 - 58 WORD(CHS可寻址的扇区数)，因为不满足32位对齐的要求，不可定义为一个ULONG字段。Lynn McGuire的程序里正是由于定义为一个ULONG字段，导致该结构不可用。
 #pragma pack(pop)
 // SCSI驱动所需的输入输出共用的结构
-/*typedef struct _SRB_IO_CONTROL
-{
-	ULONG HeaderLength; // 头长度
-	UCHAR Signature[8]; // 特征名称
-	ULONG Timeout; // 超时时间
-	ULONG ControlCode; // 控制码
-	ULONG ReturnCode; // 返回码
-	ULONG Length; // 缓冲区长度
-} SRB_IO_CONTROL, *PSRB_IO_CONTROL;
-// IDE命令 寄存器
-typedef struct _IDEREGS
-{
-BYTE bFeaturesReg;// 特征寄存器 (用于SMART 命令)　 BYTE bSectorCountReg;　 // 扇区数目寄存器
-BYTE bSectorNumberReg;// 开始扇区寄存器
-BYTE bCylLowReg; // 开始柱面低字节 寄存器
-BYTE bCylHighReg; // 开始柱面高字节寄存器
-BYTE bDriveHeadReg; // 驱动器/磁头寄存器
-BYTE bCommandReg; // 指令寄存器
-BYTE bReserved; // 保留
-} IDEREGS, *PIDEREGS, *LPIDEREGS;
-// 从驱动程序返回的状态
-typedef struct _DRIVERSTATUS
-{
-BYTE bDriverError;  // 错误码
-BYTE bIDEStatus; // IDE状态寄存器
-BYTE bReserved[2]; // 保留
-DWORD dwReserved[2]; // 保留
-} DRIVERSTATUS, *PDRIVERSTATUS, *LPDRIVERSTATUS;
-// IDE设备IOCTL输入数据结构
-typedef struct _SENDCMDINPARAMS
-{
-DWORD cBufferSize;// 缓冲区字节数
-IDEREGS irDriveRegs;// IDE寄存器组
-BYTE bDriveNumber;// 驱动器号
-BYTE bReserved[3];//保留
-DWORD dwReserved[4]; //保留
-BYTE bBuffer[1]; //输入缓冲区(此处象征性地包含1字节)
-} SENDCMDINPARAMS, *PSENDCMDINPARAMS, *LPSENDCMDINPARAMS;
-// IDE设备IOCTL输出数据结构
-typedef struct _SENDCMDOUTPARAMS
-{
-DWORD cBufferSize;// 缓冲区 字节数
-DRIVERSTATUS DriverStatus; // 驱动程序返回状态
-BYTE bBuffer[1]; // 输入缓冲区(此处象征性地包含1字节)
-} SENDCMDOUTPARAMS, *PSENDCMDOUTPARAMS, *LPSENDCMDOUTPARAMS;*/
+// typedef struct _SRB_IO_CONTROL
+// {
+// 	ULONG HeaderLength; // 头长度
+// 	UCHAR Signature[8]; // 特征名称
+// 	ULONG Timeout; // 超时时间
+// 	ULONG ControlCode; // 控制码
+// 	ULONG ReturnCode; // 返回码
+// 	ULONG Length; // 缓冲区长度
+// } SRB_IO_CONTROL, *PSRB_IO_CONTROL;
+// // IDE命令 寄存器
+// typedef struct _IDEREGS
+// {
+// BYTE bFeaturesReg;// 特征寄存器 (用于SMART 命令)　 BYTE bSectorCountReg;　 // 扇区数目寄存器
+// BYTE bSectorNumberReg;// 开始扇区寄存器
+// BYTE bCylLowReg; // 开始柱面低字节 寄存器
+// BYTE bCylHighReg; // 开始柱面高字节寄存器
+// BYTE bDriveHeadReg; // 驱动器/磁头寄存器
+// BYTE bCommandReg; // 指令寄存器
+// BYTE bReserved; // 保留
+// } IDEREGS, *PIDEREGS, *LPIDEREGS;
+// // 从驱动程序返回的状态
+// typedef struct _DRIVERSTATUS
+// {
+// BYTE bDriverError;  // 错误码
+// BYTE bIDEStatus; // IDE状态寄存器
+// BYTE bReserved[2]; // 保留
+// DWORD dwReserved[2]; // 保留
+// } DRIVERSTATUS, *PDRIVERSTATUS, *LPDRIVERSTATUS;
+// // IDE设备IOCTL输入数据结构
+// typedef struct _SENDCMDINPARAMS
+// {
+// DWORD cBufferSize;// 缓冲区字节数
+// IDEREGS irDriveRegs;// IDE寄存器组
+// BYTE bDriveNumber;// 驱动器号
+// BYTE bReserved[3];//保留
+// DWORD dwReserved[4]; //保留
+// BYTE bBuffer[1]; //输入缓冲区(此处象征性地包含1字节)
+// } SENDCMDINPARAMS, *PSENDCMDINPARAMS, *LPSENDCMDINPARAMS;
+// // IDE设备IOCTL输出数据结构
+// typedef struct _SENDCMDOUTPARAMS
+// {
+// DWORD cBufferSize;// 缓冲区 字节数
+// DRIVERSTATUS DriverStatus; // 驱动程序返回状态
+// BYTE bBuffer[1]; // 输入缓冲区(此处象征性地包含1字节)
+// } SENDCMDOUTPARAMS, *PSENDCMDOUTPARAMS, *LPSENDCMDOUTPARAMS;
 
 struct SMART_READ_DATA_OUTDATA
 {

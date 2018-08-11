@@ -25,10 +25,59 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        svassistmainwindow.cpp
+        svassistmainwindow.cpp \
+    appinit.cpp \
+    closebutton.cpp \
+    mainctrlbutton.cpp \
+    homewidget.cpp \
+    hardwaretab.cpp \
+    CPUHardwareWidget.cpp \
+    DiskWidget.cpp \
+    GPUWidget.cpp \
+    HardwareOthersWidget.cpp \
+    hardwaretab.cpp \
+    homewidget.cpp \
+    main.cpp \
+    mainctrlbutton.cpp \
+    MemoryWidget.cpp \
+    MonitorWidget.cpp \
+    MotherBroadWidget.cpp \
+    NetworkWidget.cpp \
+    AudioWidget.cpp
 
 HEADERS += \
-        svassistmainwindow.h
+        svassistmainwindow.h \
+    appinit.h \
+    closebutton.h \
+    mainctrlbutton.h \
+    homewidget.h \
+    hardwaretab.h \
+    CPUHardwareWidget.h \
+    DiskWidget.h \
+    GPUWidget.h \
+    HardwareOthersWidget.h \
+    hardwaretab.h \
+    homewidget.h \
+    mainctrlbutton.h \
+    MemoryWidget.h \
+    MonitorWidget.h \
+    MotherBroadWidget.h \
+    NetworkWidget.h \
+    AudioWidget.h
 
 FORMS += \
         svassistmainwindow.ui
+
+RESOURCES += \
+    Resource/resource.qrc
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/lib/ -lsv-assistant
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/lib/ -lsv-assistantd
+
+INCLUDEPATH += $$PWD/.
+DEPENDPATH += $$PWD/.
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/lib/libsv-assistant.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/lib/libsv-assistantd.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/lib/sv-assistant.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/lib/sv-assistantd.lib

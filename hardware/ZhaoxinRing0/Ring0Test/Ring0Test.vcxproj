@@ -160,9 +160,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Driverdll\Driverdll.vcxproj">
-      <Project>{bc32d43c-0e72-42fc-86a3-64fd91c5c4ec}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\hardware assistant\sv-assistant\sv-assistant\sv-assistant.vcxproj">
       <Project>{8c332a47-eb90-4e1a-a28e-4a82bae1cdb9}</Project>
     </ProjectReference>

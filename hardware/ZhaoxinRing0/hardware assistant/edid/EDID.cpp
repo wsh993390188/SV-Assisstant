@@ -37,6 +37,169 @@ namespace SV_ASSIST
 			{
 				EDIDData->UpdateData();
 			}
+
+			const std::string GetMonitorName()
+			{
+				std::string edidname = {};
+				auto edidinfo = EDIDData->ReturnEDID();
+				if (!edidinfo.empty())
+				{
+					EDIDManufacturer  buf = {};
+					buf.__Manufacturer = edidinfo.at(0).Manufacturer.Manufacturer;
+					buf.__Manufacturer = ((buf.__Manufacturer & 0xFF) << 8) | ((buf.__Manufacturer & 0xFF00) >> 8);
+					char temp[4] = {};
+					temp[0] = buf.bits._First + 'A' - 1;
+					temp[1] = buf.bits._Second + 'A' - 1;
+					temp[2] = buf.bits._Third + 'A' - 1;
+
+					if (strcmp(temp, "AAA") == 0)
+						edidname = "Avolites Ltd";					
+					else if (strcmp(temp, "ACI") == 0)
+						edidname = "Ancor Communications Inc";					
+					else if (strcmp(temp, "ACR") == 0)
+					 	edidname = "Acer Technologies";					
+					else if (strcmp(temp, "ADA") == 0)
+					 	edidname = "Addi-Data GmbH";					
+					else if (strcmp(temp, "APP") == 0)
+					 	edidname = "Apple Computer Inc";					
+					else if (strcmp(temp, "ASK") == 0)
+					 	edidname = "Ask A/S";					
+					else if (strcmp(temp, "AVT") == 0)
+					 	edidname = "Avtek (Electronics) Pty Ltd";					
+					else if (strcmp(temp, "BNO") == 0)
+					 	edidname = "Bang & Olufsen";					
+					else if (strcmp(temp, "CMN") == 0)
+					 	edidname = "Chimei Innolux Corporation";					
+					else if (strcmp(temp, "CMO") == 0)
+					 	edidname = "Chi Mei Optoelectronics corp.";					
+					else if (strcmp(temp, "CRO") == 0)
+					 	edidname = "Extraordinary Technologies PTY Limited";					
+					else if (strcmp(temp, "DEL") == 0)
+					 	edidname = "Dell Inc.";					
+					else if (strcmp(temp, "DGC") == 0)
+					 	edidname = "Data General Corporation";					
+					else if (strcmp(temp, "DON") == 0)
+					 	edidname = "DENON, Ltd.";					
+					else if (strcmp(temp, "ENC") == 0)
+					 	edidname = "Eizo Nanao Corporation";					
+					else if (strcmp(temp, "EPH") == 0)
+					 	edidname = "Epiphan Systems Inc. ";					
+					else if (strcmp(temp, "EXP") == 0)
+					 	edidname = "Data Export Corporation";					
+					else if (strcmp(temp, "FNI") == 0)
+					 	edidname = "Funai Electric Co., Ltd.";					
+					else if (strcmp(temp, "FUS") == 0)
+					 	edidname = "Fujitsu Siemens Computers GmbH";					
+					else if (strcmp(temp, "GSM") == 0)
+					 	edidname = "Goldstar Company Ltd";					
+					else if (strcmp(temp, "HIQ") == 0)
+					 	edidname = "Kaohsiung Opto Electronics Americas, Inc.";					
+					else if (strcmp(temp, "HSD") == 0)
+					 	edidname = "HannStar Display Corp";					
+					else if (strcmp(temp, "HTC") == 0)
+					 	edidname = "Hitachi Ltd";					
+					else if (strcmp(temp, "HWP") == 0)
+					 	edidname = "Hewlett Packard";					
+					else if (strcmp(temp, "INT") == 0)
+					 	edidname = "Interphase Corporation";					
+					else if (strcmp(temp, "ITE") == 0)
+					 	edidname = "Integrated Tech Express Inc";					
+					else if (strcmp(temp, "IVM") == 0)
+					 	edidname = "Iiyama North America";					
+					else if (strcmp(temp, "LEN") == 0)
+					 	edidname = "Lenovo Group Limited";					
+					else if (strcmp(temp, "MAX") == 0)
+					 	edidname = "Rogen Tech Distribution Inc";					
+					else if (strcmp(temp, "MEG") == 0)
+					 	edidname = "Abeam Tech Ltd";					
+					else if (strcmp(temp, "MEI") == 0)
+					 	edidname = "Panasonic Industry Company";					
+					else if (strcmp(temp, "MTC") == 0)
+					 	edidname = "Mars-Tech Corporation";					
+					else if (strcmp(temp, "MTX") == 0)
+					 	edidname = "Matrox";					
+					else if (strcmp(temp, "NEC") == 0)
+					 	edidname = "NEC Corporation";					
+					else if (strcmp(temp, "NEX") == 0)
+					 	edidname = "Nexgen Mediatech Inc.";					
+					else if (strcmp(temp, "ONK") == 0)
+					 	edidname = "ONKYO Corporation";					
+					else if (strcmp(temp, "ORN") == 0)
+					 	edidname = "ORION ELECTRIC CO., LTD.";					
+					else if (strcmp(temp, "OTM") == 0)
+					 	edidname = "Optoma Corporation";					
+					else if (strcmp(temp, "OVR") == 0)
+					 	edidname = "Oculus VR, Inc.";					
+					else if (strcmp(temp, "PHL") == 0)
+					 	edidname = "Philips Consumer Electronics Company";					
+					else if (strcmp(temp, "PIO") == 0)
+					 	edidname = "Pioneer Electronic Corporation";					
+					else if (strcmp(temp, "PNR") == 0)
+					 	edidname = "Planar Systems, Inc.";					
+					else if (strcmp(temp, "QDS") == 0)
+					 	edidname = "Quanta Display Inc.";					
+					else if (strcmp(temp, "RAT") == 0)
+					 	edidname = "Rent-A-Tech";					
+					else if (strcmp(temp, "REN") == 0)
+					 	edidname = "Renesas Technology Corp.";					
+					else if (strcmp(temp, "SEC") == 0)
+					 	edidname = "Seiko Epson Corporation";					
+					else if (strcmp(temp, "SHP") == 0)
+					 	edidname = "Sharp Corporation";					
+					else if (strcmp(temp, "SII") == 0)
+					 	edidname = "Silicon Image, Inc.";					
+					else if (strcmp(temp, "SNY") == 0)
+					 	edidname = "Sony";					
+					else if (strcmp(temp, "STD") == 0)
+					 	edidname = "STD Computer Inc.";					
+					else if (strcmp(temp, "SVS") == 0)
+					 	edidname = "SVSI";					
+					else if (strcmp(temp, "SYN") == 0)
+					 	edidname = "Synaptics Inc.";					
+					else if (strcmp(temp, "TCL") == 0)
+					 	edidname = "Technical Concepts Ltd";					
+					else if (strcmp(temp, "TOP") == 0)
+					 	edidname = "Orion Communications Co., Ltd.";					
+					else if (strcmp(temp, "TSB") == 0)
+					 	edidname = "Toshiba America Info Systems Inc.";					
+					else if (strcmp(temp, "TST") == 0)
+					 	edidname = "Transtream Inc.";					
+					else if (strcmp(temp, "VES") == 0)
+					 	edidname = "Vestel Elektronik Sanayi ve Ticaret A. S.";					
+					else if (strcmp(temp, "VIZ") == 0)
+					 	edidname = "VIZIO, Inc.";					
+					else if (strcmp(temp, "UNK") == 0)
+					 	edidname = "Unknown";					
+					else if (strcmp(temp, "VSC") == 0)
+					 	edidname = "ViewSonic Corporation";					
+					else if (strcmp(temp, "YMH") == 0)
+					 	edidname = "Yamaha Corporation";					
+					else if (strcmp(temp, "SAM") == 0)
+						edidname = "Samsung Electric Company";
+					else
+						edidname = "Unknown Manufacturer";
+				}
+				else
+					edidname = "Unknown Manufacturer";
+
+				for (short i = 0; i < 4; i++)
+				{
+					EDID_Other_Monitor_Descriptors OtherDesc;
+					memcpy(&OtherDesc, edidinfo.at(0).Descriptor + i, sizeof(EDID_Other_Monitor_Descriptors));
+					if (OtherDesc.Reserve == 0 && OtherDesc.Reserved[0] == 0 && OtherDesc.Reserved[1] == 0 && OtherDesc.Reserved[2] == 0)
+					{
+						if (OtherDesc.Descriptor_Type == 0xFC)
+						{
+							std::string t((const char *)edidinfo.at(0).Descriptor[i].Display_Serial_Number.Display_Serial_Number);
+							boost::trim(t);
+							edidname += (" " + t);
+							break;
+						}
+					}
+				}
+				return edidname;
+
+			}
 			const std::vector<EDID>& GetEDID()
 			{
 				return EDIDData->ReturnEDID();
@@ -49,14 +212,19 @@ namespace SV_ASSIST
 
 		std::shared_ptr<CEDID> CEDID::temp = nullptr;
 
+		const std::string GetMonitorName()
+		{
+			return CEDID::Instance()->GetMonitorName();
+		}
+
 		const std::vector<EDID>& GetEDID()
 		{
 			return CEDID::Instance()->GetEDID();
 		}
 
-		void Exec()
+		void outputfile()
 		{
-			TCHAR   szCurDir[MAX_PATH];
+			TCHAR   szCurDir[MAX_PATH] = {};
 			if (GetModuleFileName(NULL, szCurDir, MAX_PATH) == 0) {
 
 				printf("GetCurrentDirectory failed!  Error = %d \n", GetLastError());
@@ -328,7 +496,6 @@ namespace SV_ASSIST
 		void UpdateData()
 		{
 			CEDID::Instance()->UpdateData();
-			Exec();
 		}
 	}
 }

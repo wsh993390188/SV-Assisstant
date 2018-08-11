@@ -1,9 +1,11 @@
+#pragma region Include Header
 #include "stdafx.h"
 #include "zhaoxin.h"
 #include  <math.h>
-#include <boost/algorithm/string.hpp>
-#include "..\..\Driverdll\Driverdll.h"
+#include "..\driver\Driverdll.h"
+#pragma endregion
 
+#pragma region CPUID Offset
 //L1 Cache and TLB Information CPUID = 0x80000005
 //EAX
 #define INSTRUCTION_TLB_SIZE				0x000000FF
@@ -47,7 +49,9 @@
 #define L3_INSTRUCTION_CACHE_ASSOC			0x0000F000
 #define L3_INSTRUCTION_CACHE_LINE_PER_TAG	0x00000F00
 #define L3_INSTRUCTION_CACHE_LINE_SIZE		0x000000FF
+#pragma endregion
 
+#pragma region Initialize
 Zhaoxin::Zhaoxin() : f1_ecx{ 0 }, f1_edx{ 0 }, f7_ecx{ 0 }, f7_ebx{ 0 }, f81_ecx{ 0 }, f81_edx{ 0 }
 , Zhaoxin_Temperature{ 0x1423 }, Zhaoxin_FIDVID{ 0x198 }, Zhaoxin_Target{ 0x199 }
 {
@@ -228,13 +232,17 @@ void Zhaoxin::Init(void)
 
 	ExecCache();
 }
+#pragma endregion
 
+#pragma region Update
 void Zhaoxin::UpDateData(void)
 {
 	GetBusSpeed();
 	GetCurrentSpeed();
 }
+#pragma endregion
 
+#pragma region Feature
 void Zhaoxin::ExecFeature()
 {
 	Feature.ZhaoxinFeature.SSE3 = f1_ecx[0];
@@ -274,7 +282,9 @@ void Zhaoxin::ExecFeature()
 	Feature.ZhaoxinFeature.PBE = f1_edx[31];
 
 }
+#pragma endregion
 
+#pragma region Cache
 void Zhaoxin::ExecCache()
 {
 	Cache[0].Cache_level = 1;
@@ -303,7 +313,9 @@ void Zhaoxin::ExecCache()
 	//Cache[3].Cache_Ways = ((extdata__[6][3] & L3_INSTRUCTION_CACHE_ASSOC) >> 12);
 	Cache[3].Cache_Size = ((extdata__[6][3] & L3_INSTRUCTION_CACHE_SIZE) >> 18);
 }
+#pragma endregion
 
+#pragma region Temperature
 void Zhaoxin::ExecTemperature()
 {
 	DWORD64 msrdata = 0;
@@ -317,7 +329,9 @@ void Zhaoxin::ExecTemperature()
 	}
 
 }
+#pragma endregion
 
+#pragma region Frequency
 void Zhaoxin::GetBusSpeed()
 {
 	DWORD64 data = 0;
@@ -366,3 +380,4 @@ void Zhaoxin::GetCurrentSpeed()
 		}
 	}
 }
+#pragma endregion

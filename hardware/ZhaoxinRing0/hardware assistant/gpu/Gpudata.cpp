@@ -11,7 +11,7 @@ GPUData::GPUData() : amdinfo(nullptr), nvinfo(nullptr), Intelinfo(nullptr), Type
 	nv_gpu = std::make_shared<CNvidia>();
 	if (nv_gpu->exec() == NVIDIA_GPU)
 	{
-		nvinfo = reinterpret_cast<const vector<NvidiaInfo>*>(nv_gpu->Returninfo());
+		nvinfo = reinterpret_cast<const std::vector<NvidiaInfo>*>(nv_gpu->Returninfo());
 		Types |= NVIDIA_GPU;
 		NV_DriverVer = nv_gpu->GetDriverVersion();
 		NV_BranchVersion = nv_gpu->GetBranchVersion();
@@ -30,7 +30,7 @@ GPUData::GPUData() : amdinfo(nullptr), nvinfo(nullptr), Intelinfo(nullptr), Type
 	amd_gpu = std::make_shared<CAMD>();
 	if (amd_gpu->exec() == AMD_GPU)
 	{
-		amdinfo = reinterpret_cast<const vector<AMDINFO>*> (amd_gpu->Returninfo());
+		amdinfo = reinterpret_cast<const std::vector<AMDINFO>*> (amd_gpu->Returninfo());
 		Types |= AMD_GPU;
 		AMD_DriverVer = amd_gpu->GetDriverVersion();
 		AMD_BranchVersion = amd_gpu->GetBranchVersion();
@@ -49,15 +49,15 @@ GPUData::GPUData() : amdinfo(nullptr), nvinfo(nullptr), Intelinfo(nullptr), Type
 	intel_gpu = std::make_shared<CIntelGPU>();
 	if (intel_gpu->exec() == INTEL_GPU)
 	{
-		Intelinfo = reinterpret_cast<const vector<IntelGPUInfo>*> (intel_gpu->Returninfo());
+		Intelinfo = reinterpret_cast<const std::vector<IntelGPUInfo>*> (intel_gpu->Returninfo());
 		Types |= INTEL_GPU;
 		IN_DriverVer = intel_gpu->GetDriverVersion();
 		IN_BranchVersion = intel_gpu->GetBranchVersion();
 #ifdef ZX_OutputLog
 		int i = 0;
-		for (auto var : *(this->amdinfo))
+		for (auto var : *(this->Intelinfo))
 		{
-			boost::format ft = boost::format("Exist Intel GPU #%1% Name: ") % i++;
+			boost::wformat ft = boost::wformat(L"Exist Intel GPU #%1% Name: ") % i++;
 			Logger::Instance()->OutputLogInfo(el::Level::Debug, ft.str() + var.FullName);
 		}
 #endif

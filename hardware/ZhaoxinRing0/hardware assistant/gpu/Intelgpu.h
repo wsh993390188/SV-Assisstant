@@ -13,7 +13,7 @@ public:
 	const void* Returninfo();
 	GPUTypes UpdateData();
 private:
-	vector<IntelGPUInfo> Intelinfo;
+	std::vector<IntelGPUInfo> Intelinfo;
 	bool getGraphicsDeviceInfo(unsigned int* VendorId,
 		unsigned int* DeviceId,
 		unsigned __int64* VideoMemory,

@@ -17,12 +17,15 @@ namespace SV_ASSIST
 			static execSMBIOS* Instance() 
 			{
 				if (!sm.get())
-					sm = make_shared<execSMBIOS>();
+					sm = std::make_shared<execSMBIOS>();
 				return sm.get();
 			}
-			execSMBIOS() :data(make_shared<Smbios>()) {}
-			void outtofile();
-			void Updatedata();
+			execSMBIOS() :data(std::make_shared<Smbios>()) {}
+			void outputfile();
+			const SMBIOS_Struct& GetSMBIOSinfo()
+			{
+				return data->GetSmbiosInfo();
+			}
 		protected:
 		private:
 			std::shared_ptr<Smbios> data;
@@ -31,9 +34,9 @@ namespace SV_ASSIST
 
 		std::shared_ptr<execSMBIOS> execSMBIOS::sm = nullptr;
 
-		void execSMBIOS::outtofile()
+		void execSMBIOS::outputfile()
 		{
-			TCHAR   szCurDir[MAX_PATH];
+			TCHAR   szCurDir[MAX_PATH] = {};
 			if (GetModuleFileName(NULL, szCurDir, MAX_PATH) == 0) {
 
 				printf("GetCurrentDirectory failed!  Error = %d \n", GetLastError());
@@ -41,7 +44,7 @@ namespace SV_ASSIST
 
 			}
 			(_tcsrchr(szCurDir, _T('\\')))[1] = 0; // 删除文件名，只获得路径字串
-			wstring dir(szCurDir);
+			std::wstring dir(szCurDir);
 			dir.append(L"\\HardWare\\DMI\\");
 			if (_waccess(dir.c_str(), 0) == -1)
 			{
@@ -68,525 +71,526 @@ namespace SV_ASSIST
 					}
 				}
 			}
-			ofstream outfile;
+			std::ofstream outfile;
 			outfile.open(dir + _T("\\smbios.txt"));
-			outfile << "				Desktop Management Interface Information" << endl;
-			if (!data->BIOSinfo.empty())
+			outfile << "				Desktop Management Interface Information" << std::endl;
+			auto smbios_temp = data->GetSmbiosInfo();
+			if (!smbios_temp.BIOSinfo.empty())
 			{
-				outfile << "[BIOS Information]" << endl;
-				for (const auto& i : data->BIOSinfo)
+				outfile << "[BIOS Information]" << std::endl;
+				for (const auto& i : smbios_temp.BIOSinfo)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
-			if (!data->Sysyteminfo.empty())
+			if (!smbios_temp.Sysyteminfo.empty())
 			{
-				outfile << "[System Information]" << endl;
-				for (const auto& i : data->Sysyteminfo)
+				outfile << "[System Information]" << std::endl;
+				for (const auto& i : smbios_temp.Sysyteminfo)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
-			if (!data->BaseBroadinfo.empty())
+			if (!smbios_temp.BaseBroadinfo.empty())
 			{
-				outfile << "[Base Board Information]" << endl;
-				for (const auto& i : data->BaseBroadinfo)
+				outfile << "[Base Board Information]" << std::endl;
+				for (const auto& i : smbios_temp.BaseBroadinfo)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
-			if (!data->SystemEorC.empty())
+			if (!smbios_temp.SystemEorC.empty())
 			{
-				outfile << "[System Enclosure or Chassis Information]" << endl;
-				for (const auto& i : data->SystemEorC)
+				outfile << "[System Enclosure or Chassis Information]" << std::endl;
+				for (const auto& i : smbios_temp.SystemEorC)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
-			if (!data->Processorinfo.empty())
+			if (!smbios_temp.Processorinfo.empty())
 			{
-				outfile << "[Processor Information]" << endl;
-				for (const auto& i : data->Processorinfo)
+				outfile << "[Processor Information]" << std::endl;
+				for (const auto& i : smbios_temp.Processorinfo)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
-			if (!data->MemoryCtrlinfo.empty())
+			if (!smbios_temp.MemoryCtrlinfo.empty())
 			{
-				outfile << "[Memory Controller Information]" << endl;
-				for (const auto& i : data->MemoryCtrlinfo)
+				outfile << "[Memory Controller Information]" << std::endl;
+				for (const auto& i : smbios_temp.MemoryCtrlinfo)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
-			if (!data->MemoryModinfo.empty())
+			if (!smbios_temp.MemoryModinfo.empty())
 			{
-				outfile << "[Memory Module Information]" << endl;
-				for (const auto& i : data->MemoryModinfo)
+				outfile << "[Memory Module Information]" << std::endl;
+				for (const auto& i : smbios_temp.MemoryModinfo)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
-			if (!data->Cacheinfo.empty())
+			if (!smbios_temp.Cacheinfo.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->Cacheinfo)
+				for (const auto& i : smbios_temp.Cacheinfo)
 				{
-					outfile << "[Cache Information #" << k++ << "]" << endl;
+					outfile << "[Cache Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->Portinfo.empty())
+			if (!smbios_temp.Portinfo.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->Portinfo)
+				for (const auto& i : smbios_temp.Portinfo)
 				{
-					outfile << "[Port Connector Information #" << k++ << "]" << endl;
+					outfile << "[Port Connector Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->SystemSlotinfo.empty())
+			if (!smbios_temp.SystemSlotinfo.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->SystemSlotinfo)
+				for (const auto& i : smbios_temp.SystemSlotinfo)
 				{
-					outfile << "[System Slots Information #" << k++ << "]" << endl;
+					outfile << "[System Slots Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->BroadDevinfo.empty())
+			if (!smbios_temp.BroadDevinfo.empty())
 			{
-				outfile << "[On Board Devices Information]" << endl;
-				for (const auto& i : data->BroadDevinfo)
+				outfile << "[On Board Devices Information]" << std::endl;
+				for (const auto& i : smbios_temp.BroadDevinfo)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
 
-			if (!data->OEMString.empty())
+			if (!smbios_temp.OEMString.empty())
 			{
-				outfile << "[OEM Strings Information]" << endl;
-				for (const auto& i : data->OEMString)
+				outfile << "[OEM Strings Information]" << std::endl;
+				for (const auto& i : smbios_temp.OEMString)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
 
-			if (!data->SystemConfigOption.empty())
+			if (!smbios_temp.SystemConfigOption.empty())
 			{
-				outfile << "[System Configuration Information]" << endl;
-				for (const auto& i : data->SystemConfigOption)
+				outfile << "[System Configuration Information]" << std::endl;
+				for (const auto& i : smbios_temp.SystemConfigOption)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
 
-			if (!data->BIOSLanginfo.empty())
+			if (!smbios_temp.BIOSLanginfo.empty())
 			{
-				outfile << "[BIOS Language Information]" << endl;
-				for (const auto& i : data->BIOSLanginfo)
+				outfile << "[BIOS Language Information]" << std::endl;
+				for (const auto& i : smbios_temp.BIOSLanginfo)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
-			if (!data->GroupAssociations.empty())
+			if (!smbios_temp.GroupAssociations.empty())
 			{
-				outfile << "[Group Associations Information]" << endl;
-				for (const auto& i : data->GroupAssociations)
+				outfile << "[Group Associations Information]" << std::endl;
+				for (const auto& i : smbios_temp.GroupAssociations)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
 
-			if (!data->SysEventLog.empty())
+			if (!smbios_temp.SysEventLog.empty())
 			{
-				outfile << "[System Event Log Information]" << endl;
-				for (const auto& i : data->SysEventLog)
+				outfile << "[System Event Log Information]" << std::endl;
+				for (const auto& i : smbios_temp.SysEventLog)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
-			if (!data->PhysicalMemoryArray.empty())
+			if (!smbios_temp.PhysicalMemoryArray.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->PhysicalMemoryArray)
+				for (const auto& i : smbios_temp.PhysicalMemoryArray)
 				{
-					outfile << "[Physical Memory Array Information #" << k++ << "]" << endl;
+					outfile << "[Physical Memory Array Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->MemoryDev.empty())
+			if (!smbios_temp.MemoryDev.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->MemoryDev)
+				for (const auto& i : smbios_temp.MemoryDev)
 				{
-					outfile << "[Memory Device Information #" << k++ << "]" << endl;
+					outfile << "[Memory Device Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->MemoryErrinfo.empty())
+			if (!smbios_temp.MemoryErrinfo.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->MemoryErrinfo)
+				for (const auto& i : smbios_temp.MemoryErrinfo)
 				{
-					outfile << "[32-Bit Memory Error Information #" << k++ << "]" << endl;
+					outfile << "[32-Bit Memory Error Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->MemArrayMappedAddress.empty())
+			if (!smbios_temp.MemArrayMappedAddress.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->MemArrayMappedAddress)
+				for (const auto& i : smbios_temp.MemArrayMappedAddress)
 				{
-					outfile << "[Memory Array Mapped Address Information #" << k++ << "]" << endl;
+					outfile << "[Memory Array Mapped Address Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->MemDevMappedAddress.empty())
+			if (!smbios_temp.MemDevMappedAddress.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->MemDevMappedAddress)
+				for (const auto& i : smbios_temp.MemDevMappedAddress)
 				{
-					outfile << "[Memory Device Mapped Address Information #" << k++ << "]" << endl;
+					outfile << "[Memory Device Mapped Address Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->Pointing_Dev.empty())
+			if (!smbios_temp.Pointing_Dev.empty())
 			{
-				outfile << "[Built-in Pointing Device Information]" << endl;
-				for (const auto& i : data->Pointing_Dev)
+				outfile << "[Built-in Pointing Device Information]" << std::endl;
+				for (const auto& i : smbios_temp.Pointing_Dev)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
 
-			if (!data->Portable_Battery.empty())
+			if (!smbios_temp.Portable_Battery.empty())
 			{
-				outfile << "[Portable Battery Information]" << endl;
-				for (const auto& i : data->Portable_Battery)
+				outfile << "[Portable Battery Information]" << std::endl;
+				for (const auto& i : smbios_temp.Portable_Battery)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
 
-			if (!data->System_Reset.empty())
+			if (!smbios_temp.System_Reset.empty())
 			{
-				outfile << "[System Reset Information]" << endl;
-				for (const auto& i : data->System_Reset)
+				outfile << "[System Reset Information]" << std::endl;
+				for (const auto& i : smbios_temp.System_Reset)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
-			if (!data->Hardware_Security.empty())
+			if (!smbios_temp.Hardware_Security.empty())
 			{
-				outfile << "[Hardware Security Information]" << endl;
-				for (const auto& i : data->Hardware_Security)
+				outfile << "[Hardware Security Information]" << std::endl;
+				for (const auto& i : smbios_temp.Hardware_Security)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
 
-			if (!data->System_Power_Controls.empty())
+			if (!smbios_temp.System_Power_Controls.empty())
 			{
-				outfile << "[System Power Controls Information]" << endl;
-				for (const auto& i : data->System_Power_Controls)
+				outfile << "[System Power Controls Information]" << std::endl;
+				for (const auto& i : smbios_temp.System_Power_Controls)
 				{
-					outfile << "	" << i.first << ":		" << i.second << endl;
+					outfile << "	" << i.first << ":		" << i.second << std::endl;
 				}
 			}
 
-			if (!data->Voltage_Probe.empty())
+			if (!smbios_temp.Voltage_Probe.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->Voltage_Probe)
+				for (const auto& i : smbios_temp.Voltage_Probe)
 				{
-					outfile << "[Voltage Probe Information #" << k++ << "]" << endl;
+					outfile << "[Voltage Probe Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->CoolingDev.empty())
+			if (!smbios_temp.CoolingDev.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->CoolingDev)
+				for (const auto& i : smbios_temp.CoolingDev)
 				{
-					outfile << "[Cooling Device Information #" << k++ << "]" << endl;
+					outfile << "[Cooling Device Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->TemperatureProbe.empty())
+			if (!smbios_temp.TemperatureProbe.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->TemperatureProbe)
+				for (const auto& i : smbios_temp.TemperatureProbe)
 				{
-					outfile << "[Temperature Probe Information #" << k++ << "]" << endl;
+					outfile << "[Temperature Probe Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->ElectricalCurrentProbe.empty())
+			if (!smbios_temp.ElectricalCurrentProbe.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->ElectricalCurrentProbe)
+				for (const auto& i : smbios_temp.ElectricalCurrentProbe)
 				{
-					outfile << "[Electrical Current Probe Information #" << k++ << "]" << endl;
+					outfile << "[Electrical Current Probe Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->BandRemoteAccess.empty())
+			if (!smbios_temp.BandRemoteAccess.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->BandRemoteAccess)
+				for (const auto& i : smbios_temp.BandRemoteAccess)
 				{
-					outfile << "[Out-of-Band Remote Access Information #" << k++ << "]" << endl;
+					outfile << "[Out-of-Band Remote Access Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->Systembootstatus.empty())
+			if (!smbios_temp.Systembootstatus.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->Systembootstatus)
+				for (const auto& i : smbios_temp.Systembootstatus)
 				{
-					outfile << "[System Boot Information #" << k++ << "]" << endl;
+					outfile << "[System Boot Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->MemoryError64Bit.empty())
+			if (!smbios_temp.MemoryError64Bit.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->MemoryError64Bit)
+				for (const auto& i : smbios_temp.MemoryError64Bit)
 				{
-					outfile << "[64-Bit Memory Error Information #" << k++ << "]" << endl;
+					outfile << "[64-Bit Memory Error Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->ManagementDevice.empty())
+			if (!smbios_temp.ManagementDevice.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->ManagementDevice)
+				for (const auto& i : smbios_temp.ManagementDevice)
 				{
-					outfile << "[Management Device Information #" << k++ << "]" << endl;
+					outfile << "[Management Device Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->ManagementDeviceComponent.empty())
+			if (!smbios_temp.ManagementDeviceComponent.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->ManagementDeviceComponent)
+				for (const auto& i : smbios_temp.ManagementDeviceComponent)
 				{
-					outfile << "[Management Device Component Information #" << k++ << "]" << endl;
+					outfile << "[Management Device Component Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->ManagementDeviceComponentThresholdData.empty())
+			if (!smbios_temp.ManagementDeviceComponentThresholdData.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->ManagementDeviceComponentThresholdData)
+				for (const auto& i : smbios_temp.ManagementDeviceComponentThresholdData)
 				{
-					outfile << "[Management Device Threshold Data Information #" << k++ << "]" << endl;
+					outfile << "[Management Device Threshold Data Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->MemoryChannel.empty())
+			if (!smbios_temp.MemoryChannel.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->MemoryChannel)
+				for (const auto& i : smbios_temp.MemoryChannel)
 				{
-					outfile << "[Memory Channel Information #" << k++ << "]" << endl;
+					outfile << "[Memory Channel Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->IPMIDeviceinfo.empty())
+			if (!smbios_temp.IPMIDeviceinfo.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->IPMIDeviceinfo)
+				for (const auto& i : smbios_temp.IPMIDeviceinfo)
 				{
-					outfile << "[IPMI Device Information #" << k++ << "]" << endl;
+					outfile << "[IPMI Device Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->SystemPowerSupply.empty())
+			if (!smbios_temp.SystemPowerSupply.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->SystemPowerSupply)
+				for (const auto& i : smbios_temp.SystemPowerSupply)
 				{
-					outfile << "[System Power Supply Information #" << k++ << "]" << endl;
+					outfile << "[System Power Supply Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->Additionalinfo.empty())
+			if (!smbios_temp.Additionalinfo.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->Additionalinfo)
+				for (const auto& i : smbios_temp.Additionalinfo)
 				{
-					outfile << "[Additional Information #" << k++ << "]" << endl;
+					outfile << "[Additional Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->BroadDevExtendedinfo.empty())
+			if (!smbios_temp.BroadDevExtendedinfo.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->BroadDevExtendedinfo)
+				for (const auto& i : smbios_temp.BroadDevExtendedinfo)
 				{
-					outfile << "[On board Devices Extended Information #" << k++ << "]" << endl;
+					outfile << "[On board Devices Extended Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->ManagementControllerHostInterface.empty())
+			if (!smbios_temp.ManagementControllerHostInterface.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->ManagementControllerHostInterface)
+				for (const auto& i : smbios_temp.ManagementControllerHostInterface)
 				{
-					outfile << "[Management Controller Host Interface Information #" << k++ << "]" << endl;
+					outfile << "[Management Controller Host Interface Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->TPMDevice.empty())
+			if (!smbios_temp.TPMDevice.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->TPMDevice)
+				for (const auto& i : smbios_temp.TPMDevice)
 				{
-					outfile << "[TPM Device Information #" << k++ << "]" << endl;
+					outfile << "[TPM Device Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->Inactive.empty())
+			if (!smbios_temp.Inactive.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->Inactive)
+				for (const auto& i : smbios_temp.Inactive)
 				{
-					outfile << "[Inactive Information #" << k++ << "]" << endl;
+					outfile << "[Inactive Information #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
 
-			if (!data->EndofTable.empty())
+			if (!smbios_temp.EndofTable.empty())
 			{
 				int k = 1;
-				for (const auto& i : data->EndofTable)
+				for (const auto& i : smbios_temp.EndofTable)
 				{
-					outfile << "[End-of-Table #" << k++ << "]" << endl;
+					outfile << "[End-of-Table #" << k++ << "]" << std::endl;
 					for (const auto&j : i)
 					{
-						outfile << "	" << j.first << ":		" << j.second << endl;
+						outfile << "	" << j.first << ":		" << j.second << std::endl;
 					}
 				}
 			}
@@ -595,15 +599,14 @@ namespace SV_ASSIST
 			outfile.close();
 		}
 
-		void execSMBIOS::Updatedata()
+		void OutputFile()
 		{
-			data->UpdateData();
+			execSMBIOS::Instance()->outputfile();
 		}
 
-		void Updatesmbios()
+		const SMBIOS_Struct& GetSMBIOSinfo()
 		{
-			execSMBIOS::Instance()->Updatedata();
-			execSMBIOS::Instance()->outtofile();
+			return execSMBIOS::Instance()->GetSMBIOSinfo();
 		}
 	}
 }

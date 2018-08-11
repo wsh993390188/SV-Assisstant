@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Smbios.h"
 
-Smbios::Smbios()
+Smbios::Smbios() : m_smbios{}
 {
 #ifdef ZX_OutputLog
 	Logger::Instance()->OutputLogInfo(el::Level::Debug, "***** SMBIOS info *****");
@@ -16,54 +16,9 @@ Smbios::~Smbios()
 {
 }
 
-void Smbios::UpdateData()
+const SMBIOS_Struct & Smbios::GetSmbiosInfo()
 {
-	this->BIOSinfo.clear();
-	this->Sysyteminfo.clear();
-	this->BaseBroadinfo.clear();
-	this->SystemEorC.clear();
-	this->Processorinfo.clear();
-	this->MemoryCtrlinfo.clear();
-	this->MemoryModinfo.clear();
-	this->Cacheinfo.clear();
-	this->Portinfo.clear();
-	this->SystemSlotinfo.clear();
-	this->BroadDevinfo.clear();
-	this->OEMString.clear();
-	this->SystemConfigOption.clear();
-	this->BIOSLanginfo.clear();
-	this->GroupAssociations.clear();
-	this->SysEventLog.clear();
-	this->PhysicalMemoryArray.clear();
-	this->MemoryDev.clear();
-	this->MemoryErrinfo.clear();
-	this->MemArrayMappedAddress.clear();
-	this->MemDevMappedAddress.clear();
-	this->Pointing_Dev.clear();
-	this->Portable_Battery.clear();
-	this->System_Reset.clear();
-	this->Hardware_Security.clear();
-	this->System_Power_Controls.clear();
-	this->Voltage_Probe.clear();
-	this->CoolingDev.clear();
-	this->TemperatureProbe.clear();
-	this->ElectricalCurrentProbe.clear();
-	this->BandRemoteAccess.clear();
-	this->Systembootstatus.clear();
-	this->MemoryError64Bit.clear();
-	this->ManagementDevice.clear();
-	this->ManagementDeviceComponent.clear();
-	this->ManagementDeviceComponentThresholdData.clear();
-	this->MemoryChannel.clear();
-	this->IPMIDeviceinfo.clear();
-	this->SystemPowerSupply.clear();
-	this->Additionalinfo.clear();
-	this->BroadDevExtendedinfo.clear();
-	this->ManagementControllerHostInterface.clear();
-	this->TPMDevice.clear();
-	this->Inactive.clear();
-	this->EndofTable.clear();
-	this->GetSmbiosinfo();
+	return this->m_smbios;
 }
 
 BOOL Smbios::GetSmbiosinfo()
@@ -90,7 +45,7 @@ BOOL Smbios::GetSmbiosinfo()
 		return 1;
 	}
 	RawSMBIOSData* Smbios = (RawSMBIOSData *)buf;
-	const string SmbiosVersion = to_string(Smbios->SMBIOSMajorVersion) + "." + to_string(Smbios->SMBIOSMinorVersion);
+	const std::string SmbiosVersion = std::to_string(Smbios->SMBIOSMajorVersion) + "." + std::to_string(Smbios->SMBIOSMinorVersion);
 	SmbiosADDR = Smbios->SMBIOSTableData;
 	DMI_Header* dmi_head = NULL;
 	PCHAR HextoString = new char[1024];
@@ -102,29 +57,29 @@ BOOL Smbios::GetSmbiosinfo()
 			{
 				if (strcmp(("2.0"), SmbiosVersion.c_str()) <= 0)
 				{
-					BIOSinfo.insert(MapString::value_type(("BIOS Vendor"), dmi_to_string(dmi_head, SmbiosADDR[Type0_Vendor])));
-					BIOSinfo.insert(MapString::value_type(("BIOS Version"), dmi_to_string(dmi_head, SmbiosADDR[Type0_BIOS_Version])));
+					m_smbios.BIOSinfo.insert(MapString::value_type(("BIOS Vendor"), dmi_to_string(dmi_head, SmbiosADDR[Type0_Vendor])));
+					m_smbios.BIOSinfo.insert(MapString::value_type(("BIOS Version"), dmi_to_string(dmi_head, SmbiosADDR[Type0_BIOS_Version])));
 					for (size_t i = 0; i < sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type0_BIOS_Start_ADDR + (sizeof(WORD) - i - 1)))));
 					}
-					BIOSinfo.insert(MapString::value_type(("BIOS Start ADDR"), HextoString));
-					BIOSinfo.insert(MapString::value_type(("BIOS Release Date"), dmi_to_string(dmi_head, SmbiosADDR[Type0_BIOS_Release_Date])));
-					BIOSinfo.insert(MapString::value_type(("BIOS ROM Size"), to_string(64 * (WORD(*(SmbiosADDR + Type0_BIOS_ROM_SIZE)) + 1)) + ("KB")));
+					m_smbios.BIOSinfo.insert(MapString::value_type(("BIOS Start ADDR"), HextoString));
+					m_smbios.BIOSinfo.insert(MapString::value_type(("BIOS Release Date"), dmi_to_string(dmi_head, SmbiosADDR[Type0_BIOS_Release_Date])));
+					m_smbios.BIOSinfo.insert(MapString::value_type(("BIOS ROM Size"), std::to_string(64 * (WORD(*(SmbiosADDR + Type0_BIOS_ROM_SIZE)) + 1)) + ("KB")));
 					for (size_t i = 0; i < sizeof(int64_t); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type0_BIOS_Characteristics + (sizeof(int64_t) - i - 1)))));
 					}
-					BIOSinfo.insert(MapString::value_type(("BIOS Characteristics"), HextoString));//可解析 未解析
+					m_smbios.BIOSinfo.insert(MapString::value_type(("BIOS Characteristics"), HextoString));//可解析 未解析
 					if (strcmp(("2.4"), SmbiosVersion.c_str()) <= 0)
 					{
 						for (size_t i = 0; i < sizeof(WORD); ++i)
 						{
 							sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type0_BIOS_Characteristics_EXtension + (sizeof(WORD) - i - 1)))));
 						}
-						BIOSinfo.insert(MapString::value_type(("BIOS Ext Characteristics"), HextoString));//可解析 未解析
-						BIOSinfo.insert(MapString::value_type(("System BIOS Release"), to_string(*(SmbiosADDR + Type0_BIOS_Major_Release)) + (".") + to_string(*(SmbiosADDR + Type0_BIOS_Minor_Release))));
-						BIOSinfo.insert(MapString::value_type(("EC Release"), to_string(*(SmbiosADDR + Type0_Firmware_Major_Release)) + (".") + to_string(*(SmbiosADDR + Type0_Firmware_Minor_Release))));
+						m_smbios.BIOSinfo.insert(MapString::value_type(("BIOS Ext Characteristics"), HextoString));//可解析 未解析
+						m_smbios.BIOSinfo.insert(MapString::value_type(("System BIOS Release"), std::to_string(*(SmbiosADDR + Type0_BIOS_Major_Release)) + (".") + std::to_string(*(SmbiosADDR + Type0_BIOS_Minor_Release))));
+						m_smbios.BIOSinfo.insert(MapString::value_type(("EC Release"), std::to_string(*(SmbiosADDR + Type0_Firmware_Major_Release)) + (".") + std::to_string(*(SmbiosADDR + Type0_Firmware_Minor_Release))));
 					}
 					if (strcmp(("3.1"), SmbiosVersion.c_str()) <= 0)
 					{
@@ -132,7 +87,7 @@ BOOL Smbios::GetSmbiosinfo()
 						{
 							sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type0_Extended_BIOS_ROM_SIZE + (sizeof(WORD) - i - 1)))));
 						}
-						BIOSinfo.insert(MapString::value_type(("Extended BIOS ROM Size"), HextoString));
+						m_smbios.BIOSinfo.insert(MapString::value_type(("Extended BIOS ROM Size"), HextoString));
 					}
 				}
 				first_flags = 0;
@@ -142,41 +97,41 @@ BOOL Smbios::GetSmbiosinfo()
 			{
 				if (strcmp(("2.0"), SmbiosVersion.c_str()) <= 0)
 				{
-					Sysyteminfo.insert(MapString::value_type(("System Manufacturer"), dmi_to_string(dmi_head, SmbiosADDR[Type1_Manufacturer])));
-					Sysyteminfo.insert(MapString::value_type(("System Product Name"), dmi_to_string(dmi_head, SmbiosADDR[Type1_Product_Name])));
-					Sysyteminfo.insert(MapString::value_type(("System Version"), dmi_to_string(dmi_head, SmbiosADDR[Type1_Version])));
-					Sysyteminfo.insert(MapString::value_type(("System Serial Number"), dmi_to_string(dmi_head, SmbiosADDR[Type1_Serial_Number])));
+					m_smbios.Sysyteminfo.insert(MapString::value_type(("System Manufacturer"), dmi_to_string(dmi_head, SmbiosADDR[Type1_Manufacturer])));
+					m_smbios.Sysyteminfo.insert(MapString::value_type(("System Product Name"), dmi_to_string(dmi_head, SmbiosADDR[Type1_Product_Name])));
+					m_smbios.Sysyteminfo.insert(MapString::value_type(("System Version"), dmi_to_string(dmi_head, SmbiosADDR[Type1_Version])));
+					m_smbios.Sysyteminfo.insert(MapString::value_type(("System Serial Number"), dmi_to_string(dmi_head, SmbiosADDR[Type1_Serial_Number])));
 					if (strcmp(("2.1"), SmbiosVersion.c_str()) <= 0)
 					{
 						for (size_t i = 0; i < 16; ++i)
 						{
 							sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type1_UUID + i))));
 						}
-						Sysyteminfo.insert(MapString::value_type(("System UUID"), HextoString));
+						m_smbios.Sysyteminfo.insert(MapString::value_type(("System UUID"), HextoString));
 						switch (SmbiosADDR[Type1_Wake_up_Type])
 						{
 						case Wake_up_TYPE::Other:
-							Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("Other")));
+							m_smbios.Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("Other")));
 							break;
 						case Wake_up_TYPE::APM_Timer:
-							Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("APM Timer")));
+							m_smbios.Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("APM Timer")));
 							break;
 						case Wake_up_TYPE::UUnknown:
-							Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("Unknown")));
+							m_smbios.Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("Unknown")));
 							break;
 						case Wake_up_TYPE::Modern_Ring:
-							Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("Modern Ring")));
+							m_smbios.Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("Modern Ring")));
 						case Wake_up_TYPE::LAN_Remote:
-							Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("LAN Remote")));
+							m_smbios.Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("LAN Remote")));
 							break;
 						case Wake_up_TYPE::PCI_PME:
-							Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("PCI PME#")));
+							m_smbios.Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("PCI PME#")));
 							break;
 						case Wake_up_TYPE::Power_switch:
-							Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("Power Switch")));
+							m_smbios.Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("Power Switch")));
 							break;
 						case Wake_up_TYPE::AC_Power_Restored:
-							Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("AC Power Restored")));
+							m_smbios.Sysyteminfo.insert(MapString::value_type(("System Wake-Up Type"), ("AC Power Restored")));
 							break;
 						default:
 							break;
@@ -184,8 +139,8 @@ BOOL Smbios::GetSmbiosinfo()
 					}
 					if (strcmp(("2.4"), SmbiosVersion.c_str()) <= 0)
 					{
-						Sysyteminfo.insert(MapString::value_type(("System SKU Number"), dmi_to_string(dmi_head, SmbiosADDR[Type1_SKU_Number])));
-						Sysyteminfo.insert(MapString::value_type(("System Family"), dmi_to_string(dmi_head, SmbiosADDR[Type1_Family])));
+						m_smbios.Sysyteminfo.insert(MapString::value_type(("System SKU Number"), dmi_to_string(dmi_head, SmbiosADDR[Type1_SKU_Number])));
+						m_smbios.Sysyteminfo.insert(MapString::value_type(("System Family"), dmi_to_string(dmi_head, SmbiosADDR[Type1_Family])));
 					}
 				}
 			}
@@ -194,54 +149,54 @@ BOOL Smbios::GetSmbiosinfo()
 			{
 				if (strcmp(("2.0"), SmbiosVersion.c_str()) <= 0)
 				{
-					BaseBroadinfo.insert(MapString::value_type(("BaseBroad Manufacturer"), dmi_to_string(dmi_head, SmbiosADDR[Type2_Manufacturer])));
-					BaseBroadinfo.insert(MapString::value_type(("BaseBroad Product"), dmi_to_string(dmi_head, SmbiosADDR[Type2_Product_Name])));
-					BaseBroadinfo.insert(MapString::value_type(("BaseBroad Version"), dmi_to_string(dmi_head, SmbiosADDR[Type2_Version])));
-					BaseBroadinfo.insert(MapString::value_type(("BaseBroad Serial Number"), dmi_to_string(dmi_head, SmbiosADDR[Type2_Serial_Number])));
-					BaseBroadinfo.insert(MapString::value_type(("BaseBroad Asset Tag"), dmi_to_string(dmi_head, SmbiosADDR[Type2_Asset_Tag])));
+					m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Manufacturer"), dmi_to_string(dmi_head, SmbiosADDR[Type2_Manufacturer])));
+					m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Product"), dmi_to_string(dmi_head, SmbiosADDR[Type2_Product_Name])));
+					m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Version"), dmi_to_string(dmi_head, SmbiosADDR[Type2_Version])));
+					m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Serial Number"), dmi_to_string(dmi_head, SmbiosADDR[Type2_Serial_Number])));
+					m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Asset Tag"), dmi_to_string(dmi_head, SmbiosADDR[Type2_Asset_Tag])));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type2_Feature_Flags))));
-					BaseBroadinfo.insert(MapString::value_type(("BaseBroad Feature Flags"), HextoString));
-					BaseBroadinfo.insert(MapString::value_type(("BaseBroad Location in Chassis"), dmi_to_string(dmi_head, SmbiosADDR[Type2_Location_in_Chassis])));
+					m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Feature Flags"), HextoString));
+					m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Location in Chassis"), dmi_to_string(dmi_head, SmbiosADDR[Type2_Location_in_Chassis])));
 					switch (SmbiosADDR[Type2_Board_Type])
 					{
 					case BaseBoard_Type::BroadUnknown:
-						BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Unknown")));
+						m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Unknown")));
 						break;
 					case BaseBoard_Type::BroadOther:
-						BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Other")));
+						m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Other")));
 						break;
 					case BaseBoard_Type::Server_Blade:
-						BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Server Blade")));
+						m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Server Blade")));
 						break;
 					case BaseBoard_Type::Connectivity_Switch:
-						BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("ConnectivitySwitch")));
+						m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("ConnectivitySwitch")));
 						break;
 					case BaseBoard_Type::System_Management_Module:
-						BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("System Management Module")));
+						m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("System Management Module")));
 						break;
 					case BaseBoard_Type::Processor_Module:
-						BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Processor Module")));
+						m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Processor Module")));
 						break;
 					case BaseBoard_Type::IO_Module:
-						BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("I/O Module")));
+						m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("I/O Module")));
 						break;
 					case BaseBoard_Type::Memory_Module:
-						BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Memory Module")));
+						m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Memory Module")));
 						break;
 					case BaseBoard_Type::Daughter_board:
-						BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Daughter board")));
+						m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Daughter board")));
 						break;
 					case BaseBoard_Type::Motherboard:
-						BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Motherboard (includes processor, memory, and I/O)")));
+						m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Motherboard (includes processor, memory, and I/O)")));
 						break;
 					case BaseBoard_Type::Processor_Memory_Module:
-						BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Processor/Memory Module")));
+						m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Processor/Memory Module")));
 						break;
 					case BaseBoard_Type::Processor_IO_Module:
-						BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Processor/IO Module")));
+						m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Processor/IO Module")));
 						break;
 					case BaseBoard_Type::Interconnect_board:
-						BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Interconnect board")));
+						m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Type"), ("Interconnect board")));
 						break;
 					default:
 						break;
@@ -250,9 +205,9 @@ BOOL Smbios::GetSmbiosinfo()
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type2_Chassis_Handle + (sizeof(WORD) - i - 1)))));
 					}
-					BaseBroadinfo.insert(MapString::value_type(("BaseBroad Chassis Handle"), HextoString));
+					m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Chassis Handle"), HextoString));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type2_Num_Obj_Handles))));
-					BaseBroadinfo.insert(MapString::value_type(("BaseBroad Number of Contained Object Handles"), HextoString));
+					m_smbios.BaseBroadinfo.insert(MapString::value_type(("BaseBroad Number of Contained Object Handles"), HextoString));
 				}
 			}
 
@@ -262,38 +217,38 @@ BOOL Smbios::GetSmbiosinfo()
 				++abc;
 				if (strcmp(("2.0"), SmbiosVersion.c_str()) <= 0)
 				{
-					SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Manufacturer"), dmi_to_string(dmi_head, SmbiosADDR[Type3_Manufacturer])));
+					m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Manufacturer"), dmi_to_string(dmi_head, SmbiosADDR[Type3_Manufacturer])));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type3_TypeE))));
-					SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Type"), HextoString));
+					m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Type"), HextoString));
 					if ((SmbiosADDR[Type3_TypeE] - 1) < 0x24)
 					{
-						SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Type Name"), System_Enclosure_or_Chassis_Types[SmbiosADDR[Type3_TypeE] - 1]));
+						m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Type Name"), System_Enclosure_or_Chassis_Types[SmbiosADDR[Type3_TypeE] - 1]));
 					}
-					SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Type"), HextoString));
-					SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Version"), dmi_to_string(dmi_head, SmbiosADDR[Type3_Version])));
-					SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Serial Number"), dmi_to_string(dmi_head, SmbiosADDR[Type3_Serial_Number])));
-					SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Asset Tag"), dmi_to_string(dmi_head, SmbiosADDR[Type3_Asset_Tag])));
+					m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Type"), HextoString));
+					m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Version"), dmi_to_string(dmi_head, SmbiosADDR[Type3_Version])));
+					m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Serial Number"), dmi_to_string(dmi_head, SmbiosADDR[Type3_Serial_Number])));
+					m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Asset Tag"), dmi_to_string(dmi_head, SmbiosADDR[Type3_Asset_Tag])));
 					if (strcmp(("2.1"), SmbiosVersion.c_str()) <= 0)
 					{
 						switch (SmbiosADDR[Type3_Boot_Up_State])
 						{
 						case SEC_States::SEC_States_Other:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Boot-up State"), ("Other")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Boot-up State"), ("Other")));
 							break;
 						case SEC_States::SEC_States_Unknown:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Boot-up State"), ("Unknown")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Boot-up State"), ("Unknown")));
 							break;
 						case SEC_States::SEC_Safe:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Boot-up State"), ("Safe")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Boot-up State"), ("Safe")));
 							break;
 						case SEC_States::SEC_Warning:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Boot-up State"), ("Warning")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Boot-up State"), ("Warning")));
 							break;
 						case SEC_States::SEC_Critical:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Boot-up State"), ("Critical")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Boot-up State"), ("Critical")));
 							break;
 						case SEC_States::SEC_Non_recoverable:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Boot-up State"), ("Non-recoverable")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Boot-up State"), ("Non-recoverable")));
 							break;
 						default:
 							break;
@@ -301,22 +256,22 @@ BOOL Smbios::GetSmbiosinfo()
 						switch (SmbiosADDR[Type3_Power_Supply_Status])
 						{
 						case SEC_States::SEC_States_Other:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Power Supply State"), ("Other")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Power Supply State"), ("Other")));
 							break;
 						case SEC_States::SEC_States_Unknown:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Power Supply State"), ("Unknown")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Power Supply State"), ("Unknown")));
 							break;
 						case SEC_States::SEC_Safe:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Power Supply State"), ("Safe")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Power Supply State"), ("Safe")));
 							break;
 						case SEC_States::SEC_Warning:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Power Supply State"), ("Warning")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Power Supply State"), ("Warning")));
 							break;
 						case SEC_States::SEC_Critical:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Power Supply State"), ("Critical")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Power Supply State"), ("Critical")));
 							break;
 						case SEC_States::SEC_Non_recoverable:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Power Supply State"), ("Non-recoverable")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Power Supply State"), ("Non-recoverable")));
 							break;
 						default:
 							break;
@@ -324,22 +279,22 @@ BOOL Smbios::GetSmbiosinfo()
 						switch (SmbiosADDR[Type3_Thermal_State])
 						{
 						case SEC_States::SEC_States_Other:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Thermal State"), ("Other")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Thermal State"), ("Other")));
 							break;
 						case SEC_States::SEC_States_Unknown:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Thermal State"), ("Unknown")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Thermal State"), ("Unknown")));
 							break;
 						case SEC_States::SEC_Safe:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Thermal State"), ("Safe")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Thermal State"), ("Safe")));
 							break;
 						case SEC_States::SEC_Warning:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Thermal State"), ("Warning")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Thermal State"), ("Warning")));
 							break;
 						case SEC_States::SEC_Critical:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Thermal State"), ("Critical")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Thermal State"), ("Critical")));
 							break;
 						case SEC_States::SEC_Non_recoverable:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Thermal State"), ("Non-recoverable")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Thermal State"), ("Non-recoverable")));
 							break;
 						default:
 							break;
@@ -347,19 +302,19 @@ BOOL Smbios::GetSmbiosinfo()
 						switch (SmbiosADDR[Type3_Security_Status])
 						{
 						case SEC_Security_States::SEC_Security_States_Other:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Security State"), ("Other")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Security State"), ("Other")));
 							break;
 						case SEC_Security_States::SEC_Security_States_Unknown:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Security State"), ("Unknown")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Security State"), ("Unknown")));
 							break;
 						case SEC_Security_States::SEC_States_None:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Security State"), ("None")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Security State"), ("None")));
 							break;
 						case SEC_Security_States::SEC_External_interface_locked_out:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Security State"), ("External interface locked out")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Security State"), ("External interface locked out")));
 							break;
 						case SEC_Security_States::SEC_External_interface_enabled:
-							SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Security State"), ("External interface enabled")));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Security State"), ("External interface enabled")));
 							break;
 						default:
 							break;
@@ -372,15 +327,15 @@ BOOL Smbios::GetSmbiosinfo()
 						{
 							sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type3_OEM_defined + (sizeof(DWORD) - i - 1)))));
 						}
-						SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis OEM-defined"), HextoString));
+						m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis OEM-defined"), HextoString));
 						sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type3_Height))));
-						SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Height"), HextoString));
+						m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Height"), HextoString));
 						sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type3_Num_of_Power_Cords))));
-						SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Number of Power Cords"), HextoString));
+						m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Number of Power Cords"), HextoString));
 						sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type3_Contained_Element_Count))));
-						SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Contained Element Count(n)"), HextoString));
+						m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Contained Element Count(n)"), HextoString));
 						sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type3_Contained_Element_Length))));
-						SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Contained Element Record Length(m)"), HextoString));
+						m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis Contained Element Record Length(m)"), HextoString));
 						n = (BYTE)SmbiosADDR[Type3_Contained_Element_Count];
 						m = (BYTE)SmbiosADDR[Type3_Contained_Element_Length];
 						if (n > 0 || m > 0)
@@ -389,19 +344,19 @@ BOOL Smbios::GetSmbiosinfo()
 							{
 								sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type3_Contained_Element + (n*m - i - 1)))));
 							}
-							SystemEorC.insert(MapString::value_type(("System Enclosure or Chassis Contained Elements"), HextoString));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or Chassis Contained Elements"), HextoString));
 						}
 						else
 						{
 							sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type3_Contained_Element]);
-							SystemEorC.insert(MapString::value_type(("System Enclosure or Chassis Contained Elements"), HextoString));
+							m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or Chassis Contained Elements"), HextoString));
 						}
 
 						if (strcmp(("2.7"), SmbiosVersion.c_str()) <= 0)
 						{
 							if (n > 0 || m > 0)
 							{
-								SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis SKU Number"), dmi_to_string(dmi_head, SmbiosADDR[Type3_Contained_Element + n*m])));
+								m_smbios.SystemEorC.insert(MapString::value_type(("System Enclosure or  Chassis SKU Number"), dmi_to_string(dmi_head, SmbiosADDR[Type3_Contained_Element + n*m])));
 							}
 						}
 					}
@@ -412,81 +367,81 @@ BOOL Smbios::GetSmbiosinfo()
 			{
 				if (strcmp(("2.0"), SmbiosVersion.c_str()) <= 0)
 				{
-					Processorinfo.insert(MapString::value_type(("Processor Information Socket Designation"), dmi_to_string(dmi_head, SmbiosADDR[Type4_Socket_Designation])));
+					m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Socket Designation"), dmi_to_string(dmi_head, SmbiosADDR[Type4_Socket_Designation])));
 					if ((SmbiosADDR[Type4_Processor_Type] - 1)< 0x06)
 					{
-						Processorinfo.insert(MapString::value_type(("Processor Information Type"), Processor_Type[SmbiosADDR[Type4_Processor_Type] - 1]));
+						m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Type"), Processor_Type[SmbiosADDR[Type4_Processor_Type] - 1]));
 					}
 					if ((SmbiosADDR[Type4_Processor_Family] - 1) < sizeof(Processor_Family))
 					{
-						Processorinfo.insert(MapString::value_type(("Processor Information Family"), Processor_Family[SmbiosADDR[Type4_Processor_Family] - 1]));
+						m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Family"), Processor_Family[SmbiosADDR[Type4_Processor_Family] - 1]));
 					}
-					Processorinfo.insert(MapString::value_type(("Processor Information Processor Manufacturer"), dmi_to_string(dmi_head, SmbiosADDR[Type4_Processor_Manufacturer])));
+					m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Processor Manufacturer"), dmi_to_string(dmi_head, SmbiosADDR[Type4_Processor_Manufacturer])));
 					for (size_t i = 0; i < sizeof(int64_t); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Processor_ID + (sizeof(int64_t) - i - 1)))));
 					}
-					Processorinfo.insert(MapString::value_type(("Processor Information Processor ID"), HextoString));
-					Processorinfo.insert(MapString::value_type(("Processor Information Processor Version"), dmi_to_string(dmi_head, SmbiosADDR[Type4_Processor_Version])));
+					m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Processor ID"), HextoString));
+					m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Processor Version"), dmi_to_string(dmi_head, SmbiosADDR[Type4_Processor_Version])));
 					if (SmbiosADDR[Type4_Voltage] & 0x80)
 					{
 						switch (SmbiosADDR[Type4_Voltage] & 0x0F)
 						{
 						case 0x00:
-							Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("Unknown")));
+							m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("Unknown")));
 							break;
 						case 0x01:
-							Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("3.3V")));
+							m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("3.3V")));
 							break;
 						case 0x02:
-							Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("2.9V")));
+							m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("2.9V")));
 							break;
 						case 0x03:
-							Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("8.3V")));
+							m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("8.3V")));
 							break;
 						case 0x04:
-							Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("2.9V")));
+							m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("2.9V")));
 							break;
 						case 0x05:
-							Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("7.9V")));
+							m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("7.9V")));
 							break;
 						case 0x06:
-							Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("6.2V")));
+							m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("6.2V")));
 							break;
 						case 0x07:
-							Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("11.2V")));
+							m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), ("11.2V")));
 							break;
 						default:
 							sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type4_Voltage]);
-							Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), HextoString));
+							m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), HextoString));
 							break;
 						}
 					}
 					else
 					{
 						double Voltage = (SmbiosADDR[Type4_Voltage] - 0x80) / 10;
-						Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), to_string(Voltage) + ("V")));
+						m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Voltage"), std::to_string(Voltage) + ("V")));
 					}
 					for (size_t i = 0; i < sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_External_Clock + (sizeof(WORD) - i - 1)))));
 					}
-					Processorinfo.insert(MapString::value_type(("Processor Information External Clock"), HextoString));
+					m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information External Clock"), HextoString));
 					for (size_t i = 0; i < sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Max_Speed + (sizeof(WORD) - i - 1)))));
 					}
-					Processorinfo.insert(MapString::value_type(("Processor Information Max Speed"), HextoString));
+					m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Max Speed"), HextoString));
 					for (size_t i = 0; i < sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Current_Speed + (sizeof(WORD) - i - 1)))));
 					}
-					Processorinfo.insert(MapString::value_type(("Processor Information Current Speed"), HextoString));
+					m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Current Speed"), HextoString));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type4_Status]);
-					Processorinfo.insert(MapString::value_type(("Processor Information Status"), HextoString));//可解析 未解析
+					m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Status"), HextoString));//可解析 未解析
 					if ((SmbiosADDR[Type4_Processor_Upgrade] - 1) < sizeof(Processor_Socket))
 					{
-						Processorinfo.insert(MapString::value_type(("Processor Information Family"), Processor_Socket[SmbiosADDR[Type4_Processor_Upgrade] - 1]));
+						m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Family"), Processor_Socket[SmbiosADDR[Type4_Processor_Upgrade] - 1]));
 					}
 					if (strcmp(("2.1"), SmbiosVersion.c_str()) <= 0)
 					{
@@ -494,80 +449,80 @@ BOOL Smbios::GetSmbiosinfo()
 						{
 							sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_L1_Cache_Handle + (sizeof(WORD) - i - 1)))));
 						}
-						Processorinfo.insert(MapString::value_type(("Processor Information L1 Cache Handle"), HextoString));
+						m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information L1 Cache Handle"), HextoString));
 						for (size_t i = 0; i < sizeof(WORD); ++i)
 						{
 							sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_L2_Cache_Handle + (sizeof(WORD) - i - 1)))));
 						}
-						Processorinfo.insert(MapString::value_type(("Processor Information L2 Cache Handle"), HextoString));
+						m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information L2 Cache Handle"), HextoString));
 						for (size_t i = 0; i < sizeof(WORD); ++i)
 						{
 							sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_L3_Cache_Handle + (sizeof(WORD) - i - 1)))));
 						}
-						Processorinfo.insert(MapString::value_type(("Processor Information L3 Cache Handle"), HextoString));
+						m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information L3 Cache Handle"), HextoString));
 					}
 					if (strcmp(("2.3"), SmbiosVersion.c_str()) <= 0)
 					{
-						Processorinfo.insert(MapString::value_type(("Processor Information Serial Number"), dmi_to_string(dmi_head, SmbiosADDR[Type4_Serial_Number])));
-						Processorinfo.insert(MapString::value_type(("Processor Information Asset Tag"), dmi_to_string(dmi_head, SmbiosADDR[Type4_Asset_Tag])));
-						Processorinfo.insert(MapString::value_type(("Processor Information Part Number"), dmi_to_string(dmi_head, SmbiosADDR[Type4_Part_Number])));
+						m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Serial Number"), dmi_to_string(dmi_head, SmbiosADDR[Type4_Serial_Number])));
+						m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Asset Tag"), dmi_to_string(dmi_head, SmbiosADDR[Type4_Asset_Tag])));
+						m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Part Number"), dmi_to_string(dmi_head, SmbiosADDR[Type4_Part_Number])));
 					}
 					if (strcmp(("2.5"), SmbiosVersion.c_str()) <= 0)
 					{
 						sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Processor_Characteristics))));
-						Processorinfo.insert(MapString::value_type(("Processor Information Processor Characteristics"), HextoString));//可解析 未解析 懒得解析
+						m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Processor Characteristics"), HextoString));//可解析 未解析 懒得解析
 						if (strcmp(("3.0"), SmbiosVersion.c_str()) <= 0)
 						{
 							if (SmbiosADDR[Type4_Core_Count] < 0xFF)
 							{
 								if (SmbiosADDR[Type4_Core_Count] == 0)
 								{
-									Processorinfo.insert(MapString::value_type(("Processor Information Core Count"), ("Unknown")));
+									m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Core Count"), ("Unknown")));
 								}
 								sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Core_Count))));
-								Processorinfo.insert(MapString::value_type(("Processor Information Core Count"), HextoString));
+								m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Core Count"), HextoString));
 								sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Core_Enable))));
-								Processorinfo.insert(MapString::value_type(("Processor Information Core Enable"), HextoString));
+								m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Core Enable"), HextoString));
 								sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Thread_Count))));
-								Processorinfo.insert(MapString::value_type(("Processor Information Thread Count"), HextoString));
+								m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Thread Count"), HextoString));
 							}
 							else if (SmbiosADDR[Type4_Core_Count] == 0xFF)
 							{
 								if (SmbiosADDR[Type4_Core_Count2] > 0xFF)
 								{
 									sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Core_Count2))));
-									Processorinfo.insert(MapString::value_type(("Processor Information Core Count"), HextoString));
+									m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Core Count"), HextoString));
 									sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Core_Enable2))));
-									Processorinfo.insert(MapString::value_type(("Processor Information Core Enable"), HextoString));
+									m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Core Enable"), HextoString));
 									sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Thread_Count2))));
-									Processorinfo.insert(MapString::value_type(("Processor Information Thread Count"), HextoString));
+									m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Thread Count"), HextoString));
 								}
 								else
 								{
 									sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Core_Count))));
-									Processorinfo.insert(MapString::value_type(("Processor Information Core Count"), HextoString));
+									m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Core Count"), HextoString));
 									sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Core_Enable))));
-									Processorinfo.insert(MapString::value_type(("Processor Information Core Enable"), HextoString));
+									m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Core Enable"), HextoString));
 									sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Thread_Count))));
-									Processorinfo.insert(MapString::value_type(("Processor Information Thread Count"), HextoString));
+									m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Thread Count"), HextoString));
 								}
 							}
 						}
 						else
 						{
 							sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Core_Count))));
-							Processorinfo.insert(MapString::value_type(("Processor Information Core Count"), HextoString));
+							m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Core Count"), HextoString));
 							sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Core_Enable))));
-							Processorinfo.insert(MapString::value_type(("Processor Information Core Enable"), HextoString));
+							m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Core Enable"), HextoString));
 							sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type4_Thread_Count))));
-							Processorinfo.insert(MapString::value_type(("Processor Information Thread Count"), HextoString));
+							m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Thread Count"), HextoString));
 						}
 					}
 					if (strcmp(("2.6"), SmbiosVersion.c_str()) <= 0)
 					{
 						if ((SmbiosADDR[Type4_Processor_NFamily2] - 1) < sizeof(Processor_Family))
 						{
-							Processorinfo.insert(MapString::value_type(("Processor Information Family2"), Processor_Family[SmbiosADDR[Type4_Processor_NFamily2] - 1]));
+							m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information Family2"), Processor_Family[SmbiosADDR[Type4_Processor_NFamily2] - 1]));
 						}
 					}
 				}
@@ -579,126 +534,126 @@ BOOL Smbios::GetSmbiosinfo()
 				{
 					if ((SmbiosADDR[Type5_Error_Detecting_Method] - 1) < sizeof(Error_Detected_Method))
 					{
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Detecting Method"), Error_Detected_Method[SmbiosADDR[Type5_Error_Detecting_Method] - 1]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Detecting Method"), Error_Detected_Method[SmbiosADDR[Type5_Error_Detecting_Method] - 1]));
 					}
 					switch (SmbiosADDR[Type5_Error_COrrecting_Capability] & 0x3F)
 					{
 					case 0x01:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Correcting Capability"), Error_Correcting_Capability[0]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Correcting Capability"), Error_Correcting_Capability[0]));
 						break;
 					case 0x02:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Correcting Capability"), Error_Correcting_Capability[1]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Correcting Capability"), Error_Correcting_Capability[1]));
 						break;
 					case 0x04:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Correcting Capability"), Error_Correcting_Capability[2]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Correcting Capability"), Error_Correcting_Capability[2]));
 						break;
 					case 0x08:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Correcting Capability"), Error_Correcting_Capability[3]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Correcting Capability"), Error_Correcting_Capability[3]));
 						break;
 					case 0x10:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Correcting Capability"), Error_Correcting_Capability[4]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Correcting Capability"), Error_Correcting_Capability[4]));
 						break;
 					case 0x20:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Correcting Capability"), Error_Correcting_Capability[5]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Correcting Capability"), Error_Correcting_Capability[5]));
 						break;
 					default:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Correcting Capability"), Error_Correcting_Capability[6]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Correcting Capability"), Error_Correcting_Capability[6]));
 						break;
 					}
 					if ((SmbiosADDR[Type5_Supported_Interleave] - 1) < sizeof(Interleave_Support_field))
 					{
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Supported Interleave"), Interleave_Support_field[SmbiosADDR[Type5_Supported_Interleave] - 1]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Supported Interleave"), Interleave_Support_field[SmbiosADDR[Type5_Supported_Interleave] - 1]));
 					}
 					if ((SmbiosADDR[Type5_Current_Interleave] - 1) < sizeof(Interleave_Support_field))
 					{
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Current Interleave"), Interleave_Support_field[SmbiosADDR[Type5_Current_Interleave] - 1]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Family Error Current Interleave"), Interleave_Support_field[SmbiosADDR[Type5_Current_Interleave] - 1]));
 					}
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type5_Maximum_Memory_Moudule_size]);
-					MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Maximum Memory Module Size"), HextoString));
+					m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Maximum Memory Module Size"), HextoString));
 					switch (SmbiosADDR[Type5_Error_COrrecting_Capability] & 0x1F)
 					{
 					case 0x01:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Supported Memory Speed"), Memory_Speed_field[0]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Supported Memory Speed"), Memory_Speed_field[0]));
 						break;
 					case 0x02:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Supported Memory Speed"), Memory_Speed_field[1]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Supported Memory Speed"), Memory_Speed_field[1]));
 						break;
 					case 0x04:
 						break;
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Supported Memory Speed"), Memory_Speed_field[2]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Supported Memory Speed"), Memory_Speed_field[2]));
 					case 0x08:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Supported Memory Speed"), Memory_Speed_field[3]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Supported Memory Speed"), Memory_Speed_field[3]));
 						break;
 					case 0x10:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Supported Memory Speed"), Memory_Speed_field[4]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Supported Memory Speed"), Memory_Speed_field[4]));
 						break;
 					default:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Supported Memory Speed"), Memory_Speed_field[5]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Supported Memory Speed"), Memory_Speed_field[5]));
 						break;
 					}
 					switch ((SmbiosADDR[Type5_Supported_Memory_Types + 1] << 8) + SmbiosADDR[Type5_Supported_Memory_Types])
 					{
 					case 0x01:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[0]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[0]));
 						break;
 					case 0x02:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[1]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[1]));
 						break;
 					case 0x04:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[2]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[2]));
 						break;
 					case 0x08:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[3]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[3]));
 						break;
 					case 0x10:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[4]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[4]));
 						break;
 					case 0x20:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[5]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[5]));
 						break;
 					case 0x40:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[6]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[6]));
 						break;
 					case 0x80:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[7]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[7]));
 						break;
 					case 0x100:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[8]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[8]));
 						break;
 					case 0x200:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[9]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[9]));
 						break;
 					case 0x400:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[10]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[10]));
 						break;
 					default:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[11]));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Type"), Memory_Types[11]));
 						break;
 					}
 					switch (SmbiosADDR[Type5_Memory_Module_Voltage] & 0x0F)
 					{
 					case 0x01:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Module Voltage"), ("5V")));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Module Voltage"), ("5V")));
 						break;
 					case 0x02:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Module Voltage"), ("3.3V")));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Module Voltage"), ("3.3V")));
 						break;
 					case 0x04:
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Module Voltage"), ("2.9V")));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Module Voltage"), ("2.9V")));
 						break;
 					default:
 						sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type5_Memory_Module_Voltage]);
-						MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Module Voltage"), HextoString));
+						m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Memory Module Voltage"), HextoString));
 						break;
 					}
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type5_Num_of_Memory_Slots]);
-					MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Number of Associated Memory Slots"), HextoString));
+					m_smbios.MemoryCtrlinfo.insert(MapString::value_type(("Memory Controller Information Number of Associated Memory Slots"), HextoString));
 
 					for (size_t i = 0; i < SmbiosADDR[Type5_Num_of_Memory_Slots] * sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type5_Num_of_Memory_Slots + 1 + (SmbiosADDR[Type5_Num_of_Memory_Slots] * sizeof(WORD) - i - 1)))));
 					}
-					Processorinfo.insert(MapString::value_type(("Processor Information External Clock"), HextoString));
+					m_smbios.Processorinfo.insert(MapString::value_type(("Processor Information External Clock"), HextoString));
 				}
 			}
 
@@ -706,48 +661,48 @@ BOOL Smbios::GetSmbiosinfo()
 			{
 				if (strcmp(("2.0"), SmbiosVersion.c_str()) <= 0)
 				{
-					MemoryModinfo.insert(MapString::value_type(("Memory Module Information Socket Designation"), dmi_to_string(dmi_head, SmbiosADDR[Type6_Socket_Designation])));
+					m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Socket Designation"), dmi_to_string(dmi_head, SmbiosADDR[Type6_Socket_Designation])));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type6_Bank_Connections))));
-					MemoryModinfo.insert(MapString::value_type(("Memory Module Information Bank Connections"), HextoString));
+					m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Bank Connections"), HextoString));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type6_Current_Speed))));
-					MemoryModinfo.insert(MapString::value_type(("Memory Module Information Current Speed"), HextoString));
+					m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Current Speed"), HextoString));
 					switch ((SmbiosADDR[Type6_Current_Memory_Types + 1] << 8) + SmbiosADDR[Type6_Current_Memory_Types])
 					{
 					case 0x01:
-						MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[0]));
+						m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[0]));
 						break;
 					case 0x02:
-						MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[1]));
+						m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[1]));
 						break;
 					case 0x04:
-						MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[2]));
+						m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[2]));
 						break;
 					case 0x08:
-						MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[3]));
+						m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[3]));
 						break;
 					case 0x10:
-						MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[4]));
+						m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[4]));
 						break;
 					case 0x20:
-						MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[5]));
+						m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[5]));
 						break;
 					case 0x40:
-						MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[6]));
+						m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[6]));
 						break;
 					case 0x80:
-						MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[7]));
+						m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[7]));
 						break;
 					case 0x100:
-						MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[8]));
+						m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[8]));
 						break;
 					case 0x200:
-						MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[9]));
+						m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[9]));
 						break;
 					case 0x400:
-						MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[10]));
+						m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[10]));
 						break;
 					default:
-						MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[11]));
+						m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Memory Type"), Memory_Types[11]));
 						break;
 					}
 					/*	if (SmbiosADDR[Type6_Installed_Size])
@@ -770,17 +725,17 @@ BOOL Smbios::GetSmbiosinfo()
 					}
 					if (SmbiosADDR[Type6_Installed_Size] & 0x80)
 					{
-					temp = ("Double Bank ") + to_string((int)pow((int)2, SmbiosADDR[Type6_Installed_Size] & 0x7F)) + ("MB");
+					temp = ("Double Bank ") + std::to_string((int)pow((int)2, SmbiosADDR[Type6_Installed_Size] & 0x7F)) + ("MB");
 					strcpy_s(HextoString, sizeof(temp.c_str()) + 1, temp.c_str());
 					}
 					else
 					{
-					temp = ("Double Bank ") + to_string((int)pow((int)2, SmbiosADDR[Type6_Installed_Size] & 0x7F)) + ("MB");
+					temp = ("Double Bank ") + std::to_string((int)pow((int)2, SmbiosADDR[Type6_Installed_Size] & 0x7F)) + ("MB");
 					strcpy_s(HextoString, sizeof(temp.c_str()) + 1, temp.c_str());
 					}
 					}*/
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type6_Installed_Size]);
-					MemoryModinfo.insert(MapString::value_type(("Memory Module Information Installed Size"), HextoString));
+					m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Installed Size"), HextoString));
 					/*if (SmbiosADDR[Type6_Enabled_Size])
 					{
 					string temp;
@@ -801,19 +756,19 @@ BOOL Smbios::GetSmbiosinfo()
 					}
 					if (SmbiosADDR[Type6_Enabled_Size] & 0x80)
 					{
-					temp = ("Double Bank ") + to_string((int)pow((int)2, SmbiosADDR[Type6_Enabled_Size] & 0x7F)) + ("MB");
+					temp = ("Double Bank ") + std::to_string((int)pow((int)2, SmbiosADDR[Type6_Enabled_Size] & 0x7F)) + ("MB");
 					strcpy_s(HextoString, sizeof(temp.c_str()) + 1, temp.c_str());
 					}
 					else
 					{
-					temp = ("Double Bank ") + to_string((int)pow((int)2, SmbiosADDR[Type6_Enabled_Size] & 0x7F)) + ("MB");
+					temp = ("Double Bank ") + std::to_string((int)pow((int)2, SmbiosADDR[Type6_Enabled_Size] & 0x7F)) + ("MB");
 					strcpy_s(HextoString, sizeof(temp.c_str()) + 1, temp.c_str());
 					}
 					}*/
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type6_Enabled_Size]);
-					MemoryModinfo.insert(MapString::value_type(("Memory Module Information Enabled Size"), HextoString));
+					m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information Enabled Size"), HextoString));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type6_Error_Status))));
-					MemoryModinfo.insert(MapString::value_type(("Memory Module Information ERROR State"), HextoString));
+					m_smbios.MemoryModinfo.insert(MapString::value_type(("Memory Module Information ERROR State"), HextoString));
 				}
 			}
 			//没搞定7 一会再说
@@ -841,7 +796,7 @@ BOOL Smbios::GetSmbiosinfo()
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type7_Installed_Size + (sizeof(WORD) - i - 1)))));
 					}
 					Type7String.insert(MapString::value_type(("Cache Information Installed Size"), HextoString));
-					string sram;
+					std::string sram;
 					for (size_t i = 0; i < SRAM_Type->length(); ++i)
 					{
 
@@ -918,7 +873,7 @@ BOOL Smbios::GetSmbiosinfo()
 						}
 						Type7String.insert(MapString::value_type(("Cache Information Maximum Installed Cache Size 2"), HextoString));
 					}
-					Cacheinfo.emplace_back(Type7String);
+					m_smbios.Cacheinfo.emplace_back(Type7String);
 					Type7String.clear();
 				}
 			}
@@ -955,7 +910,7 @@ BOOL Smbios::GetSmbiosinfo()
 						Type8Map.insert(MapString::value_type(("Port Connector Information Port Type"), Port_Types[SmbiosADDR[Type8_Port_Type]]));
 					}
 					Type8Map.insert(MapString::value_type(("Port Connector Information External Reference Designator"), dmi_to_string(dmi_head, SmbiosADDR[Type8_External_Reference_Designator])));
-					Portinfo.emplace_back(Type8Map);
+					m_smbios.Portinfo.emplace_back(Type8Map);
 					Type8Map.clear();
 				}
 			}
@@ -1004,7 +959,7 @@ BOOL Smbios::GetSmbiosinfo()
 							Type9String.insert(MapString::value_type(("System Slots Slot Function Number"), HextoString));
 						}
 					}
-					SystemSlotinfo.emplace_back(Type9String);
+					m_smbios.SystemSlotinfo.emplace_back(Type9String);
 					Type9String.clear();
 				}
 			}
@@ -1015,9 +970,9 @@ BOOL Smbios::GetSmbiosinfo()
 				{
 					for (WORD n = 1; n <= (dmi_head->length - 4) / 2; ++n)
 					{
-						BroadDevinfo.insert(MapString::value_type(("Board Devices ") + to_string(n) + (" Status"), (SmbiosADDR[4 + 2 * (n - 1)] & 0x80) ? ("Device Enabled") : ("Device Disabled")));
-						BroadDevinfo.insert(MapString::value_type(("Board Devices ") + to_string(n) + (" Type"), Onboard_Device_Types[(SmbiosADDR[4 + 2 * (n - 1)] & 0x7F) - 1]));
-						BroadDevinfo.insert(MapString::value_type(("Board Devices Information Description"), dmi_to_string(dmi_head, SmbiosADDR[5 + 2 * (n - 1)])));
+						m_smbios.BroadDevinfo.insert(MapString::value_type(("Board Devices ") + std::to_string(n) + (" Status"), (SmbiosADDR[4 + 2 * (n - 1)] & 0x80) ? ("Device Enabled") : ("Device Disabled")));
+						m_smbios.BroadDevinfo.insert(MapString::value_type(("Board Devices ") + std::to_string(n) + (" Type"), Onboard_Device_Types[(SmbiosADDR[4 + 2 * (n - 1)] & 0x7F) - 1]));
+						m_smbios.BroadDevinfo.insert(MapString::value_type(("Board Devices Information Description"), dmi_to_string(dmi_head, SmbiosADDR[5 + 2 * (n - 1)])));
 					}
 				}
 			}
@@ -1025,20 +980,20 @@ BOOL Smbios::GetSmbiosinfo()
 			if (dmi_head->type == 11)
 			{
 				sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type11_Count]);
-				OEMString.insert(MapString::value_type(("OEM Strings Count"), HextoString));
+				m_smbios.OEMString.insert(MapString::value_type(("OEM Strings Count"), HextoString));
 				for (BYTE i = 1; i <= SmbiosADDR[Type11_Count]; ++i)
 				{
-					OEMString.insert(MapString::value_type(("OEM Strings ") + to_string(i), dmi_to_string(dmi_head, i)));
+					m_smbios.OEMString.insert(MapString::value_type(("OEM Strings ") + std::to_string(i), dmi_to_string(dmi_head, i)));
 				}
 			}
 
 			if (dmi_head->type == 12)
 			{
 				sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type12_Count]);
-				SystemConfigOption.insert(MapString::value_type(("System Configuration Options Count"), HextoString));
+				m_smbios.SystemConfigOption.insert(MapString::value_type(("System Configuration Options Count"), HextoString));
 				for (BYTE i = 1; i <= SmbiosADDR[Type12_Count]; ++i)
 				{
-					SystemConfigOption.insert(MapString::value_type(("System Configuration Options ") + to_string(i), dmi_to_string(dmi_head, i)));
+					m_smbios.SystemConfigOption.insert(MapString::value_type(("System Configuration Options ") + std::to_string(i), dmi_to_string(dmi_head, i)));
 				}
 			}
 
@@ -1047,16 +1002,16 @@ BOOL Smbios::GetSmbiosinfo()
 				if (strcmp(("2.0"), SmbiosVersion.c_str()) <= 0)
 				{
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", (SmbiosADDR[Type13_Installable_Languages]));
-					BIOSLanginfo.insert(MapString::value_type(("BIOS Language Installable Languages"), HextoString));
+					m_smbios.BIOSLanginfo.insert(MapString::value_type(("BIOS Language Installable Languages"), HextoString));
 					if (strcmp(("2.1"), SmbiosVersion.c_str()) <= 0)
 					{
-						BIOSLanginfo.insert(MapString::value_type(("BIOS Language Flags"), (SmbiosADDR[Type13_Flags] & 0x01) ? ("Abbreviated format") : ("Long format")));
-						BIOSLanginfo.insert(MapString::value_type(("BIOS Language Current Language"), dmi_to_string(dmi_head, SmbiosADDR[Type13_Current_Languages])));
+						m_smbios.BIOSLanginfo.insert(MapString::value_type(("BIOS Language Flags"), (SmbiosADDR[Type13_Flags] & 0x01) ? ("Abbreviated format") : ("Long format")));
+						m_smbios.BIOSLanginfo.insert(MapString::value_type(("BIOS Language Current Language"), dmi_to_string(dmi_head, SmbiosADDR[Type13_Current_Languages])));
 						if(SmbiosADDR[Type13_Installable_Languages] > 0)
 						{
 							for (BYTE i = 1; i <= SmbiosADDR[Type13_Installable_Languages]; ++i)
 							{
-								BIOSLanginfo.insert(MapString::value_type(("BIOS Language Installable Language ") + to_string(i), dmi_to_string(dmi_head, i)));
+								m_smbios.BIOSLanginfo.insert(MapString::value_type(("BIOS Language Installable Language ") + std::to_string(i), dmi_to_string(dmi_head, i)));
 							}
 						}
 					}
@@ -1065,15 +1020,15 @@ BOOL Smbios::GetSmbiosinfo()
 
 			if (dmi_head->type == 14)
 			{
-				GroupAssociations.insert(MapString::value_type(("Group Associations Group Name"), dmi_to_string(dmi_head, SmbiosADDR[Type14_Group_Name])));
+				m_smbios.GroupAssociations.insert(MapString::value_type(("Group Associations Group Name"), dmi_to_string(dmi_head, SmbiosADDR[Type14_Group_Name])));
 				for (WORD n = 1; n <= (dmi_head->length - 5) / 3; ++n)
 				{
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type14_Item_Type + ((n - 1) * 3)]);
-					SystemConfigOption.insert(MapString::value_type(("Group Associations Item Type") + to_string(n), HextoString));
+					m_smbios.SystemConfigOption.insert(MapString::value_type(("Group Associations Item Type") + std::to_string(n), HextoString));
 					for (WORD m = 0; m < sizeof(WORD); ++m)
 					{
 						sprintf_s(HextoString + (m * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type14_Item_Handle + ((n - 1) * 3) + (sizeof(WORD) - m - 1)))));
-						SystemConfigOption.insert(MapString::value_type(("Group Associations Item Handle") + to_string(n), HextoString));
+						m_smbios.SystemConfigOption.insert(MapString::value_type(("Group Associations Item Handle") + std::to_string(n), HextoString));
 					}
 				}
 
@@ -1087,40 +1042,40 @@ BOOL Smbios::GetSmbiosinfo()
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type15_Log_Area_Length + (sizeof(WORD) - i - 1)))));
 					}
-					SysEventLog.insert(MapString::value_type(("System Event Log Area Length"), HextoString));
+					m_smbios.SysEventLog.insert(MapString::value_type(("System Event Log Area Length"), HextoString));
 					for (size_t i = 0; i < sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type15_Log_Header_Start_Offset + (sizeof(WORD) - i - 1)))));
 					}
-					SysEventLog.insert(MapString::value_type(("System Event Log Header Start Offset"), HextoString));
+					m_smbios.SysEventLog.insert(MapString::value_type(("System Event Log Header Start Offset"), HextoString));
 					for (size_t i = 0; i < sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type15_Log_Data_Start_Offset + (sizeof(WORD) - i - 1)))));
 					}
-					SysEventLog.insert(MapString::value_type(("System Event Log Data Start Offset"), HextoString));
+					m_smbios.SysEventLog.insert(MapString::value_type(("System Event Log Data Start Offset"), HextoString));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", (SmbiosADDR[Type15_Access_Method]));
-					SysEventLog.insert(MapString::value_type(("System Event Log Access Method"), HextoString));
+					m_smbios.SysEventLog.insert(MapString::value_type(("System Event Log Access Method"), HextoString));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", (SmbiosADDR[Type15_Log_Status]));
-					SysEventLog.insert(MapString::value_type(("System Event Log Status"), HextoString));
+					m_smbios.SysEventLog.insert(MapString::value_type(("System Event Log Status"), HextoString));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", (SmbiosADDR[Type15_Log_Status]));
 					for (size_t i = 0; i < sizeof(DWORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type15_Log_Change_Token + (sizeof(DWORD) - i - 1)))));
 					}
-					SysEventLog.insert(MapString::value_type(("System Event Log Change Token"), HextoString));
+					m_smbios.SysEventLog.insert(MapString::value_type(("System Event Log Change Token"), HextoString));
 					for (size_t i = 0; i < sizeof(DWORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type15_Access_Method_Address + (sizeof(DWORD) - i - 1)))));
 					}
-					SysEventLog.insert(MapString::value_type(("System Event Log Access Method Address"), HextoString));
+					m_smbios.SysEventLog.insert(MapString::value_type(("System Event Log Access Method Address"), HextoString));
 					if (strcmp(("2.1"), SmbiosVersion.c_str()) <= 0)
 					{
 						sprintf_s(HextoString, sizeof(HextoString), "%02X", (SmbiosADDR[Type15_Log_Header_Format]));
-						SysEventLog.insert(MapString::value_type(("System Event Log Number of Supported Log Type Descriptors"), HextoString));
+						m_smbios.SysEventLog.insert(MapString::value_type(("System Event Log Number of Supported Log Type Descriptors"), HextoString));
 						sprintf_s(HextoString, sizeof(HextoString), "%02X", (SmbiosADDR[Type15_Num_of_Supported_Log_Types]));
-						SysEventLog.insert(MapString::value_type(("System Event Log Number of Supported Log Type Descriptors"), HextoString));
+						m_smbios.SysEventLog.insert(MapString::value_type(("System Event Log Number of Supported Log Type Descriptors"), HextoString));
 						sprintf_s(HextoString, sizeof(HextoString), "%02X", (SmbiosADDR[Type15_Length_Log_Type]));
-						SysEventLog.insert(MapString::value_type(("System Event Log Length of each Log Type Type Descriptors"), HextoString));
+						m_smbios.SysEventLog.insert(MapString::value_type(("System Event Log Length of each Log Type Type Descriptors"), HextoString));
 					}
 				}
 			}
@@ -1156,7 +1111,7 @@ BOOL Smbios::GetSmbiosinfo()
 						}
 						Type16String.insert(MapString::value_type(("Physical Memory Array Extended Maximum Capacity"), HextoString));
 					}
-					PhysicalMemoryArray.emplace_back(Type16String);
+					m_smbios.PhysicalMemoryArray.emplace_back(Type16String);
 					Type16String.clear();
 				}
 			}
@@ -1250,7 +1205,7 @@ BOOL Smbios::GetSmbiosinfo()
 							Type17String.insert(MapString::value_type(("Memory Device Configured Voltage"), HextoString));
 						}
 					}
-					MemoryDev.emplace_back(Type17String);
+					m_smbios.MemoryDev.emplace_back(Type17String);
 					Type17String.clear();
 				}
 			}
@@ -1283,7 +1238,7 @@ BOOL Smbios::GetSmbiosinfo()
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type18_Error_Resolution + (sizeof(DWORD) - i - 1)))));
 					}
 					Type18String.insert(MapString::value_type(("Memory Error Error Resolution"), HextoString));
-					MemoryErrinfo.emplace_back(Type18String);
+					m_smbios.MemoryErrinfo.emplace_back(Type18String);
 					Type18String.clear();
 				}
 			}
@@ -1323,7 +1278,7 @@ BOOL Smbios::GetSmbiosinfo()
 						}
 						Type19String.insert(MapString::value_type(("Memory Array Mapped Address Extended Ending Address"), HextoString));
 					}
-					MemArrayMappedAddress.emplace_back(Type19String);
+					m_smbios.MemArrayMappedAddress.emplace_back(Type19String);
 					Type19String.clear();
 				}
 			}
@@ -1372,7 +1327,7 @@ BOOL Smbios::GetSmbiosinfo()
 						}
 						Type20String.insert(MapString::value_type(("Memory Device Mapped Address Extended Ending Address"), HextoString));
 					}
-					MemDevMappedAddress.emplace_back(Type20String);
+					m_smbios.MemDevMappedAddress.emplace_back(Type20String);
 					Type20String.clear();
 				}
 			}
@@ -1382,10 +1337,10 @@ BOOL Smbios::GetSmbiosinfo()
 				if (strcmp(("2.1"), SmbiosVersion.c_str()) <= 0)
 				{
 					
-					Pointing_Dev.insert(MapString::value_type(("Built-in Pointing Device Type"), Pointing_Device_Type[SmbiosADDR[Type21_Types] - 1]));
-					Pointing_Dev.insert(MapString::value_type(("Built-in Pointing Device Interface"), Pointing_Device_Interface[SmbiosADDR[Type21_Interface] - 1]));
+					m_smbios.Pointing_Dev.insert(MapString::value_type(("Built-in Pointing Device Type"), Pointing_Device_Type[SmbiosADDR[Type21_Types] - 1]));
+					m_smbios.Pointing_Dev.insert(MapString::value_type(("Built-in Pointing Device Interface"), Pointing_Device_Interface[SmbiosADDR[Type21_Interface] - 1]));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type21_Num_of_Buttons]);
-					Pointing_Dev.insert(MapString::value_type(("Built-in Pointing Device Number of Buttons"), HextoString));
+					m_smbios.Pointing_Dev.insert(MapString::value_type(("Built-in Pointing Device Number of Buttons"), HextoString));
 				}
 			}
 
@@ -1393,43 +1348,43 @@ BOOL Smbios::GetSmbiosinfo()
 			{
 				if (strcmp(("2.1"), SmbiosVersion.c_str()) <= 0)
 				{
-					Portable_Battery.insert(MapString::value_type(("Portable Battery Location"), dmi_to_string(dmi_head, SmbiosADDR[Type22_Location])));
-					Portable_Battery.insert(MapString::value_type(("Portable Battery Manufacturer"), dmi_to_string(dmi_head, SmbiosADDR[Type22_Manufacturer])));
-					Portable_Battery.insert(MapString::value_type(("Portable Battery Serial Number"), dmi_to_string(dmi_head, SmbiosADDR[Type22_Serial_Number])));
-					Portable_Battery.insert(MapString::value_type(("Portable Battery Manufacturer Date"), dmi_to_string(dmi_head, SmbiosADDR[Type22_Manufacturer_Date])));
-					Portable_Battery.insert(MapString::value_type(("Portable Battery Device Name"), dmi_to_string(dmi_head, SmbiosADDR[Type22_Device_Name])));
-					Portable_Battery.insert(MapString::value_type(("Portable Battery Device Name"), Portable_Battery_Device_Chemistry[SmbiosADDR[Type22_Device_Chemistry] - 1]));
+					m_smbios.Portable_Battery.insert(MapString::value_type(("Portable Battery Location"), dmi_to_string(dmi_head, SmbiosADDR[Type22_Location])));
+					m_smbios.Portable_Battery.insert(MapString::value_type(("Portable Battery Manufacturer"), dmi_to_string(dmi_head, SmbiosADDR[Type22_Manufacturer])));
+					m_smbios.Portable_Battery.insert(MapString::value_type(("Portable Battery Serial Number"), dmi_to_string(dmi_head, SmbiosADDR[Type22_Serial_Number])));
+					m_smbios.Portable_Battery.insert(MapString::value_type(("Portable Battery Manufacturer Date"), dmi_to_string(dmi_head, SmbiosADDR[Type22_Manufacturer_Date])));
+					m_smbios.Portable_Battery.insert(MapString::value_type(("Portable Battery Device Name"), dmi_to_string(dmi_head, SmbiosADDR[Type22_Device_Name])));
+					m_smbios.Portable_Battery.insert(MapString::value_type(("Portable Battery Device Name"), Portable_Battery_Device_Chemistry[SmbiosADDR[Type22_Device_Chemistry] - 1]));
 					for (size_t i = 0; i < sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type22_Design_Capacity + (sizeof(WORD) - i - 1)))));
 					}
-					Portable_Battery.insert(MapString::value_type(("Portable Battery Design Capacity"), HextoString));
+					m_smbios.Portable_Battery.insert(MapString::value_type(("Portable Battery Design Capacity"), HextoString));
 					for (size_t i = 0; i < sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type22_Design_Voltage + (sizeof(WORD) - i - 1)))));
 					}
-					Portable_Battery.insert(MapString::value_type(("Portable Battery Design Voltage"), HextoString));
-					Portable_Battery.insert(MapString::value_type(("Portable Battery SBDS Version Number"), dmi_to_string(dmi_head, SmbiosADDR[Type22_SBDS_Version_Number])));
+					m_smbios.Portable_Battery.insert(MapString::value_type(("Portable Battery Design Voltage"), HextoString));
+					m_smbios.Portable_Battery.insert(MapString::value_type(("Portable Battery SBDS Version Number"), dmi_to_string(dmi_head, SmbiosADDR[Type22_SBDS_Version_Number])));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type22_Maximum_Error_In_Battery_Data]);
-					Portable_Battery.insert(MapString::value_type(("Portable Battery Maximum Error In Battery Data"), HextoString));
+					m_smbios.Portable_Battery.insert(MapString::value_type(("Portable Battery Maximum Error In Battery Data"), HextoString));
 					for (size_t i = 0; i < sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type22_SDBS_Serial_Number + (sizeof(WORD) - i - 1)))));
 					}
-					Portable_Battery.insert(MapString::value_type(("Portable Battery SBDS Serial Number"), HextoString));
+					m_smbios.Portable_Battery.insert(MapString::value_type(("Portable Battery SBDS Serial Number"), HextoString));
 					for (size_t i = 0; i < sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type22_SDBS_Manufacturer_Date + (sizeof(WORD) - i - 1)))));
 					}
-					Portable_Battery.insert(MapString::value_type(("Portable Battery SBDS Manufacture Date"), HextoString));
-					Portable_Battery.insert(MapString::value_type(("Portable Battery SBDS Device Chemistry"), dmi_to_string(dmi_head, SmbiosADDR[Type22_SDBS_Device_Chemistry])));
+					m_smbios.Portable_Battery.insert(MapString::value_type(("Portable Battery SBDS Manufacture Date"), HextoString));
+					m_smbios.Portable_Battery.insert(MapString::value_type(("Portable Battery SBDS Device Chemistry"), dmi_to_string(dmi_head, SmbiosADDR[Type22_SDBS_Device_Chemistry])));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type22_Design_Capacity_Multiplier]);
-					Portable_Battery.insert(MapString::value_type(("Portable Battery Design Capacity Capacity"), HextoString));
+					m_smbios.Portable_Battery.insert(MapString::value_type(("Portable Battery Design Capacity Capacity"), HextoString));
 					for (size_t i = 0; i < sizeof(DWORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type22_OEM_specific + (sizeof(DWORD) - i - 1)))));
 					}
-					Portable_Battery.insert(MapString::value_type(("Portable Battery OEM-specific"), HextoString));
+					m_smbios.Portable_Battery.insert(MapString::value_type(("Portable Battery OEM-specific"), HextoString));
 				}
 			}
 
@@ -1438,34 +1393,34 @@ BOOL Smbios::GetSmbiosinfo()
 				if (strcmp(("2.1"), SmbiosVersion.c_str()) <= 0)
 				{
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type23_Capabilities]);
-					System_Reset.insert(MapString::value_type(("System Reset Capabilities"), HextoString));
+					m_smbios.System_Reset.insert(MapString::value_type(("System Reset Capabilities"), HextoString));
 					for (size_t i = 0; i < sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type23_Reset_Count + (sizeof(WORD) - i - 1)))));
 					}
-					System_Reset.insert(MapString::value_type(("System Reset Count"), HextoString));
+					m_smbios.System_Reset.insert(MapString::value_type(("System Reset Count"), HextoString));
 					for (size_t i = 0; i < sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type23_Reset_Limit + (sizeof(WORD) - i - 1)))));
 					}
-					System_Reset.insert(MapString::value_type(("System Reset Limit"), HextoString));
+					m_smbios.System_Reset.insert(MapString::value_type(("System Reset Limit"), HextoString));
 					for (size_t i = 0; i < sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type23_Timer_Interval + (sizeof(WORD) - i - 1)))));
 					}
-					System_Reset.insert(MapString::value_type(("System Reset Timer Interval"), HextoString));
+					m_smbios.System_Reset.insert(MapString::value_type(("System Reset Timer Interval"), HextoString));
 					for (size_t i = 0; i < sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type23_Timeout + (sizeof(WORD) - i - 1)))));
 					}
-					System_Reset.insert(MapString::value_type(("System Reset Timeout"), HextoString));
+					m_smbios.System_Reset.insert(MapString::value_type(("System Reset Timeout"), HextoString));
 				}
 			}
 
 			if (dmi_head->type == 24)
 			{
 				sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type24_Hardware_Security_Settings]);
-				Hardware_Security.insert(MapString::value_type(("Hardware Security Settings"), HextoString));
+				m_smbios.Hardware_Security.insert(MapString::value_type(("Hardware Security Settings"), HextoString));
 			}
 
 			if (dmi_head->type == 25)
@@ -1473,15 +1428,15 @@ BOOL Smbios::GetSmbiosinfo()
 				if (strcmp(("2.1"), SmbiosVersion.c_str()) <= 0)
 				{
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type25_Next_Scheduled_Power_on_Month]);
-					System_Power_Controls.insert(MapString::value_type(("System Power Controls Next Scheduled Power - on Month"), HextoString));
+					m_smbios.System_Power_Controls.insert(MapString::value_type(("System Power Controls Next Scheduled Power - on Month"), HextoString));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type25_Next_Scheduled_Power_on_Day]);
-					System_Power_Controls.insert(MapString::value_type(("System Power Controls Next Scheduled Power - on Day-of-month"), HextoString));
+					m_smbios.System_Power_Controls.insert(MapString::value_type(("System Power Controls Next Scheduled Power - on Day-of-month"), HextoString));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type25_Next_Scheduled_Power_on_Hour]);
-					System_Power_Controls.insert(MapString::value_type(("System Power Controls Next Scheduled Power - on Hour"), HextoString));
+					m_smbios.System_Power_Controls.insert(MapString::value_type(("System Power Controls Next Scheduled Power - on Hour"), HextoString));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type25_Next_Scheduled_Power_on_Minute]);
-					System_Power_Controls.insert(MapString::value_type(("System Power Controls Next Scheduled Power - on Minute"), HextoString));
+					m_smbios.System_Power_Controls.insert(MapString::value_type(("System Power Controls Next Scheduled Power - on Minute"), HextoString));
 					sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type25_Next_Scheduled_Power_on_Second]);
-					System_Power_Controls.insert(MapString::value_type(("System Power Controls Next Scheduled Power - on Second"), HextoString));
+					m_smbios.System_Power_Controls.insert(MapString::value_type(("System Power Controls Next Scheduled Power - on Second"), HextoString));
 				}
 			}
 
@@ -1590,7 +1545,7 @@ BOOL Smbios::GetSmbiosinfo()
 					sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type26_Nominal_Value + (sizeof(WORD) - i - 1)))));
 				}
 				Type26String.insert(MapString::value_type(("Voltage Probe Nominal Value"), HextoString));
-				Voltage_Probe.emplace_back(Type26String);
+				m_smbios.Voltage_Probe.emplace_back(Type26String);
 				Type26String.clear();
 			}
 
@@ -1685,7 +1640,7 @@ BOOL Smbios::GetSmbiosinfo()
 					{
 						Type27String.insert(MapString::value_type(("Cooling Device Description"), dmi_to_string(dmi_head, SmbiosADDR[Type27_Description])));
 					}
-					CoolingDev.emplace_back(Type27String);
+					m_smbios.CoolingDev.emplace_back(Type27String);
 					Type27String.clear();
 				}
 			}
@@ -1805,7 +1760,7 @@ BOOL Smbios::GetSmbiosinfo()
 					sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type28_Nominal_Value + (sizeof(WORD) - i - 1)))));
 				}
 				Type28String.insert(MapString::value_type(("Temperature Probe Nominal Value"), HextoString));
-				TemperatureProbe.emplace_back(Type28String);
+				m_smbios.TemperatureProbe.emplace_back(Type28String);
 				Type28String.clear();
 
 			}
@@ -1914,7 +1869,7 @@ BOOL Smbios::GetSmbiosinfo()
 					sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type29_Nominal_Value + (sizeof(WORD) - i - 1)))));
 				}
 				Type29String.insert(MapString::value_type(("Electrical Current Probe Nominal Value"), HextoString));
-				ElectricalCurrentProbe.emplace_back(Type29String);
+				m_smbios.ElectricalCurrentProbe.emplace_back(Type29String);
 				Type29String.clear();
 
 			}
@@ -1925,7 +1880,7 @@ BOOL Smbios::GetSmbiosinfo()
 				Type30String.insert(MapString::value_type(("Out-of-Band Remote Access Manufacturer Name"), dmi_to_string(dmi_head, SmbiosADDR[Type30_Manufacturer_Name])));
 				sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type30_Connections]);
 				Type30String.insert(MapString::value_type(("Out-of-Band Remote Access Connections"), HextoString));
-				BandRemoteAccess.emplace_back(Type30String);
+				m_smbios.BandRemoteAccess.emplace_back(Type30String);
 				Type30String.clear();
 			}
 
@@ -1940,7 +1895,7 @@ BOOL Smbios::GetSmbiosinfo()
 					}
 					Type32String.insert(MapString::value_type(("System Boot Status"), HextoString));
 				}
-				Systembootstatus.emplace_back(Type32String);
+				m_smbios.Systembootstatus.emplace_back(Type32String);
 				Type32String.clear();
 			}
 
@@ -1977,7 +1932,7 @@ BOOL Smbios::GetSmbiosinfo()
 					sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type33_Error_Resolution + (sizeof(DWORD) - i - 1)))));
 				}
 				Type33String.insert(MapString::value_type(("64-Bit Memory Error Information Error Resolution"), HextoString));
-				MemoryError64Bit.emplace_back(Type33String);
+				m_smbios.MemoryError64Bit.emplace_back(Type33String);
 				Type33String.clear();
 			}
 
@@ -1992,7 +1947,7 @@ BOOL Smbios::GetSmbiosinfo()
 					sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type34_Address + (sizeof(DWORD) - i - 1)))));
 				}
 				Type34String.insert(MapString::value_type(("Management Device Address"), HextoString));
-				ManagementDevice.emplace_back(Type34String);
+				m_smbios.ManagementDevice.emplace_back(Type34String);
 				Type34String.clear();
 			}
 
@@ -2015,7 +1970,7 @@ BOOL Smbios::GetSmbiosinfo()
 					sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type35_Threshold_Handle + (sizeof(WORD) - i - 1)))));
 				}
 				Type35String.insert(MapString::value_type(("Management Device Component Threshold Handle"), HextoString));
-				ManagementDeviceComponent.emplace_back(Type35String);
+				m_smbios.ManagementDeviceComponent.emplace_back(Type35String);
 				Type35String.clear();
 			}
 
@@ -2052,7 +2007,7 @@ BOOL Smbios::GetSmbiosinfo()
 					sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type36_Upper_Threshold_Nonrecoverable + (sizeof(WORD) - i - 1)))));
 				}
 				Type36String.insert(MapString::value_type(("Management Device Threshold Data Upper Threshold Non-recoverable"), HextoString));
-				ManagementDeviceComponentThresholdData.emplace_back(Type36String);
+				m_smbios.ManagementDeviceComponentThresholdData.emplace_back(Type36String);
 				Type36String.clear();
 			}
 
@@ -2094,16 +2049,16 @@ BOOL Smbios::GetSmbiosinfo()
 					for (size_t i = 1; i <= n; ++i)
 					{
 						sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type37_Memory1_Device_Load + 3 * (n - 1)]);
-						Type37String.insert(MapString::value_type(("Memory Channel Memory Device Load") + to_string(i), HextoString));
+						Type37String.insert(MapString::value_type(("Memory Channel Memory Device Load") + std::to_string(i), HextoString));
 						for (size_t i = 0; i < sizeof(WORD); ++i)
 						{
 							sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type37_Memory1_Device_Handle + 3 * (n - 1) + (sizeof(WORD) - i - 1)))));
 						}
-						Type37String.insert(MapString::value_type(("Memory Channel Memory Device Handle") + to_string(i), HextoString));
+						Type37String.insert(MapString::value_type(("Memory Channel Memory Device Handle") + std::to_string(i), HextoString));
 					}
 
 				}
-				MemoryChannel.emplace_back(Type37String);
+				m_smbios.MemoryChannel.emplace_back(Type37String);
 				Type37String.clear();
 			}
 
@@ -2143,7 +2098,7 @@ BOOL Smbios::GetSmbiosinfo()
 				Type38String.insert(MapString::value_type(("IPMI Device Base Address Modifier / Interrupt Info"), HextoString));
 				sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type38_Interrupt_Number]);
 				Type38String.insert(MapString::value_type(("IPMI Device Interrupt Number"), HextoString));
-				IPMIDeviceinfo.emplace_back(Type38String);
+				m_smbios.IPMIDeviceinfo.emplace_back(Type38String);
 				Type38String.clear();
 			}
 
@@ -2184,7 +2139,7 @@ BOOL Smbios::GetSmbiosinfo()
 					sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type39_Input_Current_Probe_Handle + (sizeof(WORD) - i - 1)))));
 				}
 				Type39String.insert(MapString::value_type(("System Power Supply Input Current Probe Handle"), HextoString));
-				SystemPowerSupply.emplace_back(Type39String);
+				m_smbios.SystemPowerSupply.emplace_back(Type39String);
 				Type39String.clear();
 			}
 
@@ -2198,18 +2153,18 @@ BOOL Smbios::GetSmbiosinfo()
 					for (size_t i = 1; i <= SmbiosADDR[Type40_Num_of_Addition_Inf_Entries]; ++i)
 					{
 						sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type40_Addition_Inf_Entries + 4 * (i - 1)]);
-						Type40String.insert(MapString::value_type(("Number of Additional Information Entry Length") + to_string(i), HextoString));
+						Type40String.insert(MapString::value_type(("Number of Additional Information Entry Length") + std::to_string(i), HextoString));
 						for (size_t i = 0; i < sizeof(WORD); ++i)
 						{
 							sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type40_Addition_Inf_Entries + 1 + 4 * (i - 1) + (sizeof(WORD) - i - 1)))));
 						}
-						Type40String.insert(MapString::value_type(("Number of Additional Information Referenced Handle") + to_string(i), HextoString));
+						Type40String.insert(MapString::value_type(("Number of Additional Information Referenced Handle") + std::to_string(i), HextoString));
 						sprintf_s(HextoString, sizeof(HextoString), "%02X", SmbiosADDR[Type40_Addition_Inf_Entries + 3 + 4 * (i - 1)]);
-						Type40String.insert(MapString::value_type(("Number of Additional Information Referenced Offset") + to_string(i), HextoString));
+						Type40String.insert(MapString::value_type(("Number of Additional Information Referenced Offset") + std::to_string(i), HextoString));
 						Type40String.insert(MapString::value_type(("Number of Additional Information String"), dmi_to_string(dmi_head, SmbiosADDR[Type40_Addition_Inf_Entries + 4 + 4 * (i - 1)])));
 					}
 				}
-				Additionalinfo.emplace_back(Type40String);
+				m_smbios.Additionalinfo.emplace_back(Type40String);
 				Type40String.clear();
 			}
 
@@ -2238,7 +2193,7 @@ BOOL Smbios::GetSmbiosinfo()
 				Type41String.insert(MapString::value_type(("Onboard Devices Extended Information Device Number"), HextoString));
 				sprintf_s(HextoString, sizeof(HextoString), "%02X", (SmbiosADDR[Type41_Device_Function_Number] & 0x07));
 				Type41String.insert(MapString::value_type(("Onboard Devices Extended Information Function Number"), HextoString));
-				BroadDevExtendedinfo.emplace_back(Type41String);
+				m_smbios.BroadDevExtendedinfo.emplace_back(Type41String);
 				Type41String.clear();
 			}
 
@@ -2247,7 +2202,7 @@ BOOL Smbios::GetSmbiosinfo()
 				MapString Type42String;
 				sprintf_s(HextoString, sizeof(HextoString), "%02X", (SmbiosADDR[Type42_Interface_Type]));
 				Type42String.insert(MapString::value_type(("Management Controller Host Interface Type"), HextoString));
-				ManagementControllerHostInterface.emplace_back(Type42String);
+				m_smbios.ManagementControllerHostInterface.emplace_back(Type42String);
 				Type42String.clear();
 			}
 
@@ -2284,7 +2239,7 @@ BOOL Smbios::GetSmbiosinfo()
 					sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%c", BigEndian_to_LittleEndian((*(SmbiosADDR + Type43_OEM_defined + (sizeof(DWORD) - i - 1)))));
 				}
 				Type43String.insert(MapString::value_type(("TMP Device OEM-defined"), HextoString));
-				TPMDevice.emplace_back(Type43String);
+				m_smbios.TPMDevice.emplace_back(Type43String);
 				Type43String.clear();
 			}
 
@@ -2300,7 +2255,7 @@ BOOL Smbios::GetSmbiosinfo()
 					sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%c", BigEndian_to_LittleEndian((*(SmbiosADDR + Type126_Handle + (sizeof(WORD) - i - 1)))));
 				}
 				Type126String.insert(MapString::value_type(("Inactive Handle"), HextoString));
-				Inactive.emplace_back(Type126String);
+				m_smbios.Inactive.emplace_back(Type126String);
 				Type126String.clear();
 			}
 
@@ -2316,7 +2271,7 @@ BOOL Smbios::GetSmbiosinfo()
 					sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%c", BigEndian_to_LittleEndian((*(SmbiosADDR + Type127_Handle + (sizeof(WORD) - i - 1)))));
 				}
 				Type127String.insert(MapString::value_type(("End-of-Table Handle"), HextoString));
-				EndofTable.emplace_back(Type127String);
+				m_smbios.EndofTable.emplace_back(Type127String);
 				Type127String.clear();
 				break;
 			}

@@ -4,6 +4,9 @@
 #include <array>
 #include <vector>
 #include <string>
+#include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
+#include <boost/tokenizer.hpp>
 #include "defination.h"
 #include "CPUWMI.h"
 /**
@@ -59,10 +62,14 @@ public:
 	static CPU_Brands GetCPUBrands();
 	//CPUID解析后数据
 	//0
+	std::string Name;
 	std::string Manufacturer;
 	std::string microarchitecture;
 	std::string Brand;
 	unsigned int Technology;
+	unsigned int MaxTDP;
+	std::string SocketDesignation;
+
 	//1
 	short Family;
 	short Model;
@@ -71,8 +78,7 @@ public:
 	short ExtModel;
 	CPUFeature Feature;
 
-	string ProcessorId;
-	string SocketDesignation;
+	std::string ProcessorId;
 	UINT ExtClock;
 	UINT Core;
 	UINT Thread;
@@ -97,9 +103,14 @@ protected:
 	std::vector<std::array<int, 4>> data__;
 	std::vector<std::array<int, 4>> extdata__;
 	std::vector<int> nIdsLeaf;	//0xFFFF|FFFF 前半段为main leaf（0x0001 Normal 0x8000 Ext） 后半段为sub leaf
+	std::map<std::string, std::map<std::string, std::vector<std::string>>> CPUDB; //cpu数据库
 	int nIds_;
 	int nExIds_;
 private:
+	void InitCPUDB();
+	void split(const std::string& s,
+		const std::string& delim,
+		std::vector<std::string>& ret);
 	explicit CPUBASE(const CPUBASE& x);
 	CPUBASE& operator=(const CPUBASE& x);
 };

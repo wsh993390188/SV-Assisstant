@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZhaoxinRing0", "ZhaoxinRing0\ZhaoxinRing0.vcxproj", "{7DB3A491-ED7E-461E-A838-DB8826AE33A0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Driverdll", "Driverdll\Driverdll.vcxproj", "{BC32D43C-0E72-42FC-86A3-64FD91C5C4EC}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ring0Test", "Ring0Test\Ring0Test.vcxproj", "{F12E7D71-1CB6-4B81-9A1E-0B304F6E7993}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sv-assistant", "hardware assistant\sv-assistant\sv-assistant\sv-assistant.vcxproj", "{8C332A47-EB90-4E1A-A28E-4A82BAE1CDB9}"
@@ -47,18 +45,6 @@ Global
 		{7DB3A491-ED7E-461E-A838-DB8826AE33A0}.Release|x86.ActiveCfg = Release|Win32
 		{7DB3A491-ED7E-461E-A838-DB8826AE33A0}.Release|x86.Build.0 = Release|Win32
 		{7DB3A491-ED7E-461E-A838-DB8826AE33A0}.Release|x86.Deploy.0 = Release|Win32
-		{BC32D43C-0E72-42FC-86A3-64FD91C5C4EC}.Debug|ARM.ActiveCfg = Debug|Win32
-		{BC32D43C-0E72-42FC-86A3-64FD91C5C4EC}.Debug|ARM64.ActiveCfg = Debug|Win32
-		{BC32D43C-0E72-42FC-86A3-64FD91C5C4EC}.Debug|x64.ActiveCfg = Debug|x64
-		{BC32D43C-0E72-42FC-86A3-64FD91C5C4EC}.Debug|x64.Build.0 = Debug|x64
-		{BC32D43C-0E72-42FC-86A3-64FD91C5C4EC}.Debug|x86.ActiveCfg = Debug|Win32
-		{BC32D43C-0E72-42FC-86A3-64FD91C5C4EC}.Debug|x86.Build.0 = Debug|Win32
-		{BC32D43C-0E72-42FC-86A3-64FD91C5C4EC}.Release|ARM.ActiveCfg = Release|Win32
-		{BC32D43C-0E72-42FC-86A3-64FD91C5C4EC}.Release|ARM64.ActiveCfg = Release|Win32
-		{BC32D43C-0E72-42FC-86A3-64FD91C5C4EC}.Release|x64.ActiveCfg = Release|x64
-		{BC32D43C-0E72-42FC-86A3-64FD91C5C4EC}.Release|x64.Build.0 = Release|x64
-		{BC32D43C-0E72-42FC-86A3-64FD91C5C4EC}.Release|x86.ActiveCfg = Release|Win32
-		{BC32D43C-0E72-42FC-86A3-64FD91C5C4EC}.Release|x86.Build.0 = Release|Win32
 		{F12E7D71-1CB6-4B81-9A1E-0B304F6E7993}.Debug|ARM.ActiveCfg = Debug|Win32
 		{F12E7D71-1CB6-4B81-9A1E-0B304F6E7993}.Debug|ARM64.ActiveCfg = Debug|Win32
 		{F12E7D71-1CB6-4B81-9A1E-0B304F6E7993}.Debug|x64.ActiveCfg = Debug|x64

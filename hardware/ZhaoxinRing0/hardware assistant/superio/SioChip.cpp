@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "SioChip.h"
-#include "..\..\Driverdll\Driverdll.h"
+#include "..\driver\Driverdll.h"
 
 _SioSensor::_SioSensor() : sensor{}
 {

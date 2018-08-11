@@ -37,6 +37,8 @@ protected:
 	void ExecTemperature();
 	BOOL GetTjMaxFromMSR();
 private:	
+	void ExecCPUName();
+	void ExecCodeNameByFMS(int Family, int Model);
 	void GetBusSpeed();
 	void GetCurrentSpeed();
 #pragma region MSR Register

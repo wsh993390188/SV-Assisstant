@@ -77,6 +77,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>ZX_OutputLog;ELPP_UNICODE;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\boost_1_67_0;C:\Users\wsh\OneDrive\SV-Assisstant\hardware\hardware assistant\gpu\NVAPILIB;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -93,6 +94,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>ZX_OutputLog;ELPP_UNICODE;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\boost_1_67_0;E:\work\boost_1_67_0;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -115,6 +117,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>ZX_OutputLog;ELPP_UNICODE;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\boost_1_67_0;C:\Users\wsh\OneDrive\SV-Assisstant\hardware\hardware assistant\gpu\NVAPILIB;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -135,6 +138,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>ZX_OutputLog;ELPP_UNICODE;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\boost_1_67_0;E:\work\boost_1_67_0;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -168,6 +172,12 @@
     <ClInclude Include="..\..\disk\WMI for Disk\SynQuery.h" />
     <ClInclude Include="..\..\disk\WMI for Disk\WMI.h" />
     <ClInclude Include="..\..\disk\WMI for Disk\WMIExtern.h" />
+    <ClInclude Include="..\..\driver\Defination\Ring0Defination.h" />
+    <ClInclude Include="..\..\driver\Driverdll.h" />
+    <ClInclude Include="..\..\driver\DriverOrigin.h" />
+    <ClInclude Include="..\..\driver\Load\Driver.h" />
+    <ClInclude Include="..\..\driver\MyDriverClass.h" />
+    <ClInclude Include="..\..\driver\PCI-E.h" />
     <ClInclude Include="..\..\edid\EDID src.h" />
     <ClInclude Include="..\..\edid\EDID.h" />
     <ClInclude Include="..\..\edid\EDIDdefination.h" />
@@ -177,9 +187,13 @@
     <ClInclude Include="..\..\gpu\Igpu.h" />
     <ClInclude Include="..\..\gpu\Intelgpu.h" />
     <ClInclude Include="..\..\gpu\Nvidia.h" />
+    <ClInclude Include="..\..\Memory\CMemory.h" />
+    <ClInclude Include="..\..\Memory\memorydefination.h" />
+    <ClInclude Include="..\..\Memory\MemoryLib.h" />
     <ClInclude Include="..\..\network\NetWork.h" />
     <ClInclude Include="..\..\network\NetworkLib.h" />
     <ClInclude Include="..\..\smbios\Smbios.h" />
+    <ClInclude Include="..\..\smbios\smbiosdefination.h" />
     <ClInclude Include="..\..\smbios\smbioslib.h" />
     <ClInclude Include="..\..\superio\Superio.h" />
     <ClInclude Include="..\..\superio\SuperIOStruct.h" />
@@ -208,6 +222,11 @@
     <ClCompile Include="..\..\disk\diskdefination.cpp" />
     <ClCompile Include="..\..\disk\WMI for Disk\SynQuery.cpp" />
     <ClCompile Include="..\..\disk\WMI for Disk\WMI.cpp" />
+    <ClCompile Include="..\..\driver\Driverdll.cpp" />
+    <ClCompile Include="..\..\driver\DriverOrigin.cpp" />
+    <ClCompile Include="..\..\driver\Load\Driver.cpp" />
+    <ClCompile Include="..\..\driver\MyDriverClass.cpp" />
+    <ClCompile Include="..\..\driver\PCI-E.cpp" />
     <ClCompile Include="..\..\edid\EDID src.cpp" />
     <ClCompile Include="..\..\edid\EDID.cpp" />
     <ClCompile Include="..\..\gpu\AMDgpu.cpp" />
@@ -216,6 +235,9 @@
     <ClCompile Include="..\..\gpu\Igpu.cpp" />
     <ClCompile Include="..\..\gpu\Intelgpu.cpp" />
     <ClCompile Include="..\..\gpu\Nvidia.cpp" />
+    <ClCompile Include="..\..\Memory\CMemory.cpp" />
+    <ClCompile Include="..\..\Memory\memorydefination.cpp" />
+    <ClCompile Include="..\..\Memory\MemoryLib.cpp" />
     <ClCompile Include="..\..\network\NetWork.cpp" />
     <ClCompile Include="..\..\network\NetworkLib.cpp" />
     <ClCompile Include="..\..\smbios\Smbios.cpp" />
@@ -245,11 +267,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Driverdll\Driverdll.vcxproj">
-      <Project>{bc32d43c-0e72-42fc-86a3-64fd91c5c4ec}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

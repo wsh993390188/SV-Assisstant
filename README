@@ -1,6 +1,6 @@
 SV-助手 分 硬件助手 软件助手
 
-硬件助手 仿制cpuz gpuz aida64 hwinfo rweverthing
+硬件助手 仿制cpuz gpuz AIDA64 Hwinfo Rweverthing
 软件助手 仿制PCHunter
 
 开发中 只是个代码仓库 自己用着玩的
@@ -11,3 +11,5 @@ https://github.com/opcm/pcm
 https://github.com/Microsoft/Windows-driver-samples
 https://github.com/hiyohiyo/CrystalDiskInfo
 https://sourceforge.net/projects/winring0/
+https://github.com/openhardwaremonitor/openhardwaremonitor
+https://github.com/muflihun/easyloggingpp

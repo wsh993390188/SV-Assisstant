@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 /*************************************************
 Copyright: 2017 Zhaoxin BJ-SV
 Author:王硕

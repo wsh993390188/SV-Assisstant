@@ -1,15 +1,9 @@
 #include "stdafx.h"
 #include "CPUWMI.h"
-
-// #pragma warning(push)
-// #pragma warning(disable:4819)
-// #include "WMI.h"
-// #pragma warning(pop)
-
 #include <objbase.h>
 
-CWMI::CWMI() : m_wstrNamespace("root\\CIMV2"), Name("Unknown"), ProcessorId("Unknown"), SocketDesignation("Unknown"),
-CurrentClockSpeed(0), ExtClock(0), Core(0), Thread(0), Revision(0), MaxClockSpeed(0), UpgradeMethod(0)
+CWMI::CWMI() : m_wstrNamespace("root\\CIMV2"),ProcessorId("Unknown"),
+				ExtClock(0), Core(0), Thread(0), Revision(0), MaxClockSpeed(0)
 {}
 
 CWMI::~CWMI(void)
@@ -108,7 +102,7 @@ HRESULT CWMI::Excute(CComPtr<IWbemServices> pSvc)
 		CComVariant pVal;
 		hr = pSvc->ExecQuery(
 			_bstr_t("WQL"),
-			_bstr_t("SELECT Name,CurrentClockSpeed ,MaxClockSpeed,ExtClock,MaxClockSpeed,NumberOfCores,ProcessorId,Revision,SocketDesignation,UpgradeMethod,NumberOfLogicalProcessors FROM Win32_Processor"),
+			_bstr_t("SELECT MaxClockSpeed,ExtClock,MaxClockSpeed,NumberOfCores,ProcessorId,Revision,SocketDesignation,UpgradeMethod,NumberOfLogicalProcessors FROM Win32_Processor"),
 			WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY,
 			NULL,
 			&pEnumerator
@@ -118,19 +112,6 @@ HRESULT CWMI::Excute(CComPtr<IWbemServices> pSvc)
 		{
 			if(m_Return == 0)	break;
 			count++;
-			if (pDev->Get(L"Name", 0L, &pVal, nullptr, nullptr) == WBEM_S_NO_ERROR && pVal.vt > VT_NULL)
-			{
-				unique_ptr<char[]> t(_com_util::ConvertBSTRToString(pVal.bstrVal));
-				Name = t.get();
-				char* p = _com_util::ConvertBSTRToString(pVal.bstrVal);
-				Name = p;
-				delete[] p;
-				p = nullptr;
-			}
-			if (pDev->Get(L"CurrentClockSpeed", 0L, &pVal, nullptr, nullptr) == WBEM_S_NO_ERROR && pVal.vt > VT_NULL)
-			{
-				CurrentClockSpeed = pVal.intVal;
-			}
 			if (pDev->Get(L"MaxClockSpeed", 0L, &pVal, nullptr, nullptr) == WBEM_S_NO_ERROR && pVal.vt > VT_NULL)
 			{
 				MaxClockSpeed = pVal.intVal;
@@ -155,15 +136,6 @@ HRESULT CWMI::Excute(CComPtr<IWbemServices> pSvc)
 			if (pDev->Get(L"Revision", 0L, &pVal, nullptr, nullptr) == WBEM_S_NO_ERROR && pVal.vt > VT_NULL)
 			{
 				Revision = pVal.intVal;
-			}
-			if (pDev->Get(L"SocketDesignation", 0L, &pVal, nullptr, nullptr) == WBEM_S_NO_ERROR && pVal.vt > VT_NULL)
-			{
- 				unique_ptr<char[]> t(_com_util::ConvertBSTRToString(pVal.bstrVal));
- 				SocketDesignation = t.get();
-			}
-			if (pDev->Get(L"UpgradeMethod", 0L, &pVal, nullptr, nullptr) == WBEM_S_NO_ERROR && pVal.vt > VT_NULL)
-			{
-				UpgradeMethod = pVal.intVal;
 			}
 			if (pDev->Get(L"NumberOfLogicalProcessors", 0L, &pVal, nullptr, nullptr) == WBEM_S_NO_ERROR && pVal.vt > VT_NULL)
 			{

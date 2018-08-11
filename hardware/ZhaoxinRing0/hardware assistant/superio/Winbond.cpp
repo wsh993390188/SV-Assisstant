@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "SioChip.h"
-#include "..\..\Driverdll\Driverdll.h"
+#include "..\driver\Driverdll.h"
 
 #pragma region Winbond
 W836XX::W836XX(std::pair<USHORT, std::string> chip, USHORT LPC_Address) : WINBOND_VENDOR_ID{ 0x5CA3 }, HIGH_BYTE{ 0x80 },

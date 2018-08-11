@@ -1,9 +1,10 @@
+#pragma region Include Header
 #include "stdafx.h"
 #include "amd.h"
 #include  <math.h>
-#include <boost/algorithm/string.hpp>
-#include "..\..\Driverdll\Driverdll.h"
+#include "..\driver\Driverdll.h"
 using namespace std;
+#pragma endregion
 
 #pragma region CPUID Offset
 //L1 Cache and TLB Information CPUID = 0x80000005

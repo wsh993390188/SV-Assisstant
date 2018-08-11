@@ -75,9 +75,6 @@ typedef int(*ADL_OVERDRIVE6_FANSPEED_SET)(int iAdapterIndex, ADLOD6FanSpeedValue
 typedef int(*ADL_OVERDRIVE6_STATE_SET)(int iAdapterIndex, int iStateType, ADLOD6StateInfo *lpStateInfo);
 typedef int(*ADL_OVERDRIVE6_POWERCONTROL_SET)(int iAdapterIndex, int iValue);
 
-
-using namespace std;
-
 class CAMD : public CGPU
 {
 public:
@@ -99,7 +96,7 @@ private:
 	static void __stdcall ADL_Main_Memory_Free(void ** lpBuffer);
 private:
 	GPUTypes							re;
-	vector<AMDINFO>							AmdInfo;
+	std::vector<AMDINFO>							AmdInfo;
 
 	ADL_MAIN_CONTROL_CREATE					ADL_Main_Control_Create;
 	ADL_MAIN_CONTROL_DESTROY				ADL_Main_Control_Destroy;

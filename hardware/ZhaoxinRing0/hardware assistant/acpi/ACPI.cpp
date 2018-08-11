@@ -13,7 +13,7 @@ namespace SV_ASSIST
 			static CACPI_info* Instance() 
 			{ 
 				if (!temp.get())
-					temp.reset(new CACPI_info);
+					temp= std::make_shared<CACPI_info>();
 				return temp.get();
 			}
 			CACPI_info(void);
@@ -33,7 +33,7 @@ namespace SV_ASSIST
 			std::shared_ptr<CACPI> acpi;
 		};
 
-		std::shared_ptr<CACPI_info> CACPI_info::temp = std::make_shared<CACPI_info>();
+		std::shared_ptr<CACPI_info> CACPI_info::temp = nullptr;
 
 		CACPI_info::CACPI_info() : acpi(new CACPI())
 		{
