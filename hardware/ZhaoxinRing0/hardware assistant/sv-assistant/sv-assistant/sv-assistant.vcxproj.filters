@@ -97,6 +97,18 @@
     <Filter Include="源文件\Driver\Load">
       <UniqueIdentifier>{cf2a44f8-808c-48a7-b95f-5f4382d786df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\disk\FromCrystalDisk">
+      <UniqueIdentifier>{43d0c519-b934-465e-9005-23af31cde807}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\disk\FromCrystalDisk">
+      <UniqueIdentifier>{04f37ed6-25dc-420b-9d67-cc226afb6bd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\PCI">
+      <UniqueIdentifier>{5701c412-c3a2-4fcf-82b2-c13e2cfca659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\PCI">
+      <UniqueIdentifier>{9bafbccd-5e75-4090-89c5-57a8d20e9d82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -131,21 +143,6 @@
     </ClInclude>
     <ClInclude Include="..\..\edid\EDID.h">
       <Filter>头文件\edid</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\disk\disk.h">
-      <Filter>头文件\disk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\disk\diskdefination.h">
-      <Filter>头文件\disk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\disk\WMI for Disk\SynQuery.h">
-      <Filter>头文件\disk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\disk\WMI for Disk\WMI.h">
-      <Filter>头文件\disk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\disk\WMI for Disk\WMIExtern.h">
-      <Filter>头文件\disk</Filter>
     </ClInclude>
     <ClInclude Include="..\..\usb\UsbController.h">
       <Filter>头文件\usb</Filter>
@@ -246,14 +243,41 @@
     <ClInclude Include="..\..\driver\MyDriverClass.h">
       <Filter>头文件\Driver</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\driver\PCI-E.h">
-      <Filter>头文件\Driver</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\driver\Load\Driver.h">
       <Filter>头文件\Driver\Load</Filter>
     </ClInclude>
     <ClInclude Include="..\..\driver\Defination\Ring0Defination.h">
       <Filter>头文件\Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\disk\StorageQuery.h">
+      <Filter>头文件\disk\FromCrystalDisk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\disk\AtaSmart.h">
+      <Filter>头文件\disk\FromCrystalDisk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\disk\DnpService.h">
+      <Filter>头文件\disk\FromCrystalDisk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\disk\NVMeInterpreter.h">
+      <Filter>头文件\disk\FromCrystalDisk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\disk\SlotSpeedGetter.h">
+      <Filter>头文件\disk\FromCrystalDisk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\disk\SPTIUtil.h">
+      <Filter>头文件\disk\FromCrystalDisk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\disk\DiskLib.h">
+      <Filter>头文件\disk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\disk\diskdefination.h">
+      <Filter>头文件\disk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PCIE\PCI-E.h">
+      <Filter>头文件\PCI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PCIE\pcioptionrom.h">
+      <Filter>头文件\PCI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -280,18 +304,6 @@
     </ClCompile>
     <ClCompile Include="..\..\edid\EDID.cpp">
       <Filter>源文件\edid</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\disk\disk.cpp">
-      <Filter>源文件\disk</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\disk\diskdefination.cpp">
-      <Filter>源文件\disk</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\disk\WMI for Disk\SynQuery.cpp">
-      <Filter>源文件\disk</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\disk\WMI for Disk\WMI.cpp">
-      <Filter>源文件\disk</Filter>
     </ClCompile>
     <ClCompile Include="..\..\usb\UsbController.cpp">
       <Filter>源文件\usb</Filter>
@@ -383,9 +395,6 @@
     <ClCompile Include="..\..\Memory\MemoryLib.cpp">
       <Filter>源文件\memory</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\driver\PCI-E.cpp">
-      <Filter>源文件\Driver</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\driver\MyDriverClass.cpp">
       <Filter>源文件\Driver</Filter>
     </ClCompile>
@@ -400,6 +409,27 @@
     </ClCompile>
     <ClCompile Include="..\..\Memory\memorydefination.cpp">
       <Filter>源文件\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\disk\AtaSmart.cpp">
+      <Filter>源文件\disk\FromCrystalDisk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\disk\DnpService.cpp">
+      <Filter>源文件\disk\FromCrystalDisk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\disk\NVMeInterpreter.cpp">
+      <Filter>源文件\disk\FromCrystalDisk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\disk\SlotSpeedGetter.cpp">
+      <Filter>源文件\disk\FromCrystalDisk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\disk\DiskLib.cpp">
+      <Filter>源文件\disk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PCIE\PCI-E.cpp">
+      <Filter>源文件\PCI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PCIE\pcioptionrom.cpp">
+      <Filter>源文件\PCI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

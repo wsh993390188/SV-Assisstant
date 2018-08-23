@@ -1,11 +1,4 @@
 ﻿#pragma once
-
-typedef unsigned long       DWORD;
-typedef unsigned char       BYTE;
-typedef unsigned short      WORD;
-typedef int                 INT;
-typedef unsigned int        UINT;
-
 #pragma pack(push,1)
 struct EDID_Detailed_Timing_Descriptor
 {

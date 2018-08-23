@@ -239,6 +239,8 @@ void Zhaoxin::UpDateData(void)
 {
 	GetBusSpeed();
 	GetCurrentSpeed();
+	ExecVoltage();
+	ExecTemperature();
 }
 #pragma endregion
 
@@ -313,6 +315,26 @@ void Zhaoxin::ExecCache()
 	//Cache[3].Cache_Ways = ((extdata__[6][3] & L3_INSTRUCTION_CACHE_ASSOC) >> 12);
 	Cache[3].Cache_Size = ((extdata__[6][3] & L3_INSTRUCTION_CACHE_SIZE) >> 18);
 }
+#pragma endregion
+
+#pragma region Voltage
+void Zhaoxin::ExecVoltage()
+{
+	double VCore = INFINITY;
+	DWORD64 msrdata = 0;
+	for (DWORD threadAffinityMask = 0; threadAffinityMask < Core; threadAffinityMask++)
+	{
+		if (SV_ASSIST::Ring0::RdMsrTx(Zhaoxin_FIDVID, msrdata, threadAffinityMask) == 1)
+		{
+			BYTE VID = (msrdata & 0xFF);
+			VCore = 1.5 - VID * 0.0125;
+			if (VCore < 0.0)
+				VCore = INFINITY;
+			CoreVID[threadAffinityMask] = VCore;
+		}
+	}
+}
+
 #pragma endregion
 
 #pragma region Temperature

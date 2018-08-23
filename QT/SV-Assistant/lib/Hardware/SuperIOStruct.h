@@ -5,23 +5,6 @@ struct Super_IO_Data
 	unsigned char SuperioData[256];
 };
 
-// enum ITE_Page
-// {
-// 	FDC = 0x00,
-// 	SerialPort1 = 0x01,
-// 	SerialPort2 = 0x02,
-// 	ParallelPort = 0x03,
-// 	EC = 0x04,
-// 	KBC_Keybroad = 0x05,
-// 	KBC_Mouse = 0x06,
-// 	GPIO = 0x07,
-// 	SerialPort3 = 0x08,
-// 	SerialPort4 = 0x09,
-// 	SerialPort5 = 0x0A,
-// 	SerialPort6 = 0x0B,
-// 	ConsumerIR = 0x0C
-// };
-
 enum SIO_Model
 {
 	SIO_Unknown = 0,
@@ -49,9 +32,9 @@ enum SIO_Model
 	IT8721F = 0x8721,//none
 	IT8726F = 0x8726,
 	IT8728F = 0x8728,//none
+	IT8733E = 0x8733,//none
 	IT8771E = 0x8771,//none
 	IT8772E = 0x8772,//none
-
 
 	NCT6771F = 0xB470,
 	NCT6776F = 0xC330,

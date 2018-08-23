@@ -14,6 +14,7 @@ protected:
 	void UpDateData(void);
 	void ExecFeature();
 	void ExecCache();
+	void ExecVoltage();
 	void ExecTemperature();
 private:
 	void GetBusSpeed();

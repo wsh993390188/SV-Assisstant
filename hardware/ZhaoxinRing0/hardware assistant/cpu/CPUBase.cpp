@@ -25,6 +25,11 @@ CPU_Brands CPUBASE::GetCPUBrands()
 		return OTHERS_;
 }
 
+void CPUBASE::GetCpuid(int(&cpuid)[4], const int eax, const int ecx)
+{
+	__cpuidex(cpuid, eax, ecx);
+}
+
 CPUBASE::CPUBASE() : data__{}, extdata__{}, nIdsLeaf{}, nIds_(0),
 					nExIds_(0), Manufacturer{}, Technology(0), Family(0), Model(0),
 					Stepping(0), ExtFamily(0), ExtModel(0), microarchitecture{}, Brand{},
@@ -42,7 +47,10 @@ CPUBASE::CPUBASE() : data__{}, extdata__{}, nIdsLeaf{}, nIds_(0),
 	this->Thread = wmi.Thread;
 	this->Revision = wmi.Revision;
 	for (UINT i = 0; i < this->Core; i++)
+	{
 		this->CurrentClockSpeed.emplace_back(INFINITY);
+		this->CoreVID.emplace_back(INFINITY);
+	}
 }
 
 size_t CPUBASE::findcpuid(int value)

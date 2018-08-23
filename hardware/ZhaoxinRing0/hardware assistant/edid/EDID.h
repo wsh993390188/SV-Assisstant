@@ -16,10 +16,11 @@ namespace SV_ASSIST
 		*@brief					获得Mointor名称
 		*@author				王硕
 		*@param
+			nums				输入第几个显示器,由GetEDID确定最大显示器个数
 		*@return
 			*@string			Mointor的名称(制造商+型号)
 		****************************************************************/
-		const std::string GetMonitorName();
+		const std::string GetMonitorName(int nums = 0);
 
 		/**************************************************************
 		*@Function				GetEDID
@@ -43,17 +44,6 @@ namespace SV_ASSIST
 								生成文件\\HardWare\\EDID\\edid%d.txt	
 		****************************************************************/
 		void outputfile();
-
-		/**************************************************************
-		*@Function				UpdateData
-		*@brief					更新EDID值
-		*@author				王硕
-		*@param
-			*@null
-		*@return
-			*@null				更新EDID 调用Exec前需调用本函数
-		****************************************************************/
-		void UpdateData();
 	}
 }
 

@@ -73,7 +73,9 @@ public:
 	void InitSioDB()
 	{
 		#pragma region Unknown
-		pageDB.first[0] = std::vector<USHORT>{};
+		pageDB.first[0] = std::vector<USHORT>{ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
+		for(int i = 0; i < 0x20;i++)
+		pageDB.second[0][i] = "Logicial Device " + std::to_string(i);
 #pragma endregion
 		#pragma region W83627HF
 		pageDB.first[0x5200] = std::vector<USHORT>{ 0x00, 0x01,0x02,0x03,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B };
@@ -450,24 +452,24 @@ float SV_ASSIST::CPU::GetCpuVCore(IN DWORD VendorID)
 {
 	auto Sioinfo = SuperIOInterface::Instance()->GetSioSensor();
 	float temp = INFINITY;
-	switch (VendorID)
+	if (!Sioinfo.Voltages.empty() && temp > Sioinfo.Voltages.at(0))
+		temp = Sioinfo.Voltages[0];
+	else
 	{
-	case 0x8086:
-	case 0x1022:
-	case 0x1002:
-		if(!Sioinfo.Voltages.empty())
-			temp = Sioinfo.Voltages[0];
+		switch (VendorID)
+		{
+		case 0x8086:
 			break;
-	case 0x1106:
-		if (!Sioinfo.Voltages.empty())
-			temp = Sioinfo.Voltages[0];
-		else
+		case 0x1022:
+		case 0x1002:
+			break;
+		case 0x1106:
 			temp = ZX_CoreVoltage();
-		break;
-	default:
-		break;
+			break;
+		default:
+			break;
+		}
 	}
-
 	return temp;
 }
 

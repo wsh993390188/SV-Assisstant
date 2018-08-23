@@ -1,5 +1,10 @@
 ﻿#include "stdafx.h"
 #include "MyDriverClass.h"
+#include <stdlib.h>
+#include <conio.h>
+#include <winioctl.h>
+#include "../../ZhaoxinRing0/ioctl.h"
+#include "../../ZhaoxinRing0/Public.h"
 
 CRing0::CRing0():hdevice(INVALID_HANDLE_VALUE)
 {
@@ -121,7 +126,7 @@ BOOL CRing0::RdIOPort(IN USHORT IO_Port_Addr,IN USHORT IO_DataSize, OUT DWORD& I
 	return FALSE;
 }
 
-BOOL CRing0::WrIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, IN ULONG IO_Data)
+BOOL CRing0::WrIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, IN DWORD IO_Data)
 {
 	ULONG nOutput;
 	TargetPortData IO_Port;
@@ -132,6 +137,7 @@ BOOL CRing0::WrIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, IN ULONG IO
 	{
 		return FALSE;
 	}
+
 	if ((IO_Port.Data_size == 1) ||(IO_Port.Data_size == 2)|| (IO_Port.Data_size == 4))
 	{
 		if (!DeviceIoControl(hdevice,
@@ -151,7 +157,7 @@ BOOL CRing0::WrIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, IN ULONG IO
 	return FALSE;
 }
 
-BOOL CRing0::RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT ULONG& Memory_Data)
+BOOL CRing0::RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT DWORD& Memory_Data)
 {
 	READ_MEMORY_INPUT MemData;
 	ULONG membuffer;
@@ -166,7 +172,8 @@ BOOL CRing0::RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT ULON
 	MemData.UnitSize = Mem_DataSize;
 	memset(membuffer, 0, sizeof(membuffer));
 */
-	if ((MemData.UnitSize == 1) || (MemData.UnitSize == 2) || (MemData.UnitSize == 4))
+#ifdef _WIN64
+	if ((MemData.UnitSize == 1) || (MemData.UnitSize == 2) || (MemData.UnitSize == 4) || (MemData.UnitSize == 8))
 	{
 		if constexpr (sizeof(void*) == 4)
 		{
@@ -177,7 +184,6 @@ BOOL CRing0::RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT ULON
 		{
 			MemData.Address.QuadPart = Memory_Addr;
 		}
-		Sleep(1);
 		if (!DeviceIoControl(hdevice,
 			READ_MEMORY,
 			&MemData,
@@ -190,19 +196,77 @@ BOOL CRing0::RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT ULON
 		{
 			return GetLastError();
 		}
-		memcpy_s(&Memory_Data, sizeof(Memory_Data),&membuffer, sizeof(membuffer));
+		memcpy_s(&Memory_Data, sizeof(Memory_Data), &membuffer, sizeof(membuffer));
 		return TRUE;
 	}
 	return FALSE;
+#elif
+	if ((MemData.UnitSize == 1) || (MemData.UnitSize == 2) || (MemData.UnitSize == 4))
+	{
+		if constexpr (sizeof(void*) == 4)
+		{
+			MemData.Address.HighPart = 0;
+			MemData.Address.LowPart = (DWORD)Memory_Addr;
+		}
+		else
+		{
+			MemData.Address.QuadPart = Memory_Addr;
+		}
+		if (!DeviceIoControl(hdevice,
+			READ_MEMORY,
+			&MemData,
+			sizeof(READ_MEMORY_INPUT),
+			&membuffer,
+			MemData.Count * MemData.UnitSize,
+			&nOutput,
+			NULL)
+			)
+		{
+			return GetLastError();
+		}
+		memcpy_s(&Memory_Data, sizeof(Memory_Data), &membuffer, sizeof(membuffer));
+		return TRUE;
+	}
+	return FALSE;
+#endif
+
 }
 
-BOOL CRing0::WrMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN ULONG Memory_Data)
+BOOL CRing0::WrMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN DWORD Memory_Data)
 {
 	WRITE_MEMORY_INPUT WRmem;
 	ULONG nOutput;
 	WRmem.Count = 1;
 	WRmem.Data = Memory_Data;
 	WRmem.UnitSize = Mem_DataSize;
+#ifdef _WIN64
+	if ((WRmem.UnitSize == 1) || (WRmem.UnitSize == 2) || (WRmem.UnitSize == 4) || (WRmem.UnitSize == 8))
+	{
+		if constexpr (sizeof(void*) == 4)
+		{
+			WRmem.Address.HighPart = 0;
+			WRmem.Address.LowPart = (DWORD)Memory_Addr;
+		}
+		else
+		{
+			WRmem.Address.QuadPart = Memory_Addr;
+		}
+		if (!DeviceIoControl(hdevice,
+			WRITE_MEMORY,
+			&WRmem,
+			sizeof(WRITE_MEMORY_INPUT),
+			NULL,
+			NULL,
+			&nOutput,
+			NULL)
+			)
+		{
+			return GetLastError();
+		}
+		return TRUE;
+}
+	return FALSE;
+#elif
 	if ((WRmem.UnitSize == 1) || (WRmem.UnitSize == 2) || (WRmem.UnitSize == 4))
 	{
 		if constexpr (sizeof(void*) == 4)
@@ -214,7 +278,6 @@ BOOL CRing0::WrMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN ULONG
 		{
 			WRmem.Address.QuadPart = Memory_Addr;
 		}
-		Sleep(1);
 		if (!DeviceIoControl(hdevice,
 			WRITE_MEMORY,
 			&WRmem,
@@ -230,6 +293,7 @@ BOOL CRing0::WrMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN ULONG
 		return TRUE;
 	}
 	return FALSE;
+#endif
 }
 
 BOOL CRing0::ReadPci(IN USHORT bus, IN USHORT dev, IN USHORT func, OUT PCI_COMMON_CONFIG& pci_config)
@@ -392,6 +456,7 @@ BOOL CRing0::SetECData(BYTE EC_Addr, BYTE EC_Write_Data)
 	if (Data != 0x08)		return FALSE;
 	this->WrIOPort(EC_DATA, 1, EC_Addr);	//	将地址写入EC
 	this->WrIOPort(EC_DATA, 1, EC_Write_Data);	//将数据写入EC
+	Sleep(1);
 	return TRUE;
 }
 

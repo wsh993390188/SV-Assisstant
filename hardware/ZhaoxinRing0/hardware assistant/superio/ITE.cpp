@@ -6,7 +6,7 @@
 #pragma region ITE
 IT87XX::IT87XX(std::pair<USHORT, std::string> chip, USHORT LPC_Address) : ITE_VENDOR_ID(0x90), CONFIGURATION_REGISTER(0x00),
 TEMPERATURE_BASE_REG{ 0x29 }, VENDOR_ID_REGISTER{ 0x58 }, FAN_TACHOMETER_DIVISOR_REGISTER{ 0x0B },
-FAN_TACHOMETER_REG{ 0x0d, 0x0e, 0x0f, 0x80, 0x82 }, FAN_TACHOMETER_EXT_REG{ 0x18, 0x19, 0x1a, 0x81, 0x83 }, VOLTAGE_BASE_REG{ 0x20 }, FAN_PWM_CTRL_REG{ 0x15, 0x16, 0x17 }
+FAN_TACHOMETER_REG{ 0x0d, 0x0e, 0x0f, 0x80, 0x82, 0x4D }, FAN_TACHOMETER_EXT_REG{ 0x18, 0x19, 0x1A, 0x81, 0x83,0x4C }, VOLTAGE_BASE_REG{ 0x20 }, FAN_PWM_CTRL_REG{ 0x15, 0x16, 0x17 }
 {
 	this->sensor.ChipName = chip.second;
 	this->LPC_Base = LPC_Address;
@@ -27,30 +27,71 @@ FAN_TACHOMETER_REG{ 0x0d, 0x0e, 0x0f, 0x80, 0x82 }, FAN_TACHOMETER_EXT_REG{ 0x18
 	// 		return;
 
 	this->sensor.Voltages = { INFINITY, INFINITY, INFINITY, INFINITY, INFINITY, INFINITY,INFINITY, INFINITY, INFINITY };
-	this->sensor.Temperatures = { INFINITY, INFINITY, INFINITY };
-	if (chip.first == IT8705F)
+	if (chip.first == IT8606E || chip.first == IT8607E || chip.first == IT8655E
+		||chip.first == IT8665E || chip.first == IT8686E)
+	{
+		this->sensor.Temperatures = { INFINITY, INFINITY, INFINITY,INFINITY, INFINITY, INFINITY };
+	}
+	else
+	{
+		this->sensor.Temperatures = { INFINITY, INFINITY, INFINITY };
+	}
+
+	if (chip.first == IT8705F|| chip.first == IT8606E || chip.first == IT8607E 
+		|| chip.first == IT8790E ||chip.first == IT8792E)
 	{
 		this->sensor.Fans = { INFINITY, INFINITY, INFINITY };
+	}
+	else if (chip.first == IT8732F || chip.first == IT8613E)
+	{
+		this->sensor.Fans = { INFINITY, INFINITY, INFINITY,INFINITY };
+	}
+	else if (chip.first == IT8665E)
+	{
+		this->sensor.Fans = { INFINITY, INFINITY, INFINITY, INFINITY, INFINITY,INFINITY };
+		FAN_TACHOMETER_REG.pop_back();
+		FAN_TACHOMETER_REG.emplace_back(0x93);
+		FAN_TACHOMETER_EXT_REG.pop_back();
+		FAN_TACHOMETER_EXT_REG.emplace_back(0x94);
+	}
+	else if (chip.first == IT8620E || chip.first == IT8628E || chip.first == IT8686E)
+	{
+		this->sensor.Fans = { INFINITY, INFINITY, INFINITY, INFINITY, INFINITY,INFINITY };
 	}
 	else
 	{
 		this->sensor.Fans = { INFINITY, INFINITY, INFINITY, INFINITY, INFINITY };
 	}
+
+	if (chip.first == IT8613E)
+	{
+		FAN_TACHOMETER_REG.clear();
+		FAN_TACHOMETER_EXT_REG.clear();
+		FAN_TACHOMETER_REG = { 0x0e, 0x0f, 0x80, 0x82 };
+		FAN_TACHOMETER_EXT_REG = { 0x19, 0x1a, 0x81, 0x83 };
+	}
+
 	this->sensor.Controls = { INFINITY, INFINITY, INFINITY };
 
+	//Some infomations from https://github.com/a1wong/it87
 	// IT8620E, IT8628E, IT8721F, IT8728F and IT8772E use a 12mV resultion 
 	// IT8625E use a 11mV
 	// IT8665E use a 10.9mV
 	// ADC, all others 16mV
 	if (chip.first == IT8620E || chip.first == IT8628E || chip.first == IT8721F
-		|| chip.first == IT8728F || chip.first == IT8771E || chip.first == IT8772E)
+		|| chip.first == IT8728F || chip.first == IT8771E || chip.first == IT8772E
+		|| chip.first == IT8606E || chip.first == IT8607E || chip.first == IT8622E
+		|| chip.first == IT8686E || chip.first == IT8603E)
 		voltageGain = 0.012f;
-	else if (chip.first == IT8665E)
+	else if (chip.first == IT8665E|| chip.first == IT8655E
+		|| chip.first == IT8732F || chip.first == IT8790E || chip.first == IT8792E)
 		voltageGain = 0.0109f;
+	else if(chip.first == IT8613E || chip.first == IT8625E)
+		voltageGain = 0.011f;
 	else
 		voltageGain = 0.016f;
 
-	// older IT8705F and IT8721F revisions do not have 16-bit fan counters
+	// older IT8705F and IT8712F revisions do not have 16-bit fan counters
 	if ((chip.first == IT8705F /*&& version < 3*/) ||
 		(chip.first == IT8712F/* && version < 8*/))
 	{

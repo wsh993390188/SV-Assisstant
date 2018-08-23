@@ -19,7 +19,29 @@ namespace SV_ASSIST
 		*@return
 			*@vector<USB_ROOT_HUB>		Usb设备树信息		
 		****************************************************************/
-		const vector<USB_ROOT_HUB>& GetUsbInfo();
+		const std::vector<USB_ROOT_HUB>& GetAllUsbinfo();
+
+		/**************************************************************
+		*@Function				GetAllUsbDeviceInfo
+		*@brief					获取Usb设备的信息
+		*@author				王硕
+		*@param
+			*@null
+		*@return
+			*@vector<DEVICE_INFO_NODE>		Usb设备信息
+		****************************************************************/
+		const std::vector<DEVICE_INFO_NODE>& GetAllUsbDeviceInfo();
+
+		/**************************************************************
+		*@Function				GetAllUsbHubInfo
+		*@brief					获取Usb集线器的信息
+		*@author				王硕
+		*@param
+			*@null
+		*@return
+			*@vector<DEVICE_INFO_NODE>		Usb集线器信息
+		****************************************************************/
+		const std::vector<DEVICE_INFO_NODE>& GetAllUsbHubInfo();
 
 		/**************************************************************
 		*@Function				UpdateData

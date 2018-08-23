@@ -1,6 +1,10 @@
 #pragma once
+#include <initguid.h>
+#include <winioctl.h>
+#include <math.h>
 #include "UsbDefination.h"
 
+using namespace std;
 class _EnumUsbController
 {
 public:

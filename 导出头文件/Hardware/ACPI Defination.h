@@ -29,7 +29,7 @@ typedef struct _ACPI_RSDT_STRUCTURE
 	DWORD								OEMRevision;
 	BYTE								CreatorID[4];
 	DWORD								CreatorRevision;
-	DWORD								Entry[1];
+	std::vector<DWORD>					Entry;
 }ACPI_RSDT_STRUCTURE;
 
 typedef struct _ACPI_XSDT_STRUCTURE
@@ -43,7 +43,7 @@ typedef struct _ACPI_XSDT_STRUCTURE
 	DWORD								OEMRevision;
 	BYTE								CreatorID[4];
 	DWORD								CreatorRevision;
-	ULONGLONG							Entry[1];
+	std::vector<DWORD64>				Entry;
 }ACPI_XSDT_STRUCTURE;
 
 /************************************************************************/
@@ -888,16 +888,16 @@ typedef	struct _Performance_Record_Structure
 
 typedef struct _ACPI_FPDT_STRUCTURE			//Maximum System Characteristics Table
 {
-	BYTE								Signature[4];	// must be 'FPDT' 
-	DWORD								Length;
-	BYTE								Revision;
-	BYTE								Checksum;
-	BYTE								OEMID[6];
-	BYTE								OEMTableID[8];
-	DWORD								OEMRevision;
-	BYTE								CreatorID[4];
-	DWORD								CreatorRevision;
-	Performance_Record_Structure		Performance_Records[];
+	BYTE										Signature[4];	// must be 'FPDT' 
+	DWORD										Length;
+	BYTE										Revision;
+	BYTE										Checksum;
+	BYTE										OEMID[6];
+	BYTE										OEMTableID[8];
+	DWORD										OEMRevision;
+	BYTE										CreatorID[4];
+	DWORD										CreatorRevision;
+	std::vector<Performance_Record_Structure>	Performance_Records;
 }ACPI_FPDT_STRUCTURE, *PACPI_FPDT_STRUCTURE;
 
 
@@ -954,4 +954,4 @@ typedef struct _ACPI_HPET_STRUCTURE			//IA-PC High Precision Event Timer
 }ACPI_HPET_STRUCTURE;
 
 #pragma warning( default : 4200 )
-#pragma  pack(pop)
+#pragma pack(pop)

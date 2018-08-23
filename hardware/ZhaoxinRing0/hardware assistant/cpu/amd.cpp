@@ -256,6 +256,7 @@ void AMD::UpDateData(void)
 {
 	this->GetBusSpeed();
 	this->GetFrequency();
+	this->GetVoltage();
 }
 #pragma endregion
 
@@ -469,6 +470,24 @@ void AMD::GetCurrentPState_17Family(IN DWORD threadAffinityMask, OUT double& COF
 void AMD::GetBusSpeed()
 {
 
+}
+void AMD::GetVoltage()
+{
+	double COF = 0.0, CpuIdd = 0, CpuVID = 0;
+	switch (this->ExtFamily)
+	{
+	case 0x17:
+		for (int threadAffinityMask = 0; threadAffinityMask < this->Core; threadAffinityMask++)
+		{
+			GetCurrentPState_17Family(threadAffinityMask, COF, CpuIdd, CpuVID);
+			CoreVID[threadAffinityMask] = CpuVID;
+		}
+		break;
+	case 0x15:
+		break;
+	default:
+		break;
+	}
 }
 
 void AMD::GetFrequency()

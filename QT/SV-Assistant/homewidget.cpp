@@ -45,31 +45,19 @@ void Homewidget::Init()
 	memorycpubaseinfo = new HomebaseInfo(this);
 	memorycpubaseinfo->BaseLabel->setText(tr("Memory"));
 	QString memoryInfomation = {};
-	QVector<QString> memoryVector = {};
 	{
 		QString temp = {};
 		size_t memorysize = 0;
+		bool state = true;
 		for (size_t i = 0; i < memoryinfo.size(); i++)
 		{
-			if (memoryInfomation.contains(QString::fromStdString(memoryinfo.at(i).second.ModuleManufacturer), Qt::CaseInsensitive))
-			{
-				memorysize += memoryinfo.at(i).second.ModuleSize;
-				temp = tr("%1 %2 GBytes").arg(QString::fromStdString(memoryinfo.at(i).second.ModuleManufacturer)).arg(memorysize);
-			}
-			else
-			{
-				memoryVector.push_back(temp);
-				memorysize = memoryinfo.at(i).second.ModuleSize;
-				temp = tr("%1 %2 GBytes").arg(QString::fromStdString(memoryinfo.at(i).second.ModuleManufacturer)).arg(memorysize);
-			}
+			if(state)
+				memoryInfomation += (QString::fromStdString(memoryinfo.at(i).second.ModuleType) + tr(" "));
+			state = false;
+			memorysize += memoryinfo.at(i).second.ModuleSize;
+			temp = tr("%1 GBytes").arg(memorysize);
 		}
-		memoryVector.push_back(temp);
-	}
-
-	for (const auto& i : memoryVector)
-	{
-		memoryInfomation += i;
-		memoryInfomation += tr(" ");
+		memoryInfomation += temp;
 	}
 
 	memorycpubaseinfo->BaseInfo->setText(memoryInfomation);
@@ -84,9 +72,14 @@ void Homewidget::Init()
 	else
 		gpubaseinfo->BaseInfo->setText(QString::fromStdString(gpu.at(0).GetGPUName()));
 
+	auto diskinfo = SV_ASSIST::Storage::GetDiskSMARTInfo();
 	diskbaseinfo = new HomebaseInfo(this);
+	if(diskinfo.empty())
+		diskbaseinfo->BaseInfo->setText(tr("None"));
+	else
+		diskbaseinfo->BaseInfo->setText(QString::fromStdWString(diskinfo.at(0).Model));
 	diskbaseinfo->BaseLabel->setText(tr("Storage"));
-	diskbaseinfo->BaseInfo->setText(tr("Intel"));
+
 
 	SV_ASSIST::Display::UpdateData();
 

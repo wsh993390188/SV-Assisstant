@@ -269,6 +269,16 @@ namespace SV_ASSIST
 			*@double			未知返回INFINITY
 		****************************************************************/
 		const std::vector<double>& GetTemperature();
-
+		
+		/**************************************************************
+		*@Function				GetVoltage
+		*@brief					获取处理器的每个核的电压
+		*@author				王硕
+		*@param
+			*@null
+		*@return
+			*@double			未知返回INFINITY
+		****************************************************************/
+		const std::vector<double>& GetVoltage();
 	}
 }

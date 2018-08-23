@@ -5,23 +5,6 @@ struct Super_IO_Data
 	unsigned char SuperioData[256];
 };
 
-// enum ITE_Page
-// {
-// 	FDC = 0x00,
-// 	SerialPort1 = 0x01,
-// 	SerialPort2 = 0x02,
-// 	ParallelPort = 0x03,
-// 	EC = 0x04,
-// 	KBC_Keybroad = 0x05,
-// 	KBC_Mouse = 0x06,
-// 	GPIO = 0x07,
-// 	SerialPort3 = 0x08,
-// 	SerialPort4 = 0x09,
-// 	SerialPort5 = 0x0A,
-// 	SerialPort6 = 0x0B,
-// 	ConsumerIR = 0x0C
-// };
-
 enum SIO_Model
 {
 	SIO_Unknown = 0,
@@ -38,19 +21,33 @@ enum SIO_Model
 	F71889F = 0x0723,//none
 	F71808E = 0x0901,
 
+	IT8603E = 0x8603,//none info none
+	IT8606E = 0x8606,//none info none
+	IT8607E = 0x8607,//none info none
+	IT8613E = 0x8613,//none info none
 	IT8620E = 0x8620,//none
+	IT8622E = 0x8622,//none info none
+	IT8623E = 0x8623,//none info none no voltageGain
+	IT8625E = 0x8625,//none info none
 	IT8628E = 0x8628,//none
+	IT8655E = 0x8655,//none info none
 	IT8665E = 0x8665,//none
-	IT8705F = 0x8705,
-	IT8712F = 0x8712,
-	IT8716F = 0x8716,
-	IT8718F = 0x8718,
-	IT8720F = 0x8720,
+	IT8686E = 0x8686,//none info none
+	IT8705F = 0x8705,//no voltageGain
+	IT8712F = 0x8712,//no voltageGain
+	IT8716F = 0x8716,//no voltageGain
+	IT8718F = 0x8718,//no voltageGain
+	IT8720F = 0x8720,//no voltageGain
 	IT8721F = 0x8721,//none
-	IT8726F = 0x8726,
+	IT8726F = 0x8726,//no voltageGain
 	IT8728F = 0x8728,//none
+	IT8732F = 0x8732,//none info none
+	IT8733E = 0x8733,//none
 	IT8771E = 0x8771,//none
 	IT8772E = 0x8772,//none
+	IT8783E = 0x8783,//none info none no voltageGain
+	IT8790E = 0x8790,//none info none
+	IT8792E = 0x8792,//none info none
 
 
 	NCT6771F = 0xB470,

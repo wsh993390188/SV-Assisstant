@@ -271,5 +271,18 @@ namespace SV_ASSIST
 		****************************************************************/
 		const std::vector<double>& GetTemperature();
 
+		/**************************************************************
+		*@Function				GetVoltage
+		*@brief					获取处理器的每个核的电压
+		*@author				王硕
+		*@param
+			*@null
+		*@return
+			*@double			未知返回INFINITY
+		****************************************************************/
+		const std::vector<double>& GetVoltage();
+
+
+		void GetCpuid(int(&cpuid)[4], const int eax, const int ecx);
 	}
 }

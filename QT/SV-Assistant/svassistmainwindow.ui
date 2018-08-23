@@ -281,7 +281,7 @@ font: 10pt &quot;宋体&quot;;
 color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
-          <string>游戏检测</string>
+          <string>性能检测</string>
          </property>
          <property name="icon">
           <iconset resource="Resource/resource.qrc">
@@ -495,7 +495,7 @@ color: rgb(255, 255, 255);</string>
            <number>0</number>
           </property>
           <item>
-           <widget class="Homewidget" name="TitleHomewidget" native="true">
+           <widget class="Homewidget" name="TitleStackedWidget" native="true">
             <property name="minimumSize">
              <size>
               <width>650</width>
@@ -549,13 +549,13 @@ color: rgb(255, 255, 255);</string>
            <widget class="HardwareTab" name="HardwareTabwidget" native="true">
             <property name="minimumSize">
              <size>
-              <width>185</width>
+              <width>100</width>
               <height>0</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>185</width>
+              <width>100</width>
               <height>16777215</height>
              </size>
             </property>
@@ -565,13 +565,13 @@ color: rgb(255, 255, 255);</string>
            <widget class="QStackedWidget" name="HardwareInfomationstackedWidget">
             <property name="minimumSize">
              <size>
-              <width>725</width>
+              <width>800</width>
               <height>0</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>725</width>
+              <width>800</width>
               <height>16777215</height>
              </size>
             </property>

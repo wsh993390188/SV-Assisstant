@@ -36,9 +36,10 @@ void MemoryWidget::Init()
 			temp.push_back(i.second);
 		}
 		Header = new MemoryHeadWidget(this, temp);
+		mainlayout->addWidget(Header);
+		mainlayout->addWidget(Infomation);
 	}
-	mainlayout->addWidget(Header);
-	mainlayout->addWidget(Infomation);
+
 	connect(this->Header, &MemoryHeadWidget::SendMemoryInfomation, this->Infomation, &MemoryInfomationWidget::ReciveMemoryInfomation);
 }
 
@@ -72,36 +73,37 @@ horizontalSpace(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Min
 		toolbutton->setMinimumSize(QSize(45, 80));
 		toolbutton->setMaximumSize(QSize(60, 100));
 		QString temp = QString::fromStdString(BaseInfo[i].ModuleManufacturer);
-		toolbutton->setText(tr("DIMM #%1").arg(i));
+		toolbutton->setText(tr("DIMM\n#%1").arg(i));
 		toolbutton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 		connect(toolbutton, &QToolButton::clicked, this, [=] { emit SendMemoryInfomation(BaseInfo[i]); });
 		mainlayout->addWidget(toolbutton);
 	}
+	mainlayout->setMargin(0);
 	mainlayout->addSpacerItem(horizontalSpace);
 }
 
 MemoryInfomationWidget::MemoryInfomationWidget(QWidget *parent, const MemoryData& data) : QWidget(parent), mainlayout(new QVBoxLayout(this))
 {
 	ModuleType = new MemoryBaseInfo(this);
-	ModuleType->BaseLabel->setText("Module Type");
+	ModuleType->BaseLabel->setText(tr("Module Type"));
 
 	ModuleSize = new MemoryBaseInfo(this);
-	ModuleSize->BaseLabel->setText("Module Size");
+	ModuleSize->BaseLabel->setText(tr("Module Size"));
 
 	ModuleManufacturer = new MemoryBaseInfo(this);
-	ModuleManufacturer->BaseLabel->setText("Module Manufacturer");
+	ModuleManufacturer->BaseLabel->setText(tr("Module Manufacturer"));
 
 	DRAMManufacturer = new MemoryBaseInfo(this);
-	DRAMManufacturer->BaseLabel->setText("DRAM Manufacturer");
+	DRAMManufacturer->BaseLabel->setText(tr("DRAM Manufacturer"));
 
 	SerialNumber = new MemoryBaseInfo(this);
-	SerialNumber->BaseLabel->setText("SerialNumber");
+	SerialNumber->BaseLabel->setText(tr("SerialNumber"));
 
 	PartNumber = new MemoryBaseInfo(this);
-	PartNumber->BaseLabel->setText("PartNumber");
+	PartNumber->BaseLabel->setText(tr("PartNumber"));
 
 	ProductDate = new MemoryBaseInfo(this);
-	ProductDate->BaseLabel->setText("Product Date");
+	ProductDate->BaseLabel->setText(tr("Product Date"));
 
 	ModuleType->BaseInfo->setText(QString::fromStdString(data.ModuleType));
 	ModuleSize->BaseInfo->setText(tr("%1 GBytes").arg(QString::number(data.ModuleSize)));

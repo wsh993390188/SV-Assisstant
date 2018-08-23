@@ -2,12 +2,13 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include <map>
 #include <tchar.h>
 
 #include "ACPI.h"
 #include "CAudio.h"
 #include "CPU.h"
-#include "diskdefination.h"
+#include "DiskLib.h"
 #include "EDID.h"
 #include "smbioslib.h"
 #include "Superio.h"
@@ -16,3 +17,4 @@
 #include "NetworkLib.h"
 #include "Driverdll.h"
 #include "MemoryLib.h"
+#include "PCI-E.h"

@@ -1,6 +1,8 @@
 #pragma once
 #include <map>
 #include <string>
+
+#pragma pack(push, 1)
 //EC Data 共256个字节 具体每一位代表什么需要相应的spec来确定
 struct Embedded_Controller_Data
 {
@@ -119,3 +121,30 @@ typedef struct _Pci_All_Config_Space
 {
 	std::map<std::wstring, PCI_COMMON_CONFIG> pciconfig;
 }Pci_All_Config_Space, *PPci_All_Config_Space;
+
+struct PCI_OPTION_ROM_HEADER
+{
+	BYTE								Signature[2]; // must be 0x55 0xAA
+	BYTE								Length;
+	DWORD								Initialization_Entry;
+	BYTE								Reserved[17];
+	WORD								PCI_Data_Offset;
+	BYTE								Expansion_Header_Offset;
+};
+
+struct PCI_OPTION_ROM_Data_Structure
+{
+	BYTE								Signature[4]; // must be 'PCIR'
+	WORD								VendorID;                   // (ro)
+	WORD								DeviceID;                   // (ro)
+	WORD								Product_Data;
+	WORD								Structure_Length;
+	BYTE								Structure_Revision;
+	BYTE								Class_Code[3];
+	WORD								Image_Length;
+	WORD								Revision_Level;
+	BYTE								Code_Type;
+	BYTE								Indicator;
+	WORD								Reserved;
+};
+#pragma pack(pop)

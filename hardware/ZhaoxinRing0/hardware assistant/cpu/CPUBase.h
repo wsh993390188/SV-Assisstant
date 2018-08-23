@@ -97,6 +97,10 @@ public:
 	//Frequence
 	double BusSpeed;
 	vector<double> CurrentClockSpeed;
+
+	vector<double> CoreVID;
+
+	void GetCpuid(int (&cpuid)[4], const int eax, const int ecx);
 protected:
 	CPUBASE();
 	size_t findcpuid(int value);

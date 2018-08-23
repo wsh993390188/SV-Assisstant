@@ -7,7 +7,7 @@ using namespace std;
 #pragma endregion
 
 #pragma region Initialize
-Intel::Intel() :f1_ecx { 0 }, f1_edx{ 0 }, f7_ebx{ 0 }, f7_ecx{ 0 },
+Intel::Intel() :f1_ecx{ 0 }, f1_edx{ 0 }, f7_ebx{ 0 }, f7_ecx{ 0 }, DisplayFamily{ 0 }, DisplayModel{0},
 IA32_THERM_STATUS_MSR{ 0x019C }, IA32_TEMPERATURE_TARGET{ 0x01A2 }, IA32_PERF_STATUS{ 0x198 }, MSR_PLATFORM_INFO{ 0xCE },
 IA32_PACKAGE_THERM_STATUS{ 0x1B1 }, MSR_RAPL_POWER_UNIT{ 0x606 }, MSR_PKG_ENERY_STATUS{ 0x611 }, MSR_DRAM_ENERGY_STATUS{ 0x619 },
 MSR_PP0_ENERY_STATUS{ 0x639 }, MSR_PP1_ENERY_STATUS{ 0x641 }, MaxNonTurboFre{0}
@@ -188,7 +188,6 @@ void Intel::Init(void)
 		f1_ecx = data__[1][2];
 		f1_edx = data__[1][3];
 
-		int DisplayFamily, DisplayModel;
 		if (this->Family != 0x0F)		DisplayFamily = this->Family;
 		else	DisplayFamily = this->ExtFamily;
 		if (this->Family == 0x06 || this->Family == 0x0F)	DisplayModel = this->ExtModel;
@@ -218,9 +217,8 @@ void Intel::Init(void)
 void Intel::UpDateData(void)
 {
 	ExecTemperature();
-
+	ExecVoltageByFMS();
 	GetBusSpeed();
-
 	GetCurrentSpeed();
 }
 #pragma endregion
@@ -1188,6 +1186,33 @@ void Intel::ExecCodeNameByFMS(int Family, int Model)
 	default:
 		microarchitecture = "Unknown";
 		break;
+	}
+}
+#pragma endregion
+
+#pragma region Voltage
+void Intel::ExecVoltageByFMS()
+{
+	double VCore = INFINITY;
+	DWORD64 msrdata = 0;
+	PCI_COMMON_CONFIG pci = {};
+	SV_ASSIST::Ring0::ReadPci(0, 0, 0, pci);
+	DWORD64 VIDmask = 0xFFFF00000000;
+	if (pci.DeviceID == 0x3C00)
+		VIDmask = 0x3F00000000;
+	if ((DisplayFamily == 0x06 && DisplayModel == 0x46) || (DisplayModel == 0x2D && DisplayFamily == 0x06))
+	{
+		for (DWORD threadAffinityMask = 0; threadAffinityMask < this->Core; threadAffinityMask++)
+		{
+			if (SV_ASSIST::Ring0::RdMsrTx(IA32_PERF_STATUS, msrdata, threadAffinityMask) == 1 && msrdata)
+			{
+				WORD VID = (msrdata & VIDmask) >> 32;
+				VCore = VID / pow(2, 13);
+				if (VCore < 0.0)
+					VCore = INFINITY;
+				CoreVID[threadAffinityMask] = VCore;
+			}
+		}
 	}
 }
 #pragma endregion

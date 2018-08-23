@@ -39,6 +39,10 @@ BOOL _EnumUsbHub::Updatedata()
 	this->Usb_Tree.clear();
 	this->UsbHostControllerInfo.clear();
 	this->ControllerDevicePath.clear();
+	this->Usb_Hub_info.clear();
+	this->Usb_Device_info.clear();
+	EnumUSBDevice(GUID_DEVINTERFACE_USB_DEVICE);
+	EnumUSBDevice(GUID_DEVINTERFACE_USB_HUB);
 	if (this->EnumUsbController())
 	{
 		OutputDebugPrintf(_T("Updatedata Usb Controller!\n"));
@@ -49,6 +53,21 @@ BOOL _EnumUsbHub::Updatedata()
 	}
 	this->Excute();
 	return TRUE;
+}
+
+const vector<USB_ROOT_HUB>& _EnumUsbHub::GetAllUsbinfo()
+{
+	return this->Usb_Tree;
+}
+
+const vector<DEVICE_INFO_NODE>& _EnumUsbHub::GetAllUsbDeviceInfo()
+{
+	return this->Usb_Device_info;
+}
+
+const vector<DEVICE_INFO_NODE>& _EnumUsbHub::GetAllUsbHubInfo()
+{
+	return this->Usb_Hub_info;
 }
 
 BOOL _EnumUsbHub::EnumRootUsbHub(const wstring HubName, bool IsRootHub)
@@ -400,7 +419,7 @@ BOOL _EnumUsbHub::EnumUSBDevice(const GUID Guid)
 		DWORD DataT;
 		LPTSTR buffer = NULL;
 		DWORD buffersize = 0;
-		DEVICE_INFO_NODE tmp;
+		DEVICE_INFO_NODE tmp = {};
 		// 获取详细信息
 		tmp.DeviceInfo = hDevInfo;
 		tmp.DeviceInfoData = DeviceInfoData;
@@ -453,6 +472,21 @@ BOOL _EnumUsbHub::EnumUSBDevice(const GUID Guid)
 				break;
 		}
 		tmp.DeviceDriverName = buffer;
+		{
+			CM_POWER_DATA cmPowerData = { };
+			BOOL bResult;
+
+			bResult = SetupDiGetDeviceRegistryProperty(hDevInfo,
+				&DeviceInfoData,
+				SPDRP_DEVICE_POWER_DATA,
+				NULL,
+				(PBYTE)&cmPowerData,
+				sizeof(cmPowerData),
+				NULL);
+
+			tmp.LatestDevicePowerState = bResult ? cmPowerData.PD_MostRecentPowerState : PowerDeviceUnspecified;
+		}
+
 		SP_DEVICE_INTERFACE_DATA DeviceInterfaceData;
 		DeviceInterfaceData.cbSize = sizeof(SP_DEVICE_INTERFACE_DATA);
 		for (USHORT j = 0; SetupDiEnumDeviceInterfaces(hDevInfo, &DeviceInfoData, (LPGUID)&Guid, j, &DeviceInterfaceData); ++j)

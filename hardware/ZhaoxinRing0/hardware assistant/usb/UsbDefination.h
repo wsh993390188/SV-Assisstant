@@ -1,18 +1,11 @@
 #pragma once
 #pragma warning(disable:4035)
-#include <windowsx.h>
-#include <initguid.h>
-#include <devioctl.h>
-#include <stdio.h>
-#include <usbioctl.h>
 #include <usbiodef.h>
 #include <usb.h>
 #include <usbuser.h>
+#include <devioctl.h>
+#include <usbioctl.h>
 #include <setupapi.h>
-#include <winioctl.h>
-#include <math.h>
-
-using namespace std;
 #define USB_DESCRIPTOR_MAX_LENGTH 18
 
 typedef enum _USBDESCRIPTORTYPES
@@ -59,11 +52,11 @@ typedef struct _USB_HID_DESCRIPTOR
 
 typedef struct _USB_DEVICE_PNP_STRINGS
 {
-	wstring DeviceId;
-	wstring DeviceDesc;
-	wstring HwId;
-	wstring Service;
-	wstring DeviceClass;
+	std::wstring DeviceId;
+	std::wstring DeviceDesc;
+	std::wstring HwId;
+	std::wstring Service;
+	std::wstring DeviceClass;
 } USB_DEVICE_PNP_STRINGS, *PUSB_DEVICE_PNP_STRINGS;
 
 typedef struct _USB_HOST_CONTROLLER_BDF
@@ -78,7 +71,7 @@ typedef struct _USB_HOST_CONTROLLER_BDF
 typedef struct _USBHOSTCONTROLLERINFO
 {
 	USBDEVICEINFOTYPE                   DeviceInfoType;
-	wstring                             DriverKey;
+	std::wstring                             DriverKey;
 	ULONG                               VendorID;
 	ULONG                               DeviceID;
 	ULONG                               SubSysID;
@@ -87,16 +80,16 @@ typedef struct _USBHOSTCONTROLLERINFO
 	USB_HOST_CONTROLLER_BDF				UsbControllerBDF;
 	USB_CONTROLLER_INFO_0               ControllerInfo;
 	USB_DEVICE_PNP_STRINGS              UsbDeviceProperties;
-	wstring								RootHubName;
+	std::wstring								RootHubName;
 }USBHOSTCONTROLLERINFO, *PUSBHOSTCONTROLLERINFO;
 
 typedef struct _DEVICE_INFO_NODE {
 	HDEVINFO                         DeviceInfo;
 	SP_DEVINFO_DATA                  DeviceInfoData;
 	SP_DEVICE_INTERFACE_DATA         DeviceInterfaceData;
-	wstring							 DevicePath;
-	wstring                          DeviceDescName;
-	wstring                          DeviceDriverName;
+	std::wstring							 DevicePath;
+	std::wstring                          DeviceDescName;
+	std::wstring                          DeviceDriverName;
 	DEVICE_POWER_STATE               LatestDevicePowerState;
 } DEVICE_INFO_NODE, *PDEVICE_INFO_NODE;
 
@@ -153,7 +146,7 @@ typedef struct _USB_PORT_CONNECTOR_PROPERTIES_V2 {
 	USHORT                CompanionPortNumber;
 
 	// Symbolic link name for the companion hub
-	wstring                CompanionHubSymbolicLinkName;
+	std::wstring           CompanionHubSymbolicLinkName;
 } USB_PORT_CONNECTOR_PROPERTIES_V2, *PUSB_PORT_CONNECTOR_PROPERTIES_V2;
 
 typedef struct _USB_NODE_CONNECTION_INFORMATION_EX_V1 {
@@ -182,71 +175,71 @@ typedef struct _USB_ALL_DESCRIPTOR
 		USB_ENDPOINT_DESCRIPTOR				EndPoint;
 		CHAR								UnknownDesc[USB_DESCRIPTOR_MAX_LENGTH];
 	}Descriptors;
-	wstring									StringDescriptors;
+	std::wstring							StringDescriptors;
 }USB_ALL_DESCRIPTOR;
 
 
 typedef struct _USBROOTHUBINFO
 {
-	USBDEVICEINFOTYPE                   DeviceInfoType;
-	USB_NODE_INFORMATION                HubInfo;
-	USB_HUB_INFORMATION_EX              HubInfoEx;
-	wstring                             HubName;
-	USB_PORT_CONNECTOR_PROPERTIES_V2    PortConnectorProps;
-	USB_DEVICE_PNP_STRINGS              UsbDeviceProperties;
-	DEVICE_INFO_NODE                    DeviceInfoNode;
-	USB_HUB_CAPABILITIES_EX             HubCapabilityEx;
+	USBDEVICEINFOTYPE						DeviceInfoType;
+	USB_NODE_INFORMATION					HubInfo;
+	USB_HUB_INFORMATION_EX					HubInfoEx;
+	std::wstring                            HubName;
+	USB_PORT_CONNECTOR_PROPERTIES_V2		PortConnectorProps;
+	USB_DEVICE_PNP_STRINGS					UsbDeviceProperties;
+	DEVICE_INFO_NODE						DeviceInfoNode;
+	USB_HUB_CAPABILITIES_EX					HubCapabilityEx;
 } USBROOTHUBINFO, *PUSBROOTHUBINFO;
 
 typedef struct _USBEXTERNALHUBINFO
 {
-	USBDEVICEINFOTYPE                      DeviceInfoType;
-	USB_NODE_INFORMATION                   HubInfo;
-	USB_HUB_INFORMATION_EX                 HubInfoEx;
-	wstring                                HubName;
-	USB_NODE_CONNECTION_INFORMATION_EX_V1  ConnectionInfo;
-	USB_PIPE_INFO						   Usb_Pipe_Info[30];
-	USB_PORT_CONNECTOR_PROPERTIES_V2       PortConnectorProps;
-	USB_CONFIGURATION_DESCRIPTOR           ConfigDesc;
-	USB_BOS_DESCRIPTOR					   BosDesc;
-	vector<wstring>						   StringDescs;
-	vector<USB_ALL_DESCRIPTOR>			   AllDescs;		 // NULL if root HUB
-	USB_NODE_CONNECTION_INFORMATION_EX_V2  ConnectionInfoV2; // NULL if root HUB
-	USB_DEVICE_PNP_STRINGS                 UsbDeviceProperties;
-	DEVICE_INFO_NODE                       DeviceInfoNode;
-	USB_HUB_CAPABILITIES_EX                HubCapabilityEx;
+	USBDEVICEINFOTYPE						DeviceInfoType;
+	USB_NODE_INFORMATION					HubInfo;
+	USB_HUB_INFORMATION_EX					HubInfoEx;
+	std::wstring                            HubName;
+	USB_NODE_CONNECTION_INFORMATION_EX_V1	ConnectionInfo;
+	USB_PIPE_INFO							Usb_Pipe_Info[30];
+	USB_PORT_CONNECTOR_PROPERTIES_V2		PortConnectorProps;
+	USB_CONFIGURATION_DESCRIPTOR			ConfigDesc;
+	USB_BOS_DESCRIPTOR						BosDesc;
+	std::vector<std::wstring>				StringDescs;
+	std::vector<USB_ALL_DESCRIPTOR>			AllDescs;		 // NULL if root HUB
+	USB_NODE_CONNECTION_INFORMATION_EX_V2	ConnectionInfoV2; // NULL if root HUB
+	USB_DEVICE_PNP_STRINGS					UsbDeviceProperties;
+	DEVICE_INFO_NODE						DeviceInfoNode;
+	USB_HUB_CAPABILITIES_EX					HubCapabilityEx;
 } USBEXTERNALHUBINFO, *PUSBEXTERNALHUBINFO;
 
 // HubInfo, HubName may be in USBDEVICEINFOTYPE, so they can be removed
 typedef struct _USBDEVICEINFO
 {
-	USBDEVICEINFOTYPE                      DeviceInfoType;
-	USB_NODE_INFORMATION                   HubInfo;          // NULL if not a HUB
-	USB_HUB_INFORMATION_EX                 HubInfoEx;        // NULL if not a HUB
-	wstring                                HubName;          // NULL if not a HUB
-	USB_NODE_CONNECTION_INFORMATION_EX_V1  ConnectionInfo;   // NULL if root HUB
-	USB_PIPE_INFO						   Usb_Pipe_Info[30];// NULL if root HUB
-	USB_PORT_CONNECTOR_PROPERTIES_V2       PortConnectorProps;
-	USB_CONFIGURATION_DESCRIPTOR           ConfigDesc;       // NULL if root HUB
-	USB_BOS_DESCRIPTOR					   BosDesc;          // NULL if root HUB
-	vector<wstring>						   StringDescs;
-	vector<USB_ALL_DESCRIPTOR>			   AllDescs;		 // NULL if root HUB
-	USB_NODE_CONNECTION_INFORMATION_EX_V2  ConnectionInfoV2; // NULL if root HUB
-	USB_DEVICE_PNP_STRINGS                 UsbDeviceProperties;
-	DEVICE_INFO_NODE                       DeviceInfoNode;
-	USB_HUB_CAPABILITIES_EX                HubCapabilityEx;  // NULL if not a HUB
+	USBDEVICEINFOTYPE                       DeviceInfoType;
+	USB_NODE_INFORMATION					HubInfo;          // NULL if not a HUB
+	USB_HUB_INFORMATION_EX					HubInfoEx;        // NULL if not a HUB
+	std::wstring                            HubName;          // NULL if not a HUB
+	USB_NODE_CONNECTION_INFORMATION_EX_V1	ConnectionInfo;   // NULL if root HUB
+	USB_PIPE_INFO							Usb_Pipe_Info[30];// NULL if root HUB
+	USB_PORT_CONNECTOR_PROPERTIES_V2		PortConnectorProps;
+	USB_CONFIGURATION_DESCRIPTOR			ConfigDesc;       // NULL if root HUB
+	USB_BOS_DESCRIPTOR						BosDesc;          // NULL if root HUB
+	std::vector<std::wstring>				StringDescs;
+	std::vector<USB_ALL_DESCRIPTOR>			AllDescs;		 // NULL if root HUB
+	USB_NODE_CONNECTION_INFORMATION_EX_V2	ConnectionInfoV2; // NULL if root HUB
+	USB_DEVICE_PNP_STRINGS					UsbDeviceProperties;
+	DEVICE_INFO_NODE						DeviceInfoNode;
+	USB_HUB_CAPABILITIES_EX					HubCapabilityEx;  // NULL if not a HUB
 } USBDEVICEINFO, *PUSBDEVICEINFO;
 
 struct USB_Hub
 {
-	vector<USBEXTERNALHUBINFO>				UsbExternalHubInfo;
-	vector<USBDEVICEINFO>					UsbDeviceInfo;
+	std::vector<USBEXTERNALHUBINFO>				UsbExternalHubInfo;
+	std::vector<USBDEVICEINFO>					UsbDeviceInfo;
 };
 
 struct USB_Device
 {
-	vector<USB_Hub>							UsbHubInfo;
-	vector<USBDEVICEINFO>					UsbDeviceInfo;
+	std::vector<USB_Hub>							UsbHubInfo;
+	std::vector<USBDEVICEINFO>					UsbDeviceInfo;
 };
 
 struct USB_ROOT_HUB

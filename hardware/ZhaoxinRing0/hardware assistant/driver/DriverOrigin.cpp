@@ -1,13 +1,10 @@
 #include "stdafx.h"
 #include "DriverOrigin.h"
-#include <fstream>
 
 std::shared_ptr<ZhaoxinDriver> ZhaoxinDriver::ring0_temp = nullptr;
 
 ZhaoxinDriver::ZhaoxinDriver() : ring(make_shared<CRing0>()), ring0_mutex{}
-{
-	InitPciDB();
-}
+{}
 
 ZhaoxinDriver * ZhaoxinDriver::Instance()
 {
@@ -63,7 +60,9 @@ BOOL ZhaoxinDriver::RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, O
 BOOL ZhaoxinDriver::WrMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN ULONG Memory_Data)
 {
 	std::lock_guard<std::mutex> lock(ring0_mutex);
-	return ring->WrMemory(Memory_Addr, Mem_DataSize, Memory_Data);
+	auto state = ring->WrMemory(Memory_Addr, Mem_DataSize, Memory_Data);
+	Sleep(1);
+	return state;
 }
 
 BOOL ZhaoxinDriver::ReadPci(IN USHORT bus, IN USHORT dev, IN USHORT func, OUT PCI_COMMON_CONFIG & pci_config)
@@ -99,45 +98,3 @@ const Pci_All_Config_Space& ZhaoxinDriver::GetAllPciInfo()
 	return ring->ReturnPCIConfigSpace();
 }
 
-BOOL ZhaoxinDriver::GetPCIDeviceName(USHORT VenderID, USHORT DeviceID, std::string & VenderName, std::string & DeviceName)
-{
-	VenderName = (pciDB.first.count(VenderID) > 0) ? pciDB.first.at(VenderID).c_str() : "unknown vendor";
-	DeviceName = (pciDB.second.count(VenderID) > 0 && pciDB.second.at(VenderID).count(DeviceID) > 0) ? pciDB.second.at(VenderID).at(DeviceID).c_str() : "unknown device";
-	return TRUE;
-}
-
-BOOL ZhaoxinDriver::InitPciDB()
-{
-	std::ifstream in("pci.ids");
-	std::string line, item;
-
-	if (!in.is_open())
-	{
-		std::cerr << "pci.ids file is not available. Download it from https://raw.githubusercontent.com/pciutils/pciids/master/pci.ids" << endl;
-		return FALSE;
-	}
-
-	int vendorID = -1;
-
-	while (std::getline(in, line)) {
-		// Ignore any line starting with #
-		if (line.size() == 0 || line[0] == '#')
-			continue;
-
-		if (line[0] == '\t' && line[1] == '\t')
-		{
-			// subvendor subdevice  subsystem_name
-			continue;
-		}
-		if (line[0] == '\t')
-		{
-			int deviceID = stoi(line.substr(1, 4), 0, 16);
-			pciDB.second[vendorID][deviceID] = line.substr(7);
-			continue;
-		}
-		// vendor
-		vendorID = stoi(line.substr(0, 4), 0, 16);
-		pciDB.first[vendorID] = line.substr(6);
-	}
-	return TRUE;
-}

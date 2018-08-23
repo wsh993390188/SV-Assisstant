@@ -5,13 +5,7 @@ Author:王硕
 Date:2017-10-27
 Description:从驱动中读取IO Memory PCI MSR SuperIO SPD等等信息
 **************************************************/
-#include <stdlib.h>
-#include <conio.h>
-#include <winioctl.h>
-
 #include <algorithm>
-#include "../../ZhaoxinRing0/ioctl.h"
-#include "../../ZhaoxinRing0/Public.h"
 #include "Load/Driver.h"
 
 
@@ -128,8 +122,8 @@ public:
 	*@return
 		*@BOOL				是否成功
 	***************************************************************************/
-	BOOL RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT ULONG& Memory_Data);
-
+	BOOL RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT DWORD& Memory_Data);
+	
 	/***************************************************************************
 	*@Function				WrMemory
 	*@brief					写入内存的值
@@ -141,8 +135,8 @@ public:
 	*@return
 		*@BOOL				是否成功
 	******************************************************************************/
+	BOOL WrMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN DWORD Memory_Data);
 
-	BOOL WrMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN ULONG Memory_Data);
 	/*************************************************
 	*@Function				ReadPci
 	*@brief					读PCI配置空间的数据

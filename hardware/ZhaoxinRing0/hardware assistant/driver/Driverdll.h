@@ -85,12 +85,14 @@ namespace SV_ASSIST
         *@author				王硕
         *@param
             *@IO_Port_Addr		IN 输入Memory的地址
-            *@IO_DataSize		IN Memory 输出数据的大小 1、2、4（8、16、32bits）
+            *@IO_DataSize		IN Memory 输出数据的大小 1、2、4（8、16、32bits)
             *@IO_Data			OUT 输出的Memory中的值
         *@return
             *@BOOL				是否成功 1成功 其他值 失败
         ***************************************************************************/
-        BOOL RdMemory(IN LONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT ULONG& Memory_Data);
+
+		BOOL RdMemory(IN LONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT ULONG& Memory_Data);
+
 
         /***************************************************************************
         *@Function				WrMemory
@@ -103,7 +105,7 @@ namespace SV_ASSIST
         *@return
             *@BOOL				是否成功 1成功 其他值 失败
         ******************************************************************************/
-        BOOL WrMemory(IN LONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN ULONG Memory_Data);
+		BOOL WrMemory(IN LONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN ULONG Memory_Data);
 
         /*************************************************
         *@Function				ReadPci
@@ -156,6 +158,7 @@ namespace SV_ASSIST
 			*@BOOL					设置是否成功
         ****************************************************/
         BOOL SetECData(BYTE EC_Addr, BYTE EC_Write_Data);
+
         /***************************************************
         *@Function					GetSMbusBaseAddr
         *@brief						获取SMBUS基地址
@@ -178,33 +181,6 @@ namespace SV_ASSIST
         ****************************************************/
         USHORT GetPCIVendorID();
 
-		/**************************************************************
-		*@Function				GetPCIEInfo
-		*@brief					获取PCIE Configuration Space
-		*@author				王硕
-		*@param
-			*@PCIE_BaseAddress	IN PCIE内存地址
-			*@Data				INOut PCIE配置空间数组
-			*@DataSize			INOut PCIE配置空间大小4096
-		*@return
-			*@BOOL				获取Configuration Space是否成功
-		****************************************************************/
-		BOOL GetPCIEInfo(const ULONGLONG PCIE_BaseAddress, ULONG bus, ULONG dev, ULONG func, PVOID& Data, size_t DataSize);
-
-		/***************************************************
-		*@Function					GetPCIDeviceName
-		*@brief						获取Pci厂商名
-		*@author					王硕
-		*@param
-			*@VenderID				厂商ID号
-			*@DeviceID				设备ID号
-			*@VenderName			输出厂商名
-			*@DeviceName			输出设备名
-		*@return
-			*@USHORT				厂商pci代号，如1022、8086、1106
-		****************************************************/
-		BOOL GetPCIDeviceName(USHORT VenderID, USHORT DeviceID, std::string& VenderName, std::string& DeviceName);
-
 		/***************************************************
 		*@Function					GetAllPciInfo
 		*@brief						获取全部的PCI配置空间信息
@@ -214,19 +190,5 @@ namespace SV_ASSIST
 			*@Pci_All_Config_Space	Pci设备
 		****************************************************/
 		const Pci_All_Config_Space& GetAllPciInfo();
-
-		/***************************************************
-		*@Function					PCIstringToBDF
-		*@brief						pci字符转换成bus dev func
-		*@author					王硕
-		*@param
-			*@pcistring				输入的pci字符串
-			*@bus					返回bus号
-			*@dev					返回dev号
-			*@func					返回func号
-		*@return
-			*@BOOL					是否成功
-		****************************************************/
-		const BOOL PCIstringToBDF(const std::wstring& pcistring, ULONG &bus, ULONG &dev, ULONG &func);
     }
 }

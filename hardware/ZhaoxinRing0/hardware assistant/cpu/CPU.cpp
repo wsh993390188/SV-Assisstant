@@ -29,6 +29,7 @@ public:
 	const std::string& GetProcessorID() { return data->cpu->ProcessorId; }
 	const std::string& GetSocketDesignation() { return data->cpu->SocketDesignation; }
 	const std::vector<double>& GetCurrentClockSpeed() { return data->cpu->CurrentClockSpeed; }
+	const std::vector<double>& GetVoltage() { return data->cpu->CoreVID; }
 	const double GetExtClock() 
 	{
 		if (data->cpu->BusSpeed < INFINITY)
@@ -44,6 +45,7 @@ public:
 	const UINT GetTechonology() { return data->cpu->Technology; }
 	const double GetPackageTemperature() { return data->cpu->PackageTemperature; }
 	const std::vector<double>& GetTemperature(){ return data->cpu->Temperature; }
+	void GetCpuid(int(&cpuid)[4], const int eax, const int ecx) { data->cpu->GetCpuid(cpuid, eax, ecx); }
 	void Updatedata(){ data->Update(); }
 	CPUDLL() : data(std::make_shared<CPUDLLDATA>())
 	{
@@ -225,4 +227,14 @@ const double SV_ASSIST::CPU::GetPackageTemperature()
 const std::vector<double>& SV_ASSIST::CPU::GetTemperature()
 {
 	return CPUDLL::Instance()->GetTemperature();
+}
+
+const std::vector<double>& SV_ASSIST::CPU::GetVoltage()
+{
+	return CPUDLL::Instance()->GetVoltage();
+}
+
+void SV_ASSIST::CPU::GetCpuid(int(&cpuid)[4], const int eax, const int ecx)
+{
+	return CPUDLL::Instance()->GetCpuid(cpuid,eax,ecx);
 }

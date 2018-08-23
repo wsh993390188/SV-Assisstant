@@ -39,6 +39,7 @@ protected:
 private:	
 	void ExecCPUName();
 	void ExecCodeNameByFMS(int Family, int Model);
+	void ExecVoltageByFMS();
 	void GetBusSpeed();
 	void GetCurrentSpeed();
 #pragma region MSR Register
@@ -53,6 +54,8 @@ private:
 	const DWORD MSR_PP0_ENERY_STATUS;
 	const DWORD MSR_PP1_ENERY_STATUS;
 #pragma endregion
+	int DisplayFamily;
+	int DisplayModel;
 	std::vector<double> Tjmax; 
 	double PackageTjmax;
 	UINT MaxNonTurboFre;

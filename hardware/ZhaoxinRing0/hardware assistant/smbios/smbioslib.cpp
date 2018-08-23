@@ -608,5 +608,16 @@ namespace SV_ASSIST
 		{
 			return execSMBIOS::Instance()->GetSMBIOSinfo();
 		}
+
+		bool IsUEFI()
+		{
+			GetFirmwareEnvironmentVariable(L"", L"{00000000-0000-0000-0000-000000000000}", NULL, 0);
+			if (GetLastError() == ERROR_INVALID_FUNCTION) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
 	}
 }

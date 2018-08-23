@@ -78,6 +78,7 @@
       <PreprocessorDefinitions>ZX_OutputLog;ELPP_UNICODE;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\boost_1_67_0;C:\Users\wsh\OneDrive\SV-Assisstant\hardware\hardware assistant\gpu\NVAPILIB;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <SupportJustMyCode>false</SupportJustMyCode>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -95,6 +96,7 @@
       <PreprocessorDefinitions>ZX_OutputLog;ELPP_UNICODE;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\boost_1_67_0;E:\work\boost_1_67_0;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <SupportJustMyCode>false</SupportJustMyCode>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -102,7 +104,7 @@
       <AdditionalLibraryDirectories>$(SolutionDir)..\gpu\NVAPILIB;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Lib>
-      <AdditionalDependencies>wlanapi.lib;nvapi64.lib;propsys.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;Iphlpapi.lib;Rpcrt4.lib;SetupAPI.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ole32.lib;oleaut32.lib;wbemuuid.lib;wlanapi.lib;nvapi64.lib;propsys.lib;D3D11.lib;Iphlpapi.lib;Rpcrt4.lib;SetupAPI.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;E:\work\boost\bin1.63.0\VC14.0threading=multi\lib;$(SolutionDir)hardware assistant\gpu\NVAPILIB;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -126,7 +128,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x86;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;$(SolutionDir)hardware assistant\gpu\NVAPILIB;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>wlanapi.lib;NVAPI.lib;propsys.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;Iphlpapi.lib;SetupAPI.lib;Rpcrt4.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wlanapi.lib;Cfgmgr32.lib;NVAPI.lib;propsys.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;Iphlpapi.lib;SetupAPI.lib;Rpcrt4.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -139,6 +141,7 @@
       <PreprocessorDefinitions>ZX_OutputLog;ELPP_UNICODE;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\boost_1_67_0;E:\work\boost_1_67_0;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,7 +149,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>wlanapi.lib;nvapi64.lib;propsys.lib;ole32.lib;oleaut32.lib;wbemuuid.lib;D3D11.lib;Iphlpapi.lib;Rpcrt4.lib;SetupAPI.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ole32.lib;oleaut32.lib;wbemuuid.lib;wlanapi.lib;nvapi64.lib;propsys.lib;D3D11.lib;Iphlpapi.lib;Rpcrt4.lib;SetupAPI.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;E:\work\boost\bin1.63.0\VC14.0threading=multi\lib;$(SolutionDir)hardware assistant\gpu\NVAPILIB;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -167,17 +170,19 @@
     <ClInclude Include="..\..\cpu\defination.h" />
     <ClInclude Include="..\..\cpu\Intel.h" />
     <ClInclude Include="..\..\cpu\zhaoxin.h" />
-    <ClInclude Include="..\..\disk\disk.h" />
+    <ClInclude Include="..\..\disk\AtaSmart.h" />
     <ClInclude Include="..\..\disk\diskdefination.h" />
-    <ClInclude Include="..\..\disk\WMI for Disk\SynQuery.h" />
-    <ClInclude Include="..\..\disk\WMI for Disk\WMI.h" />
-    <ClInclude Include="..\..\disk\WMI for Disk\WMIExtern.h" />
+    <ClInclude Include="..\..\disk\DiskLib.h" />
+    <ClInclude Include="..\..\disk\DnpService.h" />
+    <ClInclude Include="..\..\disk\NVMeInterpreter.h" />
+    <ClInclude Include="..\..\disk\SlotSpeedGetter.h" />
+    <ClInclude Include="..\..\disk\SPTIUtil.h" />
+    <ClInclude Include="..\..\disk\StorageQuery.h" />
     <ClInclude Include="..\..\driver\Defination\Ring0Defination.h" />
     <ClInclude Include="..\..\driver\Driverdll.h" />
     <ClInclude Include="..\..\driver\DriverOrigin.h" />
     <ClInclude Include="..\..\driver\Load\Driver.h" />
     <ClInclude Include="..\..\driver\MyDriverClass.h" />
-    <ClInclude Include="..\..\driver\PCI-E.h" />
     <ClInclude Include="..\..\edid\EDID src.h" />
     <ClInclude Include="..\..\edid\EDID.h" />
     <ClInclude Include="..\..\edid\EDIDdefination.h" />
@@ -192,6 +197,8 @@
     <ClInclude Include="..\..\Memory\MemoryLib.h" />
     <ClInclude Include="..\..\network\NetWork.h" />
     <ClInclude Include="..\..\network\NetworkLib.h" />
+    <ClInclude Include="..\..\PCIE\PCI-E.h" />
+    <ClInclude Include="..\..\PCIE\pcioptionrom.h" />
     <ClInclude Include="..\..\smbios\Smbios.h" />
     <ClInclude Include="..\..\smbios\smbiosdefination.h" />
     <ClInclude Include="..\..\smbios\smbioslib.h" />
@@ -218,15 +225,15 @@
     <ClCompile Include="..\..\cpu\CPUWMI.cpp" />
     <ClCompile Include="..\..\cpu\Intel.cpp" />
     <ClCompile Include="..\..\cpu\zhaoxin.cpp" />
-    <ClCompile Include="..\..\disk\disk.cpp" />
-    <ClCompile Include="..\..\disk\diskdefination.cpp" />
-    <ClCompile Include="..\..\disk\WMI for Disk\SynQuery.cpp" />
-    <ClCompile Include="..\..\disk\WMI for Disk\WMI.cpp" />
+    <ClCompile Include="..\..\disk\AtaSmart.cpp" />
+    <ClCompile Include="..\..\disk\DiskLib.cpp" />
+    <ClCompile Include="..\..\disk\DnpService.cpp" />
+    <ClCompile Include="..\..\disk\NVMeInterpreter.cpp" />
+    <ClCompile Include="..\..\disk\SlotSpeedGetter.cpp" />
     <ClCompile Include="..\..\driver\Driverdll.cpp" />
     <ClCompile Include="..\..\driver\DriverOrigin.cpp" />
     <ClCompile Include="..\..\driver\Load\Driver.cpp" />
     <ClCompile Include="..\..\driver\MyDriverClass.cpp" />
-    <ClCompile Include="..\..\driver\PCI-E.cpp" />
     <ClCompile Include="..\..\edid\EDID src.cpp" />
     <ClCompile Include="..\..\edid\EDID.cpp" />
     <ClCompile Include="..\..\gpu\AMDgpu.cpp" />
@@ -240,6 +247,8 @@
     <ClCompile Include="..\..\Memory\MemoryLib.cpp" />
     <ClCompile Include="..\..\network\NetWork.cpp" />
     <ClCompile Include="..\..\network\NetworkLib.cpp" />
+    <ClCompile Include="..\..\PCIE\PCI-E.cpp" />
+    <ClCompile Include="..\..\PCIE\pcioptionrom.cpp" />
     <ClCompile Include="..\..\smbios\Smbios.cpp" />
     <ClCompile Include="..\..\smbios\smbioslib.cpp" />
     <ClCompile Include="..\..\superio\Fintek.cpp" />

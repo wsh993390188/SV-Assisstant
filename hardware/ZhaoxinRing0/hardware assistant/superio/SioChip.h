@@ -165,8 +165,8 @@ private:
 	USHORT addressReg;
 	USHORT dataReg;
 
-	const std::vector<USHORT> FAN_TACHOMETER_REG;
-	const std::vector<USHORT> FAN_TACHOMETER_EXT_REG;
+	std::vector<USHORT> FAN_TACHOMETER_REG;
+	std::vector<USHORT> FAN_TACHOMETER_EXT_REG;
 	const USHORT VOLTAGE_BASE_REG;
 	const std::vector<USHORT> FAN_PWM_CTRL_REG;
 };

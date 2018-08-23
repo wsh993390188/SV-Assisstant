@@ -32,20 +32,16 @@ namespace SV_ASSIST
 					temp = std::make_shared<CEDID>();
 				return temp.get();
 			}
-			CEDID() : EDIDData(std::make_shared<_EDID_INFO>()) {}
-			void UpdateData()
-			{
-				EDIDData->UpdateData();
-			}
+			CEDID() : EDIDData(std::make_shared<_EDID_INFO>()) { EDIDData->UpdateData(); }
 
-			const std::string GetMonitorName()
+			const std::string GetMonitorName(int Nums = 0)
 			{
 				std::string edidname = {};
 				auto edidinfo = EDIDData->ReturnEDID();
 				if (!edidinfo.empty())
 				{
 					EDIDManufacturer  buf = {};
-					buf.__Manufacturer = edidinfo.at(0).Manufacturer.Manufacturer;
+					buf.__Manufacturer = edidinfo.at(Nums).Manufacturer.Manufacturer;
 					buf.__Manufacturer = ((buf.__Manufacturer & 0xFF) << 8) | ((buf.__Manufacturer & 0xFF00) >> 8);
 					char temp[4] = {};
 					temp[0] = buf.bits._First + 'A' - 1;
@@ -178,25 +174,24 @@ namespace SV_ASSIST
 						edidname = "Samsung Electric Company";
 					else
 						edidname = "Unknown Manufacturer";
-				}
-				else
-					edidname = "Unknown Manufacturer";
-
-				for (short i = 0; i < 4; i++)
-				{
-					EDID_Other_Monitor_Descriptors OtherDesc;
-					memcpy(&OtherDesc, edidinfo.at(0).Descriptor + i, sizeof(EDID_Other_Monitor_Descriptors));
-					if (OtherDesc.Reserve == 0 && OtherDesc.Reserved[0] == 0 && OtherDesc.Reserved[1] == 0 && OtherDesc.Reserved[2] == 0)
+					for (short i = 0; i < 4; i++)
 					{
-						if (OtherDesc.Descriptor_Type == 0xFC)
+						EDID_Other_Monitor_Descriptors OtherDesc;
+						memcpy(&OtherDesc, edidinfo.at(Nums).Descriptor + i, sizeof(EDID_Other_Monitor_Descriptors));
+						if (OtherDesc.Reserve == 0 && OtherDesc.Reserved[0] == 0 && OtherDesc.Reserved[1] == 0 && OtherDesc.Reserved[2] == 0)
 						{
-							std::string t((const char *)edidinfo.at(0).Descriptor[i].Display_Serial_Number.Display_Serial_Number);
-							boost::trim(t);
-							edidname += (" " + t);
-							break;
+							if (OtherDesc.Descriptor_Type == 0xFC)
+							{
+								std::string t((const char *)edidinfo.at(Nums).Descriptor[i].Display_Serial_Number.Display_Serial_Number);
+								boost::trim(t);
+								edidname += (" " + t);
+								break;
+							}
 						}
 					}
 				}
+				else
+					edidname = "Unknown Manufacturer";
 				return edidname;
 
 			}
@@ -212,9 +207,9 @@ namespace SV_ASSIST
 
 		std::shared_ptr<CEDID> CEDID::temp = nullptr;
 
-		const std::string GetMonitorName()
+		const std::string GetMonitorName(int nums)
 		{
-			return CEDID::Instance()->GetMonitorName();
+			return CEDID::Instance()->GetMonitorName(nums);
 		}
 
 		const std::vector<EDID>& GetEDID()
@@ -491,11 +486,6 @@ namespace SV_ASSIST
 
 				outfile.close();
 			}
-		}
-
-		void UpdateData()
-		{
-			CEDID::Instance()->UpdateData();
 		}
 	}
 }

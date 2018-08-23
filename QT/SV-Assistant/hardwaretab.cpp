@@ -2,7 +2,7 @@
 
 HardwareButton::HardwareButton(QWidget *parent) : QToolButton(parent), Changecolor(true)
 {
-    this->setStyleSheet("QToolButton {border:none;color:#000000;font-family: \"consolas\"; font-size:14px;background-color: #33E6FF;}");
+    this->setStyleSheet("QToolButton {border:none;color:#000000;font-family: \"consolas\"; font-size:14px;background-color: #FFFFFF;}");
     this->setMouseTracking(true);
     this->installEventFilter(this);
     this->setGeometry(0,0,30,185);
@@ -27,7 +27,7 @@ bool HardwareButton::eventFilter(QObject *watched, QEvent *event)
             this->setStyleSheet("QToolButton {border-style:none;background-color: #d81e06;font-family: \"consolas\"; font-size:14px;}");
         } else if (event->type() == QEvent::Leave) {
             if(!btn->isChecked())
-                    this->setStyleSheet("QToolButton {border-style:none;font-family: \"consolas\"; font-size:14px;background-color: #33E6FF;}");
+                    this->setStyleSheet("QToolButton {border-style:none;font-family: \"consolas\"; font-size:14px;background-color: #FFFFFF;}");
             else
                 this->setStyleSheet("QToolButton {border-style:none;background-color: #d81e06;font-family: \"consolas\"; font-size:14px;}");
         }

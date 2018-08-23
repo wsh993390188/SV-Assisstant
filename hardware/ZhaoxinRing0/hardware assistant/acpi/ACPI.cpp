@@ -21,12 +21,12 @@ namespace SV_ASSIST
 			BOOL Excute();
 			const ACPI_MCFG_STRUCTURE& GetMCFG()
 			{
-				return acpi->mcfg;
+				return acpi->acpi_mcfg;
 			}
 
 			const ACPI_RSDT_STRUCTURE& GetRSDT()
 			{
-				return acpi->rsdt;
+				return acpi->acpi_rsdt;
 			}
 		private:
 			static std::shared_ptr<CACPI_info> temp;
@@ -46,7 +46,7 @@ namespace SV_ASSIST
 		{
 			if (acpi->isSupportACPI)
 			{
-				acpi->Get();
+				acpi->Excute();
 			}
 			return acpi->isSupportACPI;
 		}

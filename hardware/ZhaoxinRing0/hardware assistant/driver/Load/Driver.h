@@ -26,7 +26,7 @@ SetupDriverName(
 #ifdef _WIN64
 #define DRIVER_NAME					_T("ZhaoxinRing0.sys")
 #else
-#define DRIVER_NAME					_T("ZhaoxinRing0x86.sys")
+#define DRIVER_NAME					_T("ZhaoxinRing0_x86.sys")
 #endif // WIN64
 
 #define DRIVER_ID					_T("ZhaoxinRing0")

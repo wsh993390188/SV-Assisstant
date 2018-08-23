@@ -63,7 +63,7 @@ namespace SV_ASSIST
 		{
 			m_data = std::make_unique<CommonSMBUS>();
 			auto smbiosmemory = SV_ASSIST::DMI_SMBIOS::GetSMBIOSinfo().MemoryDev;
-			bool Success = true;
+			bool Success = false;
 			for (size_t DIMMSlot = 0; DIMMSlot < smbiosmemory.size(); DIMMSlot++)
 			{
 				Success |= JudgeSPDType(DIMMADDR[DIMMSlot]);
@@ -73,6 +73,11 @@ namespace SV_ASSIST
 				PCI_COMMON_CONFIG pci = {};
 				Ring0::ReadPci(0, 0, 0, pci);
 				if (pci.VendorID == 0x8086 && pci.DeviceID == 0x3C00)
+				{
+					m_data = nullptr;
+					m_data.reset(new IvyBridgeSMbus());
+				}
+				else if (pci.VendorID == 0x8086 && pci.DeviceID == 0x0E00)
 				{
 					m_data = nullptr;
 					m_data.reset(new IvyBridgeSMbus());
@@ -104,7 +109,7 @@ namespace SV_ASSIST
 
 		void MemoryLib::GetSPDInfo()
 		{
-			PVOID spd = nullptr;
+			PVOID64 spd = nullptr;
 			size_t len = 0;
 			bool firstCreate = true;
 			for (const auto& i : memorymapdeviceID)
@@ -130,17 +135,17 @@ namespace SV_ASSIST
 				{
 					memset(spd, 0, len);
 				}
-				this->ReadSPD(DIMMType, DIMMSlot, spd, len, SmbusBase);
-				if (DIMMType == DDR4 || DIMMType == DDR4E || DIMMType == LPDDR4)
-				{
-					std::pair<ULONG, DDR4_INFO> temp(DIMMSlot, *(PDDR4_INFO)spd);
-					Memoryddr4Info.emplace_back(temp);
-				}
-				else
-				{
-					std::pair<ULONG, DDR3_INFO> temp(DIMMSlot, *(PDDR3_INFO)spd);
-					Memoryddr3Info.emplace_back(temp);
-				}
+				if(this->ReadSPD(DIMMType, DIMMSlot, spd, len, SmbusBase))
+					if (DIMMType == DDR4 || DIMMType == DDR4E || DIMMType == LPDDR4)
+					{
+						std::pair<ULONG, DDR4_INFO> temp(DIMMSlot, *(PDDR4_INFO)spd);
+						Memoryddr4Info.emplace_back(temp);
+					}
+					else
+					{
+						std::pair<ULONG, DDR3_INFO> temp(DIMMSlot, *(PDDR3_INFO)spd);
+						Memoryddr3Info.emplace_back(temp);
+					}
 			}
 			if(spd)
 			{
@@ -151,6 +156,8 @@ namespace SV_ASSIST
 
 		bool MemoryLib::JudgeSPDType(const USHORT DIMMId, const ULONG SwitchSmbus)
 		{
+			if (!m_data.get())
+				return false;
 			DIMMType types = DIMM_UNKNOWN;
 			ULONG SmbusControlBase = SwitchSmbus;
 			if (this->m_data->JudgeSPDType(types, DIMMId, SmbusControlBase))
@@ -4211,6 +4218,8 @@ namespace SV_ASSIST
 #pragma endregion
 		bool MemoryLib::ReadSPD(const DIMMType types, const USHORT DIMMId, PVOID64& spd, const int len, const ULONG SmbusControlBase)
 		{
+			if (!m_data.get())
+				return false;
 			return this->m_data->ReadSPD(types, DIMMId, spd, len, SmbusControlBase);
 		}
 

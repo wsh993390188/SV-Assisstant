@@ -157,9 +157,9 @@ public:
 		gpudata->UpdateData();
 		GetInfo();
 	}
-	const std::vector<IgpuSensor>* ReturnGPUInfo()
+	const std::vector<IgpuSensor>& ReturnGPUInfo()
 	{
-		return &this->gpuinfo;
+		return this->gpuinfo;
 	}
 	GPU() : gpudata(std::make_shared<GPUData>())
 	{
@@ -291,7 +291,7 @@ std::shared_ptr<GPU> GPU::temp = nullptr;
 
 const std::vector<IgpuSensor>& SV_ASSIST::GPU::GetGpuInfo()
 {
-	return *::GPU::Instance()->ReturnGPUInfo();
+	return ::GPU::Instance()->ReturnGPUInfo();
 }
 
 void SV_ASSIST::GPU::UpdateDate()

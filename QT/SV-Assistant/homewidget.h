@@ -12,7 +12,7 @@
 struct HomebaseInfo
 {
     QHBoxLayout* layout;
-    QLabel* BaseLabel;
+	QLabel* BaseLabel;
     QLabel* BaseInfo;
     QSpacerItem *horizontalSpace;
     QSpacerItem *BeginhorizontalSpace;
@@ -26,7 +26,7 @@ public:
     explicit Homewidget(QWidget *parent = nullptr);
 	~Homewidget();
 signals:
-
+	void switchPage(int i);
 public slots:
 
 private:

@@ -349,7 +349,7 @@ bool SV_ASSIST::Memory::IvyBridgeSMbus::ClearStatus(DWORD BaseAddress)
 	DWORD loops = 0x8000;
 	do
 	{
-		Ring0::WrIOPort(BaseAddress + 4, 4, 0);
+		Ring0::WrMemory(BaseAddress + 4, 4, 0);
 		DWORD Local8 = {};
 		Ring0::RdMemory(BaseAddress, 4, Local8);
 		if((Local8 & 0x10000000) == 0)
@@ -411,4 +411,3 @@ bool SV_ASSIST::Memory::IvyBridgeSMbus::JudgeSPDType(DIMMType & types, const USH
 	SmbusControlBase = SmbusBase;
 	return true;
 }
-

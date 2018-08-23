@@ -4,7 +4,6 @@
 #include "stdafx.h"
 #include "Driverdll.h"
 #include "DriverOrigin.h"
-#include "PCI-E.h"
 
 namespace SV_ASSIST
 {
@@ -75,30 +74,11 @@ namespace SV_ASSIST
 			return ZhaoxinDriver::Instance()->GetPCIVendorID();
 		}
 
-		BOOL GetPCIEInfo(const ULONGLONG PCIE_BaseAddress, ULONG bus, ULONG dev, ULONG func, PVOID& Data, size_t DataSize)
-		{
-			return GetPCIEConfigSpace(PCIE_BaseAddress, bus, dev, func, Data, DataSize);
-		}
-
-		BOOL GetPCIDeviceName(USHORT VenderID, USHORT DeviceID, std::string & VenderName, std::string & DeviceName)
-		{
-			return ZhaoxinDriver::Instance()->GetPCIDeviceName(VenderID, DeviceID, VenderName, DeviceName);
-		}
-
 		const Pci_All_Config_Space & GetAllPciInfo()
 		{
 			return ZhaoxinDriver::Instance()->GetAllPciInfo();
 		}
 
-		const BOOL PCIstringToBDF(const std::wstring& pcistring,ULONG & bus, ULONG & dev, ULONG & func)
-		{
-			BOOL status = FALSE;
-			if (swscanf_s(pcistring.c_str(),
-				_T("bus:%d dev:%d func:%d"),
-				&bus, &dev, &func))
-				status = TRUE;
-			return status;
-		}
 
 		BOOL GetSMbusBaseAddr(const USHORT VendorID, USHORT& SMbusBaseAddress)
 		{

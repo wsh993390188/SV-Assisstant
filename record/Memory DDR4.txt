@@ -8,5 +8,5 @@ SlaveAddress=6E Command=40切到Page1
 X79 平台及Ivy Bridge Sandy Bridge-E SMBUS地址可能为EFF78180 EFF78190.具体看RW.ini
 没找到Spec都是根据RW猜得
 [State 16bits Data 16bits [DeviceId(A1-A7)] 8bits [offsets]8bits [Write bits] 16bits [Probable limit DeviceId R\W (A8) 8bits] ] 
-卧槽 MmMapIoSpace 得慢点读 读的快了好像就会链接到错误的物理地址上
+写需要等待一段时间让硬件完成操作
 但是怎么切Page我还不会，代码还没写

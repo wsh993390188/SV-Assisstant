@@ -418,6 +418,11 @@ NTSTATUS ReadMemory(
 			case 4:
 				READ_REGISTER_BUFFER_ULONG(mapped, (PULONG)outmembuf, Read_mem.Count);
 				break;
+#ifdef _WIN64
+			case 8:
+				READ_REGISTER_BUFFER_ULONG64(mapped, (PULONG64)outmembuf, Read_mem.Count);
+				break;
+#endif
 			default:
 				break;
 			}
@@ -485,6 +490,11 @@ NTSTATUS WriteMemory(
 			case 4:
 				WRITE_REGISTER_BUFFER_ULONG(mapped, (PULONG)&Write_mem.Data, Write_mem.Count);
 				break;
+#ifdef _WIN64
+			case 8:
+				WRITE_REGISTER_BUFFER_ULONG64(mapped, (PULONG64)&Write_mem.Data, Write_mem.Count);;
+				break;
+#endif
 			default:
 				break;
 			}

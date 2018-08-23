@@ -9,6 +9,10 @@ public:
 	virtual ~_EnumUsbHub();
 	BOOL Excute();
 	BOOL Updatedata();
+	const vector<USB_ROOT_HUB>& GetAllUsbinfo();
+	const vector<DEVICE_INFO_NODE>& GetAllUsbDeviceInfo();
+	const vector<DEVICE_INFO_NODE>& GetAllUsbHubInfo();
+
 protected:
 	BOOL EnumRootUsbHub(const wstring HubName, bool IsRootHub);
 	BOOL EnumExternalUsbHub(const wstring HubName, USB_NODE_CONNECTION_INFORMATION_EX_V1 ConnectionInfo, USB_NODE_CONNECTION_INFORMATION_EX_V2 ConnectionInfoV2, USB_PIPE_INFO Usb_Pipe_Info[30], USB_PORT_CONNECTOR_PROPERTIES_V2 PortConnectorProps, USB_CONFIGURATION_DESCRIPTOR ConfigDesc, USB_BOS_DESCRIPTOR BosDesc, vector<wstring> StringDescs, vector<USB_ALL_DESCRIPTOR> AllDescs, USB_DEVICE_PNP_STRINGS DevProps, bool IsRootHub);
@@ -31,9 +35,8 @@ private:
 	void SafeDeleteData(T*& Data);
 	template<class T>
 	void SafeDeleteArray(T *& Data);
-public:
-	vector<USB_ROOT_HUB> Usb_Tree;
 private:
+	vector<USB_ROOT_HUB> Usb_Tree;
 	vector<DEVICE_INFO_NODE> Usb_Device_info;
 	vector<DEVICE_INFO_NODE> Usb_Hub_info;
 	// Temp Data

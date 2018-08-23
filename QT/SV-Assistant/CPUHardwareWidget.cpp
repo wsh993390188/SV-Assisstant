@@ -64,91 +64,91 @@ void CPUHardwareWidget::Init()
 {
 	SUPERIO::UpdateData();
 	cpuName = new CPUHardware_Struct(this);
-	cpuName->cpulabel->setText("Name");
+	cpuName->cpulabel->setText(tr("Name"));
 	cpuName->cpuinfo->setText(QString::fromStdString(CPU::GetCPUName()));
 
 	cpucodename = new CPUHardware_Struct(this);
-	cpucodename->cpulabel->setText("Code Name");
+	cpucodename->cpulabel->setText(tr("Code Name"));
 	cpucodename->cpuinfo->setText(QString::fromStdString(CPU::GetCodeName()));
 
 	cpuMAXTDP = new CPUHardware_Struct(this);
-	cpuMAXTDP->cpulabel->setText("Max TDP");
+	cpuMAXTDP->cpulabel->setText(tr("Max TDP"));
 	cpuMAXTDP->cpuinfo->setText(QString::number(CPU::GetMaxTDP()) + tr(" W"));
 	horizonallayout_1->addLayout(cpucodename->layout);
 	horizonallayout_1->addLayout(cpuMAXTDP->layout);
 
 	cpuPackage = new CPUHardware_Struct(this);
-	cpuPackage->cpulabel->setText("Package");
+	cpuPackage->cpulabel->setText(tr("Package"));
 	cpuPackage->cpuinfo->setText(QString::fromStdString(CPU::GetSocketDesignation()));
 
 	cpuTechnology = new CPUHardware_Struct(this);
-	cpuTechnology->cpulabel->setText("Technology");
+	cpuTechnology->cpulabel->setText(tr("Technology"));
 	cpuTechnology->cpuinfo->setText(QString::number(CPU::GetTechnology()) + tr(" nm"));
 
 	cpuCoreVoltage = new CPUHardware_Struct(this);
-	cpuCoreVoltage->cpulabel->setText("Core Voltage");
+	cpuCoreVoltage->cpulabel->setText(tr("Core Voltage"));
 	cpuCoreVoltage->cpuinfo->setText(QString::number(CPU::GetCpuVCore(Ring0::GetPCIVendorID())) + tr(" V"));
 
 	cpuSpecification = new CPUHardware_Struct(this);
-	cpuSpecification->cpulabel->setText("Specification");
+	cpuSpecification->cpulabel->setText(tr("Specification"));
 	cpuSpecification->cpuinfo->setText(QString::fromStdString(CPU::GetCPUSpecification()));
 
 	cpuFamily = new CPUHardware_Struct(this);
-	cpuFamily->cpulabel->setText("Family");
+	cpuFamily->cpulabel->setText(tr("Family"));
 	cpuFamily->cpuinfo->setText(QString::number(CPU::GetFamily(), 16).toUpper());
 
 	cpuExtFamily = new CPUHardware_Struct(this);
-	cpuExtFamily->cpulabel->setText("Ext.Family");
+	cpuExtFamily->cpulabel->setText(tr("Ext.Family"));
 	cpuExtFamily->cpuinfo->setText(QString::number(CPU::GetExtFamily(), 16).toUpper());
 
 	cpuModel = new CPUHardware_Struct(this);
-	cpuModel->cpulabel->setText("Model");
+	cpuModel->cpulabel->setText(tr("Model"));
 	cpuModel->cpuinfo->setText(QString::number(CPU::GetModel(), 16).toUpper());
 
 	cpuExtModel = new CPUHardware_Struct(this);
-	cpuExtModel->cpulabel->setText("Ext.Model");
+	cpuExtModel->cpulabel->setText(tr("Ext.Model"));
 	cpuExtModel->cpuinfo->setText(QString::number(CPU::GetExtModel(), 16).toUpper());
 
 	cpuSteping = new CPUHardware_Struct(this);
-	cpuSteping->cpulabel->setText("Steping");
+	cpuSteping->cpulabel->setText(tr("Steping"));
 	cpuSteping->cpuinfo->setText(QString::number(CPU::GetStepping(), 16).toUpper());
 
 	cpuInstructions = new CPUHardware_Struct(this);
-	cpuInstructions->cpulabel->setText("Instructions");
+	cpuInstructions->cpulabel->setText(tr("Instructions"));
 	cpuInstructions->cpuinfo->setText(ExecInstructions());
 
 	cpuCores = new CPUHardware_Struct(this);
-	cpuCores->cpulabel->setText("Cores");
+	cpuCores->cpulabel->setText(tr("Cores"));
 	cpuCores->cpuinfo->setText(QString::number(CPU::GetCore()));
 
 	cpuThreads = new CPUHardware_Struct(this);
-	cpuThreads->cpulabel->setText("Threads");
+	cpuThreads->cpulabel->setText(tr("Threads"));
 	cpuThreads->cpuinfo->setText(QString::number(CPU::GetThread()));
 
 	auto cache = CPU::GetCache();
 	cpucacheL1D = new CPUHardware_Struct(this);
-	cpucacheL1D->cpulabel->setText("Cache Level1 Data");
+	cpucacheL1D->cpulabel->setText(tr("Cache Level1 Data"));
 	if (cache[0].Cache_Size / 1024 > 1024)
 		cpucacheL1D->cpuinfo->setText(tr("%1 MB %2-Ways").arg(QString::number(cache[0].Cache_Size / 1024 / 1024, 10)).arg(QString::number(cache[0].Cache_Ways)));
 	else
 		cpucacheL1D->cpuinfo->setText(tr("%1 KB %2-Ways").arg(QString::number(cache[0].Cache_Size / 1024, 10)).arg(QString::number(cache[0].Cache_Ways)));
 
 	cpucacheL1T = new CPUHardware_Struct(this);
-	cpucacheL1T->cpulabel->setText("Cache Level1 Inst.");
+	cpucacheL1T->cpulabel->setText(tr("Cache Level1 Inst."));
 	if (cache[1].Cache_Size / 1024 > 1024)
 		cpucacheL1T->cpuinfo->setText(tr("%1 MB %2-Ways").arg(QString::number(cache[1].Cache_Size / 1024 / 1024, 10)).arg(QString::number(cache[1].Cache_Ways)));
 	else
 		cpucacheL1T->cpuinfo->setText(tr("%1 KB %2-Ways").arg(QString::number(cache[1].Cache_Size / 1024, 10)).arg(QString::number(cache[1].Cache_Ways)));
 
 	cpucacheL2 = new CPUHardware_Struct(this);
-	cpucacheL2->cpulabel->setText("Cache Level2");
+	cpucacheL2->cpulabel->setText(tr("Cache Level2"));
 	if (cache[2].Cache_Size / 1024 > 1024)
 		cpucacheL2->cpuinfo->setText(tr("%1 MB %2-Ways").arg(QString::number(cache[2].Cache_Size / 1024 / 1024, 10)).arg(QString::number(cache[2].Cache_Ways)));
 	else
 		cpucacheL2->cpuinfo->setText(tr("%1 KB %2-Ways").arg(QString::number(cache[2].Cache_Size / 1024, 10)).arg(QString::number(cache[2].Cache_Ways)));
 
 	cpucacheL3 = new CPUHardware_Struct(this);
-	cpucacheL3->cpulabel->setText("Cache Level3");
+	cpucacheL3->cpulabel->setText(tr("Cache Level3"));
 	if (cache[3].Cache_Size > 1024)
 	if (cache[3].Cache_Size / 1024 > 1024)
 		cpucacheL3->cpuinfo->setText(tr("%1 MB %2-Ways").arg(QString::number(cache[3].Cache_Size / 1024 / 1024, 10)).arg(QString::number(cache[3].Cache_Ways)));

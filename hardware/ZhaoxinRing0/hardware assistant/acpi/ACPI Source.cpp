@@ -1,249 +1,271 @@
 #include "stdafx.h"
 #include "ACPI Source.h"
+#include "..\driver\DriverOrigin.h"
 
-template<class T>
-void CACPI::SafeDeleteArray(T*& Array)
+CACPI::CACPI() : IsUEFI{ false }, ACPIAddress{}, isSupportACPI{ true }, acpi_rsdp{}, acpi_rsdt{}, acpi_mcfg{}, acpi_facp{}, acpi_fpdt{},
+acpi_facs{}, acpi_hpet{}, acpi_sbst{}, acpi_bgrt{}
 {
-	if (Array)
-	{
-		delete[] Array;
-		Array = NULL;
+	this->GetACPIAddress();
+	GetFirmwareEnvironmentVariable(L"", L"{00000000-0000-0000-0000-000000000000}", NULL, 0);
+	if (GetLastError() == ERROR_INVALID_FUNCTION) {
+		IsUEFI = false;
 	}
-}
-
-template<class T>
-void CACPI::SafeDeletePoint(T*& Point)
-{
-	if (Point)
-	{
-		delete Point;
-		Point = NULL;
+	else {
+		IsUEFI = true;
 	}
-}
-
-CACPI::CACPI()
-{
-	::ZeroMemory(&facp, sizeof(facp));
-	::ZeroMemory(&hpet, sizeof(hpet));
-	::ZeroMemory(&mcfg, sizeof(mcfg));
-	fpdt = NULL;
-	::ZeroMemory(&bgrt, sizeof(bgrt));
-	for (size_t i = 0; i < 30; i++)
-	{
-		FirewareTable[i].FireWareTable = NULL;
-		FirewareTable[i].FireWareTableSize = 0;
-	}
-	isSupportACPI = this->Get_FirmWare_Enum();
 }
 
 CACPI::~CACPI()
 {
-	for (size_t i = 0; i < 30; i++)
-	{
-		SafeDeleteArray(FirewareTable[i].FireWareTable);
-	}
 }
 
-void CACPI::Get()
+void CACPI::Excute()
+{
+	this->GetXSDT_RSDT();
+	this->GetOtherTabels();
+}
+
+void CACPI::GetACPIAddress()
+{
+	char signat[9] = { 0x52,0x53,0x44,0x20,0x50,0x54,0x52,0x20,0 };
+	bool state = false;
+	//find RSDP(root System Description Pointer)
+	for (size_t addr = 0xE0000; addr <= (0xFFFFF); addr += 0x10)//16 bytes boundaries
+	{
+		int count = 0;
+		ULONG hi = 0;
+		ZhaoxinDriver::Instance()->RdMemory(addr, 1, hi);
+		for (size_t i = 0; hi == signat[i]; ++i)
+		{
+			++count;
+			if ((signat[i + 1] == '\0') && (count == 8))
+			{
+				ACPIAddress = addr;
+				state = true;
+				break;
+			}
+			ZhaoxinDriver::Instance()->RdMemory(addr + i + 1, 1, hi);
+		}
+		if (state)
+			break;
+	}
+
+	if (!ACPIAddress)
+	{
+		bool state = false;
+		//find RSDP(root System Description Pointer)
+		for (size_t addr = 0x40E; addr < 0x40E+1024; addr += 0x10)//16 bytes boundaries
+		{
+			int count = 0;
+			ULONG hi = 0;
+			ZhaoxinDriver::Instance()->RdMemory(addr, 1, hi);
+			for (size_t i = 0; hi == signat[i]; ++i)
+			{
+				++count;
+				if ((signat[i + 1] == '\0') && (count == 8))
+				{
+					ACPIAddress = addr;
+					state = true;
+					break;
+				}
+				ZhaoxinDriver::Instance()->RdMemory(addr + i + 1, 1, hi);
+			}
+			if (state)
+				break;
+		}
+	}
+	
+	if (!ACPIAddress)
+		isSupportACPI = false;
+}
+
+void CACPI::GetXSDT_RSDT()
 {
 	if (isSupportACPI)
 	{
-		for (size_t i = 0; i < FirmwareTableID.size(); ++i)
+		for (size_t i = 0; i < sizeof(ACPI_RSDP_STRUCTURE); i++)
 		{
-			this->Get_ACPI_Table(FirmwareTableID[i], i);
-			this->Excute(FirmwareTableID[i]);
+			ULONG temp = 0;
+			ZhaoxinDriver::Instance()->RdMemory(ACPIAddress + i, 1, temp);
+			memcpy((PUCHAR)(&acpi_rsdp) + i, &temp, 1);
+		}
+
+		if(acpi_rsdp.RsdtAddress)
+		{
+			for (size_t i = 0; i < 36; i++)
+			{
+				ULONG temp = 0;
+				ZhaoxinDriver::Instance()->RdMemory(acpi_rsdp.RsdtAddress + i, 1, temp);
+				memcpy((PUCHAR)(&acpi_rsdt) + i, &temp, 1);
+			}
+
+			for (size_t i = 36; i < acpi_rsdt.Length; i+=4)
+			{
+				ULONG temp = 0;
+				ZhaoxinDriver::Instance()->RdMemory(acpi_rsdp.RsdtAddress + i, 4, temp);
+				acpi_rsdt.Entry.emplace_back(temp);
+			}
+		}
+
+		if(acpi_rsdp.XsdtAddress)
+		{
+			for (size_t i = 0; i < 36; i++)
+			{
+				DWORD temp = 0;
+				ZhaoxinDriver::Instance()->RdMemory(acpi_rsdp.XsdtAddress + i, 1, temp);
+				memcpy((PUCHAR)(&acpi_xsdt) + i, &temp, 1);
+			}
+
+
+			for (size_t i = 36; i < acpi_xsdt.Length; i += 8)
+			{
+				DWORD temp1 = 0, temp2 = 0;
+				ZhaoxinDriver::Instance()->RdMemory(acpi_rsdp.XsdtAddress + i, 4, temp1);
+				ZhaoxinDriver::Instance()->RdMemory(acpi_rsdp.XsdtAddress + i + 4, 4, temp2);
+				acpi_xsdt.Entry.emplace_back((temp2 << 31) | temp1);
+			}
 		}
 	}
 }
 
-void CACPI::Excute(const DWORD Table_Type)
+void CACPI::GetOtherTabels()
 {
-	DWORD location = 0;
-	switch (Table_Type)
+	if (IsUEFI)
 	{
-	case RSDT:
-		for (DWORD i = 0; i < FirmwareTableID.size(); ++i)
+		for (const auto& addr : this->acpi_xsdt.Entry)
 		{
-			if (Table_Type == FirmwareTableID[i])
+			ULONG signature = 0;
+			ZhaoxinDriver::Instance()->RdMemory(addr, 4, signature);
+			ULONG length = 0;
+			ZhaoxinDriver::Instance()->RdMemory(addr + 4, 1, length);
+			if (signature == 'GFCM')
 			{
-				location = i;
-				break;
+				for (size_t i = 0; i < length; i++)
+				{
+					ULONG temp = 0;
+					ZhaoxinDriver::Instance()->RdMemory(addr + i, 1, temp);
+					memcpy((PUCHAR)(&acpi_mcfg) + i, &temp, 1);
+				}
 			}
-			location = -1;
-		}
-		ACPI_RSDT_STRUCTURE rsdt;
-		if (location == 0xFFFFFFFF)		break;
-		memcpy_s(&rsdt, sizeof(rsdt),FirewareTable[location].FireWareTable, FirewareTable[location].FireWareTableSize);
-		break;
-	case FACP:
-		for (DWORD i = 0; i < FirmwareTableID.size(); ++i)
-		{
-			if (Table_Type == FirmwareTableID[i])
+			else if (signature == 'PCAF')
 			{
-				location = i;
-				break;
+				for (size_t i = 0; i < length; i++)
+				{
+					ULONG temp = 0;
+					ZhaoxinDriver::Instance()->RdMemory(addr + i, 1, temp);
+					memcpy((PUCHAR)(&acpi_facp) + i, &temp, 1);
+				}
 			}
-			location = -1;
-		}
-		if (location == 0xFFFFFFFF)		break;
-		memcpy_s(&facp, sizeof(facp), FirewareTable[location].FireWareTable, FirewareTable[location].FireWareTableSize);
-		break;
-	case HPET:
-		for (DWORD i = 0; i < FirmwareTableID.size(); ++i)
-		{
-			if (Table_Type == FirmwareTableID[i])
+			else if (signature == 'SCAF')
 			{
-				location = i;
-				break;
+				acpi_facs = std::make_shared<ACPI_FACS_STRUCTURE>();
+				for (size_t i = 0; i < length; i++)
+				{
+					ULONG temp = 0;
+					ZhaoxinDriver::Instance()->RdMemory(addr + i, 1, temp);
+					memcpy((PUCHAR)acpi_facs.get() + i, &temp, 1);
+				}
 			}
-			location = -1;
-		}
-		if (location == 0xFFFFFFFF)		break;
-		memcpy_s(&hpet, sizeof(hpet), FirewareTable[location].FireWareTable, FirewareTable[location].FireWareTableSize);
-		break;
-	case FPDT:
-		for (DWORD i = 0; i < FirmwareTableID.size(); ++i)
-		{
-			if (Table_Type == FirmwareTableID[i])
+			else if (signature == 'TDPF')
 			{
-				location = i;
-				break;
-			}
-			location = -1;
-		}
-		if (location == 0xFFFFFFFF)		break;
-		fpdt = (PACPI_FPDT_STRUCTURE)FirewareTable[location].FireWareTable;
-		//memcpy_s(fpdt, sizeof(*fpdt), FirewareTable[location].FireWareTable, FirewareTable[location].FireWareTableSize);
-		break;
-	case BGRT:
-		for (DWORD i = 0; i < FirmwareTableID.size(); ++i)
-		{
-			if (Table_Type == FirmwareTableID[i])
-			{
-				location = i;
-				break;
-			}
-			location = -1;
-		}
-		if (location == 0xFFFFFFFF)		break;
-		memcpy_s(&bgrt, sizeof(bgrt), FirewareTable[location].FireWareTable, FirewareTable[location].FireWareTableSize);
-		break;
-	case MCFG:
-		for (DWORD i = 0; i < FirmwareTableID.size(); ++i)
-		{
-			if (Table_Type == FirmwareTableID[i])
-			{
-				location = i;
-				break;
-			}
-			location = -1;
-		}
-		if (location == 0xFFFFFFFF)		break;
-		memcpy_s(&mcfg, sizeof(mcfg), FirewareTable[location].FireWareTable, FirewareTable[location].FireWareTableSize);
-		break;
-	case SSDT:
-// 		for (DWORD i = 0; i < FirmwareTableID.size(); ++i)
-// 		{
-// 			if (Table_Type == FirmwareTableID[i])
-// 			{
-// 				location = i;
-// 				break;
-// 			}
-// 			location = -1;
-// 		}
-// 		if (location == 0xFFFFFFFF)		break;
-		break;
-	default:
-		break;
-	}
-}
+				acpi_fpdt = std::make_shared<ACPI_FPDT_STRUCTURE>();
+				for (size_t i = 0; i < 36; i++)
+				{
+					ULONG temp = 0;
+					ZhaoxinDriver::Instance()->RdMemory(addr + i, 1, temp);
+					memcpy((PUCHAR)acpi_fpdt.get() + i, &temp, 1);
+				}
 
-bool CACPI::Get_FirmWare_Enum()
-{
-	USHORT ret = 0;
-	ret = EnumSystemFirmwareTables('ACPI', NULL, NULL);
-	const USHORT buffersize = ret;
-	PVOID buf = new BYTE[buffersize];
-	PDWORD p_FirmwareTable_ID = new DWORD;
-	PDWORD temp = p_FirmwareTable_ID;
-	memset(buf, 0, buffersize);
-	ret = EnumSystemFirmwareTables('ACPI', buf, buffersize);
-	if (!ret)
-	{
-		printf("Function failed!\n");
-		SafeDeleteArray(buf);
-		return FALSE;
-	}
-	p_FirmwareTable_ID = (PDWORD)buf;
-	for (USHORT i = 0; i < ret/4; ++i)
-	{
-		//if (*p_FirmwareTable_ID == 'TDSS')		continue;
-		FirmwareTableID.emplace_back(*p_FirmwareTable_ID);
-		p_FirmwareTable_ID++;
-	}
-	SafeDeleteArray(buf);
-	SafeDeletePoint(temp);
-	return TRUE;
-}
-
-void CACPI::PrintACPITable(DWORD TableName)
-{
-	PUCHAR Name = new UCHAR[sizeof(DWORD) * 2];
-	memset(Name, 0, sizeof(Name));
-	memcpy_s(Name, sizeof(Name), &TableName, sizeof(TableName));
-	for (DWORD i = 0; i < sizeof(DWORD); ++i)
-	{
-		OutputDebugPrintf(_T("%s"),Name[i]);
-		if (i == 3)
-		{
-			OutputDebugPrintf(_T("\n"));
+// 				for (size_t i = 36; i < acpi_fpdt->Length; i+= sizeof(Performance_Record_Structure))
+// 				{
+// 					Performance_Record_Structure adds = {};
+// 					for (size_t j = i;( j < j+sizeof(Performance_Record_Structure)) && (j < acpi_fpdt->Length); j++)
+// 					{
+// 						ULONG temp = 0;
+// 						ZhaoxinDriver::Instance()->RdMemory(addr + j, 1, temp);
+// 						memcpy((PUCHAR)(&adds) + j - i, &temp, 1);
+// 					}
+// 					acpi_fpdt->Performance_Records.emplace_back(adds);
+// 				}
+			}
+			else if (signature == 'TEPH')
+			{
+				for (size_t i = 0; i < length; i++)
+				{
+					ULONG temp = 0;
+					ZhaoxinDriver::Instance()->RdMemory(addr + i, 1, temp);
+					memcpy((PUCHAR)(&acpi_hpet) + i, &temp, 1);
+				}
+			}
+			else if (signature == 'TSBS')
+			{
+				acpi_sbst = std::make_shared<ACPI_SBST_STRUCTURE>();
+				for (size_t i = 0; i < length; i++)
+				{
+					ULONG temp = 0;
+					ZhaoxinDriver::Instance()->RdMemory(addr + i, 1, temp);
+					memcpy((PUCHAR)(acpi_sbst.get()) + i, &temp, 1);
+				}
+			}
+			else if (signature == 'TRGB')
+			{
+				acpi_bgrt = std::make_shared<ACPI_BGRT_STRUCTURE>();
+				for (size_t i = 0; i < length; i++)
+				{
+					ULONG temp = 0;
+					ZhaoxinDriver::Instance()->RdMemory(addr + i, 1, temp);
+					memcpy((PUCHAR)(acpi_bgrt.get()) + i, &temp, 1);
+				}
+			}
 		}
 	}
-	SafeDeleteArray(Name);
-}
-
-BOOL CACPI::Get_ACPI_Table(const DWORD Table_Type, const size_t Num)
-{
-	USHORT ret = 0;
-// 	if (Table_Type == 'TDSS')
-// 	{
-// 		return TRUE;
-// 	}
-	ret = GetSystemFirmwareTable('ACPI', Table_Type, NULL, NULL);
-	if (!ret)
+	else
 	{
-		OutputDebugPrintf(_T("Function failed!\n"));
-		return FALSE;
+		for (const auto& addr : this->acpi_rsdt.Entry)
+		{
+			ULONG signature = 0;
+			ZhaoxinDriver::Instance()->RdMemory(addr, 4, signature);
+			ULONG length = 0;
+			ZhaoxinDriver::Instance()->RdMemory(addr + 4, 1, length);
+			if (signature == 'MCFG')
+			{
+				for (size_t i = 0; i < length; i++)
+				{
+					ULONG temp = 0;
+					ZhaoxinDriver::Instance()->RdMemory(addr + i, 1, temp);
+					memcpy((PUCHAR)(&acpi_mcfg) + i, &temp, 1);
+				}
+			}
+			else if (signature == 'PCAF')
+			{
+				for (size_t i = 0; i < length; i++)
+				{
+					ULONG temp = 0;
+					ZhaoxinDriver::Instance()->RdMemory(addr + i, 1, temp);
+					memcpy((PUCHAR)(&acpi_facp) + i, &temp, 1);
+				}
+			}
+			else if (signature == 'SCAF')
+			{
+				acpi_facs = std::make_shared<ACPI_FACS_STRUCTURE>();
+				for (size_t i = 0; i < length; i++)
+				{
+					ULONG temp = 0;
+					ZhaoxinDriver::Instance()->RdMemory(addr + i, 1, temp);
+					memcpy((PUCHAR)acpi_facs.get() + i, &temp, 1);
+				}
+			}
+			else if (signature == 'TEPH')
+			{
+				for (size_t i = 0; i < length; i++)
+				{
+					ULONG temp = 0;
+					ZhaoxinDriver::Instance()->RdMemory(addr + i, 1, temp);
+					memcpy((PUCHAR)(&acpi_hpet) + i, &temp, 1);
+				}
+			}
+		}
 	}
-	const USHORT buffersize = ret;
-	PUCHAR buf = new BYTE[buffersize];
-	memset(buf, 0, buffersize);
-	ret = GetSystemFirmwareTable('ACPI', Table_Type, buf, buffersize);
-	if (!ret)
-	{
-		OutputDebugPrintf(_T("Function failed!\n"));
-		this->SafeDeleteArray(buf);
-		return FALSE;
-	}
-
-	FirewareTable[Num].FireWareTable = new UCHAR[buffersize];
-	memset(FirewareTable[Num].FireWareTable, 0, buffersize);
-	memcpy_s(FirewareTable[Num].FireWareTable, buffersize, buf, buffersize);
-	FirewareTable[Num].FireWareTableSize = buffersize;
-	
-	//Test Code To Show Memory
-// 	PrintACPITable(Table_Type);
-// 	for (size_t j = 0; j < buffersize; ++j)
-// 	{
-// 		cout << hex << setfill('0') << setw(2) << int(*(buf + j)) << " ";
-// 		if ((j + 1) % 16 == 0)
-// 		{
-// 			cout << endl;
-// 		}
-// 	}
-// 	cout << endl;
-	this->SafeDeleteArray(buf);
-	return TRUE;
 }
 
 

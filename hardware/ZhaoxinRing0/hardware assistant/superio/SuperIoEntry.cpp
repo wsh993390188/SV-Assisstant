@@ -181,14 +181,41 @@ bool SuperIoEntry::ReadITE(USHORT port, USHORT data)
 	{
 		switch (ChipID)
 		{
+		case IT8603E:
+			this->ChipID = std::make_pair(ChipID, "ITE IT8603E");
+			break;
+		case IT8606E:
+			this->ChipID = std::make_pair(ChipID, "ITE IT8606E");
+			break;
+		case IT8607E:
+			this->ChipID = std::make_pair(ChipID, "ITE IT8607E");
+			break;
+		case IT8613E:
+			this->ChipID = std::make_pair(ChipID, "ITE IT8613E");
+			break;
 		case IT8620E: 			
 			this->ChipID = std::make_pair(ChipID, "ITE IT8620E");
 			break; 
+		case IT8622E:
+			this->ChipID = std::make_pair(ChipID, "ITE IT8622E");
+			break;
+		case IT8623E:
+			this->ChipID = std::make_pair(ChipID, "ITE IT8623E");
+			break;
+		case IT8625E:
+			this->ChipID = std::make_pair(ChipID, "ITE IT8625E");
+			break;
 		case IT8628E:
 			this->ChipID = std::make_pair(ChipID, "ITE IT8628E");
 			break;
+		case IT8655E:
+			this->ChipID = std::make_pair(ChipID, "ITE IT8655E");
+			break;
 		case IT8665E:
 			this->ChipID = std::make_pair(ChipID, "ITE IT8665E");
+			break;
+		case IT8686E:
+			this->ChipID = std::make_pair(ChipID, "ITE IT8686E");
 			break;
 		case IT8705F: 
 			this->ChipID = std::make_pair(ChipID, "ITE IT8705F");
@@ -214,11 +241,26 @@ bool SuperIoEntry::ReadITE(USHORT port, USHORT data)
 		case IT8728F:
 			this->ChipID = std::make_pair(ChipID, "ITE IT8728F");
 			break;
+		case IT8732F:
+			this->ChipID = std::make_pair(ChipID, "ITE IT8732F");
+			break;
+		case IT8733E:
+			this->ChipID = std::make_pair(ChipID, "ITE IT8733E");
+			break;
 		case IT8771E:
 			this->ChipID = std::make_pair(ChipID, "ITE IT8771E");
 			break;
 		case IT8772E:
 			this->ChipID = std::make_pair(ChipID, "ITE IT8772E");
+			break;
+		case IT8783E:
+			this->ChipID = std::make_pair(ChipID, "ITE IT8783E");
+			break;
+		case IT8790E:
+			this->ChipID = std::make_pair(ChipID, "ITE IT8790E");
+			break;
+		case IT8792E:
+			this->ChipID = std::make_pair(ChipID, "ITE IT8792E");
 			break;
 		default:
 			boost::format fmt = boost::format("ITE Unknown Id %04X") % ChipID;
