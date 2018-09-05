@@ -132,7 +132,6 @@ bool SV_ASSIST::Memory::CommonSMBUS::ReadSPD(const DIMMType types, const USHORT 
 				Ring0::RdIOPort(SmbusBase + SMBUS_DATA0_REG, 1, val);
 				memcpy((PBYTE)spd + offset, &val, 1);
 			}
-
 		}
 		else
 			return false;

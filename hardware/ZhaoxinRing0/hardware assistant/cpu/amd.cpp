@@ -376,7 +376,7 @@ void AMD::FIDVID_Family17(IN DWORD threadAffinityMask, IN ULONG Index, OUT doubl
 	USHORT CpuFID = 0;
 	double CpuDfsId = 0;
 	DWORD IddValue = 0, IddDiv = 0;
-	if (SV_ASSIST::Ring0::RdMsrTx(AMD_PSTATE[Index], msrdata, threadAffinityMask) == 1 && msrdata)
+	if (SV_ASSIST::Ring0::RdMsrTx(AMD_PSTATE[Index], msrdata, threadAffinityMask) == 0 && msrdata)
 	{
 		CpuFID = (msrdata & 0xFF);
 		CpuVID = (msrdata & 0x3FC000) >> 14;
@@ -425,7 +425,7 @@ void AMD::GetCurrentPState_17Family(IN DWORD threadAffinityMask, OUT double& COF
 	USHORT CpuFID = 0;
 	double CpuDfsId = 0;
 	DWORD IddValue = 0, IddDiv = 0;
-	if (SV_ASSIST::Ring0::RdMsrTx(AMD_CurrentState, msrdata, threadAffinityMask) == 1 && msrdata)
+	if (SV_ASSIST::Ring0::RdMsrTx(AMD_CurrentState, msrdata, threadAffinityMask) == 0 && msrdata)
 	{
 		CpuFID = (msrdata & 0xFF);
 		CpuVID = (msrdata & 0x3FC000) >> 14;

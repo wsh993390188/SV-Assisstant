@@ -2,16 +2,6 @@
 #include "lib\Hardware\SV_Hardware.h"
 
 using namespace SV_ASSIST;
-MotherBroadWidget::MotherBroadWidget() : mainlayout(new QVBoxLayout(this))
-{
-	QPalette pal(this->palette());
-	//ÉèÖÃ±³¾°whiteÉ«
-	pal.setColor(QPalette::Background, Qt::white);
-	this->setAutoFillBackground(true);
-	this->setPalette(pal);
-	this->Init();
-}
-
 MotherBroadWidget::MotherBroadWidget(QWidget *parent)
 	: QWidget(parent) ,mainlayout(new QVBoxLayout(this))
 {

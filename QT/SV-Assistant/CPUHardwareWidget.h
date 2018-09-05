@@ -8,6 +8,8 @@
 #include <QGridLayout>
 #include <QSpacerItem>
 #include <QGroupBox>
+#include <QTimer>
+#include <QTimerEvent>
 
 struct CPUHardware_Struct
 {
@@ -23,11 +25,13 @@ class CPUHardwareWidget : public QWidget
 {
 	Q_OBJECT
 public:
-	CPUHardwareWidget();
-	explicit CPUHardwareWidget(QWidget *parent);
+	explicit CPUHardwareWidget(QWidget *parent = nullptr);
 	~CPUHardwareWidget();
+protected:
+	void timerEvent(QTimerEvent *event) Q_DECL_OVERRIDE;
 private:
 	void Init();
+	void UpdateData();
 	const QString ExecInstructions();
 private:
 	CPUHardware_Struct *cpuName;
@@ -49,9 +53,19 @@ private:
 	CPUHardware_Struct *cpucacheL1T;
 	CPUHardware_Struct *cpucacheL2;
 	CPUHardware_Struct *cpucacheL3;
+	CPUHardware_Struct *cpuCurrentSpeed;
+	CPUHardware_Struct *cpuBusSpeed;
+	CPUHardware_Struct *cpuMultiplier;
+
 	QVBoxLayout *mainlayout;
 	QHBoxLayout *horizonallayout_1;
 	QHBoxLayout *horizonallayout_2;
 	QHBoxLayout *horizonallayout_3;
 	QHBoxLayout *horizonallayout_4;
+	QHBoxLayout *horizonallayout_5;
+	QHBoxLayout *horizonallayout_6;
+	QHBoxLayout *horizonallayout_7;
+	QHBoxLayout *horizonallayout_8;
+
+	size_t timeID;
 };

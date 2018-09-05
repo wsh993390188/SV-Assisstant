@@ -48,7 +48,7 @@ BOOL CRing0::WrMsr(IN DWORD Index, IN DWORD64 Data)
 	{
 		return GetLastError();
 	}
-	return TRUE;
+	return 0;
 }
 
 BOOL CRing0::RdMsrTx(IN DWORD Index, IN DWORD threadAffinityMask, OUT DWORD64 & Data)
@@ -70,7 +70,7 @@ BOOL CRing0::RdMsrTx(IN DWORD Index, IN DWORD threadAffinityMask, OUT DWORD64 & 
 	{
 		return GetLastError();
 	}
-	return TRUE;
+	return 0;
 }
 
 BOOL CRing0::WrMsrTx(IN DWORD Index, IN DWORD threadAffinityMask, IN DWORD64 Data)
@@ -92,7 +92,7 @@ BOOL CRing0::WrMsrTx(IN DWORD Index, IN DWORD threadAffinityMask, IN DWORD64 Dat
 	{
 		return GetLastError();
 	}
-	return TRUE;
+	return 0;
 }
 
 BOOL CRing0::RdIOPort(IN USHORT IO_Port_Addr,IN USHORT IO_DataSize, OUT DWORD& IO_Data)
@@ -104,7 +104,7 @@ BOOL CRing0::RdIOPort(IN USHORT IO_Port_Addr,IN USHORT IO_DataSize, OUT DWORD& I
 	IO_Port.Data_size = (UCHAR)IO_DataSize;
 	if (IO_Port.Port_Addr == NULL)
 	{
-		return FALSE;
+		return -1;
 	}
 	if ((IO_Port.Data_size == 1) || (IO_Port.Data_size == 2) || (IO_Port.Data_size == 4))
 	{
@@ -120,10 +120,10 @@ BOOL CRing0::RdIOPort(IN USHORT IO_Port_Addr,IN USHORT IO_DataSize, OUT DWORD& I
 		{
 			return GetLastError();
 		}
-		return TRUE;
+		return 0;
 	}
 
-	return FALSE;
+	return -1;
 }
 
 BOOL CRing0::WrIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, IN DWORD IO_Data)
@@ -135,7 +135,7 @@ BOOL CRing0::WrIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, IN DWORD IO
 	IO_Port.Data_size = (UCHAR)IO_DataSize;
 	if (IO_Port.Port_Addr == NULL)
 	{
-		return FALSE;
+		return -1;
 	}
 
 	if ((IO_Port.Data_size == 1) ||(IO_Port.Data_size == 2)|| (IO_Port.Data_size == 4))
@@ -152,9 +152,9 @@ BOOL CRing0::WrIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, IN DWORD IO
 		{
 			return GetLastError();
 		}
-		return TRUE; 
+		return 0; 
 	}
-	return FALSE;
+	return -1;
 }
 
 BOOL CRing0::RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT DWORD& Memory_Data)
@@ -197,9 +197,9 @@ BOOL CRing0::RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT DWOR
 			return GetLastError();
 		}
 		memcpy_s(&Memory_Data, sizeof(Memory_Data), &membuffer, sizeof(membuffer));
-		return TRUE;
+		return 0;
 	}
-	return FALSE;
+	return -1;
 #elif
 	if ((MemData.UnitSize == 1) || (MemData.UnitSize == 2) || (MemData.UnitSize == 4))
 	{
@@ -225,9 +225,9 @@ BOOL CRing0::RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT DWOR
 			return GetLastError();
 		}
 		memcpy_s(&Memory_Data, sizeof(Memory_Data), &membuffer, sizeof(membuffer));
-		return TRUE;
+		return 0;
 	}
-	return FALSE;
+	return -1;
 #endif
 
 }
@@ -263,9 +263,9 @@ BOOL CRing0::WrMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN DWORD
 		{
 			return GetLastError();
 		}
-		return TRUE;
+		return 0;
 }
-	return FALSE;
+	return -1;
 #elif
 	if ((WRmem.UnitSize == 1) || (WRmem.UnitSize == 2) || (WRmem.UnitSize == 4))
 	{
@@ -290,9 +290,9 @@ BOOL CRing0::WrMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN DWORD
 		{
 			return GetLastError();
 		}
-		return TRUE;
+		return 0;
 	}
-	return FALSE;
+	return -1;
 #endif
 }
 
@@ -318,7 +318,7 @@ BOOL CRing0::ReadPci(IN USHORT bus, IN USHORT dev, IN USHORT func, OUT PCI_COMMO
 		{
 			return GetLastError();
 		}
-	return TRUE;
+	return 0;
 }
 
 BOOL CRing0::WritePci(IN USHORT bus, IN USHORT dev, IN USHORT func, IN UCHAR offset, IN ULONG Data)
@@ -342,7 +342,7 @@ BOOL CRing0::WritePci(IN USHORT bus, IN USHORT dev, IN USHORT func, IN UCHAR off
 	{
 		return GetLastError();
 	}
-	return TRUE;
+	return 0;
 }
 
 BOOL CRing0::ReadAllPci()
@@ -363,7 +363,7 @@ BOOL CRing0::ReadAllPci()
 			}
 		}
 	}
-	return TRUE;
+	return 0;
 }
 
 const Pci_All_Config_Space& CRing0::ReturnPCIConfigSpace()
@@ -494,5 +494,5 @@ BOOL CRing0::RdMsr(IN DWORD Index, OUT DWORD64& Data)
 	{
 		return GetLastError();
 	}
-	return TRUE;
+	return 0;
 }

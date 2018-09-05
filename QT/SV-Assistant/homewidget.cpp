@@ -2,17 +2,32 @@
 #include "QVector"
 #include "lib\Hardware\SV_Hardware.h"
 
-HomebaseInfo::HomebaseInfo(QWidget* father) : BaseLabel(new QLabel(father)), BaseInfo(new QLabel(father)),
+HomebaseInfo::HomebaseInfo(QWidget* father) : BaseLabel(new QPushButton(father)), BaseInfo(new QLabel(father)),
     horizontalSpace(new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum)), layout(new QHBoxLayout()),
-    BeginhorizontalSpace(new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum))
+    BeginhorizontalSpace(new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum)),
+	EndhorizontalSpace(new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum))
 {
-    BaseLabel->setStyleSheet(QObject::tr("QLabel{color:#000000;font-family: \"consolas\"; font-size:14px;background-color: rgb(255, 255, 255);}"));
-    BaseInfo->setStyleSheet(QObject::tr("QLabel{color:#000000;font-family: \"consolas\"; font-size:14px;background-color: rgb(255, 255, 255);}"));
+    BaseLabel->setStyleSheet("QPushButton{color:#000000;border-style: outset; border-width: 2px; border-radius: 5px;border-color: #8B7355;font-family: \"consolas\"; font-size:14px;background-color: rgb(255, 255, 255);padding: 5px;}\
+		QPushButton:hover{ \
+		background - color: rgb(0, 150, 0); \
+		}\
+		QPushButton : pressed{ \
+		background - color: #1E90FF; \
+		border - style: inset; \
+		}\
+		QPushButton : !enabled{ \
+		background - color: rgb(100, 100, 100); \
+		border - style: inset; \
+		}");
+	BaseLabel->setMinimumSize(100, 50);
+	BaseLabel->setMaximumSize(150, 100);
+    BaseInfo->setStyleSheet(QObject::tr("QLabel{color:#000000;font-family: \"consolas\"; font-size:13px;background-color: rgb(255, 255, 255);}"));
 	BaseInfo->setAlignment(Qt::AlignCenter);
     layout->addItem(BeginhorizontalSpace);
     layout->addWidget(BaseLabel);
     layout->addItem(horizontalSpace);
     layout->addWidget(BaseInfo);
+	layout->addItem(EndhorizontalSpace);
 }
 
 Homewidget::Homewidget(QWidget *parent) : QWidget(parent), m_verticalLayout(new QVBoxLayout(this))
@@ -39,11 +54,14 @@ void Homewidget::Init()
 		smbios.BaseBroadinfo.count("BaseBroad Manufacturer") > 0 ? temp += QString::fromStdString(smbios.BaseBroadinfo["BaseBroad Manufacturer"]) + tr(" ") : temp = "Unknown MotherBroad";
 		smbios.BaseBroadinfo.count("BaseBroad Product") > 0 ? temp += QString::fromStdString(smbios.BaseBroadinfo["BaseBroad Product"]) : temp = "Unknown MotherBroad";
 		motherbroadbaseinfo->BaseInfo->setText(temp);
+		connect(motherbroadbaseinfo->BaseLabel, &QPushButton::clicked, this, [=] {emit switchPage(1); });
 	}
 
+	connect(cpubaseinfo->BaseLabel, &QPushButton::clicked, this, [=] {emit switchPage(0); });
+
 	auto memoryinfo = SV_ASSIST::Memory::GetMemoryGlobalInfomation();
-	memorycpubaseinfo = new HomebaseInfo(this);
-	memorycpubaseinfo->BaseLabel->setText(tr("Memory"));
+	memorybaseinfo = new HomebaseInfo(this);
+	memorybaseinfo->BaseLabel->setText(tr("Memory"));
 	QString memoryInfomation = {};
 	{
 		QString temp = {};
@@ -60,8 +78,8 @@ void Homewidget::Init()
 		memoryInfomation += temp;
 	}
 
-	memorycpubaseinfo->BaseInfo->setText(memoryInfomation);
-
+	memorybaseinfo->BaseInfo->setText(memoryInfomation);
+	connect(memorybaseinfo->BaseLabel, &QPushButton::clicked, this, [=] {emit switchPage(2); });
 
 	gpubaseinfo = new HomebaseInfo(this);
 	gpubaseinfo->BaseLabel->setText(tr("GPU"));
@@ -70,7 +88,8 @@ void Homewidget::Init()
 	if (gpu.empty())
 		gpubaseinfo->BaseInfo->setText(tr("Unknown GPU"));
 	else
-		gpubaseinfo->BaseInfo->setText(QString::fromStdString(gpu.at(0).GetGPUName()));
+		gpubaseinfo->BaseInfo->setText(QString::fromStdString(gpu.at(0).GPUname));
+	connect(gpubaseinfo->BaseLabel, &QPushButton::clicked, this, [=] {emit switchPage(3); });
 
 	auto diskinfo = SV_ASSIST::Storage::GetDiskSMARTInfo();
 	diskbaseinfo = new HomebaseInfo(this);
@@ -79,22 +98,20 @@ void Homewidget::Init()
 	else
 		diskbaseinfo->BaseInfo->setText(QString::fromStdWString(diskinfo.at(0).Model));
 	diskbaseinfo->BaseLabel->setText(tr("Storage"));
-
-
-	SV_ASSIST::Display::UpdateData();
+	connect(diskbaseinfo->BaseLabel, &QPushButton::clicked, this, [=] {emit switchPage(4); });
 
 	monitorbaseinfo = new HomebaseInfo(this);
 	monitorbaseinfo->BaseLabel->setText(tr("Monitor"));
 	monitorbaseinfo->BaseInfo->setText(QString::fromStdString(SV_ASSIST::Display::GetMonitorName()));
+	connect(monitorbaseinfo->BaseLabel, &QPushButton::clicked, this, [=] {emit switchPage(5); });
 
-	SV_ASSIST::Net::Exec();
 	auto net = SV_ASSIST::Net::GetData();
 	networkbaseinfo = new HomebaseInfo(this);
 	networkbaseinfo->BaseLabel->setText(tr("Network"));
 	if (!net.empty())
 		for (const auto& i : net)
 		{
-			if (i.MediaType == L"LAN")
+			if (i.state == L"CONNECTED")
 			{
 				networkbaseinfo->BaseInfo->setText(QString::fromStdWString(i.DeviceName));
 				break;
@@ -102,7 +119,7 @@ void Homewidget::Init()
 		}
 	else
 		networkbaseinfo->BaseInfo->setText(tr("Unknown Network Device"));
-
+	connect(networkbaseinfo->BaseLabel, &QPushButton::clicked, this, [=] {emit switchPage(6); });
 	SV_ASSIST::AUDIO::UpdateData();
 	auto audio = SV_ASSIST::AUDIO::GetOutputAudio();
 	audiobaseinfo = new HomebaseInfo(this);
@@ -123,7 +140,7 @@ void Homewidget::Init()
     m_verticalLayout->setMargin(3);
     m_verticalLayout->addLayout(cpubaseinfo->layout);
     m_verticalLayout->addLayout(motherbroadbaseinfo->layout);
-    m_verticalLayout->addLayout(memorycpubaseinfo->layout);
+    m_verticalLayout->addLayout(memorybaseinfo->layout);
     m_verticalLayout->addLayout(gpubaseinfo->layout);
     m_verticalLayout->addLayout(diskbaseinfo->layout);
     m_verticalLayout->addLayout(monitorbaseinfo->layout);
@@ -135,7 +152,7 @@ Homewidget::~Homewidget()
 {
 	delete cpubaseinfo;
 	delete motherbroadbaseinfo;
-	delete memorycpubaseinfo;
+	delete memorybaseinfo;
 	delete gpubaseinfo;
 	delete diskbaseinfo;
 	delete monitorbaseinfo;

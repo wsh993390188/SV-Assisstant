@@ -324,7 +324,7 @@ void Zhaoxin::ExecVoltage()
 	DWORD64 msrdata = 0;
 	for (DWORD threadAffinityMask = 0; threadAffinityMask < Core; threadAffinityMask++)
 	{
-		if (SV_ASSIST::Ring0::RdMsrTx(Zhaoxin_FIDVID, msrdata, threadAffinityMask) == 1)
+		if (SV_ASSIST::Ring0::RdMsrTx(Zhaoxin_FIDVID, msrdata, threadAffinityMask) == 0)
 		{
 			BYTE VID = (msrdata & 0xFF);
 			VCore = 1.5 - VID * 0.0125;
@@ -343,7 +343,7 @@ void Zhaoxin::ExecTemperature()
 	DWORD64 msrdata = 0;
 	for (DWORD threadAffinityMask = 0; threadAffinityMask < Core; threadAffinityMask++)
 	{
-		if (SV_ASSIST::Ring0::RdMsrTx(Zhaoxin_Temperature, msrdata, threadAffinityMask) == 1)
+		if (SV_ASSIST::Ring0::RdMsrTx(Zhaoxin_Temperature, msrdata, threadAffinityMask) == 0)
 		{
 			auto temperature = (int)msrdata * 1.0;
 			Temperature[threadAffinityMask] = temperature;
@@ -357,7 +357,7 @@ void Zhaoxin::ExecTemperature()
 void Zhaoxin::GetBusSpeed()
 {
 	DWORD64 data = 0;
-	if (SV_ASSIST::Ring0::RdMsr(0xCD, data) == 1)
+	if (SV_ASSIST::Ring0::RdMsr(0xCD, data) == 0)
 	{
 		switch (data & 0x07)
 		{
@@ -395,9 +395,9 @@ void Zhaoxin::GetCurrentSpeed()
 	{
 		for (DWORD threadAffinityMask = 0; threadAffinityMask < this->Core; threadAffinityMask++)
 		{
-			if (SV_ASSIST::Ring0::RdMsrTx(Zhaoxin_FIDVID, msrdata, threadAffinityMask) == 1)
+			if (SV_ASSIST::Ring0::RdMsrTx(Zhaoxin_FIDVID, msrdata, threadAffinityMask) == 0)
 			{
-				CurrentClockSpeed[threadAffinityMask] = (((DWORD)msrdata >> 8) & 0xFF) * BusSpeed;
+				CurrentClockSpeed[threadAffinityMask] = (((DWORD)msrdata >> 8) & 0xFF) / 2 * BusSpeed;
 			}
 		}
 	}

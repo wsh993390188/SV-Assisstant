@@ -69,7 +69,35 @@ namespace SV_ASSIST
 			return ZhaoxinDriver::Instance()->SetECData(EC_Addr, EC_Write_Data);
 		}
 
-		USHORT GetPCIVendorID()
+		BOOL ReadSMbusByByte(const USHORT SmbusBase, const USHORT SlaveAddress, const USHORT offset, BYTE & data)
+		{
+			return ZhaoxinDriver::Instance()->ReadSMbusByByte(SmbusBase, SlaveAddress, offset, data);
+		}
+
+		BOOL ReadSMbusByWord(const USHORT SmbusBase, const USHORT SlaveAddress, const USHORT offset, WORD & data)
+		{
+			return ZhaoxinDriver::Instance()->ReadSMbusByWord(SmbusBase, SlaveAddress, offset, data);
+		}
+		const std::vector<USHORT> Scan_SMBUS_DEVICE(const USHORT SmbusBase)
+		{
+			std::vector<USHORT> re = {};
+			for (USHORT i = 0; i <= 0xFE; i+=2)
+			{
+				BYTE data = 0;
+				if (ZhaoxinDriver::Instance()->ReadSMbusByByte(SmbusBase, i, 0, data))
+				{
+					re.emplace_back(i);
+				}
+			}
+			return re;
+		}
+
+		void WriteSMbusByByte(const USHORT SmbusBase, const USHORT SlaveAddress, const USHORT offset, const DWORD data)
+		{
+			return ZhaoxinDriver::Instance()->WriteSMbusByByte(SmbusBase, SlaveAddress, offset, data);
+		}
+
+		const USHORT GetPCIVendorID()
 		{
 			return ZhaoxinDriver::Instance()->GetPCIVendorID();
 		}
@@ -79,7 +107,6 @@ namespace SV_ASSIST
 			return ZhaoxinDriver::Instance()->GetAllPciInfo();
 		}
 
-
 		BOOL GetSMbusBaseAddr(const USHORT VendorID, USHORT& SMbusBaseAddress)
 		{
 			BOOL Success = FALSE;
@@ -88,7 +115,7 @@ namespace SV_ASSIST
 			switch (VendorID)
 			{
 			case 0x8086:
-				if (ZhaoxinDriver::Instance()->ReadPci(0, 31, 3, pci))
+				if (ZhaoxinDriver::Instance()->ReadPci(0, 31, 3, pci) == 0)
 				{
 					tmp = pci.u.type0.BaseAddresses[4];
 					SMbusBaseAddress = (USHORT)((tmp & 0xFFFE));

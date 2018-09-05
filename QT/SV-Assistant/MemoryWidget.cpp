@@ -2,16 +2,6 @@
 #include "mainctrlbutton.h"
 #include "lib/Hardware/SV_Hardware.h"
 
-MemoryWidget::MemoryWidget() :mainlayout(new QVBoxLayout(this))
-{
-	QPalette pal(this->palette());
-	//ÉèÖÃ±³¾°whiteÉ«
-	pal.setColor(QPalette::Background, Qt::white);
-	this->setAutoFillBackground(true);
-	this->setPalette(pal);
-	this->Init();
-}
-
 MemoryWidget::MemoryWidget(QWidget *parent)
 	: QWidget(parent), mainlayout(new QVBoxLayout(this))
 {
@@ -66,7 +56,7 @@ MemoryHeadWidget::MemoryHeadWidget(QWidget *parent, QVector<MemoryData> meminfo)
 horizontalSpace(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum))
 {
 	this->setMinimumSize(QSize(725,80));
-	this->setMaximumSize(QSize(725,80));
+	this->setMaximumSize(QSize(1125,80));
 	for (size_t i = 0; i < meminfo.size(); i++)
 	{
 		mainctrlbutton * toolbutton = new mainctrlbutton(this);
@@ -105,13 +95,33 @@ MemoryInfomationWidget::MemoryInfomationWidget(QWidget *parent, const MemoryData
 	ProductDate = new MemoryBaseInfo(this);
 	ProductDate->BaseLabel->setText(tr("Product Date"));
 
-	ModuleType->BaseInfo->setText(QString::fromStdString(data.ModuleType));
+	MaxBandWidth = new MemoryBaseInfo(this);
+	MaxBandWidth->BaseLabel->setText(tr("MaxBandWidth"));
+
+	Ranks_Banks = new MemoryBaseInfo(this);
+	Ranks_Banks->BaseLabel->setText(tr("Ranks And Banks"));
+
+	DataBits = new MemoryBaseInfo(this);
+	DataBits->BaseLabel->setText(tr("Data Bits"));
+
+	Voltages = new MemoryBaseInfo(this);
+	Voltages->BaseLabel->setText(tr("Voltages"));
+
+	{
+		QString a = {};
+		data.SupportsECC ? a = "ECC" : a = "";
+		ModuleType->BaseInfo->setText(tr("%1 %2").arg(QString::fromStdString(data.ModuleType)).arg(a));
+	}
 	ModuleSize->BaseInfo->setText(tr("%1 GBytes").arg(QString::number(data.ModuleSize)));
 	ModuleManufacturer->BaseInfo->setText(QString::fromStdString(data.ModuleManufacturer));
 	DRAMManufacturer->BaseInfo->setText(QString::fromStdString(data.DRAMManufacturer));
 	SerialNumber->BaseInfo->setText(QString::fromStdString(data.SerialNumber));
 	PartNumber->BaseInfo->setText(QString::fromStdString(data.PartNumber));
 	ProductDate->BaseInfo->setText(QString::fromStdString(data.ProductDate));
+	MaxBandWidth->BaseInfo->setText(QString::fromStdString(data.MaxBandWidth));
+	Ranks_Banks->BaseInfo->setText(QString::fromStdString(data.Ranks_Banks));
+	DataBits->BaseInfo->setText(QString::fromStdString(data.DataBits));
+	Voltages->BaseInfo->setText(QString::fromStdString(data.Voltages));
 
 	mainlayout->addLayout(ModuleType->layout);
 	mainlayout->addLayout(ModuleSize->layout);
@@ -120,17 +130,29 @@ MemoryInfomationWidget::MemoryInfomationWidget(QWidget *parent, const MemoryData
 	mainlayout->addLayout(SerialNumber->layout);
 	mainlayout->addLayout(PartNumber->layout);
 	mainlayout->addLayout(ProductDate->layout);
+	mainlayout->addLayout(MaxBandWidth->layout);
+	mainlayout->addLayout(Ranks_Banks->layout);
+	mainlayout->addLayout(DataBits->layout);
+	mainlayout->addLayout(Voltages->layout);
 }
 
 void MemoryInfomationWidget::ReciveMemoryInfomation(const MemoryData& data)
 {
-	ModuleType->BaseInfo->setText(QString::fromStdString(data.ModuleType));
+	{
+		QString a = {};
+		data.SupportsECC ? a = "ECC" : a = "";
+		ModuleType->BaseInfo->setText(tr("%1 %2").arg(QString::fromStdString(data.ModuleType)).arg(a));
+	}
 	ModuleSize->BaseInfo->setText(tr("%1 GBytes").arg(QString::number(data.ModuleSize)));
 	ModuleManufacturer->BaseInfo->setText(QString::fromStdString(data.ModuleManufacturer));
 	DRAMManufacturer->BaseInfo->setText(QString::fromStdString(data.DRAMManufacturer));
 	SerialNumber->BaseInfo->setText(QString::fromStdString(data.SerialNumber));
 	PartNumber->BaseInfo->setText(QString::fromStdString(data.PartNumber));
 	ProductDate->BaseInfo->setText(QString::fromStdString(data.ProductDate));
+	MaxBandWidth->BaseInfo->setText(QString::fromStdString(data.MaxBandWidth));
+	Ranks_Banks->BaseInfo->setText(QString::fromStdString(data.Ranks_Banks));
+	DataBits->BaseInfo->setText(QString::fromStdString(data.DataBits));
+	Voltages->BaseInfo->setText(QString::fromStdString(data.Voltages));
 }
 
 MemoryInfomationWidget::~MemoryInfomationWidget()
@@ -142,4 +164,8 @@ MemoryInfomationWidget::~MemoryInfomationWidget()
 	delete SerialNumber;
 	delete PartNumber;
 	delete ProductDate;
+	delete MaxBandWidth;
+	delete Ranks_Banks;
+	delete DataBits;
+	delete Voltages;
 }

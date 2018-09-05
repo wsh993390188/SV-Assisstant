@@ -15,7 +15,6 @@ AppInit *AppInit::Instance()
             self = new AppInit;
         }
     }
-
     return self;
 }
 

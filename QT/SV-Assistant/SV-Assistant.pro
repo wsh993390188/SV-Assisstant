@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -43,7 +43,8 @@ SOURCES += \
     MonitorWidget.cpp \
     MotherBroadWidget.cpp \
     NetworkWidget.cpp \
-    AudioWidget.cpp
+    AudioWidget.cpp \
+    HomeBottomWidget/CPUBottomWidget.cpp
 
 HEADERS += \
         svassistmainwindow.h \
@@ -63,7 +64,8 @@ HEADERS += \
     MonitorWidget.h \
     MotherBroadWidget.h \
     NetworkWidget.h \
-    AudioWidget.h
+    AudioWidget.h \
+    HomeBottomWidget/CPUBottomWidget.h
 
 FORMS += \
         svassistmainwindow.ui

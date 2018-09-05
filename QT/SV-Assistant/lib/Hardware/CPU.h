@@ -280,5 +280,7 @@ namespace SV_ASSIST
 			*@double			未知返回INFINITY
 		****************************************************************/
 		const std::vector<double>& GetVoltage();
+
+		void GetCpuid(int(&cpuid)[4], const int eax, const int ecx);
 	}
 }

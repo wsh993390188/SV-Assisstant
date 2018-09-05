@@ -139,6 +139,24 @@ typedef struct _NvidiaInfo
 {
 	std::string FullName;
 	std::string GPUType;
+	std::string VbiosVersion;
+	std::string SysType;
+	ULONG PhysicalFrame;
+	ULONG VirtualFrame;
+	BOOL HDCP;
+	UINT corecount;
+	struct
+	{
+		USHORT bus;
+		USHORT dev;
+		USHORT func;
+
+		ULONG pDeviceId;
+		ULONG pSubSystemId;
+		ULONG pRevisionId;
+		ULONG pExtDeviceId;
+	}PCIIdentify;
+
 	ULONG dedicatedVideoMemory;
 	ULONG availableDedicatedVideoMemory;
 	ULONG systemVideoMemory;
@@ -149,33 +167,17 @@ typedef struct _NvidiaInfo
 	ULONG fans;
 	DEVICE_TEM Device_Tem;
 	DEVICE_CLOCK Device_clock;	//khz
-	BOOL HDCP;
-	UINT corecount;
 	NV_GPU_DYNAMIC_PSTATES_INFO_EX percentage;
-	std::string VbiosVersion;
-	std::string VbiosRevision;
-	std::string VbiosOEMRevision;
-	ULONG BusID;
-	ULONG BuSlotID;
-	std::string BusType;
-	ULONG AGPAperture;
-	ULONG AGPRate;
-	std::string SysType;
-	ULONG PhysicalFrame;
-	ULONG VirtualFrame;
-	union 
-	{
-		NV_GPU_PERF_PSTATES20_INFO NV_PState;	
+	UINT CurrentPState;
+	PCISPEED MaxPCIESpeed;
+	PCISPEED CurrentPCIESpeed;
+	NVIDIA_USAGE Nvidia_Usage;
+	NV_GPU_PERF_PSTATES20_INFO NV_PState;	
 // 			P0/P1 - Maximum 3D performance 
 // 			P2 / P3 - Balanced 3D performance - power
 // 			P8 - Basic HD video playback
 // 			P10 - DVD playback
 // 			P12 - Minimum idle power consumption
-	}PState;
-	UINT CurrentPState;
-	ULONG CurrentPCIEWidth;
-	NVIDIA_USAGE Nvidia_Usage;
-	NV_GPU_ECC_CONFIGURATION_INFO ECC_Config;
 }NvidiaInfo;
 
 struct IntelDeviceInfoV1

@@ -34,5 +34,16 @@ namespace SV_ASSIST
 			*@SMBIOS_Struct		包含SMBIOS信息的结构
 		****************************************************************/
 		const SMBIOS_Struct& GetSMBIOSinfo();
+		
+		/**************************************************************
+		*@Function				IsUEFI
+		*@brief					是否为UEFI模式启动
+		*@author				王硕
+		*@param
+			*@null
+		*@return
+			*@bool				true UEFI Mode ;false Legacy Mode
+		****************************************************************/
+		bool IsUEFI();
 	}
 }

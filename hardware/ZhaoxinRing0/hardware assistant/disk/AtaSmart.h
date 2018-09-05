@@ -169,10 +169,10 @@ public:
 		INTERFACE_TYPE_SATA,
 		INTERFACE_TYPE_USB,
 		INTERFACE_TYPE_IEEE1394,
-		INTERFACE_TYPE_UASP,
+//		INTERFACE_TYPE_UASP,
 		INTERFACE_TYPE_SCSI,
 		INTERFACE_TYPE_NVME,
-		INTERFACE_TYPE_USB_NVME,
+//		INTERFACE_TYPE_USB_NVME,
 	};
 
 protected:
@@ -1361,6 +1361,9 @@ public:
 		BOOL				IsSsd;
 		BOOL				IsTrimSupported;
 
+		BOOL				IsNVMe;
+		BOOL				IsUasp;
+
 		INT					PhysicalDriveId;
 		INT					ScsiPort;
 		INT					ScsiTargetId;
@@ -1504,7 +1507,7 @@ protected:
 	BOOL m_FlagAtaPassThroughSmart;
 	BOOL m_FlagNVMeStorageQuery;
 
-	BOOL GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INTERFACE_TYPE interfaceType, COMMAND_TYPE commandType, VENDOR_ID vendorId, DWORD productId = 0, INT scsiBus = -1, DWORD siliconImageId = 0, BOOL FlagNvidiaController = 0, BOOL FlagMarvellController = 0, std::wstring pnpDeviceId = _T(""));
+	BOOL GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INTERFACE_TYPE interfaceType, COMMAND_TYPE commandType, VENDOR_ID vendorId, DWORD productId = 0, INT scsiBus = -1, DWORD siliconImageId = 0, BOOL FlagNvidiaController = 0, BOOL FlagMarvellController = 0, std::wstring pnpDeviceId = _T(""), BOOL FlagNVMe = FALSE, BOOL FlagUasp = FALSE);
 	BOOL AddDisk(INT PhysicalDriveId, INT ScsiPort, INT scsiTargetId, INT scsiBus, BYTE target, COMMAND_TYPE commandType, IDENTIFY_DEVICE* identify, INT siliconImageType = -1, PCSMI_SAS_PHY_ENTITY sasPhyEntity = NULL, std::wstring pnpDeviceId = _T(""));
 	DWORD CheckSmartAttributeUpdate(DWORD index, SMART_ATTRIBUTE* pre, SMART_ATTRIBUTE* cur);
 

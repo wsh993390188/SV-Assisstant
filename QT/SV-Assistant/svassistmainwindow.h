@@ -2,6 +2,7 @@
 #define SVASSISTMAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimerEvent>
 
 namespace Ui {
 class SVAssistMainWindow;
@@ -14,9 +15,13 @@ class SVAssistMainWindow : public QMainWindow
 public:
     explicit SVAssistMainWindow(QWidget *parent = 0);
     ~SVAssistMainWindow();
+protected:
+	void timerEvent(QTimerEvent * event);
 private:
+	void UpdateUsages();
     void InitWindow();
 private:
+	int CPUUsageID;
     Ui::SVAssistMainWindow *ui;
 };
 

@@ -367,6 +367,27 @@ namespace SV_ASSIST
 			default:
 				break;
 			}
+			if (spd.DDR3_Detail.sBusWidth.bits.Bus_width_extension == 1)
+			{
+				data.SupportsECC = true;
+				data.DataBits = (std::to_string(Primarybuswidth + 8) + " Bits With 8 Bits ECC");
+			}
+			else
+			{
+				data.SupportsECC = false;
+				data.DataBits = (std::to_string(Primarybuswidth) + " Bits");
+			}
+			if (spd.DDR3_Detail.MTB_Dividend == 1 && spd.DDR3_Detail.MTB_Divisor == 8)
+			{
+				if (spd.DDR3_Detail.sTCKmin == 10)
+					data.MaxBandWidth = "DDR3-1600 (800MHz)";
+				else if (spd.DDR3_Detail.sTCKmin == 12)
+					data.MaxBandWidth = "DDR3-1333 (666.67MHz)";
+				else if (spd.DDR3_Detail.sTCKmin == 15)
+					data.MaxBandWidth = "DDR3-1066 (533MHz)";
+				else if (spd.DDR3_Detail.sTCKmin == 20)
+					data.MaxBandWidth = "DDR3-800 (400MHz)";
+			}
 			double DDRSize = capacity / 8.0 * Primarybuswidth / SDRAMWidth * Ranks;
 			data.ModuleSize = (size_t)DDRSize;
 			int year = spd.DDR3_Detail.ManufacturingDate[0], week = spd.DDR3_Detail.ManufacturingDate[1];
@@ -376,6 +397,17 @@ namespace SV_ASSIST
 				sprintf_s(part_number, "%02X\\%02X", week, year);
 				data.ProductDate = part_number;
 			}
+
+			{
+				int Banks = pow(2, spd.DDR3_Detail.sSDRAMBank_Density.bits.Bank + 3);
+				data.Ranks_Banks = boost::str(boost::format("%1% Ranks %2% Banks") % Ranks % Banks);
+			}
+			if (!spd.DDR3_Detail.sModuleNominalVoltage.bits.VDD_1_5)
+				data.Voltages += " 1.5 V";
+			if (spd.DDR3_Detail.sModuleNominalVoltage.bits.VDD_1_35)
+				data.Voltages += " 1.35 V";
+			if (spd.DDR3_Detail.sModuleNominalVoltage.bits.VDD_1_2X)
+				data.Voltages += " 1.2X V";
 		}
 
 		void MemoryLib::ExecDDR4ToSPDInfomation(const DDR4_INFO & spd, MemoryData& data)
@@ -519,6 +551,7 @@ namespace SV_ASSIST
 			default:
 				break;
 			}
+			data.Voltages = "1.2 V";
 			data.DRAMManufacturer = SPDManufacturer(spd.DDR4_Detail.DRAMManufacturerIDLeast & 0x7F, spd.DDR4_Detail.DRAMManufacturerIDMost);
 			data.ModuleManufacturer = SPDManufacturer(spd.DDR4_Detail.ModuleManufacturerIDLeast & 0x7F, spd.DDR4_Detail.ModuleManufacturerIDMost);
 			int year = spd.DDR4_Detail.ManufacturingDate[0], week = spd.DDR4_Detail.ManufacturingDate[1];
@@ -528,6 +561,50 @@ namespace SV_ASSIST
 				sprintf_s(part_number, "%02X\\%02X", week, year);
 				data.ProductDate = part_number;
 			}
+			if (spd.DDR4_Detail.sTCKmin == 10 && spd.DDR4_Detail.sTCKmin125 == 0)
+				data.MaxBandWidth = "DDR4-1600 (800MHz)";
+			else if (spd.DDR4_Detail.sTCKmin == 9 && spd.DDR4_Detail.sTCKmin125 == 0xCA)
+				data.MaxBandWidth = "DDR4-1866 (933MHz)";
+			else if (spd.DDR4_Detail.sTCKmin == 8 && spd.DDR4_Detail.sTCKmin125 == 0xC1)
+				data.MaxBandWidth = "DDR4-2133 (1066.67MHz)";
+			else if (spd.DDR4_Detail.sTCKmin == 7 && spd.DDR4_Detail.sTCKmin125 == 0xD6)
+				data.MaxBandWidth = "DDR4-2400 (1200MHz)";
+			else if (spd.DDR4_Detail.sTCKmin == 6 && spd.DDR4_Detail.sTCKmin125 == 0)
+				data.MaxBandWidth = "DDR4-2666 (1333.33MHz)";
+			else if (spd.DDR4_Detail.sTCKmin == 5 && spd.DDR4_Detail.sTCKmin125 == 0)
+				data.MaxBandWidth = "DDR4-3200 (1600MHz)";
+			{
+				int BankGroup = 1;
+				switch (spd.DDR4_Detail.sSDRAMBank_Density.bits.BankGroupBits)
+				{
+				case 1:
+					BankGroup = 2;
+					break;
+				case 2:
+					BankGroup = 4;
+					break;
+				default:
+					break;
+				}
+				int BankAddressBits = 0;
+				switch (spd.DDR4_Detail.sSDRAMBank_Density.bits.BankAddressBits)
+				{
+				case 0:
+					BankAddressBits = 4;
+					break;
+				case 1:
+					BankAddressBits = 8;
+					break;
+				default:
+					break;
+				}
+				data.Ranks_Banks = boost::str(boost::format("%1% Ranks %2% Banks") % Ranks % (BankAddressBits * BankGroup));
+			}
+
+			if (spd.DDR4_Detail.sBusWidth.bits.Bus_width_extension == 1)
+				data.SupportsECC = true;
+			else
+				data.SupportsECC = false;
 		}
 
 		const std::string MemoryLib::SPDManufacturer(const BYTE Bank, const BYTE IDCode)

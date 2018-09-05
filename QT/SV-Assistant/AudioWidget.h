@@ -1,14 +1,15 @@
 #pragma once
 
-#include <QWidget>
+#include <QTableWidget>
+#include <QHeaderView>
+#include <QScrollBar>
 
-class AudioWidget : public QWidget
+class AudioWidget : public QTableWidget
 {
 	Q_OBJECT
 
 public:
-	AudioWidget();
-	AudioWidget(QWidget *parent);
+	AudioWidget(QWidget *parent = nullptr);
 	void Init();
 	~AudioWidget();
 };

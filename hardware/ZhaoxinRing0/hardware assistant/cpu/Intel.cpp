@@ -21,7 +21,7 @@ MSR_PP0_ENERY_STATUS{ 0x639 }, MSR_PP1_ENERY_STATUS{ 0x641 }, MaxNonTurboFre{0}
 	this->GetTjMaxFromMSR();
 
 	DWORD64 data = 0;
-	if (SV_ASSIST::Ring0::RdMsr(MSR_PLATFORM_INFO, data) == 1)
+	if (SV_ASSIST::Ring0::RdMsr(MSR_PLATFORM_INFO, data) == 0)
 	{
 		MaxNonTurboFre = ((data & 0xFF00) >> 8) * ExtClock;
 	}
@@ -1204,7 +1204,7 @@ void Intel::ExecVoltageByFMS()
 	{
 		for (DWORD threadAffinityMask = 0; threadAffinityMask < this->Core; threadAffinityMask++)
 		{
-			if (SV_ASSIST::Ring0::RdMsrTx(IA32_PERF_STATUS, msrdata, threadAffinityMask) == 1 && msrdata)
+			if (SV_ASSIST::Ring0::RdMsrTx(IA32_PERF_STATUS, msrdata, threadAffinityMask) == 0 && msrdata)
 			{
 				WORD VID = (msrdata & VIDmask) >> 32;
 				VCore = VID / pow(2, 13);
@@ -1223,14 +1223,14 @@ void Intel::ExecTemperature()
 	DWORD64 msrdata = 0;
 	for (DWORD threadAffinityMask = 0; threadAffinityMask < Core; threadAffinityMask++)
 	{
-		if (SV_ASSIST::Ring0::RdMsrTx(IA32_THERM_STATUS_MSR, msrdata, threadAffinityMask) == 1)
+		if (SV_ASSIST::Ring0::RdMsrTx(IA32_THERM_STATUS_MSR, msrdata, threadAffinityMask) == 0)
 		{
 			auto temperature = (Tjmax[threadAffinityMask] - ((msrdata & 0x007F0000) >> 16));
 			Temperature[threadAffinityMask] = temperature;
 		}
 	}
 
-	if (SV_ASSIST::Ring0::RdMsr(IA32_PACKAGE_THERM_STATUS, msrdata) == 1)
+	if (SV_ASSIST::Ring0::RdMsr(IA32_PACKAGE_THERM_STATUS, msrdata) == 0)
 	{
 		PackageTemperature = (PackageTjmax - ((msrdata & 0x007F0000) >> 16));
 	}
@@ -1241,7 +1241,7 @@ BOOL Intel::GetTjMaxFromMSR()
 	DWORD64 msrdata = 0;
 	for (DWORD threadAffinityMask = 0; threadAffinityMask < this->Core; threadAffinityMask++)
 	{
-		if (SV_ASSIST::Ring0::RdMsrTx(IA32_TEMPERATURE_TARGET, msrdata, threadAffinityMask) == 1)
+		if (SV_ASSIST::Ring0::RdMsrTx(IA32_TEMPERATURE_TARGET, msrdata, threadAffinityMask) == 0)
 		{
 			Tjmax[threadAffinityMask] = ((DWORD)msrdata >> 16) & 0xFF;
 		}
@@ -1259,7 +1259,7 @@ BOOL Intel::GetTjMaxFromMSR()
 void Intel::GetBusSpeed()
 {
 	DWORD64 data = 0;
-	if (SV_ASSIST::Ring0::RdMsr(0xCD, data) == 1)
+	if (SV_ASSIST::Ring0::RdMsr(0xCD, data) == 0)
 	{
 		switch (data & 0x07)
 		{
@@ -1312,7 +1312,7 @@ void Intel::GetCurrentSpeed()
 	{
 		for (DWORD threadAffinityMask = 0; threadAffinityMask < this->Core; threadAffinityMask++)
 		{
-			if (SV_ASSIST::Ring0::RdMsrTx(IA32_PERF_STATUS, msrdata, threadAffinityMask) == 1)
+			if (SV_ASSIST::Ring0::RdMsrTx(IA32_PERF_STATUS, msrdata, threadAffinityMask) == 0)
 			{
 				CurrentClockSpeed[threadAffinityMask] = (((DWORD)msrdata >> 8) & 0xFF) * BusSpeed;
 			}

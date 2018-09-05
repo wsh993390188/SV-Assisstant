@@ -95,6 +95,9 @@
     <ClCompile Include="svassistmainwindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="curvechart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AudioWidget.h">
@@ -142,46 +145,17 @@
     <QtMoc Include="svassistmainwindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="curvechart.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <CustomBuild Include="debug\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    
-    
-    
-    
     <ClInclude Include="ui_svassistmainwindow.h">
       <Filter>Generated Files</Filter>
     </ClInclude>

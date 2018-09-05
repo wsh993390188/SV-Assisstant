@@ -1181,7 +1181,8 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 					INT physicalDriveId = -1, scsiPort = -1, scsiTargetId = -1, scsiBus = -1;
 					BOOL flagTarget = FALSE;
 					BOOL flagBlackList = FALSE;
-					BOOL flagInterfaceTypeUASP = FALSE;
+					BOOL flagUasp = FALSE;
+					BOOL flagNVMe = FALSE;
 					DWORD siliconImageType = 0;
 					
 				try
@@ -1289,7 +1290,7 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 							if(m_UASPController.at(i).find(pnpDeviceId) != std::wstring::npos)
 							{
 								OutputDebugString(std::wstring(_T("UASPController:") + pnpDeviceId + _T("\n")).c_str());
-								flagInterfaceTypeUASP = TRUE;
+								flagUasp = TRUE;
 							}
 						}
 
@@ -1336,37 +1337,26 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 						VENDOR_ID usbVendorId = VENDOR_UNKNOWN;
 						DWORD usbProductId = 0;
 
-						if(flagInterfaceTypeUASP)
-						{
-							OutputDebugString(_T("INTERFACE_TYPE_UASP\n"));
-							interfaceType = INTERFACE_TYPE_UASP;
-						}
-						else if (model.find(_T("NVMe")) != std::wstring::npos || pnpDeviceId.find(_T("NVME")) != std::wstring::npos)
-						{
-							OutputDebugString(_T("INTERFACE_TYPE_NVME\n"));
-							interfaceType = INTERFACE_TYPE_NVME;
-						}
-						/*
-						else if (interfaceTypeWmi.Find(_T("SCSI")) >= 0)
-						{
-							OutputDebugString(_T("INTERFACE_TYPE_SCSI\n"));
-							interfaceType = INTERFACE_TYPE_SCSI;
-						}*/
-						else if(interfaceTypeWmi.find(_T("1394")) != std::wstring::npos || (model.find(_T(" IEEE 1394 SBP2 Device")) != 0 && model.find(_T(" IEEE 1394 SBP2 Device")) != std::wstring::npos))
+						if(interfaceTypeWmi.find(_T("1394")) != std::wstring::npos || (model.find(_T(" IEEE 1394 SBP2 Device")) != 0 && model.find(_T(" IEEE 1394 SBP2 Device")) != std::wstring::npos))
 						{
 							OutputDebugString(_T("INTERFACE_TYPE_IEEE1394\n"));
 							interfaceType = INTERFACE_TYPE_IEEE1394;
 						}
-						else if(interfaceTypeWmi.find(_T("USB")) != std::wstring::npos || (model.find(_T(" USB Device")) != 0 && model.find(_T(" USB Device")) != std::wstring::npos))
+						else if(interfaceTypeWmi.find(_T("USB")) != std::wstring::npos || (model.find(_T(" USB Device")) != 0 && model.find(_T(" USB Device")) != std::wstring::npos) || flagUasp)
 						{
 							OutputDebugString(_T("INTERFACE_TYPE_USB\n"));
 							interfaceType = INTERFACE_TYPE_USB;
 
 							if (model.find(_T("NVMe")) != std::wstring::npos || pnpDeviceId.find(_T("NVME")) != std::wstring::npos)
 							{
-								OutputDebugString(_T("INTERFACE_TYPE_USB_NVME\n"));
-								interfaceType = INTERFACE_TYPE_USB_NVME;
+								flagNVMe = TRUE;
 							}
+						}
+						else if (model.find(_T("NVMe")) != std::wstring::npos || pnpDeviceId.find(_T("NVME")) != std::wstring::npos)
+						{
+							OutputDebugString(_T("INTERFACE_TYPE_NVME\n"));
+							interfaceType = INTERFACE_TYPE_NVME;
+							flagNVMe = TRUE;
 						}
 						else
 						{
@@ -1397,7 +1387,7 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 						}
 
 						OutputDebugString(_T("flagTarget && GetDiskInfo\n"));
-						if (flagTarget && GetDiskInfo(physicalDriveId, scsiPort, scsiTargetId, interfaceType, commandType, usbVendorId, usbProductId, scsiBus, siliconImageType, FlagNvidiaController, FlagMarvellController, pnpDeviceId))
+						if (flagTarget && GetDiskInfo(physicalDriveId, scsiPort, scsiTargetId, interfaceType, commandType, usbVendorId, usbProductId, scsiBus, siliconImageType, FlagNvidiaController, FlagMarvellController, pnpDeviceId, flagNVMe, flagUasp))
 						{
 							OutputDebugString(_T("int index = (int)vars.GetCount() - 1;\n"));
 							auto index = (int)vars.size() - 1;
@@ -1430,12 +1420,13 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 							boost::algorithm::replace_all(model, _T(" ATA Device"), _T(""));
 							boost::algorithm::replace_all(model, _T("NVMe "), _T(""));
 
-							if (interfaceType == INTERFACE_TYPE_UASP)
+							if(flagUasp)
 							{
 								flagSkipModelCheck = TRUE;
 								cstr = boost::str(boost::wformat(_T("UASP (%1%)")) % vars[index].Interface);
 								vars[index].Interface = cstr;
-								vars[index].InterfaceType = INTERFACE_TYPE_UASP;
+								vars[index].InterfaceType = INTERFACE_TYPE_USB;
+								vars[index].IsUasp = TRUE;
 								
 								detectUASPdisks = TRUE;
 								for (int i = 0; i < externals.size(); i++)
@@ -1521,7 +1512,7 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 								vars[index].Model = CharToWchar(vars[index].ModelReverse.c_str(), vars[index].ModelReverse.size());
 								vars[index].ModelSerial = GetModelSerial(vars[index].Model, vars[index].SerialNumber);
 							}
-							else if(vars[index].InterfaceType == INTERFACE_TYPE_USB || vars[index].InterfaceType == INTERFACE_TYPE_UASP || vars[index].InterfaceType == INTERFACE_TYPE_USB_NVME)
+							else if(vars[index].InterfaceType == INTERFACE_TYPE_USB)
 							{
 								// None
 							}
@@ -2090,6 +2081,9 @@ BOOL CAtaSmart::AddDisk(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INT
 	asi.IsMaxtorMinute = FALSE;
 	asi.IsSsd = FALSE;
 	asi.IsTrimSupported = FALSE;
+
+	asi.IsNVMe = FALSE;
+	asi.IsUasp = FALSE;
 	
 	asi.TotalDiskSize = 0;
 	asi.Cylinder = 0;
@@ -2944,8 +2938,16 @@ BOOL CAtaSmart::AddDiskNVMe(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 	asi.DriveLetterMap = 0;
 
 	asi.AlarmTemperature = 0;
+	asi.IsNVMe = TRUE;
 
-	asi.InterfaceType = INTERFACE_TYPE_NVME;
+	if (commandType >= CMD_TYPE_NVME_JMICRON)
+	{
+		asi.InterfaceType = INTERFACE_TYPE_USB;
+	}
+	else
+	{
+		asi.InterfaceType = INTERFACE_TYPE_NVME;
+	}
 	asi.HostReadsWritesUnit = HOST_READS_WRITES_512B;
 
 	asi.DiskVendorId = VENDOR_UNKNOWN;
@@ -4283,7 +4285,8 @@ VOID CAtaSmart::WakeUp(INT physicalDriveId)
 }
 
 BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId, 
-	INTERFACE_TYPE interfaceType, COMMAND_TYPE commandType, VENDOR_ID usbVendorId, DWORD productId, INT scsiBus, DWORD siliconImageType, BOOL FlagNvidiaController, BOOL FlagMarvellController, std::wstring pnpDeviceId
+	INTERFACE_TYPE interfaceType, COMMAND_TYPE commandType, VENDOR_ID usbVendorId, DWORD productId, INT scsiBus, DWORD siliconImageType, BOOL FlagNvidiaController, BOOL FlagMarvellController, std::wstring pnpDeviceId,
+	BOOL flagNVMe, BOOL flagUsap
 	)
 {
 	OutputDebugString(_T("GetDiskInfo\n"));
@@ -4415,17 +4418,6 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 			return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_INTEL, &identify);
 		}
 	}
-	else if (interfaceType == INTERFACE_TYPE_USB_NVME)
-	{
-		debug = _T("DoIdentifyDeviceNVMeJMicron\n");
-		OutputDebugString(debug.c_str());
-		if (DoIdentifyDeviceNVMeJMicron(physicalDriveId, scsiPort, scsiTargetId, &identify))
-		{
-			debug = _T("AddDiskNVMe - CMD_TYPE_NVME_JMICRON\n");
-			OutputDebugString(debug.c_str());
-			return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_JMICRON, &identify);
-		}
-	}
 	
 	if(physicalDriveId >= 0)
 	{
@@ -4475,6 +4467,14 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_JMICRON\n");
 				OutputDebugString(debug.c_str());
 				return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_JMICRON, &identify);
+			}
+			else if (FlagUsbNVMeASMedia && DoIdentifyDeviceNVMeASMedia(physicalDriveId, scsiPort, scsiTargetId, &identify))
+			{
+				debug = _T("DoIdentifyDeviceNVMeASMedia\n");
+				OutputDebugString(debug.c_str());
+				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_ASMEDIA\n");
+				OutputDebugString(debug.c_str());
+				return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_ASMEDIA, &identify);
 			}
 			else
 			{
@@ -4534,16 +4534,6 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 			}
 		}
 
-/*
-		else if(interfaceType == INTERFACE_TYPE_USB && vendorId == USB_VENDOR_LOGITEC && productId != 0x00D9)
-		{
-			if(DoIdentifyDeviceSat(physicalDriveId, &identify, CMD_TYPE_LOGITEC))
-			{
-				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, CMD_TYPE_LOGITEC, &identify);
-			}
-		}
-*/
-
 		if(interfaceType == INTERFACE_TYPE_USB && usbVendorId == USB_VENDOR_SUNPLUS)
 		{
 			OutputDebugString(_T("usbVendorId == USB_VENDOR_SUNPLUS\n"));
@@ -4589,9 +4579,38 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xB0, CMD_TYPE_SAT, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 		}
+		else if (interfaceType == INTERFACE_TYPE_USB && flagNVMe)
+		{
+			if (DoIdentifyDeviceNVMeJMicron(physicalDriveId, scsiPort, scsiTargetId, &identify))
+			{
+				debug = _T("DoIdentifyDeviceNVMeJMicron\n");
+				OutputDebugString(debug.c_str());
+				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_JMICRON\n");
+				OutputDebugString(debug.c_str());
+				return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_JMICRON, &identify);
+			}
+			// USB-NVMe
+			else if (DoIdentifyDeviceNVMeASMedia(physicalDriveId, scsiPort, scsiTargetId, &identify))
+			{
+				debug = _T("DoIdentifyDeviceNVMeASMedia\n");
+				OutputDebugString(debug.c_str());
+				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_ASMEDIA\n");
+				OutputDebugString(debug.c_str());
+				return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_ASMEDIA, &identify);
+			}
+		}
 		else
 		{
 			OutputDebugString(_T("else (USB-HDD)\n"));
+
+//			if (DoIdentifyDeviceNVMeASMedia(physicalDriveId, scsiPort, scsiTargetId, &identify))
+//			{
+//				debug = _T("DoIdentifyDeviceNVMeASMedia");
+//				OutputDebugString(debug);
+//				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_ASMEDIA");
+//				OutputDebugString(debug);
+//				return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_ASMEDIA, &identify);
+//			}
 
 			if(FlagUsbSat && DoIdentifyDeviceSat(physicalDriveId, 0xA0, &identify, CMD_TYPE_SAT))
 			{
@@ -4661,6 +4680,15 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_JMICRON\n");
 				OutputDebugString(debug.c_str());
 				return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_JMICRON, &identify);
+			}
+			// USB-NVMe
+			else if (DoIdentifyDeviceNVMeASMedia(physicalDriveId, scsiPort, scsiTargetId, &identify))
+			{
+				debug  =_T("DoIdentifyDeviceNVMeASMedia\n");
+				OutputDebugString(debug.c_str());
+				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_ASMEDIA\n");
+				OutputDebugString(debug.c_str());
+				return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_ASMEDIA, &identify);
 			}
 		}
 	}
@@ -5099,7 +5127,7 @@ BOOL CAtaSmart::DoIdentifyDeviceNVMeJMicron(INT physicalDriveId, INT scsiPort, I
 	{
 		count += sptwb.DataBuf[i];
 	}
-	if (count == 0)
+	if (count == 0 || count == 317)
 	{
 		::CloseHandle(hIoCtrl);
 		return	FALSE;
@@ -5241,17 +5269,115 @@ BOOL CAtaSmart::GetSmartAttributeNVMeJMicron(INT physicalDriveId, INT scsiPort, 
 }
 
 /*---------------------------------------------------------------------------*/
-//  NVMe ASMedia <DOES NOT WORK>
+//  NVMe ASMedia
 /*---------------------------------------------------------------------------*/
 
 BOOL CAtaSmart::DoIdentifyDeviceNVMeASMedia(INT physicalDriveId, INT scsiPort, INT scsiTargetId, IDENTIFY_DEVICE* data)
 {
-	return FALSE;
+BOOL	bRet;
+	HANDLE	hIoCtrl;
+	DWORD	dwReturned;
+	DWORD	length;
+ 	SCSI_PASS_THROUGH_WITH_BUFFERS sptwb;
+ 	if (data == NULL)
+	{
+		return	FALSE;
+	}
+ 	::ZeroMemory(data, sizeof(IDENTIFY_DEVICE));
+ 	hIoCtrl = GetIoCtrlHandle(physicalDriveId);
+ 	if (hIoCtrl == INVALID_HANDLE_VALUE)
+	{
+		return	FALSE;
+	}
+ 	::ZeroMemory(&sptwb, sizeof(SCSI_PASS_THROUGH_WITH_BUFFERS));
+	sptwb.Spt.Length = sizeof(SCSI_PASS_THROUGH);
+	sptwb.Spt.PathId = 0;
+	sptwb.Spt.TargetId = 0;
+	sptwb.Spt.Lun = 0;
+	sptwb.Spt.SenseInfoLength = 24;
+	sptwb.Spt.DataTransferLength = 4096;
+	sptwb.Spt.TimeOutValue = 2;
+	sptwb.Spt.DataBufferOffset = offsetof(SCSI_PASS_THROUGH_WITH_BUFFERS, DataBuf);
+	sptwb.Spt.SenseInfoOffset = offsetof(SCSI_PASS_THROUGH_WITH_BUFFERS, SenseBuf);
+ 	sptwb.Spt.CdbLength = 16;
+	sptwb.Spt.Cdb[0] = 0xE6; // NVME PASS THROUGH
+	sptwb.Spt.Cdb[1] = 0x06; // IDENTIFY
+	sptwb.Spt.Cdb[3] = 0x01;
+ 	sptwb.Spt.DataIn = SCSI_IOCTL_DATA_IN;
+ 	length = offsetof(SCSI_PASS_THROUGH_WITH_BUFFERS, DataBuf) + sptwb.Spt.DataTransferLength;
+ 	bRet = ::DeviceIoControl(hIoCtrl, IOCTL_SCSI_PASS_THROUGH,
+		&sptwb, length,
+		&sptwb, length, &dwReturned, NULL);
+ 	if (bRet == FALSE)
+	{
+		::CloseHandle(hIoCtrl);
+		return	FALSE;
+	}
+ 	DWORD count = 0;
+	for (int i = 0; i < 512; i++)
+	{
+		count += sptwb.DataBuf[i];
+	}
+	if (count == 0)
+	{
+		::CloseHandle(hIoCtrl);
+		return	FALSE;
+	}
+ 	memcpy_s(data, sizeof(IDENTIFY_DEVICE), sptwb.DataBuf, sizeof(IDENTIFY_DEVICE));
+ 	::CloseHandle(hIoCtrl);
+ 	return TRUE;
 }
 
 BOOL CAtaSmart::GetSmartAttributeNVMeASMedia(INT physicalDriveId, INT scsiPort, INT scsiTargetId, ATA_SMART_INFO* asi)
 {
-	return FALSE;
+BOOL	bRet;
+	HANDLE	hIoCtrl;
+	DWORD	dwReturned;
+	DWORD	length;
+ 	SCSI_PASS_THROUGH_WITH_BUFFERS sptwb;
+ 	hIoCtrl = GetIoCtrlHandle(physicalDriveId);
+ 	if (hIoCtrl == INVALID_HANDLE_VALUE)
+	{
+		return	FALSE;
+	}
+ 	::ZeroMemory(&sptwb, sizeof(SCSI_PASS_THROUGH_WITH_BUFFERS));
+	sptwb.Spt.Length = sizeof(SCSI_PASS_THROUGH);
+	sptwb.Spt.PathId = 0;
+	sptwb.Spt.TargetId = 0;
+	sptwb.Spt.Lun = 0;
+	sptwb.Spt.SenseInfoLength = 24;
+	sptwb.Spt.DataTransferLength = 512;
+	sptwb.Spt.TimeOutValue = 2;
+	sptwb.Spt.DataBufferOffset = offsetof(SCSI_PASS_THROUGH_WITH_BUFFERS, DataBuf);
+	sptwb.Spt.SenseInfoOffset = offsetof(SCSI_PASS_THROUGH_WITH_BUFFERS, SenseBuf);
+ 	sptwb.Spt.CdbLength = 16;
+	sptwb.Spt.Cdb[0] = 0xE6; // NVME PASS THROUGH
+	sptwb.Spt.Cdb[1] = 0x02; // GetLogPage
+	sptwb.Spt.Cdb[3] = 0x02; // S.M.A.R.T.
+	sptwb.Spt.Cdb[7] = 0x7F;
+ 	sptwb.Spt.DataIn = SCSI_IOCTL_DATA_IN;
+ 	length = offsetof(SCSI_PASS_THROUGH_WITH_BUFFERS, DataBuf) + sptwb.Spt.DataTransferLength;
+ 	bRet = ::DeviceIoControl(hIoCtrl, IOCTL_SCSI_PASS_THROUGH,
+		&sptwb, length,
+		&sptwb, length, &dwReturned, NULL);
+ 	if (bRet == FALSE)
+	{
+		::CloseHandle(hIoCtrl);
+		return	FALSE;
+	}
+ 	DWORD count = 0;
+	for (int i = 0; i < 512; i++)
+	{
+		count += sptwb.DataBuf[i];
+	}
+	if (count == 0)
+	{
+		::CloseHandle(hIoCtrl);
+		return	FALSE;
+	}
+ 	memcpy_s(&(asi->SmartReadData), 512, sptwb.DataBuf, 512);
+ 	::CloseHandle(hIoCtrl);
+ 	return TRUE;
 }
 
 
@@ -6150,6 +6276,16 @@ BOOL CAtaSmart::DoIdentifyDeviceSat(INT physicalDriveId, BYTE target, IDENTIFY_D
 		return	FALSE;
 	}
 
+	DWORD count = 0;
+	for (int i = 0; i < 512; i++)
+	{
+		count += sptwb.DataBuf[i];
+	}
+	if (count == 0 || sptwb.DataBuf[510] != 0xA5)
+	{
+		return	FALSE;
+	}
+
 	memcpy_s(data, sizeof(IDENTIFY_DEVICE), sptwb.DataBuf, sizeof(IDENTIFY_DEVICE));
 
 	return	TRUE;
@@ -6318,6 +6454,16 @@ BOOL CAtaSmart::GetSmartAttributeSat(INT PhysicalDriveId, BYTE target, ATA_SMART
 	::CloseHandle(hIoCtrl);
 	
 	if(bRet == FALSE || dwReturned != length)
+	{
+		return	FALSE;
+	}
+
+	DWORD count = 0;
+	for (int i = 0; i < 512; i++)
+	{
+		count += sptwb.DataBuf[i];
+	}
+	if (count == 0)
 	{
 		return	FALSE;
 	}

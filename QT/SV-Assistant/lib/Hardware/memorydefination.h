@@ -480,7 +480,12 @@ struct MemoryData
 {
 	MemoryData();
 	std::string ModuleType;
+	bool SupportsECC;
 	size_t ModuleSize;
+	std::string Ranks_Banks;
+	std::string Voltages;
+	std::string MaxBandWidth;
+	std::string DataBits;
 	std::string ModuleManufacturer;
 	std::string DRAMManufacturer;
 	std::string PartNumber;

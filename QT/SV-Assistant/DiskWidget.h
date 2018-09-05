@@ -9,9 +9,12 @@
 #include <QVector>
 #include <QString>
 #include <QToolButton>
+#include <QTimerEvent>
+#include <QMutex>
 #include <windows.h>
 #include <string>
 #include <vector>
+#include "mainctrlbutton.h"
 #include "lib\Hardware\DiskLib.h"
 
 struct DiskBaseInfo
@@ -30,16 +33,20 @@ class DiskHeadWidget : public QWidget
 public:
 	DiskHeadWidget(QWidget *parent, QVector<SV_ASSIST::Storage::DISK_SMART_INFO> diskinfo);
 	QHBoxLayout * mainlayout;
+public slots:
+	void ReceiveUpdateData(QVector<SV_ASSIST::Storage::DISK_SMART_INFO> data);
 signals:
 	void SendDiskInfomation(const SV_ASSIST::Storage::DISK_SMART_INFO& info);
 private:
 	QSpacerItem * horizontalSpace;
+	QVector<mainctrlbutton*> buttons;
 	QVector<SV_ASSIST::Storage::DISK_SMART_INFO> BaseInfo;
 };
 
 class DiskInfomationWidget : public QWidget
 {
 	Q_OBJECT
+	friend class DiskWidget;
 public:
 	DiskInfomationWidget(QWidget * parent, const SV_ASSIST::Storage::DISK_SMART_INFO & data);
 	~DiskInfomationWidget();
@@ -47,6 +54,7 @@ public:
 public slots:
 	void ReciveDiskInfomation(const SV_ASSIST::Storage::DISK_SMART_INFO& data);
 private:
+	QMutex mutex;
 	QLabel * DiskName;
 	DiskBaseInfo * Firmware;
 	DiskBaseInfo * SerialNumber;
@@ -77,11 +85,18 @@ class DiskWidget : public QWidget
 	Q_OBJECT
 
 public:
-	DiskWidget();
-	DiskWidget(QWidget *parent);
-	void Init();
+	DiskWidget(QWidget *parent = nullptr);
 	~DiskWidget();
+protected:
+	void timerEvent(QTimerEvent * event);
 private:
+	void Init();
+	void UpdateData();
+signals:
+	void UpdateData(QVector<SV_ASSIST::Storage::DISK_SMART_INFO> data);
+	void UpdateData(SV_ASSIST::Storage::DISK_SMART_INFO data);
+private:
+	int diskTimeID;
 	QVBoxLayout *mainlayout;
 	DiskInfomationWidget* Infomation;
 	DiskHeadWidget* Header;

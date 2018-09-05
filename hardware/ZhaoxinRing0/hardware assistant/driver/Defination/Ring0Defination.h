@@ -9,6 +9,12 @@ struct Embedded_Controller_Data
 	BYTE	Data[256];
 };
 
+struct PCISPEED
+{
+	USHORT LinkWidth;
+	USHORT LinkSpeed;
+};
+
 #ifndef _PCI_X_
 #define _PCI_X_
 #define PCI_TYPE0_ADDRESSES             6

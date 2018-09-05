@@ -29,7 +29,7 @@ typedef struct _ACPI_RSDT_STRUCTURE
 	DWORD								OEMRevision;
 	BYTE								CreatorID[4];
 	DWORD								CreatorRevision;
-	DWORD								Entry[1];
+	std::vector<DWORD>					Entry;
 }ACPI_RSDT_STRUCTURE;
 
 typedef struct _ACPI_XSDT_STRUCTURE
@@ -43,7 +43,7 @@ typedef struct _ACPI_XSDT_STRUCTURE
 	DWORD								OEMRevision;
 	BYTE								CreatorID[4];
 	DWORD								CreatorRevision;
-	ULONGLONG							Entry[1];
+	std::vector<DWORD64>				Entry;
 }ACPI_XSDT_STRUCTURE;
 
 /************************************************************************/
@@ -189,7 +189,7 @@ typedef struct _ACPI_FACS_STRUCTURE
 			DWORD						Reserve : 30;
 		}bits;
 		DWORD							Flags;
-	}						Flags;
+	}									Flags;
 	ULONGLONG							XFirmwareWakingVector;
 	BYTE								Version;
 	BYTE								Reserve[3];
@@ -201,7 +201,7 @@ typedef struct _ACPI_FACS_STRUCTURE
 			DWORD						Reserved : 31;
 		}bits;
 		DWORD							OSPMFlags;
-	}						OSPMFlags;
+	}									OSPMFlags;
 	BYTE								Reserved[24];
 }ACPI_FACS_STRUCTURE;
 
@@ -327,8 +327,8 @@ typedef struct _Local_SAPIC_Structure
 		DWORD							Flags;
 	}									Flags;
 	DWORD								ACPI_Processor_UID_Value;
-	UCHAR								ACPI_Processor_UID_String[1];
-}_Local_SAPIC_Structure;
+	std::string							ACPI_Processor_UID_String;
+}Local_SAPIC_Structure;
 
 typedef struct _Platform_Interrupt_Source_Structure
 {
@@ -369,7 +369,7 @@ typedef struct _Processor_Local_X2APIC_Structure
 	DWORD								X2APIC_ID;
 	DWORD								Flags;
 	DWORD								ACPI_Processor_UID;
-}_Processor_Local_X2APIC_Structure;
+}Processor_Local_X2APIC_Structure;
 
 typedef struct _Local_X2APIC_NMI_Structure
 {
@@ -453,37 +453,62 @@ typedef struct _GIC_MSI_Frame_Structure
 	USHORT								SPI_Base;
 }GIC_MSI_Frame_Structure;
 
-typedef struct _GIC_Interrupt_Translation_Service_Structure
+typedef struct _GICR_Structure
 {
 	BYTE								Type;		// must be 14
 	BYTE								Length;		// must be 16
 	USHORT								Reserve;
 	ULONGLONG							Discovery_Range_Base_Address;
 	DWORD								Discovery_Range_Length;
+}GICR_Structure;
+
+typedef struct _GIC_Interrupt_Translation_Service_Structure
+{
+	BYTE								Type;		// must be 15
+	BYTE								Length;		// must be 20
+	USHORT								Reserve;
+	DWORD								GIC_ITS_ID;
+	DWORD64								Physical_Base_Address;
+	DWORD								Reserved;
 }GIC_Interrupt_Translation_Service_Structure;
 
 typedef struct _ACPI_MADT_STRUCTURE
 {
-	BYTE								Signature[4];	// must be 'APIC' 
-	DWORD								Length;
-	BYTE								Revision;
-	BYTE								Checksum;
-	BYTE								OEMID[6];
-	BYTE								OEMTableID[8];
-	DWORD								OEMRevision;
-	BYTE								CreatorID[4];
-	DWORD								CreatorRevision;
-	DWORD								LocalInterruptControllerAddress;
+	BYTE									Signature[4];	// must be 'APIC' 
+	DWORD									Length;
+	BYTE									Revision;
+	BYTE									Checksum;
+	BYTE									OEMID[6];
+	BYTE									OEMTableID[8];
+	DWORD									OEMRevision;
+	BYTE									CreatorID[4];
+	DWORD									CreatorRevision;
+	DWORD									LocalInterruptControllerAddress;
 	union
 	{
 		struct
 		{
-			DWORD						PCAT_COMPAT : 1;
-			DWORD						Reserve : 31;
+			DWORD							PCAT_COMPAT : 1;
+			DWORD							Reserve : 31;
 		}bits;
-		DWORD							Flags;
-	}									Flags;
-	DWORD								InterruptControllerStructure[];
+		DWORD								Flags;
+	}										Flags;
+	std::vector<APIC_Structure>												Processor_Local_APIC;
+	std::vector<IO_APIC_Structure>											IO_APIC;
+	std::vector<Interrupt_Source_Override_Structure>						Interrupt_Source_Override;
+	std::vector<NMI_Source_Structure>										NMI_Source;
+	std::vector<Local_APIC_NMI_Structure>									Local_APIC_NMI;
+	std::vector<Local_APIC_Address_Override_Structure>						Local_APIC_Address_Override;
+	std::vector<IO_SAPIC_Structure>											IO_SAPIC;
+	std::vector<Local_SAPIC_Structure>										Local_IO_SAPIC;
+	std::vector<Platform_Interrupt_Source_Structure>						Platform_Interrupt_Sources;
+	std::vector<Processor_Local_X2APIC_Structure>							Processor_Local_X2APIC;
+	std::vector<Local_X2APIC_NMI_Structure>									Local_x2APIC_NMI;
+	std::vector<GIC_CPU_Interface_Structure>								GICC;
+	std::vector<GIC_Distributor_Structure>									GICD;
+	std::vector<GIC_MSI_Frame_Structure>									GIC_MSI_Frame;
+	std::vector<GICR_Structure>												GICR;
+	std::vector<GIC_Interrupt_Translation_Service_Structure>				ITS;
 }ACPI_MADT_STRUCTURE, *PACPI_MADT_STRUCTURE;
 
 /************************************************************************/
@@ -525,7 +550,7 @@ typedef struct _ACPI_ECDT_STRUCTURE			//Embedded Controller Boot Resources Table
 	BYTE								ECDT_DATA[12];
 	DWORD								UID;
 	BYTE								GPE_BIT;
-	DWORD								EC_ID[];	//Value Variable
+	std::string							EC_ID;	//Value Variable
 }ACPI_ECDT_STRUCTURE;
 
 /************************************************************************/
@@ -664,7 +689,7 @@ typedef struct _Corrected_Platform_Error_Polling_Processor_Structure
 
 typedef struct _ACPI_CPEP_STRUCTURE			//Corrected Platform Error Polling Table
 {
-	BYTE								Signature[4];	// must be 'SLIT' 
+	BYTE								Signature[4];	// must be 'CPEP' 
 	DWORD								Length;
 	BYTE								Revision;
 	BYTE								Checksum;
@@ -674,7 +699,7 @@ typedef struct _ACPI_CPEP_STRUCTURE			//Corrected Platform Error Polling Table
 	BYTE								CreatorID[4];
 	DWORD								CreatorRevision;
 	ULONGLONG							Reserved;
-	DWORD								CPEP_Processor_Structure[];	// _Corrected_Platform_Error_Polling_Processor_Structure
+	std::vector<Corrected_Platform_Error_Polling_Processor_Structure>	CPEP_Processor_Structure;	// _Corrected_Platform_Error_Polling_Processor_Structure
 }ACPI_CPEP_STRUCTURE;
 
 /************************************************************************/
@@ -888,16 +913,16 @@ typedef	struct _Performance_Record_Structure
 
 typedef struct _ACPI_FPDT_STRUCTURE			//Maximum System Characteristics Table
 {
-	BYTE								Signature[4];	// must be 'FPDT' 
-	DWORD								Length;
-	BYTE								Revision;
-	BYTE								Checksum;
-	BYTE								OEMID[6];
-	BYTE								OEMTableID[8];
-	DWORD								OEMRevision;
-	BYTE								CreatorID[4];
-	DWORD								CreatorRevision;
-	Performance_Record_Structure		Performance_Records[];
+	BYTE										Signature[4];	// must be 'FPDT' 
+	DWORD										Length;
+	BYTE										Revision;
+	BYTE										Checksum;
+	BYTE										OEMID[6];
+	BYTE										OEMTableID[8];
+	DWORD										OEMRevision;
+	BYTE										CreatorID[4];
+	DWORD										CreatorRevision;
+	std::vector<Performance_Record_Structure>	Performance_Records;
 }ACPI_FPDT_STRUCTURE, *PACPI_FPDT_STRUCTURE;
 
 
@@ -954,4 +979,4 @@ typedef struct _ACPI_HPET_STRUCTURE			//IA-PC High Precision Event Timer
 }ACPI_HPET_STRUCTURE;
 
 #pragma warning( default : 4200 )
-#pragma  pack(pop)
+#pragma pack(pop)

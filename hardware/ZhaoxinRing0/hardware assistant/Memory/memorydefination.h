@@ -467,7 +467,7 @@ typedef struct _DDR4_INFO
 			BYTE DRAMManufacturerIDLeast; // Byte 350: DRAM Manufacturer ID Code, Least Significant Byte
 			BYTE DRAMManufacturerIDMost; // Byte 351: DRAM Manufacturer ID Code, Most Significant Byte
 			BYTE DRAMStepping; // Byte 352 (0x160): DRAM Stepping
-			BYTE ManufacturerSpecificData[29]; // Bytes 353~381 (0x161~0x17D): Manufacturer’s Specific Data
+			BYTE ManufacturerSpecificData[29]; // Bytes 353~381 (0x161~0x17D): Manufacturer Specific Data
 			BYTE Reserved382[2]; //Byte 382~383 (0x17E~0x17F): Reserved
 
 		}DDR4_Detail;
@@ -480,7 +480,12 @@ struct MemoryData
 {
 	MemoryData();
 	std::string ModuleType;
+	bool SupportsECC;
 	size_t ModuleSize;
+	std::string Ranks_Banks;
+	std::string Voltages;
+	std::string MaxBandWidth;
+	std::string DataBits;
 	std::string ModuleManufacturer;
 	std::string DRAMManufacturer;
 	std::string PartNumber;

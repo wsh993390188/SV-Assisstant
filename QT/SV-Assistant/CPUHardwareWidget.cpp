@@ -18,20 +18,11 @@ CPUHardware_Struct::CPUHardware_Struct(QWidget * parent) : cpulabel(new QLabel(p
 	layout->addSpacerItem(horizontalSpacelast);
 }
 
-CPUHardwareWidget::CPUHardwareWidget() : mainlayout(new QVBoxLayout(this)), horizonallayout_1(new QHBoxLayout()),
-	horizonallayout_2(new QHBoxLayout()), horizonallayout_3(new QHBoxLayout()), horizonallayout_4(new QHBoxLayout())
-{
-	QPalette pal(this->palette());
-	//设置背景white色
-	pal.setColor(QPalette::Background, Qt::white);
-	this->setAutoFillBackground(true);
-	this->setPalette(pal);
-	this->Init();
-}
-
 CPUHardwareWidget::CPUHardwareWidget(QWidget *parent)
 	: QWidget(parent), mainlayout(new QVBoxLayout(this)), horizonallayout_1(new QHBoxLayout()),
-	horizonallayout_2(new QHBoxLayout()), horizonallayout_3(new QHBoxLayout()), horizonallayout_4(new QHBoxLayout())
+	horizonallayout_2(new QHBoxLayout()), horizonallayout_3(new QHBoxLayout()), horizonallayout_4(new QHBoxLayout()),
+	horizonallayout_5(new QHBoxLayout()), horizonallayout_6(new QHBoxLayout()), horizonallayout_7(new QHBoxLayout()),
+	horizonallayout_8(new QHBoxLayout())
 {
 	QPalette pal(this->palette());
 	//设置背景white色
@@ -58,6 +49,9 @@ CPUHardwareWidget::~CPUHardwareWidget()
 	delete cpuInstructions;
 	delete cpuCores;
 	delete cpuThreads;
+	delete cpuCurrentSpeed;
+	delete cpuBusSpeed;
+	delete cpuMultiplier;
 }
 
 void CPUHardwareWidget::Init()
@@ -125,6 +119,18 @@ void CPUHardwareWidget::Init()
 	cpuThreads->cpulabel->setText(tr("Threads"));
 	cpuThreads->cpuinfo->setText(QString::number(CPU::GetThread()));
 
+	cpuCurrentSpeed = new CPUHardware_Struct(this);
+	cpuCurrentSpeed->cpulabel->setText(tr("Current Speed"));
+	cpuCurrentSpeed->cpuinfo->setText(QString::number(CPU::GetCurrentClockSpeed().at(0)) + tr(" MHZ"));
+
+	cpuBusSpeed = new CPUHardware_Struct(this);
+	cpuBusSpeed->cpulabel->setText(tr("Bus Speed"));
+	cpuBusSpeed->cpuinfo->setText(QString::number(CPU::GetExtClock()) + tr(" MHZ"));
+
+	cpuMultiplier = new CPUHardware_Struct(this);
+	cpuMultiplier->cpulabel->setText(tr("Multiplier"));
+	cpuMultiplier->cpuinfo->setText(QString::number((size_t)(CPU::GetCurrentClockSpeed().at(0) / CPU::GetExtClock())) + tr("x"));
+
 	auto cache = CPU::GetCache();
 	cpucacheL1D = new CPUHardware_Struct(this);
 	cpucacheL1D->cpulabel->setText(tr("Cache Level1 Data"));
@@ -165,7 +171,19 @@ void CPUHardwareWidget::Init()
 	
 	horizonallayout_4->addLayout(cpuCores->layout);
 	horizonallayout_4->addLayout(cpuThreads->layout);
-	horizonallayout_4->addLayout(cpuCoreVoltage->layout);
+	horizonallayout_4->addLayout(cpuPackage->layout);
+
+	horizonallayout_5->addLayout(cpucacheL1D->layout);
+	horizonallayout_5->addLayout(cpuCoreVoltage->layout);
+
+	horizonallayout_6->addLayout(cpucacheL1T->layout);
+	horizonallayout_6->addLayout(cpuCurrentSpeed->layout);
+
+	horizonallayout_7->addLayout(cpucacheL2->layout);
+	horizonallayout_7->addLayout(cpuBusSpeed->layout);
+
+	horizonallayout_8->addLayout(cpucacheL3->layout);
+	horizonallayout_8->addLayout(cpuMultiplier->layout);
 
 	mainlayout->setContentsMargins(0, 0, 6, 0);
 	mainlayout->setMargin(0);
@@ -174,13 +192,32 @@ void CPUHardwareWidget::Init()
 	mainlayout->addLayout(horizonallayout_2);
 	mainlayout->addLayout(horizonallayout_3);
 	mainlayout->addLayout(horizonallayout_4);
-	mainlayout->addLayout(cpuPackage->layout);
 	mainlayout->addLayout(cpuSpecification->layout);
 	mainlayout->addLayout(cpuInstructions->layout);
-	mainlayout->addLayout(cpucacheL1D->layout);
-	mainlayout->addLayout(cpucacheL1T->layout);
-	mainlayout->addLayout(cpucacheL2->layout);
-	mainlayout->addLayout(cpucacheL3->layout);
+	mainlayout->addLayout(horizonallayout_5);
+	mainlayout->addLayout(horizonallayout_6);
+	mainlayout->addLayout(horizonallayout_7);
+	mainlayout->addLayout(horizonallayout_8);
+
+	timeID = this->startTimer(1000);
+}
+
+void CPUHardwareWidget::timerEvent(QTimerEvent *event)
+{
+	if (event->timerId() == timeID && this->isVisible())
+	{
+		this->UpdateData();
+	}
+}
+
+void CPUHardwareWidget::UpdateData()
+{
+	SV_ASSIST::CPU::Updatedata();
+	SV_ASSIST::SUPERIO::UpdateData();
+	cpuCoreVoltage->cpuinfo->setText(QString::number(CPU::GetCpuVCore(Ring0::GetPCIVendorID())) + tr(" V"));
+	cpuMultiplier->cpuinfo->setText(QString::number((size_t)(CPU::GetCurrentClockSpeed().at(0) / CPU::GetExtClock())) + tr("x"));
+	cpuCurrentSpeed->cpuinfo->setText(QString::number(CPU::GetCurrentClockSpeed().at(0)) + tr(" MHZ"));
+	cpuBusSpeed->cpuinfo->setText(QString::number(CPU::GetExtClock()) + tr(" MHZ"));
 }
 
 const QString CPUHardwareWidget::ExecInstructions()

@@ -17,3 +17,5 @@
 #include "NetworkLib.h"
 #include "Driverdll.h"
 #include "MemoryLib.h"
+#include "PCI-E.h"
+#include "gpu.h"

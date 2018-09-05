@@ -15,10 +15,6 @@ namespace SV_ASSIST
 					NetInstance = std::make_shared<NetInterface>();
 				return NetInstance.get();
 			}
-			void Exec()
-			{
-				temp->Exec();
-			}
 			void Update()
 			{
 				temp->Update();
@@ -36,11 +32,6 @@ namespace SV_ASSIST
 		};
 
 		std::shared_ptr<NetInterface> NetInterface::NetInstance = nullptr;
-
-		void Exec()
-		{
-			NetInterface::Instance()->Exec();
-		}
 		
  		void Update()
  		{

@@ -9,9 +9,27 @@ namespace SV_ASSIST
 	{
 		BOOL Excute();
 
+		const ACPI_RSDT_STRUCTURE& GetRSDT();
+
+		const ACPI_RSDP_STRUCTURE& GetRSDP();
+
+		const ACPI_XSDT_STRUCTURE& GetXSDT();
+
+		const ACPI_FADT_STRUCTURE& GetFACP();
+
+		const ACPI_HPET_STRUCTURE& GetHPET();
+
+		const ACPI_BGRT_STRUCTURE& GetBGRT();
+
+		const ACPI_SBST_STRUCTURE& GetSBST();
+
+		const ACPI_CPEP_STRUCTURE& GetCPEP();
+
+		const ACPI_FACS_STRUCTURE& GetFACS();
+
 		const ACPI_MCFG_STRUCTURE& GetMCFG();
 
-		const ACPI_RSDT_STRUCTURE& GetRSDT();
+		const ACPI_MADT_STRUCTURE& GetAPIC();
 		
 		/**************************************************************
 		*@Function				GetPCIEBaseAddress

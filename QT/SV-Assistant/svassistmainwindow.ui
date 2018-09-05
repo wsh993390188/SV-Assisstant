@@ -10,6 +10,12 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="minimumSize">
    <size>
     <width>900</width>
@@ -18,8 +24,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>900</width>
-    <height>600</height>
+    <width>1350</width>
+    <height>900</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -30,6 +36,24 @@
     <normaloff>:/menu/Title/ZX.png</normaloff>:/menu/Title/ZX.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>900</width>
+     <height>600</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>1350</width>
+     <height>900</height>
+    </size>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
      <number>0</number>
@@ -56,8 +80,8 @@
       </property>
       <property name="maximumSize">
        <size>
-        <width>900</width>
-        <height>100</height>
+        <width>1350</width>
+        <height>150</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -473,8 +497,8 @@ color: rgb(255, 255, 255);</string>
         </property>
         <property name="maximumSize">
          <size>
-          <width>900</width>
-          <height>472</height>
+          <width>1350</width>
+          <height>708</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -504,14 +528,14 @@ color: rgb(255, 255, 255);</string>
             </property>
             <property name="maximumSize">
              <size>
-              <width>650</width>
-              <height>472</height>
+              <width>975</width>
+              <height>708</height>
              </size>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QWidget" name="Bottomwidget" native="true">
+           <widget class="QStackedWidget" name="BottomstackedWidget">
             <property name="minimumSize">
              <size>
               <width>250</width>
@@ -520,10 +544,64 @@ color: rgb(255, 255, 255);</string>
             </property>
             <property name="maximumSize">
              <size>
-              <width>250</width>
-              <height>472</height>
+              <width>375</width>
+              <height>708</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">border-color: rgb(255, 255, 255);</string>
+            </property>
+            <widget class="QWidget" name="CPUBottomstackedWidgetPage">
+             <layout class="QVBoxLayout" name="verticalLayout_2">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <spacer name="CPUUsageverticalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>301</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="CurveChart" name="CPUUsagewidget" native="true">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>150</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="MotherBroadBottomstackedWidgetPage"/>
+            <widget class="QWidget" name="MemoryBottomstackedWidgetPage"/>
+            <widget class="QWidget" name="GPUBottomstackedWidgetPage"/>
+            <widget class="QWidget" name="DiskBottomstackedWidgetPage"/>
+            <widget class="QWidget" name="MonitorBottomstackedWidgetPage"/>
+            <widget class="QWidget" name="NetworkBottomstackedWidgetPage"/>
            </widget>
           </item>
          </layout>
@@ -550,13 +628,13 @@ color: rgb(255, 255, 255);</string>
             <property name="minimumSize">
              <size>
               <width>100</width>
-              <height>0</height>
+              <height>472</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>100</width>
-              <height>16777215</height>
+              <width>150</width>
+              <height>708</height>
              </size>
             </property>
            </widget>
@@ -566,13 +644,13 @@ color: rgb(255, 255, 255);</string>
             <property name="minimumSize">
              <size>
               <width>800</width>
-              <height>0</height>
+              <height>472</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>800</width>
-              <height>16777215</height>
+              <width>1200</width>
+              <height>708</height>
              </size>
             </property>
             <widget class="CPUHardwareWidget" name="CPUpage"/>
@@ -582,16 +660,105 @@ color: rgb(255, 255, 255);</string>
             <widget class="DiskWidget" name="Diskpage"/>
             <widget class="MonitorWidget" name="Monitorpage"/>
             <widget class="AudioWidget" name="Audiopage"/>
-            <widget class="NetworkWidget" name="Networkpage"/>
+            <widget class="QWidget" name="Networkpage">
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <property name="spacing">
+               <number>9</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QSplitter" name="Networksplitter">
+                <property name="styleSheet">
+                 <string notr="true">border-color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="handleWidth">
+                 <number>7</number>
+                </property>
+                <widget class="NetworkListWidget" name="NetworklistWidget"/>
+                <widget class="NetworkTableWidget" name="NetworktextBrowser"/>
+               </widget>
+              </item>
+             </layout>
+            </widget>
             <widget class="HardwareOthersWidget" name="Otherhardwarepage"/>
            </widget>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="Hardwaremasterpage"/>
-        <widget class="QWidget" name="Softwarepage"/>
-        <widget class="QWidget" name="Softwaremasterpage"/>
-        <widget class="QWidget" name="GameTestpage"/>
+        <widget class="QWidget" name="Hardwaremasterpage">
+         <widget class="QLabel" name="label_5">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>200</y>
+            <width>171</width>
+            <height>71</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Under construction</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="Softwarepage">
+         <widget class="QLabel" name="label_2">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>190</y>
+            <width>171</width>
+            <height>71</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Under construction</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="Softwaremasterpage">
+         <widget class="QLabel" name="label_3">
+          <property name="geometry">
+           <rect>
+            <x>310</x>
+            <y>200</y>
+            <width>171</width>
+            <height>71</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Under construction</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="GameTestpage">
+         <widget class="QLabel" name="label_4">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>200</y>
+            <width>171</width>
+            <height>71</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Under construction</string>
+          </property>
+         </widget>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -606,8 +773,8 @@ color: rgb(255, 255, 255);</string>
       </property>
       <property name="maximumSize">
        <size>
-        <width>900</width>
-        <height>28</height>
+        <width>1350</width>
+        <height>42</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -686,12 +853,6 @@ color: rgb(255, 255, 255);</string>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>NetworkWidget</class>
-   <extends>QWidget</extends>
-   <header>networkwidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>AudioWidget</class>
    <extends>QWidget</extends>
    <header>audiowidget.h</header>
@@ -702,6 +863,22 @@ color: rgb(255, 255, 255);</string>
    <extends>QWidget</extends>
    <header>hardwareotherswidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CurveChart</class>
+   <extends>QWidget</extends>
+   <header>curvechart.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>NetworkListWidget</class>
+   <extends>QListWidget</extends>
+   <header>NetworkWidget.h </header>
+  </customwidget>
+  <customwidget>
+   <class>NetworkTableWidget</class>
+   <extends>QTextBrowser</extends>
+   <header>NetworkWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>

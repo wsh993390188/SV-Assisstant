@@ -6,10 +6,10 @@
 #include "Gpudata.h"
 #include "Igpu.h"
 
-class GPUSensor : public IgpuSensor
+class GPUSensor : public GPUBaseInfo
 {
 public:
-	using IgpuSensor::IgpuSensor;
+	using GPUBaseInfo::GPUBaseInfo;
 	BOOL SetGPUName(const std::string& name)
 	{
 		BOOL status = FALSE;
@@ -157,7 +157,7 @@ public:
 		gpudata->UpdateData();
 		GetInfo();
 	}
-	const std::vector<IgpuSensor>& ReturnGPUInfo()
+	const std::vector<GPUBaseInfo>& ReturnGPUInfo()
 	{
 		return this->gpuinfo;
 	}
@@ -167,7 +167,7 @@ public:
 	}
 private:
 	explicit GPU(const GPU& x);
-	GPU& operator=(const GPU& x);
+	GPU& operator=(const GPU& x) {};
 	void InitGPUDB()
 	{
 		std::ifstream in("gpu.ids");
@@ -238,7 +238,7 @@ private:
 			temp.SetsharedSystemMemory(var.sharedSystemMemory);
 			temp.SetdedicatedVideoMemory(var.dedicatedVideoMemory);
 			temp.SetsystemVideoMemory(var.systemVideoMemory);
-			this->gpuinfo.emplace_back(IgpuSensor(temp));
+			this->gpuinfo.emplace_back(GPUBaseInfo(temp));
 		}
 		if (gpudata->amdinfo)
 		for (auto var : *(gpudata->amdinfo))
@@ -256,17 +256,17 @@ private:
 			temp.SetsharedSystemMemory(var.sharedSystemMemory);
 			temp.SetdedicatedVideoMemory(var.dedicatedVideoMemory);
 			temp.SetsystemVideoMemory(var.systemVideoMemory);
-			this->gpuinfo.emplace_back(IgpuSensor(temp));
+			this->gpuinfo.emplace_back(GPUBaseInfo(temp));
 		}
 
 		if (gpudata->Intelinfo)
 			for (auto var : *(gpudata->Intelinfo))
 			{
 				GPUSensor temp = {};
-				temp.SetGPUBranchVersion(gpudata->AMD_BranchVersion);
-				temp.SetGPUDriverVersion(gpudata->AMD_DriverVer);
+				temp.SetGPUBranchVersion("");
+				temp.SetGPUDriverVersion("");
 				temp.SetGPUName(WStringToString(var.FullName));
-				this->gpuinfo.emplace_back(IgpuSensor(temp));
+				this->gpuinfo.emplace_back(GPUBaseInfo(temp));
 			}
 	}
 	std::string WStringToString(const std::wstring &wstr)
@@ -281,7 +281,7 @@ private:
 		}
 		return str;
 	}
-	std::vector<IgpuSensor> gpuinfo;
+	std::vector<GPUBaseInfo> gpuinfo;
 	std::shared_ptr<GPUData> gpudata;
 	std::map<std::string, std::map<std::string, std::vector<std::string>>> GPUDB; //gpuÊý¾Ý¿â
 	static std::shared_ptr<GPU> temp;
@@ -289,7 +289,7 @@ private:
 
 std::shared_ptr<GPU> GPU::temp = nullptr;
 
-const std::vector<IgpuSensor>& SV_ASSIST::GPU::GetGpuInfo()
+const std::vector<GPUBaseInfo>& SV_ASSIST::GPU::GetGpuInfo()
 {
 	return ::GPU::Instance()->ReturnGPUInfo();
 }

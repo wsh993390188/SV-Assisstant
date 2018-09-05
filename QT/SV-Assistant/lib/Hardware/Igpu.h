@@ -1,22 +1,7 @@
 #pragma once 
-class IgpuSensor
+struct GPUBaseInfo
 {
-public:
-	const std::string& GetGPUName();
-	const std::string& GetGPUBiosVersion();
-	const std::string& GetGPUDriverVersion();
-	const std::string& GetGPUBranchVersion();
-	INT GetTemperature();
-	double GetGPUClock();
-	double GetGPUMemoryClock();
-	ULONG GetGPUusage();
-	ULONG GetGPUfans();
-	size_t GetdedicatedVideoMemory();
-	size_t GetsystemVideoMemory();
-	size_t GetsharedSystemMemory();
-	~IgpuSensor();
-protected:
-	IgpuSensor();
+	GPUBaseInfo();
 	std::string GPUname;
 	std::string GPUBiosVersion;
 	std::string GPUDriverVersion;
@@ -29,4 +14,9 @@ protected:
 	size_t dedicatedVideoMemory;
 	size_t systemVideoMemory;
 	size_t sharedSystemMemory;
+};
+
+struct GPUSensorInfo
+{
+
 };

@@ -8,14 +8,16 @@
 #include <QSpacerItem>
 #include <QPalette>
 #include <QString>
+#include <QPushButton>
 
 struct HomebaseInfo
 {
     QHBoxLayout* layout;
-	QLabel* BaseLabel;
+	QPushButton* BaseLabel;
     QLabel* BaseInfo;
     QSpacerItem *horizontalSpace;
     QSpacerItem *BeginhorizontalSpace;
+    QSpacerItem *EndhorizontalSpace;
     HomebaseInfo(QWidget* father);
 };
 
@@ -34,7 +36,7 @@ private:
 private:
     HomebaseInfo *cpubaseinfo;
     HomebaseInfo *motherbroadbaseinfo;
-    HomebaseInfo *memorycpubaseinfo;
+    HomebaseInfo *memorybaseinfo;
     HomebaseInfo *gpubaseinfo;
     HomebaseInfo *diskbaseinfo;
     HomebaseInfo *monitorbaseinfo;

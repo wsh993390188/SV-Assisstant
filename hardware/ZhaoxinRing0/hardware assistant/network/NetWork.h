@@ -27,8 +27,12 @@ namespace SV_ASSIST
 		private:
 			std::wstring GetDeviceState(IN DWORD state);
 			std::wstring GetDeviceMediaType(IN DWORD state);
+			void GetPhysicalDevice();
+			bool GetCurrentDev();
+			std::wstring CharToWchar(const char * c, size_t m_encode);
 			explicit NetWork(const NetWork& x);
 			NetWork& operator=(const NetWork& x);
+		private:
 			HRESULT hr;
 			std::vector<NetStruct> NetInfo;
 			CComPtr<INetConnectionManager>  pManager;
@@ -39,6 +43,7 @@ namespace SV_ASSIST
 			CComPtr<INetConnectionProps> pProps;
 			CComPtr<INetSharingConfiguration> pConfiguration;
 			NETCON_PROPERTIES* NNproperties;
+			std::vector<NETCON_PROPERTIES> PhysicalDev;
 		};
 	}
 }

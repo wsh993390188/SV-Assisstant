@@ -52,6 +52,10 @@ private:
 	MemoryBaseInfo * SerialNumber;
 	MemoryBaseInfo * PartNumber;
 	MemoryBaseInfo * ProductDate;
+	MemoryBaseInfo * MaxBandWidth;
+	MemoryBaseInfo * Ranks_Banks;
+	MemoryBaseInfo * DataBits;
+	MemoryBaseInfo * Voltages;
 };
 
 class MemoryWidget : public QWidget
@@ -59,8 +63,7 @@ class MemoryWidget : public QWidget
 	Q_OBJECT
 
 public:
-	MemoryWidget();
-	MemoryWidget(QWidget *parent);
+	MemoryWidget(QWidget *parent = nullptr);
 	void Init();
 	~MemoryWidget();
 private:

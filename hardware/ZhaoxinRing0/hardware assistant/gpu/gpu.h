@@ -19,7 +19,7 @@ namespace SV_ASSIST
 		*@return
 			*@IgpuSensor		gpu信息数组
 		****************************************************************/
-		const std::vector<IgpuSensor>& GetGpuInfo();
+		const std::vector<GPUBaseInfo>& GetGpuInfo();
 
 		/**************************************************************
 		*@Function				UpdateDate

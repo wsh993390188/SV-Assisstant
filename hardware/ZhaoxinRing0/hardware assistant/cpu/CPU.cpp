@@ -48,8 +48,7 @@ public:
 	void GetCpuid(int(&cpuid)[4], const int eax, const int ecx) { data->cpu->GetCpuid(cpuid, eax, ecx); }
 	void Updatedata(){ data->Update(); }
 	CPUDLL() : data(std::make_shared<CPUDLLDATA>())
-	{
-	}
+	{}
 private:
 	static std::shared_ptr<CPUDLL> ttt;
 	std::shared_ptr<CPUDLLDATA> data;

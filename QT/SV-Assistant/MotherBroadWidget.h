@@ -24,8 +24,7 @@ class MotherBroadWidget : public QWidget
 	Q_OBJECT
 
 public:
-	MotherBroadWidget();
-	MotherBroadWidget(QWidget *parent);
+	MotherBroadWidget(QWidget *parent = nullptr);
 	~MotherBroadWidget();
 private:
 	void Init();

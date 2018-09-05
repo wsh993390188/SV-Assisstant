@@ -51,7 +51,7 @@ BOOL ZhaoxinDriver::WrMsrTx(IN DWORD Index, IN DWORD64 Data, IN DWORD threadAffi
 	return ring->WrMsrTx(Index, threadAffinityMask, Data);
 }
 
-BOOL ZhaoxinDriver::RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT ULONG & Memory_Data)
+BOOL ZhaoxinDriver::RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT DWORD & Memory_Data)
 {
 	std::lock_guard<std::mutex> lock(ring0_mutex);
 	return ring->RdMemory(Memory_Addr, Mem_DataSize, Memory_Data);
@@ -85,6 +85,96 @@ BOOL ZhaoxinDriver::GetECData(Embedded_Controller_Data & EC_Data)
 BOOL ZhaoxinDriver::SetECData(BYTE EC_Addr, BYTE EC_Write_Data)
 {
 	return ring->SetECData(EC_Addr, EC_Write_Data);
+}
+
+BOOL ZhaoxinDriver::ReadSMbusByByte(const USHORT SmbusBase, const USHORT SlaveAddress, const USHORT offset, BYTE & data)
+{
+	if (smbus_wait_until_ready(SmbusBase))
+	{
+		WrIOPort(SmbusBase + SMBUS_HOST_CMD_REG, 1, SlaveAddress | 1);
+		WrIOPort(SmbusBase + SMBUS_CONTROL_REG, 1, offset);
+		WrIOPort(SmbusBase + SMBUS_COMMAND_REG, 1, SMBUS_READ_BYTE_COMMAND);
+		if (smbus_wait_until_done(SmbusBase) < 0)
+			return false;
+		DWORD val = 0;
+		RdIOPort(SmbusBase + SMBUS_DATA0_REG, 1, val);
+		memcpy(&data, &val, 1);
+	}
+	else
+		return FALSE;
+	return TRUE;
+}
+
+BOOL ZhaoxinDriver::ReadSMbusByWord(const USHORT SmbusBase, const USHORT SlaveAddress, const USHORT offset, WORD & data)
+{
+	if (smbus_wait_until_ready(SmbusBase))
+	{
+		WrIOPort(SmbusBase + SMBUS_HOST_CMD_REG, 1, SlaveAddress | 1);
+		WrIOPort(SmbusBase + SMBUS_CONTROL_REG, 1, offset);
+		WrIOPort(SmbusBase + SMBUS_COMMAND_REG, 1, SMBUS_READ_WORD_COMMAND);
+		if (smbus_wait_until_done(SmbusBase) < 0)
+			return false;
+		DWORD val = 0;
+		RdIOPort(SmbusBase + SMBUS_DATA0_REG, 2, val);
+		memcpy(&data, &val, 2);
+	}
+	else
+		return FALSE;
+	return TRUE;
+}
+
+bool ZhaoxinDriver::smbus_wait_until_ready(const USHORT SmbusBase)
+{
+	ULONG loops = SMBUS_TIMEOUT;
+	do {
+		DWORD val = {};
+		RdIOPort(SmbusBase + SMBUS_STATUS_REG, 1, val);
+		val &= 0x1f;
+		if (val == 0) {	/* ready now */
+			return true;
+		}
+		WrIOPort(SmbusBase + SMBUS_STATUS_REG, 1, 0xFE);
+	} while (--loops);
+	return false;		/* time out */
+}
+
+int ZhaoxinDriver::smbus_wait_until_done(const USHORT SmbusBase)
+{
+	DWORD loops = SMBUS_TIMEOUT;
+	do {
+		DWORD val = {};
+
+		RdIOPort(SmbusBase + SMBUS_STATUS_REG, 1, val);
+		val &= 0x1f;	/* mask off reserved bits */
+		if (val & 0x1c) {
+			if ((val & SMBHSTSTS_DEV_ERR) == SMBHSTSTS_DEV_ERR)
+				return -2;
+			if ((val & SMBHSTSTS_BUS_ERR) == SMBHSTSTS_BUS_ERR)
+				return -3;
+			if ((val & SMBHSTSTS_FAILED) == SMBHSTSTS_FAILED)
+				return -4;
+			return -5;	/* error */
+		}
+		if ((val & 0x03) == 0x02) {
+			return 0;
+		}
+	} while (--loops);
+	return -1;		/* timeout */
+}
+
+void ZhaoxinDriver::WriteSMbusByByte(const USHORT SmbusBase, const USHORT SlaveAddress, const USHORT offset, const DWORD data)
+{
+	if (smbus_wait_until_ready(SmbusBase))
+	{
+		WrIOPort(SmbusBase + SMBUS_HOST_CMD_REG, 1, SlaveAddress & 0xFE);
+		if (!smbus_wait_until_ready(SmbusBase))
+			return;
+		WrIOPort(SmbusBase + SMBUS_CONTROL_REG, 1, offset);
+		WrIOPort(SmbusBase + SMBUS_DATA0_REG, 1, data);
+		WrIOPort(SmbusBase + SMBUS_COMMAND_REG, 1, SMBUS_READ_BYTE_COMMAND);
+		if (smbus_wait_until_done(SmbusBase) < 0)
+			return;
+	}
 }
 
 USHORT ZhaoxinDriver::GetPCIVendorID()
