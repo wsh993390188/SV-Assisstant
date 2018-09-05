@@ -1,0 +1,12 @@
+﻿Memory DDR4 需要切换Page
+SlaveAddress=6C Command=40切到Page0
+SlaveAddress=6E Command=40切到Page1
+
+切到Page1读取完成后要切回Page0
+
+有点OJBK的意思了
+X79 平台及Ivy Bridge Sandy Bridge-E SMBUS地址可能为EFF78180 EFF78190.具体看RW.ini
+没找到Spec都是根据RW猜得
+[State 16bits Data 16bits [DeviceId(A1-A7)] 8bits [offsets]8bits [Write bits] 16bits [Probable limit DeviceId R\W (A8) 8bits] ] 
+写需要等待一段时间让硬件完成操作
+但是怎么切Page我还不会，代码还没写

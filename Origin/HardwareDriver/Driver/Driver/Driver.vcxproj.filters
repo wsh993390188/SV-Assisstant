@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\SuperIO">
+      <UniqueIdentifier>{ecf4c95e-21af-4280-86af-b458a2bc5fd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\SuperIO\ITE">
+      <UniqueIdentifier>{ba00da5d-c1af-4f03-a17d-d551ea673425}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\AMD">
+      <UniqueIdentifier>{0dc10615-d5b3-400a-8e39-8d4b688a8422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\AMD">
+      <UniqueIdentifier>{1f2fd426-042c-4852-9deb-43b37d4e6a6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Memory">
+      <UniqueIdentifier>{56d96f6a-ab94-4dc2-ae87-14d27b5f2973}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Memory">
+      <UniqueIdentifier>{f975caf9-61e0-41c1-b03c-8fb75a1349ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\PCI">
+      <UniqueIdentifier>{75810048-f4a3-44b3-9818-96d75270f6c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\PCI">
+      <UniqueIdentifier>{119ec232-51c8-4a46-a2a1-db876feb5796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\PCI-E">
+      <UniqueIdentifier>{d391aa13-c9e8-4190-af28-8c46e783876d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\PCI-E">
+      <UniqueIdentifier>{064ab8c9-13f6-4200-802b-a1ebd6f4d8da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\EC">
+      <UniqueIdentifier>{0f3f391c-59e7-4d4b-8469-037f984c142a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\EC">
+      <UniqueIdentifier>{eace8865-e02d-4617-9743-8f40e65febb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Smbus">
+      <UniqueIdentifier>{3dd51375-a2d3-41b1-a400-098bfa3cc695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Smbus">
+      <UniqueIdentifier>{a2209808-4447-498a-946f-537241c77b07}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDriverClass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AMD.cpp">
+      <Filter>源文件\AMD</Filter>
+    </ClCompile>
+    <ClCompile Include="PCI\PCI defination.cpp">
+      <Filter>源文件\PCI</Filter>
+    </ClCompile>
+    <ClCompile Include="EC\EC.cpp">
+      <Filter>源文件\EC</Filter>
+    </ClCompile>
+    <ClCompile Include="SMbus\SMbus.cpp">
+      <Filter>源文件\Smbus</Filter>
+    </ClCompile>
+    <ClCompile Include="Load\Driver.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MyDriverClass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AMD.h">
+      <Filter>头文件\AMD</Filter>
+    </ClInclude>
+    <ClInclude Include="PCI\PCI defination.h">
+      <Filter>头文件\PCI</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperIO.h">
+      <Filter>头文件\SuperIO\ITE</Filter>
+    </ClInclude>
+    <ClInclude Include="EC\EC.h">
+      <Filter>头文件\EC</Filter>
+    </ClInclude>
+    <ClInclude Include="SMbus\SMbus.h">
+      <Filter>头文件\Smbus</Filter>
+    </ClInclude>
+    <ClInclude Include="Load\Driver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

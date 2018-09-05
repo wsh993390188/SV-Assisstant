@@ -1,9 +1,0 @@
-[Version]
-Signature="$WINDOWS NT$"
-DriverVer = 12/22/2017,11.5.54.204
-
-[ZhaoxinRing0.NT.Wdf]
-KmdfService = ZhaoxinRing0, ZhaoxinRing0_Service_kmdfInst
-
-[ZhaoxinRing0_Service_kmdfInst]
-KmdfLibraryVersion = 1.11

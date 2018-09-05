@@ -93,6 +93,45 @@ typedef struct _MSR_Request
 
 #ifndef _PCI_X_
 #define _PCI_X_ 
+//
+// A PCI driver can read the complete 256 bytes of configuration
+// information for any PCI device by calling:
+//
+//      ULONG
+//      HalGetBusData (
+//          _In_ BUS_DATA_TYPE        PCIConfiguration,
+//          _In_ ULONG                PciBusNumber,
+//          _In_ PCI_SLOT_NUMBER      VirtualSlotNumber,
+//          _In_ PPCI_COMMON_CONFIG   &PCIDeviceConfig,
+//          _In_ ULONG                sizeof (PCIDeviceConfig)
+//      );
+//
+//      A return value of 0 means that the specified PCI bus does not exist.
+//
+//      A return value of 2, with a VendorID of PCI_INVALID_VENDORID means
+//      that the PCI bus does exist, but there is no device at the specified
+//      VirtualSlotNumber (PCI Device/Function number).
+//
+//
+
+
+
+
+typedef struct _PCI_SLOT_NUMBER {
+	union {
+		struct {
+			ULONG   DeviceNumber : 5;
+			ULONG   FunctionNumber : 3;
+			ULONG   Reserved : 24;
+		} bits;
+		ULONG   AsULONG;
+	} u;
+} PCI_SLOT_NUMBER, *PPCI_SLOT_NUMBER;
+
+#define PCI_TYPE0_ADDRESSES             6
+#define PCI_TYPE1_ADDRESSES             2
+#define PCI_TYPE2_ADDRESSES             5
+
 typedef struct _PCI_COMMON_HEADER {
 	USHORT  VendorID;                   // (ro)
 	USHORT  DeviceID;                   // (ro)
@@ -179,20 +218,22 @@ typedef struct _PCI_COMMON_HEADER {
 
 
 	} u;
-	UCHAR   DeviceSpecific[192];
 
+} PCI_COMMON_HEADER, *PPCI_COMMON_HEADER;
+
+#ifdef __cplusplus
+
+typedef struct _PCI_COMMON_CONFIG : PCI_COMMON_HEADER {
+	UCHAR   DeviceSpecific[192];
 } PCI_COMMON_CONFIG, *PPCI_COMMON_CONFIG;
 
-typedef struct _PCI_SLOT_NUMBER {
-	union {
-		struct {
-			ULONG   FunctionNumber : 3;
-			ULONG   DeviceNumber : 5;
-			ULONG   Reserved : 24;
-		} bits;
-		ULONG   AsULONG;
-	} u;
-} PCI_SLOT_NUMBER, *PPCI_SLOT_NUMBER;
+#else
+
+typedef struct _PCI_COMMON_CONFIG {
+	PCI_COMMON_HEADER DUMMYSTRUCTNAME;
+	UCHAR   DeviceSpecific[192];
+} PCI_COMMON_CONFIG, *PPCI_COMMON_CONFIG;
+#endif
 
 #endif
 

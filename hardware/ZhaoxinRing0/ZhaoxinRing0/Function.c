@@ -1,22 +1,6 @@
 #include "Driver.h"
 #include <Ndis.h>
 
-// #ifdef ALLOC_PRAGMA
-// #pragma alloc_text (PAGE, ReadIoPort)
-// #pragma alloc_text (PAGE, WriteIoPort)
-// #pragma alloc_text (PAGE, ReadMsr)
-// #pragma alloc_text (PAGE, WriteMsr)
-// #pragma alloc_text (PAGE, ReadPmc)
-// #pragma alloc_text (PAGE, ReadMemory)
-// #pragma alloc_text (PAGE, WriteMemory)
-// #pragma alloc_text (PAGE, ReadPciConfig)
-// #pragma alloc_text (PAGE, WritePciConfig)
-// #pragma alloc_text (PAGE, ReadSPDBYTE)
-// #pragma alloc_text (PAGE, SMBUS_Read_Byte)
-// #pragma alloc_text (PAGE, ReadITEDisk)
-// /*#pragma alloc_text (PAGE, WritePciConfig)*/
-// #endif
-
 /************************************************************************/
 /*						R/W Io Port			                            */
 /************************************************************************/
@@ -28,16 +12,13 @@ ReadIoPort(
 )
 {
 	UNREFERENCED_PARAMETER(OutputBufferLength);
-	KdPrint(("Entry IOCTl_READ_PORT\n"));
 	NTSTATUS status;
 	PVOID buffer = NULL;//DeviceIoControl的输入输出buffer
 	TargetPortData databuf;//读写IO口的数据buffer
-	 
-	//DbgBreakPoint();
+	
 	if ((!InputBufferLength))
 	{
 		WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
-		KdPrint(("Leave IOCTl_READ_PORT\n"));
 		return STATUS_INVALID_PARAMETER;
 	}
 	else
@@ -46,7 +27,6 @@ ReadIoPort(
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_READ_PORT\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 
@@ -71,12 +51,10 @@ ReadIoPort(
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_READ_PORT\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 		memcpy(buffer, &databuf.Port_Data, sizeof(databuf.Port_Data));
 		WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, databuf.Data_size);
-		KdPrint(("Leave IOCTl_READ_PORT\n"));
 		return STATUS_SUCCESS;
 	}
 }
@@ -89,7 +67,6 @@ NTSTATUS WriteIoPort(
 )
 {
 	UNREFERENCED_PARAMETER(OutputBufferLength);
-	KdPrint(("Entry IOCTl_WRITE_PORT\n"));
 	//DbgBreakPoint();
 	NTSTATUS status;
 	PVOID buffer = NULL;//DeviceIoControl的输入输出buffer
@@ -98,7 +75,6 @@ NTSTATUS WriteIoPort(
 	if (!InputBufferLength)
 	{
 		WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
-		KdPrint(("Leave IOCTl_WRITE_PORT\n"));
 		return STATUS_INVALID_PARAMETER;
 	}
 	else
@@ -107,7 +83,6 @@ NTSTATUS WriteIoPort(
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_WRITE_PORT\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 
@@ -127,7 +102,6 @@ NTSTATUS WriteIoPort(
 			break;
 		}
 		WdfRequestComplete(Request, STATUS_SUCCESS);
-		KdPrint(("Leave IOCTl_WRITE_PORT\n"));
 		return STATUS_SUCCESS;
 	}
 
@@ -144,8 +118,6 @@ NTSTATUS ReadMsr(
 )
 {
 	UNREFERENCED_PARAMETER(OutputBufferLength);
-	KdPrint(("Entry IOCTl_READ_MSR\n"));
-	//DbgBreakPoint();
 	NTSTATUS status;
 	PVOID buffer = NULL;//DeviceIoControl的输入输出buffer
 	MSR_Request MSR_Data;//MSR buffer
@@ -153,7 +125,6 @@ NTSTATUS ReadMsr(
 	if (!InputBufferLength)
 	{
 		WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
-		KdPrint(("Leave IOCTl_READ_MSR\n"));
 		return STATUS_INVALID_PARAMETER;
 	}
 	else
@@ -162,7 +133,6 @@ NTSTATUS ReadMsr(
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_READ_MSR\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 
@@ -174,8 +144,8 @@ NTSTATUS ReadMsr(
 		}
 		__except (EXCEPTION_EXECUTE_HANDLER)
 		{
+			MSR_Data.Value = -1;
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_READ_MSR\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 
@@ -183,12 +153,10 @@ NTSTATUS ReadMsr(
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_READ_MSR\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 		memcpy(buffer, &MSR_Data.Value, sizeof(MSR_Data.Value));
 		WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, sizeof(MSR_Data.Value));
-		KdPrint(("Leave IOCTl_READ_MSR\n"));
 		return STATUS_SUCCESS;
 	}
 }
@@ -200,8 +168,6 @@ NTSTATUS WriteMsr(
 )
 {
 	UNREFERENCED_PARAMETER(OutputBufferLength);
-	KdPrint(("Entry IOCTl_WRITE_MSR\n"));
-	//DbgBreakPoint();
 	NTSTATUS status;
 	PVOID buffer = NULL;//DeviceIoControl的输入输出buffer
 	MSR_Request MSR_Data;//MSR buffer
@@ -209,7 +175,6 @@ NTSTATUS WriteMsr(
 	if (!InputBufferLength)
 	{
 		WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
-		KdPrint(("Leave IOCTl_WRITE_MSR\n"));
 		return STATUS_INVALID_PARAMETER;
 	}
 	else
@@ -218,7 +183,6 @@ NTSTATUS WriteMsr(
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_WRITE_MSR\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 		memcpy(&MSR_Data, buffer, InputBufferLength);
@@ -229,11 +193,9 @@ NTSTATUS WriteMsr(
 		__except (EXCEPTION_EXECUTE_HANDLER)
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_WRITE_MSR\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 		WdfRequestComplete(Request, STATUS_SUCCESS);
-		KdPrint(("Leave IOCTl_WRITE_MSR\n"));
 		return STATUS_SUCCESS;
 	}
 }
@@ -241,15 +203,12 @@ NTSTATUS WriteMsr(
 NTSTATUS ReadMsrThread(WDFREQUEST Request, size_t OutputBufferLength, size_t InputBufferLength)
 {
 	UNREFERENCED_PARAMETER(OutputBufferLength);
-	KdPrint(("Entry IOCTl_READ_MSR\n"));
-	//DbgBreakPoint();
 	NTSTATUS status;
 	PMSR_Request buffer = NULL;//DeviceIoControl的输入输出buffer
 	unsigned __int64 output = 0;
 	if (!InputBufferLength)
 	{
 		WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
-		KdPrint(("Leave IOCTl_READ_MSR\n"));
 		return STATUS_INVALID_PARAMETER;
 	}
 	else
@@ -259,7 +218,6 @@ NTSTATUS ReadMsrThread(WDFREQUEST Request, size_t OutputBufferLength, size_t Inp
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_READ_MSR\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 
@@ -282,8 +240,8 @@ NTSTATUS ReadMsrThread(WDFREQUEST Request, size_t OutputBufferLength, size_t Inp
 		}
 		__except (EXCEPTION_EXECUTE_HANDLER)
 		{
+			output = -1;
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_READ_MSR\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 
@@ -291,12 +249,10 @@ NTSTATUS ReadMsrThread(WDFREQUEST Request, size_t OutputBufferLength, size_t Inp
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_READ_MSR\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 		memcpy(buffer, &output, sizeof(output));
 		WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, sizeof(output));
-		KdPrint(("Leave IOCTl_READ_MSR\n"));
 		return STATUS_SUCCESS;
 	}
 }
@@ -304,14 +260,12 @@ NTSTATUS ReadMsrThread(WDFREQUEST Request, size_t OutputBufferLength, size_t Inp
 NTSTATUS WriteMsrThread(WDFREQUEST Request, size_t OutputBufferLength, size_t InputBufferLength)
 {
 	UNREFERENCED_PARAMETER(OutputBufferLength);
-	KdPrint(("Entry IOCTl_WRITE_MSR\n"));
 	NTSTATUS status;
 	PMSR_Request buffer = NULL;//DeviceIoControl的输入输出buffer
 
 	if (!InputBufferLength)
 	{
 		WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
-		KdPrint(("Leave IOCTl_WRITE_MSR\n"));
 		return STATUS_INVALID_PARAMETER;
 	}
 	else
@@ -320,7 +274,6 @@ NTSTATUS WriteMsrThread(WDFREQUEST Request, size_t OutputBufferLength, size_t In
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_WRITE_MSR\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 
@@ -344,11 +297,9 @@ NTSTATUS WriteMsrThread(WDFREQUEST Request, size_t OutputBufferLength, size_t In
 		__except (EXCEPTION_EXECUTE_HANDLER)
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_WRITE_MSR\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 		WdfRequestComplete(Request, STATUS_SUCCESS);
-		KdPrint(("Leave IOCTl_WRITE_MSR\n"));
 		return STATUS_SUCCESS;
 	}
 }
@@ -364,7 +315,6 @@ NTSTATUS ReadPmc(
 )
 {
 	UNREFERENCED_PARAMETER(OutputBufferLength);
-	KdPrint(("Entry IOCTl_READ_PMC"));
 	NTSTATUS status;
 	PMSR_Request buffer = NULL;//DeviceIoControl的输入输出buffer
 	MSR_Request MSR_Data;//MSR buffer
@@ -372,7 +322,6 @@ NTSTATUS ReadPmc(
 	if (!InputBufferLength)
 	{
 		WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
-		KdPrint(("Leave IOCTl_READ_PMC\n"));
 		return STATUS_INVALID_PARAMETER;
 	}
 	else
@@ -381,7 +330,6 @@ NTSTATUS ReadPmc(
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_READ_PMC\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 
@@ -393,7 +341,6 @@ NTSTATUS ReadPmc(
 		__except (EXCEPTION_EXECUTE_HANDLER)
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_READ_PMC\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 
@@ -401,12 +348,10 @@ NTSTATUS ReadPmc(
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_READ_PMC\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 		memcpy(buffer, &MSR_Data.Value, sizeof(MSR_Data.Value));
 		WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, sizeof(MSR_Data.Value));
-		KdPrint(("Leave IOCTl_READ_PMC\n"));
 		return STATUS_SUCCESS;
 	}
 }
@@ -422,7 +367,6 @@ NTSTATUS ReadMemory(
 )
 {
 	UNREFERENCED_PARAMETER(OutputBufferLength);
-	KdPrint(("Entry IOCTL_READ_MEMORY"));
 	READ_MEMORY_INPUT Read_mem;//Memory缓冲区
 	PVOID outmembuf;
 	NTSTATUS status;
@@ -434,7 +378,6 @@ NTSTATUS ReadMemory(
 	if (!InputBufferLength)
 	{
 		WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
-		KdPrint(("Leave IOCTL_READ_MEMORY\n"));
 		return STATUS_INVALID_PARAMETER;
 	}
 	else
@@ -443,7 +386,6 @@ NTSTATUS ReadMemory(
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTL_READ_MEMORY\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 
@@ -454,7 +396,6 @@ NTSTATUS ReadMemory(
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTL_READ_MEMORY\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 
@@ -464,7 +405,6 @@ NTSTATUS ReadMemory(
 			if (mapped == NULL)
 			{
 				WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-				KdPrint(("Leave IOCTL_READ_MEMORY\n"));
 				return STATUS_UNSUCCESSFUL;
 			}
 			switch (Read_mem.UnitSize)
@@ -478,6 +418,11 @@ NTSTATUS ReadMemory(
 			case 4:
 				READ_REGISTER_BUFFER_ULONG(mapped, (PULONG)outmembuf, Read_mem.Count);
 				break;
+#ifdef _WIN64
+			case 8:
+				READ_REGISTER_BUFFER_ULONG64(mapped, (PULONG64)outmembuf, Read_mem.Count);
+				break;
+#endif
 			default:
 				break;
 			}
@@ -485,7 +430,6 @@ NTSTATUS ReadMemory(
 		__except (EXCEPTION_EXECUTE_HANDLER)
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTL_READ_MEMORY\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 		WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, Read_mem.UnitSize);
@@ -493,7 +437,6 @@ NTSTATUS ReadMemory(
 		{
 			MmUnmapIoSpace(mapped, memsize);
 		}
-		KdPrint(("Leave IOCTl_READ_PMC\n"));
 		return STATUS_SUCCESS;
 	}
 }
@@ -504,7 +447,6 @@ NTSTATUS WriteMemory(
 )
 {
 	UNREFERENCED_PARAMETER(OutputBufferLength);
-	KdPrint(("Entry IOCTL_WRITE_MEMORY\n"));
 	WRITE_MEMORY_INPUT Write_mem;
 	NTSTATUS status;
 	PVOID buffer = NULL;//DeviceIoControl的输入输出buffer
@@ -515,7 +457,6 @@ NTSTATUS WriteMemory(
 	if (!InputBufferLength)
 	{
 		WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
-		KdPrint(("Leave IOCTL_WRITE_MEMORY\n"));
 		return STATUS_INVALID_PARAMETER;
 	}
 	else
@@ -524,7 +465,6 @@ NTSTATUS WriteMemory(
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTL_WRITE_MEMORY\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 
@@ -537,7 +477,6 @@ NTSTATUS WriteMemory(
 			if (mapped == NULL)
 			{
 				WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-				KdPrint(("Leave IOCTL_WRITE_MEMORY\n"));
 				return STATUS_UNSUCCESSFUL;
 			}
 			switch (Write_mem.UnitSize)
@@ -551,6 +490,11 @@ NTSTATUS WriteMemory(
 			case 4:
 				WRITE_REGISTER_BUFFER_ULONG(mapped, (PULONG)&Write_mem.Data, Write_mem.Count);
 				break;
+#ifdef _WIN64
+			case 8:
+				WRITE_REGISTER_BUFFER_ULONG64(mapped, (PULONG64)&Write_mem.Data, Write_mem.Count);;
+				break;
+#endif
 			default:
 				break;
 			}
@@ -558,7 +502,6 @@ NTSTATUS WriteMemory(
 		__except (EXCEPTION_EXECUTE_HANDLER)
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTL_WRITE_MEMORY\n"));
 			return STATUS_UNSUCCESSFUL;
 		}
 		WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, 0);
@@ -566,7 +509,6 @@ NTSTATUS WriteMemory(
 		{
 			MmUnmapIoSpace(mapped, memsize);
 		}
-		KdPrint(("Leave IOCTL_WRITE_MEMORY\n"));
 		return STATUS_SUCCESS;
 	}
 }
@@ -582,24 +524,15 @@ NTSTATUS ReadPciConfig(
 )
 {
 	UNREFERENCED_PARAMETER(OutputBufferLength);
-	KdPrint(("Entry IOCTl_READ_PCI_COnfig\n"));
-	//DbgBreakPoint();
 	NTSTATUS status;
 	PVOID buffer = NULL;//DeviceIoControl的输入输出buffer
 	PCI_ADDRESS addr;
 	ULONG	dwAddr;
 	ULONG	dwData;
-	PPCI_COMMON_CONFIG pci_config = ExAllocatePoolWithTag(
-		PagedPool,
-		256,
-		111
-	);
-	RtlFillMemory(pci_config, sizeof(*pci_config), 0xFF);
+	PPCI_COMMON_CONFIG pci_config = NULL;
 	if (!InputBufferLength)
 	{
-		ExFreePoolWithTag(pci_config, 111);
 		WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
-		KdPrint(("Leave IOCTl_READ_PCI_COnfig\n"));
 		return STATUS_INVALID_PARAMETER;
 	}
 	else
@@ -607,42 +540,35 @@ NTSTATUS ReadPciConfig(
 		status = WdfRequestRetrieveInputBuffer(Request, 4, &buffer, NULL);
 		if (!NT_SUCCESS(status))
 		{
-			ExFreePoolWithTag(pci_config, 111);
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_READ_PCI_COnfig\n"));
+			return STATUS_UNSUCCESSFUL;
+		}
+		memcpy(&addr, buffer, InputBufferLength);
+
+		status = WdfRequestRetrieveOutputBuffer(Request, 1, &buffer, NULL);
+		if (!NT_SUCCESS(status))
+		{
+			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
 			return STATUS_UNSUCCESSFUL;
 		}
 
-		memcpy(&addr, buffer, InputBufferLength);
+		RtlZeroMemory(buffer, OutputBufferLength);
+		pci_config = buffer;
+
 		for (int i = 0; i < 0x100; i+=4)
 		{
 			dwAddr = MK_PCIADDR(addr.bus, addr.dev, addr.func, i);
 			WRITE_PORT_ULONG((PULONG)(ULONG)PCI_CONFIG_ADDRESS, dwAddr);
 			dwData = READ_PORT_ULONG((PULONG)(ULONG)PCI_CONFIG_DATA);
-			memcpy((PUCHAR)pci_config + i, &dwData, 4);
+			RtlCopyMemory((PUCHAR)pci_config + i, &dwData, 4);
 			if (pci_config->VendorID == 0xFFFF)
 			{
-				RtlFillMemory(pci_config, sizeof(*pci_config), 0xFF);
+				RtlFillMemory(pci_config, sizeof(PCI_COMMON_CONFIG), 0xFF);
 				break;
 			}
 		}
-		/*dwAddr = 0x80000000 | (addr.bus << 16) | (SlotNumber.u.AsULONG << 8 | addr.Offset);
-		WRITE_PORT_ULONG((PULONG)(ULONG)PCI_CONFIG_ADDRESS, dwAddr);
-		dwData = READ_PORT_ULONG((PULONG)(ULONG)PCI_CONFIG_DATA);	*/	
-		
-		status = WdfRequestRetrieveOutputBuffer(Request, 1, &buffer, NULL);
-		if (!NT_SUCCESS(status))
-		{
-			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			ExFreePoolWithTag(pci_config, 111);
-			KdPrint(("Leave IOCTl_READ_PCI_COnfig\n"));
-			return STATUS_UNSUCCESSFUL;
-		}
-		RtlMoveMemory(buffer, pci_config, sizeof(*pci_config));
-		//RtlMoveMemory(buffer, &dwData, sizeof(dwData));
-		WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, sizeof(*pci_config));
-		ExFreePoolWithTag(pci_config, 111);
-		KdPrint(("Leave IOCTl_READ_PCI_COnfig\n"));
+
+		WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, sizeof(PCI_COMMON_CONFIG));
 		return STATUS_SUCCESS;
 	}
 }
@@ -654,8 +580,6 @@ NTSTATUS WritePciConfig(
 )
 {
 	UNREFERENCED_PARAMETER(OutputBufferLength);
-	KdPrint(("Entry IOCTl_WRITE_PCI_COnfig\n"));
-	//DbgBreakPoint();
 	NTSTATUS status;
 	PVOID buffer = NULL;//DeviceIoControl的输入输出buffer
 	PCI_ADDRESS addr;
@@ -664,7 +588,6 @@ NTSTATUS WritePciConfig(
 	if (!InputBufferLength)
 	{
 		WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
-		KdPrint(("Leave IOCTl_WRITE_PCI_COnfig\n"));
 		return STATUS_INVALID_PARAMETER;
 	}
 	else
@@ -673,8 +596,7 @@ NTSTATUS WritePciConfig(
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-			KdPrint(("Leave IOCTl_WRITE_PCI_COnfig\n"));
-			return STATUS_UNSUCCESSFUL;
+				return STATUS_UNSUCCESSFUL;
 		}
 
 		memcpy(&addr, buffer, InputBufferLength);
@@ -688,25 +610,10 @@ NTSTATUS WritePciConfig(
 		{
 			status = STATUS_INVALID_PARAMETER;
 			WdfRequestComplete(Request, status);
-			KdPrint(("Leave IOCTl_WRITE_PCI_COnfig\n"));
-			return status;
+				return status;
 		}
 
-// 		dwAddr = 0x80000000 | (addr.bus << 16) | (SlotNumber.u.AsULONG << 8);
-// 
-// 		WRITE_PORT_ULONG((PULONG)(ULONG)PCI_CONFIG_ADDRESS, dwAddr | addr.Offset);
-// 
-// 		__try {
-// 			WRITE_PORT_ULONG((PULONG)(ULONG)PCI_CONFIG_DATA, addr.Data);
-// 		}
-// 		__except (EXCEPTION_EXECUTE_HANDLER)
-// 		{
-// 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
-// 			KdPrint(("Leave IOCTl_WRITE_PCI_COnfig\n"));
-// 			return STATUS_UNSUCCESSFUL;
-// 		}
 		WdfRequestComplete(Request, STATUS_SUCCESS);
-		KdPrint(("Leave IOCTl_WRITE_PCI_COnfig\n"));
 		return STATUS_SUCCESS;
 	}
 }
@@ -722,6 +629,13 @@ NTSTATUS ReadSPDBYTE(
 	size_t InputBufferLength
 )
 {
+	UNREFERENCED_PARAMETER(OutputBufferLength);
+
+	if (Platform_id != INTEL_PLATFORM && Platform_id != AMD_PLATFORM && Platform_id != ZX_PLATFORM && Platform_id != ATI_PLATFORM && Platform_id != NVI_PLATFORM)
+	{
+		WdfRequestComplete(Request, STATUS_PLATFORM_MANIFEST_INVALID);
+		return STATUS_PLATFORM_MANIFEST_INVALID;
+	}
 	//SPD
 	//UCHAR Data = 0;
 	SPD_Head spd_head;
@@ -730,7 +644,6 @@ NTSTATUS ReadSPDBYTE(
 	PPCI_COMMON_CONFIG Data = NULL;
 	UCHAR cData = 0;
 	KdPrint(("Entry IOCTl_READ_SPD\n"));
-	//DbgBreakPoint();
 	if (!InputBufferLength)
 	{
 		WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
@@ -759,30 +672,45 @@ NTSTATUS ReadSPDBYTE(
 		RtlZeroMemory(buffer, 255);
 		Data = buffer;
 		KdPrint(("Entry Read SPD Byte\n"));
+		if (Platform_id == AMD_PLATFORM || Platform_id == ATI_PLATFORM)
+		{
+			setupFch(spd_head.Base_Address);
+			setupFch(spd_head.Base_Address);
+		}
 		for (USHORT i = 0; i < 0x100; ++i)
 		{
-			KdPrint(("Reading SPD %d Byte\n", i));
-			if (NT_SUCCESS(SMBUS_Read_Byte(spd_head.Base_Address, spd_head.Slave_Address, i, &cData)))
+			KdPrint(("Reading %04X Platform SPD %d Byte\n", Platform_id, i));
+			status = SMBUS_Read_Byte_Zhaoxin(spd_head.Base_Address, spd_head.Slave_Address, i, &cData);
+			if (NT_SUCCESS(status))
 				memcpy((PUCHAR)Data + i, &cData, 1);
+			else
+				break;
 		}
-		KdPrint(("Leave Read SPD Byte\n"));
-		WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, sizeof(PCI_COMMON_CONFIG));
-		KdPrint(("Leave IOCTl_READ_SPD\n"));
-		return STATUS_SUCCESS;
+
+		if (!NT_SUCCESS(status))
+		{
+			status = STATUS_UNSUCCESSFUL;
+			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
+		}
+		else
+		{
+			WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, sizeof(PCI_COMMON_CONFIG));
+			status = STATUS_SUCCESS;
+		}
+		return status;
 	}
 }
 
-NTSTATUS __stdcall SMBUS_Read_Byte(size_t Base_Address, size_t Slave_Address, size_t Offset, OUT PUCHAR Data)
+NTSTATUS __stdcall SMBUS_Read_Byte_Zhaoxin(size_t Base_Address, size_t Slave_Address, size_t Offset, OUT PUCHAR Data)
 {
 	NTSTATUS status = STATUS_SUCCESS;
 	USHORT temp = 0;
 	USHORT counter = 4;
 
-	KdPrint(("Init SMBUS!\n"));
 	do
 	{
-		WRITE_PORT_UCHAR((PUCHAR)(USHORT)Base_Address, 0x1E);
-		temp = READ_PORT_UCHAR((PUCHAR)(USHORT)Base_Address);
+		WRITE_PORT_UCHAR((PUCHAR)(USHORT)Base_Address + SMBUS_STATUS_REG, 0x1E);
+		temp = READ_PORT_UCHAR((PUCHAR)(USHORT)Base_Address + SMBUS_STATUS_REG);
 		if (!(counter--))
 		{
 			temp = 0;
@@ -791,15 +719,15 @@ NTSTATUS __stdcall SMBUS_Read_Byte(size_t Base_Address, size_t Slave_Address, si
 		}
 	} while (temp & 0x01);
 
-	WRITE_PORT_UCHAR((PUCHAR)(USHORT)(Base_Address + 4), Slave_Address + 1);
-	WRITE_PORT_UCHAR((PUCHAR)(USHORT)(Base_Address + 3), Offset);
-	WRITE_PORT_UCHAR((PUCHAR)(USHORT)(Base_Address + 2), 0x48);
+	WRITE_PORT_UCHAR((PUCHAR)(USHORT)(Base_Address + SMBUS_HOST_CMD_REG), Slave_Address | 1);
+	WRITE_PORT_UCHAR((PUCHAR)(USHORT)(Base_Address + SMBUS_CONTROL_REG), Offset);
+	WRITE_PORT_UCHAR((PUCHAR)(USHORT)Base_Address + SMBUS_STATUS_REG, 0xFE);
+	WRITE_PORT_UCHAR((PUCHAR)(USHORT)(Base_Address + SMBUS_COMMAND_REG), SMBUS_READ_BYTE_COMMAND);
 	NdisMSleep(200);
-	KdPrint(("Init SMBUS Over!\n"));
 	counter = 4;
 	while (counter--)
 	{
-		temp = READ_PORT_UCHAR((PUCHAR)(USHORT)Base_Address);
+		temp = READ_PORT_UCHAR((PUCHAR)(USHORT)Base_Address + SMBUS_STATUS_REG);
 		if (temp & 0x1C)
 		{
 			temp = 0;
@@ -815,7 +743,11 @@ NTSTATUS __stdcall SMBUS_Read_Byte(size_t Base_Address, size_t Slave_Address, si
 		}
 	}
 	if (counter)
-		temp = READ_PORT_UCHAR((PUCHAR)(USHORT)(Base_Address + 5));
+	{
+		temp = READ_PORT_UCHAR((PUCHAR)(USHORT)(Base_Address + SMBUS_DATA0_REG));
+		KdPrint(("Read Smbus Offset: %02X, Data: %02X", Offset, temp));
+	}
+
 exit:
 	RtlCopyMemory(Data, &temp, sizeof(temp));
 	return status;
@@ -897,3 +829,114 @@ NTSTATUS ReadITEDisk(
 		return STATUS_SUCCESS;
 	}
 }
+
+void writePmReg(UINT8 reg, UINT8 data)
+{
+	__outbyte(PMIO_INDEX_REG, reg);
+	__outbyte(PMIO_DATA_REG, data);
+}
+
+void setupFch(UINT16 SmbusBase)
+{
+	/* set up SMBUS - Set to SMBUS 0 & set base address */
+	/* For SB800 & Hudson1 to SB900 & Hudson 2/3 */
+	writePmReg(SMBUS_BAR_HIGH_BYTE, SmbusBase >> 8);
+	writePmReg(SMBUS_BAR_LOW_BYTE, (SmbusBase & 0xe0) | 1);
+
+	/* set SMBus clock to 400 KHz */
+	__outbyte(SmbusBase + SMBUS_CLOCK_REG, SMBUS_FREQUENCY_CONST / 400000);
+}
+
+int do_smbus_read_byte(unsigned int smbus_base, UINT16 device,
+	unsigned int address)
+{
+	unsigned char status;
+	unsigned char byte;
+
+	if (smbus_wait_until_ready(smbus_base) < 0)
+		return SMBUS_WAIT_UNTIL_READY_TIMEOUT;
+	/* Set up transaction */
+	/* Disable interrupts */
+	__outbyte(smbus_base + SMBUS_COMMAND_REG, __inbyte(smbus_base + SMBUS_COMMAND_REG) & ~SMBHSTCNT_INTREN);
+	/* Set the device I'm talking to */
+	__outbyte(smbus_base + SMBUS_HOST_CMD_REG, ((device & 0x7f) << 1) | 1);
+	/* Set the command/address... */
+	__outbyte(smbus_base + SMBUS_CONTROL_REG, address & 0xff);
+	/* Set up for a byte data read */
+	__outbyte((smbus_base + SMBUS_COMMAND_REG), (__inbyte(smbus_base + SMBUS_COMMAND_REG) & 0xe3) | I801_BYTE_DATA);
+	/* Clear any lingering errors, so the transaction will run */
+	__outbyte(smbus_base + SMBUS_STATUS_REG, __inbyte(smbus_base + SMBUS_STATUS_REG));
+
+	/* Clear the data byte... */
+	__outbyte(smbus_base + SMBUS_DATA0_REG, 0);
+
+	/* Start the command */
+	__outbyte(smbus_base + SMBUS_COMMAND_REG, (__inbyte(smbus_base + SMBUS_COMMAND_REG) | SMBHSTCNT_START));
+
+	/* poll for it to start */
+	if (smbus_wait_until_active(smbus_base) < 0)
+		return SMBUS_WAIT_UNTIL_ACTIVE_TIMEOUT;
+
+	/* Poll for transaction completion */
+	if (smbus_wait_until_done(smbus_base) < 0)
+		return SMBUS_WAIT_UNTIL_DONE_TIMEOUT;
+
+	status = __inbyte(smbus_base + SMBUS_STATUS_REG);
+	KdPrint(("Intel SPD Status:%02X", status));
+	/* Ignore the "In Use" status... */
+	status &= ~(SMBHSTSTS_SMBALERT_STS | SMBHSTSTS_INUSE_STS);
+
+	/* Read results of transaction */
+	byte = __inbyte(smbus_base + SMBUS_DATA0_REG);
+	if (status != SMBHSTSTS_INTR)
+		return SMBUS_ERROR;
+	return byte;
+}
+
+void smbus_delay(void)
+{
+	__inbyte(0x80);
+}
+
+int smbus_wait_until_ready(UINT32 smbus_base)
+{
+	unsigned int loops = SMBUS_TIMEOUT;
+	unsigned char byte;
+	do {
+		smbus_delay();
+		if (--loops == 0)
+			break;
+		byte = __inbyte(smbus_base + SMBUS_STATUS_REG);
+	} while (byte & SMBHSTSTS_HOST_BUSY);
+	return loops ? 0 : -1;
+}
+
+int smbus_wait_until_done(UINT32 smbus_base)
+{
+	unsigned int loops = SMBUS_TIMEOUT;
+	unsigned char byte;
+	do {
+		smbus_delay();
+		if (--loops == 0)
+			break;
+		byte = __inbyte(smbus_base + SMBUS_STATUS_REG);
+	} while ((byte & SMBHSTSTS_HOST_BUSY)
+		|| (byte & ~(SMBHSTSTS_INUSE_STS | SMBHSTSTS_HOST_BUSY)) == 0);
+	return loops ? 0 : -1;
+}
+
+int smbus_wait_until_active(UINT32 smbus_base)
+{
+	unsigned long loops;
+	loops = SMBUS_TIMEOUT;
+	do {
+		unsigned char val;
+		smbus_delay();
+		val = __inbyte(smbus_base + SMBUS_STATUS_REG);
+		if ((val & SMBHSTSTS_HOST_BUSY)) {
+			break;
+		}
+	} while (--loops);
+	return loops ? 0 : -1;
+}
+

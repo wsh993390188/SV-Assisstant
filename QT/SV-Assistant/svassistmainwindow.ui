@@ -1,0 +1,888 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SVAssistMainWindow</class>
+ <widget class="QMainWindow" name="SVAssistMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>900</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1350</width>
+    <height>900</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>SVAssistMainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Resource/resource.qrc">
+    <normaloff>:/menu/Title/ZX.png</normaloff>:/menu/Title/ZX.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>900</width>
+     <height>600</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>1350</width>
+     <height>900</height>
+    </size>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QWidget" name="Titlewidget" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>900</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1350</width>
+        <height>150</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget#Titlewidget{border-image: url(:/menu/Title/panel.png); }</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>4</number>
+       </property>
+       <item>
+        <widget class="QToolButton" name="HometoolButton">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:none;
+font: 10pt &quot;宋体&quot;;
+color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>基本信息</string>
+         </property>
+         <property name="icon">
+          <iconset resource="Resource/resource.qrc">
+           <normaloff>:/menu/Title/computer.png</normaloff>:/menu/Title/computer.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>54</width>
+           <height>54</height>
+          </size>
+         </property>
+         <property name="popupMode">
+          <enum>QToolButton::DelayedPopup</enum>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextUnderIcon</enum>
+         </property>
+         <property name="arrowType">
+          <enum>Qt::NoArrow</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="HardwareViewtoolButton">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:none;
+font: 10pt &quot;宋体&quot;;
+color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>硬件检测</string>
+         </property>
+         <property name="icon">
+          <iconset resource="Resource/resource.qrc">
+           <normaloff>:/menu/Title/hardware.png</normaloff>:/menu/Title/hardware.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>54</width>
+           <height>54</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextUnderIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="SoftwareViewtoolButton">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:none;
+font: 10pt &quot;宋体&quot;;
+color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>硬件大师</string>
+         </property>
+         <property name="icon">
+          <iconset resource="Resource/resource.qrc">
+           <normaloff>:/menu/Title/hardware-danger.png</normaloff>:/menu/Title/hardware-danger.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>54</width>
+           <height>54</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextUnderIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="HardwareManagetoolButton">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:none;
+font: 10pt &quot;宋体&quot;;
+color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>软件检测</string>
+         </property>
+         <property name="icon">
+          <iconset resource="Resource/resource.qrc">
+           <normaloff>:/menu/Title/software.png</normaloff>:/menu/Title/software.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>54</width>
+           <height>54</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextUnderIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="SoftwareManagetoolButton">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:none;
+font: 10pt &quot;宋体&quot;;
+color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>软件大师</string>
+         </property>
+         <property name="icon">
+          <iconset resource="Resource/resource.qrc">
+           <normaloff>:/menu/Title/software-danger.png</normaloff>:/menu/Title/software-danger.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>54</width>
+           <height>54</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextUnderIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="GameTesttoolButton">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:none;
+font: 10pt &quot;宋体&quot;;
+color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>性能检测</string>
+         </property>
+         <property name="icon">
+          <iconset resource="Resource/resource.qrc">
+           <normaloff>:/menu/Title/gamebox.png</normaloff>:/menu/Title/gamebox.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>54</width>
+           <height>54</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextUnderIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="menuhorizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>347</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="menugridLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item row="0" column="3">
+          <widget class="closebutton" name="closeButton">
+           <property name="minimumSize">
+            <size>
+             <width>48</width>
+             <height>18</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>48</width>
+             <height>18</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="Resource/resource.qrc">
+             <normaloff>:/menu/menu/close.png</normaloff>:/menu/menu/close.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="mainctrlbutton" name="minButton">
+           <property name="minimumSize">
+            <size>
+             <width>33</width>
+             <height>18</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>33</width>
+             <height>18</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="Resource/resource.qrc">
+             <normaloff>:/menu/menu/minimize.png</normaloff>:/menu/menu/minimize.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <spacer name="menuverticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="1">
+          <widget class="QToolButton" name="setButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>33</horstretch>
+             <verstretch>18</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>33</width>
+             <height>18</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>33</width>
+             <height>18</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>最小化</string>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="arrowType">
+            <enum>Qt::DownArrow</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="mainctrlbutton" name="reportButton">
+           <property name="minimumSize">
+            <size>
+             <width>33</width>
+             <height>18</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>33</width>
+             <height>18</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="Resource/resource.qrc">
+             <normaloff>:/menu/menu/report.png</normaloff>:/menu/menu/report.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="HomehorizontalLayout">
+      <item>
+       <widget class="QStackedWidget" name="HomestackedWidget">
+        <property name="minimumSize">
+         <size>
+          <width>900</width>
+          <height>472</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>1350</width>
+          <height>708</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <widget class="QWidget" name="Homepage">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="Homewidget" name="TitleStackedWidget" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>650</width>
+              <height>472</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>975</width>
+              <height>708</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QStackedWidget" name="BottomstackedWidget">
+            <property name="minimumSize">
+             <size>
+              <width>250</width>
+              <height>472</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>375</width>
+              <height>708</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border-color: rgb(255, 255, 255);</string>
+            </property>
+            <widget class="QWidget" name="CPUBottomstackedWidgetPage">
+             <layout class="QVBoxLayout" name="verticalLayout_2">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <spacer name="CPUUsageverticalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>301</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="CurveChart" name="CPUUsagewidget" native="true">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>150</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="MotherBroadBottomstackedWidgetPage"/>
+            <widget class="QWidget" name="MemoryBottomstackedWidgetPage"/>
+            <widget class="QWidget" name="GPUBottomstackedWidgetPage"/>
+            <widget class="QWidget" name="DiskBottomstackedWidgetPage"/>
+            <widget class="QWidget" name="MonitorBottomstackedWidgetPage"/>
+            <widget class="QWidget" name="NetworkBottomstackedWidgetPage"/>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="Hardwarepage">
+         <layout class="QHBoxLayout" name="HardwarehorizontalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="HardwareTab" name="HardwareTabwidget" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>472</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>708</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QStackedWidget" name="HardwareInfomationstackedWidget">
+            <property name="minimumSize">
+             <size>
+              <width>800</width>
+              <height>472</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1200</width>
+              <height>708</height>
+             </size>
+            </property>
+            <widget class="CPUHardwareWidget" name="CPUpage"/>
+            <widget class="MotherBroadWidget" name="MotherBroadpage"/>
+            <widget class="MemoryWidget" name="Memorypage"/>
+            <widget class="GPUWidget" name="GPUpage"/>
+            <widget class="DiskWidget" name="Diskpage"/>
+            <widget class="MonitorWidget" name="Monitorpage"/>
+            <widget class="AudioWidget" name="Audiopage"/>
+            <widget class="QWidget" name="Networkpage">
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <property name="spacing">
+               <number>9</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QSplitter" name="Networksplitter">
+                <property name="styleSheet">
+                 <string notr="true">border-color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="handleWidth">
+                 <number>7</number>
+                </property>
+                <widget class="NetworkListWidget" name="NetworklistWidget"/>
+                <widget class="NetworkTableWidget" name="NetworktextBrowser"/>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="HardwareOthersWidget" name="Otherhardwarepage"/>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="Hardwaremasterpage">
+         <widget class="QLabel" name="label_5">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>200</y>
+            <width>171</width>
+            <height>71</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Under construction</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="Softwarepage">
+         <widget class="QLabel" name="label_2">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>190</y>
+            <width>171</width>
+            <height>71</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Under construction</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="Softwaremasterpage">
+         <widget class="QLabel" name="label_3">
+          <property name="geometry">
+           <rect>
+            <x>310</x>
+            <y>200</y>
+            <width>171</width>
+            <height>71</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Under construction</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="GameTestpage">
+         <widget class="QLabel" name="label_4">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>200</y>
+            <width>171</width>
+            <height>71</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Under construction</string>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="Versionlabel">
+      <property name="minimumSize">
+       <size>
+        <width>900</width>
+        <height>28</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1350</width>
+        <height>42</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{color:#000000;font-family: \&quot;consolas\&quot;; font-size:10px; font-weight:bold;background-color: rgb(255, 255, 255);}
+</string>
+      </property>
+      <property name="text">
+       <string>Major Version 0.0.1</string>
+      </property>
+      <property name="margin">
+       <number>8</number>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>Homewidget</class>
+   <extends>QWidget</extends>
+   <header>homewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>mainctrlbutton</class>
+   <extends>QToolButton</extends>
+   <header>mainctrlbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>closebutton</class>
+   <extends>QToolButton</extends>
+   <header>closebutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>HardwareTab</class>
+   <extends>QWidget</extends>
+   <header location="global">hardwaretab.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CPUHardwareWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">cpuhardwarewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MotherBroadWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">motherbroadwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>GPUWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">gpuwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MemoryWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">memorywidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MonitorWidget</class>
+   <extends>QWidget</extends>
+   <header>monitorwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>DiskWidget</class>
+   <extends>QWidget</extends>
+   <header>diskwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AudioWidget</class>
+   <extends>QWidget</extends>
+   <header>audiowidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HardwareOthersWidget</class>
+   <extends>QWidget</extends>
+   <header>hardwareotherswidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CurveChart</class>
+   <extends>QWidget</extends>
+   <header>curvechart.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>NetworkListWidget</class>
+   <extends>QListWidget</extends>
+   <header>NetworkWidget.h </header>
+  </customwidget>
+  <customwidget>
+   <class>NetworkTableWidget</class>
+   <extends>QTextBrowser</extends>
+   <header>NetworkWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="Resource/resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

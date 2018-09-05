@@ -95,6 +95,9 @@ STATUS_UNSUCCESSFUL otherwise.
 		return status;
 	}
 
+	HalGetBusDataByOffset(PCIConfiguration, 0, 0, &Platform_id, 0, 2);
+
+	KdPrint(("Platform Id: %X", Platform_id));
 	//
 	//
 	// In order to create a control device, we first need to allocate a
@@ -109,6 +112,8 @@ STATUS_UNSUCCESSFUL otherwise.
 		status = STATUS_INSUFFICIENT_RESOURCES;
 		return status;
 	}
+
+
 
 	//
 	// Call NonPnpDeviceAdd to create a deviceobject to represent our

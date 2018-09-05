@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/menu">
+        <file>menu/close.png</file>
+        <file>menu/minimize.png</file>
+        <file>Title/computer.png</file>
+        <file>Title/hardware.png</file>
+        <file>Title/software.png</file>
+        <file>Title/panel.png</file>
+        <file>Title/ZX.png</file>
+        <file>Title/hardware-danger.png</file>
+        <file>Title/software-danger.png</file>
+        <file>menu/report.png</file>
+        <file>Title/gamebox.png</file>
+    </qresource>
+    <qresource prefix="/"/>
+</RCC>

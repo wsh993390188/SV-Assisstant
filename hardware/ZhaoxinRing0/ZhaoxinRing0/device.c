@@ -201,7 +201,6 @@ VOID
 	);*/
 
 	NTSTATUS status;
-	KdPrint(("Entry MyDriverEvtIoDeviceControl!\n"));
 	//RtlZeroMemory(buffer, 4);
 	switch (IoControlCode)
 	{
@@ -303,7 +302,6 @@ VOID
 	}
 	//ExFreeToPagedLookasideList(&Lookaside, buffer);
 	//ExDeletePagedLookasideList(&Lookaside);
-	KdPrint(("Entry MyDriverEvtIoDeviceControl!\n"));
 	return;
 }
 
