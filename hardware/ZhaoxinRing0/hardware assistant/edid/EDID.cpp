@@ -29,7 +29,7 @@ namespace SV_ASSIST
 			static CEDID* Instance()
 			{
 				if (!temp.get())
-					temp = std::make_shared<CEDID>();
+					temp = std::make_unique<CEDID>();
 				return temp.get();
 			}
 			CEDID() : EDIDData(std::make_shared<_EDID_INFO>()) { EDIDData->UpdateData(); }
@@ -201,11 +201,11 @@ namespace SV_ASSIST
 			}
 
 		private:
-			static std::shared_ptr<CEDID> temp;
+			static std::unique_ptr<CEDID> temp;
 			std::shared_ptr<_EDID_INFO> EDIDData;
 		};
 
-		std::shared_ptr<CEDID> CEDID::temp = nullptr;
+		std::unique_ptr<CEDID> CEDID::temp = nullptr;
 
 		const std::string GetMonitorName(int nums)
 		{

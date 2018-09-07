@@ -357,7 +357,7 @@ BOOL CRing0::ReadAllPci()
 				this->ReadPci(bus, dev, func, Pci_Temp);
 				if (Pci_Temp.VendorID != 0xFFFF)
 				{
-					wstring temp = _T("bus:") + to_wstring(bus) + _T(" dev:") + to_wstring(dev) + _T(" func:") + to_wstring(func);
+					std::wstring temp = _T("bus:") + std::to_wstring(bus) + _T(" dev:") + std::to_wstring(dev) + _T(" func:") + std::to_wstring(func);
 					Pci_Config_space.pciconfig.insert(std::map<std::wstring, PCI_COMMON_CONFIG>::value_type(temp, Pci_Temp));
 				}
 			}
@@ -461,7 +461,7 @@ BOOL CRing0::SetECData(BYTE EC_Addr, BYTE EC_Write_Data)
 }
 
 template<class T>
-INT64 CRing0::find_location(vector<T> vecIntegerArray, string search_string)
+INT64 CRing0::find_location(std::vector<T> vecIntegerArray, std::string search_string)
 {
 	vector<T>::iterator iElement = find(
 		vecIntegerArray.begin(),

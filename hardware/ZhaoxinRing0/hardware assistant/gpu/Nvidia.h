@@ -14,10 +14,12 @@ public:
 	using CGPU::CGPU;
 	~CNvidia();
 	bool CheckdllStatus();
-	GPUTypes exec();
-	const void* Returninfo();
-	GPUTypes UpdateData();
+	GPUTypes exec() override;
+	const void* Returninfo() override;
+	GPUTypes UpdateData() override;
 private:
+	static int callback(void * NotUsed, int argc, char ** argv, char ** azColName);
+	bool GetBaseinfoFromDB(NvidiaInfo & nvinfo);
 	NvAPI_Status PhysicalGPUs(INT Index, NvidiaInfo& nvinfo);
 	NvAPI_Status UpdatePhysicalGPUs(INT Index, NvidiaInfo& nvinfo);
 	NvAPI_Status DisplayGPUS();

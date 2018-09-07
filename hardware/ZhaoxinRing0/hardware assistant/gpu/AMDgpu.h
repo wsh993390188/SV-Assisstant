@@ -89,6 +89,7 @@ protected:
 	void DestoryADL();
 	void GetBaseInfo();
 	void GetAdapterinfo();
+	BOOL GetPCIESpeed(AMDINFO & amdinfo);
 	BOOL GetOverDrive5(int adapterId, AMDINFO& info);
 	BOOL GetAdapterMemory(AMDINFO & info);
 private:

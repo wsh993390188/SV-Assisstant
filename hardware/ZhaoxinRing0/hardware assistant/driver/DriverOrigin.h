@@ -71,7 +71,7 @@ private:
 #define SMBHSTSTS_HOST_BUSY	(1 << 0)
 #pragma endregion
 
-	static std::shared_ptr<ZhaoxinDriver> ring0_temp;
+	static std::unique_ptr<ZhaoxinDriver> ring0_temp;
 	std::mutex ring0_mutex;
 	std::shared_ptr<CRing0> ring;
 };

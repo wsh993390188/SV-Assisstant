@@ -2,6 +2,24 @@
 #include "NVAPI/nvapi.h"
 #include "ADL/adl_sdk.h"
 
+struct GPUBaseInfoFromDB
+{
+	std::string Architecture;
+	std::string CoreName;
+	ULONG Technology;
+	ULONG Transistors;
+	ULONG DieSize;
+	std::string MemoryType;
+	ULONG MemoryBus;
+	double MemoryBusWidth;
+	ULONG TDP;
+	ULONG Shaders;
+	ULONG TMUs;
+	ULONG ROPs;
+	double PixelRate;
+	double TextureRate;
+};
+
 typedef struct _ALL_DEVICE_CLOCK
 {
 	ULONG GraphicsCurrent;
@@ -106,7 +124,7 @@ typedef struct _OVERDRIVE5
 	ADLPMActivity					activity;
 }OVERDRIVE5;
 
-typedef struct _AMDINFO
+typedef struct _AMDINFO : GPUBaseInfoFromDB
 {
 	/// The BUS number associated with this adapter.
 	int iBusNumber;
@@ -122,20 +140,19 @@ typedef struct _AMDINFO
 	std::string						adapterActive;
 	std::string						Aspects;
 	ADLBiosInfo						biosInfo;
-	int								ASICFamilyTypes;
-	int								ASICFamilyValids;
 	int								AdapterSpeedCurrent;
 	int								AdapterSpeedDefault;
-	std::string						AdapterAccessibility;
 	int								AdapterID;
 	ADLAdapterCapsX2				adapterCaps;
 	OVERDRIVE5						OverDrive5;
+	PCISPEED MaxPCIESpeed;
+	PCISPEED CurrentPCIESpeed;
 	size_t dedicatedVideoMemory;
 	size_t systemVideoMemory;
 	size_t sharedSystemMemory;
 }AMDINFO;
 
-typedef struct _NvidiaInfo
+typedef struct _NvidiaInfo : GPUBaseInfoFromDB
 {
 	std::string FullName;
 	std::string GPUType;
@@ -239,7 +256,7 @@ protected:
 	std::string BranchVersion;
 private:
 	explicit CGPU(const CGPU& x);
-	CGPU& operator=(const CGPU& x);
+	CGPU& operator=(const CGPU& x) {};
 };
 
 class GPUData
@@ -265,5 +282,5 @@ private:
 	std::shared_ptr<CGPU> amd_gpu;
 	std::shared_ptr<CGPU> intel_gpu;
 	explicit GPUData(const GPUData& x);
-	GPUData& operator=(const GPUData& x);
+	GPUData& operator=(const GPUData& x) {};
 };

@@ -14,7 +14,7 @@ namespace SV_ASSIST
 			static DiskLibrary* Instance() 
 			{
 				if (!m_disk.get())
-					m_disk = std::make_shared<DiskLibrary>();
+					m_disk = std::make_unique<DiskLibrary>();
 				return m_disk.get();
 			}
 			DiskLibrary() : m_Ata(std::make_shared<CAtaSmart>()), m_FlagChangeDisk{ FALSE }, m_FlagAdvancedDiskSearch{ FALSE }, m_FlagHideNoSmartDisk{ FALSE }, m_FlagworkaroundAdataSsd{ TRUE }, m_FlagWorkaroundHD204UI{ FALSE }
@@ -246,9 +246,9 @@ namespace SV_ASSIST
 			BOOL m_FlagWorkaroundHD204UI;
 			BOOL m_FlagHideNoSmartDisk;
 			std::shared_ptr<CAtaSmart> m_Ata;
-			static std::shared_ptr<DiskLibrary> m_disk;
+			static std::unique_ptr<DiskLibrary> m_disk;
 		};
-		std::shared_ptr<DiskLibrary> DiskLibrary::m_disk = nullptr;
+		std::unique_ptr<DiskLibrary> DiskLibrary::m_disk = nullptr;
 
 		DiskLibrary::~DiskLibrary()
 		{

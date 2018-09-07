@@ -41,7 +41,7 @@ public:
 	static SuperIOInterface* Instance()
 	{
 		if (!temp.get())
-			temp = std::make_shared<SuperIOInterface>();
+			temp = std::make_unique<SuperIOInterface>();
 		return temp.get();
 	}
 
@@ -401,13 +401,13 @@ public:
 private:
 	explicit SuperIOInterface(const SuperIOInterface& that);
 	SuperIOInterface operator=(const SuperIOInterface& that);
-	static std::shared_ptr<SuperIOInterface> temp;
+	static std::unique_ptr<SuperIOInterface> temp;
 	std::shared_ptr<SuperIoEntry> Sio;
 	std::shared_ptr<_SioSensor> SioChip;
 	SioPageDB pageDB;
 };
 
-std::shared_ptr<SuperIOInterface> SuperIOInterface::temp = nullptr;
+std::unique_ptr<SuperIOInterface> SuperIOInterface::temp = nullptr;
 
 SIO_Model SV_ASSIST::SUPERIO::GetSuperIoChipId()
 {

@@ -12,7 +12,7 @@ namespace SV_ASSIST
 			static NetInterface* Instance()
 			{
 				if (!NetInstance.get())
-					NetInstance = std::make_shared<NetInterface>();
+					NetInstance = std::make_unique<NetInterface>();
 				return NetInstance.get();
 			}
 			void Update()
@@ -28,10 +28,10 @@ namespace SV_ASSIST
 			explicit NetInterface(const NetInterface& x);
 			NetInterface& operator=(const NetInterface& x);
 			std::shared_ptr<NetWork> temp;
-			static std::shared_ptr<NetInterface> NetInstance;
+			static std::unique_ptr<NetInterface> NetInstance;
 		};
 
-		std::shared_ptr<NetInterface> NetInterface::NetInstance = nullptr;
+		std::unique_ptr<NetInterface> NetInterface::NetInstance = nullptr;
 		
  		void Update()
  		{

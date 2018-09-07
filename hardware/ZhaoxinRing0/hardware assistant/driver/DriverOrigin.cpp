@@ -1,16 +1,16 @@
 #include "stdafx.h"
 #include "DriverOrigin.h"
 
-std::shared_ptr<ZhaoxinDriver> ZhaoxinDriver::ring0_temp = nullptr;
+std::unique_ptr<ZhaoxinDriver> ZhaoxinDriver::ring0_temp = nullptr;
 
-ZhaoxinDriver::ZhaoxinDriver() : ring(make_shared<CRing0>()), ring0_mutex{}
+ZhaoxinDriver::ZhaoxinDriver() : ring(std::make_shared<CRing0>()), ring0_mutex{}
 {}
 
 ZhaoxinDriver * ZhaoxinDriver::Instance()
 {
 	if (!ring0_temp.get())
 	{
-		ring0_temp = make_shared<ZhaoxinDriver>();
+		ring0_temp = std::make_unique<ZhaoxinDriver>();
 	}
 	return ring0_temp.get();
 }
@@ -187,4 +187,3 @@ const Pci_All_Config_Space& ZhaoxinDriver::GetAllPciInfo()
 {
 	return ring->ReturnPCIConfigSpace();
 }
-

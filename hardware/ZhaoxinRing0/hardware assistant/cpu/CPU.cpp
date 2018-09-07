@@ -12,7 +12,7 @@ class CPUDLL
 public:
 	static CPUDLL* Instance() {
 		if (!ttt.get())
-			ttt = std::make_shared<CPUDLL>();
+			ttt = std::make_unique<CPUDLL>();
 		return ttt.get();
 	}
 	const std::string & GetCPUSpecification() { return data->cpu->Brand; }
@@ -50,7 +50,7 @@ public:
 	CPUDLL() : data(std::make_shared<CPUDLLDATA>())
 	{}
 private:
-	static std::shared_ptr<CPUDLL> ttt;
+	static std::unique_ptr<CPUDLL> ttt;
 	std::shared_ptr<CPUDLLDATA> data;
 	class CPUDLLDATA
 	{
@@ -107,7 +107,7 @@ private:
 	};
 };
 
-std::shared_ptr<CPUDLL> CPUDLL::ttt = nullptr;
+std::unique_ptr<CPUDLL> CPUDLL::ttt = nullptr;
 
 void SV_ASSIST::CPU::Updatedata()
 {

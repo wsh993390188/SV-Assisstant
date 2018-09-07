@@ -212,6 +212,7 @@
     <ClInclude Include="..\..\usb\UsbHub.h" />
     <ClInclude Include="log\easylogging++.h" />
     <ClInclude Include="log\sv_log.h" />
+    <ClInclude Include="sqlite\sqlite3.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -239,7 +240,6 @@
     <ClCompile Include="..\..\gpu\AMDgpu.cpp" />
     <ClCompile Include="..\..\gpu\Gpudata.cpp" />
     <ClCompile Include="..\..\gpu\gpu.cpp" />
-    <ClCompile Include="..\..\gpu\Igpu.cpp" />
     <ClCompile Include="..\..\gpu\Intelgpu.cpp" />
     <ClCompile Include="..\..\gpu\Nvidia.cpp" />
     <ClCompile Include="..\..\Memory\CMemory.cpp" />
@@ -270,6 +270,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="log\sv_log.cpp" />
+    <ClCompile Include="sqlite\sqlite3.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

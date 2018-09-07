@@ -17,7 +17,7 @@ namespace SV_ASSIST
 			static PCIELib* Instance()
 			{
 				if (!m_pcie.get())
-					m_pcie = std::make_shared<PCIELib>();
+					m_pcie = std::make_unique<PCIELib>();
 				return m_pcie.get();
 			}
 
@@ -74,10 +74,10 @@ namespace SV_ASSIST
 		private:
 			PCIDB pciDB;
 			std::shared_ptr<Option_Rom> m_optionROM;
-			static std::shared_ptr<PCIELib> m_pcie;
+			static std::unique_ptr<PCIELib> m_pcie;
 
 		};
-		std::shared_ptr<PCIELib> PCIELib::m_pcie = nullptr;
+		std::unique_ptr<PCIELib> PCIELib::m_pcie = nullptr;
 
 		BOOL PCIELib::GetPCIVendorName(const USHORT VenderID, std::string & VenderName)
 		{
@@ -99,7 +99,7 @@ namespace SV_ASSIST
 
 			if (!in.is_open())
 			{
-				std::cerr << "pci.ids file is not available. Download it from https://raw.githubusercontent.com/pciutils/pciids/master/pci.ids" << endl;
+				std::cerr << "pci.ids file is not available. Download it from https://raw.githubusercontent.com/pciutils/pciids/master/pci.ids" << std::endl;
 				return FALSE;
 			}
 

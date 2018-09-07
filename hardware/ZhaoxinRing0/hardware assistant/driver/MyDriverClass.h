@@ -8,9 +8,6 @@ Description:从驱动中读取IO Memory PCI MSR SuperIO SPD等等信息
 #include <algorithm>
 #include "Load/Driver.h"
 
-
-using namespace std;
-
 //-----------------------------------------------------------------------------
 //
 // Global
@@ -243,7 +240,7 @@ private:
 		*@INT64					返回字符串在矢量中位置 -1代表未找到
 	*************************************************************/
 	template<class T>
-	INT64 find_location(vector<T> vecIntegerArray, string search_string);
+	INT64 find_location(std::vector<T> vecIntegerArray, std::string search_string);
 	explicit CRing0(const CRing0& x);
 	CRing0& operator=(const CRing0& x);
 

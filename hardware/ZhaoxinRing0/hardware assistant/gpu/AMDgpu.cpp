@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "AMDgpu.h"
+#include "..\driver\DriverOrigin.h"
 
 #include <InitGuid.h>
 #include <D3D11.h>
@@ -27,7 +28,6 @@ CAMD::CAMD() : re(OTHERS_GPU)
 #ifdef ZX_OutputLog
 		Logger::Instance()->OutputLogInfo(el::Level::Debug, "Initiallize AMD ADL Library Success");
 #endif 
-		re = AMD_GPU;
 	}
 #ifdef ZX_OutputLog
 	else
@@ -91,11 +91,8 @@ CAMD::~CAMD()
 
 GPUTypes CAMD::exec()
 {
-	if(re == AMD_GPU)
-	{
-		GetBaseInfo();
-		GetAdapterinfo();
-	}
+	GetBaseInfo();
+	GetAdapterinfo();
 	return re;
 }
 
@@ -248,6 +245,8 @@ void CAMD::GetAdapterinfo()
 				memset(lpAdapterInfo, '\0', sizeof(AdapterInfo) * iAdapterNumbers);
 				ADL_ERROR_Code = ADL_Adapter_AdapterInfo_Get(lpAdapterInfo, sizeof(AdapterInfo) * iAdapterNumbers);
 			}
+			if (iAdapterNumbers)
+				re = AMD_GPU;
 			for (int i = 0; i < iAdapterNumbers; ++i)
 			{
 				bool pass = false;
@@ -256,9 +255,8 @@ void CAMD::GetAdapterinfo()
 				int adapterActive = 0;
 				ADL_Adapter_Active_Get(adapterInfo.iAdapterIndex, &adapterActive);
 				
-				if(adapterInfo.iVendorID == 1002 /*|| adapterInfo.iVendorID == 0x1022*/)
+				if(adapterInfo.iVendorID == 1002 || adapterInfo.iVendorID == 0x1002) // 1002ÊÇË­Ï¹Ð´½ø¿âµÄ À¬»øAMD
 				{
-
 					for each (auto var in AmdInfo)
 					{
 						if (var.iBusNumber == adapterInfo.iBusNumber &&
@@ -299,25 +297,6 @@ void CAMD::GetAdapterinfo()
 						}
 					}
 
-					if (ADL_Adapter_ASICFamilyType_Get)
-					{
-						int lpAsicTypes = 0, lpValids = 0;
-						if (ADL_OK == ADL_Adapter_ASICFamilyType_Get(i, &lpAsicTypes, &lpValids))
-						{
-							info.ASICFamilyTypes = lpAsicTypes;
-							info.ASICFamilyValids = lpValids;
-						}
-					}
-
-					if (ADL_Adapter_Accessibility_Get)
-					{
-						int lpAccessibility = 0;
-						if (ADL_OK == ADL_Adapter_Accessibility_Get(i, &lpAccessibility))
-						{
-							lpAccessibility ? info.AdapterAccessibility = "yes" : info.AdapterAccessibility = "no";
-						}
-					}
-
 					if (ADL_Adapter_ID_Get)
 					{
 						int lpAdapterID = 0;
@@ -348,6 +327,42 @@ void CAMD::GetAdapterinfo()
 		lpAdapterInfo = NULL;
 	}
 }
+
+#pragma region PCI Function
+BOOL CAMD::GetPCIESpeed(AMDINFO & amdinfo)
+{
+	PCI_COMMON_CONFIG pci = {};
+	if (ZhaoxinDriver::Instance()->ReadPci(amdinfo.iBusNumber, amdinfo.iDeviceNumber, amdinfo.iFunctionNumber, pci) == 0)
+	{
+		UCHAR* capaaddr = reinterpret_cast<UCHAR*>(&pci);
+		USHORT CapabilitiesPtr = pci.u.type0.CapabilitiesPtr;
+		bool IsPCIE10H = false;
+		while (true)
+		{
+			if (capaaddr[CapabilitiesPtr] == 0x10)
+			{
+				IsPCIE10H = true;
+				break;
+			}
+			if (capaaddr[CapabilitiesPtr + 1] == 0x00)
+				break;
+			CapabilitiesPtr = capaaddr[CapabilitiesPtr + 1];
+		}
+		if (IsPCIE10H)
+		{
+			amdinfo.MaxPCIESpeed.LinkSpeed = capaaddr[CapabilitiesPtr + 0x0C] & 0xFF;
+			USHORT temp = capaaddr[CapabilitiesPtr + 0x0C] | (capaaddr[CapabilitiesPtr + 0x0D] << 8);
+			amdinfo.MaxPCIESpeed.LinkWidth = (temp & 0x3F0) >> 4;
+
+			amdinfo.CurrentPCIESpeed.LinkSpeed = capaaddr[CapabilitiesPtr + 0x12] & 0xFF;
+			temp = capaaddr[CapabilitiesPtr + 0x12] | (capaaddr[CapabilitiesPtr + 0x13] << 8);
+			amdinfo.CurrentPCIESpeed.LinkWidth = (temp & 0x3F0) >> 4;
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+#pragma endregion
 
 BOOL CAMD::GetOverDrive5(int adapterId, AMDINFO& info)
 {

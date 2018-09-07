@@ -2,10 +2,30 @@
 #include "NVAPI/nvapi.h"
 #include "..\driver\DriverOrigin.h"
 #include "Nvidia.h"
+#include "..\sv-assistant\sv-assistant\sqlite\sqlite3.h"
 
 /************************************************************************/
 /*                         Load Area                                    */
 /************************************************************************/
+
+int CNvidia::callback(void *NotUsed, int argc, char **argv, char **azColName) {
+	NvidiaInfo &temp = *static_cast<NvidiaInfo*>(NotUsed);
+	temp.Architecture = argv[1];
+	temp.CoreName = argv[2];
+	temp.Technology = std::stol(argv[3]);
+	temp.Transistors = std::stol(argv[4]);
+	temp.DieSize = std::stol(argv[5]);
+	temp.MemoryType = argv[7];
+	temp.MemoryBus = std::stol(argv[8]);
+	temp.MemoryBusWidth = strtod(argv[9], nullptr);
+	temp.TDP = std::stol(argv[10]);
+	temp.Shaders = std::stol(argv[11]);
+	temp.TMUs = std::stol(argv[12]);
+	temp.ROPs = std::stol(argv[13]);
+	temp.PixelRate = strtod(argv[14], nullptr);
+	temp.TextureRate = strtod(argv[15], nullptr);
+	return 0;
+}
 
 CNvidia::CNvidia() : hDisplay{}, phys{}
 {
@@ -61,6 +81,55 @@ CNvidia::~CNvidia()
 	}
 }
 
+#pragma region Data Base Info
+bool CNvidia::GetBaseinfoFromDB(NvidiaInfo & nvinfo)
+{
+	sqlite3* db;
+	char *zErrMsg = 0;
+	int rc;
+
+	rc = sqlite3_open("nvidia.db", &db);
+	if (rc) {
+		OutputDebugPrintf(L"Can't open database: %s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+	else {
+		OutputDebugPrintf(L"Opened database successfully\n");
+	}
+	if (nvinfo.FullName.find("GeForce GTX") != std::string::npos)
+	{
+		size_t last = 0;
+		size_t count = 0;
+		size_t index = nvinfo.FullName.find_first_of(' ', last);
+		while (index != std::string::npos)
+		{
+			if ((count++) == 3)
+				break;
+			auto temp = nvinfo.FullName.substr(last, index - last);
+			last = index + 1;
+			index = nvinfo.FullName.find_first_of(' ', last);
+		}
+		if (nvinfo.FullName.size() - last > 0)
+		{
+			std::string sql = boost::str(boost::format("SELECT * from GEFORCEGTX WHERE ID LIKE '%S'") % nvinfo.FullName.substr(last).c_str());
+			rc = sqlite3_exec(db, sql.c_str(), callback, static_cast<void*>(&nvinfo), &zErrMsg);
+			if (rc) {
+				OutputDebugPrintf(L"Can't query Info: %s\n", zErrMsg);
+				sqlite3_free(zErrMsg);
+				return 0;
+			}
+			else {
+				OutputDebugPrintf(L"Query Info successfully\n");
+			}
+		}
+
+	}
+
+	return true;
+}
+#pragma endregion
+
+#pragma region Public Functions
 bool CNvidia::CheckdllStatus()
 {
 	return (m_succeed_Nvidia == NVAPI_OK) ? TRUE : FALSE;
@@ -81,6 +150,7 @@ GPUTypes CNvidia::UpdateData()
 	}
 	return GPUTypes::NVIDIA_GPU;
 }
+#pragma endregion
 
 NvAPI_Status CNvidia::PhysicalGPUs(INT Index, NvidiaInfo & nvinfo)
 {
@@ -102,12 +172,12 @@ NvAPI_Status CNvidia::PhysicalGPUs(INT Index, NvidiaInfo & nvinfo)
 			if ((i.second.VendorID == VendorID) && (i.second.DeviceID == DeviceID))
 			{
 			swscanf_s(i.first.c_str(),
-				_T("bus:%d dev:%d func:%d"),
+				_T("bus:%hd dev:%hd func:%hd"),
 				&nvinfo.PCIIdentify.bus, &nvinfo.PCIIdentify.dev, &nvinfo.PCIIdentify.func);
 			}
 		}
 	}
-
+	GetBaseinfoFromDB(nvinfo);
 	this->UpdatePhysicalGPUs(Index, nvinfo);
 	return NVAPI_OK;
 }
@@ -157,6 +227,7 @@ GPUTypes CNvidia::exec()
 	return re;
 }
 
+#pragma region PCI Function
 BOOL CNvidia::GetPCIESpeed(NvidiaInfo & nvinfo)
 {
 	PCI_COMMON_CONFIG pci = {};
@@ -190,7 +261,9 @@ BOOL CNvidia::GetPCIESpeed(NvidiaInfo & nvinfo)
 	}
 	return FALSE;
 }
+#pragma endregion
 
+#pragma region NVAPI Function
 NvAPI_Status CNvidia::EnumPhysicalGPUs()
 {
 	NvAPI_Status status = NVAPI_ERROR;
@@ -713,3 +786,4 @@ BOOL CNvidia::GetDynamicInfo(INT Index, NVIDIA_USAGE& Nvidia_Usage)
 	}
 	return FALSE;
 }
+#pragma endregion

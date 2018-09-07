@@ -17,7 +17,7 @@ namespace SV_ASSIST
 			static execSMBIOS* Instance() 
 			{
 				if (!sm.get())
-					sm = std::make_shared<execSMBIOS>();
+					sm = std::make_unique<execSMBIOS>();
 				return sm.get();
 			}
 			execSMBIOS() :data(std::make_shared<Smbios>()) {}
@@ -29,10 +29,10 @@ namespace SV_ASSIST
 		protected:
 		private:
 			std::shared_ptr<Smbios> data;
-			static std::shared_ptr<execSMBIOS> sm;
+			static std::unique_ptr<execSMBIOS> sm;
 		};
 
-		std::shared_ptr<execSMBIOS> execSMBIOS::sm = nullptr;
+		std::unique_ptr<execSMBIOS> execSMBIOS::sm = nullptr;
 
 		void execSMBIOS::outputfile()
 		{

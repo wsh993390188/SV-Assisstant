@@ -27,7 +27,7 @@ namespace SV_ASSIST
 			static MemoryLib* Instance() 
 			{
 				if (!m_memory.get())
-					m_memory = std::make_shared<MemoryLib>();
+					m_memory = std::make_unique<MemoryLib>();
 				return m_memory.get();
 			}
 			MemoryLib();
@@ -53,11 +53,11 @@ namespace SV_ASSIST
 			std::vector<std::pair<ULONG, DDR4_INFO>> Memoryddr4Info;
 			std::vector<std::pair<ULONG, MemoryData>> SPDInfomation;
 			std::unique_ptr<IBaseMemory> m_data;
-			static std::shared_ptr<MemoryLib> m_memory;
+			static std::unique_ptr<MemoryLib> m_memory;
 		};
 
 
-		std::shared_ptr<MemoryLib> MemoryLib::m_memory = nullptr;
+		std::unique_ptr<MemoryLib> MemoryLib::m_memory = nullptr;
 
 		MemoryLib::MemoryLib() : GlobelDIMMType(DIMM_UNKNOWN)
 		{

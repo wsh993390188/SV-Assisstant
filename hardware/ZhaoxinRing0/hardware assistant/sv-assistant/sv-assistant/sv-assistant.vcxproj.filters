@@ -109,6 +109,12 @@
     <Filter Include="头文件\PCI">
       <UniqueIdentifier>{9bafbccd-5e75-4090-89c5-57a8d20e9d82}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\SQLite">
+      <UniqueIdentifier>{7ec078f7-6cb0-456f-a23a-fc791ab6c426}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\SQLite">
+      <UniqueIdentifier>{0d7556f0-f2e1-4849-8964-2edebc2c736a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -279,6 +285,9 @@
     <ClInclude Include="..\..\PCIE\pcioptionrom.h">
       <Filter>头文件\PCI</Filter>
     </ClInclude>
+    <ClInclude Include="sqlite\sqlite3.h">
+      <Filter>头文件\SQLite</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -340,9 +349,6 @@
     </ClCompile>
     <ClCompile Include="..\..\network\NetworkLib.cpp">
       <Filter>源文件\network</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\gpu\Igpu.cpp">
-      <Filter>源文件\gpu</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Audio\CAudio.cpp">
       <Filter>源文件\Audio</Filter>
@@ -430,6 +436,9 @@
     </ClCompile>
     <ClCompile Include="..\..\PCIE\pcioptionrom.cpp">
       <Filter>源文件\PCI</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\sqlite3.c">
+      <Filter>源文件\SQLite</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
