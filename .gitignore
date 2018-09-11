@@ -23,6 +23,8 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+Ring0Test/
+sqlite/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -328,12 +330,4 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
-
-/hardware/ZhaoxinRing0/hardware\ assistant/sv-assistant/sv-assistant/sqlite
-
-/hardware/ZhaoxinRing0/Ring0Test/
-
-*.zx
-
-/record/
 
