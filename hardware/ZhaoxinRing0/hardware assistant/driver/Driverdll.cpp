@@ -24,6 +24,11 @@ namespace SV_ASSIST
 			return ZhaoxinDriver::Instance()->RdMsrTx(Index, Data, threadAffinityMask);
 		}
 
+		BOOL RdTscTx(OUT DWORD64 & Data, IN DWORD threadAffinityMask)
+		{
+			return ZhaoxinDriver::Instance()->RdTscTx(Data, threadAffinityMask);
+		}
+
 		BOOL WrMsrTx(IN DWORD Index, IN DWORD64 Data, IN DWORD threadAffinityMask)
 		{
 			return ZhaoxinDriver::Instance()->WrMsrTx(Index, Data, threadAffinityMask);
@@ -32,6 +37,11 @@ namespace SV_ASSIST
 		BOOL RdMsr(IN DWORD Index, OUT DWORD64 & Data)
 		{
 			return ZhaoxinDriver::Instance()->RdMsr(Index, Data);
+		}
+
+		BOOL RdTsc(OUT DWORD64 & Data)
+		{
+			return ZhaoxinDriver::Instance()->RdTsc(Data);
 		}
 
 		BOOL WrMsr(IN DWORD Index, IN DWORD64 Data)

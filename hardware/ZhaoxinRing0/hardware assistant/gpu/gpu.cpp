@@ -27,7 +27,7 @@ public:
 					if (var.FullName == gpu.first.GPUname)
 					{
 						gpu.second.fans = std::to_string(var.fans) + " RPM";
-						gpu.second.Temperature = std::to_string(var.Device_Tem.GPUCurrTem) + "  °C";
+						gpu.second.Temperature = std::to_wstring(var.Device_Tem.GPUCurrTem) + L"  °C";
 						if (var.Device_clock.GraphicsCurrent > 1000)
 							gpu.second.GPUClock = std::to_string(var.Device_clock.GraphicsCurrent / 1000.0f) + " MHz";
 						else
@@ -89,64 +89,12 @@ public:
 	}
 	GPU() : gpudata(std::make_shared<GPUData>())
 	{
-		this->InitGPUDB();
 		gpudata->UpdateData();
 		GetInfo();
 	}
 private:
 	explicit GPU(const GPU& x);
 	GPU& operator=(const GPU& x) {};
-	void InitGPUDB()
-	{
-		std::ifstream in("gpu.ids");
-		std::string line, item;
-
-		if (!in.is_open())
-		{
-			return;
-		}
-		std::string cpuFM = {};
-		while (std::getline(in, line)) {
-			// Ignore any line starting with #
-			if (line.size() == 0 || line[0] == '#')
-				continue;
-
-			if (line[0] == '\t' && line[1] == '\t')
-			{
-				std::string temp = line.substr(2);
-				int technology = 0, TDP = 0;
-				char a[0x20] = {};
-				sscanf_s(temp.c_str(), "%s\t", a, _countof(a));
-				temp = temp.substr(strlen(a) + 1);
-				std::vector<std::string> itemlist;
-				this->split(temp, ",", itemlist);
-				GPUDB[cpuFM][std::string(a)] = itemlist;
-				continue;
-			}
-			if (line[0] == '\t')
-			{
-				cpuFM = line.substr(1);
-				continue;
-			}
-		}
-		in.close();
-	}
-
-	void split(const std::string & s, const std::string & delim, std::vector<std::string>& ret)
-	{
-		size_t last = 0;
-		size_t index = s.find_first_of(delim, last);
-		while (index != std::string::npos)
-		{
-			ret.emplace_back(s.substr(last, index - last));
-			last = index + 1;
-			index = s.find_first_of(delim, last);
-		}
-		if (index - last > 0)
-		{
-			ret.emplace_back(s.substr(last, index - last));
-		}
-	}
 
 	void GetInfo()
 	{
@@ -201,7 +149,7 @@ private:
 			SV_ASSIST::PCIE::GetPCIVendorName((USHORT)(var.PCIIdentify.pSubSystemId & 0xFFFF), temp.GPUSubVendor);
 			GPUSensorInfo temp2 = {};
 			temp2.fans = std::to_string(var.fans) + " RPM";
-			temp2.Temperature = std::to_string(var.Device_Tem.GPUCurrTem) + "  °C";
+			temp2.Temperature = std::to_wstring(var.Device_Tem.GPUCurrTem) + L"  °C";
 			if(var.Device_clock.GraphicsCurrent > 1000)
 				temp2.GPUClock = std::to_string(var.Device_clock.GraphicsCurrent / 1000.0f) + " MHz";
 			else
@@ -250,7 +198,7 @@ private:
 					break;
 				}
 			}
-			this->gpuinfo.emplace_back(std::make_pair(temp,temp2));
+			this->gpuinfo.emplace_back(std::make_pair(std::move(temp),std::move(temp2)));
 		}
 		if (gpudata->amdinfo)
 		for (auto &var : *(gpudata->amdinfo))
@@ -285,7 +233,6 @@ private:
 	}
 	std::vector<std::pair<GPUBaseInfo, GPUSensorInfo>> gpuinfo;
 	std::shared_ptr<GPUData> gpudata;
-	std::map<std::string, std::map<std::string, std::vector<std::string>>> GPUDB; //gpu数据库
 	static std::unique_ptr<GPU> temp;
 };
 

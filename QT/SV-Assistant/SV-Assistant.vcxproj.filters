@@ -98,6 +98,15 @@
     <ClCompile Include="curvechart.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HardwareMasterTab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IOButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IODataView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AudioWidget.h">
@@ -146,6 +155,15 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="curvechart.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="HardwareMasterTab.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="IOButton.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="IODataView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

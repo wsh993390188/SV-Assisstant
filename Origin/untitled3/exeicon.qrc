@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/exeicon">
-        <file>resources/EXE/Computer.png</file>
-    </qresource>
-</RCC>

@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 #include "mainctrlbutton.h"
+#include "lib\Hardware\Ring0Defination.h"
 #include "lib\Hardware\gpu.h"
 
 struct GpuGUIBaseInfo
@@ -54,6 +55,6 @@ private:
 	GpuGUIBaseInfo * gpuFans;
 	GpuGUIBaseInfo * gpuMemory;
 	GpuGUIBaseInfo * gpuSharedMemory;
-	QVector<GPUBaseInfo> BaseInfo;
+	QVector<std::pair<GPUBaseInfo, GPUSensorInfo>> BaseInfo;
 	QComboBox *allGPUName;
 };

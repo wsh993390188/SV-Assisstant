@@ -53,8 +53,17 @@ namespace SV_ASSIST
             *@BOOL				是否成功 0成功 其他值 失败
         ***************************************************/
         BOOL WrMsrTx(IN DWORD Index, IN DWORD64 Data, IN DWORD threadAffinityMask);
-
-
+		/**************************************************
+		*@Function				RdTscTx
+		*@brief					写MSR的值
+		*@author				王硕
+		*@param
+			*@threadAffinityMask设置线程所运行的核心
+			*@Data				OUT 输出MSR的值，64位
+		*@return
+			*@BOOL				是否成功 0成功 其他值 失败
+		***************************************************/
+		BOOL RdTscTx(OUT DWORD64 & Data, IN DWORD threadAffinityMask);
         /**************************************************
         *@Function				RdMsr
         *@brief					获取MSR的值
@@ -66,7 +75,16 @@ namespace SV_ASSIST
             *@BOOL				是否成功 0成功 其他值 失败
         ***************************************************/
         BOOL RdMsr(IN DWORD Index, OUT DWORD64& Data);
-
+		/**************************************************
+		*@Function				RdTsc
+		*@brief					获取TSC的值
+		*@author				王硕
+		*@param
+			*@Data				OUT 输出TSC的值，64位
+		*@return
+			*@BOOL				是否成功 0成功 其他值 失败
+		***************************************************/
+		BOOL RdTsc(OUT DWORD64 & Data);
         /**************************************************
         *@Function				WrMsr
         *@brief					写MSR的值

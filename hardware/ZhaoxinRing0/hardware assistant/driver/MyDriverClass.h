@@ -56,6 +56,10 @@ public:
 	***************************************************/
 	BOOL WrMsr(IN DWORD Index, IN DWORD64 Data);
 
+	BOOL RdTsc(OUT DWORD64 & Data);
+
+	BOOL RdTscTx(IN DWORD threadAffinityMask, OUT DWORD64 & Data);
+
 	/**************************************************
 	*@Function				RdMsr
 	*@brief					获取MSR的值

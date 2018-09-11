@@ -21,64 +21,50 @@ void GPUWidget::Init()
 	for (const auto& i : SV_ASSIST::GPU::GetGpuInfo())
 	{
 		this->BaseInfo.push_back(i);
-		allGPUName->addItem(QString::fromStdString(i.GPUname));
+		allGPUName->addItem(QString::fromStdString(i.first.GPUname));
 	}
 
 	if(!BaseInfo.empty())
 	{
 		gpuname = new GpuGUIBaseInfo(this);
 		gpuname->BaseLabel->setText(tr("Name"));
-		gpuname->BaseInfo->setText(QString::fromStdString(BaseInfo.at(0).GPUname));
+		gpuname->BaseInfo->setText(QString::fromStdString(BaseInfo.at(0).first.GPUname));
 
 		gpubios = new GpuGUIBaseInfo(this);
 		gpubios->BaseLabel->setText(tr("BIOS Version"));
-		gpubios->BaseInfo->setText(QString::fromStdString(BaseInfo.at(0).GPUBiosVersion));
+		gpubios->BaseInfo->setText(QString::fromStdString(BaseInfo.at(0).first.GPUBiosVersion));
 
 		gpuDriver = new GpuGUIBaseInfo(this);
 		gpuDriver->BaseLabel->setText(tr("Driver Version"));
-		gpuDriver->BaseInfo->setText(QString::fromStdString(BaseInfo.at(0).GPUDriverVersion));
+		gpuDriver->BaseInfo->setText(QString::fromStdString(BaseInfo.at(0).first.GPUDriverVersion));
 
 		gpuTemperature = new GpuGUIBaseInfo(this);
 		gpuTemperature->BaseLabel->setText(tr("Temperature"));
-		gpuTemperature->BaseInfo->setText(tr("%1 ¡ãC").arg(QString::number(BaseInfo.at(0).Temperature)));
+		gpuTemperature->BaseInfo->setText(QString::fromStdWString(BaseInfo.at(0).second.Temperature));
 
 		gpuClock = new GpuGUIBaseInfo(this);
 		gpuClock->BaseLabel->setText(tr("GPU Clock"));
-		gpuClock->BaseInfo->setText(tr("%1 Mhz").arg(QString::number(BaseInfo.at(0).GPUClock)));
+		gpuClock->BaseInfo->setText(QString::fromStdString(BaseInfo.at(0).second.GPUClock));
 
 		gpuMemoryClock = new GpuGUIBaseInfo(this);
 		gpuMemoryClock->BaseLabel->setText(tr("Memory Clock"));
-		gpuMemoryClock->BaseInfo->setText(tr("%1 Mhz").arg(QString::number(BaseInfo.at(0).GPUMemclock)));
+		gpuMemoryClock->BaseInfo->setText(QString::fromStdString(BaseInfo.at(0).second.GPUMemClock));
 
 		gpuUsage = new GpuGUIBaseInfo(this);
 		gpuUsage->BaseLabel->setText(tr("GPU Usage"));
-		gpuUsage->BaseInfo->setText(tr("%1 %").arg(QString::number(BaseInfo.at(0).GPUusage)));
+		gpuUsage->BaseInfo->setText(QString::fromStdString(BaseInfo.at(0).second.GPUUsage));
 
 		gpuFans = new GpuGUIBaseInfo(this);
 		gpuFans->BaseLabel->setText(tr("GPU Fans"));
-		gpuFans->BaseInfo->setText(tr("%1 RPM").arg(QString::number(BaseInfo.at(0).fans)));
+		gpuFans->BaseInfo->setText(QString::fromStdString(BaseInfo.at(0).second.fans));
 
 		gpuMemory = new GpuGUIBaseInfo(this);
 		gpuMemory->BaseLabel->setText(tr("GPU Memory"));
-		if(BaseInfo.at(0).dedicatedVideoMemory > 1024)
-			if(BaseInfo.at(0).dedicatedVideoMemory / 1024 > 1024)
-				if(BaseInfo.at(0).dedicatedVideoMemory / 1024 / 1024 > 1024)
-					gpuMemory->BaseInfo->setText(tr("%1 GB").arg(QString::number(BaseInfo.at(0).dedicatedVideoMemory / 1024 / 1024)));
-				else
-					gpuMemory->BaseInfo->setText(tr("%1 MB").arg(QString::number(BaseInfo.at(0).dedicatedVideoMemory / 1024)));
-			else
-				gpuMemory->BaseInfo->setText(tr("%1 KB").arg(QString::number(BaseInfo.at(0).dedicatedVideoMemory)));
+		gpuMemory->BaseInfo->setText(QString::fromStdString(BaseInfo.at(0).first.GPUMemorySize));
 
 		gpuSharedMemory = new GpuGUIBaseInfo(this);
 		gpuSharedMemory->BaseLabel->setText(tr("Shared memory"));		
-		if (BaseInfo.at(0).sharedSystemMemory > 1024)
-			if (BaseInfo.at(0).sharedSystemMemory / 1024 > 1024)
-				if (BaseInfo.at(0).sharedSystemMemory / 1024 / 1024 > 1024)
-					gpuSharedMemory->BaseInfo->setText(tr("%1 GB").arg(QString::number(BaseInfo.at(0).sharedSystemMemory / 1024 / 1024)));
-				else
-					gpuSharedMemory->BaseInfo->setText(tr("%1 MB").arg(QString::number(BaseInfo.at(0).sharedSystemMemory / 1024)));
-			else
-				gpuSharedMemory->BaseInfo->setText(tr("%1 KB").arg(QString::number(BaseInfo.at(0).sharedSystemMemory)));
+		gpuSharedMemory->BaseInfo->setText(QString::fromStdString(BaseInfo.at(0).first.GPUSharedMemorySize));
 
 		mainlayout->addLayout(gpuname->layout);
 		mainlayout->addLayout(gpubios->layout);
@@ -111,31 +97,16 @@ void GPUWidget::Updatedata(int Index)
 	if (!BaseInfo.empty() && Index < BaseInfo.size())
 	{
 		QMutexLocker locker(&this->mutex);
-		gpuname->BaseInfo->setText(QString::fromStdString(BaseInfo.at(Index).GPUname));
-		gpubios->BaseInfo->setText(QString::fromStdString(BaseInfo.at(Index).GPUBiosVersion));
-		gpuDriver->BaseInfo->setText(QString::fromStdString(BaseInfo.at(Index).GPUDriverVersion));
-		gpuTemperature->BaseInfo->setText(tr("%1 ¡ãC").arg(QString::number(BaseInfo.at(Index).Temperature)));
-		gpuClock->BaseInfo->setText(tr("%1 Mhz").arg(QString::number(BaseInfo.at(Index).GPUClock)));
-		gpuMemoryClock->BaseInfo->setText(tr("%1 Mhz").arg(QString::number(BaseInfo.at(Index).GPUMemclock)));
-		gpuUsage->BaseInfo->setText(tr("%1 %").arg(QString::number(BaseInfo.at(Index).GPUusage)));
-		gpuFans->BaseInfo->setText(tr("%1 RPM").arg(QString::number(BaseInfo.at(Index).fans)));
-		gpuMemory->BaseLabel->setText(tr("GPU Memory"));
-		if (BaseInfo.at(0).dedicatedVideoMemory > 1024)
-			if (BaseInfo.at(0).dedicatedVideoMemory / 1024 > 1024)
-				if (BaseInfo.at(0).dedicatedVideoMemory / 1024 / 1024 > 1024)
-					gpuMemory->BaseInfo->setText(tr("%1 GB").arg(QString::number(BaseInfo.at(Index).dedicatedVideoMemory / 1024 / 1024)));
-				else
-					gpuMemory->BaseInfo->setText(tr("%1 MB").arg(QString::number(BaseInfo.at(Index).dedicatedVideoMemory / 1024)));
-			else
-				gpuMemory->BaseInfo->setText(tr("%1 KB").arg(QString::number(BaseInfo.at(Index).dedicatedVideoMemory)));
-		if (BaseInfo.at(0).sharedSystemMemory > 1024)
-			if (BaseInfo.at(0).sharedSystemMemory / 1024 > 1024)
-				if (BaseInfo.at(0).sharedSystemMemory / 1024 / 1024 > 1024)
-					gpuSharedMemory->BaseInfo->setText(tr("%1 GB").arg(QString::number(BaseInfo.at(Index).sharedSystemMemory / 1024 / 1024)));
-				else
-					gpuSharedMemory->BaseInfo->setText(tr("%1 MB").arg(QString::number(BaseInfo.at(Index).sharedSystemMemory / 1024)));
-			else
-				gpuSharedMemory->BaseInfo->setText(tr("%1 KB").arg(QString::number(BaseInfo.at(Index).sharedSystemMemory)));
+		gpuname->BaseInfo->setText(QString::fromStdString(BaseInfo.at(Index).first.GPUname));
+		gpubios->BaseInfo->setText(QString::fromStdString(BaseInfo.at(Index).first.GPUBiosVersion));
+		gpuDriver->BaseInfo->setText(QString::fromStdString(BaseInfo.at(Index).first.GPUDriverVersion));
+		gpuTemperature->BaseInfo->setText(QString::fromStdWString(BaseInfo.at(Index).second.Temperature));
+		gpuClock->BaseInfo->setText(QString::fromStdString(BaseInfo.at(Index).second.GPUClock));
+		gpuMemoryClock->BaseInfo->setText(QString::fromStdString(BaseInfo.at(Index).second.GPUMemClock));
+		gpuUsage->BaseInfo->setText(QString::fromStdString(BaseInfo.at(Index).second.GPUUsage));
+		gpuFans->BaseInfo->setText(QString::fromStdString(BaseInfo.at(Index).second.fans));
+		gpuMemory->BaseInfo->setText(QString::fromStdString(BaseInfo.at(Index).first.GPUMemorySize));
+		gpuSharedMemory->BaseInfo->setText(QString::fromStdString(BaseInfo.at(Index).first.GPUSharedMemorySize));
 	}
 }
 

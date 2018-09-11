@@ -31,7 +31,6 @@ class HardwareTab : public QWidget
     Q_OBJECT
 public:
     explicit HardwareTab(QWidget *parent = nullptr);
-
 signals:
 	void SendHardwareTabIndex(int index);
 public slots:

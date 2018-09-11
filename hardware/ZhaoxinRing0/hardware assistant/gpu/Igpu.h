@@ -28,7 +28,7 @@ struct GPUBaseInfo
 
 struct GPUSensorInfo 
 {
-	std::string	Temperature;
+	std::wstring Temperature;
 	std::string GPUClock;
 	std::string GPUBaseclock;
 	std::string GPUBoostClock;

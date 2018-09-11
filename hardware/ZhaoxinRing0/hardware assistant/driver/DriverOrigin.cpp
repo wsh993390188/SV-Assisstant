@@ -33,6 +33,12 @@ BOOL ZhaoxinDriver::RdMsr(IN DWORD Index, OUT DWORD64 & Data)
 	return ring->RdMsr(Index, Data);
 }
 
+BOOL ZhaoxinDriver::RdTsc(OUT DWORD64 & Data)
+{
+	std::lock_guard<std::mutex> lock(ring0_mutex);
+	return ring->RdTsc(Data);
+}
+
 BOOL ZhaoxinDriver::WrMsr(IN DWORD Index, IN DWORD64 Data)
 {
 	std::lock_guard<std::mutex> lock(ring0_mutex);
@@ -43,6 +49,12 @@ BOOL ZhaoxinDriver::RdMsrTx(IN DWORD Index, OUT DWORD64 & Data, IN DWORD threadA
 {
 	std::lock_guard<std::mutex> lock(ring0_mutex);
 	return ring->RdMsrTx(Index, threadAffinityMask, Data);
+}
+
+BOOL ZhaoxinDriver::RdTscTx(OUT DWORD64 & Data, IN DWORD threadAffinityMask)
+{
+	std::lock_guard<std::mutex> lock(ring0_mutex);
+	return ring->RdTscTx(threadAffinityMask, Data);
 }
 
 BOOL ZhaoxinDriver::WrMsrTx(IN DWORD Index, IN DWORD64 Data, IN DWORD threadAffinityMask)

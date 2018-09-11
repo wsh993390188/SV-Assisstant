@@ -294,6 +294,19 @@ VOID
 			OutputBufferLength,
 			InputBufferLength
 		);
+	case READ_TSC:
+		status = ReadTsc(
+			Request,
+			OutputBufferLength,
+			InputBufferLength
+		);
+		break;
+	case READ_TSC_THREAD:
+		status = ReadTscThread(
+			Request,
+			OutputBufferLength,
+			InputBufferLength
+		);
 		break;
 	default:
 		status = STATUS_INVALID_DEVICE_REQUEST;

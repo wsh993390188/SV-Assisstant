@@ -51,6 +51,28 @@ BOOL CRing0::WrMsr(IN DWORD Index, IN DWORD64 Data)
 	return 0;
 }
 
+BOOL CRing0::RdTscTx(IN DWORD threadAffinityMask, OUT DWORD64 & Data)
+{
+	ULONG nOutput;
+	MSR_Request MSR;
+	MSR.msr_address = 0;
+	MSR.Value = 0;
+	MSR.core_id = threadAffinityMask;
+	if (!DeviceIoControl(hdevice,
+		READ_TSC_THREAD,
+		&MSR,
+		sizeof(MSR),
+		&Data,
+		sizeof(unsigned long long),
+		&nOutput,
+		NULL)
+		)
+	{
+		return GetLastError();
+	}
+	return 0;
+}
+
 BOOL CRing0::RdMsrTx(IN DWORD Index, IN DWORD threadAffinityMask, OUT DWORD64 & Data)
 {
 	ULONG nOutput;
@@ -102,7 +124,7 @@ BOOL CRing0::RdIOPort(IN USHORT IO_Port_Addr,IN USHORT IO_DataSize, OUT DWORD& I
 	IO_Port.Port_Addr = IO_Port_Addr;
 	IO_Port.Port_Data = 0;
 	IO_Port.Data_size = (UCHAR)IO_DataSize;
-	if (IO_Port.Port_Addr == NULL)
+	if (IO_Port.Port_Addr > 0xFFFF)
 	{
 		return -1;
 	}
@@ -133,7 +155,7 @@ BOOL CRing0::WrIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, IN DWORD IO
 	IO_Port.Port_Addr = IO_Port_Addr;
 	IO_Port.Port_Data = IO_Data;
 	IO_Port.Data_size = (UCHAR)IO_DataSize;
-	if (IO_Port.Port_Addr == NULL)
+	if (IO_Port.Port_Addr > 0xFFFF)
 	{
 		return -1;
 	}
@@ -474,6 +496,27 @@ INT64 CRing0::find_location(std::vector<T> vecIntegerArray, std::string search_s
 		return Positison;
 	}
 	return -1;
+}
+
+BOOL CRing0::RdTsc(OUT DWORD64& Data)
+{
+	ULONG nOutput;
+	MSR_Request MSR;
+	MSR.msr_address = 0;
+	MSR.Value = 0;
+	if (!DeviceIoControl(hdevice,
+		READ_TSC,
+		&MSR,
+		sizeof(MSR),
+		&Data,
+		sizeof(unsigned long long),
+		&nOutput,
+		NULL)
+		)
+	{
+		return GetLastError();
+	}
+	return 0;
 }
 
 BOOL CRing0::RdMsr(IN DWORD Index, OUT DWORD64& Data)

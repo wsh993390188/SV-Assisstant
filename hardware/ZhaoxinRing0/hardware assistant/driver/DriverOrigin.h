@@ -11,8 +11,10 @@ public:
 	BOOL RdIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, OUT DWORD& IO_Data);
 	BOOL WrIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, IN ULONG IO_Data);
 	BOOL RdMsr(IN DWORD Index, OUT DWORD64& Data);
+	BOOL RdTsc(OUT DWORD64 & Data);
 	BOOL WrMsr(IN DWORD Index, IN DWORD64 Data);
 	BOOL RdMsrTx(IN DWORD Index, OUT DWORD64& Data, IN DWORD threadAffinityMask);
+	BOOL RdTscTx(OUT DWORD64 & Data, IN DWORD threadAffinityMask);
 	BOOL WrMsrTx(IN DWORD Index, IN DWORD64 Data, IN DWORD threadAffinityMask);
 	BOOL RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT DWORD& Memory_Data);
 	BOOL WrMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN ULONG Memory_Data);

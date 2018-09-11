@@ -46,15 +46,15 @@ HardwareTab::HardwareTab(QWidget *parent) : QWidget(parent),
     this->setAutoFillBackground(true);
     this->setPalette(pal);
     this->Init();
-	connect(this->CPUButton, &QToolButton::clicked, this, [&] { emit SendHardwareTabIndex(0); });
-	connect(this->MotherBroadButton, &QToolButton::clicked, this, [&] { emit SendHardwareTabIndex(1); });
-	connect(this->MemoryButton, &QToolButton::clicked, this, [&] { emit SendHardwareTabIndex(2); });
-	connect(this->GPUButton, &QToolButton::clicked, this, [&] { emit SendHardwareTabIndex(3); });
-	connect(this->DiskButton, &QToolButton::clicked, this, [&] { emit SendHardwareTabIndex(4); });
-	connect(this->MonitorButton, &QToolButton::clicked, this, [&] { emit SendHardwareTabIndex(5); });
-	connect(this->AudioButton, &QToolButton::clicked, this, [&] { emit SendHardwareTabIndex(6); });
-	connect(this->NetworkButton, &QToolButton::clicked, this, [&] { emit SendHardwareTabIndex(7); });
-	connect(this->OtherButton, &QToolButton::clicked, this, [&] { emit SendHardwareTabIndex(8); });
+	connect(this->CPUButton, &QToolButton::clicked, this, [this] { emit SendHardwareTabIndex(0); });
+	connect(this->MotherBroadButton, &QToolButton::clicked, this, [this] { emit SendHardwareTabIndex(1); });
+	connect(this->MemoryButton, &QToolButton::clicked, this, [this] { emit SendHardwareTabIndex(2); });
+	connect(this->GPUButton, &QToolButton::clicked, this, [this] { emit SendHardwareTabIndex(3); });
+	connect(this->DiskButton, &QToolButton::clicked, this, [this] { emit SendHardwareTabIndex(4); });
+	connect(this->MonitorButton, &QToolButton::clicked, this, [this] { emit SendHardwareTabIndex(5); });
+	connect(this->AudioButton, &QToolButton::clicked, this, [this] { emit SendHardwareTabIndex(6); });
+	connect(this->NetworkButton, &QToolButton::clicked, this, [this] { emit SendHardwareTabIndex(7); });
+	connect(this->OtherButton, &QToolButton::clicked, this, [this] { emit SendHardwareTabIndex(8); });
 }
 
 void HardwareTab::Init()
@@ -82,4 +82,3 @@ void HardwareTab::Init()
     layout->addSpacerItem(verticalSpace);
 	layout->setSpacing(0);
 }
-

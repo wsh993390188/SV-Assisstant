@@ -245,7 +245,7 @@ NTSTATUS ReadMsrThread(WDFREQUEST Request, size_t OutputBufferLength, size_t Inp
 			return STATUS_UNSUCCESSFUL;
 		}
 
-		status = WdfRequestRetrieveOutputBuffer(Request, 4, &buffer, NULL);
+		status = WdfRequestRetrieveOutputBuffer(Request, 8, &buffer, NULL);
 		if (!NT_SUCCESS(status))
 		{
 			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
@@ -300,6 +300,106 @@ NTSTATUS WriteMsrThread(WDFREQUEST Request, size_t OutputBufferLength, size_t In
 			return STATUS_UNSUCCESSFUL;
 		}
 		WdfRequestComplete(Request, STATUS_SUCCESS);
+		return STATUS_SUCCESS;
+	}
+}
+
+/************************************************************************/
+/*                            Read TSC                                  */
+/************************************************************************/
+
+NTSTATUS ReadTsc(
+	WDFREQUEST Request,
+	size_t OutputBufferLength,
+	size_t InputBufferLength
+)
+{
+	UNREFERENCED_PARAMETER(OutputBufferLength);
+	NTSTATUS status;
+	PVOID buffer = NULL;//DeviceIoControl的输入输出buffer
+	MSR_Request MSR_Data;//MSR buffer
+
+	if (!InputBufferLength)
+	{
+		WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
+		return STATUS_INVALID_PARAMETER;
+	}
+	else
+	{
+		status = WdfRequestRetrieveInputBuffer(Request, 2, &buffer, NULL);
+		if (!NT_SUCCESS(status))
+		{
+			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
+			return STATUS_UNSUCCESSFUL;
+		}
+
+		memcpy(&MSR_Data, buffer, InputBufferLength);
+
+		__try
+		{
+			MSR_Data.Value = __rdtsc();
+		}
+		__except (EXCEPTION_EXECUTE_HANDLER)
+		{
+			MSR_Data.Value = -1;
+			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
+			return STATUS_UNSUCCESSFUL;
+		}
+
+		status = WdfRequestRetrieveOutputBuffer(Request, 8, &buffer, NULL);
+		if (!NT_SUCCESS(status))
+		{
+			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
+			return STATUS_UNSUCCESSFUL;
+		}
+		memcpy(buffer, &MSR_Data.Value, sizeof(MSR_Data.Value));
+		WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, sizeof(MSR_Data.Value));
+		return STATUS_SUCCESS;
+	}
+}
+
+NTSTATUS ReadTscThread(WDFREQUEST Request, size_t OutputBufferLength, size_t InputBufferLength)
+{
+	UNREFERENCED_PARAMETER(OutputBufferLength);
+	NTSTATUS status;
+	PVOID buffer = NULL;//DeviceIoControl的输入输出buffer
+	MSR_Request MSR_Data;//MSR buffer
+
+	if (!InputBufferLength)
+	{
+		WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
+		return STATUS_INVALID_PARAMETER;
+	}
+	else
+	{
+		status = WdfRequestRetrieveInputBuffer(Request, 2, &buffer, NULL);
+		if (!NT_SUCCESS(status))
+		{
+			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
+			return STATUS_UNSUCCESSFUL;
+		}
+
+		memcpy(&MSR_Data, buffer, InputBufferLength);
+
+		__try
+		{
+			MSR_Data.Value = __rdtsc();
+		}
+		__except (EXCEPTION_EXECUTE_HANDLER)
+		{
+			MSR_Data.Value = -1;
+			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
+			return STATUS_UNSUCCESSFUL;
+		}
+
+		status = WdfRequestRetrieveOutputBuffer(Request, 8, &buffer, NULL);
+		if (!NT_SUCCESS(status))
+		{
+			WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
+			return STATUS_UNSUCCESSFUL;
+		}
+		memcpy(buffer, &MSR_Data.Value, sizeof(MSR_Data.Value));
+		WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, sizeof(MSR_Data.Value));
 		return STATUS_SUCCESS;
 	}
 }

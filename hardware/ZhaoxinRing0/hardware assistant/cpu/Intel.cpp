@@ -218,7 +218,6 @@ void Intel::UpDateData(void)
 {
 	ExecTemperature();
 	ExecVoltageByFMS();
-	GetBusSpeed();
 	GetCurrentSpeed();
 }
 #pragma endregion
@@ -1256,7 +1255,7 @@ BOOL Intel::GetTjMaxFromMSR()
 #pragma endregion
 
 #pragma region Frequency
-void Intel::GetBusSpeed()
+void Intel::GetBusSpeed(DWORD threadAffinityMask)
 {
 	DWORD64 data = 0;
 	if (SV_ASSIST::Ring0::RdMsr(0xCD, data) == 0)
@@ -1294,28 +1293,28 @@ void Intel::GetBusSpeed()
 		double time;
 		QueryPerformanceFrequency(&nFreq);
 		QueryPerformanceCounter(&nBeginTime);
-		auto tsc1 = __rdtsc();
-		Sleep(1);
-		auto tsc2 = __rdtsc();
-		QueryPerformanceCounter(&nEndTime);
-
-		time = (double)(nEndTime.QuadPart - nBeginTime.QuadPart) / (double)nFreq.QuadPart;
-
-		BusSpeed = (tsc2 - tsc1) / time / (MaxNonTurboFre * 10000.0);
+//		if(SetThreadAffinityMask(GetCurrentThread(), 1ULL << threadAffinityMask) != 0)
+//		{
+			DWORD64 msrdata = 0;
+			auto tsc1 = __rdtsc();
+			Sleep(1);
+			auto tsc2 = __rdtsc();
+			QueryPerformanceCounter(&nEndTime);
+			time = (double)(nEndTime.QuadPart - nBeginTime.QuadPart) / (double)nFreq.QuadPart;
+			BusSpeed = (tsc2 - tsc1) / time / (MaxNonTurboFre * 10000.0);
+		//}
 	}
 }
 
 void Intel::GetCurrentSpeed()
 {
 	DWORD64 msrdata = 0;
-	if (BusSpeed != INFINITY)
+	for (DWORD threadAffinityMask = 0; threadAffinityMask < this->Core; threadAffinityMask++)
 	{
-		for (DWORD threadAffinityMask = 0; threadAffinityMask < this->Core; threadAffinityMask++)
+		if (SV_ASSIST::Ring0::RdMsrTx(IA32_PERF_STATUS, msrdata, threadAffinityMask) == 0)
 		{
-			if (SV_ASSIST::Ring0::RdMsrTx(IA32_PERF_STATUS, msrdata, threadAffinityMask) == 0)
-			{
-				CurrentClockSpeed[threadAffinityMask] = (((DWORD)msrdata >> 8) & 0xFF) * BusSpeed;
-			}
+			GetBusSpeed(threadAffinityMask);
+			CurrentClockSpeed[threadAffinityMask] = (((DWORD)msrdata >> 8) & 0xFF) * BusSpeed;
 		}
 	}
 }

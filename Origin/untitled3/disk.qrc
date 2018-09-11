@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>resources/Disk/Left.png</file>
-        <file>resources/Disk/Right.png</file>
-    </qresource>
-</RCC>

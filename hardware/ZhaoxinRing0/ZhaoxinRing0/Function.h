@@ -227,7 +227,13 @@ WriteMsrThread(
 	_In_ size_t InputBufferLength
 );
 
+NTSTATUS ReadTsc(
+	WDFREQUEST Request,
+	size_t OutputBufferLength,
+	size_t InputBufferLength
+);
 
+NTSTATUS ReadTscThread(WDFREQUEST Request, size_t OutputBufferLength, size_t InputBufferLength);
 /*************************************************
 Function:       // ReadPmc
 Description:    // 读取PMC的数据

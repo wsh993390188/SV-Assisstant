@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/qss"/>
-    <qresource prefix="/">
-        <file>resources/QSS/QScroll.css</file>
-    </qresource>
-</RCC>

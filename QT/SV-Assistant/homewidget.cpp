@@ -88,7 +88,7 @@ void Homewidget::Init()
 	if (gpu.empty())
 		gpubaseinfo->BaseInfo->setText(tr("Unknown GPU"));
 	else
-		gpubaseinfo->BaseInfo->setText(QString::fromStdString(gpu.at(0).GPUname));
+		gpubaseinfo->BaseInfo->setText(QString::fromStdString(gpu.at(0).first.GPUname));
 	connect(gpubaseinfo->BaseLabel, &QPushButton::clicked, this, [=] {emit switchPage(3); });
 
 	auto diskinfo = SV_ASSIST::Storage::GetDiskSMARTInfo();

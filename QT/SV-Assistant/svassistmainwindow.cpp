@@ -80,7 +80,9 @@ void SVAssistMainWindow::InitWindow()
     connect(ui->GameTesttoolButton, &QToolButton::clicked, this, [&]{ ui->HomestackedWidget->setCurrentIndex(5); });
 	connect(ui->NetworklistWidget, &NetworkListWidget::SendNetStruct, ui->NetworktextBrowser, &NetworkTableWidget::ReceiveNetdata);
 	connect(ui->HardwareTabwidget, &HardwareTab::SendHardwareTabIndex, this, [&](int Index) {ui->HardwareInfomationstackedWidget->setCurrentIndex(Index); });
+	connect(ui->HardwareMasterTabWidget, &HardwareMasterTab::SendHardwareTabIndex, this, [&](int Index) {ui->HardwareMasterStackedWidget->setCurrentIndex(Index); });
 	connect(ui->TitleStackedWidget, &Homewidget::switchPage, this, [&](int Pages) { ui->BottomstackedWidget->setCurrentIndex(Pages); });
+	connect(ui->IOBasetoolButton, &IOButton::SendBaseAddr, ui->IoBasetableView, [&](unsigned int addr) { ui->IoBasetableView->SetBaseAddr(addr); });
 	CPUUsageID = this->startTimer(1000);
 }
 

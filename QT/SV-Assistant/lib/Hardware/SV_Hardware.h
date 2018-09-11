@@ -5,6 +5,7 @@
 #include <map>
 #include <tchar.h>
 
+#include "Driverdll.h"
 #include "ACPI.h"
 #include "CAudio.h"
 #include "CPU.h"
@@ -15,7 +16,6 @@
 #include "Iusb.h"
 #include "gpu.h"
 #include "NetworkLib.h"
-#include "Driverdll.h"
 #include "MemoryLib.h"
 #include "PCI-E.h"
 #include "gpu.h"
