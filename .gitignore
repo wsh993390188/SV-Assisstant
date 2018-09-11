@@ -329,11 +329,11 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 
-sqlite/*
+/hardware/ZhaoxinRing0/hardware\ assistant/sv-assistant/sv-assistant/sqlite
 
-Ring0Test/*
+/hardware/ZhaoxinRing0/Ring0Test/
 
-.vs/*
+*.zx
 
-record/*
+/record/
 
