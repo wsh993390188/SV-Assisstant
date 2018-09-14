@@ -20,9 +20,12 @@
 #include <bitset>
 #include <iostream>
 #include "..\..\driver\Defination\Ring0Defination.h"
+#include "boost/format.hpp"
+
+#ifdef ZX_OutputLog
 #include "log/easylogging++.h"
 #include "log/sv_log.h"
-#include "boost/format.hpp"
+#endif
 
 // TODO:  在此处引用程序需要的其他头文件
 

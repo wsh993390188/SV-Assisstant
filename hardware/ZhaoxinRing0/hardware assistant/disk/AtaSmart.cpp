@@ -677,14 +677,14 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 		CComPtr<IWbemClassObject>		pCOMDev = nullptr;
 
 		
-		OutputDebugString(_T("CAtaSmart::Init WMI on - Start\n"));
+		OutputDebugPrintf(_T("CAtaSmart::Init WMI on - Start"));
 
 		bool initWmi = true;
 		CDnpService	cService;
 	
 		if(! cService.IsServiceRunning(_T("Winmgmt")))
 		{
-			OutputDebugString(_T("Waiting... Winmgmt\n"));
+			OutputDebugPrintf(_T("Waiting... Winmgmt"));
 			initWmi = cService.EasyStart(_T("Winmgmt"));
 		}
 
@@ -692,18 +692,18 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 		{
 			try
 			{
-				OutputDebugString(_T("CoInitialize()\n"));
+				OutputDebugPrintf(_T("CoInitialize()"));
 				CoInitialize(NULL);
-				OutputDebugString(_T("CoInitializeSecurity()\n"));
+				OutputDebugPrintf(_T("CoInitializeSecurity()"));
 				CoInitializeSecurity(NULL, -1, NULL, NULL, RPC_C_AUTHN_LEVEL_DEFAULT,
 					RPC_C_IMP_LEVEL_IMPERSONATE, NULL, EOAC_NONE, NULL);
-				OutputDebugString(_T("CoCreateInstance()\n"));
+				OutputDebugPrintf(_T("CoCreateInstance()"));
 				//CLSID_WbemAdministrativeLocator / 
 				if(FAILED(CoCreateInstance(CLSID_WbemLocator, NULL, CLSCTX_INPROC_SERVER,
 					IID_IWbemLocator, (LPVOID *)&pIWbemLocator)))
 				{
 					CoUninitialize();
-					OutputDebugString(_T("NG:WMI Init 1\n"));
+					OutputDebugPrintf(_T("NG:WMI Init 1"));
 				}
 				else 
 				{
@@ -715,30 +715,30 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 						securityFlag = WBEM_FLAG_CONNECT_USE_MAX_WAIT;
 					}
 
-					OutputDebugString(_T("ConnectServer()\n"));
+					OutputDebugPrintf(_T("ConnectServer()"));
 					if (FAILED(pIWbemLocator->ConnectServer(_bstr_t(L"\\\\.\\root\\cimv2"),
 						NULL, NULL, 0L,
 						securityFlag,
 						NULL, NULL, &pIWbemServices)))
 					{
 						CoUninitialize();
-						OutputDebugString(_T("NG:WMI Init 2\n"));
+						OutputDebugPrintf(_T("NG:WMI Init 2"));
 					}
 					else
 					{
-						OutputDebugString(_T("CoSetProxyBlanket()\n"));
+						OutputDebugPrintf(_T("CoSetProxyBlanket()"));
 						hRes = CoSetProxyBlanket(pIWbemServices, RPC_C_AUTHN_WINNT, RPC_C_AUTHZ_NONE,
 							NULL, RPC_C_AUTHN_LEVEL_CALL, RPC_C_IMP_LEVEL_IMPERSONATE, NULL, EOAC_NONE);
 						if(FAILED(hRes))
 						{
 							CoUninitialize();
-							std::wstring cstr = boost::str(boost::wformat(_T("NG:WMI Init - %08X\n")) % hRes);
-							OutputDebugString(cstr.c_str());
+							std::wstring cstr = boost::str(boost::wformat(_T("NG:WMI Init - %08X")) % hRes);
+							OutputDebugPrintf(cstr.c_str());
 						}
 						else
 						{
 							IsEnabledWmi = TRUE;
-							OutputDebugString(_T("OK:WMI Init\n"));
+							OutputDebugPrintf(_T("OK:WMI Init"));
 						}
 					}
 					pIWbemLocator = nullptr;
@@ -746,12 +746,12 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 			}
 			catch(...)
 			{
-				OutputDebugString(_T("EX:WMI Init\n"));
+				OutputDebugPrintf(_T("EX:WMI Init"));
 			}
 		}
 		else
 		{
-			OutputDebugString(_T("NG:WMI Init 3\n"));
+			OutputDebugPrintf(_T("NG:WMI Init 3"));
 		}
 
 		if(IsEnabledWmi)
@@ -831,11 +831,11 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 					pEnumCOMDevs2 = nullptr;
 				}
 				pEnumCOMDevs = nullptr;
-				OutputDebugString(_T("OK:Win32_IDEController\n"));
+				OutputDebugPrintf(_T("OK:Win32_IDEController"));
 			}
 			catch(...)
 			{
-				OutputDebugString(_T("EX:Win32_IDEController\n"));
+				OutputDebugPrintf(_T("EX:Win32_IDEController"));
 			}
 
 			try
@@ -972,11 +972,11 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 					pEnumCOMDevs2 = nullptr;
 				}
 				pEnumCOMDevs = nullptr;
-				OutputDebugString(_T("OK:Win32_SCSIController\n"));
+				OutputDebugPrintf(_T("OK:Win32_SCSIController"));
 			}
 			catch(...)
 			{
-				OutputDebugString(_T("EX:Win32_SCSIController\n"));
+				OutputDebugPrintf(_T("EX:Win32_SCSIController"));
 			}
 
 			try
@@ -1047,17 +1047,17 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 					pEnumCOMDevs2 = nullptr;
 				}
 				pEnumCOMDevs = nullptr;
-				OutputDebugString(_T("OK:Win32_USBController\n"));
+				OutputDebugPrintf(_T("OK:Win32_USBController"));
 
 				for(int i = 0; i < externals.size(); i++)
 				{
-					cstr = boost::str(boost::wformat(_T("VID=%04Xh, PID=%04Xh\n")) % externals[i].UsbVendorId % externals[i].UsbProductId);
-					OutputDebugString(cstr.c_str());
+					cstr = boost::str(boost::wformat(_T("VID=%04Xh, PID=%04Xh")) % externals[i].UsbVendorId % externals[i].UsbProductId);
+					OutputDebugPrintf(cstr.c_str());
 				}
 			}
 			catch(...)
 			{
-				OutputDebugString(_T("EX:Win32_USBController\n"));
+				OutputDebugPrintf(_T("EX:Win32_USBController"));
 			}
 /*
 			try
@@ -1094,11 +1094,11 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 					SAFE_RELEASE(pEnumCOMDevs2);
 				}
 				SAFE_RELEASE(pEnumCOMDevs);
-				OutputDebugString(_T("OK:Win32_1394Controller"));
+				OutputDebugPrintf(_T("OK:Win32_1394Controller"));
 			}
 			catch(...)
 			{
-				OutputDebugString(_T("EX:Win32_1394Controller"));
+				OutputDebugPrintf(_T("EX:Win32_1394Controller"));
 			}
 */
 			/* DEBUG
@@ -1126,17 +1126,16 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 				hIoCtrl = GetIoCtrlHandle(i);
 				if(hIoCtrl == INVALID_HANDLE_VALUE)
 				{
-				///	OutputDebugString(_T("INVALID_HANDLE_VALUE - continue"));
+				///	OutputDebugPrintf(_T("INVALID_HANDLE_VALUE - continue"));
 					continue;
 				}
-				///	OutputDebugString(_T("DeviceIoControl"));
+				///	OutputDebugPrintf(_T("DeviceIoControl"));
 				bRet = ::DeviceIoControl(hIoCtrl, IOCTL_DISK_GET_DRIVE_GEOMETRY, 
 					NULL, 0, &dg, sizeof(DISK_GEOMETRY),
 					&dwReturned, NULL);
 				if(dg.MediaType == FixedMedia)
 				{
-					std::wstring cstr = boost::str(boost::wformat(_T("WakeUp(%d)\n")) % i);
-					OutputDebugString(cstr.c_str());
+					OutputDebugPrintf(boost::str(boost::wformat(_T("WakeUp(%d)")) % i).c_str());
 					WakeUp(i);
 				}
 				::CloseHandle(hIoCtrl);
@@ -1153,18 +1152,18 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 
 			try
 			{
-				OutputDebugString(_T("DO:SELECT * FROM Win32_DiskDrive\n"));
+				OutputDebugPrintf(_T("DO:SELECT * FROM Win32_DiskDrive"));
 				hRes = pIWbemServices->ExecQuery(_bstr_t(L"WQL"), 
 					_bstr_t(L"SELECT * FROM Win32_DiskDrive"), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumCOMDevs);
 				if(FAILED(hRes))
 				{
 					goto safeRelease;
 				}
-				OutputDebugString(_T("OK1:SELECT * FROM Win32_DiskDrive\n"));
+				OutputDebugPrintf(_T("OK1:SELECT * FROM Win32_DiskDrive"));
 
 				if(! pEnumCOMDevs)
 				{
-					OutputDebugString(_T("pEnumCOMDevs == NULL\n"));
+					OutputDebugPrintf(_T("pEnumCOMDevs == NULL"));
 					goto safeRelease;
 				}
 
@@ -1172,10 +1171,10 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 				{
 					if(uReturned != 1)
 					{
-						OutputDebugString(_T("uReturned != 1\n"));
+						OutputDebugPrintf(_T("uReturned != 1"));
 						break;
 					}
-					OutputDebugString(_T("while(pEnumCOMDevs ...\n"));
+					OutputDebugPrintf(_T("while(pEnumCOMDevs ..."));
 					std::wstring mapping1, mapping2;
 					std::wstring model, deviceId, diskSize, mediaType, interfaceTypeWmi, pnpDeviceId, firmware;
 					INT physicalDriveId = -1, scsiPort = -1, scsiTargetId = -1, scsiBus = -1;
@@ -1191,14 +1190,14 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 					if(pCOMDev->Get(L"Size", 0L, &pVal, NULL, NULL) == WBEM_S_NO_ERROR && pVal.vt > VT_NULL)
 					{
 						diskSize = pVal.bstrVal;
-						OutputDebugString(std::wstring(_T("diskSize:") + diskSize + _T("\n")).c_str() );
+						OutputDebugPrintf(std::wstring(_T("diskSize:") + diskSize).c_str() );
 						pVal.Clear();
 					}
 
 					if(pCOMDev->Get(L"DeviceID", 0L, &pVal, NULL, NULL) == WBEM_S_NO_ERROR && pVal.vt > VT_NULL)
 					{
 						deviceId = pVal.bstrVal;
-						OutputDebugString(std::wstring(_T("deviceId:") + deviceId + _T("\n")).c_str());
+						OutputDebugPrintf(std::wstring(_T("deviceId:") + deviceId).c_str());
 						boost::algorithm::replace_all(deviceId, _T("\\"), _T("\\\\"));
 						if(_ttoi(deviceId.substr(deviceId.size() - 2, deviceId.size()).c_str()) >= 10)
 						{
@@ -1213,7 +1212,7 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 					if(pCOMDev->Get(L"Model", 0L, &pVal, NULL, NULL) == WBEM_S_NO_ERROR && pVal.vt > VT_NULL)
 					{
 						model = pVal.bstrVal;
-						OutputDebugString(std::wstring(_T("model:") + model + _T("\n")).c_str());
+						OutputDebugPrintf(std::wstring(_T("model:") + model).c_str());
 						pVal.Clear();
 					}
 					if(pCOMDev->Get(L"FirmwareRevision", 0L, &pVal, NULL, NULL) == WBEM_S_NO_ERROR && pVal.vt > VT_NULL)
@@ -1239,7 +1238,7 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 					if(pCOMDev->Get(L"MediaType", 0L, &pVal, NULL, NULL) == WBEM_S_NO_ERROR && pVal.vt > VT_NULL)
 					{
 						mediaType = pVal.bstrVal;
-						OutputDebugString(std::wstring(_T("mediaType:") + mediaType + _T("\n")).c_str());
+						OutputDebugPrintf(std::wstring(_T("mediaType:") + mediaType).c_str());
 						boost::to_lower(mediaType);
 						pVal.Clear();
 
@@ -1272,7 +1271,7 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 					if(pCOMDev->Get(L"InterfaceType", 0L, &pVal, NULL, NULL) == WBEM_S_NO_ERROR && pVal.vt > VT_NULL)
 					{
 						interfaceTypeWmi = pVal.bstrVal;
-						OutputDebugString(std::wstring(_T("interfaceTypeWmi:") + interfaceTypeWmi + _T("\n")).c_str());
+						OutputDebugPrintf(std::wstring(_T("interfaceTypeWmi:") + interfaceTypeWmi).c_str());
 						pVal.Clear();
 					}
 
@@ -1280,7 +1279,7 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 					if(pCOMDev->Get(L"PNPDeviceID", 0L, &pVal, NULL, NULL) == WBEM_S_NO_ERROR && pVal.vt > VT_NULL)
 					{
 						pnpDeviceId = pVal.bstrVal;
-						OutputDebugString(std::wstring(_T("pnpDeviceId:") + pnpDeviceId + _T("\n")).c_str());
+						OutputDebugPrintf(std::wstring(_T("pnpDeviceId:") + pnpDeviceId).c_str());
 						boost::to_upper(pnpDeviceId);
 						pVal.Clear();
 
@@ -1289,7 +1288,7 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 						{
 							if(m_UASPController.at(i).find(pnpDeviceId) != std::wstring::npos)
 							{
-								OutputDebugString(std::wstring(_T("UASPController:") + pnpDeviceId + _T("\n")).c_str());
+								OutputDebugPrintf(std::wstring(_T("UASPController:") + pnpDeviceId).c_str());
 								flagUasp = TRUE;
 							}
 						}
@@ -1299,7 +1298,7 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 						{
 							if(m_SiliconImageController.at(i).find(pnpDeviceId) != std::wstring::npos)
 							{
-								OutputDebugString(std::wstring(_T("SiliconImageController:") + pnpDeviceId + _T("\n")).c_str());
+								OutputDebugPrintf(std::wstring(_T("SiliconImageController:") + pnpDeviceId).c_str());
 								siliconImageType = m_SiliconImageControllerType.at(i);
 							}
 						}
@@ -1308,7 +1307,7 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 						{
 							if(m_BlackIdeController.at(i).find(pnpDeviceId) != std::wstring::npos)
 							{
-								OutputDebugString(std::wstring(_T("BlackIdeController:") + pnpDeviceId + _T("\n")).c_str());
+								OutputDebugPrintf(std::wstring(_T("BlackIdeController:") + pnpDeviceId).c_str());
 								m_BlackPhysicalDrive.emplace_back(physicalDriveId);
 								flagBlackList = TRUE;
 							}
@@ -1317,7 +1316,7 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 						{
 							if(m_BlackScsiController.at(i).find(pnpDeviceId) != std::wstring::npos)
 							{
-								OutputDebugString(std::wstring(_T("BlackScsiController:") + pnpDeviceId + _T("\n")).c_str());
+								OutputDebugPrintf(std::wstring(_T("BlackScsiController:") + pnpDeviceId).c_str());
 								flagBlackList = TRUE;
 							}
 						}
@@ -1329,8 +1328,8 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 					{
 						// GetDiskInfo
 						std::wstring cstr;
-						cstr = boost::str(boost::wformat(_T("DO:GetDiskInfo pd=%1%, sp=%2%, st=%3%, mt=%4%\n")) % physicalDriveId % scsiPort % scsiTargetId % mediaType);
-						OutputDebugString(cstr.c_str());
+						cstr = boost::str(boost::wformat(_T("DO:GetDiskInfo pd=%1%, sp=%2%, st=%3%, mt=%4%")) % physicalDriveId % scsiPort % scsiTargetId % mediaType);
+						OutputDebugPrintf(cstr.c_str());
 
 						INTERFACE_TYPE interfaceType = INTERFACE_TYPE_UNKNOWN;
 						COMMAND_TYPE commandType = CMD_TYPE_UNKNOWN;
@@ -1339,12 +1338,12 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 
 						if(interfaceTypeWmi.find(_T("1394")) != std::wstring::npos || (model.find(_T(" IEEE 1394 SBP2 Device")) != 0 && model.find(_T(" IEEE 1394 SBP2 Device")) != std::wstring::npos))
 						{
-							OutputDebugString(_T("INTERFACE_TYPE_IEEE1394\n"));
+							OutputDebugPrintf(_T("INTERFACE_TYPE_IEEE1394"));
 							interfaceType = INTERFACE_TYPE_IEEE1394;
 						}
 						else if(interfaceTypeWmi.find(_T("USB")) != std::wstring::npos || (model.find(_T(" USB Device")) != 0 && model.find(_T(" USB Device")) != std::wstring::npos) || flagUasp)
 						{
-							OutputDebugString(_T("INTERFACE_TYPE_USB\n"));
+							OutputDebugPrintf(_T("INTERFACE_TYPE_USB"));
 							interfaceType = INTERFACE_TYPE_USB;
 
 							if (model.find(_T("NVMe")) != std::wstring::npos || pnpDeviceId.find(_T("NVME")) != std::wstring::npos)
@@ -1354,7 +1353,7 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 						}
 						else if (model.find(_T("NVMe")) != std::wstring::npos || pnpDeviceId.find(_T("NVME")) != std::wstring::npos)
 						{
-							OutputDebugString(_T("INTERFACE_TYPE_NVME\n"));
+							OutputDebugPrintf(_T("INTERFACE_TYPE_NVME"));
 							interfaceType = INTERFACE_TYPE_NVME;
 							flagNVMe = TRUE;
 						}
@@ -1370,7 +1369,7 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 								usbVendorId = (VENDOR_ID)externals[i].UsbVendorId;
 								usbProductId = externals[i].UsbProductId;
 								cstr = boost::str(boost::wformat(_T("usbVendorId=%04X, usbProductId=%04X\n")) % usbVendorId% usbProductId);
-								OutputDebugString(cstr.c_str());
+								OutputDebugPrintf(cstr.c_str());
 							}
 						}
 
@@ -1386,10 +1385,10 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 							flagTarget = FALSE;
 						}
 
-						OutputDebugString(_T("flagTarget && GetDiskInfo\n"));
+						OutputDebugPrintf(_T("flagTarget && GetDiskInfo"));
 						if (flagTarget && GetDiskInfo(physicalDriveId, scsiPort, scsiTargetId, interfaceType, commandType, usbVendorId, usbProductId, scsiBus, siliconImageType, FlagNvidiaController, FlagMarvellController, pnpDeviceId, flagNVMe, flagUasp))
 						{
-							OutputDebugString(_T("int index = (int)vars.GetCount() - 1;\n"));
+							OutputDebugPrintf(_T("int index = (int)vars.GetCount() - 1;"));
 							auto index = (int)vars.size() - 1;
 							if(! diskSize.empty())
 							{
@@ -1492,9 +1491,9 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 							
 							if(vars[index].Model.empty())
 							{
-								OutputDebugString(std::wstring(_T("WmiModel: ") + model + _T("\n")).c_str());
-								OutputDebugString(std::wstring(_T("SerialNumber: ") + vars[index].SerialNumber + _T("\n")).c_str());
-								OutputDebugString(std::wstring(_T("vars.RemoveAt(index) - 1\n")).c_str());
+								OutputDebugPrintf(std::wstring(_T("WmiModel: ") + model).c_str());
+								OutputDebugPrintf(std::wstring(_T("SerialNumber: ") + vars[index].SerialNumber).c_str());
+								OutputDebugPrintf(std::wstring(_T("vars.RemoveAt(index) - 1")).c_str());
 								vars.erase(vars.begin() + index);
 							}
 							else if(flagSkipModelCheck)
@@ -1518,46 +1517,46 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 							}
 							else
 							{
-								OutputDebugString(std::wstring(_T("WmiModel: ") + model + _T("\n")).c_str());
-								OutputDebugString(std::wstring(_T("Model: ") + vars[index].Model + _T("\n")).c_str());
-								OutputDebugString(std::wstring(_T("SerialNumber: ") + vars[index].SerialNumber + _T("\n")).c_str());
-								OutputDebugString(_T("DISABLED: vars.RemoveAt(index) - 2\n"));
+								OutputDebugPrintf(std::wstring(_T("WmiModel: ") + model).c_str());
+								OutputDebugPrintf(std::wstring(_T("Model: ") + vars[index].Model).c_str());
+								OutputDebugPrintf(std::wstring(_T("SerialNumber: ") + vars[index].SerialNumber).c_str());
+								OutputDebugPrintf(_T("DISABLED: vars.RemoveAt(index) - 2"));
 							//	vars.RemoveAt(index);
 							}
 
 							// DEBUG
 							// vars[index].VendorId = VENDOR_MTRON;
-							OutputDebugString(_T("OK:Check Model Name\n"));
+							OutputDebugPrintf(_T("OK:Check Model Name"));
 
 						}
 					}
 				}
 				catch(...)
 				{
-					OutputDebugString(_T("EX:while(pEnumCOMDevs\n"));
+					OutputDebugPrintf(_T("EX:while(pEnumCOMDevs"));
 				}
 				}
 				pEnumCOMDevs = nullptr;
-				OutputDebugString(_T("OK2:SELECT * FROM Win32_DiskDrive\n"));
+				OutputDebugPrintf(_T("OK2:SELECT * FROM Win32_DiskDrive"));
 			}
 			catch(...)
 			{
-				OutputDebugString(_T("EX:SELECT * FROM Win32_DiskDrive\n"));
+				OutputDebugPrintf(_T("EX:SELECT * FROM Win32_DiskDrive"));
 			}
 
 			// Drive Letter Mapping Start
 			/*
 			try
 			{
-				OutputDebugString(_T("DO:SELECT * FROM Win32_DiskPartition"));
+				OutputDebugPrintf(_T("DO:SELECT * FROM Win32_DiskPartition"));
 				hRes = pIWbemServices->ExecQuery(_bstr_t(L"WQL"), 
 					_bstr_t(L"SELECT * FROM Win32_DiskPartition"), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumCOMDevs);
 				if(FAILED(hRes))
 				{
-					OutputDebugString(_T("NG:SELECT * FROM Win32_DiskPartition"));
+					OutputDebugPrintf(_T("NG:SELECT * FROM Win32_DiskPartition"));
 					goto safeRelease;
 				}
-				OutputDebugString(_T("OK:SELECT * FROM Win32_DiskPartition"));
+				OutputDebugPrintf(_T("OK:SELECT * FROM Win32_DiskPartition"));
 
 				while(pEnumCOMDevs && SUCCEEDED(pEnumCOMDevs->Next(10000, 1, &pCOMDev, &uReturned)) && uReturned == 1)
 				{
@@ -1579,7 +1578,7 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 						_bstr_t(L"SELECT * FROM Win32_LogicalDisk Where DriveType = 3"), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &pEnumCOMDevs2);
 					if(FAILED(hRes))
 					{
-						OutputDebugString(_T("NG:SELECT * FROM Win32_LogicalDisk Where DriveType = 3"));
+						OutputDebugPrintf(_T("NG:SELECT * FROM Win32_LogicalDisk Where DriveType = 3"));
 						goto safeRelease;
 					}
 
@@ -1612,12 +1611,12 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 				}
 				SAFE_RELEASE(pEnumCOMDevs);
 
-				OutputDebugString(_T("OK:Drive Letter Mapping"));
+				OutputDebugPrintf(_T("OK:Drive Letter Mapping"));
 
 			}
 			catch(...)
 			{
-				OutputDebugString(_T("EX:Drive Letter Mapping"));
+				OutputDebugPrintf(_T("EX:Drive Letter Mapping"));
 			}
 		*/
 safeRelease:
@@ -1627,12 +1626,12 @@ safeRelease:
 			pEnumCOMDevs2 = nullptr;
 			pIWbemServices = nullptr;
 			CoUninitialize();
-		  OutputDebugString(_T("OK:CoUninitialize()\n"));
+		  OutputDebugPrintf(_T("OK:CoUninitialize()"));
 		}
 	}
 	else
 	{
-		OutputDebugString(_T("CAtaSmart::Init WMI off - Start\n"));
+		OutputDebugPrintf(_T("CAtaSmart::Init WMI off - Start"));
 	}
 	
 	// \\\\.\\PhysicalDrive%d
@@ -1665,24 +1664,24 @@ safeRelease:
 
 		if(flagChecked)
 		{
-///			OutputDebugString(_T("flagChecked - continue"));
+///			OutputDebugPrintf(_T("flagChecked - continue"));
 			continue;
 		}
 
-///		OutputDebugString(_T("GetIoCtrlHandle"));
+///		OutputDebugPrintf(_T("GetIoCtrlHandle"));
 		hIoCtrl = GetIoCtrlHandle(i);
 		if(hIoCtrl == INVALID_HANDLE_VALUE)
 		{
-///			OutputDebugString(_T("INVALID_HANDLE_VALUE - continue"));
+///			OutputDebugPrintf(_T("INVALID_HANDLE_VALUE - continue"));
 			continue;
 		}
-///		OutputDebugString(_T("DeviceIoControl"));
+///		OutputDebugPrintf(_T("DeviceIoControl"));
 		bRet = ::DeviceIoControl(hIoCtrl, IOCTL_DISK_GET_DRIVE_GEOMETRY, 
 			NULL, 0, &dg, sizeof(DISK_GEOMETRY),
 			&dwReturned, NULL);
 		if(bRet == FALSE || dwReturned != sizeof(DISK_GEOMETRY) || dg.MediaType != FixedMedia)
 		{
-///			OutputDebugString(_T("CloseHandle - continue"));
+///			OutputDebugPrintf(_T("CloseHandle - continue"));
 			::CloseHandle(hIoCtrl);
 			continue;
 		}
@@ -1740,7 +1739,7 @@ safeRelease:
 		// USB-HDD Check
 		// if(! IsEnabledWmi)
 		{
-			OutputDebugString(_T("USB-HDD Check\n"));
+			OutputDebugPrintf(_T("USB-HDD Check"));
 
 			BYTE cbData[4096];
 			ZeroMemory(cbData, 4096);
@@ -1753,36 +1752,36 @@ safeRelease:
 			sQuery.QueryType	= PropertyStandardQuery;
 			sQuery.AdditionalParameters[0] = NULL;
 
-///			OutputDebugString(_T("DeviceIoControl"));
+///			OutputDebugPrintf(_T("DeviceIoControl"));
 			bRet = ::DeviceIoControl(hIoCtrl, IOCTL_STORAGE_QUERY_PROPERTY, &sQuery,
 				sizeof(STORAGE_PROPERTY_QUERY), &cbData, 4096, &dwRet, NULL);
 
 			if(bRet != FALSE)
 			{
-				OutputDebugString(_T("Check Bus Type\n"));
+				OutputDebugPrintf(_T("Check Bus Type"));
 				pDescriptor = (STORAGE_DEVICE_DESCRIPTOR*)&cbData;
 				if(pDescriptor->BusType == BusTypeUsb)
 				{
-					OutputDebugString(_T("Bus Type = USB\n"));
+					OutputDebugPrintf(_T("Bus Type = USB"));
 					interfaceType = INTERFACE_TYPE_USB;
 					vendor = USB_VENDOR_ALL;
 				}
 			}
 		}
-///		OutputDebugString(_T("CloseHandle"));
+///		OutputDebugPrintf(_T("CloseHandle"));
 		::CloseHandle(hIoCtrl);
 
-		OutputDebugString(_T("DO:GetDiskInfo\n"));
+		OutputDebugPrintf(_T("DO:GetDiskInfo"));
 		if(GetDiskInfo(i, -1, -1, interfaceType, commandType, vendor))
 		{
-			OutputDebugString(_T("OK:GetDiskInfo\n"));
+			OutputDebugPrintf(_T("OK:GetDiskInfo"));
 			auto index = vars.size() - 1;
 			
 			std::wstring cmp, cstr;
 
 ///			cstr.Format(_T("index: %d"), index);
 			cmp = vars[index].Model;
-			OutputDebugString(_T("Check Reverse\n"));
+			OutputDebugPrintf(_T("Check Reverse"));
 			if(cmp.find(_T("DW C")) == 0 // WDC 
 			|| cmp.find(_T("iHat")) == 0 // Hitachi
 			|| cmp.find(_T("ASSM")) == 0 // SAMSUNG
@@ -1791,7 +1790,7 @@ safeRelease:
 			|| cmp.find(_T("UFIJ")) == 0 // FUJITSU
 			)	
 			{
-				OutputDebugString(_T("Reverse\n"));
+				OutputDebugPrintf(_T("Reverse"));
 				vars[index].SerialNumber = CharToWchar(vars[index].SerialNumberReverse.c_str(), vars[index].SerialNumberReverse.size());
 				vars[index].FirmwareRev = CharToWchar(vars[index].FirmwareRevReverse.c_str(), vars[index].FirmwareRevReverse.size());
 				vars[index].Model = CharToWchar(vars[index].ModelReverse.c_str(), vars[index].ModelReverse.size());
@@ -1800,17 +1799,17 @@ safeRelease:
 
 			if(interfaceType == INTERFACE_TYPE_USB)
 			{
-				cstr = boost::str(boost::wformat(_T("USB (%1%)\n")) % vars[index].Interface);
+				cstr = boost::str(boost::wformat(_T("USB (%1%)")) % vars[index].Interface);
 				vars[index].Interface = cstr;
 			}
 		}
 	}
 
-	OutputDebugString(_T("OK:GetDiskInfo - PhysicalDrive\n"));
+	OutputDebugPrintf(_T("OK:GetDiskInfo - PhysicalDrive"));
 	// Sort
 	std::sort(vars.begin(), vars.end(), Compare);
 
-	OutputDebugString(_T("OK:sort\n"));
+	OutputDebugPrintf(_T("OK:sort"));
 
 	// Advanced Disk Search
 	if(IsAdvancedDiskSearch)
@@ -1842,10 +1841,10 @@ safeRelease:
 				}
 			}
 		}
-		OutputDebugString(_T("OK:GetDiskInfo - Scsi\n"));
+		OutputDebugPrintf(_T("OK:GetDiskInfo - Scsi"));
 	}
 
-	OutputDebugString(_T("Drive Letter Mapping - Start\n"));
+	OutputDebugPrintf(_T("Drive Letter Mapping - Start"));
 
 	// Drive Letter Mapping http://www.cplusplus.com/forum/windows/12196/
 	for(TCHAR c = 'A'; c <= 'Z'; c++)
@@ -1854,7 +1853,7 @@ safeRelease:
 		TCHAR szPath[MAX_PATH] = {};
 		wsprintf(szPath, _T("%c:\\"), c);
 		cstr = szPath;
-		OutputDebugString(cstr.c_str());
+		OutputDebugPrintf(cstr.c_str());
 
 		if(GetDriveType(cstr.c_str()) == DRIVE_FIXED)
 		{
@@ -1866,20 +1865,20 @@ safeRelease:
 		}
 		else
 		{
-			OutputDebugString(_T("Drive Letter Mapping - != DRIVE_FIXED\n"));
+			OutputDebugPrintf(_T("Drive Letter Mapping - != DRIVE_FIXED"));
 			continue;
 		}
 		
 		wsprintf(szPath, _T("\\\\.\\%c:"), c);
 		cstr = szPath;
 		cstr += _T("\n");
-		OutputDebugString(cstr.c_str());
+		OutputDebugPrintf(cstr.c_str());
 
 		HANDLE hHandle = CreateFile(szPath, GENERIC_READ|GENERIC_WRITE, FILE_SHARE_WRITE|FILE_SHARE_READ,
 			NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		if(hHandle == INVALID_HANDLE_VALUE)
 		{
-			OutputDebugString(_T("Drive Letter Mapping - INVALID_HANDLE_VALUE\n"));
+			OutputDebugPrintf(_T("Drive Letter Mapping - INVALID_HANDLE_VALUE"));
 			continue;
 		}
 		VOLUME_DISK_EXTENTS_LX volumeDiskExtents;
@@ -1889,12 +1888,12 @@ safeRelease:
 		CloseHandle(hHandle);
 		if(!bResult)
 		{
-			OutputDebugString(_T("Drive Letter Mapping - bResult == FALSE\n"));
+			OutputDebugPrintf(_T("Drive Letter Mapping - bResult == FALSE"));
 			continue;
 		}
 
-		cstr = boost::str(boost::wformat(_T("volumeDiskExtents.NumberOfDiskExtents = %d\n")) % volumeDiskExtents.NumberOfDiskExtents);
-		OutputDebugString(cstr.c_str());
+		cstr = boost::str(boost::wformat(_T("volumeDiskExtents.NumberOfDiskExtents = %d")) % volumeDiskExtents.NumberOfDiskExtents);
+		OutputDebugPrintf(cstr.c_str());
 
 		for (DWORD n = 0; n < volumeDiskExtents.NumberOfDiskExtents && volumeDiskExtents.NumberOfDiskExtents < 4; ++n)
 		{
@@ -1910,11 +1909,11 @@ safeRelease:
 			{
 				driveLetterMap[pDiskExtent->DiskNumber] |= 1 << (c - 'A');
 			}
-			cstr = boost::str(boost::wformat(_T("n = %d, pDiskExtent->DiskNumber = %d\n")) % n % pDiskExtent->DiskNumber);
-			OutputDebugString(cstr.c_str());
+			cstr = boost::str(boost::wformat(_T("n = %d, pDiskExtent->DiskNumber = %d")) % n % pDiskExtent->DiskNumber);
+			OutputDebugPrintf(cstr.c_str());
 		}
 	}
-	OutputDebugString(_T("Drive Letter Mapping - End\n"));
+	OutputDebugPrintf(_T("Drive Letter Mapping - End"));
 
 	for(int i = 0; i < vars.size(); i++)
 	{
@@ -1931,7 +1930,7 @@ safeRelease:
 				std::wstring cstr = boost::str(boost::wformat(_T("%C")) % (j + 'A'));
 				driveLetter += cstr + _T(": ");
 				vars[i].DriveLetterMap += (1 << j);
-				OutputDebugString(cstr.c_str());
+				OutputDebugPrintf(cstr.c_str());
 			}
 		}
 		vars[i].DriveMap.append(driveLetter);
@@ -1940,7 +1939,7 @@ safeRelease:
 	// Drive Letter Mapping2
 
 	MeasuredGetTickCount = GetTickCount();
-	OutputDebugString(_T("CAtaSmart::Init - Complete\n"));
+	OutputDebugPrintf(_T("CAtaSmart::Init - Complete"));
 
 	if(flagChangeDisk != NULL)
 	{
@@ -2172,7 +2171,7 @@ BOOL CAtaSmart::AddDisk(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INT
 	|| CheckAsciiStringError(identify->A.Model, sizeof(identify->A.Model)))
 	{
 		asi.IsIdInfoIncorrect = TRUE;
-	//	OutputDebugString(_T("CheckAsciiStringError"));
+	//	OutputDebugPrintf(_T("CheckAsciiStringError"));
 		return FALSE;
 	}
 
@@ -2214,7 +2213,7 @@ BOOL CAtaSmart::AddDisk(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INT
 
 	if(asi.Model.empty() || asi.FirmwareRev.empty())
 	{
-		OutputDebugString(_T("asi.Model.IsEmpty() || asi.FirmwareRev.IsEmpty()\n"));
+		OutputDebugPrintf(_T("asi.Model.IsEmpty() || asi.FirmwareRev.IsEmpty()"));
 		asi.IsIdInfoIncorrect = TRUE;
 		return FALSE;
 	}
@@ -2232,7 +2231,7 @@ BOOL CAtaSmart::AddDisk(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INT
 				if(CsmiType == CSMI_TYPE_ENABLE_AUTO)
 				{
 					duplicatedId = i;
-					OutputDebugString(_T("vars[i].CommandType = CMD_TYPE_CSMI_PHYSICAL_DRIVE\n"));
+					OutputDebugPrintf(_T("vars[i].CommandType = CMD_TYPE_CSMI_PHYSICAL_DRIVE"));
 					vars[i].CommandType = CMD_TYPE_CSMI_PHYSICAL_DRIVE;
 					vars[i].CommandTypeString = commandTypeString[vars[i].CommandType];
 					break;
@@ -2463,15 +2462,15 @@ BOOL CAtaSmart::AddDisk(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INT
 		switch(asi.CommandType)
 		{
 		case CMD_TYPE_PHYSICAL_DRIVE:
-			debug = boost::str(boost::wformat(_T("GetSmartAttributePd(%d) - 1\n")) % physicalDriveId);
-			OutputDebugString(debug.c_str());
+			debug = boost::str(boost::wformat(_T("GetSmartAttributePd(%d) - 1")) % physicalDriveId);
+			OutputDebugPrintf(debug.c_str());
 			if(GetSmartAttributePd(physicalDriveId, asi.Target, &asi))
 			{
 				CheckSsdSupport(asi);
 				GetSmartAttributePd(physicalDriveId, asi.Target, &asiCheck);
 				if(CheckSmartAttributeCorrect(&asi, &asiCheck))
 				{
-					debug = boost::str(boost::wformat(_T("GetSmartAttributePd(%d) - 1A\n")) % physicalDriveId);
+					debug = boost::str(boost::wformat(_T("GetSmartAttributePd(%d) - 1A")) % physicalDriveId);
 					asi.IsSmartCorrect = TRUE;
 				}
 
@@ -2485,15 +2484,15 @@ BOOL CAtaSmart::AddDisk(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INT
 			
 			if(! asi.IsSmartCorrect && ControlSmartStatusPd(physicalDriveId, asi.Target, ENABLE_SMART))
 			{
-				debug = boost::str(boost::wformat(_T("GetSmartAttributePd(%d) - 2\n")) % physicalDriveId);
-				OutputDebugString(debug.c_str());
+				debug = boost::str(boost::wformat(_T("GetSmartAttributePd(%d) - 2")) % physicalDriveId);
+				OutputDebugPrintf(debug.c_str());
 				if(GetSmartAttributePd(physicalDriveId, asi.Target, &asi))
 				{
 					CheckSsdSupport(asi);
 					GetSmartAttributePd(physicalDriveId, asi.Target, &asiCheck);
 					if(CheckSmartAttributeCorrect(&asi, &asiCheck))
 					{
-						debug = boost::str(boost::wformat(_T("GetSmartAttributePd(%d) - 2A\n")) % physicalDriveId);
+						debug = boost::str(boost::wformat(_T("GetSmartAttributePd(%d) - 2A")) % physicalDriveId);
 						asi.IsSmartCorrect = TRUE;
 					}
 					if(GetSmartThresholdPd(physicalDriveId, asi.Target, &asi))
@@ -2509,7 +2508,7 @@ BOOL CAtaSmart::AddDisk(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INT
 			// 2013/12/2 - https://crystalmark.info/bbs/c-board.cgi?cmd=one;no=1330;id=diskinfo#1330
 			if (memcmp(asi.SmartReadData, asi.SmartReadThreshold, 512) == 0 && asi.DiskVendorId != SSD_VENDOR_INDILINX)
 			{
-				OutputDebugString(_T("asi.SmartReadData == asi.SmartReadThreshold\n"));
+				OutputDebugPrintf(_T("asi.SmartReadData == asi.SmartReadThreshold"));
 				asi.IsSmartCorrect = FALSE;
 				asi.IsThresholdCorrect = FALSE;
 				asi.IsSmartEnabled = FALSE;
@@ -2518,7 +2517,7 @@ BOOL CAtaSmart::AddDisk(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INT
 				m_FlagAtaPassThroughSmart = TRUE; // Force Enable ATA_PASS_THROUGH
 				
 				debug.Format(_T("GetSmartAttributePd(%d) - 1"), physicalDriveId);
-				OutputDebugString(debug);
+				OutputDebugPrintf(debug);
 				if(GetSmartAttributePd(physicalDriveId, asi.Target, &asi))
 				{
 					CheckSsdSupport(asi);
@@ -2540,7 +2539,7 @@ BOOL CAtaSmart::AddDisk(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INT
 				if(! asi.IsSmartCorrect && ControlSmartStatusPd(physicalDriveId, asi.Target, ENABLE_SMART))
 				{
 					debug.Format(_T("GetSmartAttributePd(%d) - 2"), physicalDriveId);
-					OutputDebugString(debug);
+					OutputDebugPrintf(debug);
 					if(GetSmartAttributePd(physicalDriveId, asi.Target, &asi))
 					{
 						CheckSsdSupport(asi);
@@ -2598,22 +2597,22 @@ BOOL CAtaSmart::AddDisk(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INT
 			}
 			break;
 		case CMD_TYPE_SILICON_IMAGE:
-			OutputDebugString(_T("GetSmartAttributeSi(physicalDriveId, &asi)\n"));
+			OutputDebugPrintf(_T("GetSmartAttributeSi(physicalDriveId, &asi)"));
 			if(GetSmartAttributeSi(physicalDriveId, &asi))
 			{
 				CheckSsdSupport(asi);
-				OutputDebugString(_T("GetSmartAttributeSi(physicalDriveId, &asiCheck)\n"));
+				OutputDebugPrintf(_T("GetSmartAttributeSi(physicalDriveId, &asiCheck)"));
 				GetSmartAttributeSi(physicalDriveId, &asiCheck);
-				OutputDebugString(_T("CheckSmartAttributeCorrect(&asi, &asiCheck) - 1\n"));
+				OutputDebugPrintf(_T("CheckSmartAttributeCorrect(&asi, &asiCheck) - 1"));
 				if(CheckSmartAttributeCorrect(&asi, &asiCheck))
 				{
 					asi.IsSmartCorrect = TRUE;
 					// Compare Si and Pd 
 					GetSmartAttributePd(physicalDriveId, 0xA0, &asiCheck);
-					OutputDebugString(_T("CheckSmartAttributeCorrect(&asi, &asiCheck) - 2\n"));
+					OutputDebugPrintf(_T("CheckSmartAttributeCorrect(&asi, &asiCheck) - 2"));
 					if(CheckSmartAttributeCorrect(&asi, &asiCheck))
 					{
-						OutputDebugString(_T("GetSmartThresholdPd\n"));
+						OutputDebugPrintf(_T("GetSmartThresholdPd"));
 						// Does not support GetSmartThresholdSi
 						GetSmartThresholdPd(physicalDriveId, 0xA0, &asi);
 						asi.IsThresholdCorrect = TRUE;
@@ -2659,15 +2658,15 @@ BOOL CAtaSmart::AddDisk(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INT
 			}
 			break;
 		case CMD_TYPE_CSMI_PHYSICAL_DRIVE:
-			debug = boost::str(boost::wformat(_T("GetSmartAttributePd(%d) - 1 CSMI\n")) % physicalDriveId);
-			OutputDebugString(debug.c_str());
+			debug = boost::str(boost::wformat(_T("GetSmartAttributePd(%d) - 1 CSMI")) % physicalDriveId);
+			OutputDebugPrintf(debug.c_str());
 			if(GetSmartAttributePd(physicalDriveId, asi.Target, &asi))
 			{
 				CheckSsdSupport(asi);
 				GetSmartAttributePd(physicalDriveId, asi.Target, &asiCheck);
 				if(CheckSmartAttributeCorrect(&asi, &asiCheck))
 				{
-					debug = boost::str(boost::wformat(_T("GetSmartAttributePd(%d) - 1A CSMI\n")) % physicalDriveId);
+					debug = boost::str(boost::wformat(_T("GetSmartAttributePd(%d) - 1A CSMI")) % physicalDriveId);
 					asi.IsSmartCorrect = TRUE;
 				}
 
@@ -2680,8 +2679,8 @@ BOOL CAtaSmart::AddDisk(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INT
 
 			if(! asi.IsSmartEnabled || ! asi.IsSmartCorrect || ! asi.IsThresholdCorrect)
 			{
-				debug = _T("GetSmartAttributeCsmi - 1 CSMI\n");
-				OutputDebugString(debug.c_str());
+				debug = _T("GetSmartAttributeCsmi - 1 CSMI");
+				OutputDebugPrintf(debug.c_str());
 				if(GetSmartAttributeCsmi(scsiPort, sasPhyEntity, &asi))
 				{
 					CheckSsdSupport(asi);
@@ -2730,12 +2729,12 @@ BOOL CAtaSmart::AddDisk(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INT
 		case CMD_TYPE_LOGITEC2:
 		case CMD_TYPE_JMICRON:
 		case CMD_TYPE_CYPRESS:
-			debug = boost::str(boost::wformat(_T("GetSmartAttributeSat(%d) - 1 [%s]\n")) % physicalDriveId % commandTypeString[asi.CommandType]);
-			OutputDebugString(debug.c_str());
+			debug = boost::str(boost::wformat(_T("GetSmartAttributeSat(%d) - 1 [%s]")) % physicalDriveId % commandTypeString[asi.CommandType]);
+			OutputDebugPrintf(debug.c_str());
 			if(GetSmartAttributeSat(physicalDriveId, asi.Target, &asi))
 			{
 				CheckSsdSupport(asi);
-				OutputDebugString(_T("GetSmartAttributeSat - 1A\n"));
+				OutputDebugPrintf(_T("GetSmartAttributeSat - 1A"));
 				GetSmartAttributeSat(physicalDriveId, asi.Target, &asiCheck);
 				if(CheckSmartAttributeCorrect(&asi, &asiCheck))
 				{
@@ -2751,11 +2750,11 @@ BOOL CAtaSmart::AddDisk(INT physicalDriveId, INT scsiPort, INT scsiTargetId, INT
 			
 			if(! asi.IsSmartCorrect && ControlSmartStatusSat(physicalDriveId, asi.Target, ENABLE_SMART, asi.CommandType))
 			{
-				OutputDebugString(_T("GetSmartAttributeSat - 2\n"));
+				OutputDebugPrintf(_T("GetSmartAttributeSat - 2"));
 				if(GetSmartAttributeSat(physicalDriveId, asi.Target, &asi))
 				{
 					CheckSsdSupport(asi);
-					OutputDebugString(_T("GetSmartAttributeSat - 2A\n"));
+					OutputDebugPrintf(_T("GetSmartAttributeSat - 2A"));
 					GetSmartAttributeSat(physicalDriveId, asi.Target, &asiCheck);
 					if(CheckSmartAttributeCorrect(&asi, &asiCheck))
 					{
@@ -4247,7 +4246,7 @@ BOOL CAtaSmart::CheckSmartAttributeCorrect(ATA_SMART_INFO* asi1, ATA_SMART_INFO*
 {
 	if(asi1->AttributeCount != asi2->AttributeCount)
 	{
-		OutputDebugString(_T("asi1->AttributeCount != asi2->AttributeCount\n"));
+		OutputDebugPrintf(_T("asi1->AttributeCount != asi2->AttributeCount"));
 		return FALSE;
 	}
 	
@@ -4255,7 +4254,7 @@ BOOL CAtaSmart::CheckSmartAttributeCorrect(ATA_SMART_INFO* asi1, ATA_SMART_INFO*
 	{
 		if(asi1->Attribute[i].Id != asi2->Attribute[i].Id)
 		{
-			OutputDebugString(_T("asi1->Attribute[i].Id != asi2->Attribute[i].Id\n"));
+			OutputDebugPrintf(_T("asi1->Attribute[i].Id != asi2->Attribute[i].Id"));
 			return FALSE;
 		}
 	}
@@ -4289,10 +4288,10 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 	BOOL flagNVMe, BOOL flagUsap
 	)
 {
-	OutputDebugString(_T("GetDiskInfo\n"));
+	OutputDebugPrintf(_T("GetDiskInfo"));
 	if(vars.size() > MAX_DISK)
 	{
-		OutputDebugString(_T("GetDiskInfo - FALSE0\n"));
+		OutputDebugPrintf(_T("GetDiskInfo - FALSE0"));
 		return FALSE;
 	}
 	// Check overlap
@@ -4300,7 +4299,7 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 	{
 		if(physicalDriveId >= 0 && vars[i].PhysicalDriveId == physicalDriveId)
 		{
-			OutputDebugString(_T("GetDiskInfo - FALSE1\n"));
+			OutputDebugPrintf(_T("GetDiskInfo - FALSE1"));
 			return FALSE;
 		}
 		/*
@@ -4309,7 +4308,7 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 			&& vars[i].ScsiBus == scsiBus
 			)
 		{
-			OutputDebugString(_T("GetDiskInfo - FALSE2"));
+			OutputDebugPrintf(_T("GetDiskInfo - FALSE2"));
 			return FALSE;
 		}
 		*/
@@ -4323,11 +4322,11 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 		if(siliconImageType)
 		{
 			WakeUp(physicalDriveId);
-			debug = boost::str(boost::wformat(_T("physicalDriveId=%d, scsiPort=%d, scsiBus=%d, scsiTargetId=%d\n")) % physicalDriveId % scsiPort % scsiTargetId);
-			OutputDebugString(debug.c_str());
+			debug = boost::str(boost::wformat(_T("physicalDriveId=%d, scsiPort=%d, scsiBus=%d, scsiTargetId=%d")) % physicalDriveId % scsiPort % scsiTargetId);
+			OutputDebugPrintf(debug.c_str());
 			if(DoIdentifyDeviceSi(physicalDriveId, scsiPort, scsiBus, siliconImageType, &identify))
 			{
-				OutputDebugString(_T("AddDisk - Si\n"));
+				OutputDebugPrintf(_T("AddDisk - Si"));
 				if(AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_SILICON_IMAGE, &identify, siliconImageType, NULL, pnpDeviceId))
 				{
 					return TRUE;
@@ -4338,30 +4337,30 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 
 		if(physicalDriveId >= 0)
 		{
-			debug = boost::str(boost::wformat(_T("DoIdentifyDevicePd(%d, 0xA0) - 1\n")) % physicalDriveId);
-			OutputDebugString(debug.c_str());
+			debug = boost::str(boost::wformat(_T("DoIdentifyDevicePd(%d, 0xA0) - 1")) % physicalDriveId);
+			OutputDebugPrintf(debug.c_str());
 			if(! DoIdentifyDevicePd(physicalDriveId, 0xA0, &identify))
 			{
-				debug = boost::str(boost::wformat(_T("WakeUp(%d)\n")) % physicalDriveId);
-				OutputDebugString(debug.c_str());
+				debug = boost::str(boost::wformat(_T("WakeUp(%d)")) % physicalDriveId);
+				OutputDebugPrintf(debug.c_str());
 				WakeUp(physicalDriveId);
 
-				debug = boost::str(boost::wformat(_T("DoIdentifyDevicePd(%d, 0xA0) - 2\n")) % physicalDriveId);
-				OutputDebugString(debug.c_str());
+				debug = boost::str(boost::wformat(_T("DoIdentifyDevicePd(%d, 0xA0) - 2")) % physicalDriveId);
+				OutputDebugPrintf(debug.c_str());
 				if(! DoIdentifyDevicePd(physicalDriveId, 0xA0, &identify))
 				{
-					debug = boost::str(boost::wformat(_T("DoIdentifyDevicePd(%d, 0xB0) - 3\n")) % physicalDriveId);
-					OutputDebugString(debug.c_str());
+					debug = boost::str(boost::wformat(_T("DoIdentifyDevicePd(%d, 0xB0) - 3")) % physicalDriveId);
+					OutputDebugPrintf(debug.c_str());
 
 					if(! DoIdentifyDevicePd(physicalDriveId, 0xB0, &identify))
 					{
-						debug = boost::str(boost::wformat(_T("DoIdentifyDeviceScsi(%d, %d) - 4\n")) % scsiPort % scsiTargetId);
-						OutputDebugString(debug.c_str());
+						debug = boost::str(boost::wformat(_T("DoIdentifyDeviceScsi(%d, %d) - 4")) % scsiPort % scsiTargetId);
+						OutputDebugPrintf(debug.c_str());
 
 						if ((FlagNvidiaController || FlagMarvellController || IsAdvancedDiskSearch) && scsiPort >= 0 && scsiTargetId >= 0 && DoIdentifyDeviceScsi(scsiPort, scsiTargetId, &identify))
 						{
-							debug = boost::str(boost::wformat(_T("AddDisk(%d, %d, %d) - 5\n")) % physicalDriveId % scsiPort % scsiTargetId);
-							OutputDebugString(debug.c_str());
+							debug = boost::str(boost::wformat(_T("AddDisk(%d, %d, %d) - 5")) % physicalDriveId % scsiPort % scsiTargetId);
+							OutputDebugPrintf(debug.c_str());
 							return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_SCSI_MINIPORT, &identify, siliconImageType, NULL, pnpDeviceId);
 						}
 						else
@@ -4371,18 +4370,18 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 					}
 				}
 			}
-			debug = boost::str(boost::wformat(_T("AddDisk(%d, %d, %d) - 6\n")) % physicalDriveId % scsiPort % scsiTargetId);
-			OutputDebugString(debug.c_str());
+			debug = boost::str(boost::wformat(_T("AddDisk(%d, %d, %d) - 6")) % physicalDriveId % scsiPort % scsiTargetId);
+			OutputDebugPrintf(debug.c_str());
 			return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_PHYSICAL_DRIVE, &identify, siliconImageType, NULL, pnpDeviceId);
 		}
 		else
 		{
-			debug = boost::str(boost::wformat(_T("DoIdentifyDeviceScsi(%d, %d) - 7\n")) % scsiPort % scsiTargetId);
-			OutputDebugString(debug.c_str());
+			debug = boost::str(boost::wformat(_T("DoIdentifyDeviceScsi(%d, %d) - 7")) % scsiPort % scsiTargetId);
+			OutputDebugPrintf(debug.c_str());
 			if(scsiPort >= 0 && scsiTargetId >= 0 && DoIdentifyDeviceScsi(scsiPort, scsiTargetId, &identify))
 			{
-				debug = boost::str(boost::wformat(_T("AddDisk(%d, %d, %d) - 8\n")) %physicalDriveId % scsiPort % scsiTargetId);
-				OutputDebugString(debug.c_str());
+				debug = boost::str(boost::wformat(_T("AddDisk(%d, %d, %d) - 8")) %physicalDriveId % scsiPort % scsiTargetId);
+				OutputDebugPrintf(debug.c_str());
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_SCSI_MINIPORT, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 		}
@@ -4390,31 +4389,31 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 	else if (interfaceType == INTERFACE_TYPE_NVME)
 	{
 
-		debug = _T("DoIdentifyDeviceNVMeStorageQuery\n");
-		OutputDebugString(debug.c_str());
+		debug = _T("DoIdentifyDeviceNVMeStorageQuery");
+		OutputDebugPrintf(debug.c_str());
 		if (m_FlagNVMeStorageQuery && DoIdentifyDeviceNVMeStorageQuery(physicalDriveId, scsiPort, scsiTargetId, &identify))
 		{
-			debug = _T("AddDiskNVMe - CMD_TYPE_NVME_STORAGE_QUERY\n");
-			OutputDebugString(debug.c_str());
+			debug = _T("AddDiskNVMe - CMD_TYPE_NVME_STORAGE_QUERY");
+			OutputDebugPrintf(debug.c_str());
 			return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_STORAGE_QUERY, &identify);
 		}
 
-		debug = _T("DoIdentifyDeviceNVMeSamsung\n");
-		OutputDebugString(debug.c_str());
+		debug = _T("DoIdentifyDeviceNVMeSamsung");
+		OutputDebugPrintf(debug.c_str());
 		if (DoIdentifyDeviceNVMeSamsung(physicalDriveId, scsiPort, scsiTargetId, &identify))
 		{
-			debug = _T("AddDiskNVMe - CMD_TYPE_NVME_SAMSUNG\n");
-			OutputDebugString(debug.c_str());
+			debug = _T("AddDiskNVMe - CMD_TYPE_NVME_SAMSUNG");
+			OutputDebugPrintf(debug.c_str());
 			return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_SAMSUNG, &identify);
 		}
 
-		debug = _T("DoIdentifyDeviceNVMeIntel\n");
-		OutputDebugString(debug.c_str());
+		debug = _T("DoIdentifyDeviceNVMeIntel");
+		OutputDebugPrintf(debug.c_str());
 
 		if (DoIdentifyDeviceNVMeIntel(physicalDriveId, scsiPort, scsiTargetId, &identify))
 		{
-			debug = _T("AddDiskNVMe - CMD_TYPE_NVME_INTEL\n");
-			OutputDebugString(debug.c_str());
+			debug = _T("AddDiskNVMe - CMD_TYPE_NVME_INTEL");
+			OutputDebugPrintf(debug.c_str());
 			return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_INTEL, &identify);
 		}
 	}
@@ -4433,52 +4432,52 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 
 		if(interfaceType == INTERFACE_TYPE_USB && usbVendorId == USB_VENDOR_LOGITEC && productId == 0x00D9)
 		{
-			OutputDebugString(_T("FALSE: usbVendorId == USB_VENDOR_LOGITEC && productId == 0x00D9\n"));
+			OutputDebugPrintf(_T("FALSE: usbVendorId == USB_VENDOR_LOGITEC && productId == 0x00D9"));
 			return FALSE;
 		}
 
 		if (interfaceType == INTERFACE_TYPE_USB && usbVendorId == USB_VENDOR_JMICRON)
 		{
-			OutputDebugString(_T("usbVendorId == USB_VENDOR_JMICRON\n"));
+			OutputDebugPrintf(_T("usbVendorId == USB_VENDOR_JMICRON"));
 			if (FlagUsbJmicron && DoIdentifyDeviceSat(physicalDriveId, 0xA0, &identify, CMD_TYPE_JMICRON))
 			{
-				OutputDebugString(_T("AddDisk - USB0A\n"));
+				OutputDebugPrintf(_T("AddDisk - USB0A"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_JMICRON, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if (FlagUsbSat && DoIdentifyDeviceSat(physicalDriveId, 0xA0, &identify, CMD_TYPE_SAT))
 			{
-				OutputDebugString(_T("AddDisk - USB1A\n"));
+				OutputDebugPrintf(_T("AddDisk - USB1A"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_SAT, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			if (FlagUsbJmicron && DoIdentifyDeviceSat(physicalDriveId, 0xB0, &identify, CMD_TYPE_JMICRON))
 			{
-				OutputDebugString(_T("AddDisk - USB0B\n"));
+				OutputDebugPrintf(_T("AddDisk - USB0B"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xB0, CMD_TYPE_JMICRON, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if (FlagUsbSat && DoIdentifyDeviceSat(physicalDriveId, 0xB0, &identify, CMD_TYPE_SAT))
 			{
-				OutputDebugString(_T("AddDisk - USB1B\n"));
+				OutputDebugPrintf(_T("AddDisk - USB1B"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xB0, CMD_TYPE_SAT, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if (FlagUsbNVMeJMicron && DoIdentifyDeviceNVMeJMicron(physicalDriveId, scsiPort, scsiTargetId, &identify))
 			{
-				debug = _T("DoIdentifyDeviceNVMeJMicron\n");
-				OutputDebugString(debug.c_str());
-				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_JMICRON\n");
-				OutputDebugString(debug.c_str());
+				debug = _T("DoIdentifyDeviceNVMeJMicron");
+				OutputDebugPrintf(debug.c_str());
+				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_JMICRON");
+				OutputDebugPrintf(debug.c_str());
 				return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_JMICRON, &identify);
 			}
 			else if (FlagUsbNVMeASMedia && DoIdentifyDeviceNVMeASMedia(physicalDriveId, scsiPort, scsiTargetId, &identify))
 			{
-				debug = _T("DoIdentifyDeviceNVMeASMedia\n");
-				OutputDebugString(debug.c_str());
-				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_ASMEDIA\n");
-				OutputDebugString(debug.c_str());
+				debug = _T("DoIdentifyDeviceNVMeASMedia");
+				OutputDebugPrintf(debug.c_str());
+				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_ASMEDIA");
+				OutputDebugPrintf(debug.c_str());
 				return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_ASMEDIA, &identify);
 			}
 			else
 			{
-				OutputDebugString(_T("FALSE - USB0\n"));
+				OutputDebugPrintf(_T("FALSE - USB0"));
 				return FALSE;
 			}
 		}
@@ -4491,74 +4490,74 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 		// StoreJet         http://btmn.jp/2012/02/25/storejet-320gb-crystal-diskinfo/
 		if (interfaceType == INTERFACE_TYPE_USB && (usbVendorId == USB_VENDOR_IO_DATA && productId == 0x0122))
 		{
-			OutputDebugString(_T("(usbVendorId == USB_VENDOR_IO_DATA && productId == 0x0122\n"));
+			OutputDebugPrintf(_T("(usbVendorId == USB_VENDOR_IO_DATA && productId == 0x0122"));
 			if(FlagUsbJmicron && DoIdentifyDeviceSat(physicalDriveId, 0xA0, &identify,  CMD_TYPE_JMICRON))
 			{
-				OutputDebugString(_T("AddDisk - USB0A\n"));
+				OutputDebugPrintf(_T("AddDisk - USB0A"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0,  CMD_TYPE_JMICRON, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if(FlagUsbSat && DoIdentifyDeviceSat(physicalDriveId, 0xA0, &identify, CMD_TYPE_SAT))
 			{
-				OutputDebugString(_T("AddDisk - USB1A\n"));
+				OutputDebugPrintf(_T("AddDisk - USB1A"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_SAT, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			if(FlagUsbJmicron && DoIdentifyDeviceSat(physicalDriveId, 0xB0, &identify,  CMD_TYPE_JMICRON))
 			{
-				OutputDebugString(_T("AddDisk - USB0B\n"));
+				OutputDebugPrintf(_T("AddDisk - USB0B"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xB0,  CMD_TYPE_JMICRON, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if(FlagUsbSat && DoIdentifyDeviceSat(physicalDriveId, 0xB0, &identify, CMD_TYPE_SAT))
 			{
-				OutputDebugString(_T("AddDisk - USB1B\n"));
+				OutputDebugPrintf(_T("AddDisk - USB1B"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xB0, CMD_TYPE_SAT, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else
 			{
-				OutputDebugString(_T("FALSE - USB0\n"));
+				OutputDebugPrintf(_T("FALSE - USB0"));
 				return FALSE;
 			}
 		}
 
 		if(interfaceType == INTERFACE_TYPE_USB && usbVendorId == USB_VENDOR_IO_DATA)
 		{
-			OutputDebugString(_T("usbVendorId == USB_VENDOR_IO_DATA\n"));
+			OutputDebugPrintf(_T("usbVendorId == USB_VENDOR_IO_DATA"));
 			if(FlagUsbIodata && DoIdentifyDeviceSat(physicalDriveId, 0xA0, &identify, CMD_TYPE_IO_DATA))
 			{
-				OutputDebugString(_T("AddDisk - USB2\n"));
+				OutputDebugPrintf(_T("AddDisk - USB2"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_IO_DATA, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if(FlagUsbIodata && DoIdentifyDeviceSat(physicalDriveId, 0xB0, &identify, CMD_TYPE_IO_DATA))
 			{
-				OutputDebugString(_T("AddDisk - USB3\n"));
+				OutputDebugPrintf(_T("AddDisk - USB3"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xB0, CMD_TYPE_IO_DATA, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 		}
 
 		if(interfaceType == INTERFACE_TYPE_USB && usbVendorId == USB_VENDOR_SUNPLUS)
 		{
-			OutputDebugString(_T("usbVendorId == USB_VENDOR_SUNPLUS\n"));
+			OutputDebugPrintf(_T("usbVendorId == USB_VENDOR_SUNPLUS"));
 			if(FlagUsbSunplus && DoIdentifyDeviceSat(physicalDriveId, 0xA0, &identify, CMD_TYPE_SUNPLUS))
 			{
-				OutputDebugString(_T("AddDisk - USB4\n"));
+				OutputDebugPrintf(_T("AddDisk - USB4"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_SUNPLUS, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if(FlagUsbSunplus && DoIdentifyDeviceSat(physicalDriveId, 0xB0, &identify, CMD_TYPE_SUNPLUS))
 			{
-				OutputDebugString(_T("AddDisk - USB5\n"));
+				OutputDebugPrintf(_T("AddDisk - USB5"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xB0, CMD_TYPE_SUNPLUS, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 		}
 		else if(interfaceType == INTERFACE_TYPE_USB && usbVendorId == USB_VENDOR_CYPRESS)
 		{
-			OutputDebugString(_T("usbVendorId == USB_VENDOR_CYPRESS\n"));
+			OutputDebugPrintf(_T("usbVendorId == USB_VENDOR_CYPRESS"));
 			if(FlagUsbCypress && DoIdentifyDeviceSat(physicalDriveId, 0xA0, &identify, CMD_TYPE_CYPRESS))
 			{
-				OutputDebugString(_T("AddDisk - USB6\n"));
+				OutputDebugPrintf(_T("AddDisk - USB6"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_CYPRESS, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if(FlagUsbCypress && DoIdentifyDeviceSat(physicalDriveId, 0xB0, &identify, CMD_TYPE_CYPRESS))
 			{
-				OutputDebugString(_T("AddDisk - USB7\n"));
+				OutputDebugPrintf(_T("AddDisk - USB7"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xB0, CMD_TYPE_CYPRESS, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 		}
@@ -4566,16 +4565,16 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 			(usbVendorId == USB_VENDOR_INITIO || usbVendorId == USB_VENDOR_OXFORD)
 			)
 		{
-			OutputDebugString(_T("usbVendorId == USB_VENDOR_INITIO || usbVendorId == USB_VENDOR_OXFORD\n"));
+			OutputDebugPrintf(_T("usbVendorId == USB_VENDOR_INITIO || usbVendorId == USB_VENDOR_OXFORD"));
 
 			if(FlagUsbSat && DoIdentifyDeviceSat(physicalDriveId, 0xA0, &identify, CMD_TYPE_SAT))
 			{
-				OutputDebugString(_T("AddDisk - USB8\n"));
+				OutputDebugPrintf(_T("AddDisk - USB8"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_SAT, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if(FlagUsbSat && DoIdentifyDeviceSat(physicalDriveId, 0xB0, &identify, CMD_TYPE_SAT))
 			{
-				OutputDebugString(_T("AddDisk - USB9\n"));
+				OutputDebugPrintf(_T("AddDisk - USB9"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xB0, CMD_TYPE_SAT, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 		}
@@ -4583,111 +4582,109 @@ BOOL CAtaSmart::GetDiskInfo(INT physicalDriveId, INT scsiPort, INT scsiTargetId,
 		{
 			if (DoIdentifyDeviceNVMeJMicron(physicalDriveId, scsiPort, scsiTargetId, &identify))
 			{
-				debug = _T("DoIdentifyDeviceNVMeJMicron\n");
-				OutputDebugString(debug.c_str());
-				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_JMICRON\n");
-				OutputDebugString(debug.c_str());
+				debug = _T("DoIdentifyDeviceNVMeJMicron");
+				OutputDebugPrintf(debug.c_str());
+				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_JMICRON");
+				OutputDebugPrintf(debug.c_str());
 				return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_JMICRON, &identify);
 			}
 			// USB-NVMe
 			else if (DoIdentifyDeviceNVMeASMedia(physicalDriveId, scsiPort, scsiTargetId, &identify))
 			{
-				debug = _T("DoIdentifyDeviceNVMeASMedia\n");
-				OutputDebugString(debug.c_str());
-				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_ASMEDIA\n");
-				OutputDebugString(debug.c_str());
+				debug = _T("DoIdentifyDeviceNVMeASMedia");
+				OutputDebugPrintf(debug.c_str());
+				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_ASMEDIA");
+				OutputDebugPrintf(debug.c_str());
 				return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_ASMEDIA, &identify);
 			}
 		}
 		else
 		{
-			OutputDebugString(_T("else (USB-HDD)\n"));
+			OutputDebugPrintf(_T("else (USB-HDD)"));
 
 //			if (DoIdentifyDeviceNVMeASMedia(physicalDriveId, scsiPort, scsiTargetId, &identify))
 //			{
 //				debug = _T("DoIdentifyDeviceNVMeASMedia");
-//				OutputDebugString(debug);
+//				OutputDebugPrintf(debug);
 //				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_ASMEDIA");
-//				OutputDebugString(debug);
+//				OutputDebugPrintf(debug);
 //				return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_ASMEDIA, &identify);
 //			}
 
 			if(FlagUsbSat && DoIdentifyDeviceSat(physicalDriveId, 0xA0, &identify, CMD_TYPE_SAT))
 			{
-				OutputDebugString(_T("AddDisk - USB10\n"));
+				OutputDebugPrintf(_T("AddDisk - USB10"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_SAT, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if(FlagUsbJmicron && DoIdentifyDeviceSat(physicalDriveId, 0xA0, &identify, CMD_TYPE_JMICRON))
 			{
-				OutputDebugString(_T("AddDisk - USB11\n"));
+				OutputDebugPrintf(_T("AddDisk - USB11"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_JMICRON, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if(FlagUsbSunplus && DoIdentifyDeviceSat(physicalDriveId, 0xA0, &identify, CMD_TYPE_SUNPLUS))
 			{
-				OutputDebugString(_T("AddDisk - USB12\n"));
+				OutputDebugPrintf(_T("AddDisk - USB12"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_SUNPLUS, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if(FlagUsbCypress && DoIdentifyDeviceSat(physicalDriveId, 0xA0, &identify, CMD_TYPE_CYPRESS))
 			{
-				OutputDebugString(_T("AddDisk - USB13\n"));
+				OutputDebugPrintf(_T("AddDisk - USB13"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_CYPRESS, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if(FlagUsbLogitec1 && DoIdentifyDeviceSat(physicalDriveId, 0xA0, &identify, CMD_TYPE_LOGITEC1))
 			{
-				OutputDebugString(_T("AddDisk - USB14\n"));
+				OutputDebugPrintf(_T("AddDisk - USB14"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_LOGITEC1, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if (FlagUsbLogitec2 && DoIdentifyDeviceSat(physicalDriveId, 0xA0, &identify, CMD_TYPE_LOGITEC2))
 			{
-				OutputDebugString(_T("AddDisk - USB14\n"));
+				OutputDebugPrintf(_T("AddDisk - USB14"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xA0, CMD_TYPE_LOGITEC2, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if(FlagUsbSat && DoIdentifyDeviceSat(physicalDriveId, 0xB0, &identify, CMD_TYPE_SAT))
 			{
-				OutputDebugString(_T("AddDisk - USB15\n"));
+				OutputDebugPrintf(_T("AddDisk - USB15"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xB0, CMD_TYPE_SAT, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if(FlagUsbJmicron && DoIdentifyDeviceSat(physicalDriveId, 0xB0, &identify, CMD_TYPE_JMICRON))
 			{
-				OutputDebugString(_T("AddDisk - USB16\n"));
+				OutputDebugPrintf(_T("AddDisk - USB16"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xB0, CMD_TYPE_JMICRON, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if(FlagUsbSunplus && DoIdentifyDeviceSat(physicalDriveId, 0xB0, &identify, CMD_TYPE_SUNPLUS))
 			{
-				OutputDebugString(_T("AddDisk - USB17\n"));
+				OutputDebugPrintf(_T("AddDisk - USB17"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xB0, CMD_TYPE_SUNPLUS, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if(FlagUsbCypress && DoIdentifyDeviceSat(physicalDriveId, 0xB0, &identify, CMD_TYPE_CYPRESS))
 			{
-				OutputDebugString(_T("AddDisk - USB18\n"));
+				OutputDebugPrintf(_T("AddDisk - USB18"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xB0, CMD_TYPE_CYPRESS, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if(FlagUsbLogitec1 && DoIdentifyDeviceSat(physicalDriveId, 0xB0, &identify, CMD_TYPE_LOGITEC1))
 			{
-				OutputDebugString(_T("AddDisk - USB19\n"));
+				OutputDebugPrintf(_T("AddDisk - USB19"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xB0, CMD_TYPE_LOGITEC1, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			else if (FlagUsbLogitec2 && DoIdentifyDeviceSat(physicalDriveId, 0xB0, &identify, CMD_TYPE_LOGITEC2))
 			{
-				OutputDebugString(_T("AddDisk - USB20\n"));
+				OutputDebugPrintf(_T("AddDisk - USB20"));
 				return AddDisk(physicalDriveId, scsiPort, scsiTargetId, scsiBus, 0xB0, CMD_TYPE_LOGITEC2, &identify, siliconImageType, NULL, pnpDeviceId);
 			}
 			// USB-NVMe
 			else if (DoIdentifyDeviceNVMeJMicron(physicalDriveId, scsiPort, scsiTargetId, &identify))
 			{
-				debug = _T("DoIdentifyDeviceNVMeJMicron\n");
-				OutputDebugString(debug.c_str());
-				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_JMICRON\n");
-				OutputDebugString(debug.c_str());
+				debug = _T("DoIdentifyDeviceNVMeJMicron");
+				OutputDebugPrintf(debug.c_str());
+				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_JMICRON");
+				OutputDebugPrintf(debug.c_str());
 				return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_JMICRON, &identify);
 			}
 			// USB-NVMe
 			else if (DoIdentifyDeviceNVMeASMedia(physicalDriveId, scsiPort, scsiTargetId, &identify))
 			{
-				debug  =_T("DoIdentifyDeviceNVMeASMedia\n");
-				OutputDebugString(debug.c_str());
-				debug = _T("AddDiskNVMe - CMD_TYPE_NVME_ASMEDIA\n");
-				OutputDebugString(debug.c_str());
+				OutputDebugPrintf(_T("DoIdentifyDeviceNVMeASMedia"));
+				OutputDebugPrintf(_T("AddDiskNVMe - CMD_TYPE_NVME_ASMEDIA"));
 				return AddDiskNVMe(physicalDriveId, scsiPort, scsiTargetId, scsiBus, scsiTargetId, CMD_TYPE_NVME_ASMEDIA, &identify);
 			}
 		}
@@ -4725,7 +4722,7 @@ BOOL CAtaSmart::DoIdentifyDevicePd(INT physicalDriveId, BYTE target, IDENTIFY_DE
 
 	if(m_FlagAtaPassThrough && m_FlagAtaPassThroughSmart)
 	{
-		OutputDebugString(_T("SendAtaCommandPd - IDENTIFY_DEVICE (ATA_PASS_THROUGH)\n"));
+		OutputDebugPrintf(_T("SendAtaCommandPd - IDENTIFY_DEVICE (ATA_PASS_THROUGH)"));
 		bRet = SendAtaCommandPd(physicalDriveId, target, 0xEC, 0x00, 0x00, (PBYTE)data, sizeof(IDENTIFY_DEVICE));
 		cstr = CharToWchar(data->A.Model, 40);
 	}
@@ -4747,7 +4744,7 @@ BOOL CAtaSmart::DoIdentifyDevicePd(INT physicalDriveId, BYTE target, IDENTIFY_DE
 		sendCmd.irDriveRegs.bDriveHeadReg		= target;
 		sendCmd.cBufferSize						= IDENTIFY_BUFFER_SIZE;
 
-		OutputDebugString(_T("SendAtaCommandPd - IDENTIFY_DEVICE\n"));
+		OutputDebugPrintf(_T("SendAtaCommandPd - IDENTIFY_DEVICE"));
 		bRet = ::DeviceIoControl(hIoCtrl, DFP_RECEIVE_DRIVE_DATA, 
 			&sendCmd, sizeof(SENDCMDINPARAMS),
 			&sendCmdOutParam, sizeof(IDENTIFY_DEVICE_OUTDATA),
@@ -4777,7 +4774,7 @@ BOOL CAtaSmart::GetSmartAttributePd(INT physicalDriveId, BYTE target, ATA_SMART_
 
 	if(m_FlagAtaPassThrough && m_FlagAtaPassThroughSmart)
 	{
-		OutputDebugString(_T("SendAtaCommandPd - SMART_READ_DATA (ATA_PASS_THROUGH)\n"));
+		OutputDebugPrintf(_T("SendAtaCommandPd - SMART_READ_DATA (ATA_PASS_THROUGH)"));
 		bRet = SendAtaCommandPd(physicalDriveId, target, SMART_CMD, READ_ATTRIBUTES, 0x00, 
 		(PBYTE)&(asi->SmartReadData), sizeof(asi->SmartReadData));
 	}
@@ -4802,7 +4799,7 @@ BOOL CAtaSmart::GetSmartAttributePd(INT physicalDriveId, BYTE target, ATA_SMART_
 		sendCmd.irDriveRegs.bCommandReg		= SMART_CMD;
 		sendCmd.cBufferSize					= READ_ATTRIBUTE_BUFFER_SIZE;
 
-		OutputDebugString(_T("SendAtaCommandPd - SMART_READ_DATA\n"));
+		OutputDebugPrintf(_T("SendAtaCommandPd - SMART_READ_DATA"));
 		bRet = ::DeviceIoControl(hIoCtrl, DFP_RECEIVE_DRIVE_DATA, 
 			&sendCmd, sizeof(SENDCMDINPARAMS),
 			&sendCmdOutParam, sizeof(SMART_READ_DATA_OUTDATA),
@@ -4832,7 +4829,7 @@ BOOL CAtaSmart::GetSmartThresholdPd(INT physicalDriveId, BYTE target, ATA_SMART_
 
 	if(m_FlagAtaPassThrough && m_FlagAtaPassThroughSmart)
 	{
-		OutputDebugString(_T("SendAtaCommandPd - SMART_READ_THRESHOLDS (ATA_PASS_THROUGH)\n"));
+		OutputDebugPrintf(_T("SendAtaCommandPd - SMART_READ_THRESHOLDS (ATA_PASS_THROUGH)"));
 		bRet = SendAtaCommandPd(physicalDriveId, target, SMART_CMD, READ_THRESHOLDS, 0x00, 
 			(PBYTE)&(asi->SmartReadThreshold), sizeof(asi->SmartReadThreshold));
 	}
@@ -4857,7 +4854,7 @@ BOOL CAtaSmart::GetSmartThresholdPd(INT physicalDriveId, BYTE target, ATA_SMART_
 		sendCmd.irDriveRegs.bCommandReg		= SMART_CMD;
 		sendCmd.cBufferSize					= READ_THRESHOLD_BUFFER_SIZE;
 
-		OutputDebugString(_T("SendAtaCommandPd - SMART_READ_THRESHOLDS\n"));
+		OutputDebugPrintf(_T("SendAtaCommandPd - SMART_READ_THRESHOLDS"));
 		bRet = ::DeviceIoControl(hIoCtrl, DFP_RECEIVE_DRIVE_DATA, 
 			&sendCmd, sizeof(SENDCMDINPARAMS),
 			&sendCmdOutParam, sizeof(SMART_READ_DATA_OUTDATA),
@@ -4887,13 +4884,13 @@ BOOL CAtaSmart::ControlSmartStatusPd(INT physicalDriveId, BYTE target, BYTE comm
 
 	if(m_FlagAtaPassThrough && m_FlagAtaPassThroughSmart)
 	{
-		OutputDebugString(_T("SendAtaCommandPd - SMART_CONTROL_STATUS (ATA_PASS_THROUGH)\n"));
+		OutputDebugPrintf(_T("SendAtaCommandPd - SMART_CONTROL_STATUS (ATA_PASS_THROUGH)"));
 		bRet = SendAtaCommandPd(physicalDriveId, target, SMART_CMD, command, 0x00, NULL, 0);
 	}
 
 	if(! bRet)
 	{
-		OutputDebugString(_T("SendAtaCommandPd - SMART_CONTROL_STATUS\n"));
+		OutputDebugPrintf(_T("SendAtaCommandPd - SMART_CONTROL_STATUS"));
 		hIoCtrl = GetIoCtrlHandle(physicalDriveId);
 		if(hIoCtrl == INVALID_HANDLE_VALUE)
 		{
@@ -6103,7 +6100,7 @@ BOOL CAtaSmart::DoIdentifyDeviceSat(INT physicalDriveId, BYTE target, IDENTIFY_D
 	// DEBUG
 	//	std::wstring cstr;
 	//	cstr.Format(_T("DoIdentifyDevice TYPE=%d"), (DWORD)type);
-	//	OutputDebugString(cstr);
+	//	OutputDebugPrintf(cstr);
 
 	if (type == CMD_TYPE_SAT)
 	{
@@ -6322,7 +6319,7 @@ BOOL CAtaSmart::GetSmartAttributeSat(INT PhysicalDriveId, BYTE target, ATA_SMART
 // DEBUG
 //	std::wstring cstr;
 //	cstr.Format(_T("SmartAttribute TYPE=%d"), asi->CommandType);
-//	OutputDebugString(cstr);
+//	OutputDebugPrintf(cstr);
 
 	COMMAND_TYPE type = asi->CommandType;
 	if(type == CMD_TYPE_SAT)
@@ -6503,7 +6500,7 @@ BOOL CAtaSmart::GetSmartThresholdSat(INT physicalDriveId, BYTE target, ATA_SMART
 // DEBUG
 //	std::wstring cstr;
 //	cstr.Format(_T("SmartThreshold TYPE=%d"), asi->CommandType);
-//	OutputDebugString(cstr);
+//	OutputDebugPrintf(cstr);
 
 	COMMAND_TYPE type = asi->CommandType;
 	if(type == CMD_TYPE_SAT)
@@ -7204,7 +7201,7 @@ BOOL CAtaSmart::AddDiskCsmi(INT scsiPort)
 	if(! CsmiIoctl(hHandle, CC_CSMI_SAS_GET_DRIVER_INFO, &driverInfoBuf.IoctlHeader, sizeof(driverInfoBuf)))
 	{
 		CloseHandle(hHandle);
-		OutputDebugString(_T("FAILED: CC_CSMI_SAS_GET_DRIVER_INFO\n"));
+		OutputDebugPrintf(_T("FAILED: CC_CSMI_SAS_GET_DRIVER_INFO"));
 		return FALSE;
 	}
 
@@ -7213,7 +7210,7 @@ BOOL CAtaSmart::AddDiskCsmi(INT scsiPort)
 	if(! CsmiIoctl(hHandle, CC_CSMI_SAS_GET_RAID_INFO, &raidInfoBuf.IoctlHeader, sizeof(raidInfoBuf)))
 	{
 		CloseHandle(hHandle);
-		OutputDebugString(_T("FAILED: CC_CSMI_SAS_GET_RAID_INFO\n"));
+		OutputDebugPrintf(_T("FAILED: CC_CSMI_SAS_GET_RAID_INFO"));
 		return FALSE;
 	}
 
@@ -7228,7 +7225,7 @@ BOOL CAtaSmart::AddDiskCsmi(INT scsiPort)
 		if(! CsmiIoctl(hHandle, CC_CSMI_SAS_GET_RAID_CONFIG, &(buf->IoctlHeader), size))
 		{
 			CloseHandle(hHandle);
-			OutputDebugString(_T("FAILED: CC_CSMI_SAS_GET_RAID_CONFIG\n"));
+			OutputDebugPrintf(_T("FAILED: CC_CSMI_SAS_GET_RAID_CONFIG"));
 			VirtualFree(buf, 0, MEM_RELEASE);
 			return FALSE;
 		}
@@ -7251,7 +7248,7 @@ BOOL CAtaSmart::AddDiskCsmi(INT scsiPort)
 	if (! CsmiIoctl(hHandle, CC_CSMI_SAS_GET_PHY_INFO, &phyInfoBuf.IoctlHeader, sizeof(phyInfoBuf)))
 	{
 		CloseHandle(hHandle);
-		OutputDebugString(_T("FAILED: CC_CSMI_SAS_GET_PHY_INFO\n"));
+		OutputDebugPrintf(_T("FAILED: CC_CSMI_SAS_GET_PHY_INFO"));
 		return FALSE;
 	}
 	memcpy(&phyInfo, &(phyInfoBuf.Information), sizeof(phyInfoBuf.Information));
@@ -7343,16 +7340,16 @@ BOOL CAtaSmart::CsmiIoctl(HANDLE hHandle, UINT code, SRB_IO_CONTROL *csmiBuf, UI
 BOOL CAtaSmart::DoIdentifyDeviceCsmi(INT scsiPort, PCSMI_SAS_PHY_ENTITY sasPhyEntity, IDENTIFY_DEVICE* data)
 {
 	BOOL flag = FALSE;
-	OutputDebugString(_T("DoIdentifyDeviceCsmi\n"));
+	OutputDebugPrintf(_T("DoIdentifyDeviceCsmi"));
 	return SendAtaCommandCsmi(scsiPort, sasPhyEntity, 0xEC, 0x00, 0x00, (PBYTE)data, sizeof(IDENTIFY_DEVICE));
 }
 
 BOOL CAtaSmart::GetSmartAttributeCsmi(INT scsiPort, PCSMI_SAS_PHY_ENTITY sasPhyEntity, ATA_SMART_INFO* asi)
 {
-	OutputDebugString(_T("GetSmartAttributeCsmi\n"));
+	OutputDebugPrintf(_T("GetSmartAttributeCsmi"));
 	if(SendAtaCommandCsmi(scsiPort, sasPhyEntity, SMART_CMD, READ_ATTRIBUTES, 0x00, (PBYTE)asi->SmartReadData, sizeof(asi->SmartReadData)))
 	{
-		OutputDebugString(_T("FillSmartData\n"));
+		OutputDebugPrintf(_T("FillSmartData"));
 		return FillSmartData(asi);
 	}
 	else
@@ -7363,10 +7360,10 @@ BOOL CAtaSmart::GetSmartAttributeCsmi(INT scsiPort, PCSMI_SAS_PHY_ENTITY sasPhyE
 
 BOOL CAtaSmart::GetSmartThresholdCsmi(INT scsiPort, PCSMI_SAS_PHY_ENTITY sasPhyEntity, ATA_SMART_INFO* asi)
 {
-	OutputDebugString(_T("GetSmartThresholdCsmi\n"));
+	OutputDebugPrintf(_T("GetSmartThresholdCsmi"));
 	if(SendAtaCommandCsmi(scsiPort, sasPhyEntity, SMART_CMD, READ_THRESHOLDS, 0x00, (PBYTE)asi->SmartReadThreshold, sizeof(asi->SmartReadThreshold)))
 	{
-		OutputDebugString(_T("FillSmartThreshold\n"));
+		OutputDebugPrintf(_T("FillSmartThreshold"));
 		return FillSmartThreshold(asi);
 	}
 	else
@@ -7377,7 +7374,7 @@ BOOL CAtaSmart::GetSmartThresholdCsmi(INT scsiPort, PCSMI_SAS_PHY_ENTITY sasPhyE
 
 BOOL CAtaSmart::ControlSmartStatusCsmi(INT scsiPort, PCSMI_SAS_PHY_ENTITY sasPhyEntity, BYTE command)
 {
-	OutputDebugString(_T("ControlSmartStatusCsmi\n"));
+	OutputDebugPrintf(_T("ControlSmartStatusCsmi"));
 	return SendAtaCommandCsmi(scsiPort, sasPhyEntity, SMART_CMD, command, 0x00, NULL, 0);
 }
 

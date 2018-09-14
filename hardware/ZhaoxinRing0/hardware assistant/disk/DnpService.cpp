@@ -61,14 +61,14 @@ bool CDnpService::CServiceThread::EasyStartStop(LPCTSTR pszName, bool b)
 		return true;
 	}
 
-	OutputDebugPrintf(_T("sStatus.dwCurrentState:%08X\n"), sStatus.dwCurrentState);
+	OutputDebugPrintf(_T("sStatus.dwCurrentState:%08X"), sStatus.dwCurrentState);
 
 	//サービス開始要求
-	OutputDebugString(_T("StartService - 1\n"));
+	OutputDebugPrintf(_T("StartService - 1"));
 	bRet = ::StartService(hService, NULL, NULL);
 
 	//開始まで無限ループで待機
-	OutputDebugString(_T("QueryServiceStatus - 1"));
+	OutputDebugPrintf(_T("QueryServiceStatus - 1"));
 	int count = 0;
 	while (::QueryServiceStatus(hService, &sStatus))
 	{
@@ -80,25 +80,25 @@ bool CDnpService::CServiceThread::EasyStartStop(LPCTSTR pszName, bool b)
 
 		if (sStatus.dwCurrentState == SERVICE_RUNNING)
 		{
-			OutputDebugString(_T("StartService Completed : SERVICE_RUNNING\n"));
+			OutputDebugPrintf(_T("StartService Completed : SERVICE_RUNNING"));
 			if (hService) { ::CloseServiceHandle(hService); }
 			if (hManager) { ::CloseServiceHandle(hManager); }
 			return true;
 		}
 
 		::Sleep(100 * count);
-		OutputDebugString(_T("Sleep\n"));
+		OutputDebugPrintf(_T("Sleep"));
 		count++;
 	}
 
 	// サービスの起動モードを auto に強制変更
 	ShellExecute(NULL, NULL, _T("sc"), _T("config Winmgmt start= auto"), NULL, SW_HIDE);
 	count = 0;
-	OutputDebugString(_T("QueryServiceStatus - 2\n"));
+	OutputDebugPrintf(_T("QueryServiceStatus - 2"));
 	while (::QueryServiceStatus(hService, &sStatus))
 	{
 		//サービス開始要求
-		OutputDebugString(_T("StartService - 2\n"));
+		OutputDebugPrintf(_T("StartService - 2"));
 		::StartService(hService, NULL, NULL);
 
 		// 無限ループを回避 (最大 5 秒間 WMI の初期化を待つ)
@@ -109,14 +109,14 @@ bool CDnpService::CServiceThread::EasyStartStop(LPCTSTR pszName, bool b)
 
 		if (sStatus.dwCurrentState == SERVICE_RUNNING)
 		{
-			OutputDebugString(_T("StartService Completed : SERVICE_RUNNING\n"));
+			OutputDebugPrintf(_T("StartService Completed : SERVICE_RUNNING"));
 			if (hService) { ::CloseServiceHandle(hService); }
 			if (hManager) { ::CloseServiceHandle(hManager); }
 			return true;
 		}
 
 		::Sleep(500);
-		OutputDebugString(_T("Sleep\n"));
+		OutputDebugPrintf(_T("Sleep"));
 		count++;
 	}
 

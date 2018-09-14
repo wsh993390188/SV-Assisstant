@@ -163,7 +163,9 @@ namespace SV_ASSIST
 						ret = RegQueryInfoKey(EnumSbukey, NULL, NULL, NULL, &dwSubKeyCnt, &dwSubKeyNameMaxLen, NULL, &dwKeyValueCnt, &dwKeyValueNameMaxLen, &dwKeyValueDataMaxLen, NULL, NULL);
 						if (ret != ERROR_SUCCESS) // Error  
 						{
-							cout << "RegQueryInfoKey FAILED" << endl;
+#ifdef ZX_OutputLog
+							Logger::Instance()->OutputLogInfo(el::Level::Debug, "RegQueryInfoKey FAILED");
+#endif
 							return FALSE;
 						}
 						unique_ptr<TCHAR[]> lpDisplayKeyName(new TCHAR[dwSubKeyNameMaxLen + 1]);
@@ -188,13 +190,17 @@ namespace SV_ASSIST
 												::ZeroMemory(EDIDbuf.get(), *bufffersize);
 												if (RegQueryValueEx(EDIDKey, _T("EDID"), NULL, NULL, (LPBYTE)EDIDbuf.get(), bufffersize) == ERROR_SUCCESS)
 												{
+#ifdef ZX_OutputLog
 													Logger::Instance()->OutputLogInfo(el::Level::Debug, "Get Edid Info");
+#endif
 													memcpy_s(buffer, *bufffersize, EDIDbuf.get(), sizeof(*EDIDbuf));
 													GetEDID = TRUE;
 												}
 												else if (RegQueryValueEx(EDIDKey, _T("BAD_EDID"), NULL, NULL, (LPBYTE)EDIDbuf.get(), bufffersize) == ERROR_SUCCESS)
 												{
+#ifdef ZX_OutputLog
 													Logger::Instance()->OutputLogInfo(el::Level::Debug, "Get Bad Edid Info");
+#endif
 													::ZeroMemory(buffer, *bufffersize);
 												}
 											}

@@ -19,6 +19,9 @@ namespace SV_ASSIST
 			}
 			DiskLibrary() : m_Ata(std::make_shared<CAtaSmart>()), m_FlagChangeDisk{ FALSE }, m_FlagAdvancedDiskSearch{ FALSE }, m_FlagHideNoSmartDisk{ FALSE }, m_FlagworkaroundAdataSsd{ TRUE }, m_FlagWorkaroundHD204UI{ FALSE }
 			{
+#ifdef ZX_OutputLog
+				Logger::Instance()->OutputLogInfo(el::Level::Debug, "********** Disk info **********");
+#endif
 				m_Ata->Init(TRUE, m_FlagAdvancedDiskSearch, &m_FlagChangeDisk, m_FlagWorkaroundHD204UI, m_FlagworkaroundAdataSsd, m_FlagHideNoSmartDisk);
 				for (const auto& i : m_Ata->vars)
 				{
@@ -151,8 +154,17 @@ namespace SV_ASSIST
 					temp.Interface = i.Interface;
 					temp.Enclosure = i.Enclosure;
 					temp.DeviceNominalFormFactor = i.DeviceNominalFormFactor;
-					m_info.emplace_back(temp);
+#ifdef ZX_OutputLog
+					static int i = 0;
+					Logger::Instance()->OutputLogInfo(el::Level::Debug, L"# "+ std::to_wstring(i) + L" " + temp.Model + L" " + temp.TotalDiskSize);
+					Logger::Instance()->OutputLogInfo(el::Level::Debug, L"# " + std::to_wstring(i) + L" " + temp.SerialNumber);
+					Logger::Instance()->OutputLogInfo(el::Level::Debug, L"# " + std::to_wstring(i) + L" " + temp.CurrentTransferMode);
+#endif
+					m_info.emplace_back(std::move(temp));
 				}
+#ifdef ZX_OutputLog
+				Logger::Instance()->OutputLogInfo(el::Level::Debug, "********** End Disk info **********\n");
+#endif
 			}
 			~DiskLibrary();
 			void UpdateData()

@@ -1,6 +1,6 @@
 #include "svassistmainwindow.h"
 #include "ui_svassistmainwindow.h"
-#include "Windows.h"
+#include <Windows.h>
 
 class CCPUUseRate
 {
@@ -82,7 +82,9 @@ void SVAssistMainWindow::InitWindow()
 	connect(ui->HardwareTabwidget, &HardwareTab::SendHardwareTabIndex, this, [&](int Index) {ui->HardwareInfomationstackedWidget->setCurrentIndex(Index); });
 	connect(ui->HardwareMasterTabWidget, &HardwareMasterTab::SendHardwareTabIndex, this, [&](int Index) {ui->HardwareMasterStackedWidget->setCurrentIndex(Index); });
 	connect(ui->TitleStackedWidget, &Homewidget::switchPage, this, [&](int Pages) { ui->BottomstackedWidget->setCurrentIndex(Pages); });
-	connect(ui->IOBasetoolButton, &IOButton::SendBaseAddr, ui->IoBasetableView, [&](unsigned int addr) { ui->IoBasetableView->SetBaseAddr(addr); });
+	connect(ui->IOBasetoolButton, &IOButton::SendBaseAddr, ui->IoBasetableWidget, [&](unsigned int addr) { ui->IoBasetableWidget->SetBaseAddr(addr); });
+	connect(ui->IOIndextoolButton, &IOIndexButton::SendBaseAddr, ui->IoIndextableWidget, [&](uint Index, uint data) { ui->IoIndextableWidget->SetBaseAddr(Index, data); });
+	connect(ui->MemoryBasetoolButton, &MemoryButton::SendBaseAddr, ui->MemoryBasetableWidget, [&](ULARGE_INTEGER addr) { ui->MemoryBasetableWidget->SetBaseAddr(addr); });
 	CPUUsageID = this->startTimer(1000);
 }
 
@@ -97,8 +99,8 @@ void SVAssistMainWindow::timerEvent(QTimerEvent * event)
 	{
 		if (ui->CPUUsagewidget->isVisible())
 			this->UpdateUsages();
-		else
-			ui->CPUUsagewidget->clearData();
+ 		else
+ 			ui->CPUUsagewidget->clearData();
 	}
 }
 

@@ -7,7 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZhaoxinRing0", "ZhaoxinRing
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ring0Test", "Ring0Test\Ring0Test.vcxproj", "{F12E7D71-1CB6-4B81-9A1E-0B304F6E7993}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sv-assistant", "hardware assistant\sv-assistant\sv-assistant\sv-assistant.vcxproj", "{8C332A47-EB90-4E1A-A28E-4A82BAE1CDB9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sv-assistantlib", "hardware assistant\sv-assistant\sv-assistant\sv-assistantlib.vcxproj", "{8C332A47-EB90-4E1A-A28E-4A82BAE1CDB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

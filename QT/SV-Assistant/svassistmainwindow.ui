@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1350</width>
-    <height>900</height>
+    <width>1088</width>
+    <height>702</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -491,7 +491,7 @@ color: rgb(255, 255, 255);</string>
        <number>0</number>
       </property>
       <property name="topMargin">
-       <number>4</number>
+       <number>0</number>
       </property>
       <item>
        <widget class="QStackedWidget" name="HomestackedWidget">
@@ -601,8 +601,8 @@ color: rgb(255, 255, 255);</string>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
-                    <width>20</width>
-                    <height>301</height>
+                    <width>247</width>
+                    <height>364</height>
                    </size>
                   </property>
                  </spacer>
@@ -812,11 +812,23 @@ color: rgb(255, 255, 255);</string>
           </item>
           <item>
            <widget class="QStackedWidget" name="HardwareMasterStackedWidget">
+            <property name="minimumSize">
+             <size>
+              <width>800</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1200</width>
+              <height>750</height>
+             </size>
+            </property>
             <widget class="QWidget" name="HardwareIoPage">
              <property name="minimumSize">
               <size>
                <width>800</width>
-               <height>500</height>
+               <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -846,7 +858,7 @@ color: rgb(255, 255, 255);</string>
                 <property name="minimumSize">
                  <size>
                   <width>800</width>
-                  <height>500</height>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="maximumSize">
@@ -861,7 +873,7 @@ color: rgb(255, 255, 255);</string>
                 <widget class="QWidget" name="IOBasetab">
                  <property name="minimumSize">
                   <size>
-                   <width>0</width>
+                   <width>800</width>
                    <height>0</height>
                   </size>
                  </property>
@@ -903,8 +915,8 @@ min-height:10ex;
                   <property name="spacing">
                    <number>0</number>
                   </property>
-                  <item row="1" column="0" colspan="3">
-                   <widget class="IODataView" name="IoBasetableView">
+                  <item row="1" column="2">
+                   <widget class="QTextBrowser" name="IoBasetextBrowser">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                       <horstretch>0</horstretch>
@@ -913,29 +925,7 @@ min-height:10ex;
                     </property>
                     <property name="minimumSize">
                      <size>
-                      <width>0</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>900</width>
-                      <height>750</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="3">
-                   <widget class="QTextBrowser" name="IotextBrowser">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
+                      <width>200</width>
                       <height>0</height>
                      </size>
                     </property>
@@ -957,7 +947,7 @@ min-height:10ex;
                     </property>
                     <property name="minimumSize">
                      <size>
-                      <width>250</width>
+                      <width>0</width>
                       <height>15</height>
                      </size>
                     </property>
@@ -972,17 +962,330 @@ min-height:10ex;
                     </property>
                    </widget>
                   </item>
+                  <item row="1" column="0" colspan="2">
+                   <widget class="IODataView" name="IoBasetableWidget">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>600</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>900</width>
+                      <height>750</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
                  </layout>
                 </widget>
                 <widget class="QWidget" name="IOIndextab">
+                 <property name="minimumSize">
+                  <size>
+                   <width>800</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>1200</width>
+                   <height>750</height>
+                  </size>
+                 </property>
                  <attribute name="title">
                   <string>Io Index\Data</string>
+                 </attribute>
+                 <layout class="QGridLayout" name="gridLayout_6" columnstretch="0,0,0">
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="spacing">
+                   <number>0</number>
+                  </property>
+                  <item row="1" column="2">
+                   <widget class="QTextBrowser" name="IoIndextextBrowser">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>200</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>300</width>
+                      <height>750</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="IOIndexButton" name="IOIndextoolButton">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>15</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>250</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Io IndexData: 0x70\0x71</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0" colspan="2">
+                   <widget class="IOIndexDataView" name="IoIndextableWidget">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>600</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>900</width>
+                      <height>750</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="MemoryBasetab">
+                 <property name="minimumSize">
+                  <size>
+                   <width>800</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>1200</width>
+                   <height>750</height>
+                  </size>
+                 </property>
+                 <attribute name="title">
+                  <string>Memory Base</string>
+                 </attribute>
+                 <layout class="QGridLayout" name="gridLayout_4">
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="spacing">
+                   <number>0</number>
+                  </property>
+                  <item row="0" column="0">
+                   <widget class="MemoryButton" name="MemoryBasetoolButton">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>15</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Memory Base Address: 0x0000000000000000</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QTextBrowser" name="MemoryBasetextBrowser">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>300</width>
+                      <height>750</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0" colspan="2">
+                   <widget class="MemoryDataView" name="MemoryBasetableWidget">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>600</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>900</width>
+                      <height>750</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="HardwarePCIPage">
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QTabWidget" name="PCItabWidget">
+                <property name="currentIndex">
+                 <number>0</number>
+                </property>
+                <widget class="PCIWidget" name="PCIBasetab">
+                 <attribute name="title">
+                  <string>PCI</string>
+                 </attribute>
+                </widget>
+                <widget class="QWidget" name="PCIOptionROMtab">
+                 <attribute name="title">
+                  <string>PCI Option ROM</string>
+                 </attribute>
+                </widget>
+                <widget class="QWidget" name="PCIETab">
+                 <attribute name="title">
+                  <string>PCIE</string>
                  </attribute>
                 </widget>
                </widget>
               </item>
              </layout>
             </widget>
+            <widget class="SIOWidget" name="HardwareSIOPage"/>
+            <widget class="QWidget" name="HardwareSMBUSPage"/>
+            <widget class="QWidget" name="HardwareSPDPage"/>
+            <widget class="QWidget" name="HardwareMSRPage"/>
+            <widget class="QWidget" name="HardwareECPage"/>
+            <widget class="QWidget" name="HardwareACPIPage"/>
+            <widget class="QWidget" name="HardwareSMBIOSPage"/>
+            <widget class="QWidget" name="HardwareDISKPage">
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QTabWidget" name="tabWidget">
+                <property name="currentIndex">
+                 <number>2</number>
+                </property>
+                <widget class="QWidget" name="DiskIdentifytab">
+                 <attribute name="title">
+                  <string>Identify</string>
+                 </attribute>
+                </widget>
+                <widget class="QWidget" name="DiskSMARTtab">
+                 <attribute name="title">
+                  <string>S.M.A.R.T</string>
+                 </attribute>
+                </widget>
+                <widget class="QWidget" name="DiskSectortab">
+                 <attribute name="title">
+                  <string>Physical Sector</string>
+                 </attribute>
+                </widget>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="HardwareUSBPage"/>
            </widget>
           </item>
          </layout>
@@ -1130,12 +1433,6 @@ min-height:10ex;
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>CurveChart</class>
-   <extends>QWidget</extends>
-   <header>curvechart.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>NetworkListWidget</class>
    <extends>QListWidget</extends>
    <header>NetworkWidget.h </header>
@@ -1144,6 +1441,12 @@ min-height:10ex;
    <class>NetworkTableWidget</class>
    <extends>QTextBrowser</extends>
    <header>NetworkWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CurveChart</class>
+   <extends>QWidget</extends>
+   <header>curvechart.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>HardwareMasterTab</class>
@@ -1157,9 +1460,41 @@ min-height:10ex;
    <header>iobutton.h</header>
   </customwidget>
   <customwidget>
+   <class>IOIndexButton</class>
+   <extends>QToolButton</extends>
+   <header>IOButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MemoryButton</class>
+   <extends>QToolButton</extends>
+   <header>memorybutton.h</header>
+  </customwidget>
+  <customwidget>
    <class>IODataView</class>
-   <extends>QTableView</extends>
+   <extends>QTableWidget</extends>
+   <header>iodataview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MemoryDataView</class>
+   <extends>QTableWidget</extends>
+   <header>memorydataview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>IOIndexDataView</class>
+   <extends>QTableWidget</extends>
    <header>IODataView.h</header>
+  </customwidget>
+  <customwidget>
+   <class>PCIWidget</class>
+   <extends>QWidget</extends>
+   <header>pciwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SIOWidget</class>
+   <extends>QWidget</extends>
+   <header>siowidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

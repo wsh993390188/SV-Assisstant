@@ -316,7 +316,7 @@ BOOL ManageDriver(LPCTSTR DriverId, LPCTSTR DriverPath, USHORT Function)
 			StopDriver(hSCManager, DriverId);
 			rCode = RemoveDriver(hSCManager, DriverId);
 		}
-		RemoveFile(DriverPath);
+//		RemoveFile(DriverPath);
 		break;
 	case OLS_DRIVER_SYSTEM_INSTALL:
 		if(IsSystemInstallDriver(hSCManager, DriverId, DriverPath))

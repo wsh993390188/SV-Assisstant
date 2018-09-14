@@ -17,7 +17,7 @@ namespace SV_ASSIST
 			USHORT PlatformId;
 		private:
 			IBaseMemory(const IBaseMemory& that);
-			const IBaseMemory& operator=(const IBaseMemory& that) {};
+			const IBaseMemory& operator=(const IBaseMemory& that);
 		};
 
 		class CommonSMBUS : public IBaseMemory
@@ -25,8 +25,8 @@ namespace SV_ASSIST
 		public:
 			CommonSMBUS();
 			explicit CommonSMBUS(const USHORT PlatformId, const USHORT SmbusBase);
-			bool ReadSPD(const DIMMType types, const USHORT DIMMId, PVOID64 &spd, const int len, const ULONG SmbusControlBase = 0) override;
-			bool JudgeSPDType(DIMMType& types, const USHORT DIMMId, ULONG& SmbusControlBase) override;
+			bool ReadSPD(const DIMMType types, const USHORT DIMMId, PVOID64 &spd, const int len, const ULONG SmbusControlBase = 0);
+			bool JudgeSPDType(DIMMType& types, const USHORT DIMMId, ULONG& SmbusControlBase);
 		private:
 			bool smbus_wait_until_ready();
 			int smbus_wait_until_done();
@@ -40,9 +40,9 @@ namespace SV_ASSIST
 		{
 		public:
 			IvyBridgeSMbus();
-			bool ReadSPD(const DIMMType types, const USHORT DIMMId, PVOID64 &spd, const int len, const ULONG SmbusControlBase = 0) override;
+			bool ReadSPD(const DIMMType types, const USHORT DIMMId, PVOID64 &spd, const int len, const ULONG SmbusControlBase = 0);
 			void InitSmbuscontrol(const DWORD Smbusbase);
-			bool JudgeSPDType(DIMMType& types, const USHORT DIMMId, ULONG& SmbusControlBase) override;
+			bool JudgeSPDType(DIMMType& types, const USHORT DIMMId, ULONG& SmbusControlBase);
 		private:
 			bool ReadSPD(const DIMMType types, const USHORT DIMMId, const ULONG SmbusBase, PVOID64 & spd, const int len);
 			bool WaitByteCmd(DWORD BaseAddress);

@@ -134,11 +134,6 @@ BOOL CAMD::InitializeADL()
 		// A 32 bit calling application on 64 bit OS will fail to LoadLIbrary.
 		// Try to load the 32 bit library (atiadlxy.dll) instead
 		hDLL = LoadLibraryEx(_T("atiadlxy.dll"), NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
-	if (NULL == hDLL)
-	{
-		OutputDebugString(_T("ADL library not found!\n"));
-		return ADL_ERR;
-	}
 	int adl_err = ADL_ERR;
 	ADL_Main_Control_Create = (ADL_MAIN_CONTROL_CREATE)GetProcAddress(hDLL, "ADL_Main_Control_Create");
 	ADL_Main_Control_Destroy = (ADL_MAIN_CONTROL_DESTROY)GetProcAddress(hDLL, "ADL_Main_Control_Destroy");
@@ -200,6 +195,11 @@ BOOL CAMD::InitializeADL()
 	{
 		adl_err = ADL_Main_Control_Create(this->ADL_Main_Memory_Alloc, 1);
 	}
+	if (NULL == hDLL)
+	{
+		OutputDebugPrintf(_T("ADL library not found!"));
+		return ADL_ERR;
+	}
 	return adl_err;
 }
 
@@ -214,7 +214,7 @@ void CAMD::DestoryADL()
 
 void CAMD::GetBaseInfo()
 {
-	if (NULL != ADL_Graphics_Versions_Get)
+	if (nullptr != ADL_Graphics_Versions_Get)
 	{
 		ADLVersionsInfo	Versioninfo = {};
 		ADL_Graphics_Versions_Get(&Versioninfo);
@@ -239,10 +239,9 @@ void CAMD::GetAdapterinfo()
 		ADL_ERROR_Code = ADL_Adapter_NumberOfAdapters_Get(&iAdapterNumbers);
 		if (ADL_ERROR_Code == ADL_OK)
 		{
-			lpAdapterInfo = new AdapterInfo[iAdapterNumbers];
+			lpAdapterInfo = new AdapterInfo[iAdapterNumbers]{};
 			if (ADL_Adapter_AdapterInfo_Get && 0 < iAdapterNumbers)
 			{
-				memset(lpAdapterInfo, '\0', sizeof(AdapterInfo) * iAdapterNumbers);
 				ADL_ERROR_Code = ADL_Adapter_AdapterInfo_Get(lpAdapterInfo, sizeof(AdapterInfo) * iAdapterNumbers);
 			}
 			if (iAdapterNumbers)
@@ -439,7 +438,7 @@ BOOL CAMD::GetOverDrive5(int adapterId, AMDINFO& info)
 			}
 #ifdef _DEBUG
 			else
-				OutputDebugString(_T("Failed to get Power Controls Info\n"));
+				OutputDebugPrintf(_T("Failed to get Power Controls Info"));
 #endif // _DEBUG
 		}
 	}

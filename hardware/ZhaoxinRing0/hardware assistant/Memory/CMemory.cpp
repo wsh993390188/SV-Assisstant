@@ -67,7 +67,7 @@ bool SV_ASSIST::Memory::CommonSMBUS::ReadSPD(const DIMMType types, const USHORT 
 	if(((types == DDR4|| types == DDR4E || types == LPDDR4) && len < 384) || ((types == LPDDR3 || types == DDR3 || types == DDR2 || types == DDR) && len < 256))
 		return false;
 
-	if (PlatformId == 1002 || PlatformId == 1022)
+	if (PlatformId == 0x1002 || PlatformId == 0x1022)
 	{
 		this->setupFch();
 		this->setupFch();
@@ -91,9 +91,9 @@ bool SV_ASSIST::Memory::CommonSMBUS::ReadSPD(const DIMMType types, const USHORT 
 				memcpy((PBYTE)spd + offset, &val, 1);
 			}
 			Ring0::WrIOPort(SmbusBase + SMBUS_HOST_CMD_REG, 1, 0x6E);
-			Ring0::WrIOPort(SmbusBase + SMBUS_CONTROL_REG, 1, 1);
 			Ring0::WrIOPort(SmbusBase + SMBUS_COMMAND_REG, 1, 0x40);
 			Sleep(1);
+			Ring0::WrIOPort(SmbusBase + SMBUS_HOST_CMD_REG, 1, DIMMId | 1);
 			for (ULONG offset = 0x00; offset < 128; offset++)
 			{
 				if (!smbus_wait_until_ready())
@@ -108,7 +108,6 @@ bool SV_ASSIST::Memory::CommonSMBUS::ReadSPD(const DIMMType types, const USHORT 
 			}
 
 			Ring0::WrIOPort(SmbusBase + SMBUS_HOST_CMD_REG, 1, 0x6C);
-			Ring0::WrIOPort(SmbusBase + SMBUS_CONTROL_REG, 1, 1);
 			Ring0::WrIOPort(SmbusBase + SMBUS_COMMAND_REG, 1, 0x40);
 			Sleep(1);
 		}
@@ -132,6 +131,7 @@ bool SV_ASSIST::Memory::CommonSMBUS::ReadSPD(const DIMMType types, const USHORT 
 				Ring0::RdIOPort(SmbusBase + SMBUS_DATA0_REG, 1, val);
 				memcpy((PBYTE)spd + offset, &val, 1);
 			}
+
 		}
 		else
 			return false;
@@ -201,13 +201,16 @@ bool SV_ASSIST::Memory::CommonSMBUS::JudgeSPDType(DIMMType& types,const USHORT D
 {
 	SmbusControlBase = 0;
 	types = DIMM_UNKNOWN;
-	if (PlatformId == 1002 || PlatformId == 1022)
+	if (PlatformId == 0x1002 || PlatformId == 0x1022)
 	{
 		this->setupFch();
 		this->setupFch();
 	}
 	if (smbus_wait_until_ready())
 	{
+		Ring0::WrIOPort(SmbusBase + SMBUS_HOST_CMD_REG, 1, 0x6C);
+		Ring0::WrIOPort(SmbusBase + SMBUS_COMMAND_REG, 1, 0x48);
+		Sleep(1);
 		Ring0::WrIOPort(SmbusBase + SMBUS_HOST_CMD_REG, 1, DIMMId | 1);
 		Ring0::WrIOPort(SmbusBase + SMBUS_CONTROL_REG, 1, 0x02);
 		Ring0::WrIOPort(SmbusBase + SMBUS_COMMAND_REG, 1, SMBUS_READ_BYTE_COMMAND);
@@ -348,7 +351,7 @@ bool SV_ASSIST::Memory::IvyBridgeSMbus::ClearStatus(DWORD BaseAddress)
 	DWORD loops = 0x8000;
 	do
 	{
-		Ring0::WrMemory(BaseAddress + 4, 4, 0);
+		Ring0::WrIOPort(BaseAddress + 4, 4, 0);
 		DWORD Local8 = {};
 		Ring0::RdMemory(BaseAddress, 4, Local8);
 		if((Local8 & 0x10000000) == 0)
@@ -410,3 +413,4 @@ bool SV_ASSIST::Memory::IvyBridgeSMbus::JudgeSPDType(DIMMType & types, const USH
 	SmbusControlBase = SmbusBase;
 	return true;
 }
+

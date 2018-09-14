@@ -14,6 +14,7 @@ public:
 		std::string ttt = boost::str(boost::format("0x%lx") % Sio->ChipID.first);
 		Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Chip ID:") + ttt + std::string(" Chip Name:") + Sio->ChipID.second);
 #endif // ZX_OutputLog
+		Sio->DetectSIO();
 		if (Sio->IsFintek())
 			SioChip = std::make_shared<F718XX>(Sio->ChipID, Sio->LPCBASE());
 		else if (Sio->IsIte())

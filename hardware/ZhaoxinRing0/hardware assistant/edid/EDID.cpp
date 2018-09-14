@@ -449,7 +449,7 @@ namespace SV_ASSIST
 							outfile << _T("        To be continued") << endl;
 							break;
 						}
-						delete wide;
+						delete[] wide;
 						wide = nullptr;
 					}
 					else

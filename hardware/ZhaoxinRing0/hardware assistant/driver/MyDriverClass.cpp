@@ -8,6 +8,9 @@
 
 CRing0::CRing0():hdevice(INVALID_HANDLE_VALUE)
 {
+#ifdef ZX_OutputLog
+	Logger::Instance()->OutputLogInfo(el::Level::Debug, "********** Driver Loading **********");
+#endif
 	if(this->CRing0_Initialize())
 	{
 		this->ReadAllPci();
@@ -19,8 +22,11 @@ CRing0::CRing0():hdevice(INVALID_HANDLE_VALUE)
 #ifdef _DEBUG
 	else
 	{
-		OutputDebugPrintf(_T("Init Ring0 Failed!\n"));
+		OutputDebugPrintf(_T("Init Ring0 Failed!"));
 	}
+#endif
+#ifdef ZX_OutputLog
+	Logger::Instance()->OutputLogInfo(el::Level::Debug, "********** End Driver Loading **********\n");
 #endif
 }
 
@@ -195,6 +201,16 @@ BOOL CRing0::RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT DWOR
 	memset(membuffer, 0, sizeof(membuffer));
 */
 #ifdef _WIN64
+	if(Memory_Addr > 0xFFFF080000000000)
+	{
+		if(Mem_DataSize == 1)
+			Memory_Data = 0xFF;
+		else if(Mem_DataSize == 2)
+			Memory_Data = 0xFFFF;
+		else if(Mem_DataSize == 4)
+			Memory_Data = 0xFFFFFFFF;
+		return 0;
+	}
 	if ((MemData.UnitSize == 1) || (MemData.UnitSize == 2) || (MemData.UnitSize == 4) || (MemData.UnitSize == 8))
 	{
 		if constexpr (sizeof(void*) == 4)
@@ -223,6 +239,17 @@ BOOL CRing0::RdMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT DWOR
 	}
 	return -1;
 #elif
+	if(Memory_Addr > 0xC0000000)
+	{
+		if(Mem_DataSize == 1)
+			Memory_Data = 0xFF;
+		else if(Mem_DataSize == 2)
+			Memory_Data = 0xFFFF;
+		else if(Mem_DataSize == 4)
+			Memory_Data = 0xFFFFFFFF;
+		return 0;
+		return 0;
+	}
 	if ((MemData.UnitSize == 1) || (MemData.UnitSize == 2) || (MemData.UnitSize == 4))
 	{
 		if constexpr (sizeof(void*) == 4)
@@ -262,6 +289,10 @@ BOOL CRing0::WrMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN DWORD
 	WRmem.Data = Memory_Data;
 	WRmem.UnitSize = Mem_DataSize;
 #ifdef _WIN64
+	if(Memory_Addr > 0xFFFF080000000000)
+	{
+		return 0;
+	}
 	if ((WRmem.UnitSize == 1) || (WRmem.UnitSize == 2) || (WRmem.UnitSize == 4) || (WRmem.UnitSize == 8))
 	{
 		if constexpr (sizeof(void*) == 4)
@@ -289,6 +320,10 @@ BOOL CRing0::WrMemory(IN ULONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN DWORD
 }
 	return -1;
 #elif
+	if(Memory_Addr > 0xC0000000)
+	{
+		return 0;
+	}
 	if ((WRmem.UnitSize == 1) || (WRmem.UnitSize == 2) || (WRmem.UnitSize == 4))
 	{
 		if constexpr (sizeof(void*) == 4)
@@ -369,18 +404,18 @@ BOOL CRing0::WritePci(IN USHORT bus, IN USHORT dev, IN USHORT func, IN UCHAR off
 
 BOOL CRing0::ReadAllPci()
 {
-	PCI_COMMON_CONFIG Pci_Temp;
+
 	for (USHORT bus = 0; bus <= 0xFF; ++bus)
 	{
 		for (USHORT dev = 0; dev <= 0x1F; ++dev)
 		{
 			for (USHORT func = 0; func <= 0x07; ++func)
 			{
+				PCI_COMMON_CONFIG Pci_Temp;
 				this->ReadPci(bus, dev, func, Pci_Temp);
 				if (Pci_Temp.VendorID != 0xFFFF)
 				{
-					std::wstring temp = _T("bus:") + std::to_wstring(bus) + _T(" dev:") + std::to_wstring(dev) + _T(" func:") + std::to_wstring(func);
-					Pci_Config_space.pciconfig.insert(std::map<std::wstring, PCI_COMMON_CONFIG>::value_type(temp, Pci_Temp));
+					Pci_Config_space.pciconfig.emplace_back(std::move(std::make_pair(std::make_tuple(bus,dev,func), std::move(Pci_Temp))));
 				}
 			}
 		}
@@ -402,14 +437,14 @@ BOOL CRing0::CRing0_Initialize()
 		status = Initialize();
 		if (status == TRUE)
 		{
-			OutputDebugPrintf(_T("Initialize Driver Success\n"));
+			OutputDebugPrintf(_T("Initialize Driver Success"));
 			hdevice = gHandle;
 			break;
 		}
 #ifdef _DEBUG
 		else
 		{
-			OutputDebugPrintf(_T("Initialize Driver Failed Times: %d\n"), i);
+			OutputDebugPrintf(_T("Initialize Driver Failed Times: %d"), i);
 		}
 #endif
 		Sleep(100 * i);

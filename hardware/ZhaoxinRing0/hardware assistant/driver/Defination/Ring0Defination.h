@@ -1,4 +1,6 @@
 #pragma once
+
+#include <tuple>
 #include <map>
 #include <string>
 
@@ -125,7 +127,7 @@ typedef struct _PCI_SLOT_NUMBER {
 
 typedef struct _Pci_All_Config_Space
 {
-	std::map<std::wstring, PCI_COMMON_CONFIG> pciconfig;
+	std::vector<std::pair<std::tuple<USHORT,USHORT,USHORT>, PCI_COMMON_CONFIG>> pciconfig;
 }Pci_All_Config_Space, *PPci_All_Config_Space;
 
 struct PCI_OPTION_ROM_HEADER

@@ -27,7 +27,7 @@ namespace SV_ASSIST
 			static MemoryLib* Instance() 
 			{
 				if (!m_memory.get())
-					m_memory = std::make_unique<MemoryLib>();
+					m_memory = std::make_shared<MemoryLib>();
 				return m_memory.get();
 			}
 			MemoryLib();
@@ -53,11 +53,11 @@ namespace SV_ASSIST
 			std::vector<std::pair<ULONG, DDR4_INFO>> Memoryddr4Info;
 			std::vector<std::pair<ULONG, MemoryData>> SPDInfomation;
 			std::unique_ptr<IBaseMemory> m_data;
-			static std::unique_ptr<MemoryLib> m_memory;
+			static std::shared_ptr<MemoryLib> m_memory;
 		};
 
 
-		std::unique_ptr<MemoryLib> MemoryLib::m_memory = nullptr;
+		std::shared_ptr<MemoryLib> MemoryLib::m_memory = nullptr;
 
 		MemoryLib::MemoryLib() : GlobelDIMMType(DIMM_UNKNOWN)
 		{
@@ -73,11 +73,6 @@ namespace SV_ASSIST
 				PCI_COMMON_CONFIG pci = {};
 				Ring0::ReadPci(0, 0, 0, pci);
 				if (pci.VendorID == 0x8086 && pci.DeviceID == 0x3C00)
-				{
-					m_data = nullptr;
-					m_data.reset(new IvyBridgeSMbus());
-				}
-				else if (pci.VendorID == 0x8086 && pci.DeviceID == 0x0E00)
 				{
 					m_data = nullptr;
 					m_data.reset(new IvyBridgeSMbus());
@@ -135,17 +130,17 @@ namespace SV_ASSIST
 				{
 					memset(spd, 0, len);
 				}
-				if(this->ReadSPD(DIMMType, DIMMSlot, spd, len, SmbusBase))
-					if (DIMMType == DDR4 || DIMMType == DDR4E || DIMMType == LPDDR4)
-					{
-						std::pair<ULONG, DDR4_INFO> temp(DIMMSlot, *(PDDR4_INFO)spd);
-						Memoryddr4Info.emplace_back(temp);
-					}
-					else
-					{
-						std::pair<ULONG, DDR3_INFO> temp(DIMMSlot, *(PDDR3_INFO)spd);
-						Memoryddr3Info.emplace_back(temp);
-					}
+				this->ReadSPD(DIMMType, DIMMSlot, spd, len, SmbusBase);
+				if (DIMMType == DDR4 || DIMMType == DDR4E || DIMMType == LPDDR4)
+				{
+					std::pair<ULONG, DDR4_INFO> temp(DIMMSlot, *(PDDR4_INFO)spd);
+					Memoryddr4Info.emplace_back(temp);
+				}
+				else
+				{
+					std::pair<ULONG, DDR3_INFO> temp(DIMMSlot, *(PDDR3_INFO)spd);
+					Memoryddr3Info.emplace_back(temp);
+				}
 			}
 			if(spd)
 			{
@@ -156,8 +151,6 @@ namespace SV_ASSIST
 
 		bool MemoryLib::JudgeSPDType(const USHORT DIMMId, const ULONG SwitchSmbus)
 		{
-			if (!m_data.get())
-				return false;
 			DIMMType types = DIMM_UNKNOWN;
 			ULONG SmbusControlBase = SwitchSmbus;
 			if (this->m_data->JudgeSPDType(types, DIMMId, SmbusControlBase))
@@ -367,27 +360,6 @@ namespace SV_ASSIST
 			default:
 				break;
 			}
-			if (spd.DDR3_Detail.sBusWidth.bits.Bus_width_extension == 1)
-			{
-				data.SupportsECC = true;
-				data.DataBits = (std::to_string(Primarybuswidth + 8) + " Bits With 8 Bits ECC");
-			}
-			else
-			{
-				data.SupportsECC = false;
-				data.DataBits = (std::to_string(Primarybuswidth) + " Bits");
-			}
-			if (spd.DDR3_Detail.MTB_Dividend == 1 && spd.DDR3_Detail.MTB_Divisor == 8)
-			{
-				if (spd.DDR3_Detail.sTCKmin == 10)
-					data.MaxBandWidth = "DDR3-1600 (800MHz)";
-				else if (spd.DDR3_Detail.sTCKmin == 12)
-					data.MaxBandWidth = "DDR3-1333 (666.67MHz)";
-				else if (spd.DDR3_Detail.sTCKmin == 15)
-					data.MaxBandWidth = "DDR3-1066 (533MHz)";
-				else if (spd.DDR3_Detail.sTCKmin == 20)
-					data.MaxBandWidth = "DDR3-800 (400MHz)";
-			}
 			double DDRSize = capacity / 8.0 * Primarybuswidth / SDRAMWidth * Ranks;
 			data.ModuleSize = (size_t)DDRSize;
 			int year = spd.DDR3_Detail.ManufacturingDate[0], week = spd.DDR3_Detail.ManufacturingDate[1];
@@ -397,17 +369,6 @@ namespace SV_ASSIST
 				sprintf_s(part_number, "%02X\\%02X", week, year);
 				data.ProductDate = part_number;
 			}
-
-			{
-				int Banks = pow(2, spd.DDR3_Detail.sSDRAMBank_Density.bits.Bank + 3);
-				data.Ranks_Banks = boost::str(boost::format("%1% Ranks %2% Banks") % Ranks % Banks);
-			}
-			if (!spd.DDR3_Detail.sModuleNominalVoltage.bits.VDD_1_5)
-				data.Voltages += " 1.5 V";
-			if (spd.DDR3_Detail.sModuleNominalVoltage.bits.VDD_1_35)
-				data.Voltages += " 1.35 V";
-			if (spd.DDR3_Detail.sModuleNominalVoltage.bits.VDD_1_2X)
-				data.Voltages += " 1.2X V";
 		}
 
 		void MemoryLib::ExecDDR4ToSPDInfomation(const DDR4_INFO & spd, MemoryData& data)
@@ -551,7 +512,6 @@ namespace SV_ASSIST
 			default:
 				break;
 			}
-			data.Voltages = "1.2 V";
 			data.DRAMManufacturer = SPDManufacturer(spd.DDR4_Detail.DRAMManufacturerIDLeast & 0x7F, spd.DDR4_Detail.DRAMManufacturerIDMost);
 			data.ModuleManufacturer = SPDManufacturer(spd.DDR4_Detail.ModuleManufacturerIDLeast & 0x7F, spd.DDR4_Detail.ModuleManufacturerIDMost);
 			int year = spd.DDR4_Detail.ManufacturingDate[0], week = spd.DDR4_Detail.ManufacturingDate[1];
@@ -561,50 +521,6 @@ namespace SV_ASSIST
 				sprintf_s(part_number, "%02X\\%02X", week, year);
 				data.ProductDate = part_number;
 			}
-			if (spd.DDR4_Detail.sTCKmin == 10 && spd.DDR4_Detail.sTCKmin125 == 0)
-				data.MaxBandWidth = "DDR4-1600 (800MHz)";
-			else if (spd.DDR4_Detail.sTCKmin == 9 && spd.DDR4_Detail.sTCKmin125 == 0xCA)
-				data.MaxBandWidth = "DDR4-1866 (933MHz)";
-			else if (spd.DDR4_Detail.sTCKmin == 8 && spd.DDR4_Detail.sTCKmin125 == 0xC1)
-				data.MaxBandWidth = "DDR4-2133 (1066.67MHz)";
-			else if (spd.DDR4_Detail.sTCKmin == 7 && spd.DDR4_Detail.sTCKmin125 == 0xD6)
-				data.MaxBandWidth = "DDR4-2400 (1200MHz)";
-			else if (spd.DDR4_Detail.sTCKmin == 6 && spd.DDR4_Detail.sTCKmin125 == 0)
-				data.MaxBandWidth = "DDR4-2666 (1333.33MHz)";
-			else if (spd.DDR4_Detail.sTCKmin == 5 && spd.DDR4_Detail.sTCKmin125 == 0)
-				data.MaxBandWidth = "DDR4-3200 (1600MHz)";
-			{
-				int BankGroup = 1;
-				switch (spd.DDR4_Detail.sSDRAMBank_Density.bits.BankGroupBits)
-				{
-				case 1:
-					BankGroup = 2;
-					break;
-				case 2:
-					BankGroup = 4;
-					break;
-				default:
-					break;
-				}
-				int BankAddressBits = 0;
-				switch (spd.DDR4_Detail.sSDRAMBank_Density.bits.BankAddressBits)
-				{
-				case 0:
-					BankAddressBits = 4;
-					break;
-				case 1:
-					BankAddressBits = 8;
-					break;
-				default:
-					break;
-				}
-				data.Ranks_Banks = boost::str(boost::format("%1% Ranks %2% Banks") % Ranks % (BankAddressBits * BankGroup));
-			}
-
-			if (spd.DDR4_Detail.sBusWidth.bits.Bus_width_extension == 1)
-				data.SupportsECC = true;
-			else
-				data.SupportsECC = false;
 		}
 
 		const std::string MemoryLib::SPDManufacturer(const BYTE Bank, const BYTE IDCode)
@@ -4295,8 +4211,6 @@ namespace SV_ASSIST
 #pragma endregion
 		bool MemoryLib::ReadSPD(const DIMMType types, const USHORT DIMMId, PVOID64& spd, const int len, const ULONG SmbusControlBase)
 		{
-			if (!m_data.get())
-				return false;
 			return this->m_data->ReadSPD(types, DIMMId, spd, len, SmbusControlBase);
 		}
 

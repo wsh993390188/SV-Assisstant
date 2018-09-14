@@ -24,48 +24,51 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        svassistmainwindow.cpp \
     appinit.cpp \
+    AudioWidget.cpp \
     closebutton.cpp \
-    mainctrlbutton.cpp \
-    homewidget.cpp \
-    hardwaretab.cpp \
     CPUHardwareWidget.cpp \
+    curvechart.cpp \
     DiskWidget.cpp \
     GPUWidget.cpp \
+    HardwareMasterTab.cpp \
     HardwareOthersWidget.cpp \
     hardwaretab.cpp \
     homewidget.cpp \
+    IOButton.cpp \
+    IODataView.cpp \
     main.cpp \
     mainctrlbutton.cpp \
+    MemoryButton.cpp \
+    MemoryDataView.cpp \
     MemoryWidget.cpp \
     MonitorWidget.cpp \
     MotherBroadWidget.cpp \
-    NetworkWidget.cpp \
-    AudioWidget.cpp \
-    HomeBottomWidget/CPUBottomWidget.cpp
+    NetworkWidget.cpp	\
+	svassistmainwindow.cpp
 
 HEADERS += \
-        svassistmainwindow.h \
     appinit.h \
+    AudioWidget.h \
     closebutton.h \
-    mainctrlbutton.h \
-    homewidget.h \
-    hardwaretab.h \
     CPUHardwareWidget.h \
+    curvechart.h \
     DiskWidget.h \
     GPUWidget.h \
+    HardwareMasterTab.h \
     HardwareOthersWidget.h \
     hardwaretab.h \
     homewidget.h \
+    IOButton.h \
+    IODataView.h \
     mainctrlbutton.h \
+    MemoryButton.h \
+    MemoryDataView.h \
     MemoryWidget.h \
     MonitorWidget.h \
     MotherBroadWidget.h \
-    NetworkWidget.h \
-    AudioWidget.h \
-    HomeBottomWidget/CPUBottomWidget.h
+    NetworkWidget.h	\
+	svassistmainwindow.h
 
 FORMS += \
         svassistmainwindow.ui

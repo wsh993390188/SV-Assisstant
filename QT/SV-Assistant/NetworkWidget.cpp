@@ -20,7 +20,7 @@ void NetworkListWidget::Init()
 	this->horizontalScrollBar()->setStyleSheet(
 		"QScrollBar:horizontal{ background:#E4E4E4; max-height:12px;}"
 		"QScrollBar::handle:horizontal{ background:#B6B6B6; min-height:50px; border-radius:6px; }"
-		"QScrollBar::handle:horizontal:hover{	background:#00BB9E; }"
+		"QScrollBar::handle:horizontal:hover{ background:#00BB9E; }"
 		"QScrollBar::handle:horizontal:pressed{ background:#00BB9E;}"
 		"QScrollBar::add-page:horizontal{background:none;}"
 		"QScrollBar::sub-page:horizontal{background:none;}"

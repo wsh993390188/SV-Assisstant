@@ -171,9 +171,9 @@ NvAPI_Status CNvidia::PhysicalGPUs(INT Index, NvidiaInfo & nvinfo)
 		{
 			if ((i.second.VendorID == VendorID) && (i.second.DeviceID == DeviceID))
 			{
-			swscanf_s(i.first.c_str(),
-				_T("bus:%hd dev:%hd func:%hd"),
-				&nvinfo.PCIIdentify.bus, &nvinfo.PCIIdentify.dev, &nvinfo.PCIIdentify.func);
+				nvinfo.PCIIdentify.bus = std::get<0>(i.first);
+				nvinfo.PCIIdentify.dev = std::get<1>(i.first);
+				nvinfo.PCIIdentify.func = std::get<2>(i.first);
 			}
 		}
 	}

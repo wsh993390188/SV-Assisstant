@@ -10,9 +10,7 @@ SuperIoEntry::SuperIoEntry() : LPC_Address{ 0xFFFFFFFF }, SIO_Port{ std::make_pa
 					DEVCIE_SELECT_REGISTER{ 0x07u }, IT87_ENVIRONMENT_CONTROLLER{ 0x04u }, IT87_CHIP_VERSION_REGISTER{ 0x22u },
 					ChipID{ std::make_pair(0, std::string("Not exist")) }, FINTEK_VENDOR_ID_REGISTER{ 0x23u }, FINTEK_VENDOR_ID{ 0x1934u }, WINBOND_NUVOTON_HARDWARE_MONITOR_LDN{ 0x0Bu },
 					F71858_HARDWARE_MONITOR_LDN{ 0x02u }, FINTEK_HARDWARE_MONITOR_LDN{ 0x04u }, NUVOTON_HARDWARE_MONITOR_IO_SPACE_LOCK{ 0x28u }
-{
-	DetectSIO();
-}
+{}
 
 std::pair<USHORT, USHORT> SuperIoEntry::using_SIO_port = std::make_pair(0x2E, 0x2F);
 

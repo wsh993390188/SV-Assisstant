@@ -108,17 +108,21 @@ void Homewidget::Init()
 	auto net = SV_ASSIST::Net::GetData();
 	networkbaseinfo = new HomebaseInfo(this);
 	networkbaseinfo->BaseLabel->setText(tr("Network"));
+	bool FindNet = false;
 	if (!net.empty())
 		for (const auto& i : net)
 		{
-			if (i.state == L"CONNECTED")
+			if ((i.state == L"CONNECTED") && (i.DeviceName.find(L"Virtual") == std::wstring::npos))
 			{
 				networkbaseinfo->BaseInfo->setText(QString::fromStdWString(i.DeviceName));
+				FindNet = true;
 				break;
 			}
 		}
 	else
 		networkbaseinfo->BaseInfo->setText(tr("Unknown Network Device"));
+	if(!FindNet)
+		networkbaseinfo->BaseInfo->setText(QString::fromStdWString(net.at(0).DeviceName));
 	connect(networkbaseinfo->BaseLabel, &QPushButton::clicked, this, [=] {emit switchPage(6); });
 	SV_ASSIST::AUDIO::UpdateData();
 	auto audio = SV_ASSIST::AUDIO::GetOutputAudio();
