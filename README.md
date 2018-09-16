@@ -20,6 +20,15 @@ Features supported by SV-Assistant hardware modules
 - SUPERIO(Based on SuperIO DataSheet)
 - USB(Based on https://github.com/Microsoft/Windows-driver-samples/tree/master/usb/usbview)
 
+# Reference
+- https://github.com/skitaoka/windows-core-audio-api-samples
+- https://github.com/opcm/pcm
+- https://github.com/Microsoft/Windows-driver-samples
+- https://github.com/hiyohiyo/CrystalDiskInfo
+- https://sourceforge.net/projects/winring0/
+- https://github.com/openhardwaremonitor/openhardwaremonitor
+- https://github.com/muflihun/easyloggingpp
+
 # 概述
 SV-Assistant是一个检测硬件、软件信息的工具,如果你愿意的话还可以更改硬件信息。
 
@@ -89,11 +98,11 @@ SV-Assistant是一个检测硬件、软件信息的工具,如果你愿意的话�
       - 啥都没有呢，仅仅能获取简单的信息 这个比较困难一点，以后慢慢学习并加入该功能(会花费的时间久一点)。  
     - 未完待续(学习)
 
-# Reference
-- https://github.com/skitaoka/windows-core-audio-api-samples
-- https://github.com/opcm/pcm
-- https://github.com/Microsoft/Windows-driver-samples
-- https://github.com/hiyohiyo/CrystalDiskInfo
-- https://sourceforge.net/projects/winring0/
-- https://github.com/openhardwaremonitor/openhardwaremonitor
-- https://github.com/muflihun/easyloggingpp
+- 使用
+    - Hardware
+        - 硬件库 使用了easylogging++ sqlite boost，需要自行下载，自行配置环境编译成静态库(不完善，开发中).
+    - Software
+        - 软件库 没搞完别用
+    - Imports
+        - 软硬件库的头文件，包含SV_Hardware.h & SV_Software.h 即可
+

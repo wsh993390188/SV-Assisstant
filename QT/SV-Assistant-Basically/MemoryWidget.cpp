@@ -3,7 +3,7 @@
 #include "lib/Hardware/SV_Hardware.h"
 
 MemoryWidget::MemoryWidget(QWidget *parent)
-	: QWidget(parent), mainlayout(new QVBoxLayout(this))
+	: QWidget(parent), mainlayout(new QVBoxLayout(this)), Infomation{}, Header{}
 {
 	QPalette pal(this->palette());
 	//ÉèÖÃ±³¾°whiteÉ«
@@ -29,7 +29,7 @@ void MemoryWidget::Init()
 		mainlayout->addWidget(Header);
 		mainlayout->addWidget(Infomation);
 	}
-
+	if(Infomation && Header)
 	connect(this->Header, &MemoryHeadWidget::SendMemoryInfomation, this->Infomation, &MemoryInfomationWidget::ReciveMemoryInfomation);
 }
 
