@@ -82,6 +82,31 @@ public:
 				}
 			}
 
+		if (gpudata->amdinfo)
+		{
+			for (auto &var : *(gpudata->amdinfo))
+			{
+				for (auto &gpu : gpuinfo)
+				{
+					if (var.FullName == gpu.first.GPUname)
+					{
+						gpu.second.CurrentPCIESpeed = var.CurrentPCIESpeed;
+						gpu.second.Temperature = std::to_wstring(var.OverDrive5.TemperatureAndFans.temperatureInDegreesCelsius) + L"  °C";
+						gpu.second.fans = std::to_string(var.OverDrive5.TemperatureAndFans.fanSpeedValue.iFanSpeed);
+						if (var.OverDrive5.TemperatureAndFans.fanSpeedValue.iSpeedType == ADL_DL_FANCTRL_SPEED_TYPE_RPM)
+							gpu.second.fans += " RPM";
+						else
+							gpu.second.fans += " %";
+						gpu.second.GPUMemClock = std::to_string(var.OverDrive5.activity.iMemoryClock / 100) + " MHz";
+						gpu.second.GPUClock = std::to_string(var.OverDrive5.activity.iEngineClock / 100) + " MHz";
+						gpu.second.Voltages = std::to_string(var.OverDrive5.activity.iVddc / 1000.0f) + " V";
+						gpu.second.GPUUsage = std::to_string(var.OverDrive5.activity.iActivityPercent) + " %";
+						break;
+					}
+				}
+			}
+		}
+
 	}
 	const std::vector<std::pair<GPUBaseInfo, GPUSensorInfo>>& ReturnGPUInfo() const
 	{
@@ -95,7 +120,6 @@ public:
 private:
 	explicit GPU(const GPU& x);
 	GPU& operator=(const GPU& x) {};
-
 	void GetInfo()
 	{
 		if(gpudata->nvinfo)
@@ -208,7 +232,42 @@ private:
 			temp.GPUBranchVersion = gpudata->AMD_DriverVer;
 			temp.GPUname = var.FullName;
 			temp.GPUBiosVersion = var.biosInfo.strVersion;
-			this->gpuinfo.emplace_back(std::make_pair(temp, GPUSensorInfo()));
+			temp.MaxPCIESpeed = var.MaxPCIESpeed;
+			if (var.dedicatedVideoMemory > 1024)
+			{
+				if (var.dedicatedVideoMemory / 1024 > 1024)
+				{
+					temp.GPUMemorySize = std::to_string(var.dedicatedVideoMemory / 1024 / 1024.0f) + " GBytes";
+				}
+				else
+					temp.GPUMemorySize = std::to_string(var.dedicatedVideoMemory / 1024.0f) + " MBytes";
+			}
+			else
+				temp.GPUMemorySize = std::to_string(var.dedicatedVideoMemory) + " KBytes";
+			if (var.sharedSystemMemory > 1024)
+			{
+				if (var.sharedSystemMemory / 1024 > 1024)
+				{
+					temp.GPUSharedMemorySize = std::to_string(var.sharedSystemMemory / 1024 / 1024.0f) + " GBytes";
+				}
+				else
+					temp.GPUSharedMemorySize = std::to_string(var.sharedSystemMemory / 1024.0f) + " MBytes";
+			}
+			else
+				temp.GPUSharedMemorySize = std::to_string(var.sharedSystemMemory) + " KBytes";
+			GPUSensorInfo tempsensor = {};
+			tempsensor.CurrentPCIESpeed = var.CurrentPCIESpeed;
+			tempsensor.Temperature = std::to_wstring(var.OverDrive5.TemperatureAndFans.temperatureInDegreesCelsius) + L"  °C";
+			tempsensor.fans = std::to_string(var.OverDrive5.TemperatureAndFans.fanSpeedValue.iFanSpeed);
+			if (var.OverDrive5.TemperatureAndFans.fanSpeedValue.iSpeedType == ADL_DL_FANCTRL_SPEED_TYPE_RPM)
+				tempsensor.fans += " RPM";
+			else
+				tempsensor.fans += " %";
+			tempsensor.GPUMemClock = std::to_string(var.OverDrive5.activity.iMemoryClock / 100) + " MHz";
+			tempsensor.GPUClock = std::to_string(var.OverDrive5.activity.iEngineClock / 100) + " MHz";
+			tempsensor.Voltages = std::to_string(var.OverDrive5.activity.iVddc / 1000.0f) + " V";
+			tempsensor.GPUUsage = std::to_string(var.OverDrive5.activity.iActivityPercent) + " %";
+			this->gpuinfo.emplace_back(std::make_pair(std::move(temp), std::move(tempsensor)));
 		}
 
 		if (gpudata->Intelinfo)

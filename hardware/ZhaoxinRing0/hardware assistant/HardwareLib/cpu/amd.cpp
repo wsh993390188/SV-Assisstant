@@ -467,10 +467,49 @@ void AMD::GetCurrentPState_17Family(IN DWORD threadAffinityMask, OUT double& COF
 	}
 }
 
-void AMD::GetBusSpeed()
+void AMD::GetBusSpeed(DWORD threadAffinityMask)
 {
-
+	if (MaxClockSpeed)
+	{
+//		if(SetThreadAffinityMask(GetCurrentThread(), 1ULL << threadAffinityMask) != 0)
+//		{
+		LARGE_INTEGER nFreq, nBeginTime, nEndTime;
+		double time;
+		QueryPerformanceFrequency(&nFreq);
+		QueryPerformanceCounter(&nBeginTime);
+		DWORD64 msrdata = 0;
+		auto tsc1 = __rdtsc();
+		Sleep(1);
+		auto tsc2 = __rdtsc();
+		QueryPerformanceCounter(&nEndTime);
+		time = (double)(nEndTime.QuadPart - nBeginTime.QuadPart) / (double)nFreq.QuadPart;
+		BusSpeed = (tsc2 - tsc1) / time / (MaxClockSpeed * 10000.0);
+//		}
+	}
 }
+void AMD::GetFrequency()
+{
+	double COF = 0.0, CpuIdd = 0, CpuVID = 0;
+	switch (this->ExtFamily)
+	{
+	case 0x17:
+		for (DWORD threadAffinityMask = 0; threadAffinityMask < this->Core; threadAffinityMask++)
+		{
+			GetBusSpeed(threadAffinityMask);
+			GetCurrentPState_17Family(threadAffinityMask, COF, CpuIdd, CpuVID);
+			if (BusSpeed < INFINITY)
+				CurrentClockSpeed[threadAffinityMask] = COF / ExtClock * BusSpeed;
+			else
+				CurrentClockSpeed[threadAffinityMask] = COF;
+		}
+		break;
+	case 0x15:
+		break;
+	default:
+		break;
+	}
+}
+
 void AMD::GetVoltage()
 {
 	double COF = 0.0, CpuIdd = 0, CpuVID = 0;
@@ -481,25 +520,6 @@ void AMD::GetVoltage()
 		{
 			GetCurrentPState_17Family(threadAffinityMask, COF, CpuIdd, CpuVID);
 			CoreVID[threadAffinityMask] = CpuVID;
-		}
-		break;
-	case 0x15:
-		break;
-	default:
-		break;
-	}
-}
-
-void AMD::GetFrequency()
-{
-	double COF = 0.0, CpuIdd = 0, CpuVID = 0;
-	switch (this->ExtFamily)
-	{
-	case 0x17:
-		for (int threadAffinityMask = 0; threadAffinityMask < this->Core; threadAffinityMask++)
-		{
-			GetCurrentPState_17Family(threadAffinityMask, COF, CpuIdd, CpuVID);
-			CurrentClockSpeed[threadAffinityMask] = COF;
 		}
 		break;
 	case 0x15:

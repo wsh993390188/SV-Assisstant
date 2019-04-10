@@ -7,7 +7,7 @@
 #define NVAPI_GPU_UTILIZATION_DOMAIN_VID 2
 #define NVAPI_GPU_UTILIZATION_DOMAIN_BUS 3
 
-class CNvidia : public CGPU
+class CNvidia final : public CGPU
 {
 public:
 	CNvidia();

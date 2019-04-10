@@ -127,7 +127,7 @@ namespace SV_ASSIST
 				return FALSE;
 			}
 			Subkey.append(Model);
-			shared_ptr<EDID> EDIDbuf(new EDID);
+			unique_ptr<EDID> EDIDbuf(new EDID);
 			bool GetEDID = FALSE;
 			DWORD dwSubKeyCnt;          // 子键的数量  
 			DWORD dwSubKeyNameMaxLen;   // 子键名称的最大长度(不包含结尾的null字符)  
@@ -187,8 +187,8 @@ namespace SV_ASSIST
 											HKEY EDIDKey;
 											if (RegOpenKeyEx(hdevicekey, _T("Device Parameters"), NULL, KEY_READ, &EDIDKey) == ERROR_SUCCESS)
 											{
-												::ZeroMemory(EDIDbuf.get(), *bufffersize);
-												if (RegQueryValueEx(EDIDKey, _T("EDID"), NULL, NULL, (LPBYTE)EDIDbuf.get(), bufffersize) == ERROR_SUCCESS)
+												auto res = RegQueryValueEx(EDIDKey, _T("EDID"), NULL, NULL, (LPBYTE)EDIDbuf.get(), bufffersize);
+												if (ERROR_SUCCESS == res)
 												{
 #ifdef ZX_OutputLog
 													Logger::Instance()->OutputLogInfo(el::Level::Debug, "Get Edid Info");
@@ -196,12 +196,28 @@ namespace SV_ASSIST
 													memcpy_s(buffer, *bufffersize, EDIDbuf.get(), sizeof(*EDIDbuf));
 													GetEDID = TRUE;
 												}
-												else if (RegQueryValueEx(EDIDKey, _T("BAD_EDID"), NULL, NULL, (LPBYTE)EDIDbuf.get(), bufffersize) == ERROR_SUCCESS)
+												else
 												{
+													res = RegQueryValueEx(EDIDKey, _T("BAD_EDID"), NULL, NULL, (LPBYTE)EDIDbuf.get(), bufffersize);
+													if (ERROR_SUCCESS == res)
+													{
 #ifdef ZX_OutputLog
-													Logger::Instance()->OutputLogInfo(el::Level::Debug, "Get Bad Edid Info");
+														Logger::Instance()->OutputLogInfo(el::Level::Debug, "Get Bad Edid Info");
 #endif
-													::ZeroMemory(buffer, *bufffersize);
+														::ZeroMemory(buffer, *bufffersize);
+													}
+													else
+													{
+														res = RegQueryValueEx(EDIDKey, _T("EDID"), NULL, NULL, (LPBYTE)EDIDbuf.get(), bufffersize);
+														if (ERROR_SUCCESS == res)
+														{
+#ifdef ZX_OutputLog
+															Logger::Instance()->OutputLogInfo(el::Level::Debug, "Get Edid Info");
+#endif
+															memcpy_s(buffer, *bufffersize, EDIDbuf.get(), sizeof(*EDIDbuf));
+															GetEDID = TRUE;
+														}
+													}
 												}
 											}
 										}

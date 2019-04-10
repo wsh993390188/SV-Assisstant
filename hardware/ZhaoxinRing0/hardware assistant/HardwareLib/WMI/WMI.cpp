@@ -29,13 +29,8 @@ VOID CWMI::SetNamespace(std::wstring wstrNamespace)
 
 HRESULT CWMI::InitialCom()
 {
-    HRESULT hr = E_FAIL;
-    do {
-        hr = CoInitializeEx(0, COINIT_MULTITHREADED);
-        CHECKHR(hr);
-
-    } while (0);
-    return hr;
+    CoInitialize(NULL);
+    return S_OK;
 }
 
 HRESULT CWMI::SetComSecLevels()
@@ -114,11 +109,8 @@ HRESULT CWMI::ExcuteFun()
 	if (initWmi)
 	{
 		do {
-			hr = InitialCom();
-			CHECKHR(hr);
-
-			hr = SetComSecLevels();
-			CHECKHR(hr);
+			InitialCom();
+			SetComSecLevels();
 
 			hr = ObtainLocator2WMI(pLoc);
 			CHECKHR(hr);

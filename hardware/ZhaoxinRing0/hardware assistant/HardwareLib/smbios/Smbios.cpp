@@ -57,29 +57,29 @@ BOOL Smbios::GetSmbiosinfo()
 			{
 				if (strcmp(("2.0"), SmbiosVersion.c_str()) <= 0)
 				{
-					m_smbios.BIOSinfo.insert(MapString::value_type(("BIOS Vendor"), dmi_to_string(dmi_head, SmbiosADDR[Type0_Vendor])));
-					m_smbios.BIOSinfo.insert(MapString::value_type(("BIOS Version"), dmi_to_string(dmi_head, SmbiosADDR[Type0_BIOS_Version])));
+					m_smbios.BIOSinfo.insert(decltype(m_smbios.BIOSinfo)::value_type(("BIOS Vendor"), dmi_to_string(dmi_head, SmbiosADDR[Type0_Vendor])));
+					m_smbios.BIOSinfo.insert(decltype(m_smbios.BIOSinfo)::value_type(("BIOS Version"), dmi_to_string(dmi_head, SmbiosADDR[Type0_BIOS_Version])));
 					for (size_t i = 0; i < sizeof(WORD); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type0_BIOS_Start_ADDR + (sizeof(WORD) - i - 1)))));
 					}
-					m_smbios.BIOSinfo.insert(MapString::value_type(("BIOS Start ADDR"), HextoString));
-					m_smbios.BIOSinfo.insert(MapString::value_type(("BIOS Release Date"), dmi_to_string(dmi_head, SmbiosADDR[Type0_BIOS_Release_Date])));
-					m_smbios.BIOSinfo.insert(MapString::value_type(("BIOS ROM Size"), std::to_string(64 * (WORD(*(SmbiosADDR + Type0_BIOS_ROM_SIZE)) + 1)) + ("KB")));
+					m_smbios.BIOSinfo.insert(decltype(m_smbios.BIOSinfo)::value_type(("BIOS Start ADDR"), HextoString));
+					m_smbios.BIOSinfo.insert(decltype(m_smbios.BIOSinfo)::value_type(("BIOS Release Date"), dmi_to_string(dmi_head, SmbiosADDR[Type0_BIOS_Release_Date])));
+					m_smbios.BIOSinfo.insert(decltype(m_smbios.BIOSinfo)::value_type(("BIOS ROM Size"), std::to_string(64 * (WORD(*(SmbiosADDR + Type0_BIOS_ROM_SIZE)) + 1)) + ("KB")));
 					for (size_t i = 0; i < sizeof(int64_t); ++i)
 					{
 						sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type0_BIOS_Characteristics + (sizeof(int64_t) - i - 1)))));
 					}
-					m_smbios.BIOSinfo.insert(MapString::value_type(("BIOS Characteristics"), HextoString));//可解析 未解析
+					m_smbios.BIOSinfo.insert(decltype(m_smbios.BIOSinfo)::value_type(("BIOS Characteristics"), HextoString));//可解析 未解析
 					if (strcmp(("2.4"), SmbiosVersion.c_str()) <= 0)
 					{
 						for (size_t i = 0; i < sizeof(WORD); ++i)
 						{
 							sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type0_BIOS_Characteristics_EXtension + (sizeof(WORD) - i - 1)))));
 						}
-						m_smbios.BIOSinfo.insert(MapString::value_type(("BIOS Ext Characteristics"), HextoString));//可解析 未解析
-						m_smbios.BIOSinfo.insert(MapString::value_type(("System BIOS Release"), std::to_string(*(SmbiosADDR + Type0_BIOS_Major_Release)) + (".") + std::to_string(*(SmbiosADDR + Type0_BIOS_Minor_Release))));
-						m_smbios.BIOSinfo.insert(MapString::value_type(("EC Release"), std::to_string(*(SmbiosADDR + Type0_Firmware_Major_Release)) + (".") + std::to_string(*(SmbiosADDR + Type0_Firmware_Minor_Release))));
+						m_smbios.BIOSinfo.insert(decltype(m_smbios.BIOSinfo)::value_type(("BIOS Ext Characteristics"), HextoString));//可解析 未解析
+						m_smbios.BIOSinfo.insert(decltype(m_smbios.BIOSinfo)::value_type(("System BIOS Release"), std::to_string(*(SmbiosADDR + Type0_BIOS_Major_Release)) + (".") + std::to_string(*(SmbiosADDR + Type0_BIOS_Minor_Release))));
+						m_smbios.BIOSinfo.insert(decltype(m_smbios.BIOSinfo)::value_type(("EC Release"), std::to_string(*(SmbiosADDR + Type0_Firmware_Major_Release)) + (".") + std::to_string(*(SmbiosADDR + Type0_Firmware_Minor_Release))));
 					}
 					if (strcmp(("3.1"), SmbiosVersion.c_str()) <= 0)
 					{
@@ -87,7 +87,7 @@ BOOL Smbios::GetSmbiosinfo()
 						{
 							sprintf_s(HextoString + (i * 2), sizeof(HextoString), "%02X", BigEndian_to_LittleEndian((*(SmbiosADDR + Type0_Extended_BIOS_ROM_SIZE + (sizeof(WORD) - i - 1)))));
 						}
-						m_smbios.BIOSinfo.insert(MapString::value_type(("Extended BIOS ROM Size"), HextoString));
+						m_smbios.BIOSinfo.insert(decltype(m_smbios.BIOSinfo)::value_type(("Extended BIOS ROM Size"), HextoString));
 					}
 				}
 				first_flags = 0;

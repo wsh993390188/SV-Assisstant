@@ -41,10 +41,12 @@ void MonitorWidget::Init()
 	EDIDData->setStyleSheet("QTextBrowser{background-color: white;\
 		border:none;color:#000000;font-family: \"consolas\"; font-size:13px;\
 		background-attachment: scroll;}");
-	UpdateEDID();
-	connect(this->EDIDTitle, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &MonitorWidget::UpdateEDID);
 	mainlayout->addWidget(EDIDTitle);
 	mainlayout->addWidget(EDIDData);
+	if (edid.empty())
+		return;
+	UpdateEDID();
+	connect(this->EDIDTitle, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &MonitorWidget::UpdateEDID);
 }
 
 void MonitorWidget::UpdateEDID()

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'sv_assistant_basic_window.ui'
 **
-** Created by: Qt User Interface Compiler version 5.10.1
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -86,7 +86,7 @@ public:
     AudioWidget *Audiopage;
     QWidget *Networkpage;
     QHBoxLayout *horizontalLayout_3;
-    QSplitter *Networksplitter;
+    QSplitter *splitter;
     NetworkListWidget *NetworklistWidget;
     NetworkTableWidget *NetworktextBrowser;
     QWidget *USBhardwarepage;
@@ -371,27 +371,25 @@ public:
         Networkpage = new QWidget();
         Networkpage->setObjectName(QStringLiteral("Networkpage"));
         horizontalLayout_3 = new QHBoxLayout(Networkpage);
-        horizontalLayout_3->setSpacing(4);
+        horizontalLayout_3->setSpacing(0);
         horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        horizontalLayout_3->setContentsMargins(4, 4, 4, 4);
-        Networksplitter = new QSplitter(Networkpage);
-        Networksplitter->setObjectName(QStringLiteral("Networksplitter"));
-        Networksplitter->setStyleSheet(QStringLiteral("border-color: rgb(255, 255, 255);"));
-        Networksplitter->setOrientation(Qt::Vertical);
-        Networksplitter->setHandleWidth(7);
-        NetworklistWidget = new NetworkListWidget(Networksplitter);
+        horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
+        splitter = new QSplitter(Networkpage);
+        splitter->setObjectName(QStringLiteral("splitter"));
+        splitter->setOrientation(Qt::Horizontal);
+        NetworklistWidget = new NetworkListWidget(splitter);
         NetworklistWidget->setObjectName(QStringLiteral("NetworklistWidget"));
-        NetworklistWidget->setMinimumSize(QSize(0, 150));
-        NetworklistWidget->setMaximumSize(QSize(16777215, 225));
-        Networksplitter->addWidget(NetworklistWidget);
-        NetworktextBrowser = new NetworkTableWidget(Networksplitter);
+        NetworklistWidget->setMinimumSize(QSize(150, 500));
+        NetworklistWidget->setMaximumSize(QSize(300, 750));
+        splitter->addWidget(NetworklistWidget);
+        NetworktextBrowser = new NetworkTableWidget(splitter);
         NetworktextBrowser->setObjectName(QStringLiteral("NetworktextBrowser"));
-        NetworktextBrowser->setMinimumSize(QSize(0, 350));
-        NetworktextBrowser->setMaximumSize(QSize(16777215, 525));
-        Networksplitter->addWidget(NetworktextBrowser);
+        NetworktextBrowser->setMinimumSize(QSize(0, 500));
+        NetworktextBrowser->setMaximumSize(QSize(16777215, 750));
+        splitter->addWidget(NetworktextBrowser);
 
-        horizontalLayout_3->addWidget(Networksplitter);
+        horizontalLayout_3->addWidget(splitter);
 
         HardwareInfomationstackedWidget->addWidget(Networkpage);
         USBhardwarepage = new QWidget();
@@ -453,15 +451,15 @@ public:
 
     void retranslateUi(QMainWindow *SVAssistMainWindow)
     {
-        SVAssistMainWindow->setWindowTitle(QApplication::translate("SVAssistMainWindow", "SVAssistMainWindow", nullptr));
-        HometoolButton->setText(QApplication::translate("SVAssistMainWindow", "\345\237\272\346\234\254\344\277\241\346\201\257", nullptr));
-        HardwareViewtoolButton->setText(QApplication::translate("SVAssistMainWindow", "\347\241\254\344\273\266\346\243\200\346\265\213", nullptr));
-        SoftwareViewtoolButton->setText(QApplication::translate("SVAssistMainWindow", "\350\275\257\344\273\266\346\243\200\346\265\213", nullptr));
-        GameTesttoolButton->setText(QApplication::translate("SVAssistMainWindow", "\346\200\247\350\203\275\346\243\200\346\265\213", nullptr));
+        SVAssistMainWindow->setWindowTitle(QApplication::translate("SVAssistMainWindow", "SVAssistMainWindow", Q_NULLPTR));
+        HometoolButton->setText(QApplication::translate("SVAssistMainWindow", "\345\237\272\346\234\254\344\277\241\346\201\257", Q_NULLPTR));
+        HardwareViewtoolButton->setText(QApplication::translate("SVAssistMainWindow", "\347\241\254\344\273\266\346\243\200\346\265\213", Q_NULLPTR));
+        SoftwareViewtoolButton->setText(QApplication::translate("SVAssistMainWindow", "\350\275\257\344\273\266\346\243\200\346\265\213", Q_NULLPTR));
+        GameTesttoolButton->setText(QApplication::translate("SVAssistMainWindow", "\346\200\247\350\203\275\346\243\200\346\265\213", Q_NULLPTR));
         closeButton->setText(QString());
         minButton->setText(QString());
 #ifndef QT_NO_TOOLTIP
-        setButton->setToolTip(QApplication::translate("SVAssistMainWindow", "\346\234\200\345\260\217\345\214\226", nullptr));
+        setButton->setToolTip(QApplication::translate("SVAssistMainWindow", "\346\234\200\345\260\217\345\214\226", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         setButton->setText(QString());
         reportButton->setText(QString());
@@ -478,7 +476,7 @@ public:
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">\351\241\271\347\233\256\346\272\220\347\240\201 https://github.com/wsh993390188/SV-Assisstant</span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"><br /></p>\n"
 "<p align=\"center\" style=\"-qt-paragraph-type"
-                        ":empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"><br /></p></body></html>", nullptr));
+                        ":empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"><br /></p></body></html>", Q_NULLPTR));
         textBrowser_2->setHtml(QApplication::translate("SVAssistMainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -487,10 +485,10 @@ public:
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">\346\234\254\347\211\210\346\234\254\344\273\205\344\273\205\346\230\257\345\261\225\347\244\272\350\216\267\345\217\226\347\232\204\351\203\250\345\210\206\347\241\254\344\273\266\344\277\241\346\201\257,\345\217\257\344\273\245\344\270\216cpuz gpuz AI"
                         "DA64 HwInfo \351\262\201\345\244\247\345\270\210\347\255\211\350\277\233\350\241\214\344\277\241\346\201\257\345\257\271\346\257\224\343\200\202</span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">\344\270\252\344\272\272\345\274\200\345\217\221\357\274\214\344\277\241\346\201\257\350\216\267\345\217\226\344\270\212\351\232\276\345\205\215\346\234\211\350\257\257\345\267\256,\346\254\242\350\277\216\346\214\207\346\255\243</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">\346\234\200\344\275\263\345\210\206\350\276\250\347\216\207:1920*1080</span></p></body></html>", nullptr));
-        Versionlabel->setText(QApplication::translate("SVAssistMainWindow", "Major Version 0.0.1", nullptr));
-        label_2->setText(QApplication::translate("SVAssistMainWindow", "Under construction", nullptr));
-        label_4->setText(QApplication::translate("SVAssistMainWindow", "Under construction", nullptr));
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">\346\234\200\344\275\263\345\210\206\350\276\250\347\216\207:1920*1080</span></p></body></html>", Q_NULLPTR));
+        Versionlabel->setText(QApplication::translate("SVAssistMainWindow", "Major Version 0.0.1", Q_NULLPTR));
+        label_2->setText(QApplication::translate("SVAssistMainWindow", "Under construction", Q_NULLPTR));
+        label_4->setText(QApplication::translate("SVAssistMainWindow", "Under construction", Q_NULLPTR));
     } // retranslateUi
 
 };

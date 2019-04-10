@@ -34,7 +34,7 @@ CPUBASE::CPUBASE() : data__{}, extdata__{}, nIdsLeaf{}, nIds_(0),
 					nExIds_(0), Manufacturer{}, Technology(0), Family(0), Model(0),
 					Stepping(0), ExtFamily(0), ExtModel(0), microarchitecture{}, Brand{},
 					Name{""}, ProcessorId("Unknown"), SocketDesignation("Unknown"), SouthBridge("Unknown"), MaxTDP(0),
-					ExtClock(0), Core(0), Thread(0), Revision(0), UpgradeMethod(0), PackageTemperature{INFINITY}, BusSpeed{INFINITY}
+					ExtClock(0), Core(0), Thread(0), Revision(0), MaxClockSpeed(0), PackageTemperature{INFINITY}, BusSpeed{INFINITY}
 {
 	InitCPUDB();
 	memset(&Feature, 0, sizeof(Feature));
@@ -42,6 +42,7 @@ CPUBASE::CPUBASE() : data__{}, extdata__{}, nIdsLeaf{}, nIds_(0),
 	CPUWMI wmi;
 	wmi.ExcuteFun();
 	this->ProcessorId = wmi.ProcessorId;
+	this->MaxClockSpeed = wmi.MaxClockSpeed;
 	this->ExtClock = wmi.ExtClock;
 	this->Core = wmi.Core;
 	this->Thread = wmi.Thread;

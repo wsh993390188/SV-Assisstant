@@ -40,7 +40,7 @@ private:
 	void ExecCPUName();
 	void ExecCodeNameByFMS(int Family, int Model);
 	void ExecVoltageByFMS();
-	void GetBusSpeed(DWORD threadAffinityMask);
+	void GetBusSpeed(DWORD threadAffinityMask = 0);
 	void GetCurrentSpeed();
 #pragma region MSR Register
 	const DWORD IA32_THERM_STATUS_MSR;

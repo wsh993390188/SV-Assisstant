@@ -114,7 +114,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;E:\work\boost\bin1.63.0\VC14.0threading=multi\lib;$(SolutionDir)hardware assistant\HardwareLib\gpu\NVAPILIB;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;E:\work\boost\bin1.63.0\VC14.0threading=multi\lib;$(SolutionDir)hardware assistant\HardwareLib\gpu\NVAPILIB;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;$(SolutionDir)..\..\hardware\ZhaoxinRing0\hardware assistant\HardwareLib\gpu\NVAPILIB</AdditionalLibraryDirectories>
       <AdditionalDependencies>ole32.lib;oleaut32.lib;wbemuuid.lib;wlanapi.lib;nvapi64.lib;propsys.lib;D3D11.lib;Iphlpapi.lib;Rpcrt4.lib;SetupAPI.lib;Winmm.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
@@ -157,7 +157,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;E:\work\boost\bin1.63.0\VC14.0threading=multi\lib;$(SolutionDir)hardware assistant\HardwareLib\gpu\NVAPILIB;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;E:\work\boost\bin1.63.0\VC14.0threading=multi\lib;$(SolutionDir)hardware assistant\HardwareLib\gpu\NVAPILIB;D:\boost_1_67_0\stage\lib;D:\boost_1_67_0\libs;$(SolutionDir)..\..\hardware\ZhaoxinRing0\hardware assistant\HardwareLib\gpu\NVAPILIB</AdditionalLibraryDirectories>
       <AdditionalDependencies>ole32.lib;oleaut32.lib;wbemuuid.lib;wlanapi.lib;nvapi64.lib;propsys.lib;D3D11.lib;Iphlpapi.lib;Rpcrt4.lib;SetupAPI.lib;Winmm.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>

@@ -98,7 +98,6 @@ namespace SV_ASSIST
 			vector<DISPLAY_DEVICE> Adapter;	//适配器
 			vector<EDID> Edid;
 			wstring Model, Driver;
-
 		};
 	}
 }

@@ -446,11 +446,11 @@ bool Intel::ExecProcessorOtherInfo(int Family, int Model)
 			else ExecCodeNameByFMS(Family, Model);
 		}
 	}
-#pragma endregion
+
 
 	return state;
 }
-
+#pragma endregion
 bool Intel::ExecSouthBridge()
 {
 	PCI_COMMON_CONFIG pci = {};
@@ -897,7 +897,7 @@ bool Intel::ExecSouthBridge()
 		SouthBridge = "H370";
 		break;
 	default:
-		boost::format fmt = boost::format("ID%X") % pci.DeviceID;
+		boost::format fmt = boost::format("ID%04X") % pci.DeviceID;
 		SouthBridge = fmt.str();
 		break;
 	}
@@ -1302,7 +1302,11 @@ void Intel::GetBusSpeed(DWORD threadAffinityMask)
 			QueryPerformanceCounter(&nEndTime);
 			time = (double)(nEndTime.QuadPart - nBeginTime.QuadPart) / (double)nFreq.QuadPart;
 			BusSpeed = (tsc2 - tsc1) / time / (MaxNonTurboFre * 10000.0);
-		//}
+//		}
+	}
+	else
+	{
+		BusSpeed = ExtClock * 1.0;
 	}
 }
 

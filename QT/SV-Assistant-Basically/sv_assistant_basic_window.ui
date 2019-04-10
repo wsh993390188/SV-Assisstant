@@ -632,44 +632,38 @@ p, li { white-space: pre-wrap; }
             <widget class="MonitorWidget" name="Monitorpage"/>
             <widget class="AudioWidget" name="Audiopage"/>
             <widget class="QWidget" name="Networkpage">
-             <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
               <property name="spacing">
-               <number>4</number>
+               <number>0</number>
               </property>
               <property name="leftMargin">
-               <number>4</number>
+               <number>0</number>
               </property>
               <property name="topMargin">
-               <number>4</number>
+               <number>0</number>
               </property>
               <property name="rightMargin">
-               <number>4</number>
+               <number>0</number>
               </property>
               <property name="bottomMargin">
-               <number>4</number>
+               <number>0</number>
               </property>
               <item>
-               <widget class="QSplitter" name="Networksplitter">
-                <property name="styleSheet">
-                 <string notr="true">border-color: rgb(255, 255, 255);</string>
-                </property>
+               <widget class="QSplitter" name="splitter">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="handleWidth">
-                 <number>7</number>
+                 <enum>Qt::Horizontal</enum>
                 </property>
                 <widget class="NetworkListWidget" name="NetworklistWidget">
                  <property name="minimumSize">
                   <size>
-                   <width>0</width>
-                   <height>150</height>
+                   <width>150</width>
+                   <height>500</height>
                   </size>
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>16777215</width>
-                   <height>225</height>
+                   <width>300</width>
+                   <height>750</height>
                   </size>
                  </property>
                 </widget>
@@ -677,13 +671,13 @@ p, li { white-space: pre-wrap; }
                  <property name="minimumSize">
                   <size>
                    <width>0</width>
-                   <height>350</height>
+                   <height>500</height>
                   </size>
                  </property>
                  <property name="maximumSize">
                   <size>
                    <width>16777215</width>
-                   <height>525</height>
+                   <height>750</height>
                   </size>
                  </property>
                 </widget>

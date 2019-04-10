@@ -7,7 +7,7 @@ class CPUWMI : public CWMI
 public:
 	CPUWMI();
 private:
-	HRESULT Excute(CComPtr<IWbemServices> pSvc);
+	HRESULT Excute(CComPtr<IWbemServices> pSvc) override;
 public:
 	std::string ProcessorId;
 	UINT ExtClock;

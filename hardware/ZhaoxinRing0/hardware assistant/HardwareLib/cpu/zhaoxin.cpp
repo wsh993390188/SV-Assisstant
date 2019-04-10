@@ -63,7 +63,7 @@ Zhaoxin::~Zhaoxin()
 
 void Zhaoxin::Init(void)
 {
-	array<int, 4> cpuid__;
+	std::array<int, 4> cpuid__;
 	__cpuidex(cpuid__.data(), 0, 0);
 	nIds_ = cpuid__[0];
 	__cpuid(cpuid__.data(), 0x80000000);

@@ -16,7 +16,7 @@ protected:
 private:
 	void FIDVID_Family17(IN DWORD threadAffinityMask, IN ULONG Index, OUT double & COF, OUT double & CpuIdd, OUT double & CpuVID);
 	void GetCurrentPState_17Family(IN DWORD threadAffinityMask, OUT double & COF, OUT double & CpuIdd, OUT double & CpuVID);
-	void GetBusSpeed();
+	void GetBusSpeed(DWORD threadAffinityMask = 0);
 	void GetVoltage();
 	void GetFrequency();
 #pragma region MSR Register

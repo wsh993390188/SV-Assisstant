@@ -361,12 +361,12 @@
     <None Include="Resource\Title\software.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\hardware\ZhaoxinRing0\hardware assistant\sv-assistant\sv-assistant\sv-assistantlib.vcxproj">
-      <Project>{8c332a47-eb90-4e1a-a28e-4a82bae1cdb9}</Project>
-    </ProjectReference>
+    <ResourceCompile Include="SV-Assistant-Basically.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="SV-Assistant-Basically.rc" />
+    <ProjectReference Include="..\..\hardware\ZhaoxinRing0\hardware assistant\HardwareLib\HardwareLib.vcxproj">
+      <Project>{1486d820-2eb0-407f-861d-441f25528ec0}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

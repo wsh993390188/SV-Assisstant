@@ -79,11 +79,11 @@ public:
 	CPUFeature Feature;
 
 	std::string ProcessorId;
+	UINT MaxClockSpeed;
 	UINT ExtClock;
 	UINT Core;
 	UINT Thread;
 	UINT Revision;
-	UINT UpgradeMethod;
 	//cache
 	Cache_info Cache[4];
 
@@ -115,5 +115,5 @@ private:
 		const std::string& delim,
 		std::vector<std::string>& ret);
 	explicit CPUBASE(const CPUBASE& x);
-	CPUBASE& operator=(const CPUBASE& x);
+	CPUBASE& operator=(const CPUBASE& x) {};
 };

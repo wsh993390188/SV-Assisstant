@@ -66,19 +66,19 @@ private:
 #ifdef ZX_OutputLog
 				Logger::Instance()->OutputLogInfo(el::Level::Debug, "CPU Brands Intel");
 #endif
-				cpu = make_shared<Intel>();
+				cpu = std::make_shared<Intel>();
 				break;
 			case ZHAOXIN_:
 #ifdef ZX_OutputLog
 				Logger::Instance()->OutputLogInfo(el::Level::Debug, "CPU Brands Zhaoxin");
 #endif
-				cpu = make_shared<Zhaoxin>();
+				cpu = std::make_shared<Zhaoxin>();
 				break;
 			case AMD_:
 #ifdef ZX_OutputLog
 				Logger::Instance()->OutputLogInfo(el::Level::Debug, "CPU Brands AMD");
 #endif
-				cpu = make_shared<AMD>();
+				cpu = std::make_shared<AMD>();
 				break;
 			default:
 				break;
@@ -92,10 +92,10 @@ private:
 			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Codename: ") + cpu->microarchitecture);
 			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("SouthBridge: ") + cpu->SouthBridge);
 			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("SocketDesignation: ") + cpu->SocketDesignation);
-			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Cache L1 Data: ") + to_string(cpu->Cache[0].Cache_Size / 1024) + std::string(" KBytes, ") + to_string(cpu->Cache[0].Cache_Ways) + std::string(" -Ways"));
-			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Cache L1 Inst.: ") + to_string(cpu->Cache[1].Cache_Size / 1024) + std::string(" KBytes, ") + to_string(cpu->Cache[1].Cache_Ways) + std::string(" -Ways"));
-			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Cache L2: ") + to_string(cpu->Cache[2].Cache_Size / 1024) + std::string(" KBytes, ") + to_string(cpu->Cache[2].Cache_Ways) + std::string(" -Ways"));
-			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Cache L3: ") + to_string(cpu->Cache[3].Cache_Size / 1024) + std::string(" KBytes, ") + to_string(cpu->Cache[3].Cache_Ways) + std::string(" -Ways"));
+			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Cache L1 Data: ") + std::to_string(cpu->Cache[0].Cache_Size / 1024) + std::string(" KBytes, ") + std::to_string(cpu->Cache[0].Cache_Ways) + std::string(" -Ways"));
+			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Cache L1 Inst.: ") + std::to_string(cpu->Cache[1].Cache_Size / 1024) + std::string(" KBytes, ") + std::to_string(cpu->Cache[1].Cache_Ways) + std::string(" -Ways"));
+			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Cache L2: ") + std::to_string(cpu->Cache[2].Cache_Size / 1024) + std::string(" KBytes, ") + std::to_string(cpu->Cache[2].Cache_Ways) + std::string(" -Ways"));
+			Logger::Instance()->OutputLogInfo(el::Level::Debug, std::string("Cache L3: ") + std::to_string(cpu->Cache[3].Cache_Size / 1024) + std::string(" KBytes, ") + std::to_string(cpu->Cache[3].Cache_Ways) + std::string(" -Ways"));
 			Logger::Instance()->OutputLogInfo(el::Level::Debug, "********** End CPU info **********\n");
 #endif
 		}
