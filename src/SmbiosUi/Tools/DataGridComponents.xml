@@ -1,0 +1,10 @@
+<Folder>
+  <Instance name="TextEditorResource">
+    <Instance ref.CodeBehind="false" ref.Class="Smbios::TextEditor">
+      <GridEditorTemplate ref.Name="self" CellValue-bind="textLabel.Text" FocusControl-ref="textLabel">
+        <Label ref.Name="textLabel" Text-bind="(cast string self.CellValue) ?? ''">
+        </Label>
+      </GridEditorTemplate>
+    </Instance>
+  </Instance>
+</Folder>

@@ -1,0 +1,98 @@
+<Instance ref.CodeBehind="false" ref.Class="Smbios::DataGridTabPage" xmlns:Smbios="Smbios::*">
+  <ref.Ctor>
+    <![CDATA[
+          {
+            var tempData : observe SmbiosTypaDataItem^[] =
+            {
+              new SmbiosTypaDataItem^("")
+            };
+
+            listView.ItemSource = tempData;
+          }
+        ]]>
+  </ref.Ctor>
+  <TabPage ref.Name="self" Text="Smbios信息">
+    <Table AlignmentToParent="left:0 top:0 right:0 bottom:0" CellPadding="5">
+      <att.Rows>
+        <_>composeType:MinSize</_>
+        <_>composeType:Percentage percentage:1.0</_>
+      </att.Rows>
+      <att.Columns>
+        <CellOption>composeType:Absolute absolute:150</CellOption>
+        <CellOption>composeType:Absolute absolute:150</CellOption>
+      </att.Columns>
+      <Cell Site="row:0 column:0 columnSpan:2">
+        <ComboBox ref.Name="comboView" Alt="V" SelectedIndex="2">
+          <att.BoundsComposition-set PreferredMinSize="x:120" />
+          <att.ListControl>
+            <TextList HorizontalAlwaysVisible="false" VerticalAlwaysVisible="false">
+              <att.Items>
+                <TextItem Text="Tile" />
+                <TextItem Text="Information" />
+                <TextItem Text="Detail" />
+              </att.Items>
+            </TextList>
+          </att.ListControl>
+          <ev.SelectedIndexChanged-eval>
+            <![CDATA[
+              {
+                switch (comboView.SelectedIndex)
+                {
+                case 0:
+                  {
+                    textList.View = Tile;
+                  }
+                case 1:
+                  {
+                    textList.View = Information;
+                  }
+                case 2:
+                  {
+                    textList.View = Detail;
+                  }
+                }
+              }
+            ]]>
+          </ev.SelectedIndexChanged-eval>
+        </ComboBox>
+      </Cell>
+
+      <ColumnSplitter ColumnsToTheLeft="1" />
+      <Cell Site="row:1 column:0">
+        <BindableDataGrid ref.Name="listView" Alt="L" env.ItemType="Smbios::SmbiosTypaDataItem^" env.ItemName="itemToBind" HorizontalAlwaysVisible="false" VerticalAlwaysVisible="false"
+          ev.SelectionChanged="ListView_Selection_Changed">
+          <att.BoundsComposition-set AlignmentToParent="left:0 top:0 right:0 bottom:0" />
+          <att.Columns>
+            <DataColumn Text="Type" Size="60">
+              <att.TextProperty>Type</att.TextProperty>
+              <att.ValueProperty>Type</att.ValueProperty>
+              <att.Sorter>[Sys::Compare($1.Type, $2.Type)]</att.Sorter>
+            </DataColumn>
+            <DataColumn Text="描述" Size="120">
+              <att.TextProperty>Desc</att.TextProperty>
+              <att.ValueProperty>Desc</att.ValueProperty>
+              <att.Sorter>[Sys::Compare($1.Desc, $2.Desc)]</att.Sorter>
+            </DataColumn>
+          </att.Columns>
+
+          <att.DataColumns>
+            <_>0</_>
+          </att.DataColumns>
+        </BindableDataGrid>
+      </Cell>
+      <Cell Site="row:1 column:1">
+        <ListView ref.Name="textList" Alt="T" HorizontalAlwaysVisible="false" VerticalAlwaysVisible="false">
+          <att.BoundsComposition-set AlignmentToParent="left:0 top:0 right:0 bottom:0" />
+          <att.Columns>
+            <_ Text="名称" Size="60" />
+            <_ Text="信息" />
+          </att.Columns>
+
+          <att.DataColumns>
+            <_>0</_>
+          </att.DataColumns>
+        </ListView>
+      </Cell>
+    </Table>
+  </TabPage>
+</Instance>

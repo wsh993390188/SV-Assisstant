@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Resource>
+  <Folder name="GacGenConfig">
+    <Folder name="Cpp">
+      <Text name="SourceFolder">..\UI\Source</Text>
+      <Text name="Resource">..\UI\Smbios.bin</Text>
+      <Text name="NormalInclude">GacUI.h</Text>
+      <Text name="Name">Smbios</Text>
+    </Folder>
+  </Folder>
+
+  <Instance name="SmbiosResource">
+    <Instance ref.CodeBehind="false" ref.Class="Smbios::MainWindow" xmlns:Smbios="Smbios::*">
+
+      <Window ref.Name="self" Text="SMBIOS" ClientSize="x:640 y:480">
+        <att.BoundsComposition-set PreferredMinSize="x:640 y:480" />
+        <Tab>
+          <att.BoundsComposition-set AlignmentToParent="left:5 top:5 right:5 bottom:5" />
+          <att.Pages>
+            <Smbios:DataGridTabPage Alt="D" />
+            <Smbios:ProductInfoPage Alt="P" />
+          </att.Pages>
+        </Tab>
+      </Window>
+    </Instance>
+  </Instance>
+
+  <Instance name="DataGridTabPageResource" content="File">DataGridTabPage.xml</Instance>
+  <Instance name="ProductInfoPageResource" content="File">ProductInfoPage.xml</Instance>
+
+  <Script name="ViewModelResource">
+    <Workflow>
+      <![CDATA[
+        module viewmodel;
+
+        using system::*;
+        using presentation::*;
+
+        namespace Smbios
+        {
+          class SmbiosTypaDataItem
+          {
+            prop Desc : string = "" {not observe}
+            prop Type : int = 0 {not observe}
+            prop Address : Int64 = 0 {not observe}
+            new()
+            {
+            }
+            new(desc : string)
+            {
+              Desc = desc;
+              Type = 0;
+              Address = 0;
+            }
+          }
+
+         class DisplayDataToSmbiosData
+          {
+            prop Desc : string = "" {not observe}
+            prop Display : string = "" {not observe}
+            prop SmbiosType : int = 0 {not observe}
+            prop SmbiosTypeValue : string = "" {not observe}
+            new()
+            {
+            }
+            new(desc : string, display : string, value : string)
+            {
+              Desc = desc;
+              Display = display;
+              SmbiosType = 0;
+              SmbiosTypeValue = value;
+            }
+          }
+        }
+      ]]>
+    </Workflow>
+  </Script>
+</Resource>

@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{8352395c-1a46-4eef-bddb-362df926f5d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="UI\Type">
+      <UniqueIdentifier>{d37c9ef4-7981-4e3b-96e9-c81996bf8271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Type\OEM">
+      <UniqueIdentifier>{51ccc6ed-079c-461e-8eed-20521b6e81ea}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Source\SmbiosPartialClasses.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Source\SmbiosReflection.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Tools\MainWindow.xml">
+      <Filter>资源文件</Filter>
+    </Xml>
+    <Xml Include="Tools\DataGridComponents.xml">
+      <Filter>资源文件</Filter>
+    </Xml>
+    <Xml Include="Tools\DataGridTabPage.xml">
+      <Filter>资源文件</Filter>
+    </Xml>
+    <Xml Include="Tools\ProductInfoPage.xml">
+      <Filter>资源文件</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TypeAll.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type0.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="StringHelper.hpp" />
+    <ClInclude Include="UI\Source\SmbiosPartialClasses.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Source\SmbiosReflection.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Type1.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type2.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Source\Smbios.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Type3.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type4.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type5.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type6.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type7.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type8.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type9.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type10.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type11.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type12.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type13.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type14.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type15.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type16.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type17.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type18.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type19.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type20.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type21.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type22.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type23.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type24.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type25.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type26.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type27.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type28.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type29.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type30.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type32.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type33.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type34.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type35.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type36.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type37.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type38.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type39.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type40.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type41.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type42.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type43.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type44.hpp">
+      <Filter>UI\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type131_LENOVO.hpp">
+      <Filter>UI\Type\OEM</Filter>
+    </ClInclude>
+    <ClInclude Include="Type133_LENOVO.hpp">
+      <Filter>UI\Type\OEM</Filter>
+    </ClInclude>
+    <ClInclude Include="Type134_LENOVO.hpp">
+      <Filter>UI\Type\OEM</Filter>
+    </ClInclude>
+    <ClInclude Include="Type140_LENOVO.hpp">
+      <Filter>UI\Type\OEM</Filter>
+    </ClInclude>
+    <ClInclude Include="Type170_Acer.hpp">
+      <Filter>UI\Type\OEM</Filter>
+    </ClInclude>
+    <ClInclude Include="Type200_LENOVO.hpp">
+      <Filter>UI\Type\OEM</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

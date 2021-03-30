@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="源文件\Type">
+      <UniqueIdentifier>{603668d0-1993-450e-9428-5dab09edb135}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Type">
+      <UniqueIdentifier>{2738b6e1-ffe7-47a9-b515-50372a0fe2fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\OEMType">
+      <UniqueIdentifier>{2566afe1-96cd-42b0-ad3b-2d299301a774}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OEMType">
+      <UniqueIdentifier>{2390df2b-2298-45de-87cb-a4764e382315}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\OEMType\HP">
+      <UniqueIdentifier>{e13de824-fd90-4fdd-a776-b9f449fa3911}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OEMType\HP">
+      <UniqueIdentifier>{9e9eb39d-b8a8-4115-b74c-4666360a6946}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OEMType\LENOVO">
+      <UniqueIdentifier>{a3b95261-b9fd-4602-b002-57bd3434e552}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OEMType\Acer">
+      <UniqueIdentifier>{82b43d28-c9cd-40a7-8dac-fe6b397608b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\OEMType\LENOVO">
+      <UniqueIdentifier>{9af7496f-0a1f-45d6-80a8-1482e9785bce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\OEMType\Acer">
+      <UniqueIdentifier>{c7e278f6-0955-4c71-9e75-a4a4b08c352c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{03481168-fb58-4237-a022-b0f4415df723}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LibSMBIOS.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RawSmbios.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SmbiosDefination.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Type0.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeAll.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type1.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type2.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type3.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type4.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type7.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type16.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type17.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type24.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeImpl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Type5.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type6.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type8.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type9.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type10.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type11.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type12.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type13.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type14.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type15.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type18.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type19.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type20.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type23.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type22.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type21.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type25.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type26.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type27.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type28.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type29.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type30.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type32.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type33.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type34.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type35.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type36.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type37.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type38.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type39.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type40.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type41.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type42.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type43.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type44.h">
+      <Filter>头文件\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="OEMControl.h">
+      <Filter>头文件\OEMType</Filter>
+    </ClInclude>
+    <ClInclude Include="StringSplit.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Type170.h">
+      <Filter>头文件\OEMType\Acer</Filter>
+    </ClInclude>
+    <ClInclude Include="Type131.h">
+      <Filter>头文件\OEMType\LENOVO</Filter>
+    </ClInclude>
+    <ClInclude Include="Type134.h">
+      <Filter>头文件\OEMType\LENOVO</Filter>
+    </ClInclude>
+    <ClInclude Include="Type133.h">
+      <Filter>头文件\OEMType\LENOVO</Filter>
+    </ClInclude>
+    <ClInclude Include="Type140.h">
+      <Filter>头文件\OEMType\LENOVO</Filter>
+    </ClInclude>
+    <ClInclude Include="LenovoDisplay.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Type200.h">
+      <Filter>头文件\OEMType\LENOVO</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LibSMBIOS.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RawSmbios.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Type0.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type1.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type2.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type7.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type3.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type4.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type16.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type17.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type24.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="TypeImpl.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Type5.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type6.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type8.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type9.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type10.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type11.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type12.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type13.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type14.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type15.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type18.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type20.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type19.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type21.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type22.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type23.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type25.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type26.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type27.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type28.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type29.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type30.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type32.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type33.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type34.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type35.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type36.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type37.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type38.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type39.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type40.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type41.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type44.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type43.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Type42.cpp">
+      <Filter>源文件\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="OEMControl.cpp">
+      <Filter>源文件\OEMType</Filter>
+    </ClCompile>
+    <ClCompile Include="Type170.cpp">
+      <Filter>源文件\OEMType\Acer</Filter>
+    </ClCompile>
+    <ClCompile Include="Type131.cpp">
+      <Filter>源文件\OEMType\LENOVO</Filter>
+    </ClCompile>
+    <ClCompile Include="Type134.cpp">
+      <Filter>源文件\OEMType\LENOVO</Filter>
+    </ClCompile>
+    <ClCompile Include="Type133.cpp">
+      <Filter>源文件\OEMType\LENOVO</Filter>
+    </ClCompile>
+    <ClCompile Include="Type140.cpp">
+      <Filter>源文件\OEMType\LENOVO</Filter>
+    </ClCompile>
+    <ClCompile Include="SmbiosDefination.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LenovoDisplay.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Type200.cpp">
+      <Filter>源文件\OEMType\LENOVO</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

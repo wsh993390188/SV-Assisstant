@@ -1,0 +1,731 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="targetver.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="WSHardwarePluginV2.h">
+      <Filter>Export</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Data.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="DiskManager.h">
+      <Filter>Hardware\Disk</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="CPUManager.h">
+      <Filter>Hardware\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericCPU.h">
+      <Filter>Hardware\CPU\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="ZhaoXinCPU.h">
+      <Filter>Hardware\CPU\impl\VIA</Filter>
+    </ClInclude>
+    <ClInclude Include="IntelCPU.h">
+      <Filter>Hardware\CPU\impl\Intel</Filter>
+    </ClInclude>
+    <ClInclude Include="AmdCPU.h">
+      <Filter>Hardware\CPU\impl\Amd</Filter>
+    </ClInclude>
+    <ClInclude Include="CPUWMI.h">
+      <Filter>Hardware\CPU\impl\WMI</Filter>
+    </ClInclude>
+    <ClInclude Include="WMI\WMI.h">
+      <Filter>WMI</Filter>
+    </ClInclude>
+    <ClInclude Include="WMI\WMIExtern.h">
+      <Filter>WMI</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="msr.h">
+      <Filter>Utils\Ring0\Msr</Filter>
+    </ClInclude>
+    <ClInclude Include="IntelFamily.hpp">
+      <Filter>Hardware\CPU\impl\Intel</Filter>
+    </ClInclude>
+    <ClInclude Include="PCIHandle.h">
+      <Filter>Utils\Ring0\PCI</Filter>
+    </ClInclude>
+    <ClInclude Include="IoHandle.h">
+      <Filter>Utils\Ring0\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryHandle.h">
+      <Filter>Utils\Ring0\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memorydefination.h">
+      <Filter>Hardware\Memory\Impl\SPD</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryManager.h">
+      <Filter>Hardware\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="ExecSpd.h">
+      <Filter>Hardware\Memory\Impl\SPD</Filter>
+    </ClInclude>
+    <ClInclude Include="StringHelper.hpp">
+      <Filter>Utils\String</Filter>
+    </ClInclude>
+    <ClInclude Include="CPUConfig.h">
+      <Filter>Hardware\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseSMBUS.h">
+      <Filter>Hardware\Memory\Impl\SMBUS</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonSMBUS.h">
+      <Filter>Hardware\Memory\Impl\SMBUS</Filter>
+    </ClInclude>
+    <ClInclude Include="IvyBridgeSMbus.h">
+      <Filter>Hardware\Memory\Impl\SMBUS</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericMemory.h">
+      <Filter>Hardware\Memory\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="SPDMemoryController.h">
+      <Filter>Hardware\Memory\Impl\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="GPUManager.h">
+      <Filter>Hardware\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="MotherBroadManager.h">
+      <Filter>Hardware\MotherBroad</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericMotherBroad.h">
+      <Filter>Hardware\MotherBroad\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="MotherBroadFromSMBIOS.h">
+      <Filter>Hardware\MotherBroad\Impl\SMBIOS</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Hardware\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="BatteryManager.h">
+      <Filter>Hardware\Battery</Filter>
+    </ClInclude>
+    <ClInclude Include="WinBioManager.h">
+      <Filter>Hardware\WinBio</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericAudio.h">
+      <Filter>Hardware\Audio\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioInfoFromWindowsAPI.h">
+      <Filter>Hardware\Audio\Impl\AudioCoreAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="NICManager.h">
+      <Filter>Hardware\Monitor\Netcard</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericNIC.h">
+      <Filter>Hardware\Monitor\Netcard\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="NICIphlpapi.h">
+      <Filter>Hardware\Monitor\Netcard\Impl\WindowsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="MonitorManager.h">
+      <Filter>Hardware\Monitor</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericBattery.h">
+      <Filter>Hardware\Battery\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="BatteryFromSys.h">
+      <Filter>Hardware\Battery\Impl\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="BatteryElementCommon.h">
+      <Filter>Hardware\Battery\Impl\Element\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="BatteryElement.h">
+      <Filter>Hardware\Battery\Impl\Element</Filter>
+    </ClInclude>
+    <ClInclude Include="BatteryThinkElement.h">
+      <Filter>Hardware\Battery\Impl\Element\Think</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericWinBio.h">
+      <Filter>Hardware\WinBio\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="WinBioImpl.h">
+      <Filter>Hardware\WinBio\Impl\WinBioApi</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericMonitor.h">
+      <Filter>Hardware\Monitor\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="EDIDFromRegistry.h">
+      <Filter>Hardware\Monitor\Impl\EDID</Filter>
+    </ClInclude>
+    <ClInclude Include="EDIDdefination.h">
+      <Filter>Hardware\Monitor\Impl\EDID</Filter>
+    </ClInclude>
+    <ClInclude Include="WinReg.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGIGPUBase.h">
+      <Filter>Hardware\GPU\Device\DXGI</Filter>
+    </ClInclude>
+    <ClInclude Include="GPUDeviceBase.h">
+      <Filter>Hardware\GPU\Device\DeviceImpl</Filter>
+    </ClInclude>
+    <ClInclude Include="IntelGPU.h">
+      <Filter>Hardware\GPU\Device\DeviceImpl\Intel</Filter>
+    </ClInclude>
+    <ClInclude Include="AMDGPU.h">
+      <Filter>Hardware\GPU\Device\DeviceImpl\AMD</Filter>
+    </ClInclude>
+    <ClInclude Include="NvidiaGpu.h">
+      <Filter>Hardware\GPU\Device\DeviceImpl\NVIDIA</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericGPU.h">
+      <Filter>Hardware\GPU\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="GPUDeviceFactory.h">
+      <Filter>Hardware\GPU\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="PCIGPUDetect.h">
+      <Filter>Hardware\GPU\Device\PCI</Filter>
+    </ClInclude>
+    <ClInclude Include="tsc.h">
+      <Filter>Utils\Ring0\TSC</Filter>
+    </ClInclude>
+    <ClInclude Include="HardwareRing0.h">
+      <Filter>Utils\Ring0\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXFactory.h">
+      <Filter>Hardware\GPU\Device\DXGI\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="NVAPIHelper.h">
+      <Filter>Hardware\GPU\Device\DeviceImpl\NVIDIA\NVAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="ADLSDKHelper.h">
+      <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SIOBase.h">
+      <Filter>Hardware\SIO</Filter>
+    </ClInclude>
+    <ClInclude Include="SMSC.h">
+      <Filter>Hardware\SIO\SMSC</Filter>
+    </ClInclude>
+    <ClInclude Include="ITE.h">
+      <Filter>Hardware\SIO\ITE</Filter>
+    </ClInclude>
+    <ClInclude Include="Fintek.h">
+      <Filter>Hardware\SIO\Fintek</Filter>
+    </ClInclude>
+    <ClInclude Include="Nuvoton.h">
+      <Filter>Hardware\SIO\Nuvoton</Filter>
+    </ClInclude>
+    <ClInclude Include="Winbond.h">
+      <Filter>Hardware\SIO\Winbond</Filter>
+    </ClInclude>
+    <ClInclude Include="Overdrive.h">
+      <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD</Filter>
+    </ClInclude>
+    <ClInclude Include="OverDrive5.h">
+      <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD</Filter>
+    </ClInclude>
+    <ClInclude Include="OverDrive6.h">
+      <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD</Filter>
+    </ClInclude>
+    <ClInclude Include="OverDriveN.h">
+      <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD</Filter>
+    </ClInclude>
+    <ClInclude Include="OverDrive8.h">
+      <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD</Filter>
+    </ClInclude>
+    <ClInclude Include="NICIFEntry.h">
+      <Filter>Hardware\Monitor\Netcard\Impl\WindowsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="NetMonitor.h">
+      <Filter>Hardware\Monitor\Netcard\Impl\WindowsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="CrystalDiskInfo\AtaSmart.h">
+      <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="CrystalDiskInfo\DnpService.h">
+      <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="CrystalDiskInfo\NVMeInterpreter.h">
+      <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="CrystalDiskInfo\OsInfoFx.h">
+      <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="CrystalDiskInfo\SlotSpeedGetter.h">
+      <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="CrystalDiskInfo\SPTIUtil.h">
+      <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="CrystalDiskInfo\StorageQuery.h">
+      <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="CrystalDiskInfo\UtilityFx.h">
+      <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="WSHardwarePluginV2.cpp">
+      <Filter>Export</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface.cpp">
+      <Filter>Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="DiskManager.cpp">
+      <Filter>Hardware\Disk</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CPUManager.cpp">
+      <Filter>Hardware\CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericCPU.cpp">
+      <Filter>Hardware\CPU\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="ZhaoXinCPU.cpp">
+      <Filter>Hardware\CPU\impl\VIA</Filter>
+    </ClCompile>
+    <ClCompile Include="IntelCPU.cpp">
+      <Filter>Hardware\CPU\impl\Intel</Filter>
+    </ClCompile>
+    <ClCompile Include="AmdCPU.cpp">
+      <Filter>Hardware\CPU\impl\Amd</Filter>
+    </ClCompile>
+    <ClCompile Include="CPUWMI.cc">
+      <Filter>Hardware\CPU\impl\WMI</Filter>
+    </ClCompile>
+    <ClCompile Include="WMI\WMI.cpp">
+      <Filter>WMI</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="msr.cpp">
+      <Filter>Utils\Ring0\Msr</Filter>
+    </ClCompile>
+    <ClCompile Include="PCIHandle.cpp">
+      <Filter>Utils\Ring0\PCI</Filter>
+    </ClCompile>
+    <ClCompile Include="IoHandle.cpp">
+      <Filter>Utils\Ring0\Io</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryHandle.cpp">
+      <Filter>Utils\Ring0\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryManager.cpp">
+      <Filter>Hardware\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="ExecSpd.cpp">
+      <Filter>Hardware\Memory\Impl\SPD</Filter>
+    </ClCompile>
+    <ClCompile Include="CPUConfig.cpp">
+      <Filter>Hardware\CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="CommonSMBUS.cpp">
+      <Filter>Hardware\Memory\Impl\SMBUS</Filter>
+    </ClCompile>
+    <ClCompile Include="IvyBridgeSMbus.cpp">
+      <Filter>Hardware\Memory\Impl\SMBUS</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericMemory.cpp">
+      <Filter>Hardware\Memory\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="SPDMemoryController.cpp">
+      <Filter>Hardware\Memory\Impl\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="GPUManager.cpp">
+      <Filter>Hardware\GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseSMBUS.cpp">
+      <Filter>Hardware\Memory\Impl\SMBUS</Filter>
+    </ClCompile>
+    <ClCompile Include="MotherBroadManager.cpp">
+      <Filter>Hardware\MotherBroad</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericMotherBroad.cpp">
+      <Filter>Hardware\MotherBroad\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="MotherBroadFromSMBIOS.cpp">
+      <Filter>Hardware\MotherBroad\Impl\SMBIOS</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Hardware\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="BatteryManager.cpp">
+      <Filter>Hardware\Battery</Filter>
+    </ClCompile>
+    <ClCompile Include="WinBioManager.cpp">
+      <Filter>Hardware\WinBio</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericAudio.cpp">
+      <Filter>Hardware\Audio\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioInfoFromWindowsAPI.cpp">
+      <Filter>Hardware\Audio\Impl\AudioCoreAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="NICManager.cpp">
+      <Filter>Hardware\Monitor\Netcard</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericNIC.cpp">
+      <Filter>Hardware\Monitor\Netcard\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="NICIphlpapi.cpp">
+      <Filter>Hardware\Monitor\Netcard\Impl\WindowsAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="MonitorManager.cpp">
+      <Filter>Hardware\Monitor</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericBattery.cpp">
+      <Filter>Hardware\Battery\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="BatteryFromSys.cpp">
+      <Filter>Hardware\Battery\Impl\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="BatteryElementCommon.cpp">
+      <Filter>Hardware\Battery\Impl\Element\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="BatteryElement.cpp">
+      <Filter>Hardware\Battery\Impl\Element</Filter>
+    </ClCompile>
+    <ClCompile Include="BatteryThinkElement.cpp">
+      <Filter>Hardware\Battery\Impl\Element\Think</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericWinBio.cpp">
+      <Filter>Hardware\WinBio\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="WinBioImpl.cpp">
+      <Filter>Hardware\WinBio\Impl\WinBioApi</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericMonitor.cpp">
+      <Filter>Hardware\Monitor\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="EDIDFromRegistry.cpp">
+      <Filter>Hardware\Monitor\Impl\EDID</Filter>
+    </ClCompile>
+    <ClCompile Include="DXGIGPUBase.cpp">
+      <Filter>Hardware\GPU\Device\DXGI</Filter>
+    </ClCompile>
+    <ClCompile Include="IntelGPU.cpp">
+      <Filter>Hardware\GPU\Device\DeviceImpl\Intel</Filter>
+    </ClCompile>
+    <ClCompile Include="AMDGPU.cpp">
+      <Filter>Hardware\GPU\Device\DeviceImpl\AMD</Filter>
+    </ClCompile>
+    <ClCompile Include="NvidiaGpu.cpp">
+      <Filter>Hardware\GPU\Device\DeviceImpl\NVIDIA</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericGPU.cpp">
+      <Filter>Hardware\GPU\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="GPUDeviceFactory.cpp">
+      <Filter>Hardware\GPU\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="PCIGPUDetect.cpp">
+      <Filter>Hardware\GPU\Device\PCI</Filter>
+    </ClCompile>
+    <ClCompile Include="GPUDeviceBase.cpp">
+      <Filter>Hardware\GPU\Device\DeviceImpl</Filter>
+    </ClCompile>
+    <ClCompile Include="tsc.cpp">
+      <Filter>Utils\Ring0\TSC</Filter>
+    </ClCompile>
+    <ClCompile Include="HardwareRing0.cpp">
+      <Filter>Utils\Ring0\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXFactory.cpp">
+      <Filter>Hardware\GPU\Device\DXGI\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="NVAPIHelper.cpp">
+      <Filter>Hardware\GPU\Device\DeviceImpl\NVIDIA\NVAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="ADLSDKHelper.cpp">
+      <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="SIOBase.cpp">
+      <Filter>Hardware\SIO</Filter>
+    </ClCompile>
+    <ClCompile Include="SMSC.cpp">
+      <Filter>Hardware\SIO\SMSC</Filter>
+    </ClCompile>
+    <ClCompile Include="ITE.cpp">
+      <Filter>Hardware\SIO\ITE</Filter>
+    </ClCompile>
+    <ClCompile Include="Fintek.cpp">
+      <Filter>Hardware\SIO\Fintek</Filter>
+    </ClCompile>
+    <ClCompile Include="Nuvoton.cpp">
+      <Filter>Hardware\SIO\Nuvoton</Filter>
+    </ClCompile>
+    <ClCompile Include="Winbond.cpp">
+      <Filter>Hardware\SIO\Winbond</Filter>
+    </ClCompile>
+    <ClCompile Include="Overdrive.cpp">
+      <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD</Filter>
+    </ClCompile>
+    <ClCompile Include="OverDrive5.cpp">
+      <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD</Filter>
+    </ClCompile>
+    <ClCompile Include="OverDrive6.cpp">
+      <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD</Filter>
+    </ClCompile>
+    <ClCompile Include="OverDriveN.cpp">
+      <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD</Filter>
+    </ClCompile>
+    <ClCompile Include="OverDrive8.cpp">
+      <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD</Filter>
+    </ClCompile>
+    <ClCompile Include="NICIFEntry.cpp">
+      <Filter>Hardware\Monitor\Netcard\Impl\WindowsAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="NetMonitor.cpp">
+      <Filter>Hardware\Monitor\Netcard\Impl\WindowsAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="CrystalDiskInfo\AtaSmart.cpp">
+      <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="CrystalDiskInfo\NVMeInterpreter.cpp">
+      <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="CrystalDiskInfo\OsInfoFx.cpp">
+      <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="CrystalDiskInfo\SlotSpeedGetter.cpp">
+      <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="CrystalDiskInfo\UtilityFx.cpp">
+      <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Main">
+      <UniqueIdentifier>{fd42befe-674f-44f9-b5b5-3f2018550865}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Export">
+      <UniqueIdentifier>{0cefc661-fdd5-4024-9ff7-d0fd5ca83b2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{c029c03c-1940-4a7d-825a-13a4dc04c325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware">
+      <UniqueIdentifier>{e1854247-0c73-417c-b68b-d14c47362eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Disk">
+      <UniqueIdentifier>{c0d1c9d1-d785-41dc-8f8d-8e8cd85b6af4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Disk\CrystalDiskInfo">
+      <UniqueIdentifier>{517dde78-c3d9-4043-a062-12202d8855a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\CPU">
+      <UniqueIdentifier>{23698c7e-fe1c-4501-bda9-064676e8613b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\CPU\impl">
+      <UniqueIdentifier>{66b1fb08-8c98-4d4d-ad67-a6672e06f20d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\CPU\impl\Intel">
+      <UniqueIdentifier>{f3077721-2c5e-493c-b665-68b8827e1938}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\CPU\impl\Amd">
+      <UniqueIdentifier>{f20c3ca2-76af-4cb5-bc34-fab3fb376cc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\CPU\impl\VIA">
+      <UniqueIdentifier>{f93345c9-db84-48ce-b28a-c6441cac2e71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WMI">
+      <UniqueIdentifier>{b8a5a896-a56a-40b9-ae9d-7ea90cebf827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\CPU\impl\ARM">
+      <UniqueIdentifier>{7b6674b6-8ada-4df0-a852-99333dadb0e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{f3b0f5db-7067-49b0-8f43-8627d149ba51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\String">
+      <UniqueIdentifier>{58fa90e6-d252-4377-b532-3549bd15a869}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Ring0">
+      <UniqueIdentifier>{4c421de9-5c20-439e-a74f-5ebb26baedac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Ring0\Msr">
+      <UniqueIdentifier>{0363a21b-398a-450d-997f-60cfb15d6f9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Ring0\PCI">
+      <UniqueIdentifier>{3f044a65-b878-4e73-b5a8-c9e722b27e6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Ring0\Memory">
+      <UniqueIdentifier>{9afa1b8f-cf6d-4598-ab59-02f72892156b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Ring0\Io">
+      <UniqueIdentifier>{1503e795-7723-417b-8cae-be4ead274253}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{13d1cae0-f51e-4c0d-b00a-d050d002f421}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\CPU\impl\WMI">
+      <UniqueIdentifier>{3dbea061-bca8-424d-8b6a-71fac6927568}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Memory">
+      <UniqueIdentifier>{3f11aa25-de00-48dd-801b-aa43540f2ca0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Memory\Impl">
+      <UniqueIdentifier>{e6284cab-fcbc-41ee-898c-f7512967775c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Memory\Impl\SPD">
+      <UniqueIdentifier>{4c1885d9-4f68-4889-bf42-9977714327fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Memory\Impl\SMBUS">
+      <UniqueIdentifier>{b15d0b90-138c-45ec-b21b-871daa46f2ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Memory\Impl\Controller">
+      <UniqueIdentifier>{50159d25-1c90-4c20-94d9-91dec2f01188}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\GPU">
+      <UniqueIdentifier>{0c7e897b-f4d4-4680-acda-d9a0801e2a90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\MotherBroad">
+      <UniqueIdentifier>{97b31ff6-ae70-4c86-9538-a5e9059d2dc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\MotherBroad\Impl">
+      <UniqueIdentifier>{b4a93913-c8c3-4384-9f9f-631fedf82680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\MotherBroad\Impl\SMBIOS">
+      <UniqueIdentifier>{3d9ff3f1-4bef-4131-a4b2-fdc3b302a053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Audio">
+      <UniqueIdentifier>{b3e7ba15-54e3-470e-a6a7-959847763097}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\WinBio">
+      <UniqueIdentifier>{4042059c-06c1-4071-b6b3-6b1f2588d55e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Battery">
+      <UniqueIdentifier>{5644f7f7-7c36-4f78-8789-1249e2acde87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Audio\Impl">
+      <UniqueIdentifier>{91cb1ae6-2104-464e-ae62-ec26298ae327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Battery\Impl">
+      <UniqueIdentifier>{cb53e07b-2ed5-437c-957b-515b203a2a63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\WinBio\Impl">
+      <UniqueIdentifier>{72979a22-10ac-4326-a9fa-637efd084204}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Audio\Impl\AudioCoreAPI">
+      <UniqueIdentifier>{bf89e160-f525-4820-afa2-4b49e22ef6a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Monitor">
+      <UniqueIdentifier>{c2bcb823-4138-4a4f-921d-4b0ab86f94e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Monitor\Impl">
+      <UniqueIdentifier>{5410003d-888c-463b-8a13-31aad4b6e242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Battery\Impl\Element">
+      <UniqueIdentifier>{7b8ec525-6a70-4a57-9402-97ccc30162a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Battery\Impl\Element\Common">
+      <UniqueIdentifier>{7c140216-b351-4b38-9c19-eb3751cc3fca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Battery\Impl\Element\Think">
+      <UniqueIdentifier>{58b8dfec-8737-42ec-8f38-f3c297b47f0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Battery\Impl\Common">
+      <UniqueIdentifier>{8facd27d-2ba4-4c75-9be9-60fef4a18bbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Other">
+      <UniqueIdentifier>{2053887f-ed75-4040-97ea-409025632fec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\WinBio\Impl\WinBioApi">
+      <UniqueIdentifier>{2e6e1755-848c-484e-8f21-d995113d3017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Monitor\Impl\EDID">
+      <UniqueIdentifier>{3a769225-ac53-4dfb-bf6b-64cf5bae7b89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\GPU\Device">
+      <UniqueIdentifier>{6abd2c06-a5c4-4cca-82cb-079217d5abb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\GPU\Device\DXGI">
+      <UniqueIdentifier>{811bfcd9-b861-4a10-99e0-76cb56c0e62b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\GPU\Device\DeviceImpl">
+      <UniqueIdentifier>{90ea831c-07e4-4f7d-a37c-be6129f02fbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\GPU\Device\DeviceImpl\Intel">
+      <UniqueIdentifier>{06578437-1101-4758-9abb-7cd16df77645}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\GPU\Device\DeviceImpl\NVIDIA">
+      <UniqueIdentifier>{4a93ef00-cae9-4f48-b24b-d60d9f0df15c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\GPU\Device\DeviceImpl\AMD">
+      <UniqueIdentifier>{1bc77457-e856-4d4e-a172-f511d75993f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\GPU\Device\PCI">
+      <UniqueIdentifier>{1e5a3ccd-26ea-4f77-bcf5-f79dbc3bea03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Ring0\Impl">
+      <UniqueIdentifier>{8b457363-0e4a-4adf-93a6-5ab4389460f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Ring0\TSC">
+      <UniqueIdentifier>{babfc711-9e2a-4e21-810d-acbe34a3fcbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\GPU\Device\DXGI\DirectX">
+      <UniqueIdentifier>{1c6dd28f-4292-496c-b766-8952cd55fc52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\GPU\Device\DeviceImpl\NVIDIA\NVAPI">
+      <UniqueIdentifier>{637f1d7b-c888-4788-ac30-2c175ce04d76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK">
+      <UniqueIdentifier>{27e95696-a765-4b82-8565-4e79f87a2b47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\SIO">
+      <UniqueIdentifier>{f33dfcf0-f640-4b89-8b56-e12e7739aae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\SIO\ITE">
+      <UniqueIdentifier>{969258c7-3fe3-4b7a-bc75-06ac8684e311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\SIO\SMSC">
+      <UniqueIdentifier>{284479e8-3af7-4f08-a350-8776a430d01c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\SIO\Winbond">
+      <UniqueIdentifier>{4ef647eb-caae-4b07-9b0c-7a862a5d4fc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\SIO\Fintek">
+      <UniqueIdentifier>{18ac4110-3400-442a-a51e-47fdf5c98632}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\SIO\Nuvoton">
+      <UniqueIdentifier>{f126675f-9772-417a-a1a6-171f81b87247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD">
+      <UniqueIdentifier>{8432958e-518f-44e5-9e3f-07c6367979b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Monitor\Netcard">
+      <UniqueIdentifier>{048a33bd-f382-4216-93c5-61c7c9f461e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Monitor\Netcard\Impl">
+      <UniqueIdentifier>{4c235975-651c-4200-ae2f-751e0e17f30c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\Monitor\Netcard\Impl\WindowsAPI">
+      <UniqueIdentifier>{7861fd88-0dd4-45bb-856d-7d6a88e876cd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="CPUDatabase.xml">
+      <Filter>Config</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,454 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C9BDA4CE-65DC-45AB-8AAB-854608E21F91}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>WSHardwarePluginV2</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)..\bin\$(Configuration)\</OutDir>
+    <IncludePath>.\CrystalDiskInfo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IncludePath>.\CrystalDiskInfo;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)..\bin\$(Configuration)\</OutDir>
+    <IncludePath>.\CrystalDiskInfo;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IncludePath>.\CrystalDiskInfo;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>COOLite;WIN32;_DEBUG;_WINDOWS;_USRDLL;WSHARDWAREPLUGINV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Libcommon\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>D3D11.lib;WinBio.lib;Shell32.lib;propsys.lib;IPHLPAPI.lib;ws2_32.lib;nvapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\LibCommon\NVAPI\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>$(SolutionDir)..\Libcommon\CrystalDiskInfo\DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+    <PostBuildEvent>
+      <Command>$(SolutionDir)..\Libcommon\CooLite\LnvSignTool.exe $(OutDir)$(TargetFileName)
+COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;WSHARDWAREPLUGINV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Libcommon\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>D3D11.lib;WinBio.lib;Shell32.lib;propsys.lib;IPHLPAPI.lib;ws2_32.lib;wlanapi.lib;nvapi64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\LibCommon\NVAPI\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>$(SolutionDir)..\Libcommon\CooLite\LnvSignTool.exe $(OutDir)$(TargetFileName)
+COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
+    </PostBuildEvent>
+    <Manifest>
+      <AdditionalManifestFiles>$(SolutionDir)..\Libcommon\CrystalDiskInfo\DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>COOLite;WIN32;NDEBUG;_WINDOWS;_USRDLL;WSHARDWAREPLUGINV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Libcommon\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>D3D11.lib;WinBio.lib;Shell32.lib;propsys.lib;IPHLPAPI.lib;ws2_32.lib;nvapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\LibCommon\NVAPI\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>$(SolutionDir)..\Libcommon\CrystalDiskInfo\DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+    <PostBuildEvent>
+      <Command>$(SolutionDir)..\Libcommon\CooLite\LnvSignTool.exe $(OutDir)$(TargetFileName)
+COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;WSHARDWAREPLUGINV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Libcommon\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>D3D11.lib;WinBio.lib;Shell32.lib;propsys.lib;IPHLPAPI.lib;ws2_32.lib;wlanapi.lib;nvapi64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\LibCommon\NVAPI\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>$(SolutionDir)..\Libcommon\CooLite\LnvSignTool.exe $(OutDir)$(TargetFileName)
+COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
+    </PostBuildEvent>
+    <Manifest>
+      <AdditionalManifestFiles>$(SolutionDir)..\Libcommon\CrystalDiskInfo\DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="ADLSDKHelper.h" />
+    <ClInclude Include="AmdCPU.h" />
+    <ClInclude Include="AMDGPU.h" />
+    <ClInclude Include="AudioInfoFromWindowsAPI.h" />
+    <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="BatteryElement.h" />
+    <ClInclude Include="BatteryElementCommon.h" />
+    <ClInclude Include="BatteryFromSys.h" />
+    <ClInclude Include="BatteryManager.h" />
+    <ClInclude Include="BatteryThinkElement.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="CommonSMBUS.h" />
+    <ClInclude Include="CPUConfig.h" />
+    <ClInclude Include="CPUManager.h" />
+    <ClInclude Include="CPUWMI.h" />
+    <ClInclude Include="CrystalDiskInfo\AtaSmart.h" />
+    <ClInclude Include="CrystalDiskInfo\DnpService.h" />
+    <ClInclude Include="CrystalDiskInfo\NVMeInterpreter.h" />
+    <ClInclude Include="CrystalDiskInfo\OsInfoFx.h" />
+    <ClInclude Include="CrystalDiskInfo\SlotSpeedGetter.h" />
+    <ClInclude Include="CrystalDiskInfo\SPTIUtil.h" />
+    <ClInclude Include="CrystalDiskInfo\StorageQuery.h" />
+    <ClInclude Include="CrystalDiskInfo\UtilityFx.h" />
+    <ClInclude Include="Data.h" />
+    <ClInclude Include="DirectXFactory.h" />
+    <ClInclude Include="DiskManager.h" />
+    <ClInclude Include="DXGIGPUBase.h" />
+    <ClInclude Include="EDIDdefination.h" />
+    <ClInclude Include="EDIDFromRegistry.h" />
+    <ClInclude Include="ExecSpd.h" />
+    <ClInclude Include="Fintek.h" />
+    <ClInclude Include="GenericAudio.h" />
+    <ClInclude Include="GenericBattery.h" />
+    <ClInclude Include="GenericCPU.h" />
+    <ClInclude Include="BaseSMBUS.h" />
+    <ClInclude Include="GenericGPU.h" />
+    <ClInclude Include="GenericMonitor.h" />
+    <ClInclude Include="GenericMotherBroad.h" />
+    <ClInclude Include="GenericNIC.h" />
+    <ClInclude Include="GenericWinBio.h" />
+    <ClInclude Include="GPUDeviceBase.h" />
+    <ClInclude Include="GPUDeviceFactory.h" />
+    <ClInclude Include="GPUManager.h" />
+    <ClInclude Include="HardwareRing0.h" />
+    <ClInclude Include="ITE.h" />
+    <ClInclude Include="NetMonitor.h" />
+    <ClInclude Include="NICIFEntry.h" />
+    <ClInclude Include="Nuvoton.h" />
+    <ClInclude Include="NVAPIHelper.h" />
+    <ClInclude Include="IntelCPU.h" />
+    <ClInclude Include="IntelFamily.hpp" />
+    <ClInclude Include="IntelGPU.h" />
+    <ClInclude Include="Interface.h" />
+    <ClInclude Include="IoHandle.h" />
+    <ClInclude Include="IvyBridgeSMbus.h" />
+    <ClInclude Include="memorydefination.h" />
+    <ClInclude Include="MemoryHandle.h" />
+    <ClInclude Include="GenericMemory.h" />
+    <ClInclude Include="MemoryManager.h" />
+    <ClInclude Include="MonitorManager.h" />
+    <ClInclude Include="MotherBroadFromSMBIOS.h" />
+    <ClInclude Include="MotherBroadManager.h" />
+    <ClInclude Include="msr.h" />
+    <ClInclude Include="NICIphlpapi.h" />
+    <ClInclude Include="NICManager.h" />
+    <ClInclude Include="NvidiaGpu.h" />
+    <ClInclude Include="Overdrive.h" />
+    <ClInclude Include="OverDrive5.h" />
+    <ClInclude Include="OverDrive6.h" />
+    <ClInclude Include="OverDrive8.h" />
+    <ClInclude Include="OverDriveN.h" />
+    <ClInclude Include="PCIGPUDetect.h" />
+    <ClInclude Include="PCIHandle.h" />
+    <ClInclude Include="SIOBase.h" />
+    <ClInclude Include="SMSC.h" />
+    <ClInclude Include="SPDMemoryController.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="StringHelper.hpp" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="test.h" />
+    <ClInclude Include="tsc.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="WinBioImpl.h" />
+    <ClInclude Include="WinBioManager.h" />
+    <ClInclude Include="Winbond.h" />
+    <ClInclude Include="WinReg.hpp" />
+    <ClInclude Include="WMI\WMI.h" />
+    <ClInclude Include="WMI\WMIExtern.h" />
+    <ClInclude Include="WSHardwarePluginV2.h" />
+    <ClInclude Include="ZhaoXinCPU.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ADLSDKHelper.cpp" />
+    <ClCompile Include="AmdCPU.cpp" />
+    <ClCompile Include="AMDGPU.cpp" />
+    <ClCompile Include="AudioInfoFromWindowsAPI.cpp" />
+    <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="BaseSMBUS.cpp" />
+    <ClCompile Include="BatteryElement.cpp" />
+    <ClCompile Include="BatteryElementCommon.cpp" />
+    <ClCompile Include="BatteryFromSys.cpp" />
+    <ClCompile Include="BatteryManager.cpp" />
+    <ClCompile Include="BatteryThinkElement.cpp" />
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="CommonSMBUS.cpp" />
+    <ClCompile Include="CPUConfig.cpp" />
+    <ClCompile Include="CPUManager.cpp" />
+    <ClCompile Include="CPUWMI.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="CrystalDiskInfo\AtaSmart.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="CrystalDiskInfo\NVMeInterpreter.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\StdAfx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\StdAfx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\StdAfx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\StdAfx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="CrystalDiskInfo\OsInfoFx.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="CrystalDiskInfo\SlotSpeedGetter.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="CrystalDiskInfo\UtilityFx.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="DirectXFactory.cpp" />
+    <ClCompile Include="dllmain.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="DiskManager.cpp" />
+    <ClCompile Include="DXGIGPUBase.cpp" />
+    <ClCompile Include="EDIDFromRegistry.cpp" />
+    <ClCompile Include="ExecSpd.cpp" />
+    <ClCompile Include="Fintek.cpp" />
+    <ClCompile Include="GenericAudio.cpp" />
+    <ClCompile Include="GenericBattery.cpp" />
+    <ClCompile Include="GenericCPU.cpp" />
+    <ClCompile Include="GenericGPU.cpp" />
+    <ClCompile Include="GenericMonitor.cpp" />
+    <ClCompile Include="GenericMotherBroad.cpp" />
+    <ClCompile Include="GenericNIC.cpp" />
+    <ClCompile Include="GenericWinBio.cpp" />
+    <ClCompile Include="GPUDeviceBase.cpp" />
+    <ClCompile Include="GPUDeviceFactory.cpp" />
+    <ClCompile Include="GPUManager.cpp" />
+    <ClCompile Include="HardwareRing0.cpp" />
+    <ClCompile Include="ITE.cpp" />
+    <ClCompile Include="NetMonitor.cpp" />
+    <ClCompile Include="NICIFEntry.cpp" />
+    <ClCompile Include="Nuvoton.cpp" />
+    <ClCompile Include="NVAPIHelper.cpp" />
+    <ClCompile Include="IntelCPU.cpp" />
+    <ClCompile Include="IntelGPU.cpp" />
+    <ClCompile Include="Interface.cpp" />
+    <ClCompile Include="IoHandle.cpp" />
+    <ClCompile Include="IvyBridgeSMbus.cpp" />
+    <ClCompile Include="MemoryHandle.cpp" />
+    <ClCompile Include="GenericMemory.cpp" />
+    <ClCompile Include="MemoryManager.cpp" />
+    <ClCompile Include="MonitorManager.cpp" />
+    <ClCompile Include="MotherBroadFromSMBIOS.cpp" />
+    <ClCompile Include="MotherBroadManager.cpp" />
+    <ClCompile Include="msr.cpp" />
+    <ClCompile Include="NICIphlpapi.cpp" />
+    <ClCompile Include="NICManager.cpp" />
+    <ClCompile Include="NvidiaGpu.cpp" />
+    <ClCompile Include="Overdrive.cpp" />
+    <ClCompile Include="OverDrive5.cpp" />
+    <ClCompile Include="OverDrive6.cpp" />
+    <ClCompile Include="OverDrive8.cpp" />
+    <ClCompile Include="OverDriveN.cpp" />
+    <ClCompile Include="PCIGPUDetect.cpp" />
+    <ClCompile Include="PCIHandle.cpp" />
+    <ClCompile Include="SIOBase.cpp" />
+    <ClCompile Include="SMSC.cpp" />
+    <ClCompile Include="SPDMemoryController.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="test.cpp" />
+    <ClCompile Include="tsc.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="WinBioImpl.cpp" />
+    <ClCompile Include="WinBioManager.cpp" />
+    <ClCompile Include="Winbond.cpp" />
+    <ClCompile Include="WMI\WMI.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="WSHardwarePluginV2.cpp" />
+    <ClCompile Include="ZhaoXinCPU.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="CPUDatabase.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libcommon\jsoncpp\build\src\lib_json\jsoncpp_static.vcxproj">
+      <Project>{73f61e0d-cc26-3f9c-990e-fb1659cd820b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libcommon\spdlog\build\spdlog.vcxproj">
+      <Project>{278f1521-4faa-3197-94d5-9fd87a771009}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libcommon\tinyxml2\tinyxml2\tinyxml2.vcxproj">
+      <Project>{d1c528b6-aa02-4d29-9d61-dc08e317a70d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libSmbios\libSmbios.vcxproj">
+      <Project>{d85e9f42-fe3b-4de9-bcbe-87c26b30f1e7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Sys\DriverLoad\DriverLoad.vcxproj">
+      <Project>{02ed4f5e-81eb-4125-a226-f5cebb0d81ab}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -333,3 +333,12 @@ ASALocalRun/
 
 # VS Code
 .vscode/
+/Release
+
+# Ignore Open source project
+Libcommon/CooLite/
+Libcommon/json/
+Libcommon/NVAPI/
+build/temp/tinyxml2/
+/build/Debug-Lib
+src/HardwareUI/CPUDatabase.xml

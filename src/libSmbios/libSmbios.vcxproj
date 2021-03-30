@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D85E9F42-FE3B-4DE9-BCBE-87C26B30F1E7}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>libSmbios</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>Default</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Exception.hpp" />
+    <ClInclude Include="LenovoDisplay.h" />
+    <ClInclude Include="LibSMBIOS.h" />
+    <ClInclude Include="OEMControl.h" />
+    <ClInclude Include="RawSmbios.h" />
+    <ClInclude Include="SmbiosDefination.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="StringSplit.hpp" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Type0.h" />
+    <ClInclude Include="Type10.h" />
+    <ClInclude Include="Type11.h" />
+    <ClInclude Include="Type12.h" />
+    <ClInclude Include="Type13.h" />
+    <ClInclude Include="Type131.h" />
+    <ClInclude Include="Type133.h" />
+    <ClInclude Include="Type134.h" />
+    <ClInclude Include="Type14.h" />
+    <ClInclude Include="Type140.h" />
+    <ClInclude Include="Type15.h" />
+    <ClInclude Include="Type16.h" />
+    <ClInclude Include="Type17.h" />
+    <ClInclude Include="Type170.h" />
+    <ClInclude Include="Type18.h" />
+    <ClInclude Include="Type19.h" />
+    <ClInclude Include="Type2.h" />
+    <ClInclude Include="Type20.h" />
+    <ClInclude Include="Type200.h" />
+    <ClInclude Include="Type21.h" />
+    <ClInclude Include="Type22.h" />
+    <ClInclude Include="Type23.h" />
+    <ClInclude Include="Type24.h" />
+    <ClInclude Include="Type25.h" />
+    <ClInclude Include="Type26.h" />
+    <ClInclude Include="Type27.h" />
+    <ClInclude Include="Type28.h" />
+    <ClInclude Include="Type29.h" />
+    <ClInclude Include="Type3.h" />
+    <ClInclude Include="Type30.h" />
+    <ClInclude Include="Type32.h" />
+    <ClInclude Include="Type33.h" />
+    <ClInclude Include="Type34.h" />
+    <ClInclude Include="Type35.h" />
+    <ClInclude Include="Type36.h" />
+    <ClInclude Include="Type37.h" />
+    <ClInclude Include="Type38.h" />
+    <ClInclude Include="Type39.h" />
+    <ClInclude Include="Type4.h" />
+    <ClInclude Include="Type40.h" />
+    <ClInclude Include="Type41.h" />
+    <ClInclude Include="Type42.h" />
+    <ClInclude Include="Type43.h" />
+    <ClInclude Include="Type44.h" />
+    <ClInclude Include="Type5.h" />
+    <ClInclude Include="Type6.h" />
+    <ClInclude Include="Type7.h" />
+    <ClInclude Include="Type8.h" />
+    <ClInclude Include="Type9.h" />
+    <ClInclude Include="TypeAll.h" />
+    <ClInclude Include="Type1.h" />
+    <ClInclude Include="TypeImpl.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LenovoDisplay.cpp" />
+    <ClCompile Include="LibSMBIOS.cpp" />
+    <ClCompile Include="OEMControl.cpp" />
+    <ClCompile Include="RawSmbios.cpp" />
+    <ClCompile Include="SmbiosDefination.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Type0.cpp" />
+    <ClCompile Include="Type1.cpp" />
+    <ClCompile Include="Type10.cpp" />
+    <ClCompile Include="Type11.cpp" />
+    <ClCompile Include="Type12.cpp" />
+    <ClCompile Include="Type13.cpp" />
+    <ClCompile Include="Type131.cpp" />
+    <ClCompile Include="Type133.cpp" />
+    <ClCompile Include="Type134.cpp" />
+    <ClCompile Include="Type14.cpp" />
+    <ClCompile Include="Type140.cpp" />
+    <ClCompile Include="Type15.cpp" />
+    <ClCompile Include="Type170.cpp" />
+    <ClCompile Include="Type18.cpp" />
+    <ClCompile Include="Type19.cpp" />
+    <ClCompile Include="Type2.cpp" />
+    <ClCompile Include="Type20.cpp" />
+    <ClCompile Include="Type200.cpp" />
+    <ClCompile Include="Type21.cpp" />
+    <ClCompile Include="Type22.cpp" />
+    <ClCompile Include="Type23.cpp" />
+    <ClCompile Include="Type24.cpp" />
+    <ClCompile Include="Type25.cpp" />
+    <ClCompile Include="Type26.cpp" />
+    <ClCompile Include="Type27.cpp" />
+    <ClCompile Include="Type28.cpp" />
+    <ClCompile Include="Type29.cpp" />
+    <ClCompile Include="Type3.cpp" />
+    <ClCompile Include="Type30.cpp" />
+    <ClCompile Include="Type32.cpp" />
+    <ClCompile Include="Type33.cpp" />
+    <ClCompile Include="Type34.cpp" />
+    <ClCompile Include="Type35.cpp" />
+    <ClCompile Include="Type36.cpp" />
+    <ClCompile Include="Type37.cpp" />
+    <ClCompile Include="Type38.cpp" />
+    <ClCompile Include="Type39.cpp" />
+    <ClCompile Include="Type4.cpp" />
+    <ClCompile Include="Type40.cpp" />
+    <ClCompile Include="Type41.cpp" />
+    <ClCompile Include="Type42.cpp" />
+    <ClCompile Include="Type43.cpp" />
+    <ClCompile Include="Type44.cpp" />
+    <ClCompile Include="Type5.cpp" />
+    <ClCompile Include="Type6.cpp" />
+    <ClCompile Include="Type7.cpp" />
+    <ClCompile Include="Type16.cpp" />
+    <ClCompile Include="Type17.cpp" />
+    <ClCompile Include="Type8.cpp" />
+    <ClCompile Include="Type9.cpp" />
+    <ClCompile Include="TypeImpl.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

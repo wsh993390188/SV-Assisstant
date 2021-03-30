@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<CPUDatabase version="1.0" url="http://www.lenovo.com">
+  <CPUManufactures>
+    <Manufacture name="Intel">
+      <Family name="Celeron">
+        <CPU name="G5900">
+          <CodeName >Comet Lake</CodeName>
+          <SocketPackage >Socket 1200</SocketPackage>
+          <MaxTDP>58</MaxTDP>
+          <Technology>14</Technology>
+        </CPU>
+      </Family>
+      <Family name="Core i7">
+        <CPU name="10510U">
+          <CodeName>Comet Lake-U</CodeName>
+          <SocketPackage>BGA1440</SocketPackage>
+          <MaxTDP priority="false">25</MaxTDP>
+          <Technology>14</Technology>
+        </CPU>
+      </Family>
+    </Manufacture>
+    <Manufacture name="amd">
+    </Manufacture>
+    <Manufacture name="Zhaoxin">
+    </Manufacture>
+  </CPUManufactures>
+</CPUDatabase>

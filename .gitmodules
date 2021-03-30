@@ -1,0 +1,24 @@
+[submodule "./Libcommon/utfcpp"]
+	path = ./Libcommon/utfcpp
+	url = https://github.com/nemtrif/utfcpp.git
+[submodule "Libcommon/tinyxml2"]
+	path = Libcommon/tinyxml2
+	url = https://github.com/leethomason/tinyxml2.git
+[submodule "Libcommon/GacUILite"]
+	path = Libcommon/GacUILite
+	url = https://github.com/vczh-libraries/Release.git
+[submodule "Libcommon/jsoncpp"]
+	path = Libcommon/jsoncpp
+	url = https://github.com/open-source-parsers/jsoncpp.git
+[submodule "Libcommon/gtest"]
+	path = Libcommon/gtest
+	url = https://github.com/google/googletest.git
+[submodule "Libcommon/adlsdk"]
+	path = Libcommon/adlsdk
+	url = https://github.com/GPUOpen-LibrariesAndSDKs/display-library.git
+[submodule "Libcommon/CrystalDiskInfo"]
+	path = Libcommon/CrystalDiskInfo
+	url = https://github.com/hiyohiyo/CrystalDiskInfo.git
+[submodule "Libcommon/spdlog"]
+	path = Libcommon/spdlog
+	url = https://github.com/gabime/spdlog.git
