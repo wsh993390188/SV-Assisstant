@@ -102,11 +102,6 @@ namespace Hardware
 			/// @param CpuData 序列化类
 			/// @return 错误类型 @ref Data::ErrorType
 			Data::ErrorType ParserCpuInformaion(tinyxml2::XMLElement const* const CpuElement, CpuInformationFromCpudb& CpuData);
-
-		private:
-			/// @brief 判断测试配置文件是否存在,不调用共用库方法，自行实现
-			/// @return 测试配置文件是否存在
-			bool TestConfigIsExist();
 		};
 	}
 }

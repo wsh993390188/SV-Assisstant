@@ -119,9 +119,9 @@ namespace
 						std::string value_str = node[member_name].asString();
 						ret.emplace_back(utf8_decode(member_name), utf8_decode(value_str));
 					}
-					else if (node[member_name].isUInt())
+					else if (node[member_name].isUInt64())
 					{
-						auto value_str = node[member_name].asUInt();
+						auto value_str = node[member_name].asUInt64();
 						ret.emplace_back(utf8_decode(member_name), std::to_wstring(value_str));
 					}
 					else if (node[member_name].isArray())
@@ -152,9 +152,9 @@ namespace
 					std::string value_str = node[member_name].asString();
 					ret.emplace_back(utf8_decode(member_name), utf8_decode(value_str));
 				}
-				else if (node[member_name].isUInt())
+				else if (node[member_name].isUInt64())
 				{
-					auto value_str = node[member_name].asUInt();
+					auto value_str = node[member_name].asUInt64();
 					ret.emplace_back(utf8_decode(member_name), std::to_wstring(value_str));
 				}
 			}

@@ -195,11 +195,13 @@ std::string Hardware::Battery::BatteryCapacity::Tou8String() const
 	switch (Unit)
 	{
 	case Hardware::Battery::BatteryUnit::mW:
-		return Value + R"(mW)";
+		return Value + R"( mW)";
+	case Hardware::Battery::BatteryUnit::W:
+		return Value + R"( W)";
 	case Hardware::Battery::BatteryUnit::PerHour:
-		return Value + R"(Per hour)";
+		return Value + R"( Per hour)";
 	case Hardware::Battery::BatteryUnit::Percent:
-		return Value + R"(%)";
+		return Value + R"( %)";
 	}
 
 	spdlog::error("Unknown Unit");

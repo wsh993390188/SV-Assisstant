@@ -125,13 +125,13 @@
       <Filter>Hardware\Audio\Impl\AudioCoreAPI</Filter>
     </ClInclude>
     <ClInclude Include="NICManager.h">
-      <Filter>Hardware\Monitor\Netcard</Filter>
+      <Filter>Hardware\Netcard</Filter>
     </ClInclude>
     <ClInclude Include="GenericNIC.h">
-      <Filter>Hardware\Monitor\Netcard\Impl</Filter>
+      <Filter>Hardware\Netcard\Impl</Filter>
     </ClInclude>
     <ClInclude Include="NICIphlpapi.h">
-      <Filter>Hardware\Monitor\Netcard\Impl\WindowsAPI</Filter>
+      <Filter>Hardware\Netcard\Impl\WindowsAPI</Filter>
     </ClInclude>
     <ClInclude Include="MonitorManager.h">
       <Filter>Hardware\Monitor</Filter>
@@ -242,10 +242,10 @@
       <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD</Filter>
     </ClInclude>
     <ClInclude Include="NICIFEntry.h">
-      <Filter>Hardware\Monitor\Netcard\Impl\WindowsAPI</Filter>
+      <Filter>Hardware\Netcard\Impl\WindowsAPI</Filter>
     </ClInclude>
     <ClInclude Include="NetMonitor.h">
-      <Filter>Hardware\Monitor\Netcard\Impl\WindowsAPI</Filter>
+      <Filter>Hardware\Netcard\Impl\WindowsAPI</Filter>
     </ClInclude>
     <ClInclude Include="CrystalDiskInfo\AtaSmart.h">
       <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
@@ -382,13 +382,13 @@
       <Filter>Hardware\Audio\Impl\AudioCoreAPI</Filter>
     </ClCompile>
     <ClCompile Include="NICManager.cpp">
-      <Filter>Hardware\Monitor\Netcard</Filter>
+      <Filter>Hardware\Netcard</Filter>
     </ClCompile>
     <ClCompile Include="GenericNIC.cpp">
-      <Filter>Hardware\Monitor\Netcard\Impl</Filter>
+      <Filter>Hardware\Netcard\Impl</Filter>
     </ClCompile>
     <ClCompile Include="NICIphlpapi.cpp">
-      <Filter>Hardware\Monitor\Netcard\Impl\WindowsAPI</Filter>
+      <Filter>Hardware\Netcard\Impl\WindowsAPI</Filter>
     </ClCompile>
     <ClCompile Include="MonitorManager.cpp">
       <Filter>Hardware\Monitor</Filter>
@@ -493,10 +493,10 @@
       <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD</Filter>
     </ClCompile>
     <ClCompile Include="NICIFEntry.cpp">
-      <Filter>Hardware\Monitor\Netcard\Impl\WindowsAPI</Filter>
+      <Filter>Hardware\Netcard\Impl\WindowsAPI</Filter>
     </ClCompile>
     <ClCompile Include="NetMonitor.cpp">
-      <Filter>Hardware\Monitor\Netcard\Impl\WindowsAPI</Filter>
+      <Filter>Hardware\Netcard\Impl\WindowsAPI</Filter>
     </ClCompile>
     <ClCompile Include="CrystalDiskInfo\AtaSmart.cpp">
       <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
@@ -713,13 +713,13 @@
     <Filter Include="Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD">
       <UniqueIdentifier>{8432958e-518f-44e5-9e3f-07c6367979b4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Hardware\Monitor\Netcard">
+    <Filter Include="Hardware\Netcard">
       <UniqueIdentifier>{048a33bd-f382-4216-93c5-61c7c9f461e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Hardware\Monitor\Netcard\Impl">
+    <Filter Include="Hardware\Netcard\Impl">
       <UniqueIdentifier>{4c235975-651c-4200-ae2f-751e0e17f30c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Hardware\Monitor\Netcard\Impl\WindowsAPI">
+    <Filter Include="Hardware\Netcard\Impl\WindowsAPI">
       <UniqueIdentifier>{7861fd88-0dd4-45bb-856d-7d6a88e876cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

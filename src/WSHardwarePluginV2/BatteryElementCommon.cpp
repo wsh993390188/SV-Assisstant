@@ -13,6 +13,11 @@ Hardware::Battery::BatteryInforamtion::BatteryInforamtion(const std::wstring& De
 	{
 		throw std::exception("Not Open Battery Device");
 	}
+
+	if (GetNewTag() == BATTERY_TAG_INVALID)
+	{
+		throw std::exception("Cant Get Battery tag");
+	}
 }
 
 bool Hardware::Battery::BatteryInforamtion::Update(const uint32_t&, BatteryCommonStruct& BatteryInfo)
@@ -232,12 +237,25 @@ Hardware::Battery::BatteryCapacity Hardware::Battery::BatteryInforamtion::Batter
 {
 	if (CapacityValue == BATTERY_UNKNOWN_CAPACITY || CapacityValue == 0)
 		return {};
-	BatteryUnit UnitType = BatteryUnit::mW;
-	if (Unit & BATTERY_CAPACITY_RELATIVE)
-		UnitType = BatteryUnit::Percent;
 	Hardware::Battery::BatteryCapacity TempInst;
-	TempInst.Value = std::to_string(CapacityValue);
-	TempInst.Unit = UnitType;
+	if (Unit & BATTERY_CAPACITY_RELATIVE)
+	{
+		TempInst.Value = std::to_string(CapacityValue);
+		TempInst.Unit = BatteryUnit::Percent;
+	}
+	else
+	{
+		if (CapacityValue / 1000)
+		{
+			TempInst.Value = Utils::to_string_with_precision(CapacityValue / 1000.0);
+			TempInst.Unit = BatteryUnit::W;
+		}
+		else
+		{
+			TempInst.Value = std::to_string(CapacityValue);
+			TempInst.Unit = BatteryUnit::mW;
+		}
+	}
 	return TempInst;
 }
 

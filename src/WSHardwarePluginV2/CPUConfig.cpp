@@ -203,11 +203,6 @@ Hardware::Data::ErrorType Hardware::CPU::CPUDB::ParserCpuInformaion(tinyxml2::XM
 	return Data::ErrorType::SUCCESS;
 }
 
-bool Hardware::CPU::CPUDB::TestConfigIsExist()
-{
-	return ::PathFileExists(LR"(c:\config.ini)") == TRUE;
-}
-
 Hardware::CPU::CPUDB::CpuFamily::operator bool() const
 {
 	return !this->Element.empty();

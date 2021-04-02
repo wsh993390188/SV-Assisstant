@@ -7,6 +7,7 @@ namespace Hardware
 		enum class BatteryUnit
 		{
 			mW,///<毫瓦
+			W, ///< 瓦
 			PerHour,///< 每小时充电速率，仅用于Rate
 			Percent,///< 百分比，仅用于电池容量
 		};
