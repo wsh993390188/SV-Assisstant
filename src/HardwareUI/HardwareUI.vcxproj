@@ -106,7 +106,8 @@
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)..\Libcommon\CooLite\LnvSignTool.exe $(OutDir)$(TargetFileName)</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -129,7 +130,8 @@
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)..\Tools\LnvSignTool.exe $(OutDir)$(TargetFileName)</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -148,7 +150,8 @@
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)..\Libcommon\CooLite\LnvSignTool.exe $(OutDir)$(TargetFileName)</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -171,7 +174,8 @@
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)..\Tools\LnvSignTool.exe $(OutDir)$(TargetFileName)</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -40,13 +40,11 @@ void Hardware::CPU::CPUDB::Initialize()
 
 	CPUDBType TempDB{};
 	auto RootChildNode = RootElement->FirstChildElement();
-	while (RootChildNode) {
-		if (std::strstr(RootChildNode->Value(), "CPUManufactures")) {
-			auto CPUManufacturesChildNode = RootChildNode->FirstChildElement();
-			while (CPUManufacturesChildNode) {
-				ParserManufacture(CPUManufacturesChildNode, TempDB);
-				CPUManufacturesChildNode = CPUManufacturesChildNode->NextSiblingElement();
-			}
+	while (RootChildNode)
+	{
+		if (std::strstr(RootChildNode->Value(), "Manufacture"))
+		{
+			ParserManufacture(RootChildNode, TempDB);
 		}
 		RootChildNode = RootChildNode->NextSiblingElement();
 	}

@@ -590,6 +590,7 @@ void Hardware::CPU::AmdCPU::AddPackageTemperature(Socket& soc)
 	switch (soc.m_Data.Family)
 	{
 	case 0x17:
+	case 0x19:
 		soc.AddDecorator(std::make_unique<AMDTemperature>(0, "PackageTemperature", AMD_Family17H_DealTemperature, soc.m_Data.Family, soc.m_Data.Model));
 		break;
 	case 0x10:
@@ -620,6 +621,7 @@ void Hardware::CPU::AmdCPU::AddCoreVoltage(std::weak_ptr<HyperThread> thread, co
 			switch (Family)
 			{
 			case 0x17:
+			case 0x19:
 
 				if (Msr->read(MSR_FAMILY_17H_P_STATE, value.ui64) && value.ui32.Eax)
 				{
@@ -661,6 +663,7 @@ void Hardware::CPU::AmdCPU::AddCoreFrequency(std::weak_ptr<HyperThread> thread, 
 			switch (Family)
 			{
 			case 0x17:
+			case 0x19:
 				if (Msr->read(MSR_FAMILY_10H_P_STATE, value.ui64) && value.ui32.Eax)
 				{
 					Ptr->AddDecorator(std::make_unique<AMDFrequency>(MSR_FAMILY_17H_P_STATE, "CoreFrequency", Family, AMD_Family17H_DealFrequency, wmi.MaxClockSpeed));

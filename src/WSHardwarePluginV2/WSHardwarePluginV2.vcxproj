@@ -114,8 +114,7 @@
       <AdditionalManifestFiles>$(SolutionDir)..\Libcommon\CrystalDiskInfo\DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
     </Manifest>
     <PostBuildEvent>
-      <Command>$(SolutionDir)..\Libcommon\CooLite\LnvSignTool.exe $(OutDir)$(TargetFileName)
-COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
+      <Command>COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -136,8 +135,7 @@ COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
       <AdditionalLibraryDirectories>$(SolutionDir)..\LibCommon\NVAPI\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)..\Libcommon\CooLite\LnvSignTool.exe $(OutDir)$(TargetFileName)
-COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
+      <Command>COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
     </PostBuildEvent>
     <Manifest>
       <AdditionalManifestFiles>$(SolutionDir)..\Libcommon\CrystalDiskInfo\DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
@@ -168,8 +166,7 @@ COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
       <AdditionalManifestFiles>$(SolutionDir)..\Libcommon\CrystalDiskInfo\DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
     </Manifest>
     <PostBuildEvent>
-      <Command>$(SolutionDir)..\Libcommon\CooLite\LnvSignTool.exe $(OutDir)$(TargetFileName)
-COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
+      <Command>COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -194,8 +191,7 @@ COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
       <AdditionalLibraryDirectories>$(SolutionDir)..\LibCommon\NVAPI\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)..\Libcommon\CooLite\LnvSignTool.exe $(OutDir)$(TargetFileName)
-COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
+      <Command>COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
     </PostBuildEvent>
     <Manifest>
       <AdditionalManifestFiles>$(SolutionDir)..\Libcommon\CrystalDiskInfo\DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
