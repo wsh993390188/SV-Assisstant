@@ -4,10 +4,11 @@ namespace Hardware
 {
 	namespace CPU
 	{
+		/// @brief CPU扩展信息
 		struct CPUExtendedInfo
 		{
-			std::string Element;
-			bool Priority = false;
+			std::string Element;///<信息内容
+			bool Priority = true;///< 是否优先使用,不优先则使用代码判别的内容,默认优先使用
 		};
 		/// @brief 从配置中获取CPU信息
 		struct CPUExtendedInfoFromCPUDB
@@ -79,12 +80,10 @@ namespace Hardware
 		private:
 			/// @brief 默认构造，禁止外部访问构造函数
 			CPUDB() = default;
-			/// @brief 读取XML配置文件中的信息
-			/// @param fileName 加密后文件名
-			/// @param localConfigName 本地未加密文件名
+			/// @brief 从资源中读取XML配置文件中的信息
 			/// @param configcontent XML配置文件中二进制数据
 			/// @return 读取配置文件是否成功
-			bool GetConfigXml(const std::wstring& fileName, const std::wstring& localConfigName, std::string& configcontent);
+			bool GetConfigXmlFromResource(std::string& configcontent);
 
 			/// @brief 解析Manufacture字段
 			/// @param ManufactureElement 字段元素

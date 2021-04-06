@@ -320,13 +320,13 @@ namespace Hardware
 			if (!soc.m_Data.Technology.empty())
 			{
 				Json::Value TempValue;
-				TempValue["Technology"] = soc.m_Data.Technology;
+				TempValue["Technology"] = soc.m_Data.Technology + " nm";
 				Element.append(std::move(TempValue));
 			}
 			if (!soc.m_Data.MaxTDP.empty())
 			{
 				Json::Value TempValue;
-				TempValue["Max TDP"] = soc.m_Data.MaxTDP;
+				TempValue["Max TDP"] = soc.m_Data.MaxTDP + " W";
 				Element.append(std::move(TempValue));
 			}
 			if (!soc.m_Data.SocketPackage.empty())

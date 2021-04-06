@@ -341,4 +341,3 @@ Libcommon/json/
 Libcommon/NVAPI/
 build/temp/tinyxml2/
 /build/Debug-Lib
-src/HardwareUI/CPUDatabase.xml

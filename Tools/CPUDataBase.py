@@ -44,7 +44,7 @@ class CPUDBResquest:
                 Technology = ET.SubElement(CPU,'Technology')
                 Technology.text = cpu[5].replace(' nm','').strip()  
 
-                MaxTDP = ET.SubElement(CPU,'MaxTDP')
+                MaxTDP = ET.SubElement(CPU,'MaxTDP', attrib={'priority': 'false'})
                 MaxTDP.text = cpu[7].replace(' W','').strip()  
 
                 Released = ET.SubElement(CPU,'ReleaseDate')
@@ -111,5 +111,5 @@ if __name__ == '__main__':
         resq.SaveRoot()
         print('Generated')
     else:
-        print('error to query cpu info from cpudb')
+       print('error to query cpu info from cpudb')
 

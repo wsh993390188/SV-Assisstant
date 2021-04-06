@@ -146,7 +146,6 @@ class GPUDBResquest:
                     select = li.find('select',attrs={'id':'mfgr','name':'mfgr'})
                     if select is not None:
                         for option in select.find_all('option'):
-                            print(option['value'])
                             if len(option['value']) > 0:
                                 Manufacture = option['value']
                                 break

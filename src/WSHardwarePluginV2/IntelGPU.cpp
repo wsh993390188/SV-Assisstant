@@ -43,10 +43,17 @@ std::string Hardware::GPU::IntelGPU::UpdateGPUInfo()
 	auto MemoryPtr = std::make_shared<Utils::Ring0::SafeMemoryHandle>();
 	for (auto& decorator : m_Decorators)
 	{
-		Json::Value temp;
-		decorator->Update(MemoryPtr);
-		temp[decorator->GetDecoratorName()] = decorator->GetDecoratorValue();
-		root.append(temp);
+		try
+		{
+			Json::Value temp;
+			decorator->Update(MemoryPtr);
+			temp[decorator->GetDecoratorName()] = decorator->GetDecoratorValue();
+			root.append(temp);
+		}
+		catch (const std::exception&)
+		{
+			continue;
+		}
 	}
 	return Json::FastWriter().write(root);
 }
@@ -117,7 +124,7 @@ const std::string Hardware::GPU::IntelGPUTemperature::GetDecoratorValue() const
 			return std::to_string(m_TjCurrent) + " Degree";
 		}
 	}
-	return {};
+	throw std::exception("Cannot get IntelGPUTemperature");
 }
 
 void Hardware::GPU::IntelGPUTemperature::Update(std::weak_ptr<Utils::Ring0::SafeMemoryHandle> MemoryPtr)
@@ -155,7 +162,7 @@ const std::string Hardware::GPU::IntelGPUEngineClock::GetDecoratorValue() const
 			return std::to_string(m_EngineClock) + " Mhz";
 		}
 	}
-	return {};
+	throw std::exception("Cannot get IntelGPUEngineClock");
 }
 
 void Hardware::GPU::IntelGPUEngineClock::Update(std::weak_ptr<Utils::Ring0::SafeMemoryHandle> MemoryPtr)
@@ -193,7 +200,7 @@ const std::string Hardware::GPU::IntelGPUMemoryClock::GetDecoratorValue() const
 			return Utils::to_string_with_precision(m_MemoryClock) + " Mhz";
 		}
 	}
-	return {};
+	throw std::exception("Cannot get IntelGPUMemoryClock");
 }
 
 void Hardware::GPU::IntelGPUMemoryClock::Update(std::weak_ptr<Utils::Ring0::SafeMemoryHandle> MemoryPtr)

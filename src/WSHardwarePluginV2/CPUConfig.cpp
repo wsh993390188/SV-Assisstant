@@ -2,6 +2,9 @@
 #include <fstream>
 #include <shlwapi.h>
 #include "CPUConfig.h"
+#include "resource.h"
+
+extern HMODULE g_hModule;
 
 Hardware::CPU::CPUDB& Hardware::CPU::CPUDB::Instance()
 {
@@ -12,7 +15,7 @@ Hardware::CPU::CPUDB& Hardware::CPU::CPUDB::Instance()
 void Hardware::CPU::CPUDB::Initialize()
 {
 	std::string XmlContent;
-	if (!GetConfigXml(L"CPUDatabase.dat", L"CPUDatabase.xml", XmlContent))
+	if (!GetConfigXmlFromResource(XmlContent))
 	{
 		spdlog::error("Read Xml Config failure");
 		return;
@@ -81,18 +84,32 @@ const Hardware::CPU::CPUDB::CPUDBType& Hardware::CPU::CPUDB::GetCpuData() const
 	return m_CPUDB;
 }
 
-bool Hardware::CPU::CPUDB::GetConfigXml(const std::wstring& fileName, const std::wstring& localConfigName, std::string& configcontent)
+bool Hardware::CPU::CPUDB::GetConfigXmlFromResource(std::string& configcontent)
 {
-	std::ifstream file(localConfigName, std::ios::binary | std::ios::in);
-	if (file)
+	HGLOBAL hGlobal = NULL;
+	bool ret = false;
+	do
 	{
-		std::stringstream buffer;
-		buffer << file.rdbuf();
-		configcontent = buffer.str();
-		file.close();
-		return true;
-	}
-	return false;
+		HRSRC hRsrc = FindResourceEx(g_hModule, L"XML", MAKEINTRESOURCE(IDR_XML1), 0);
+		if (NULL == hRsrc)
+			break;
+		DWORD dwSize = SizeofResource(g_hModule, hRsrc);
+		if (0 == dwSize)
+			break;
+		hGlobal = LoadResource(g_hModule, hRsrc);
+		if (NULL == hGlobal)
+			break;
+		LPVOID pBuffer = LockResource(hGlobal);
+		if (NULL == pBuffer)
+			break;
+		configcontent.resize(dwSize);
+		memcpy_s(configcontent.data(), configcontent.size(), pBuffer, dwSize);
+		ret = true;
+	} while (false);
+
+	if (hGlobal)
+		FreeResource(hGlobal);
+	return ret;
 }
 
 void Hardware::CPU::CPUDB::ParserManufacture(tinyxml2::XMLElement const* const ManufactureElement, CPUDBType& CpuDB)
