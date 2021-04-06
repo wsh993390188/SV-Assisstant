@@ -135,7 +135,8 @@
       <AdditionalLibraryDirectories>$(SolutionDir)..\LibCommon\NVAPI\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <Manifest>
       <AdditionalManifestFiles>$(SolutionDir)..\Libcommon\CrystalDiskInfo\DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
@@ -191,7 +192,8 @@
       <AdditionalLibraryDirectories>$(SolutionDir)..\LibCommon\NVAPI\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <Manifest>
       <AdditionalManifestFiles>$(SolutionDir)..\Libcommon\CrystalDiskInfo\DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
@@ -271,6 +273,7 @@
     <ClInclude Include="OverDriveN.h" />
     <ClInclude Include="PCIGPUDetect.h" />
     <ClInclude Include="PCIHandle.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SIOBase.h" />
     <ClInclude Include="SMSC.h" />
     <ClInclude Include="SPDMemoryController.h" />
@@ -425,7 +428,9 @@
     <ClCompile Include="ZhaoXinCPU.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="CPUDatabase.xml" />
+    <Xml Include="CPUDatabase.xml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libcommon\jsoncpp\build\src\lib_json\jsoncpp_static.vcxproj">
@@ -443,6 +448,9 @@
     <ProjectReference Include="Sys\DriverLoad\DriverLoad.vcxproj">
       <Project>{02ed4f5e-81eb-4125-a226-f5cebb0d81ab}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WSHardwarePluginV2.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

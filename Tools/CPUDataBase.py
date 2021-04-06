@@ -18,7 +18,7 @@ class CPUDBResquest:
     __AMD = None
     __ZhaoXin = None
     def __init__(self):
-        self.__root = ET.Element('CPUDatabase',attrib={'version':'1.0'})
+        self.__root = ET.Element('CPUDatabase',attrib={'version':'1.0','url':r'https://www.techpowerup.com/cpu-specs','BuildDate':time.strftime("%Y-%m-%d", time.localtime())})
         self.__Intel = ET.SubElement(self.__root,"Manufacture",attrib={'name': 'Intel'})
         self.__AMD = ET.SubElement(self.__root,"Manufacture",attrib={'name': 'AMD'})
         self.__ZhaoXin = ET.SubElement(self.__root,"Manufacture",attrib={'name': 'Zhaoxin'})
@@ -33,10 +33,7 @@ class CPUDBResquest:
         Family = ET.SubElement(Manufacture,"Family", attrib={'name': FamilyName})
         for cpu in self.data:
             if len(cpu) == 9:
-                CPU = ET.SubElement(Family,'CPU')
-
-                CPUName = ET.SubElement(CPU,'Name')
-                CPUName.text = cpu[0].replace(FamilyName,'').strip()  
+                CPU = ET.SubElement(Family,'CPU',attrib={'name':cpu[0].replace(FamilyName,'').replace('-','').strip()})
 
                 CodeName = ET.SubElement(CPU,'CodeName')
                 CodeName.text = cpu[1].strip()  
@@ -50,8 +47,8 @@ class CPUDBResquest:
                 MaxTDP = ET.SubElement(CPU,'MaxTDP')
                 MaxTDP.text = cpu[7].replace(' W','').strip()  
 
-                Released = ET.SubElement(CPU,'Release Date')
-                Released.text = cpu[8].strip()                 
+                Released = ET.SubElement(CPU,'ReleaseDate')
+                Released.text = cpu[8].strip()
 
     def BuildQuery(self):
         r=requests.get(r'https://www.techpowerup.com/cpu-specs',headers={'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'})
@@ -71,7 +68,7 @@ class CPUDBResquest:
 
     def QueryFromCPUDB(self,generation):
         count = 1
-        time.sleep(random.randint(60,120))
+        time.sleep(60)
         while count <= 3 :
             url = buildUrl(generation)
             r=requests.get(url,headers={'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'})

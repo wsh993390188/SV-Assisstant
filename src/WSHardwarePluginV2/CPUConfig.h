@@ -7,7 +7,7 @@ namespace Hardware
 		struct CPUExtendedInfo
 		{
 			std::string Element;
-			bool Priority = true;
+			bool Priority = false;
 		};
 		/// @brief 从配置中获取CPU信息
 		struct CPUExtendedInfoFromCPUDB
