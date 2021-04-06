@@ -274,6 +274,10 @@
     <ClInclude Include="resource.h">
       <Filter>Main</Filter>
     </ClInclude>
+    <ClInclude Include="GPUConfig.h">
+      <Filter>Hardware\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -516,6 +520,10 @@
     <ClCompile Include="CrystalDiskInfo\UtilityFx.cpp">
       <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
     </ClCompile>
+    <ClCompile Include="GPUConfig.cpp">
+      <Filter>Hardware\GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
@@ -730,10 +738,16 @@
     <Xml Include="CPUDatabase.xml">
       <Filter>Config</Filter>
     </Xml>
+    <Xml Include="GPUDatabase.xml">
+      <Filter>Config</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WSHardwarePluginV2.rc">
       <Filter>Main</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="xml2.bin" />
   </ItemGroup>
 </Project>

@@ -113,8 +113,8 @@ namespace Hardware
 
 			/// @brief 解析Intel CPUBrand信息
 			/// @param[in,out] soc cpu信息
-			/// @return @ref Hardware::CPU::CPUDB::CPUQueryInfo
-			std::unique_ptr<Hardware::CPU::CPUDB::CPUQueryInfo> ParserCPUBrandName(Socket& soc);
+			/// @return @ref Hardware::XMLConfig::QueryInfo
+			std::unique_ptr<Hardware::XMLConfig::QueryInfo> ParserCPUBrandName(Socket& soc);
 
 			/// @brief 从CPUID中获取CPU信息
 			void GetInfoFromCPUID();

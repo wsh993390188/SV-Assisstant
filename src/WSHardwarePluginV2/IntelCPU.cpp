@@ -287,30 +287,30 @@ bool Hardware::CPU::IntelCPU::InitializeSocketFromWMI()
 	return true;
 }
 
-std::unique_ptr<Hardware::CPU::CPUDB::CPUQueryInfo> Hardware::CPU::IntelCPU::ParserCPUBrandName(Socket& soc)
+std::unique_ptr<Hardware::XMLConfig::QueryInfo> Hardware::CPU::IntelCPU::ParserCPUBrandName(Socket& soc)
 {
 	// 不确定如何操作
 	try
 	{
-		CPUDB::CPUQueryInfo QueryInfo;
-		QueryInfo.CpuManufacture = "Intel";
+		Hardware::XMLConfig::QueryInfo QueryInfo;
+		QueryInfo.Manufacture = "Intel";
 		if (soc.m_Data.Name.find("Core") != std::string::npos)
 		{
 			if (soc.m_Data.Name.find("i9") != std::string::npos)
 			{
-				QueryInfo.CpuFamily = "Core i9";
+				QueryInfo.Family = "Core i9";
 			}
 			else if (soc.m_Data.Name.find("i7") != std::string::npos)
 			{
-				QueryInfo.CpuFamily = "Core i7";
+				QueryInfo.Family = "Core i7";
 			}
 			else if (soc.m_Data.Name.find("i5") != std::string::npos)
 			{
-				QueryInfo.CpuFamily = "Core i5";
+				QueryInfo.Family = "Core i5";
 			}
 			else if (soc.m_Data.Name.find("i3") != std::string::npos)
 			{
-				QueryInfo.CpuFamily = "Core i3";
+				QueryInfo.Family = "Core i3";
 			}
 			else
 			{
@@ -326,11 +326,11 @@ std::unique_ptr<Hardware::CPU::CPUDB::CPUQueryInfo> Hardware::CPU::IntelCPU::Par
 			Index = soc.m_Data.Name.find_first_of(" ", last);
 			auto TempModel = soc.m_Data.Name.substr(last, Index - last);
 			Index = TempModel.find_first_of("-");
-			QueryInfo.CpuModel = TempModel.substr(Index + 1);
+			QueryInfo.Model = TempModel.substr(Index + 1);
 		}
 		else if (soc.m_Data.Name.find("Pentium Silver") != std::string::npos)
 		{
-			QueryInfo.CpuFamily = "Pentium Silver";
+			QueryInfo.Family = "Pentium Silver";
 			size_t last = 0;
 			size_t Index = soc.m_Data.Name.find_first_of(" ", last);
 			last = Index + 1;
@@ -341,11 +341,11 @@ std::unique_ptr<Hardware::CPU::CPUDB::CPUQueryInfo> Hardware::CPU::IntelCPU::Par
 			Index = soc.m_Data.Name.find_first_of(" ", last);
 			last = Index + 1;
 			Index = soc.m_Data.Name.find_first_of(" ", last);
-			QueryInfo.CpuModel = soc.m_Data.Name.substr(last, Index - last);
+			QueryInfo.Model = soc.m_Data.Name.substr(last, Index - last);
 		}
 		else if (soc.m_Data.Name.find("Pentium Gold") != std::string::npos)
 		{
-			QueryInfo.CpuFamily = "Pentium Gold";
+			QueryInfo.Family = "Pentium Gold";
 			size_t last = 0;
 			size_t Index = soc.m_Data.Name.find_first_of(" ", last);
 			last = Index + 1;
@@ -356,11 +356,11 @@ std::unique_ptr<Hardware::CPU::CPUDB::CPUQueryInfo> Hardware::CPU::IntelCPU::Par
 			Index = soc.m_Data.Name.find_first_of(" ", last);
 			last = Index + 1;
 			Index = soc.m_Data.Name.find_first_of(" ", last);
-			QueryInfo.CpuModel = soc.m_Data.Name.substr(last, Index - last);
+			QueryInfo.Model = soc.m_Data.Name.substr(last, Index - last);
 		}
 		else if (soc.m_Data.Name.find("Pentium") != std::string::npos)
 		{
-			QueryInfo.CpuFamily = "Pentium";
+			QueryInfo.Family = "Pentium";
 			size_t last = 0;
 			size_t Index = soc.m_Data.Name.find_first_of(" ", last);
 			last = Index + 1;
@@ -369,11 +369,11 @@ std::unique_ptr<Hardware::CPU::CPUDB::CPUQueryInfo> Hardware::CPU::IntelCPU::Par
 			Index = soc.m_Data.Name.find_first_of(" ", last);
 			last = Index + 1;
 			Index = soc.m_Data.Name.find_first_of(" ", last);
-			QueryInfo.CpuModel = soc.m_Data.Name.substr(last, Index - last);
+			QueryInfo.Model = soc.m_Data.Name.substr(last, Index - last);
 		}
 		else if (soc.m_Data.Name.find("Celeron") != std::string::npos)
 		{
-			QueryInfo.CpuFamily = "Celeron";
+			QueryInfo.Family = "Celeron";
 			size_t last = 0;
 			size_t Index = soc.m_Data.Name.find_first_of(" ", last);
 			last = Index + 1;
@@ -382,11 +382,11 @@ std::unique_ptr<Hardware::CPU::CPUDB::CPUQueryInfo> Hardware::CPU::IntelCPU::Par
 			Index = soc.m_Data.Name.find_first_of(" ", last);
 			last = Index + 1;
 			Index = soc.m_Data.Name.find_first_of(" ", last);
-			QueryInfo.CpuModel = soc.m_Data.Name.substr(last, Index - last);
+			QueryInfo.Model = soc.m_Data.Name.substr(last, Index - last);
 		}
 		else if (soc.m_Data.Name.find("Atom") != std::string::npos)
 		{
-			QueryInfo.CpuFamily = "Atom";
+			QueryInfo.Family = "Atom";
 			size_t last = 0;
 			size_t Index = soc.m_Data.Name.find_first_of(" ", last);
 			last = Index + 1;
@@ -395,7 +395,7 @@ std::unique_ptr<Hardware::CPU::CPUDB::CPUQueryInfo> Hardware::CPU::IntelCPU::Par
 			Index = soc.m_Data.Name.find_first_of(" ", last);
 			last = Index + 1;
 			Index = soc.m_Data.Name.find_first_of(" ", last);
-			QueryInfo.CpuModel = soc.m_Data.Name.substr(last, Index - last);
+			QueryInfo.Model = soc.m_Data.Name.substr(last, Index - last);
 		}
 		else if (soc.m_Data.Name.find("Xeon") != std::string::npos)
 		{
@@ -406,15 +406,15 @@ std::unique_ptr<Hardware::CPU::CPUDB::CPUQueryInfo> Hardware::CPU::IntelCPU::Par
 				|| soc.m_Data.Name.find("E9-") != std::string::npos)
 			{
 				if (soc.m_Data.Name.find("E-") != std::string::npos)
-					QueryInfo.CpuFamily = "Xeon E";
+					QueryInfo.Family = "Xeon E";
 				else if (soc.m_Data.Name.find("E3-") != std::string::npos)
-					QueryInfo.CpuFamily = "Xeon E3";
+					QueryInfo.Family = "Xeon E3";
 				else if (soc.m_Data.Name.find("E5-") != std::string::npos)
-					QueryInfo.CpuFamily = "Xeon E5";
+					QueryInfo.Family = "Xeon E5";
 				else if (soc.m_Data.Name.find("E7-") != std::string::npos)
-					QueryInfo.CpuFamily = "Xeon E7";
+					QueryInfo.Family = "Xeon E7";
 				else if (soc.m_Data.Name.find("E9-") != std::string::npos)
-					QueryInfo.CpuFamily = "Xeon E9";
+					QueryInfo.Family = "Xeon E9";
 
 				size_t last = 0, temp = 0;
 				size_t Index = soc.m_Data.Name.find_first_of(" ", last);
@@ -427,22 +427,22 @@ std::unique_ptr<Hardware::CPU::CPUDB::CPUQueryInfo> Hardware::CPU::IntelCPU::Par
 				temp = Index;
 				auto TempModel = soc.m_Data.Name.substr(last, Index - last);
 				Index = TempModel.find_first_of("-");
-				QueryInfo.CpuModel = TempModel.substr(Index + 1);
+				QueryInfo.Model = TempModel.substr(Index + 1);
 			}
 			else
 			{
 				if (soc.m_Data.Name.find("Silver") != std::string::npos)
-					QueryInfo.CpuFamily = "Xeon Silver";
+					QueryInfo.Family = "Xeon Silver";
 				else if (soc.m_Data.Name.find("Gold") != std::string::npos)
-					QueryInfo.CpuFamily = "Xeon Gold";
+					QueryInfo.Family = "Xeon Gold";
 				else if (soc.m_Data.Name.find("Bronze") != std::string::npos)
-					QueryInfo.CpuFamily = "Xeon Bronze";
+					QueryInfo.Family = "Xeon Bronze";
 				else if (soc.m_Data.Name.find("Platinum") != std::string::npos)
-					QueryInfo.CpuFamily = "Xeon Platinum";
+					QueryInfo.Family = "Xeon Platinum";
 				else if (soc.m_Data.Name.find("MP") != std::string::npos)
-					QueryInfo.CpuFamily = "Xeon MP";
+					QueryInfo.Family = "Xeon MP";
 				else if (soc.m_Data.Name.find("Phi") != std::string::npos)
-					QueryInfo.CpuFamily = "Xeon Phi";
+					QueryInfo.Family = "Xeon Phi";
 				else
 				{
 					spdlog::error("{} Unknown Model, need to update code", soc.m_Data.Name.c_str());
@@ -456,14 +456,14 @@ std::unique_ptr<Hardware::CPU::CPUDB::CPUQueryInfo> Hardware::CPU::IntelCPU::Par
 				Index = soc.m_Data.Name.find_first_of(" ", last);
 				last = Index + 1;
 				Index = soc.m_Data.Name.find_first_of(" ", last);
-				QueryInfo.CpuModel = soc.m_Data.Name.substr(last, Index - last);
+				QueryInfo.Model = soc.m_Data.Name.substr(last, Index - last);
 			}
 		}
 		else
 		{
 			return nullptr;
 		}
-		return std::make_unique<Hardware::CPU::CPUDB::CPUQueryInfo>(QueryInfo);
+		return std::make_unique<Hardware::XMLConfig::QueryInfo>(QueryInfo);
 	}
 	catch (const std::exception& e)
 	{

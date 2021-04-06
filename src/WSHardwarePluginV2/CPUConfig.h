@@ -1,27 +1,22 @@
 #pragma once
 #include <mutex>
+#include "XMLConfig.h"
 namespace Hardware
 {
 	namespace CPU
 	{
-		/// @brief CPU扩展信息
-		struct CPUExtendedInfo
-		{
-			std::string Element;///<信息内容
-			bool Priority = true;///< 是否优先使用,不优先则使用代码判别的内容,默认优先使用
-		};
 		/// @brief 从配置中获取CPU信息
 		struct CPUExtendedInfoFromCPUDB
 		{
-			CPUExtendedInfo CodeName; ///< cpu代号
-			CPUExtendedInfo SocketPackage; ///< cpu封装leixing
-			CPUExtendedInfo MaxTDP;///<cpu的标准最大的TDP
-			CPUExtendedInfo Technology;///<cpu的工艺
+			XMLConfig::ExtendedInfo CodeName; ///< cpu代号
+			XMLConfig::ExtendedInfo SocketPackage; ///< cpu封装leixing
+			XMLConfig::ExtendedInfo MaxTDP;///<cpu的标准最大的TDP
+			XMLConfig::ExtendedInfo Technology;///<cpu的工艺
 			explicit operator bool() const;
 		};
 
 		/// @brief CPU配置文件序列化类
-		class CPUDB final
+		class CPUDB final : public XMLConfig
 		{
 		private:
 			/// @brief cpudb中的信息序列化
@@ -49,17 +44,6 @@ namespace Hardware
 			/// @brief 配置文件更新的锁
 			mutable std::mutex m_Mutex;
 		public:
-			/// @brief CPU序列化类的类型
-			using CPUDBType = decltype(m_CPUDB);
-
-			/// @brief 从CPUDB中查询CPU信息
-			struct CPUQueryInfo
-			{
-				std::string CpuManufacture; ///<cpu厂商
-				std::string CpuFamily; ///<cpu家族
-				std::string CpuModel; ///<cpu类型
-				explicit operator bool() const;
-			};
 			/// @brief CPU序列化单例
 			/// @return 单例引用 @ref CPUDB
 			static CPUDB& Instance();
@@ -72,18 +56,14 @@ namespace Hardware
 			/// @param CpuFamily CPU的家族
 			/// @param CpuModel CPU的型号
 			/// @return Cpu额外信息的指针
-			std::unique_ptr<CPUExtendedInfoFromCPUDB> FindElements(const CPUQueryInfo& QueryInfo) const;
+			std::unique_ptr<CPUExtendedInfoFromCPUDB> FindElements(const QueryInfo& QueryInfo) const;
 
-			/// @brief 获取序列化后的数据
-			/// @return 序列化后的数据
-			const CPUDBType& GetCpuData()const;
 		private:
+			/// @brief CPU序列化类的类型
+			using CPUDBType = decltype(m_CPUDB);
+
 			/// @brief 默认构造，禁止外部访问构造函数
 			CPUDB() = default;
-			/// @brief 从资源中读取XML配置文件中的信息
-			/// @param configcontent XML配置文件中二进制数据
-			/// @return 读取配置文件是否成功
-			bool GetConfigXmlFromResource(std::string& configcontent);
 
 			/// @brief 解析Manufacture字段
 			/// @param ManufactureElement 字段元素

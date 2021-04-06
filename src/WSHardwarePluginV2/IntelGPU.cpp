@@ -88,6 +88,10 @@ std::string Hardware::GPU::IntelGPU::GetGPUInfo()
 				Json::Value temp;
 				temp["Description"] = Utils::wstringToUtf8(data.Description);
 				root.append(temp);
+				if (auto QueryInfo = ParserGPUName(data.Description); QueryInfo)
+				{
+					GPUConfig::Instance().BuildExtendedInfoToJson(root, *QueryInfo);
+				}
 			}
 
 			if (data.SharedSystemMemory)
@@ -107,6 +111,18 @@ std::string Hardware::GPU::IntelGPU::GetGPUInfo()
 	}
 
 	return Json::FastWriter().write(root);
+}
+
+std::unique_ptr<Hardware::XMLConfig::QueryInfo> Hardware::GPU::IntelGPU::ParserGPUName(std::wstring GPUName)
+{
+	auto ret = std::make_unique<Hardware::XMLConfig::QueryInfo>();
+	Utils::replace(GPUName, std::wstring(L"(R)"), std::wstring(L""));
+	Utils::replace(GPUName, std::wstring(L"Intel"), std::wstring(L""));
+	Utils::replace(GPUName, std::wstring(L"TM"), std::wstring(L""));
+	Utils::trim(GPUName);
+	ret->Manufacture = "Intel";
+	ret->Model = Utils::wstringToUtf8(GPUName);
+	return ret;
 }
 
 Hardware::GPU::IntelGPUTemperature::IntelGPUTemperature(const uint64_t& MemoryBase, const std::string& Name) : GPUDecorator(MemoryBase, Name)

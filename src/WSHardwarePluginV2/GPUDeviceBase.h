@@ -1,5 +1,6 @@
 #pragma once
 #include "MemoryHandle.h"
+#include "GPUConfig.h"
 namespace Hardware
 {
 	namespace GPU

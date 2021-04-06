@@ -84,13 +84,12 @@ class GPUDBResquest:
                 return r
         return None
 
-    def __BuildXmlFromData(self, Manufacture, FamilyName):  
+    def __BuildXmlFromData(self, Manufacture):  
         if len(self.data) == 0:
             return
-        Family = ET.SubElement(Manufacture,"Family", attrib={'name': FamilyName})
         for gpu in self.data:
             if len(gpu) == 8:
-                GPU = ET.SubElement(Family,'GPU',attrib={'name':gpu[0].replace(FamilyName,'').replace('-','').strip()})
+                GPU = ET.SubElement(Manufacture,'GPU',attrib={'name':gpu[0].replace('-','').strip()})
 
                 ChipName = ET.SubElement(GPU,'ChipName')
                 ChipName.text = gpu[1].strip()  
@@ -160,7 +159,7 @@ class GPUDBResquest:
                     self.data = list(filter(None, self.data))
                     node = self.get_node_by_keyvalue(self.__root, {'name': Manufacture})
                     if node is not None:
-                        self.__BuildXmlFromData(node, generation)
+                        self.__BuildXmlFromData(node)
             self.data = []
             print('Finished get {} information'.format(generation))
     

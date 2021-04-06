@@ -41,6 +41,7 @@ Data::ErrorType Hardware::GPU::PciGpuDetect::Initialize(std::string& response)
 	auto ret = InitializeDevice();
 	if (ret == Data::ErrorType::SUCCESS)
 	{
+		GPUConfig::Instance().Initialize();
 		response = BuildInitializeJson();
 	}
 	return ret;

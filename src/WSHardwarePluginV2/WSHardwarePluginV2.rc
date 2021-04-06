@@ -52,6 +52,8 @@ END
 
 IDR_XML1                XML                     "CPUDatabase.xml"
 
+IDR_XML2                XML                     "GPUDatabase.xml"
+
 #endif    // 中文(简体，中国) resources
 /////////////////////////////////////////////////////////////////////////////
 

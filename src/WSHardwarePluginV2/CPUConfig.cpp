@@ -4,8 +4,6 @@
 #include "CPUConfig.h"
 #include "resource.h"
 
-extern HMODULE g_hModule;
-
 Hardware::CPU::CPUDB& Hardware::CPU::CPUDB::Instance()
 {
 	static CPUDB inst;
@@ -15,7 +13,7 @@ Hardware::CPU::CPUDB& Hardware::CPU::CPUDB::Instance()
 void Hardware::CPU::CPUDB::Initialize()
 {
 	std::string XmlContent;
-	if (!GetConfigXmlFromResource(XmlContent))
+	if (!GetConfigXmlFromResource(XmlContent, IDR_XML1))
 	{
 		spdlog::error("Read Xml Config failure");
 		return;
@@ -60,15 +58,15 @@ void Hardware::CPU::CPUDB::Initialize()
 	return;
 }
 
-std::unique_ptr<Hardware::CPU::CPUExtendedInfoFromCPUDB> Hardware::CPU::CPUDB::FindElements(const CPUQueryInfo& QueryInfo) const
+std::unique_ptr<Hardware::CPU::CPUExtendedInfoFromCPUDB> Hardware::CPU::CPUDB::FindElements(const QueryInfo& QueryInfo) const
 {
-	auto Manufacture = m_CPUDB.find(QueryInfo.CpuManufacture);
+	auto Manufacture = m_CPUDB.find(QueryInfo.Manufacture);
 	if (Manufacture != m_CPUDB.end())
 	{
-		auto Family = Manufacture->second.Element.find(QueryInfo.CpuFamily);
+		auto Family = Manufacture->second.Element.find(QueryInfo.Family);
 		if (Family != Manufacture->second.Element.end())
 		{
-			auto Model = Family->second.Element.find(QueryInfo.CpuModel);
+			auto Model = Family->second.Element.find(QueryInfo.Model);
 			if (Model != Family->second.Element.end())
 			{
 				return std::make_unique<Hardware::CPU::CPUExtendedInfoFromCPUDB>(Model->second);
@@ -76,40 +74,6 @@ std::unique_ptr<Hardware::CPU::CPUExtendedInfoFromCPUDB> Hardware::CPU::CPUDB::F
 		}
 	}
 	return nullptr;
-}
-
-const Hardware::CPU::CPUDB::CPUDBType& Hardware::CPU::CPUDB::GetCpuData() const
-{
-	std::lock_guard<decltype(m_Mutex)> locker(m_Mutex);
-	return m_CPUDB;
-}
-
-bool Hardware::CPU::CPUDB::GetConfigXmlFromResource(std::string& configcontent)
-{
-	HGLOBAL hGlobal = NULL;
-	bool ret = false;
-	do
-	{
-		HRSRC hRsrc = FindResourceEx(g_hModule, L"XML", MAKEINTRESOURCE(IDR_XML1), 0);
-		if (NULL == hRsrc)
-			break;
-		DWORD dwSize = SizeofResource(g_hModule, hRsrc);
-		if (0 == dwSize)
-			break;
-		hGlobal = LoadResource(g_hModule, hRsrc);
-		if (NULL == hGlobal)
-			break;
-		LPVOID pBuffer = LockResource(hGlobal);
-		if (NULL == pBuffer)
-			break;
-		configcontent.resize(dwSize);
-		memcpy_s(configcontent.data(), configcontent.size(), pBuffer, dwSize);
-		ret = true;
-	} while (false);
-
-	if (hGlobal)
-		FreeResource(hGlobal);
-	return ret;
 }
 
 void Hardware::CPU::CPUDB::ParserManufacture(tinyxml2::XMLElement const* const ManufactureElement, CPUDBType& CpuDB)
@@ -228,11 +192,6 @@ Hardware::CPU::CPUDB::CpuFamily::operator bool() const
 Hardware::CPU::CPUDB::CpuInformationFromCpudb::operator bool() const
 {
 	return !Element.empty();
-}
-
-Hardware::CPU::CPUDB::CPUQueryInfo::operator bool() const
-{
-	return !(CpuManufacture.empty() || CpuModel.empty() || CpuFamily.empty());
 }
 
 Hardware::CPU::CPUExtendedInfoFromCPUDB::operator bool() const

@@ -105,6 +105,11 @@ namespace Hardware
 			/// @return Utf8 Json字符串
 			std::string GetGPUInfo() override final;
 		private:
+			/// @brief 解析GPU名称
+			/// @param GPUName 读取的GPU名称
+			/// @return 查询信息 @ref Hardware::XMLConfig::QueryInfo
+			std::unique_ptr<Hardware::XMLConfig::QueryInfo> ParserGPUName(std::wstring GPUName);
+		private:
 			/// @brief CPU 动态信息
 			std::vector<std::shared_ptr<GPUDecorator>> m_Decorators;
 

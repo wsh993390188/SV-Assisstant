@@ -240,6 +240,7 @@
     <ClInclude Include="GenericMotherBroad.h" />
     <ClInclude Include="GenericNIC.h" />
     <ClInclude Include="GenericWinBio.h" />
+    <ClInclude Include="GPUConfig.h" />
     <ClInclude Include="GPUDeviceBase.h" />
     <ClInclude Include="GPUDeviceFactory.h" />
     <ClInclude Include="GPUManager.h" />
@@ -290,6 +291,7 @@
     <ClInclude Include="WMI\WMI.h" />
     <ClInclude Include="WMI\WMIExtern.h" />
     <ClInclude Include="WSHardwarePluginV2.h" />
+    <ClInclude Include="XMLConfig.h" />
     <ClInclude Include="ZhaoXinCPU.h" />
   </ItemGroup>
   <ItemGroup>
@@ -372,6 +374,7 @@
     <ClCompile Include="GenericMotherBroad.cpp" />
     <ClCompile Include="GenericNIC.cpp" />
     <ClCompile Include="GenericWinBio.cpp" />
+    <ClCompile Include="GPUConfig.cpp" />
     <ClCompile Include="GPUDeviceBase.cpp" />
     <ClCompile Include="GPUDeviceFactory.cpp" />
     <ClCompile Include="GPUManager.cpp" />
@@ -425,12 +428,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="WSHardwarePluginV2.cpp" />
+    <ClCompile Include="XMLConfig.cpp" />
     <ClCompile Include="ZhaoXinCPU.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="CPUDatabase.xml">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </Xml>
+    <Xml Include="GPUDatabase.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libcommon\jsoncpp\build\src\lib_json\jsoncpp_static.vcxproj">
@@ -451,6 +456,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WSHardwarePluginV2.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="xml2.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
