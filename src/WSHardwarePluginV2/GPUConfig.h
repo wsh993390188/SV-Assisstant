@@ -55,11 +55,6 @@ namespace Hardware
 			/// @return Cpu额外信息的指针
 			std::unique_ptr<GPUExtendedInfoFromGPUDB> FindElements(const QueryInfo& QueryInfo) const;
 
-			/// @brief 将扩展信息转成JSON格式
-			/// @param root json跟对象
-			/// @param QueryInfo 查询的对象
-			void BuildExtendedInfoToJson(Json::Value& root, const QueryInfo& QueryInfo);
-
 		private:
 			/// @brief CPU序列化类的类型
 			using GPUDBType = decltype(m_GPUDB);

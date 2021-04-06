@@ -80,40 +80,6 @@ std::unique_ptr<Hardware::GPU::GPUExtendedInfoFromGPUDB> Hardware::GPU::GPUConfi
 	return nullptr;
 }
 
-void Hardware::GPU::GPUConfig::BuildExtendedInfoToJson(Json::Value& root, const QueryInfo& QueryInfo)
-{
-	if (auto GPUDBInfo = FindElements(QueryInfo); GPUDBInfo)
-	{
-		if(GPUDBInfo->ChipName)
-		{
-			Json::Value temp;
-			temp["Chip Name"] = GPUDBInfo->ChipName.Element;
-			root.append(temp);
-		}
-
-		if (GPUDBInfo->Shaders)
-		{
-			Json::Value temp;
-			temp["Shaders"] = GPUDBInfo->Shaders.Element;
-			root.append(temp);
-		}
-
-		if (GPUDBInfo->TMUs)
-		{
-			Json::Value temp;
-			temp["TMUs"] = GPUDBInfo->TMUs.Element;
-			root.append(temp);
-		}
-
-		if (GPUDBInfo->ROPs)
-		{
-			Json::Value temp;
-			temp["ROPs"] = GPUDBInfo->ROPs.Element;
-			root.append(temp);
-		}
-	}
-}
-
 void Hardware::GPU::GPUConfig::ParserManufacture(tinyxml2::XMLElement const* const ManufactureElement, GPUDBType& DB)
 {
 	std::string ManufactureName;

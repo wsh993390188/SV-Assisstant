@@ -83,22 +83,13 @@ std::string Hardware::GPU::IntelGPU::GetGPUInfo()
 	if (DXGIGPUBase::Instance().QueryGPUInfo({ GPUBaseData.VendorId, GPUBaseData.DeviceId }, data) == Data::ErrorType::SUCCESS)
 	{
 		{
-			if (!data.Description.empty())
-			{
-				Json::Value temp;
-				temp["Description"] = Utils::wstringToUtf8(data.Description);
-				root.append(temp);
-				if (auto QueryInfo = ParserGPUName(data.Description); QueryInfo)
-				{
-					GPUConfig::Instance().BuildExtendedInfoToJson(root, *QueryInfo);
-				}
-			}
-
+			bool HasMemory = false;
 			if (data.SharedSystemMemory)
 			{
 				Json::Value temp;
 				temp["Shared memory"] = Utils::MemoryToStringWithUnit(data.SharedSystemMemory);
 				root.append(temp);
+				HasMemory = true;
 			}
 
 			if (data.DedicatedVideoMemory)
@@ -106,6 +97,68 @@ std::string Hardware::GPU::IntelGPU::GetGPUInfo()
 				Json::Value temp;
 				temp["GPU memory"] = Utils::MemoryToStringWithUnit(data.DedicatedVideoMemory);
 				root.append(temp);
+				HasMemory = true;
+			}
+
+			if (!data.Description.empty())
+			{
+				Json::Value temp;
+				temp["Description"] = Utils::wstringToUtf8(data.Description);
+				root.append(temp);
+				if (auto QueryInfo = ParserGPUName(data.Description); QueryInfo)
+				{
+					if (auto GPUDBInfo = GPUConfig::Instance().FindElements(*QueryInfo); GPUDBInfo)
+					{
+						if (GPUDBInfo->ChipName)
+						{
+							Json::Value temp;
+							temp["Chip Name"] = GPUDBInfo->ChipName.Element;
+							root.append(temp);
+						}
+
+						if (GPUDBInfo->Shaders)
+						{
+							Json::Value temp;
+							temp["Shaders"] = GPUDBInfo->Shaders.Element;
+							root.append(temp);
+						}
+
+						if (GPUDBInfo->TMUs)
+						{
+							Json::Value temp;
+							temp["TMUs"] = GPUDBInfo->TMUs.Element;
+							root.append(temp);
+						}
+
+						if (GPUDBInfo->ROPs)
+						{
+							Json::Value temp;
+							temp["ROPs"] = GPUDBInfo->ROPs.Element;
+							root.append(temp);
+						}
+
+						if (!HasMemory && GPUDBInfo->MemorySize)
+						{
+							Json::Value temp;
+							temp["Memory Size"] = GPUDBInfo->MemorySize.Element;
+							root.append(temp);
+						}
+
+						if (HasMemory && GPUDBInfo->MemoryType)
+						{
+							Json::Value temp;
+							temp["Memory Type"] = GPUDBInfo->MemoryType.Element;
+							root.append(temp);
+						}
+
+						if (HasMemory && GPUDBInfo->MemoryBits)
+						{
+							Json::Value temp;
+							temp["Memory Bits"] = GPUDBInfo->MemoryBits.Element;
+							root.append(temp);
+						}
+					}
+				}
 			}
 		}
 	}
