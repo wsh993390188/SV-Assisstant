@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <GPUDatabase version="1.0" url="https://www.techpowerup.com/gpu-specs" BuildDate="2021-04-06">
   <Manufacture name="3dfx">
-
     <GPU name="Voodoo Graphics 4 MB">
       <ChipName>SST1</ChipName>
       <Released>Oct 7th, 1996</Released>
@@ -15,8 +14,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-
-    <GPU name="12 MB">
+    <GPU name="Voodoo2 12 MB">
       <ChipName>SST2</ChipName>
       <Released>Feb 2nd, 1998</Released>
       <Bus>PCI</Bus>
@@ -29,7 +27,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="8 MB">
+    <GPU name="Voodoo2 8 MB">
       <ChipName>SST2</ChipName>
       <Released>Feb 2nd, 1998</Released>
       <Bus>PCI</Bus>
@@ -42,8 +40,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
-    <GPU name="AGP 16 MB">
+    <GPU name="Voodoo Banshee AGP 16 MB">
       <ChipName>Banshee</ChipName>
       <Released>Jun 22nd, 1998</Released>
       <Bus>AGP 2x</Bus>
@@ -56,7 +53,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-    <GPU name="PCI 16 MB">
+    <GPU name="Voodoo Banshee PCI 16 MB">
       <ChipName>Banshee</ChipName>
       <Released>Jun 22nd, 1998</Released>
       <Bus>PCI</Bus>
@@ -69,7 +66,6 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-
     <GPU name="Velocity 100">
       <ChipName>Avenger</ChipName>
       <Released>Jul 26th, 1999</Released>
@@ -96,7 +92,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="3500 TV AGP">
+    <GPU name="Voodoo3 3500 TV AGP">
       <ChipName>Avenger</ChipName>
       <Released>Jun 1999</Released>
       <Bus>AGP 2x</Bus>
@@ -109,7 +105,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="2000 AGP">
+    <GPU name="Voodoo3 2000 AGP">
       <ChipName>Avenger</ChipName>
       <Released>Apr 3rd, 1999</Released>
       <Bus>AGP 2x</Bus>
@@ -122,7 +118,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="2000 PCI">
+    <GPU name="Voodoo3 2000 PCI">
       <ChipName>Avenger</ChipName>
       <Released>Apr 3rd, 1999</Released>
       <Bus>PCI</Bus>
@@ -135,7 +131,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="3000 AGP">
+    <GPU name="Voodoo3 3000 AGP">
       <ChipName>Avenger</ChipName>
       <Released>Apr 3rd, 1999</Released>
       <Bus>AGP 2x</Bus>
@@ -148,7 +144,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="3000 PCI">
+    <GPU name="Voodoo3 3000 PCI">
       <ChipName>Avenger</ChipName>
       <Released>Apr 3rd, 1999</Released>
       <Bus>PCI</Bus>
@@ -161,7 +157,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="1000 AGP">
+    <GPU name="Voodoo3 1000 AGP">
       <ChipName>Avenger</ChipName>
       <Released>Mar 1999</Released>
       <Bus>AGP 2x</Bus>
@@ -174,8 +170,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
-    <GPU name="4500 AGP">
+    <GPU name="Voodoo4 4500 AGP">
       <ChipName>VSA-100</ChipName>
       <Released>Oct 13th, 2000</Released>
       <Bus>AGP 4x</Bus>
@@ -188,7 +183,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="4500 PCI">
+    <GPU name="Voodoo4 4500 PCI">
       <ChipName>VSA-100</ChipName>
       <Released>Oct 13th, 2000</Released>
       <Bus>PCI</Bus>
@@ -201,7 +196,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="4000 AGP">
+    <GPU name="Voodoo4 4000 AGP">
       <ChipName>VSA-100</ChipName>
       <Released>Never Released</Released>
       <Bus>AGP 4x</Bus>
@@ -214,7 +209,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="4800 AGP">
+    <GPU name="Voodoo4 4800 AGP">
       <ChipName>VSA-100</ChipName>
       <Released>Never Released</Released>
       <Bus>AGP 4x</Bus>
@@ -227,8 +222,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
-    <GPU name="4000 AGP">
+    <GPU name="Voodoo42 4000 AGP">
       <ChipName>VSA-101</ChipName>
       <Released>Never Released</Released>
       <Bus>AGP 4x</Bus>
@@ -241,7 +235,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="4200 AGP">
+    <GPU name="Voodoo42 4200 AGP">
       <ChipName>VSA-101</ChipName>
       <Released>Never Released</Released>
       <Bus>AGP 4x</Bus>
@@ -254,7 +248,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="4200 PCI 16 MB">
+    <GPU name="Voodoo42 4200 PCI 16 MB">
       <ChipName>VSA-101</ChipName>
       <Released>Never Released</Released>
       <Bus>AGP 4x</Bus>
@@ -267,7 +261,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="4200 PCI 32 MB">
+    <GPU name="Voodoo42 4200 PCI 32 MB">
       <ChipName>VSA-101</ChipName>
       <Released>Never Released</Released>
       <Bus>AGP 4x</Bus>
@@ -280,7 +274,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="4800 AGP">
+    <GPU name="Voodoo42 4800 AGP">
       <ChipName>VSA-101</ChipName>
       <Released>Never Released</Released>
       <Bus>AGP 4x</Bus>
@@ -293,8 +287,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
-    <GPU name="5000 AGP">
+    <GPU name="Voodoo5 5000 AGP">
       <ChipName>VSA-100</ChipName>
       <Released>Never Released</Released>
       <Bus>AGP 4x</Bus>
@@ -307,7 +300,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="5000 PCI">
+    <GPU name="Voodoo5 5000 PCI">
       <ChipName>VSA-100</ChipName>
       <Released>Never Released</Released>
       <Bus>PCI</Bus>
@@ -320,7 +313,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="5500 AGP">
+    <GPU name="Voodoo5 5500 AGP">
       <ChipName>VSA-100</ChipName>
       <Released>Jun 22nd, 2000</Released>
       <Bus>AGP 2x</Bus>
@@ -333,7 +326,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="5500 PCI">
+    <GPU name="Voodoo5 5500 PCI">
       <ChipName>VSA-100</ChipName>
       <Released>Jun 22nd, 2000</Released>
       <Bus>PCI</Bus>
@@ -346,7 +339,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="6000">
+    <GPU name="Voodoo5 6000">
       <ChipName>VSA-100</ChipName>
       <Released>Never Released</Released>
       <Bus>AGP 4x</Bus>
@@ -359,8 +352,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
-    <GPU name="1000">
+    <GPU name="Spectre 1000">
       <ChipName>Rampage</ChipName>
       <Released>Never Released</Released>
       <Bus>AGP 4x</Bus>
@@ -373,7 +365,7 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="2000">
+    <GPU name="Spectre 2000">
       <ChipName>Rampage</ChipName>
       <Released>Never Released</Released>
       <Bus>AGP 4x</Bus>
@@ -386,7 +378,7 @@
       <TMUs>1</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="3000">
+    <GPU name="Spectre 3000">
       <ChipName>Rampage</ChipName>
       <Released>Never Released</Released>
       <Bus>AGP 4x</Bus>
@@ -401,7 +393,6 @@
     </GPU>
   </Manufacture>
   <Manufacture name="AMD">
-
     <GPU name="Radeon HD 6770 Green Edition">
       <ChipName>Juniper</ChipName>
       <Released>Apr 19th, 2013</Released>
@@ -805,7 +796,6 @@
       <TMUs>56</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
     <GPU name="Radeon HD 7730">
       <ChipName>Cape Verde</ChipName>
       <Released>May 1st, 2013</Released>
@@ -1131,7 +1121,6 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
     <GPU name="Radeon HD 8550 OEM">
       <ChipName>Turks</ChipName>
       <Released>Oct 25th, 2013</Released>
@@ -1379,7 +1368,6 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
     <GPU name="Radeon R9 270 1024SP">
       <ChipName>Pitcairn</ChipName>
       <Released>Mar 13th, 2015</Released>
@@ -1822,7 +1810,6 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
     <GPU name="Radeon R7 350 640SP">
       <ChipName>Cape Verde</ChipName>
       <Released>Jan 7th, 2019</Released>
@@ -2200,7 +2187,6 @@
       <TMUs>256</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-
     <GPU name="Radeon RX 460 1024SP">
       <ChipName>Baffin</ChipName>
       <Released>Jan 17th, 2017</Released>
@@ -2344,7 +2330,6 @@
       <TMUs>144</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
     <GPU name="Radeon RX 590 GME">
       <ChipName>Polaris 20</ChipName>
       <Released>Mar 9th, 2020</Released>
@@ -2644,7 +2629,6 @@
       <TMUs>144</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
     <GPU name="Radeon VII">
       <ChipName>Vega 20</ChipName>
       <Released>Feb 7th, 2019</Released>
@@ -2658,7 +2642,6 @@
       <TMUs>240</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-
     <GPU name="Radeon RX 5300">
       <ChipName>Navi 14</ChipName>
       <Released>May 28th, 2020</Released>
@@ -2776,7 +2759,6 @@
       <TMUs>160</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-
     <GPU name="Radeon RX 6700">
       <ChipName>Navi 22</ChipName>
       <Released>2021</Released>
@@ -2868,8 +2850,7 @@
       <TMUs>320</TMUs>
       <ROPs>128</ROPs>
     </GPU>
-
-    <GPU name="9370">
+    <GPU name="FireStream 9370">
       <ChipName>Cypress</ChipName>
       <Released>Jun 23rd, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -2882,7 +2863,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="9350">
+    <GPU name="FireStream 9350">
       <ChipName>Cypress</ChipName>
       <Released>Jun 1st, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -2895,7 +2876,7 @@
       <TMUs>72</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="9270">
+    <GPU name="FireStream 9270">
       <ChipName>RV770</ChipName>
       <Released>Nov 13th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -2908,7 +2889,7 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="9250">
+    <GPU name="FireStream 9250">
       <ChipName>RV770</ChipName>
       <Released>Jun 16th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -2921,7 +2902,7 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="9170">
+    <GPU name="FireStream 9170">
       <ChipName>RV670</ChipName>
       <Released>Nov 8th, 2007</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -2947,8 +2928,7 @@
       <TMUs>8</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
-    <GPU name="V520">
+    <GPU name="Radeon Pro V520">
       <ChipName>Navi 12</ChipName>
       <Released>Dec 1st, 2020</Released>
       <Bus>PCIe 4.0 x16</Bus>
@@ -2961,7 +2941,7 @@
       <TMUs>144</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="VII">
+    <GPU name="Radeon Pro VII">
       <ChipName>Vega 20</ChipName>
       <Released>May 13th, 2020</Released>
       <Bus>PCIe 4.0 x16</Bus>
@@ -2974,7 +2954,7 @@
       <TMUs>240</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="W5500">
+    <GPU name="Radeon Pro W5500">
       <ChipName>Navi 14</ChipName>
       <Released>Feb 10th, 2020</Released>
       <Bus>PCIe 4.0 x8</Bus>
@@ -2987,7 +2967,7 @@
       <TMUs>88</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="W5700">
+    <GPU name="Radeon Pro W5700">
       <ChipName>Navi 10</ChipName>
       <Released>Nov 19th, 2019</Released>
       <Bus>PCIe 4.0 x16</Bus>
@@ -3000,7 +2980,7 @@
       <TMUs>144</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="WX 3200">
+    <GPU name="Radeon Pro WX 3200">
       <ChipName>Polaris 23</ChipName>
       <Released>Jul 2nd, 2019</Released>
       <Bus>PCIe 3.0 x8</Bus>
@@ -3013,7 +2993,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="V340">
+    <GPU name="Radeon Pro V340">
       <ChipName>Vega 10</ChipName>
       <Released>Aug 26th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3026,7 +3006,7 @@
       <TMUs>224</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="WX 8200">
+    <GPU name="Radeon Pro WX 8200">
       <ChipName>Vega 10</ChipName>
       <Released>Aug 13th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3039,7 +3019,7 @@
       <TMUs>224</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="WX 8100">
+    <GPU name="Radeon Pro WX 8100">
       <ChipName>Vega 10</ChipName>
       <Released>Dec 3rd, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3052,7 +3032,7 @@
       <TMUs>224</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="SSG">
+    <GPU name="Radeon Pro SSG">
       <ChipName>Vega 10</ChipName>
       <Released>Aug 8th, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3078,7 +3058,7 @@
       <TMUs>256</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="WX 9100">
+    <GPU name="Radeon Pro WX 9100">
       <ChipName>Vega 10</ChipName>
       <Released>Jul 10th, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3091,7 +3071,7 @@
       <TMUs>256</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="V320">
+    <GPU name="Radeon Pro V320">
       <ChipName>Vega 10</ChipName>
       <Released>Jun 29th, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3117,7 +3097,7 @@
       <TMUs>256</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="WX 3100">
+    <GPU name="Radeon Pro WX 3100">
       <ChipName>Lexa</ChipName>
       <Released>Jun 12th, 2017</Released>
       <Bus>PCIe 3.0 x8</Bus>
@@ -3130,7 +3110,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="WX 2100">
+    <GPU name="Radeon Pro WX 2100">
       <ChipName>Lexa</ChipName>
       <Released>Jun 4th, 2017</Released>
       <Bus>PCIe 3.0 x8</Bus>
@@ -3143,7 +3123,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="Duo Polaris">
+    <GPU name="Radeon Pro Duo Polaris">
       <ChipName>Ellesmere</ChipName>
       <Released>Apr 24th, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3156,7 +3136,7 @@
       <TMUs>144</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="WX 5100">
+    <GPU name="Radeon Pro WX 5100">
       <ChipName>Ellesmere</ChipName>
       <Released>Nov 18th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3169,7 +3149,7 @@
       <TMUs>112</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="WX 4100">
+    <GPU name="Radeon Pro WX 4100">
       <ChipName>Baffin</ChipName>
       <Released>Nov 10th, 2016</Released>
       <Bus>PCIe 3.0 x8</Bus>
@@ -3182,7 +3162,7 @@
       <TMUs>64</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="WX 7100">
+    <GPU name="Radeon Pro WX 7100">
       <ChipName>Ellesmere</ChipName>
       <Released>Nov 10th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3195,7 +3175,7 @@
       <TMUs>144</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="Duo">
+    <GPU name="Radeon Pro Duo">
       <ChipName>Capsaicin</ChipName>
       <Released>Apr 26th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3208,7 +3188,7 @@
       <TMUs>256</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="V5300X">
+    <GPU name="Radeon Pro V5300X">
       <ChipName>Baffin</ChipName>
       <Released>Never Released</Released>
       <Bus>PCIe 3.0 x8</Bus>
@@ -3221,7 +3201,7 @@
       <TMUs>64</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="V7300X">
+    <GPU name="Radeon Pro V7300X">
       <ChipName>Ellesmere</ChipName>
       <Released>Never Released</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3234,7 +3214,7 @@
       <TMUs>144</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="V7350X2">
+    <GPU name="Radeon Pro V7350X2">
       <ChipName>Ellesmere</ChipName>
       <Released>Never Released</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3247,8 +3227,7 @@
       <TMUs>144</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
-    <GPU name="S9300 X2">
+    <GPU name="FirePro S9300 X2">
       <ChipName>Capsaicin</ChipName>
       <Released>Mar 31st, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3261,7 +3240,7 @@
       <TMUs>256</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="S7150">
+    <GPU name="FirePro S7150">
       <ChipName>Tonga</ChipName>
       <Released>Feb 1st, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3274,7 +3253,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="S7150 x2">
+    <GPU name="FirePro S7150 x2">
       <ChipName>Tonga</ChipName>
       <Released>Feb 1st, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3287,7 +3266,7 @@
       <TMUs>112</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="W4300">
+    <GPU name="FirePro W4300">
       <ChipName>Bonaire</ChipName>
       <Released>Dec 1st, 2015</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3300,7 +3279,7 @@
       <TMUs>48</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="S9170">
+    <GPU name="FirePro S9170">
       <ChipName>Hawaii</ChipName>
       <Released>Jul 8th, 2015</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3313,7 +3292,7 @@
       <TMUs>176</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="S9100">
+    <GPU name="FirePro S9100">
       <ChipName>Hawaii</ChipName>
       <Released>Oct 2nd, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3326,7 +3305,7 @@
       <TMUs>160</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="W4100">
+    <GPU name="FirePro W4100">
       <ChipName>Cape Verde</ChipName>
       <Released>Aug 13th, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3339,7 +3318,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="W2100">
+    <GPU name="FirePro W2100">
       <ChipName>Oland</ChipName>
       <Released>Aug 12th, 2014</Released>
       <Bus>PCIe 3.0 x8</Bus>
@@ -3352,7 +3331,7 @@
       <TMUs>20</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="W7100">
+    <GPU name="FirePro W7100">
       <ChipName>Tonga</ChipName>
       <Released>Aug 12th, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3365,7 +3344,7 @@
       <TMUs>112</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="S9050">
+    <GPU name="FirePro S9050">
       <ChipName>Tahiti</ChipName>
       <Released>Aug 7th, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3378,7 +3357,7 @@
       <TMUs>112</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="S9150">
+    <GPU name="FirePro S9150">
       <ChipName>Hawaii</ChipName>
       <Released>Aug 7th, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3391,7 +3370,7 @@
       <TMUs>176</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="W8100">
+    <GPU name="FirePro W8100">
       <ChipName>Hawaii</ChipName>
       <Released>Jun 23rd, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3404,7 +3383,7 @@
       <TMUs>160</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="W5100">
+    <GPU name="FirePro W5100">
       <ChipName>Bonaire</ChipName>
       <Released>Mar 31st, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3417,7 +3396,7 @@
       <TMUs>48</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="W9100">
+    <GPU name="FirePro W9100">
       <ChipName>Hawaii</ChipName>
       <Released>Mar 26th, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3430,7 +3409,7 @@
       <TMUs>176</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="S10000 Passive 12GB">
+    <GPU name="FirePro S10000 Passive 12GB">
       <ChipName>Tahiti</ChipName>
       <Released>Mar 1st, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3443,7 +3422,7 @@
       <TMUs>112</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="D300">
+    <GPU name="FirePro D300">
       <ChipName>Pitcairn</ChipName>
       <Released>Jan 18th, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3456,7 +3435,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="D500">
+    <GPU name="FirePro D500">
       <ChipName>Tahiti</ChipName>
       <Released>Jan 18th, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3469,7 +3448,7 @@
       <TMUs>96</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="D700">
+    <GPU name="FirePro D700">
       <ChipName>Tahiti</ChipName>
       <Released>Jan 18th, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3482,7 +3461,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="W5000 DVI">
+    <GPU name="FirePro W5000 DVI">
       <ChipName>Pitcairn</ChipName>
       <Released>Feb 25th, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3495,7 +3474,7 @@
       <TMUs>48</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="S10000">
+    <GPU name="FirePro S10000">
       <ChipName>Tahiti</ChipName>
       <Released>Nov 12th, 2012</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3508,7 +3487,7 @@
       <TMUs>112</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="S10000 Passive">
+    <GPU name="FirePro S10000 Passive">
       <ChipName>Tahiti</ChipName>
       <Released>Nov 12th, 2012</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3521,7 +3500,7 @@
       <TMUs>112</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="S7000">
+    <GPU name="FirePro S7000">
       <ChipName>Pitcairn</ChipName>
       <Released>Aug 27th, 2012</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3534,7 +3513,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="S9000">
+    <GPU name="FirePro S9000">
       <ChipName>Tahiti</ChipName>
       <Released>Aug 24th, 2012</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3547,7 +3526,7 @@
       <TMUs>112</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="S9010">
+    <GPU name="FirePro S9010">
       <ChipName>Tahiti</ChipName>
       <Released>Aug 24th, 2012</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3560,7 +3539,7 @@
       <TMUs>112</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="W4000">
+    <GPU name="FirePro W4000">
       <ChipName>Pitcairn</ChipName>
       <Released>Aug 7th, 2012</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3573,7 +3552,7 @@
       <TMUs>48</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="W5000">
+    <GPU name="FirePro W5000">
       <ChipName>Pitcairn</ChipName>
       <Released>Aug 7th, 2012</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3586,7 +3565,7 @@
       <TMUs>48</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="W8000">
+    <GPU name="FirePro W8000">
       <ChipName>Tahiti</ChipName>
       <Released>Jun 14th, 2012</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3599,7 +3578,7 @@
       <TMUs>112</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="W9000">
+    <GPU name="FirePro W9000">
       <ChipName>Tahiti</ChipName>
       <Released>Jun 14th, 2012</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3612,7 +3591,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="W600">
+    <GPU name="FirePro W600">
       <ChipName>Cape Verde</ChipName>
       <Released>Jun 13th, 2012</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3625,7 +3604,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="W7000">
+    <GPU name="FirePro W7000">
       <ChipName>Pitcairn</ChipName>
       <Released>Jun 13th, 2012</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3638,7 +3617,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="V3900">
+    <GPU name="FirePro V3900">
       <ChipName>Turks</ChipName>
       <Released>Feb 7th, 2012</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3651,7 +3630,7 @@
       <TMUs>24</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="V4900">
+    <GPU name="FirePro V4900">
       <ChipName>Turks</ChipName>
       <Released>Nov 1st, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3664,7 +3643,7 @@
       <TMUs>24</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="V5900">
+    <GPU name="FirePro V5900">
       <ChipName>Cayman</ChipName>
       <Released>May 24th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3677,7 +3656,7 @@
       <TMUs>32</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="V7900">
+    <GPU name="FirePro V7900">
       <ChipName>Cayman</ChipName>
       <Released>May 24th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3690,7 +3669,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="V7900 SDI">
+    <GPU name="FirePro V7900 SDI">
       <ChipName>Cayman</ChipName>
       <Released>May 24th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3703,7 +3682,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="V7760">
+    <GPU name="FirePro V7760">
       <ChipName>RV770</ChipName>
       <Released>2012</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3716,7 +3695,7 @@
       <TMUs>40</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="V7770">
+    <GPU name="FirePro V7770">
       <ChipName>RV770</ChipName>
       <Released>2012</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3729,7 +3708,7 @@
       <TMUs>40</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="V7800P">
+    <GPU name="FirePro V7800P">
       <ChipName>Cypress</ChipName>
       <Released>May 16th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3742,7 +3721,7 @@
       <TMUs>72</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="V9800">
+    <GPU name="FirePro V9800">
       <ChipName>Cypress</ChipName>
       <Released>Sep 9th, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3755,7 +3734,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="V9800P">
+    <GPU name="FirePro V9800P">
       <ChipName>Cypress</ChipName>
       <Released>Sep 9th, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3768,7 +3747,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="V3800">
+    <GPU name="FirePro V3800">
       <ChipName>Redwood</ChipName>
       <Released>Apr 26th, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3781,7 +3760,7 @@
       <TMUs>20</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="V4800">
+    <GPU name="FirePro V4800">
       <ChipName>Redwood</ChipName>
       <Released>Apr 26th, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3794,7 +3773,7 @@
       <TMUs>20</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="V5800">
+    <GPU name="FirePro V5800">
       <ChipName>Juniper</ChipName>
       <Released>Apr 26th, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3807,7 +3786,7 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="V5800 DVI">
+    <GPU name="FirePro V5800 DVI">
       <ChipName>Juniper</ChipName>
       <Released>Apr 26th, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3820,7 +3799,7 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="V7800">
+    <GPU name="FirePro V7800">
       <ChipName>Cypress</ChipName>
       <Released>Apr 26th, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3833,7 +3812,7 @@
       <TMUs>72</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="V8800">
+    <GPU name="FirePro V8800">
       <ChipName>Cypress</ChipName>
       <Released>Apr 7th, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3846,7 +3825,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="V7750">
+    <GPU name="FirePro V7750">
       <ChipName>RV730</ChipName>
       <Released>Mar 27th, 2009</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3859,7 +3838,7 @@
       <TMUs>32</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="V3750">
+    <GPU name="FirePro V3750">
       <ChipName>RV730</ChipName>
       <Released>Sep 11th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3872,7 +3851,7 @@
       <TMUs>32</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="V8700">
+    <GPU name="FirePro V8700">
       <ChipName>RV770</ChipName>
       <Released>Sep 11th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3885,7 +3864,7 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="V3700">
+    <GPU name="FirePro V3700">
       <ChipName>RV620</ChipName>
       <Released>Aug 8th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3898,7 +3877,7 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="V5700">
+    <GPU name="FirePro V5700">
       <ChipName>RV730</ChipName>
       <Released>Aug 8th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3911,7 +3890,7 @@
       <TMUs>32</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="V8750">
+    <GPU name="FirePro V8750">
       <ChipName>RV770</ChipName>
       <Released>Jul 28th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3924,7 +3903,7 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="V8700 Duo">
+    <GPU name="FirePro V8700 Duo">
       <ChipName>RV770</ChipName>
       <Released>Never Released</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -3937,8 +3916,7 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
-    <GPU name="500">
+    <GPU name="Radeon Sky 500">
       <ChipName>Pitcairn</ChipName>
       <Released>Mar 27th, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3951,7 +3929,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="700">
+    <GPU name="Radeon Sky 700">
       <ChipName>Tahiti</ChipName>
       <Released>Mar 27th, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3964,7 +3942,7 @@
       <TMUs>112</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="900">
+    <GPU name="Radeon Sky 900">
       <ChipName>Tahiti</ChipName>
       <Released>Mar 27th, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -3977,8 +3955,7 @@
       <TMUs>112</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
-    <GPU name="MI100">
+    <GPU name="Radeon Instinct MI100">
       <ChipName>Arcturus</ChipName>
       <Released>Nov 16th, 2020</Released>
       <Bus>PCIe 4.0 x16</Bus>
@@ -3991,7 +3968,7 @@
       <TMUs>480</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="MI50">
+    <GPU name="Radeon Instinct MI50">
       <ChipName>Vega 20</ChipName>
       <Released>Nov 18th, 2018</Released>
       <Bus>PCIe 4.0 x16</Bus>
@@ -4004,7 +3981,7 @@
       <TMUs>240</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="MI60">
+    <GPU name="Radeon Instinct MI60">
       <ChipName>Vega 20</ChipName>
       <Released>Nov 18th, 2018</Released>
       <Bus>PCIe 4.0 x16</Bus>
@@ -4017,7 +3994,7 @@
       <TMUs>256</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="MI25">
+    <GPU name="Radeon Instinct MI25">
       <ChipName>Vega 10</ChipName>
       <Released>Jun 27th, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -4030,7 +4007,7 @@
       <TMUs>256</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="MI6">
+    <GPU name="Radeon Instinct MI6">
       <ChipName>Ellesmere</ChipName>
       <Released>Dec 12th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -4043,7 +4020,7 @@
       <TMUs>144</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="MI8">
+    <GPU name="Radeon Instinct MI8">
       <ChipName>Fiji</ChipName>
       <Released>Dec 12th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -4056,7 +4033,6 @@
       <TMUs>256</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-
     <GPU name="FirePro 2270">
       <ChipName>Cedar</ChipName>
       <Released>Jan 31st, 2011</Released>
@@ -4135,7 +4111,6 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="FirePro R5000">
       <ChipName>Pitcairn</ChipName>
       <Released>Feb 25th, 2013</Released>
@@ -4162,7 +4137,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Radeon HD 6970M Mac Edition">
       <ChipName>Blackcomb</ChipName>
       <Released>Aug 25th, 2011</Released>
@@ -4592,7 +4566,6 @@
       <TMUs>20</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon HD 7690M XT">
       <ChipName>Thames</ChipName>
       <Released>Jan 7th, 2013</Released>
@@ -4983,7 +4956,6 @@
       <TMUs>24</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
     <GPU name="Radeon HD 8550M">
       <ChipName>Sun</ChipName>
       <Released>Jul 13th, 2014</Released>
@@ -5192,7 +5164,6 @@
       <TMUs>24</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon RX 6800M">
       <ChipName>Navi 22</ChipName>
       <Released>2021</Released>
@@ -5700,7 +5671,6 @@
       <TMUs>144</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
     <GPU name="FirePro S7100X">
       <ChipName>Amethyst</ChipName>
       <Released>May 25th, 2016</Released>
@@ -6000,7 +5970,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Radeon Pro W5500M">
       <ChipName>Navi 14</ChipName>
       <Released>Feb 10th, 2020</Released>
@@ -6105,7 +6074,6 @@
       <TMUs>144</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
     <GPU name="Radeon Pro 5300">
       <ChipName>Navi 14</ChipName>
       <Released>Aug 4th, 2020</Released>
@@ -6483,7 +6451,6 @@
       <TMUs>64</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
     <GPU name="Radeon R5 Graphics">
       <ChipName>Wani</ChipName>
       <Released>Sep 5th, 2017</Released>
@@ -6493,7 +6460,6 @@
       <TMUs>24</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon Vega 11 Embedded">
       <ChipName>Raven</ChipName>
       <Released>Feb 13th, 2018</Released>
@@ -6521,8 +6487,7 @@
       <TMUs>32</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
-    <GPU name="Radeon Pro WX  M GL">
+    <GPU name="Radeon Pro WX Vega M GL">
       <ChipName>Polaris 22</ChipName>
       <Released>Apr 24th, 2018</Released>
       <Bus>IGP</Bus>
@@ -6535,7 +6500,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="Radeon RX  M GH">
+    <GPU name="Radeon RX Vega M GH">
       <ChipName>Polaris 22</ChipName>
       <Released>Feb 1st, 2018</Released>
       <Bus>IGP</Bus>
@@ -6548,7 +6513,7 @@
       <TMUs>96</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="Radeon RX  M GL">
+    <GPU name="Radeon RX Vega M GL">
       <ChipName>Polaris 22</ChipName>
       <Released>Feb 1st, 2018</Released>
       <Bus>IGP</Bus>
@@ -6561,7 +6526,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="Radeon RX  Nano">
+    <GPU name="Radeon RX Vega Nano">
       <ChipName>Vega 10</ChipName>
       <Released>Never Released</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -6574,7 +6539,7 @@
       <TMUs>256</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="Radeon RX  56">
+    <GPU name="Radeon RX Vega 56">
       <ChipName>Vega 10</ChipName>
       <Released>Aug 14th, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -6587,7 +6552,7 @@
       <TMUs>224</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="Radeon RX  64">
+    <GPU name="Radeon RX Vega 64">
       <ChipName>Vega 10</ChipName>
       <Released>Aug 7th, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -6600,7 +6565,7 @@
       <TMUs>256</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="Radeon RX  64 Limited Edition">
+    <GPU name="Radeon RX Vega 64 Limited Edition">
       <ChipName>Vega 10</ChipName>
       <Released>Aug 7th, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -6613,7 +6578,7 @@
       <TMUs>256</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="Radeon RX  64 Liquid Cooling">
+    <GPU name="Radeon RX Vega 64 Liquid Cooling">
       <ChipName>Vega 10</ChipName>
       <Released>Aug 7th, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -6626,7 +6591,6 @@
       <TMUs>256</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-
     <GPU name="Radeon HD 6250 IGP">
       <ChipName>Loveland</ChipName>
       <Released>Oct 9th, 2012</Released>
@@ -6663,7 +6627,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Radeon HD 6520G IGP">
       <ChipName>Sumo</ChipName>
       <Released>Dec 7th, 2011</Released>
@@ -6745,7 +6708,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Radeon HD 7290 IGP">
       <ChipName>Loveland</ChipName>
       <Released>Jun 6th, 2012</Released>
@@ -6800,7 +6762,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Radeon HD 7400G IGP">
       <ChipName>Scrapper</ChipName>
       <Released>Oct 2nd, 2012</Released>
@@ -6936,7 +6897,6 @@
       <TMUs>24</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon HD 8650D IGP">
       <ChipName>Scrapper</ChipName>
       <Released>Dec 28th, 2013</Released>
@@ -7063,7 +7023,6 @@
       <TMUs>24</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon HD 8210 IGP">
       <ChipName>Kalindi</ChipName>
       <Released>Jan 31st, 2014</Released>
@@ -7091,7 +7050,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Radeon HD 8400 IGP">
       <ChipName>Kalindi</ChipName>
       <Released>Nov 23rd, 2013</Released>
@@ -7182,7 +7140,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Radeon R2 Mobile Graphics">
       <ChipName>Beema</ChipName>
       <Released>Jan 28th, 2015</Released>
@@ -7237,7 +7194,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Radeon R4 Mobile Graphics">
       <ChipName>Spectre SL</ChipName>
       <Released>Sep 17th, 2014</Released>
@@ -7301,7 +7257,6 @@
       <TMUs>32</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon R7 Mobile Graphics">
       <ChipName>Wani</ChipName>
       <Released>Nov 15th, 2015</Released>
@@ -7329,7 +7284,6 @@
       <TMUs>24</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon R2 Mobile Graphics">
       <ChipName>Stoney</ChipName>
       <Released>Jun 1st, 2016</Released>
@@ -7366,7 +7320,6 @@
       <TMUs>12</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon Vega 10 Mobile">
       <ChipName>Raven</ChipName>
       <Released>Jan 8th, 2019</Released>
@@ -7502,7 +7455,6 @@
       <TMUs>32</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon Vega 3 Mobile">
       <ChipName>Picasso</ChipName>
       <Released>Jan 6th, 2020</Released>
@@ -7647,7 +7599,6 @@
       <TMUs>32</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon Graphics 512SP">
       <ChipName>Renoir</ChipName>
       <Released>Mar 7th, 2020</Released>
@@ -7693,7 +7644,6 @@
       <TMUs>28</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon Graphics 448SP">
       <ChipName>Lucienne</ChipName>
       <Released>Jan 12th, 2021</Released>
@@ -7703,7 +7653,6 @@
       <TMUs>32</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon Vega 8">
       <ChipName>Cezanne</ChipName>
       <Released>Jan 12th, 2021</Released>
@@ -7722,7 +7671,6 @@
       <TMUs>32</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon R8 M535DX">
       <ChipName>Meso</ChipName>
       <Released>Apr 18th, 2017</Released>
@@ -8743,7 +8691,6 @@
       <TMUs>20</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon R5 A330">
       <ChipName>Exo</ChipName>
       <Released>Oct 21st, 2015</Released>
@@ -9121,7 +9068,6 @@
       <TMUs>24</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon E9390 PCIe">
       <ChipName>Ellesmere</ChipName>
       <Released>Oct 15th, 2019</Released>
@@ -9395,7 +9341,6 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Atari VCS 400 GPU">
       <ChipName>Banded Kestrel</ChipName>
       <Released>Dec 14th, 2020</Released>
@@ -9879,7 +9824,6 @@
     </GPU>
   </Manufacture>
   <Manufacture name="ATI">
-
     <GPU name="Graphics Solution Plus">
       <ChipName>CW16800-B</ChipName>
       <Released>Mar 23rd, 1987</Released>
@@ -9919,8 +9863,7 @@
       <TMUs>0</TMUs>
       <ROPs>0</ROPs>
     </GPU>
-
-    <GPU name="Wonder 480">
+    <GPU name="EGA Wonder 480">
       <ChipName>16899-0</ChipName>
       <Released>Dec 26th, 1988</Released>
       <Bus>PCI</Bus>
@@ -9933,7 +9876,7 @@
       <TMUs>0</TMUs>
       <ROPs>0</ROPs>
     </GPU>
-    <GPU name="Wonder 800+">
+    <GPU name="EGA Wonder 800+">
       <ChipName>18800-1</ChipName>
       <Released>1988</Released>
       <Bus>PCI</Bus>
@@ -9946,7 +9889,7 @@
       <TMUs>0</TMUs>
       <ROPs>0</ROPs>
     </GPU>
-    <GPU name="Wonder 800">
+    <GPU name="EGA Wonder 800">
       <ChipName>16899-0</ChipName>
       <Released>Nov 16th, 1987</Released>
       <Bus>PCI</Bus>
@@ -9959,8 +9902,7 @@
       <TMUs>0</TMUs>
       <ROPs>0</ROPs>
     </GPU>
-
-    <GPU name="Wonder XL24">
+    <GPU name="VGA Wonder XL24">
       <ChipName>28800-6</ChipName>
       <Released>Mar 16th, 1992</Released>
       <Bus>PCI</Bus>
@@ -9973,7 +9915,7 @@
       <TMUs>0</TMUs>
       <ROPs>0</ROPs>
     </GPU>
-    <GPU name="Wonder+">
+    <GPU name="VGA Wonder+">
       <ChipName>28800-5</ChipName>
       <Released>Nov 1st, 1990</Released>
       <Bus>PCI</Bus>
@@ -9986,7 +9928,7 @@
       <TMUs>0</TMUs>
       <ROPs>0</ROPs>
     </GPU>
-    <GPU name="Wonder">
+    <GPU name="VGA Wonder">
       <ChipName>18800-1</ChipName>
       <Released>Feb 5th, 1990</Released>
       <Bus>PCI</Bus>
@@ -9999,7 +9941,7 @@
       <TMUs>0</TMUs>
       <ROPs>0</ROPs>
     </GPU>
-    <GPU name="Improved Performance">
+    <GPU name="VGA Improved Performance">
       <ChipName>16899-0</ChipName>
       <Released>Sep 28th, 1987</Released>
       <Bus>PCI</Bus>
@@ -10012,7 +9954,6 @@
       <TMUs>0</TMUs>
       <ROPs>0</ROPs>
     </GPU>
-
     <GPU name="8514Ultra">
       <ChipName>Mach8</ChipName>
       <Released>1992</Released>
@@ -10052,7 +9993,6 @@
       <TMUs>0</TMUs>
       <ROPs>0</ROPs>
     </GPU>
-
     <GPU name="Graphics Ultra Pro PCI">
       <ChipName>Mach32</ChipName>
       <Released>1993</Released>
@@ -10144,7 +10084,6 @@
       <TMUs>0</TMUs>
       <ROPs>0</ROPs>
     </GPU>
-
     <GPU name="Video Xpression">
       <ChipName>Mach64</ChipName>
       <Released>May 21st, 1996</Released>
@@ -10262,8 +10201,7 @@
       <TMUs>0</TMUs>
       <ROPs>0</ROPs>
     </GPU>
-
-    <GPU name="3D">
+    <GPU name="3D Rage">
       <ChipName>Mach64 GT</ChipName>
       <Released>Apr 1st, 1996</Released>
       <Bus>PCI</Bus>
@@ -10276,7 +10214,6 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-
     <GPU name="3D Rage II">
       <ChipName>Mach64 GT-B</ChipName>
       <Released>Sep 5th, 1996</Released>
@@ -10329,7 +10266,6 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-
     <GPU name="Rage XL PCI">
       <ChipName>Rage 3</ChipName>
       <Released>Jan 11th, 1999</Released>
@@ -10421,7 +10357,6 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-
     <GPU name="Rage Fury MAXX">
       <ChipName>Rage 4</ChipName>
       <Released>Oct 1st, 1999</Released>
@@ -10513,7 +10448,6 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
     <GPU name="Radeon DDR VIVO">
       <ChipName>Rage 6</ChipName>
       <Released>Aug 14th, 2001</Released>
@@ -10644,7 +10578,6 @@
       <TMUs>1</TMUs>
       <ROPs>6</ROPs>
     </GPU>
-
     <GPU name="Radeon 7000 Mac Edition">
       <ChipName>RV100</ChipName>
       <Released>Mar 14th, 2004</Released>
@@ -10736,7 +10669,6 @@
       <TMUs>1</TMUs>
       <ROPs>6</ROPs>
     </GPU>
-
     <GPU name="Radeon 9000 PRO Mac Edition">
       <ChipName>RV250</ChipName>
       <Released>Mar 14th, 2004</Released>
@@ -11010,7 +10942,6 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon X800 GT AGP">
       <ChipName>R420</ChipName>
       <Released>Nov 8th, 2007</Released>
@@ -11232,7 +11163,6 @@
       <TMUs>6</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
     <GPU name="Radeon X1050 AGP">
       <ChipName>RV360</ChipName>
       <Released>Nov 25th, 2007</Released>
@@ -11740,7 +11670,6 @@
       <TMUs>4</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Radeon X1050">
       <ChipName>RV410</ChipName>
       <Released>Jan 25th, 2008</Released>
@@ -12040,7 +11969,6 @@
       <TMUs>6</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
     <GPU name="Radeon X1600 PRO AGP">
       <ChipName>RV530</ChipName>
       <Released>Oct 1st, 2007</Released>
@@ -12184,7 +12112,6 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Radeon X1650 GTO">
       <ChipName>RV530</ChipName>
       <Released>Dec 2nd, 2007</Released>
@@ -12731,7 +12658,6 @@
       <TMUs>8</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
     <GPU name="Radeon HD 3570">
       <ChipName>RV620</ChipName>
       <Released>Jul 5th, 2010</Released>
@@ -13304,7 +13230,6 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
     <GPU name="Radeon HD 4720">
       <ChipName>RV730</ChipName>
       <Released>Dec 11th, 2011</Released>
@@ -13721,7 +13646,6 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
     <GPU name="Radeon HD 5490">
       <ChipName>Cedar</ChipName>
       <Released>Oct 28th, 2012</Released>
@@ -14073,7 +13997,6 @@
       <TMUs>72</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
     <GPU name="Rage 128 GL">
       <ChipName>Rage 4</ChipName>
       <Released>Aug 27th, 1998</Released>
@@ -14113,8 +14036,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
-    <GPU name="4">
+    <GPU name="Fire GL4">
       <ChipName>RC1000</ChipName>
       <Released>Mar 14th, 2001</Released>
       <Bus>AGP Pro 8x</Bus>
@@ -14127,7 +14049,7 @@
       <TMUs>1</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="2">
+    <GPU name="Fire GL2">
       <ChipName>RC1000</ChipName>
       <Released>Jun 1st, 2000</Released>
       <Bus>AGP 4x</Bus>
@@ -14140,7 +14062,7 @@
       <TMUs>1</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="3">
+    <GPU name="Fire GL3">
       <ChipName>RC1000</ChipName>
       <Released>Jun 1st, 2000</Released>
       <Bus>AGP 4x</Bus>
@@ -14153,7 +14075,7 @@
       <TMUs>1</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="1">
+    <GPU name="Fire GL1">
       <ChipName>IBM</ChipName>
       <Released>Mar 1st, 1999</Released>
       <Bus>AGP 2x</Bus>
@@ -14166,8 +14088,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-
-    <GPU name="V7700">
+    <GPU name="FireGL V7700">
       <ChipName>RV670</ChipName>
       <Released>Nov 19th, 2007</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -14180,7 +14101,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="V7600">
+    <GPU name="FireGL V7600">
       <ChipName>R600</ChipName>
       <Released>Nov 6th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14193,7 +14114,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="V3600">
+    <GPU name="FireGL V3600">
       <ChipName>RV630</ChipName>
       <Released>Jun 28th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14206,7 +14127,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="V5600">
+    <GPU name="FireGL V5600">
       <ChipName>RV630</ChipName>
       <Released>Jun 28th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14219,7 +14140,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="V8600">
+    <GPU name="FireGL V8600">
       <ChipName>R600</ChipName>
       <Released>May 14th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14232,7 +14153,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="V8650">
+    <GPU name="FireGL V8650">
       <ChipName>R600</ChipName>
       <Released>May 14th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14245,7 +14166,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="V3300">
+    <GPU name="FireGL V3300">
       <ChipName>RV515</ChipName>
       <Released>Oct 1st, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14258,7 +14179,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="V3350">
+    <GPU name="FireGL V3350">
       <ChipName>RV515</ChipName>
       <Released>Oct 1st, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14271,7 +14192,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="V3400">
+    <GPU name="FireGL V3400">
       <ChipName>RV530</ChipName>
       <Released>Oct 1st, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14284,7 +14205,7 @@
       <TMUs>5</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="V5200">
+    <GPU name="FireGL V5200">
       <ChipName>RV530</ChipName>
       <Released>Oct 1st, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14297,7 +14218,7 @@
       <TMUs>5</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="V7200">
+    <GPU name="FireGL V7200">
       <ChipName>R520</ChipName>
       <Released>Oct 1st, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14310,7 +14231,7 @@
       <TMUs>8</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="V7300">
+    <GPU name="FireGL V7300">
       <ChipName>R520</ChipName>
       <Released>Oct 1st, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14323,7 +14244,7 @@
       <TMUs>8</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="V7350">
+    <GPU name="FireGL V7350">
       <ChipName>R520</ChipName>
       <Released>Oct 1st, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14336,7 +14257,7 @@
       <TMUs>8</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="V7100">
+    <GPU name="FireGL V7100">
       <ChipName>R423</ChipName>
       <Released>Dec 1st, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14349,7 +14270,7 @@
       <TMUs>6</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="V3100">
+    <GPU name="FireGL V3100">
       <ChipName>RV370</ChipName>
       <Released>Sep 1st, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14362,7 +14283,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="V3200">
+    <GPU name="FireGL V3200">
       <ChipName>RV380</ChipName>
       <Released>Sep 1st, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14375,7 +14296,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="V5000">
+    <GPU name="FireGL V5000">
       <ChipName>RV410</ChipName>
       <Released>Sep 1st, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14388,7 +14309,7 @@
       <TMUs>6</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="X3256">
+    <GPU name="FireGL X3256">
       <ChipName>R420</ChipName>
       <Released>Aug 3rd, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -14401,7 +14322,7 @@
       <TMUs>6</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="V5100">
+    <GPU name="FireGL V5100">
       <ChipName>R423</ChipName>
       <Released>May 1st, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -14414,7 +14335,7 @@
       <TMUs>6</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="9600 T2128">
+    <GPU name="FireGL 9600 T2128">
       <ChipName>RV350</ChipName>
       <Released>Oct 1st, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -14427,7 +14348,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="9600 T264S">
+    <GPU name="FireGL 9600 T264S">
       <ChipName>RV350</ChipName>
       <Released>Oct 1st, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -14440,7 +14361,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="9800 X2256T">
+    <GPU name="FireGL 9800 X2256T">
       <ChipName>R360</ChipName>
       <Released>Oct 1st, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -14453,7 +14374,7 @@
       <TMUs>4</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="9800 X2256">
+    <GPU name="FireGL 9800 X2256">
       <ChipName>R360</ChipName>
       <Released>Mar 1st, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -14466,7 +14387,7 @@
       <TMUs>4</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="9500 Z1128">
+    <GPU name="FireGL 9500 Z1128">
       <ChipName>R300</ChipName>
       <Released>Oct 1st, 2002</Released>
       <Bus>AGP 8x</Bus>
@@ -14479,7 +14400,7 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="9700 X1128">
+    <GPU name="FireGL 9700 X1128">
       <ChipName>R300</ChipName>
       <Released>Jul 1st, 2002</Released>
       <Bus>AGP 8x</Bus>
@@ -14492,7 +14413,7 @@
       <TMUs>4</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="9700 X1256">
+    <GPU name="FireGL 9700 X1256">
       <ChipName>R300</ChipName>
       <Released>Jul 1st, 2002</Released>
       <Bus>AGP 8x</Bus>
@@ -14505,7 +14426,7 @@
       <TMUs>4</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="9700 X1256p">
+    <GPU name="FireGL 9700 X1256p">
       <ChipName>R300</ChipName>
       <Released>Jul 1st, 2002</Released>
       <Bus>AGP Pro 8x</Bus>
@@ -14518,7 +14439,7 @@
       <TMUs>4</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="8700">
+    <GPU name="FireGL 8700">
       <ChipName>R200</ChipName>
       <Released>Aug 14th, 2001</Released>
       <Bus>AGP 4x</Bus>
@@ -14531,7 +14452,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="8800">
+    <GPU name="FireGL 8800">
       <ChipName>R200</ChipName>
       <Released>Aug 14th, 2001</Released>
       <Bus>AGP 4x</Bus>
@@ -14544,8 +14465,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
-    <GPU name="220">
+    <GPU name="FirePro RG220">
       <ChipName>RV711</ChipName>
       <Released>May 1st, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -14558,7 +14478,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="FireMV 2260">
       <ChipName>RV620</ChipName>
       <Released>2008</Released>
@@ -14663,8 +14582,7 @@
       <TMUs>1</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
-    <GPU name="128">
+    <GPU name="Rage Mobility 128">
       <ChipName>M3</ChipName>
       <Released>Oct 1st, 1999</Released>
       <Bus>AGP 2x</Bus>
@@ -14677,7 +14595,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="128">
+    <GPU name="Rage Mobility 128">
       <ChipName>M4</ChipName>
       <Released>Oct 1st, 1999</Released>
       <Bus>AGP 4x</Bus>
@@ -14690,7 +14608,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="M3">
+    <GPU name="Rage MobilityM3">
       <ChipName>M3</ChipName>
       <Released>Oct 1st, 1999</Released>
       <Bus>AGP 2x</Bus>
@@ -14703,7 +14621,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="M4">
+    <GPU name="Rage MobilityM4">
       <ChipName>M4</ChipName>
       <Released>Oct 1st, 1999</Released>
       <Bus>AGP 4x</Bus>
@@ -14716,7 +14634,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="CL">
+    <GPU name="Rage MobilityCL">
       <ChipName>Rage Mobility</ChipName>
       <Released>Feb 1st, 1999</Released>
       <Bus>AGP 2x</Bus>
@@ -14729,7 +14647,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-    <GPU name="M">
+    <GPU name="Rage MobilityM">
       <ChipName>Rage Mobility</ChipName>
       <Released>Feb 1st, 1999</Released>
       <Bus>AGP 2x</Bus>
@@ -14742,7 +14660,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-    <GPU name="M1">
+    <GPU name="Rage MobilityM1">
       <ChipName>M1</ChipName>
       <Released>Feb 1st, 1999</Released>
       <Bus>AGP 2x</Bus>
@@ -14755,7 +14673,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="P">
+    <GPU name="Rage MobilityP">
       <ChipName>Rage Mobility</ChipName>
       <Released>Feb 1st, 1999</Released>
       <Bus>AGP 2x</Bus>
@@ -14781,7 +14699,6 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-
     <GPU name="Mobility Radeon">
       <ChipName>M6</ChipName>
       <Released>Dec 1st, 2001</Released>
@@ -14821,7 +14738,6 @@
       <TMUs>0</TMUs>
       <ROPs>3</ROPs>
     </GPU>
-
     <GPU name="Mobility Radeon 7500">
       <ChipName>M7</ChipName>
       <Released>Dec 1st, 2001</Released>
@@ -14861,7 +14777,6 @@
       <TMUs>1</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
     <GPU name="Mobility Radeon 9200">
       <ChipName>M9</ChipName>
       <Released>Mar 1st, 2003</Released>
@@ -14927,7 +14842,6 @@
       <TMUs>1</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Mobility Radeon 9800">
       <ChipName>M18</ChipName>
       <Released>Jul 1st, 2004</Released>
@@ -15032,7 +14946,6 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Mobility Radeon X300">
       <ChipName>M22</ChipName>
       <Released>Nov 1st, 2005</Released>
@@ -15124,7 +15037,6 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Mobility Radeon X1600 Mac Edition">
       <ChipName>M56</ChipName>
       <Released>Nov 8th, 2007</Released>
@@ -15203,7 +15115,6 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Mobility Radeon X2500">
       <ChipName>M66</ChipName>
       <Released>Jun 1st, 2007</Released>
@@ -15308,7 +15219,6 @@
       <TMUs>5</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Mobility Radeon HD 2700">
       <ChipName>M76</ChipName>
       <Released>Dec 12th, 2007</Released>
@@ -15426,7 +15336,6 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Mobility Radeon HD 3870 X2">
       <ChipName>M88</ChipName>
       <Released>Sep 1st, 2008</Released>
@@ -15557,7 +15466,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Mobility Radeon HD 530v">
       <ChipName>M92</ChipName>
       <Released>May 5th, 2010</Released>
@@ -15857,7 +15765,6 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
     <GPU name="Mobility Radeon HD 5570">
       <ChipName>Pinewood</ChipName>
       <Released>Nov 23rd, 2012</Released>
@@ -16040,8 +15947,7 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
-    <GPU name="V5725">
+    <GPU name="Mobility FireGL V5725">
       <ChipName>M86</ChipName>
       <Released>2009</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -16054,7 +15960,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="V5700">
+    <GPU name="Mobility FireGL V5700">
       <ChipName>M86</ChipName>
       <Released>Jan 7th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -16067,7 +15973,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="V5600">
+    <GPU name="Mobility FireGL V5600">
       <ChipName>M76</ChipName>
       <Released>May 14th, 2007</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -16080,7 +15986,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="V5250">
+    <GPU name="Mobility FireGL V5250">
       <ChipName>M66</ChipName>
       <Released>2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -16093,7 +15999,7 @@
       <TMUs>5</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="V5200">
+    <GPU name="Mobility FireGL V5200">
       <ChipName>M56</ChipName>
       <Released>Feb 1st, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -16106,7 +16012,7 @@
       <TMUs>5</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="V5000">
+    <GPU name="Mobility FireGL V5000">
       <ChipName>M26</ChipName>
       <Released>Feb 3rd, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -16119,7 +16025,7 @@
       <TMUs>6</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="T2e">
+    <GPU name="Mobility FireGL T2e">
       <ChipName>M11</ChipName>
       <Released>Aug 1st, 2004</Released>
       <Bus>AGP 4x</Bus>
@@ -16132,7 +16038,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="V3100">
+    <GPU name="Mobility FireGL V3100">
       <ChipName>M22</ChipName>
       <Released>Jun 1st, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -16145,7 +16051,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="V3200">
+    <GPU name="Mobility FireGL V3200">
       <ChipName>M24</ChipName>
       <Released>Jun 1st, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -16158,7 +16064,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="T2">
+    <GPU name="Mobility FireGL T2">
       <ChipName>M10</ChipName>
       <Released>Nov 1st, 2003</Released>
       <Bus>AGP 4x</Bus>
@@ -16171,7 +16077,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="9000">
+    <GPU name="Mobility FireGL 9000">
       <ChipName>M9</ChipName>
       <Released>2002</Released>
       <Bus>AGP 4x</Bus>
@@ -16184,7 +16090,7 @@
       <TMUs>1</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="7800">
+    <GPU name="Mobility FireGL 7800">
       <ChipName>M7</ChipName>
       <Released>Sep 29th, 2001</Released>
       <Bus>AGP 4x</Bus>
@@ -16197,7 +16103,6 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
     <GPU name="FirePro M7820">
       <ChipName>Broadway</ChipName>
       <Released>May 1st, 2010</Released>
@@ -16250,7 +16155,6 @@
       <TMUs>32</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="Mobility Radeon HD 4225 IGP">
       <ChipName>RS880</ChipName>
       <Released>May 1st, 2010</Released>
@@ -16638,7 +16542,7 @@
       <TMUs>0</TMUs>
       <ROPs>3</ROPs>
     </GPU>
-    <GPU name="320">
+    <GPU name="Radeon IGP 320">
       <ChipName>RS100</ChipName>
       <Released>Oct 5th, 2002</Released>
       <Bus>AGP 4x</Bus>
@@ -16647,7 +16551,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-    <GPU name="320M">
+    <GPU name="Radeon IGP 320M">
       <ChipName>RS100</ChipName>
       <Released>Oct 5th, 2002</Released>
       <Bus>AGP 4x</Bus>
@@ -16656,7 +16560,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-    <GPU name="340">
+    <GPU name="Radeon IGP 340">
       <ChipName>RS200</ChipName>
       <Released>Oct 5th, 2002</Released>
       <Bus>AGP 4x</Bus>
@@ -16665,7 +16569,7 @@
       <TMUs>1</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="340M">
+    <GPU name="Radeon IGP 340M">
       <ChipName>RS200</ChipName>
       <Released>Oct 5th, 2002</Released>
       <Bus>AGP 4x</Bus>
@@ -16674,7 +16578,7 @@
       <TMUs>1</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="345M">
+    <GPU name="Radeon IGP 345M">
       <ChipName>RS200</ChipName>
       <Released>Oct 5th, 2002</Released>
       <Bus>AGP 4x</Bus>
@@ -16683,7 +16587,7 @@
       <TMUs>1</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="350M">
+    <GPU name="Radeon IGP 350M">
       <ChipName>RS200</ChipName>
       <Released>Oct 5th, 2002</Released>
       <Bus>AGP 4x</Bus>
@@ -16692,7 +16596,7 @@
       <TMUs>1</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="330M">
+    <GPU name="Radeon IGP 330M">
       <ChipName>RS200</ChipName>
       <Released>May 1st, 2002</Released>
       <Bus>AGP 4x</Bus>
@@ -16701,8 +16605,7 @@
       <TMUs>1</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
-    <GPU name="HD 3650">
+    <GPU name="AllInWonder HD 3650">
       <ChipName>RV635</ChipName>
       <Released>Jun 28th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -16715,7 +16618,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="X1900">
+    <GPU name="AllInWonder X1900">
       <ChipName>R580</ChipName>
       <Released>Jan 13th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -16728,7 +16631,7 @@
       <TMUs>8</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="2006 PCIe Edition">
+    <GPU name="AllInWonder 2006 PCIe Edition">
       <ChipName>RV515</ChipName>
       <Released>Dec 22nd, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -16741,7 +16644,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="X1800 XL">
+    <GPU name="AllInWonder X1800 XL">
       <ChipName>R520</ChipName>
       <Released>Oct 27th, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -16754,7 +16657,7 @@
       <TMUs>8</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="X600 PRO">
+    <GPU name="AllInWonder X600 PRO">
       <ChipName>RV370</ChipName>
       <Released>Jul 1st, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -16767,7 +16670,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="2006 AGP Edition">
+    <GPU name="AllInWonder 2006 AGP Edition">
       <ChipName>RV350</ChipName>
       <Released>Apr 29th, 2005</Released>
       <Bus>AGP 8x</Bus>
@@ -16780,7 +16683,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="X800 SE">
+    <GPU name="AllInWonder X800 SE">
       <ChipName>R420</ChipName>
       <Released>Apr 27th, 2005</Released>
       <Bus>AGP 8x</Bus>
@@ -16793,7 +16696,7 @@
       <TMUs>6</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="X800 VE">
+    <GPU name="AllInWonder X800 VE">
       <ChipName>R420</ChipName>
       <Released>Apr 27th, 2005</Released>
       <Bus>AGP 8x</Bus>
@@ -16806,7 +16709,7 @@
       <TMUs>6</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="X800 XL">
+    <GPU name="AllInWonder X800 XL">
       <ChipName>R430</ChipName>
       <Released>Jan 21st, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -16819,7 +16722,7 @@
       <TMUs>6</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="X800 GT">
+    <GPU name="AllInWonder X800 GT">
       <ChipName>R430</ChipName>
       <Released>Sep 21st, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -16832,7 +16735,7 @@
       <TMUs>6</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="X800 XT">
+    <GPU name="AllInWonder X800 XT">
       <ChipName>R420</ChipName>
       <Released>Sep 21st, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -16845,7 +16748,7 @@
       <TMUs>6</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="9600 XT">
+    <GPU name="AllInWonder 9600 XT">
       <ChipName>RV360</ChipName>
       <Released>Feb 6th, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -16858,7 +16761,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="9200">
+    <GPU name="AllInWonder 9200">
       <ChipName>RV280</ChipName>
       <Released>Jan 26th, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -16871,7 +16774,7 @@
       <TMUs>1</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="9200 SE">
+    <GPU name="AllInWonder 9200 SE">
       <ChipName>RV280</ChipName>
       <Released>Jan 26th, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -16884,7 +16787,7 @@
       <TMUs>1</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="9600">
+    <GPU name="AllInWonder 9600">
       <ChipName>RV350</ChipName>
       <Released>Dec 3rd, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -16897,7 +16800,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="9800 SE">
+    <GPU name="AllInWonder 9800 SE">
       <ChipName>R350</ChipName>
       <Released>Sep 10th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -16910,7 +16813,7 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="9800 PRO">
+    <GPU name="AllInWonder 9800 PRO">
       <ChipName>R350</ChipName>
       <Released>Jun 16th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -16923,7 +16826,7 @@
       <TMUs>4</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="9600 PRO">
+    <GPU name="AllInWonder 9600 PRO">
       <ChipName>RV350</ChipName>
       <Released>Apr 1st, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -16936,7 +16839,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="9000 PRO">
+    <GPU name="AllInWonder 9000 PRO">
       <ChipName>RV250</ChipName>
       <Released>Mar 31st, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -16949,7 +16852,7 @@
       <TMUs>1</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="9700 PRO">
+    <GPU name="AllInWonder 9700 PRO">
       <ChipName>R300</ChipName>
       <Released>Jan 22nd, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -16962,7 +16865,7 @@
       <TMUs>4</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="9500">
+    <GPU name="AllInWonder 9500">
       <ChipName>R300</ChipName>
       <Released>Jul 1st, 2002</Released>
       <Bus>AGP 8x</Bus>
@@ -16975,7 +16878,7 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="Radeon 7500">
+    <GPU name="AllInWonder Radeon 7500">
       <ChipName>RV200</ChipName>
       <Released>Apr 16th, 2002</Released>
       <Bus>AGP 8x</Bus>
@@ -16988,7 +16891,7 @@
       <TMUs>0</TMUs>
       <ROPs>6</ROPs>
     </GPU>
-    <GPU name="Radeon 7500 VE">
+    <GPU name="AllInWonder Radeon 7500 VE">
       <ChipName>RV200</ChipName>
       <Released>Apr 16th, 2002</Released>
       <Bus>PCI</Bus>
@@ -17001,7 +16904,7 @@
       <TMUs>0</TMUs>
       <ROPs>6</ROPs>
     </GPU>
-    <GPU name="Radeon 8500">
+    <GPU name="AllInWonder Radeon 8500">
       <ChipName>R200</ChipName>
       <Released>Nov 14th, 2001</Released>
       <Bus>AGP 8x</Bus>
@@ -17014,7 +16917,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="Radeon 8500DV">
+    <GPU name="AllInWonder Radeon 8500DV">
       <ChipName>R200</ChipName>
       <Released>Aug 30th, 2001</Released>
       <Bus>AGP 8x</Bus>
@@ -17027,7 +16930,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="Radeon 7200">
+    <GPU name="AllInWonder Radeon 7200">
       <ChipName>R100</ChipName>
       <Released>Jul 31st, 2000</Released>
       <Bus>PCI</Bus>
@@ -17040,7 +16943,7 @@
       <TMUs>1</TMUs>
       <ROPs>6</ROPs>
     </GPU>
-    <GPU name="128">
+    <GPU name="AllInWonder 128">
       <ChipName>Rage 4</ChipName>
       <Released>Jun 16th, 1999</Released>
       <Bus>AGP 4x</Bus>
@@ -17053,7 +16956,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="128 PCI">
+    <GPU name="AllInWonder 128 PCI">
       <ChipName>Rage 4</ChipName>
       <Released>Jun 16th, 1999</Released>
       <Bus>PCI</Bus>
@@ -17066,7 +16969,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="128 PRO">
+    <GPU name="AllInWonder 128 PRO">
       <ChipName>Rage 4</ChipName>
       <Released>Jun 16th, 1999</Released>
       <Bus>AGP 4x</Bus>
@@ -17079,7 +16982,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="128 PRO Ultra">
+    <GPU name="AllInWonder 128 PRO Ultra">
       <ChipName>Rage 4</ChipName>
       <Released>Jun 16th, 1999</Released>
       <Bus>AGP 4x</Bus>
@@ -17146,7 +17049,6 @@
       <TMUs>32</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Xeon Phi 5120D">
       <ChipName>Knights Corner</ChipName>
       <Released>Jun 17th, 2013</Released>
@@ -17238,7 +17140,7 @@
       <TMUs>48</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="i815">
+    <GPU name="i815 Graphics">
       <ChipName>Solano</ChipName>
       <Released>2000</Released>
       <Bus>AGP 4x</Bus>
@@ -17260,7 +17162,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-    <GPU name="i810">
+    <GPU name="i810 Graphics">
       <ChipName>Whitney</ChipName>
       <Released>1999</Released>
       <Bus>AGP 4x</Bus>
@@ -17295,7 +17197,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-    <GPU name="i740">
+    <GPU name="i740 Graphics">
       <ChipName>Auburn</ChipName>
       <Released>1998</Released>
       <Bus>PCI</Bus>
@@ -17304,7 +17206,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-    <GPU name="i752">
+    <GPU name="i752 Graphics">
       <ChipName>Portola</ChipName>
       <Released>1998</Released>
       <Bus>PCI</Bus>
@@ -17313,7 +17215,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-    <GPU name="">
+    <GPU name="Extreme Graphics">
       <ChipName>Brookdale</ChipName>
       <Released>2002</Released>
       <Bus>AGP 4x</Bus>
@@ -17403,8 +17305,7 @@
       <TMUs>1</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
-    <GPU name="U">
+    <GPU name="UHD Graphics">
       <ChipName>Rocket Lake GT1</ChipName>
       <Released>2021</Released>
       <Bus>PCIe 3.0 x1</Bus>
@@ -17413,7 +17314,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="U 730">
+    <GPU name="UHD Graphics 730">
       <ChipName>Rocket Lake GT1</ChipName>
       <Released>2021</Released>
       <Bus>PCIe 3.0 x1</Bus>
@@ -17422,7 +17323,7 @@
       <TMUs>48</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="U 750">
+    <GPU name="UHD Graphics 750">
       <ChipName>Rocket Lake GT1</ChipName>
       <Released>2021</Released>
       <Bus>PCIe 3.0 x1</Bus>
@@ -17431,7 +17332,7 @@
       <TMUs>64</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="U 610">
+    <GPU name="UHD Graphics 610">
       <ChipName>Comet Lake GT1</ChipName>
       <Released>Apr 30th, 2020</Released>
       <Bus>PCIe 3.0 x1</Bus>
@@ -17440,7 +17341,7 @@
       <TMUs>12</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="U 630">
+    <GPU name="UHD Graphics 630">
       <ChipName>Comet Lake GT2</ChipName>
       <Released>Apr 30th, 2020</Released>
       <Bus>PCIe 3.0 x1</Bus>
@@ -17449,7 +17350,7 @@
       <TMUs>24</TMUs>
       <ROPs>3</ROPs>
     </GPU>
-    <GPU name="U 630">
+    <GPU name="UHD Graphics 630">
       <ChipName>Comet Lake GT2</ChipName>
       <Released>Apr 30th, 2020</Released>
       <Bus>PCIe 3.0 x1</Bus>
@@ -17458,7 +17359,7 @@
       <TMUs>23</TMUs>
       <ROPs>3</ROPs>
     </GPU>
-    <GPU name="U 610">
+    <GPU name="UHD Graphics 610">
       <ChipName>Coffee Lake GT1</ChipName>
       <Released>Apr 3rd, 2018</Released>
       <Bus>PCIe 3.0 x1</Bus>
@@ -17467,7 +17368,7 @@
       <TMUs>12</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="U 630">
+    <GPU name="UHD Graphics 630">
       <ChipName>Coffee Lake GT2</ChipName>
       <Released>Sep 1st, 2017</Released>
       <Bus>PCIe 3.0 x1</Bus>
@@ -17476,7 +17377,7 @@
       <TMUs>24</TMUs>
       <ROPs>3</ROPs>
     </GPU>
-    <GPU name="U 630">
+    <GPU name="UHD Graphics 630">
       <ChipName>Coffee Lake GT2</ChipName>
       <Released>Sep 1st, 2017</Released>
       <Bus>PCIe 3.0 x1</Bus>
@@ -17485,7 +17386,7 @@
       <TMUs>23</TMUs>
       <ROPs>3</ROPs>
     </GPU>
-    <GPU name="610">
+    <GPU name="HD Graphics 610">
       <ChipName>Kaby Lake GT1</ChipName>
       <Released>Aug 30th, 2016</Released>
       <Bus>PCIe 3.0 x1</Bus>
@@ -17494,7 +17395,7 @@
       <TMUs>12</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="630">
+    <GPU name="HD Graphics 630">
       <ChipName>Kaby Lake GT2</ChipName>
       <Released>Aug 30th, 2016</Released>
       <Bus>PCIe 3.0 x1</Bus>
@@ -17503,7 +17404,7 @@
       <TMUs>24</TMUs>
       <ROPs>3</ROPs>
     </GPU>
-    <GPU name="510">
+    <GPU name="HD Graphics 510">
       <ChipName>Skylake GT1</ChipName>
       <Released>Sep 1st, 2015</Released>
       <Bus>PCIe 3.0 x1</Bus>
@@ -17512,7 +17413,7 @@
       <TMUs>12</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="530">
+    <GPU name="HD Graphics 530">
       <ChipName>Skylake GT2</ChipName>
       <Released>Sep 1st, 2015</Released>
       <Bus>PCIe 3.0 x1</Bus>
@@ -17530,7 +17431,7 @@
       <TMUs>48</TMUs>
       <ROPs>6</ROPs>
     </GPU>
-    <GPU name="4400">
+    <GPU name="HD Graphics 4400">
       <ChipName>Haswell GT2</ChipName>
       <Released>Sep 3rd, 2013</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -17539,7 +17440,7 @@
       <TMUs>20</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="4600">
+    <GPU name="HD Graphics 4600">
       <ChipName>Haswell GT2</ChipName>
       <Released>Jun 3rd, 2013</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -17557,7 +17458,7 @@
       <TMUs>40</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="">
+    <GPU name="HD Graphics">
       <ChipName>Haswell GT1</ChipName>
       <Released>Apr 29th, 2013</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -17566,7 +17467,7 @@
       <TMUs>10</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-    <GPU name="4000">
+    <GPU name="HD Graphics 4000">
       <ChipName>Ivy Bridge GT2</ChipName>
       <Released>May 14th, 2012</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -17575,7 +17476,7 @@
       <TMUs>16</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="">
+    <GPU name="HD Graphics">
       <ChipName>Ivy Bridge GT1</ChipName>
       <Released>Apr 1st, 2012</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -17584,7 +17485,7 @@
       <TMUs>6</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-    <GPU name="2000">
+    <GPU name="HD Graphics 2000">
       <ChipName>Sandy Bridge GT1</ChipName>
       <Released>Feb 1st, 2011</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -17593,7 +17494,7 @@
       <TMUs>6</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-    <GPU name="3000">
+    <GPU name="HD Graphics 3000">
       <ChipName>Sandy Bridge GT2+</ChipName>
       <Released>Feb 1st, 2011</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -17602,7 +17503,7 @@
       <TMUs>12</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="3000">
+    <GPU name="HD Graphics 3000">
       <ChipName>Sandy Bridge GT2</ChipName>
       <Released>Feb 1st, 2011</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -17611,7 +17512,7 @@
       <TMUs>12</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="">
+    <GPU name="HD Graphics">
       <ChipName>Ironlake</ChipName>
       <Released>Jan 10th, 2010</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -17620,7 +17521,6 @@
       <TMUs>12</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
     <GPU name="i852GM Graphics">
       <ChipName>Montara</ChipName>
       <Released>Dec 3rd, 2003</Released>
@@ -17648,8 +17548,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-
-    <GPU name="">
+    <GPU name="Extreme Graphics 2">
       <ChipName>Montara</ChipName>
       <Released>Dec 3rd, 2003</Released>
       <Bus>AGP 4x</Bus>
@@ -17658,7 +17557,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-    <GPU name="">
+    <GPU name="Extreme Graphics 2">
       <ChipName>Springdale</ChipName>
       <Released>Dec 3rd, 2003</Released>
       <Bus>AGP 4x</Bus>
@@ -17667,7 +17566,6 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
     <GPU name="GMA 3600">
       <ChipName>Cedarview</ChipName>
       <Released>Oct 1st, 2008</Released>
@@ -17812,7 +17710,6 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="UHD Graphics G4">
       <ChipName>Lakefield GT1</ChipName>
       <Released>May 28th, 2020</Released>
@@ -18227,7 +18124,6 @@
       <TMUs>16</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
     <GPU name="Iris Xe MAX Graphics">
       <ChipName>DG1</ChipName>
       <Released>Oct 31st, 2020</Released>
@@ -18268,7 +18164,6 @@
       <TMUs>48</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-
     <GPU name="GMA">
       <ChipName>Cloverview</ChipName>
       <Released>May 4th, 2010</Released>
@@ -18296,7 +18191,6 @@
       <TMUs>4</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-
     <GPU name="UHD Graphics">
       <ChipName>Amber Lake GT2</ChipName>
       <Released>Aug 21st, 2019</Released>
@@ -18396,7 +18290,6 @@
       <TMUs>4</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-
     <GPU name="UHD Graphics P750">
       <ChipName>Rocket Lake GT1</ChipName>
       <Released>2021</Released>
@@ -18505,7 +18398,6 @@
       <TMUs>12</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
     <GPU name="UHD Graphics P630">
       <ChipName>Comet Lake GT2</ChipName>
       <Released>May 13th, 2020</Released>
@@ -18544,7 +18436,6 @@
     </GPU>
   </Manufacture>
   <Manufacture name="Matrox">
-
     <GPU name="Millennium G450 x2 MMS">
       <ChipName>Condor</ChipName>
       <Released>Jun 19th, 2002</Released>
@@ -18753,8 +18644,7 @@
       <TMUs>1</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-
-    <GPU name="">
+    <GPU name="QID">
       <ChipName>MP-A4</ChipName>
       <Released>Dec 17th, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -18767,7 +18657,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="LP PCI">
+    <GPU name="QID LP PCI">
       <ChipName>MP-A4</ChipName>
       <Released>Dec 17th, 2004</Released>
       <Bus>PCI-X</Bus>
@@ -18780,7 +18670,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="LP PCIe">
+    <GPU name="QID LP PCIe">
       <ChipName>MP-A4</ChipName>
       <Released>Dec 17th, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -18793,7 +18683,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="PRO">
+    <GPU name="QID PRO">
       <ChipName>MP-A4</ChipName>
       <Released>Dec 17th, 2004</Released>
       <Bus>PCI-X</Bus>
@@ -18806,8 +18696,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
-    <GPU name="APVe">
+    <GPU name="Parhelia APVe">
       <ChipName>Parhelia-512</ChipName>
       <Released>Jun 14th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -18820,7 +18709,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="128 MB">
+    <GPU name="Parhelia 128 MB">
       <ChipName>Parhelia-512</ChipName>
       <Released>Mar 30th, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -18833,7 +18722,7 @@
       <TMUs>4</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="256 MB">
+    <GPU name="Parhelia 256 MB">
       <ChipName>Parhelia-512</ChipName>
       <Released>Mar 30th, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -18846,7 +18735,7 @@
       <TMUs>4</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="128 MB">
+    <GPU name="Parhelia 128 MB">
       <ChipName>Parhelia-512</ChipName>
       <Released>Jun 25th, 2002</Released>
       <Bus>AGP 4x</Bus>
@@ -18859,7 +18748,7 @@
       <TMUs>4</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="128 MB">
+    <GPU name="Parhelia 128 MB">
       <ChipName>Parhelia-512</ChipName>
       <Released>Jun 25th, 2002</Released>
       <Bus>AGP 4x</Bus>
@@ -18872,7 +18761,7 @@
       <TMUs>4</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="256 MB">
+    <GPU name="Parhelia 256 MB">
       <ChipName>Parhelia-512</ChipName>
       <Released>Jun 25th, 2002</Released>
       <Bus>AGP 4x</Bus>
@@ -18911,7 +18800,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="DL256">
+    <GPU name="Parhelia DL256">
       <ChipName>Parhelia-512</ChipName>
       <Released>2001</Released>
       <Bus>PCI-X</Bus>
@@ -18924,7 +18813,7 @@
       <TMUs>4</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="HR256">
+    <GPU name="Parhelia HR256">
       <ChipName>Parhelia-512</ChipName>
       <Released>2001</Released>
       <Bus>PCI-X</Bus>
@@ -18937,7 +18826,7 @@
       <TMUs>4</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="PCI">
+    <GPU name="Parhelia PCI">
       <ChipName>Parhelia-512</ChipName>
       <Released>2001</Released>
       <Bus>PCI-X</Bus>
@@ -18950,7 +18839,7 @@
       <TMUs>4</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="Precision SDT">
+    <GPU name="Parhelia Precision SDT">
       <ChipName>Parhelia-512</ChipName>
       <Released>2001</Released>
       <Bus>PCI-X</Bus>
@@ -18963,7 +18852,7 @@
       <TMUs>4</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="Precision SGT">
+    <GPU name="Parhelia Precision SGT">
       <ChipName>Parhelia-512</ChipName>
       <Released>2001</Released>
       <Bus>PCI-X</Bus>
@@ -18976,8 +18865,7 @@
       <TMUs>4</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
-    <GPU name="9125 PCIe x16">
+    <GPU name="M9125 PCIe x16">
       <ChipName>PX-A1</ChipName>
       <Released>Unknown</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -18992,8 +18880,7 @@
     </GPU>
   </Manufacture>
   <Manufacture name="NVIDIA">
-
-    <GPU name="">
+    <GPU name="NV1">
       <ChipName>NV1</ChipName>
       <Released>Sep 30th, 1995</Released>
       <Bus>PCI</Bus>
@@ -19019,8 +18906,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-
-    <GPU name="TNT">
+    <GPU name="Riva TNT">
       <ChipName>NV4</ChipName>
       <Released>Mar 23rd, 1998</Released>
       <Bus>AGP 2x</Bus>
@@ -19033,7 +18919,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="128ZX">
+    <GPU name="Riva 128ZX">
       <ChipName>NV3</ChipName>
       <Released>Feb 23rd, 1998</Released>
       <Bus>AGP 2x</Bus>
@@ -19046,7 +18932,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-    <GPU name="128">
+    <GPU name="Riva 128">
       <ChipName>NV3</ChipName>
       <Released>Apr 1st, 1997</Released>
       <Bus>AGP 2x</Bus>
@@ -19059,7 +18945,7 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-    <GPU name="128 PCI">
+    <GPU name="Riva 128 PCI">
       <ChipName>NV3</ChipName>
       <Released>Apr 1st, 1997</Released>
       <Bus>PCI</Bus>
@@ -19072,7 +18958,6 @@
       <TMUs>0</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-
     <GPU name="Vanta LT">
       <ChipName>NV5B</ChipName>
       <Released>Mar 1st, 2000</Released>
@@ -19086,7 +18971,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="Riva  M64">
+    <GPU name="Riva TNT2 M64">
       <ChipName>NV5B</ChipName>
       <Released>Oct 12th, 1999</Released>
       <Bus>AGP 4x</Bus>
@@ -19099,7 +18984,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="Riva  PRO">
+    <GPU name="Riva TNT2 PRO">
       <ChipName>NV5B</ChipName>
       <Released>Oct 12th, 1999</Released>
       <Bus>AGP 4x</Bus>
@@ -19112,7 +18997,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="Riva  M64 Vanta">
+    <GPU name="Riva TNT2 M64 Vanta">
       <ChipName>NV5B</ChipName>
       <Released>Mar 22nd, 1999</Released>
       <Bus>AGP 4x</Bus>
@@ -19125,7 +19010,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="Riva  M64 Vanta16">
+    <GPU name="Riva TNT2 M64 Vanta16">
       <ChipName>NV5B</ChipName>
       <Released>Mar 22nd, 1999</Released>
       <Bus>AGP 4x</Bus>
@@ -19138,7 +19023,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="Riva  Ultra">
+    <GPU name="Riva TNT2 Ultra">
       <ChipName>NV5B</ChipName>
       <Released>Mar 15th, 1999</Released>
       <Bus>AGP 4x</Bus>
@@ -19151,8 +19036,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
-    <GPU name="DDR">
+    <GPU name="GeForce 256 DDR">
       <ChipName>NV10</ChipName>
       <Released>Dec 23rd, 1999</Released>
       <Bus>AGP 4x</Bus>
@@ -19165,7 +19049,7 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="SDR">
+    <GPU name="GeForce 256 SDR">
       <ChipName>NV10</ChipName>
       <Released>Oct 11th, 1999</Released>
       <Bus>AGP 4x</Bus>
@@ -19178,7 +19062,6 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce2 MX 200 PCI">
       <ChipName>NV11B</ChipName>
       <Released>Mar 3rd, 2001</Released>
@@ -19231,7 +19114,6 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce2 MX 200">
       <ChipName>NV11B</ChipName>
       <Released>Mar 3rd, 2001</Released>
@@ -19297,7 +19179,6 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce2 Ti">
       <ChipName>NV15</ChipName>
       <Released>Oct 1st, 2001</Released>
@@ -19363,7 +19244,6 @@
       <TMUs>0</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="GeForce3 Ti200">
       <ChipName>NV20</ChipName>
       <Released>Oct 1st, 2001</Released>
@@ -19403,7 +19283,6 @@
       <TMUs>1</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="GeForce4 MX 4000">
       <ChipName>NV18</ChipName>
       <Released>Dec 14th, 2003</Released>
@@ -19573,7 +19452,6 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce4 Ti 4800">
       <ChipName>NV28</ChipName>
       <Released>Mar 15th, 2003</Released>
@@ -19691,8 +19569,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
-    <GPU name="5700 EP">
+    <GPU name="GeForce FX 5700 EP">
       <ChipName>NV36</ChipName>
       <Released>Sep 1st, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -19705,7 +19582,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5700 VE">
+    <GPU name="GeForce FX 5700 VE">
       <ChipName>NV36</ChipName>
       <Released>Sep 1st, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -19718,7 +19595,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5500">
+    <GPU name="GeForce FX 5500">
       <ChipName>NV34B</ChipName>
       <Released>Mar 17th, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -19731,7 +19608,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5500 PCI">
+    <GPU name="GeForce FX 5500 PCI">
       <ChipName>NV34B</ChipName>
       <Released>Mar 17th, 2004</Released>
       <Bus>PCI</Bus>
@@ -19744,7 +19621,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5700 LE">
+    <GPU name="GeForce FX 5700 LE">
       <ChipName>NV36</ChipName>
       <Released>Mar 1st, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -19757,7 +19634,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5700">
+    <GPU name="GeForce FX 5700">
       <ChipName>NV36</ChipName>
       <Released>Oct 23rd, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -19770,7 +19647,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5700 Ultra">
+    <GPU name="GeForce FX 5700 Ultra">
       <ChipName>NV36</ChipName>
       <Released>Oct 23rd, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -19783,7 +19660,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5900 Ultra">
+    <GPU name="GeForce FX 5900 Ultra">
       <ChipName>NV35</ChipName>
       <Released>Oct 23rd, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -19796,7 +19673,7 @@
       <TMUs>3</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="5950 Ultra">
+    <GPU name="GeForce FX 5950 Ultra">
       <ChipName>NV38</ChipName>
       <Released>Oct 23rd, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -19809,7 +19686,7 @@
       <TMUs>3</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="5900">
+    <GPU name="GeForce FX 5900">
       <ChipName>NV35</ChipName>
       <Released>May 12th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -19822,7 +19699,7 @@
       <TMUs>3</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="5900 XT">
+    <GPU name="GeForce FX 5900 XT">
       <ChipName>NV35</ChipName>
       <Released>May 12th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -19835,7 +19712,7 @@
       <TMUs>3</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="5900 ZT">
+    <GPU name="GeForce FX 5900 ZT">
       <ChipName>NV35</ChipName>
       <Released>May 12th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -19848,7 +19725,7 @@
       <TMUs>3</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="5200 LE">
+    <GPU name="GeForce FX 5200 LE">
       <ChipName>NV34</ChipName>
       <Released>Mar 17th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -19861,7 +19738,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5600 Ultra">
+    <GPU name="GeForce FX 5600 Ultra">
       <ChipName>NV31</ChipName>
       <Released>Mar 17th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -19874,7 +19751,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5600 XT">
+    <GPU name="GeForce FX 5600 XT">
       <ChipName>NV31</ChipName>
       <Released>Mar 17th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -19887,7 +19764,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5600 XT PCI">
+    <GPU name="GeForce FX 5600 XT PCI">
       <ChipName>NV31</ChipName>
       <Released>Mar 17th, 2003</Released>
       <Bus>PCI</Bus>
@@ -19900,7 +19777,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5100">
+    <GPU name="GeForce FX 5100">
       <ChipName>NV34</ChipName>
       <Released>Mar 6th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -19913,7 +19790,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5200">
+    <GPU name="GeForce FX 5200">
       <ChipName>NV18C</ChipName>
       <Released>Mar 6th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -19926,7 +19803,7 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5200">
+    <GPU name="GeForce FX 5200">
       <ChipName>NV34</ChipName>
       <Released>Mar 6th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -19939,7 +19816,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5200 PCI">
+    <GPU name="GeForce FX 5200 PCI">
       <ChipName>NV34B</ChipName>
       <Released>Mar 6th, 2003</Released>
       <Bus>PCI</Bus>
@@ -19952,7 +19829,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5200 Rev. 2">
+    <GPU name="GeForce FX 5200 Rev. 2">
       <ChipName>NV34B</ChipName>
       <Released>Mar 6th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -19965,7 +19842,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5200 Ultra">
+    <GPU name="GeForce FX 5200 Ultra">
       <ChipName>NV34</ChipName>
       <Released>Mar 6th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -19978,7 +19855,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5200 Ultra Mac Edition">
+    <GPU name="GeForce FX 5200 Ultra Mac Edition">
       <ChipName>NV34</ChipName>
       <Released>Mar 6th, 2003</Released>
       <Bus>AGP Pro 8x</Bus>
@@ -19991,7 +19868,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5600">
+    <GPU name="GeForce FX 5600">
       <ChipName>NV31</ChipName>
       <Released>Mar 6th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -20004,7 +19881,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5800">
+    <GPU name="GeForce FX 5800">
       <ChipName>NV30</ChipName>
       <Released>Mar 6th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -20017,7 +19894,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="5800 Ultra">
+    <GPU name="GeForce FX 5800 Ultra">
       <ChipName>NV30</ChipName>
       <Released>Mar 6th, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -20030,8 +19907,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
-    <GPU name="4300">
+    <GPU name="GeForce PCX 4300">
       <ChipName>NV19</ChipName>
       <Released>Feb 19th, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -20044,7 +19920,7 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="5300">
+    <GPU name="GeForce PCX 5300">
       <ChipName>NV37</ChipName>
       <Released>Feb 17th, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -20057,7 +19933,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5750">
+    <GPU name="GeForce PCX 5750">
       <ChipName>NV39</ChipName>
       <Released>Feb 17th, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -20070,7 +19946,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="5950">
+    <GPU name="GeForce PCX 5950">
       <ChipName>NV38</ChipName>
       <Released>Feb 17th, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -20083,7 +19959,7 @@
       <TMUs>3</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="5900">
+    <GPU name="GeForce PCX 5900">
       <ChipName>NV35</ChipName>
       <Released>Mar 17th, 2003</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -20096,7 +19972,6 @@
       <TMUs>3</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="GeForce 6200 PCI">
       <ChipName>NV44</ChipName>
       <Released>Jan 16th, 2008</Released>
@@ -20136,7 +20011,6 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce 6800 GS">
       <ChipName>NV40</ChipName>
       <Released>Dec 8th, 2005</Released>
@@ -20423,7 +20297,6 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce 6800 GS">
       <ChipName>NV41</ChipName>
       <Released>Nov 7th, 2005</Released>
@@ -20684,7 +20557,6 @@
       <TMUs>5</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-
     <GPU name="GeForce 7950 GT AGP">
       <ChipName>G71</ChipName>
       <Released>Apr 2nd, 2007</Released>
@@ -20841,7 +20713,6 @@
       <TMUs>6</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
     <GPU name="GeForce 7900 GTO">
       <ChipName>G71</ChipName>
       <Released>Oct 1st, 2006</Released>
@@ -21180,8 +21051,7 @@
       <TMUs>8</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-
-    <GPU name="400 GS Rev. 3">
+    <GPU name="GeForce 8400 GS Rev. 3">
       <ChipName>GT218</ChipName>
       <Released>Jul 12th, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21194,7 +21064,7 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="400 SE">
+    <GPU name="GeForce 8400 SE">
       <ChipName>G86</ChipName>
       <Released>Aug 1st, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21207,7 +21077,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="800 GT Mac Edition">
+    <GPU name="GeForce 8800 GT Mac Edition">
       <ChipName>G92</ChipName>
       <Released>Feb 1st, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21220,7 +21090,7 @@
       <TMUs>56</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="800 GS">
+    <GPU name="GeForce 8800 GS">
       <ChipName>G92</ChipName>
       <Released>Jan 31st, 2008</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -21233,7 +21103,7 @@
       <TMUs>48</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="800 GS Mac Edition">
+    <GPU name="GeForce 8800 GS Mac Edition">
       <ChipName>G92</ChipName>
       <Released>Jan 31st, 2008</Released>
       <Bus>MXM-HE</Bus>
@@ -21246,7 +21116,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="800 GTS 512">
+    <GPU name="GeForce 8800 GTS 512">
       <ChipName>G92</ChipName>
       <Released>Dec 11th, 2007</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21259,7 +21129,7 @@
       <TMUs>64</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="400">
+    <GPU name="GeForce 8400">
       <ChipName>G98</ChipName>
       <Released>Dec 4th, 2007</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21272,7 +21142,7 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="400 GS PCI">
+    <GPU name="GeForce 8400 GS PCI">
       <ChipName>G98</ChipName>
       <Released>Dec 4th, 2007</Released>
       <Bus>PCI</Bus>
@@ -21285,7 +21155,7 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="400 GS Rev. 2">
+    <GPU name="GeForce 8400 GS Rev. 2">
       <ChipName>G98</ChipName>
       <Released>Dec 4th, 2007</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21298,7 +21168,7 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="800 GTS Core 112">
+    <GPU name="GeForce 8800 GTS Core 112">
       <ChipName>G80</ChipName>
       <Released>Nov 19th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -21311,7 +21181,7 @@
       <TMUs>28</TMUs>
       <ROPs>20</ROPs>
     </GPU>
-    <GPU name="800 GT">
+    <GPU name="GeForce 8800 GT">
       <ChipName>G92</ChipName>
       <Released>Oct 29th, 2007</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21324,7 +21194,7 @@
       <TMUs>56</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="600 GTS Mac Edition">
+    <GPU name="GeForce 8600 GTS Mac Edition">
       <ChipName>G84</ChipName>
       <Released>Sep 21st, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -21337,7 +21207,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="800 Ultra">
+    <GPU name="GeForce 8800 Ultra">
       <ChipName>G80</ChipName>
       <Released>May 2nd, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -21350,7 +21220,7 @@
       <TMUs>32</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="300 GS">
+    <GPU name="GeForce 8300 GS">
       <ChipName>G86</ChipName>
       <Released>Apr 17th, 2007</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21363,7 +21233,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="400 GS">
+    <GPU name="GeForce 8400 GS">
       <ChipName>G86</ChipName>
       <Released>Apr 17th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -21376,7 +21246,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="400 GS PCI Rev. 2">
+    <GPU name="GeForce 8400 GS PCI Rev. 2">
       <ChipName>GT218</ChipName>
       <Released>Apr 17th, 2007</Released>
       <Bus>PCI</Bus>
@@ -21389,7 +21259,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="500 GT">
+    <GPU name="GeForce 8500 GT">
       <ChipName>G86</ChipName>
       <Released>Apr 17th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -21402,7 +21272,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="600 GS">
+    <GPU name="GeForce 8600 GS">
       <ChipName>G84</ChipName>
       <Released>Apr 17th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -21415,7 +21285,7 @@
       <TMUs>8</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="600 GT">
+    <GPU name="GeForce 8600 GT">
       <ChipName>G84</ChipName>
       <Released>Apr 17th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -21428,7 +21298,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="600 GT Mac Edition">
+    <GPU name="GeForce 8600 GT Mac Edition">
       <ChipName>G84</ChipName>
       <Released>Apr 17th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -21441,7 +21311,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="600 GTS">
+    <GPU name="GeForce 8600 GTS">
       <ChipName>G84</ChipName>
       <Released>Apr 17th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -21454,7 +21324,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="800 GTS 320">
+    <GPU name="GeForce 8800 GTS 320">
       <ChipName>G80</ChipName>
       <Released>Feb 12th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -21467,7 +21337,7 @@
       <TMUs>24</TMUs>
       <ROPs>20</ROPs>
     </GPU>
-    <GPU name="800 GTS 640">
+    <GPU name="GeForce 8800 GTS 640">
       <ChipName>G80</ChipName>
       <Released>Nov 8th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -21480,7 +21350,7 @@
       <TMUs>24</TMUs>
       <ROPs>20</ROPs>
     </GPU>
-    <GPU name="800 GTX">
+    <GPU name="GeForce 8800 GTX">
       <ChipName>G80</ChipName>
       <Released>Nov 8th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -21493,8 +21363,7 @@
       <TMUs>32</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-
-    <GPU name="400 GT Rev. 3">
+    <GPU name="GeForce 9400 GT Rev. 3">
       <ChipName>GT218</ChipName>
       <Released>Jun 13th, 2012</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21507,7 +21376,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="300 GS Rev. 2">
+    <GPU name="GeForce 9300 GS Rev. 2">
       <ChipName>GT218</ChipName>
       <Released>Mar 12th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21520,7 +21389,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="500 GT Mac Edition">
+    <GPU name="GeForce 9500 GT Mac Edition">
       <ChipName>G96C</ChipName>
       <Released>May 19th, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21533,7 +21402,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="600 GTX">
+    <GPU name="GeForce 9600 GTX">
       <ChipName>G92</ChipName>
       <Released>May 27th, 2009</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21546,7 +21415,7 @@
       <TMUs>48</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="800 GTX+">
+    <GPU name="GeForce 9800 GTX+">
       <ChipName>G92B</ChipName>
       <Released>Jan 16th, 2009</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21559,7 +21428,7 @@
       <TMUs>64</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="600 GT Mac Edition">
+    <GPU name="GeForce 9600 GT Mac Edition">
       <ChipName>G94</ChipName>
       <Released>Dec 22nd, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21572,7 +21441,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="600 GSO 512">
+    <GPU name="GeForce 9600 GSO 512">
       <ChipName>G94</ChipName>
       <Released>Oct 23rd, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21585,7 +21454,7 @@
       <TMUs>24</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="400 GT">
+    <GPU name="GeForce 9400 GT">
       <ChipName>G96C</ChipName>
       <Released>Aug 27th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21598,7 +21467,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="400 GT PCI">
+    <GPU name="GeForce 9400 GT PCI">
       <ChipName>G96C</ChipName>
       <Released>Aug 27th, 2008</Released>
       <Bus>PCI</Bus>
@@ -21611,7 +21480,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="400 GT Rev. 2">
+    <GPU name="GeForce 9400 GT Rev. 2">
       <ChipName>G96C</ChipName>
       <Released>Aug 27th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21624,7 +21493,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="400 GT">
+    <GPU name="GeForce 9400 GT">
       <ChipName>G86</ChipName>
       <Released>Aug 1st, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21637,7 +21506,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="500 GS">
+    <GPU name="GeForce 9500 GS">
       <ChipName>G96</ChipName>
       <Released>Jul 29th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21650,7 +21519,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="500 GS Rev. 2">
+    <GPU name="GeForce 9500 GS Rev. 2">
       <ChipName>G96C</ChipName>
       <Released>Jul 29th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21663,7 +21532,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="500 GT">
+    <GPU name="GeForce 9500 GT">
       <ChipName>G96</ChipName>
       <Released>Jul 29th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21676,7 +21545,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="500 GT Rev. 2">
+    <GPU name="GeForce 9500 GT Rev. 2">
       <ChipName>G96B</ChipName>
       <Released>Jul 29th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21689,7 +21558,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="500 GT Rev. 3">
+    <GPU name="GeForce 9500 GT Rev. 3">
       <ChipName>G96C</ChipName>
       <Released>Jul 29th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21702,7 +21571,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="600 GS OEM">
+    <GPU name="GeForce 9600 GS OEM">
       <ChipName>G94</ChipName>
       <Released>Jul 29th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21715,7 +21584,7 @@
       <TMUs>24</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="800 GT">
+    <GPU name="GeForce 9800 GT">
       <ChipName>G92B</ChipName>
       <Released>Jul 21st, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21728,7 +21597,7 @@
       <TMUs>56</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="800 GT">
+    <GPU name="GeForce 9800 GT">
       <ChipName>G92</ChipName>
       <Released>Jul 21st, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21741,7 +21610,7 @@
       <TMUs>56</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="800 GT Rebrand">
+    <GPU name="GeForce 9800 GT Rebrand">
       <ChipName>G92</ChipName>
       <Released>Jul 21st, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21754,7 +21623,7 @@
       <TMUs>64</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="300 GE">
+    <GPU name="GeForce 9300 GE">
       <ChipName>G98</ChipName>
       <Released>Jun 1st, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21767,7 +21636,7 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="300 GS">
+    <GPU name="GeForce 9300 GS">
       <ChipName>G98</ChipName>
       <Released>Jun 1st, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21780,7 +21649,7 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="300 SE">
+    <GPU name="GeForce 9300 SE">
       <ChipName>G98</ChipName>
       <Released>Jun 1st, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21793,7 +21662,7 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="600 GSO">
+    <GPU name="GeForce 9600 GSO">
       <ChipName>G92</ChipName>
       <Released>Apr 28th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21806,7 +21675,7 @@
       <TMUs>48</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="800 GTX">
+    <GPU name="GeForce 9800 GTX">
       <ChipName>G92</ChipName>
       <Released>Mar 28th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21819,7 +21688,7 @@
       <TMUs>64</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="800 GX2">
+    <GPU name="GeForce 9800 GX2">
       <ChipName>G92</ChipName>
       <Released>Mar 18th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21832,7 +21701,7 @@
       <TMUs>64</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="600 GT">
+    <GPU name="GeForce 9600 GT">
       <ChipName>G94</ChipName>
       <Released>Feb 21st, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21845,7 +21714,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="600 GT Green Edition">
+    <GPU name="GeForce 9600 GT Green Edition">
       <ChipName>G94</ChipName>
       <Released>Feb 21st, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -21858,7 +21727,6 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
     <GPU name="GeForce G100 OEM">
       <ChipName>G98</ChipName>
       <Released>Mar 10th, 2009</Released>
@@ -21950,7 +21818,6 @@
       <TMUs>24</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-
     <GPU name="GeForce GTX 275 PhysX Edition">
       <ChipName>GT200B</ChipName>
       <Released>Feb 16th, 2010</Released>
@@ -22302,7 +22169,6 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
     <GPU name="GeForce 315 OEM">
       <ChipName>GT215</ChipName>
       <Released>Apr 28th, 2011</Released>
@@ -22420,7 +22286,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce GTS 450 Rev. 3">
       <ChipName>GF116</ChipName>
       <Released>Jul 11th, 2012</Released>
@@ -22824,7 +22689,6 @@
       <TMUs>44</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
     <GPU name="GeForce 505 OEM">
       <ChipName>GT216</ChipName>
       <Released>Feb 17th, 2013</Released>
@@ -23163,7 +23027,6 @@
       <TMUs>64</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-
     <GPU name="GeForce GT 610 OEM">
       <ChipName>GF108</ChipName>
       <Released>Apr 2nd, 2016</Released>
@@ -23606,7 +23469,6 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
     <GPU name="GeForce GT 720 OEM">
       <ChipName>GK107</ChipName>
       <Released>Oct 29th, 2017</Released>
@@ -24088,7 +23950,6 @@
       <TMUs>240</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-
     <GPU name="GeForce GTX 950 Low Power">
       <ChipName>GM206</ChipName>
       <Released>Mar 1st, 2016</Released>
@@ -24219,7 +24080,6 @@
       <TMUs>128</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-
     <GPU name="GeForce GT 1010">
       <ChipName>GP108</ChipName>
       <Released>Jan 13th, 2021</Released>
@@ -24571,7 +24431,6 @@
       <TMUs>160</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-
     <GPU name="GeForce GTX 1650 TU116">
       <ChipName>TU116</ChipName>
       <Released>Jul 7th, 2020</Released>
@@ -24676,7 +24535,6 @@
       <TMUs>96</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-
     <GPU name="GeForce RTX 2060 TU104">
       <ChipName>TU104</ChipName>
       <Released>Jan 10th, 2020</Released>
@@ -24794,7 +24652,6 @@
       <TMUs>272</TMUs>
       <ROPs>88</ROPs>
     </GPU>
-
     <GPU name="GeForce RTX 3070 Ti">
       <ChipName>GA104</ChipName>
       <Released>2021</Released>
@@ -24899,7 +24756,6 @@
       <TMUs>328</TMUs>
       <ROPs>112</ROPs>
     </GPU>
-
     <GPU name="Quadro4 400 NVS PCI">
       <ChipName>NV17</ChipName>
       <Released>Jul 16th, 2004</Released>
@@ -24952,8 +24808,7 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
-    <GPU name="295">
+    <GPU name="Quadro NVS 295">
       <ChipName>G98</ChipName>
       <Released>May 7th, 2009</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -24966,7 +24821,7 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="420">
+    <GPU name="Quadro NVS 420">
       <ChipName>G98</ChipName>
       <Released>Jan 20th, 2009</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -24979,7 +24834,7 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="450">
+    <GPU name="Quadro NVS 450">
       <ChipName>G98</ChipName>
       <Released>Nov 11th, 2008</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -24992,7 +24847,7 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="290">
+    <GPU name="Quadro NVS 290">
       <ChipName>G86</ChipName>
       <Released>Oct 4th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25005,7 +24860,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="285">
+    <GPU name="Quadro NVS 285">
       <ChipName>NV44</ChipName>
       <Released>Jun 6th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25018,7 +24873,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="440">
+    <GPU name="Quadro NVS 440">
       <ChipName>NV43</ChipName>
       <Released>Feb 14th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25031,7 +24886,7 @@
       <TMUs>4</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="280 SD">
+    <GPU name="Quadro NVS 280 SD">
       <ChipName>NV18C</ChipName>
       <Released>May 31st, 2005</Released>
       <Bus>AGP 8x</Bus>
@@ -25044,7 +24899,7 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="50 PCI">
+    <GPU name="Quadro NVS 50 PCI">
       <ChipName>NV18</ChipName>
       <Released>May 31st, 2005</Released>
       <Bus>PCI</Bus>
@@ -25057,7 +24912,7 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="55 PCI">
+    <GPU name="Quadro NVS 55 PCI">
       <ChipName>NV34B</ChipName>
       <Released>May 31st, 2005</Released>
       <Bus>PCI</Bus>
@@ -25070,7 +24925,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="280 AGP">
+    <GPU name="Quadro NVS 280 AGP">
       <ChipName>NV34</ChipName>
       <Released>May 25th, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -25083,7 +24938,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="280 PCIe">
+    <GPU name="Quadro NVS 280 PCIe">
       <ChipName>NV37</ChipName>
       <Released>May 25th, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25096,7 +24951,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="280 PCI">
+    <GPU name="Quadro NVS 280 PCI">
       <ChipName>NV34B</ChipName>
       <Released>Oct 28th, 2003</Released>
       <Bus>PCI</Bus>
@@ -25109,8 +24964,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
-    <GPU name="810">
+    <GPU name="NVS 810">
       <ChipName>GM107</ChipName>
       <Released>Nov 4th, 2015</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -25123,7 +24977,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="315">
+    <GPU name="NVS 315">
       <ChipName>GF119</ChipName>
       <Released>Mar 10th, 2013</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25136,7 +24990,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="510">
+    <GPU name="NVS 510">
       <ChipName>GK107</ChipName>
       <Released>Oct 23rd, 2012</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25149,7 +25003,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="1000">
+    <GPU name="NVS 1000">
       <ChipName>GK107</ChipName>
       <Released>Never Released</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -25162,7 +25016,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="310">
+    <GPU name="NVS 310">
       <ChipName>GF119</ChipName>
       <Released>Jun 26th, 2012</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25175,7 +25029,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="300">
+    <GPU name="NVS 300">
       <ChipName>GT218</ChipName>
       <Released>Jan 8th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25188,7 +25042,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Quadro DCC">
       <ChipName>NV20</ChipName>
       <Released>May 14th, 2001</Released>
@@ -25202,7 +25055,7 @@
       <TMUs>1</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="Pro">
+    <GPU name="Quadro2 Pro">
       <ChipName>NV15</ChipName>
       <Released>Mar 22nd, 2001</Released>
       <Bus>AGP 4x</Bus>
@@ -25215,7 +25068,7 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="MXR">
+    <GPU name="Quadro2 MXR">
       <ChipName>NV11B</ChipName>
       <Released>Jul 25th, 2000</Released>
       <Bus>AGP 4x</Bus>
@@ -25228,7 +25081,7 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="MXR Low Profile">
+    <GPU name="Quadro2 MXR Low Profile">
       <ChipName>NV11B</ChipName>
       <Released>Jul 25th, 2000</Released>
       <Bus>AGP 4x</Bus>
@@ -25241,7 +25094,6 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Quadro4 380 XGL">
       <ChipName>NV18</ChipName>
       <Released>Nov 12th, 2002</Released>
@@ -25346,8 +25198,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
-    <GPU name="380 LP">
+    <GPU name="Quadro FX 380 LP">
       <ChipName>GT218</ChipName>
       <Released>Dec 1st, 2009</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25360,7 +25211,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="580">
+    <GPU name="Quadro FX 580">
       <ChipName>G96C</ChipName>
       <Released>Apr 9th, 2009</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25373,7 +25224,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="1800">
+    <GPU name="Quadro FX 1800">
       <ChipName>G94</ChipName>
       <Released>Mar 30th, 2009</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25386,7 +25237,7 @@
       <TMUs>32</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="380">
+    <GPU name="Quadro FX 380">
       <ChipName>G96</ChipName>
       <Released>Mar 30th, 2009</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25399,7 +25250,7 @@
       <TMUs>8</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="3800">
+    <GPU name="Quadro FX 3800">
       <ChipName>GT200B</ChipName>
       <Released>Mar 30th, 2009</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25412,7 +25263,7 @@
       <TMUs>64</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="4800">
+    <GPU name="Quadro FX 4800">
       <ChipName>GT200B</ChipName>
       <Released>Nov 11th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25425,7 +25276,7 @@
       <TMUs>64</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="4800 Mac Edition">
+    <GPU name="Quadro FX 4800 Mac Edition">
       <ChipName>GT200B</ChipName>
       <Released>Nov 11th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25438,7 +25289,7 @@
       <TMUs>64</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="5800">
+    <GPU name="Quadro FX 5800">
       <ChipName>GT200B</ChipName>
       <Released>Nov 11th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25451,7 +25302,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="370 LP">
+    <GPU name="Quadro FX 370 LP">
       <ChipName>G98</ChipName>
       <Released>Nov 6th, 2008</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25464,7 +25315,7 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="1700 Mac Edition">
+    <GPU name="Quadro FX 1700 Mac Edition">
       <ChipName>G84</ChipName>
       <Released>Sep 27th, 2008</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25477,7 +25328,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="4700 X2">
+    <GPU name="Quadro FX 4700 X2">
       <ChipName>G92</ChipName>
       <Released>Apr 18th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25490,7 +25341,7 @@
       <TMUs>64</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="3700">
+    <GPU name="Quadro FX 3700">
       <ChipName>G92</ChipName>
       <Released>Jan 8th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25503,7 +25354,7 @@
       <TMUs>56</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="1700">
+    <GPU name="Quadro FX 1700">
       <ChipName>G84</ChipName>
       <Released>Sep 12th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25516,7 +25367,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="370">
+    <GPU name="Quadro FX 370">
       <ChipName>G84</ChipName>
       <Released>Sep 12th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25529,7 +25380,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="470">
+    <GPU name="Quadro FX 470">
       <ChipName>C79</ChipName>
       <Released>Sep 12th, 2007</Released>
       <Bus>PCI</Bus>
@@ -25538,7 +25389,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="570">
+    <GPU name="Quadro FX 570">
       <ChipName>G84</ChipName>
       <Released>Sep 12th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25551,7 +25402,7 @@
       <TMUs>8</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="4600">
+    <GPU name="Quadro FX 4600">
       <ChipName>G80</ChipName>
       <Released>Mar 5th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25564,7 +25415,7 @@
       <TMUs>24</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="4600 SDI">
+    <GPU name="Quadro FX 4600 SDI">
       <ChipName>G80</ChipName>
       <Released>Mar 5th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25577,7 +25428,7 @@
       <TMUs>24</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="5600">
+    <GPU name="Quadro FX 5600">
       <ChipName>G80</ChipName>
       <Released>Mar 5th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25590,7 +25441,7 @@
       <TMUs>32</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="5600 Mac Edition">
+    <GPU name="Quadro FX 5600 Mac Edition">
       <ChipName>G80</ChipName>
       <Released>Mar 5th, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25603,7 +25454,7 @@
       <TMUs>32</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="3500">
+    <GPU name="Quadro FX 3500">
       <ChipName>G71</ChipName>
       <Released>May 22nd, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25616,7 +25467,7 @@
       <TMUs>7</TMUs>
       <ROPs>20</ROPs>
     </GPU>
-    <GPU name="4500 X2">
+    <GPU name="Quadro FX 4500 X2">
       <ChipName>G71</ChipName>
       <Released>Apr 24th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25629,7 +25480,7 @@
       <TMUs>8</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="1500">
+    <GPU name="Quadro FX 1500">
       <ChipName>G71</ChipName>
       <Released>Apr 20th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25642,7 +25493,7 @@
       <TMUs>6</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="350">
+    <GPU name="Quadro FX 350">
       <ChipName>G72</ChipName>
       <Released>Apr 20th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25655,7 +25506,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="550">
+    <GPU name="Quadro FX 550">
       <ChipName>NV43</ChipName>
       <Released>Apr 20th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25668,7 +25519,7 @@
       <TMUs>4</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="5500">
+    <GPU name="Quadro FX 5500">
       <ChipName>G71</ChipName>
       <Released>Apr 20th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25681,7 +25532,7 @@
       <TMUs>8</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="5500 SDI">
+    <GPU name="Quadro FX 5500 SDI">
       <ChipName>G71</ChipName>
       <Released>Apr 20th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25694,7 +25545,7 @@
       <TMUs>8</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="560">
+    <GPU name="Quadro FX 560">
       <ChipName>G73</ChipName>
       <Released>Apr 20th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25707,7 +25558,7 @@
       <TMUs>5</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="4500 SDI">
+    <GPU name="Quadro FX 4500 SDI">
       <ChipName>G70</ChipName>
       <Released>Jan 30th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25720,7 +25571,7 @@
       <TMUs>8</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="3450">
+    <GPU name="Quadro FX 3450">
       <ChipName>NV41</ChipName>
       <Released>Jul 28th, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25733,7 +25584,7 @@
       <TMUs>5</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="4400">
+    <GPU name="Quadro FX 4400">
       <ChipName>NV45</ChipName>
       <Released>Jul 28th, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25746,7 +25597,7 @@
       <TMUs>6</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="4400G">
+    <GPU name="Quadro FX 4400G">
       <ChipName>NV45</ChipName>
       <Released>Jul 28th, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25759,7 +25610,7 @@
       <TMUs>6</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="4500">
+    <GPU name="Quadro FX 4500">
       <ChipName>G70</ChipName>
       <Released>Jul 28th, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25772,7 +25623,7 @@
       <TMUs>8</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="1300">
+    <GPU name="Quadro FX 1300">
       <ChipName>NV38</ChipName>
       <Released>Aug 9th, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25785,7 +25636,7 @@
       <TMUs>3</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="1400">
+    <GPU name="Quadro FX 1400">
       <ChipName>NV41</ChipName>
       <Released>Aug 9th, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25798,7 +25649,7 @@
       <TMUs>5</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="540">
+    <GPU name="Quadro FX 540">
       <ChipName>NV43</ChipName>
       <Released>Aug 9th, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25811,7 +25662,7 @@
       <TMUs>4</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="330">
+    <GPU name="Quadro FX 330">
       <ChipName>NV37</ChipName>
       <Released>Jun 28th, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25824,7 +25675,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="3400">
+    <GPU name="Quadro FX 3400">
       <ChipName>NV45</ChipName>
       <Released>Jun 28th, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25837,7 +25688,7 @@
       <TMUs>5</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="4000 SDI">
+    <GPU name="Quadro FX 4000 SDI">
       <ChipName>NV41</ChipName>
       <Released>Apr 19th, 2004</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -25850,7 +25701,7 @@
       <TMUs>5</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="1100">
+    <GPU name="Quadro FX 1100">
       <ChipName>NV36</ChipName>
       <Released>Apr 1st, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -25863,7 +25714,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="4000">
+    <GPU name="Quadro FX 4000">
       <ChipName>NV40</ChipName>
       <Released>Apr 1st, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -25876,7 +25727,7 @@
       <TMUs>6</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="600 PCI">
+    <GPU name="Quadro FX 600 PCI">
       <ChipName>NV34</ChipName>
       <Released>Mar 17th, 2004</Released>
       <Bus>PCI</Bus>
@@ -25889,7 +25740,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="700">
+    <GPU name="Quadro FX 700">
       <ChipName>NV35</ChipName>
       <Released>Mar 17th, 2004</Released>
       <Bus>AGP 8x</Bus>
@@ -25902,7 +25753,7 @@
       <TMUs>3</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="3000">
+    <GPU name="Quadro FX 3000">
       <ChipName>NV35</ChipName>
       <Released>Jul 22nd, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -25915,7 +25766,7 @@
       <TMUs>3</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="3000G">
+    <GPU name="Quadro FX 3000G">
       <ChipName>NV35</ChipName>
       <Released>Jul 22nd, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -25928,7 +25779,7 @@
       <TMUs>3</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="500">
+    <GPU name="Quadro FX 500">
       <ChipName>NV34</ChipName>
       <Released>May 21st, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -25941,7 +25792,7 @@
       <TMUs>2</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="1000">
+    <GPU name="Quadro FX 1000">
       <ChipName>NV30</ChipName>
       <Released>Jan 21st, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -25954,7 +25805,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="2000">
+    <GPU name="Quadro FX 2000">
       <ChipName>NV30</ChipName>
       <Released>Jan 21st, 2003</Released>
       <Bus>AGP 8x</Bus>
@@ -25967,8 +25818,7 @@
       <TMUs>2</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
-    <GPU name="">
+    <GPU name="Quadro CX">
       <ChipName>GT200B</ChipName>
       <Released>Nov 11th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25981,8 +25831,7 @@
       <TMUs>64</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-
-    <GPU name="200">
+    <GPU name="Quadro VX 200">
       <ChipName>G92</ChipName>
       <Released>Jan 8th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -25995,7 +25844,6 @@
       <TMUs>56</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
     <GPU name="RTX A5000">
       <ChipName>GA103</ChipName>
       <Released>Unknown</Released>
@@ -26048,7 +25896,7 @@
       <TMUs>336</TMUs>
       <ROPs>112</ROPs>
     </GPU>
-    <GPU name="P2200">
+    <GPU name="Quadro P2200">
       <ChipName>GP106</ChipName>
       <Released>Jun 10th, 2019</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26061,7 +25909,7 @@
       <TMUs>80</TMUs>
       <ROPs>40</ROPs>
     </GPU>
-    <GPU name="RTX 4000">
+    <GPU name="Quadro RTX 4000">
       <ChipName>TU104</ChipName>
       <Released>Nov 13th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26074,7 +25922,7 @@
       <TMUs>144</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="RTX 5000">
+    <GPU name="Quadro RTX 5000">
       <ChipName>TU104</ChipName>
       <Released>Aug 13th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26087,7 +25935,7 @@
       <TMUs>192</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="RTX 6000">
+    <GPU name="Quadro RTX 6000">
       <ChipName>TU102</ChipName>
       <Released>Aug 13th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26100,7 +25948,7 @@
       <TMUs>288</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="RTX 6000 Passive">
+    <GPU name="Quadro RTX 6000 Passive">
       <ChipName>TU102</ChipName>
       <Released>Aug 13th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26113,7 +25961,7 @@
       <TMUs>288</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="RTX 8000">
+    <GPU name="Quadro RTX 8000">
       <ChipName>TU102</ChipName>
       <Released>Aug 13th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26126,7 +25974,7 @@
       <TMUs>288</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="RTX 8000 Passive">
+    <GPU name="Quadro RTX 8000 Passive">
       <ChipName>TU102</ChipName>
       <Released>Aug 13th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26139,7 +25987,7 @@
       <TMUs>288</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="GV100">
+    <GPU name="Quadro GV100">
       <ChipName>GV100</ChipName>
       <Released>Mar 27th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26152,7 +26000,7 @@
       <TMUs>320</TMUs>
       <ROPs>128</ROPs>
     </GPU>
-    <GPU name="P620">
+    <GPU name="Quadro P620">
       <ChipName>GP107</ChipName>
       <Released>Feb 1st, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26165,7 +26013,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="P1000">
+    <GPU name="Quadro P1000">
       <ChipName>GP107</ChipName>
       <Released>Feb 7th, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26178,7 +26026,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="P1000">
+    <GPU name="Quadro P1000">
       <ChipName>GP107</ChipName>
       <Released>Feb 7th, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26191,7 +26039,7 @@
       <TMUs>40</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="P400">
+    <GPU name="Quadro P400">
       <ChipName>GP107</ChipName>
       <Released>Feb 7th, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26204,7 +26052,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="P600">
+    <GPU name="Quadro P600">
       <ChipName>GP107</ChipName>
       <Released>Feb 7th, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26217,7 +26065,7 @@
       <TMUs>24</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="P2000">
+    <GPU name="Quadro P2000">
       <ChipName>GP106</ChipName>
       <Released>Feb 6th, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26230,7 +26078,7 @@
       <TMUs>64</TMUs>
       <ROPs>40</ROPs>
     </GPU>
-    <GPU name="P4000">
+    <GPU name="Quadro P4000">
       <ChipName>GP104</ChipName>
       <Released>Feb 6th, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26243,7 +26091,7 @@
       <TMUs>112</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="M3000 SE">
+    <GPU name="Quadro M3000 SE">
       <ChipName>GM204</ChipName>
       <Released>Oct 2nd, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26256,7 +26104,7 @@
       <TMUs>64</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="GP100">
+    <GPU name="Quadro GP100">
       <ChipName>GP100</ChipName>
       <Released>Oct 1st, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26269,7 +26117,7 @@
       <TMUs>224</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="P5000">
+    <GPU name="Quadro P5000">
       <ChipName>GP104</ChipName>
       <Released>Oct 1st, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26282,7 +26130,7 @@
       <TMUs>160</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="P6000">
+    <GPU name="Quadro P6000">
       <ChipName>GP102</ChipName>
       <Released>Oct 1st, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26295,7 +26143,7 @@
       <TMUs>240</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="M2000">
+    <GPU name="Quadro M2000">
       <ChipName>GM206</ChipName>
       <Released>Apr 8th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26308,7 +26156,7 @@
       <TMUs>48</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="M6000 24 GB">
+    <GPU name="Quadro M6000 24 GB">
       <ChipName>GM200</ChipName>
       <Released>Mar 5th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26321,7 +26169,7 @@
       <TMUs>256</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="M4000">
+    <GPU name="Quadro M4000">
       <ChipName>GM204</ChipName>
       <Released>Jun 29th, 2015</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26334,7 +26182,7 @@
       <TMUs>104</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="M5000">
+    <GPU name="Quadro M5000">
       <ChipName>GM204</ChipName>
       <Released>Jun 29th, 2015</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26347,7 +26195,7 @@
       <TMUs>128</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="M6000">
+    <GPU name="Quadro M6000">
       <ChipName>GM200</ChipName>
       <Released>Mar 21st, 2015</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26360,7 +26208,7 @@
       <TMUs>192</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="K1200">
+    <GPU name="Quadro K1200">
       <ChipName>GM107</ChipName>
       <Released>Jan 28th, 2015</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26373,7 +26221,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="K2200">
+    <GPU name="Quadro K2200">
       <ChipName>GM107</ChipName>
       <Released>Jul 22nd, 2014</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26386,7 +26234,7 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="K420">
+    <GPU name="Quadro K420">
       <ChipName>GK107</ChipName>
       <Released>Jul 22nd, 2014</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26399,7 +26247,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="K4200">
+    <GPU name="Quadro K4200">
       <ChipName>GK104</ChipName>
       <Released>Jul 22nd, 2014</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26412,7 +26260,7 @@
       <TMUs>112</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="K5200">
+    <GPU name="Quadro K5200">
       <ChipName>GK110B</ChipName>
       <Released>Jul 22nd, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26425,7 +26273,7 @@
       <TMUs>192</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="K620">
+    <GPU name="Quadro K620">
       <ChipName>GM107</ChipName>
       <Released>Jul 22nd, 2014</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26438,7 +26286,7 @@
       <TMUs>24</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="K6000">
+    <GPU name="Quadro K6000">
       <ChipName>GK110B</ChipName>
       <Released>Jul 23rd, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26451,7 +26299,7 @@
       <TMUs>240</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="K6000 SDI">
+    <GPU name="Quadro K6000 SDI">
       <ChipName>GK110</ChipName>
       <Released>Jul 23rd, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26464,7 +26312,7 @@
       <TMUs>240</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="K2000">
+    <GPU name="Quadro K2000">
       <ChipName>GK107</ChipName>
       <Released>Mar 1st, 2013</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26477,7 +26325,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="K2000D">
+    <GPU name="Quadro K2000D">
       <ChipName>GK107</ChipName>
       <Released>Mar 1st, 2013</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26490,7 +26338,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="K4000">
+    <GPU name="Quadro K4000">
       <ChipName>GK106</ChipName>
       <Released>Mar 1st, 2013</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26503,7 +26351,7 @@
       <TMUs>64</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="K600">
+    <GPU name="Quadro K600">
       <ChipName>GK107</ChipName>
       <Released>Mar 1st, 2013</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26516,7 +26364,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="K5000 SYNC">
+    <GPU name="Quadro K5000 SYNC">
       <ChipName>GK104</ChipName>
       <Released>Jan 25th, 2013</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26529,7 +26377,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="4100">
+    <GPU name="Quadro 4100">
       <ChipName>GK104</ChipName>
       <Released>Unknown</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26542,7 +26390,7 @@
       <TMUs>112</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="K5000">
+    <GPU name="Quadro K5000">
       <ChipName>GK104</ChipName>
       <Released>Aug 17th, 2012</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26555,7 +26403,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="410">
+    <GPU name="Quadro 410">
       <ChipName>GK107</ChipName>
       <Released>Aug 7th, 2012</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26568,7 +26416,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="K5000 Mac Edition">
+    <GPU name="Quadro K5000 Mac Edition">
       <ChipName>GK104</ChipName>
       <Released>Aug 7th, 2012</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26581,7 +26429,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="7000">
+    <GPU name="Quadro 7000">
       <ChipName>GF110</ChipName>
       <Released>May 2nd, 2012</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26594,7 +26442,7 @@
       <TMUs>64</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="2000D">
+    <GPU name="Quadro 2000D">
       <ChipName>GF106</ChipName>
       <Released>Oct 5th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26607,7 +26455,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="6000 SDI">
+    <GPU name="Quadro 6000 SDI">
       <ChipName>GF100</ChipName>
       <Released>Jul 25th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26620,7 +26468,7 @@
       <TMUs>56</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="4000 Mac Edition">
+    <GPU name="Quadro 4000 Mac Edition">
       <ChipName>GF100</ChipName>
       <Released>Jun 12th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26633,7 +26481,7 @@
       <TMUs>32</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="400">
+    <GPU name="Quadro 400">
       <ChipName>GT216</ChipName>
       <Released>Apr 5th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26646,7 +26494,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="5000">
+    <GPU name="Quadro 5000">
       <ChipName>GF100</ChipName>
       <Released>Feb 23rd, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26659,7 +26507,7 @@
       <TMUs>44</TMUs>
       <ROPs>40</ROPs>
     </GPU>
-    <GPU name="5000 SDI">
+    <GPU name="Quadro 5000 SDI">
       <ChipName>GF100</ChipName>
       <Released>Feb 23rd, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26672,7 +26520,7 @@
       <TMUs>44</TMUs>
       <ROPs>40</ROPs>
     </GPU>
-    <GPU name="2000">
+    <GPU name="Quadro 2000">
       <ChipName>GF106</ChipName>
       <Released>Dec 24th, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26685,7 +26533,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="600">
+    <GPU name="Quadro 600">
       <ChipName>GF108</ChipName>
       <Released>Dec 13th, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26698,7 +26546,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="6000">
+    <GPU name="Quadro 6000">
       <ChipName>GF100</ChipName>
       <Released>Dec 10th, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26711,7 +26559,7 @@
       <TMUs>56</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="4000">
+    <GPU name="Quadro 4000">
       <ChipName>GF100</ChipName>
       <Released>Nov 2nd, 2010</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26724,7 +26572,7 @@
       <TMUs>32</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="">
+    <GPU name="Quadro">
       <ChipName>NV10</ChipName>
       <Released>1999</Released>
       <Bus>AGP 4x</Bus>
@@ -26737,8 +26585,7 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
-    <GPU name="7000">
+    <GPU name="Quadro Plex 7000">
       <ChipName>GF110</ChipName>
       <Released>Jul 25th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26751,7 +26598,7 @@
       <TMUs>64</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="1000 Model II">
+    <GPU name="Quadro Plex 1000 Model II">
       <ChipName>G70</ChipName>
       <Released>Jul 25th, 2008</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -26764,7 +26611,7 @@
       <TMUs>8</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="1000 Model IV">
+    <GPU name="Quadro Plex 1000 Model IV">
       <ChipName>G80</ChipName>
       <Released>Jul 25th, 2008</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -26777,7 +26624,7 @@
       <TMUs>32</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="2100 D4">
+    <GPU name="Quadro Plex 2100 D4">
       <ChipName>G92</ChipName>
       <Released>Jul 25th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26790,7 +26637,7 @@
       <TMUs>64</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="2100 S4">
+    <GPU name="Quadro Plex 2100 S4">
       <ChipName>G80</ChipName>
       <Released>Jul 25th, 2008</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -26803,7 +26650,7 @@
       <TMUs>32</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="2200 D2">
+    <GPU name="Quadro Plex 2200 D2">
       <ChipName>GT200B</ChipName>
       <Released>Jul 25th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26816,7 +26663,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="2200 S4">
+    <GPU name="Quadro Plex 2200 S4">
       <ChipName>GT200B</ChipName>
       <Released>Jul 25th, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -26829,7 +26676,6 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
     <GPU name="A100 SXM4 80 GB">
       <ChipName>GA100</ChipName>
       <Released>Nov 16th, 2020</Released>
@@ -26869,7 +26715,7 @@
       <TMUs>432</TMUs>
       <ROPs>160</ROPs>
     </GPU>
-    <GPU name="PG500216">
+    <GPU name="Tesla PG500216">
       <ChipName>GV100</ChipName>
       <Released>Nov 26th, 2019</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26882,7 +26728,7 @@
       <TMUs>320</TMUs>
       <ROPs>128</ROPs>
     </GPU>
-    <GPU name="PG503216">
+    <GPU name="Tesla PG503216">
       <ChipName>GV100</ChipName>
       <Released>Nov 26th, 2019</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26895,7 +26741,7 @@
       <TMUs>320</TMUs>
       <ROPs>128</ROPs>
     </GPU>
-    <GPU name="V100 SXM2 16 GB">
+    <GPU name="Tesla V100 SXM2 16 GB">
       <ChipName>GV100</ChipName>
       <Released>Nov 26th, 2019</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26908,7 +26754,7 @@
       <TMUs>320</TMUs>
       <ROPs>128</ROPs>
     </GPU>
-    <GPU name="V100S PCIe 32 GB">
+    <GPU name="Tesla V100S PCIe 32 GB">
       <ChipName>GV100</ChipName>
       <Released>Nov 26th, 2019</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26921,7 +26767,7 @@
       <TMUs>320</TMUs>
       <ROPs>128</ROPs>
     </GPU>
-    <GPU name="T4">
+    <GPU name="Tesla T4">
       <ChipName>TU104</ChipName>
       <Released>Sep 13th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26934,7 +26780,7 @@
       <TMUs>160</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="V100 DGXS 16 GB">
+    <GPU name="Tesla V100 DGXS 16 GB">
       <ChipName>GV100</ChipName>
       <Released>Mar 27th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26947,7 +26793,7 @@
       <TMUs>320</TMUs>
       <ROPs>128</ROPs>
     </GPU>
-    <GPU name="V100 DGXS 32 GB">
+    <GPU name="Tesla V100 DGXS 32 GB">
       <ChipName>GV100</ChipName>
       <Released>Mar 27th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26960,7 +26806,7 @@
       <TMUs>320</TMUs>
       <ROPs>128</ROPs>
     </GPU>
-    <GPU name="V100 FHHL">
+    <GPU name="Tesla V100 FHHL">
       <ChipName>GV100</ChipName>
       <Released>Mar 27th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26973,7 +26819,7 @@
       <TMUs>320</TMUs>
       <ROPs>128</ROPs>
     </GPU>
-    <GPU name="V100 PCIe 32 GB">
+    <GPU name="Tesla V100 PCIe 32 GB">
       <ChipName>GV100</ChipName>
       <Released>Mar 27th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26986,7 +26832,7 @@
       <TMUs>320</TMUs>
       <ROPs>128</ROPs>
     </GPU>
-    <GPU name="V100 SXM2 32 GB">
+    <GPU name="Tesla V100 SXM2 32 GB">
       <ChipName>GV100</ChipName>
       <Released>Mar 27th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -26999,7 +26845,7 @@
       <TMUs>320</TMUs>
       <ROPs>128</ROPs>
     </GPU>
-    <GPU name="V100 SXM3 32 GB">
+    <GPU name="Tesla V100 SXM3 32 GB">
       <ChipName>GV100</ChipName>
       <Released>Mar 27th, 2018</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27012,7 +26858,7 @@
       <TMUs>320</TMUs>
       <ROPs>128</ROPs>
     </GPU>
-    <GPU name="V100 PCIe 16 GB">
+    <GPU name="Tesla V100 PCIe 16 GB">
       <ChipName>GV100</ChipName>
       <Released>Jun 21st, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27025,7 +26871,7 @@
       <TMUs>320</TMUs>
       <ROPs>128</ROPs>
     </GPU>
-    <GPU name="V100 SXM2 16 GB">
+    <GPU name="Tesla V100 SXM2 16 GB">
       <ChipName>GV100</ChipName>
       <Released>Jun 21st, 2017</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27038,7 +26884,7 @@
       <TMUs>320</TMUs>
       <ROPs>128</ROPs>
     </GPU>
-    <GPU name="P6">
+    <GPU name="Tesla P6">
       <ChipName>GP104</ChipName>
       <Released>Mar 24th, 2017</Released>
       <Bus>MXM-B (3.0)</Bus>
@@ -27051,7 +26897,7 @@
       <TMUs>128</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="P10">
+    <GPU name="Tesla P10">
       <ChipName>GP102</ChipName>
       <Released>Sep 13th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27064,7 +26910,7 @@
       <TMUs>240</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="P4">
+    <GPU name="Tesla P4">
       <ChipName>GP104</ChipName>
       <Released>Sep 13th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27077,7 +26923,7 @@
       <TMUs>160</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="P40">
+    <GPU name="Tesla P40">
       <ChipName>GP102</ChipName>
       <Released>Sep 13th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27090,7 +26936,7 @@
       <TMUs>240</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="P100 PCIe 12 GB">
+    <GPU name="Tesla P100 PCIe 12 GB">
       <ChipName>GP100</ChipName>
       <Released>Jun 20th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27103,7 +26949,7 @@
       <TMUs>224</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="P100 PCIe 16 GB">
+    <GPU name="Tesla P100 PCIe 16 GB">
       <ChipName>GP100</ChipName>
       <Released>Jun 20th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27116,7 +26962,7 @@
       <TMUs>224</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="M10">
+    <GPU name="Tesla M10">
       <ChipName>GM107</ChipName>
       <Released>May 18th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27129,7 +26975,7 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="P100 DGXS">
+    <GPU name="Tesla P100 DGXS">
       <ChipName>GP100</ChipName>
       <Released>Apr 5th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27142,7 +26988,7 @@
       <TMUs>224</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="P100 SXM2">
+    <GPU name="Tesla P100 SXM2">
       <ChipName>GP100</ChipName>
       <Released>Apr 5th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27155,7 +27001,7 @@
       <TMUs>224</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="M4">
+    <GPU name="Tesla M4">
       <ChipName>GM206</ChipName>
       <Released>Nov 10th, 2015</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27168,7 +27014,7 @@
       <TMUs>64</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="M40">
+    <GPU name="Tesla M40">
       <ChipName>GM200</ChipName>
       <Released>Nov 10th, 2015</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27181,7 +27027,7 @@
       <TMUs>192</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="M6">
+    <GPU name="Tesla M6">
       <ChipName>GM204</ChipName>
       <Released>Aug 30th, 2015</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27194,7 +27040,7 @@
       <TMUs>96</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="M60">
+    <GPU name="Tesla M60">
       <ChipName>GM204</ChipName>
       <Released>Aug 30th, 2015</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27207,7 +27053,7 @@
       <TMUs>128</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="K80">
+    <GPU name="Tesla K80">
       <ChipName>GK210</ChipName>
       <Released>Nov 17th, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27220,7 +27066,7 @@
       <TMUs>208</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="K8">
+    <GPU name="Tesla K8">
       <ChipName>GK104</ChipName>
       <Released>Sep 16th, 2014</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27233,7 +27079,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="K40d">
+    <GPU name="Tesla K40d">
       <ChipName>GK110B</ChipName>
       <Released>Nov 22nd, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27246,7 +27092,7 @@
       <TMUs>240</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="K40m">
+    <GPU name="Tesla K40m">
       <ChipName>GK110B</ChipName>
       <Released>Nov 22nd, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27259,7 +27105,7 @@
       <TMUs>240</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="K40s">
+    <GPU name="Tesla K40s">
       <ChipName>GK110B</ChipName>
       <Released>Nov 22nd, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27272,7 +27118,7 @@
       <TMUs>240</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="K40st">
+    <GPU name="Tesla K40st">
       <ChipName>GK110B</ChipName>
       <Released>Nov 22nd, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27285,7 +27131,7 @@
       <TMUs>240</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="K40t">
+    <GPU name="Tesla K40t">
       <ChipName>GK110B</ChipName>
       <Released>Nov 22nd, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27298,7 +27144,7 @@
       <TMUs>240</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="K40c">
+    <GPU name="Tesla K40c">
       <ChipName>GK180</ChipName>
       <Released>Oct 8th, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27311,7 +27157,7 @@
       <TMUs>240</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="K20s">
+    <GPU name="Tesla K20s">
       <ChipName>GK110</ChipName>
       <Released>Feb 18th, 2013</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27324,7 +27170,7 @@
       <TMUs>208</TMUs>
       <ROPs>40</ROPs>
     </GPU>
-    <GPU name="K20m">
+    <GPU name="Tesla K20m">
       <ChipName>GK110</ChipName>
       <Released>Jan 5th, 2013</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27337,7 +27183,7 @@
       <TMUs>208</TMUs>
       <ROPs>40</ROPs>
     </GPU>
-    <GPU name="K20X">
+    <GPU name="Tesla K20X">
       <ChipName>GK110</ChipName>
       <Released>Nov 12th, 2012</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27350,7 +27196,7 @@
       <TMUs>224</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="K20Xm">
+    <GPU name="Tesla K20Xm">
       <ChipName>GK110</ChipName>
       <Released>Nov 12th, 2012</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27363,7 +27209,7 @@
       <TMUs>224</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="K20c">
+    <GPU name="Tesla K20c">
       <ChipName>GK110</ChipName>
       <Released>Nov 12th, 2012</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27376,7 +27222,7 @@
       <TMUs>208</TMUs>
       <ROPs>40</ROPs>
     </GPU>
-    <GPU name="K10">
+    <GPU name="Tesla K10">
       <ChipName>GK104</ChipName>
       <Released>May 1st, 2012</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27389,7 +27235,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="C2050">
+    <GPU name="Tesla C2050">
       <ChipName>GF100</ChipName>
       <Released>Jul 25th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27402,7 +27248,7 @@
       <TMUs>56</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="C2070">
+    <GPU name="Tesla C2070">
       <ChipName>GF100</ChipName>
       <Released>Jul 25th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27415,7 +27261,7 @@
       <TMUs>56</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="C2075">
+    <GPU name="Tesla C2075">
       <ChipName>GF110</ChipName>
       <Released>Jul 25th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27428,7 +27274,7 @@
       <TMUs>56</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="C2090">
+    <GPU name="Tesla C2090">
       <ChipName>GF110</ChipName>
       <Released>Jul 25th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27441,7 +27287,7 @@
       <TMUs>64</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="M2050">
+    <GPU name="Tesla M2050">
       <ChipName>GF100</ChipName>
       <Released>Jul 25th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27454,7 +27300,7 @@
       <TMUs>56</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="M2070">
+    <GPU name="Tesla M2070">
       <ChipName>GF100</ChipName>
       <Released>Jul 25th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27467,7 +27313,7 @@
       <TMUs>56</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="M2070Q">
+    <GPU name="Tesla M2070Q">
       <ChipName>GF100</ChipName>
       <Released>Jul 25th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27480,7 +27326,7 @@
       <TMUs>56</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="M2075">
+    <GPU name="Tesla M2075">
       <ChipName>GF110</ChipName>
       <Released>Jul 25th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27493,7 +27339,7 @@
       <TMUs>56</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="M2090">
+    <GPU name="Tesla M2090">
       <ChipName>GF110</ChipName>
       <Released>Jul 25th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27506,7 +27352,7 @@
       <TMUs>64</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="S2050">
+    <GPU name="Tesla S2050">
       <ChipName>GF100</ChipName>
       <Released>Jul 25th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27519,7 +27365,7 @@
       <TMUs>56</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="X2070">
+    <GPU name="Tesla X2070">
       <ChipName>GF110</ChipName>
       <Released>Jul 25th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27532,7 +27378,7 @@
       <TMUs>64</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="X2090">
+    <GPU name="Tesla X2090">
       <ChipName>GF110</ChipName>
       <Released>Jul 25th, 2011</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27545,7 +27391,7 @@
       <TMUs>64</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-    <GPU name="C1060">
+    <GPU name="Tesla C1060">
       <ChipName>GT200B</ChipName>
       <Released>Apr 9th, 2009</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27558,7 +27404,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="T10 Processor">
+    <GPU name="Tesla T10 Processor">
       <ChipName>GT200B</ChipName>
       <Released>Apr 9th, 2009</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27571,7 +27417,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="M1060">
+    <GPU name="Tesla M1060">
       <ChipName>GT200B</ChipName>
       <Released>Jun 1st, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27584,7 +27430,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="S1070">
+    <GPU name="Tesla S1070">
       <ChipName>GT200B</ChipName>
       <Released>Jun 1st, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27597,7 +27443,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="S1075">
+    <GPU name="Tesla S1075">
       <ChipName>GT200B</ChipName>
       <Released>Jun 1st, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -27610,7 +27456,7 @@
       <TMUs>80</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="C870">
+    <GPU name="Tesla C870">
       <ChipName>G80</ChipName>
       <Released>May 2nd, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -27623,7 +27469,7 @@
       <TMUs>32</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="D870">
+    <GPU name="Tesla D870">
       <ChipName>G80</ChipName>
       <Released>May 2nd, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -27636,7 +27482,7 @@
       <TMUs>32</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="S870">
+    <GPU name="Tesla S870">
       <ChipName>G80</ChipName>
       <Released>May 2nd, 2007</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -27649,8 +27495,7 @@
       <TMUs>32</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-
-    <GPU name="RTX T1016">
+    <GPU name="GRID RTX T1016">
       <ChipName>TU102</ChipName>
       <Released>Unknown</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27663,7 +27508,7 @@
       <TMUs>288</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="RTX T104">
+    <GPU name="GRID RTX T104">
       <ChipName>TU102</ChipName>
       <Released>Unknown</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27676,7 +27521,7 @@
       <TMUs>288</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="RTX T108">
+    <GPU name="GRID RTX T108">
       <ChipName>TU102</ChipName>
       <Released>Unknown</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27689,7 +27534,7 @@
       <TMUs>288</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-    <GPU name="A100A">
+    <GPU name="GRID A100A">
       <ChipName>GA100</ChipName>
       <Released>May 14th, 2020</Released>
       <Bus>PCIe 4.0 x16</Bus>
@@ -27702,7 +27547,7 @@
       <TMUs>432</TMUs>
       <ROPs>192</ROPs>
     </GPU>
-    <GPU name="A100B">
+    <GPU name="GRID A100B">
       <ChipName>GA100</ChipName>
       <Released>May 14th, 2020</Released>
       <Bus>PCIe 4.0 x16</Bus>
@@ -27715,7 +27560,7 @@
       <TMUs>432</TMUs>
       <ROPs>192</ROPs>
     </GPU>
-    <GPU name="M108Q">
+    <GPU name="GRID M108Q">
       <ChipName>GM107</ChipName>
       <Released>May 18th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27728,7 +27573,7 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="M33020">
+    <GPU name="GRID M33020">
       <ChipName>GM107</ChipName>
       <Released>May 18th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27741,7 +27586,7 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="M40">
+    <GPU name="GRID M40">
       <ChipName>GM107</ChipName>
       <Released>May 18th, 2016</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27754,7 +27599,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="M68Q">
+    <GPU name="GRID M68Q">
       <ChipName>GM204</ChipName>
       <Released>Aug 30th, 2015</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27767,7 +27612,7 @@
       <TMUs>96</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="M601Q">
+    <GPU name="GRID M601Q">
       <ChipName>GM204</ChipName>
       <Released>Aug 30th, 2015</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27780,7 +27625,7 @@
       <TMUs>128</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="M602Q">
+    <GPU name="GRID M602Q">
       <ChipName>GM204</ChipName>
       <Released>Aug 30th, 2015</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27793,7 +27638,7 @@
       <TMUs>128</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="M604A">
+    <GPU name="GRID M604A">
       <ChipName>GM204</ChipName>
       <Released>Aug 30th, 2015</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27806,7 +27651,7 @@
       <TMUs>128</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="M608Q">
+    <GPU name="GRID M608Q">
       <ChipName>GM204</ChipName>
       <Released>Aug 30th, 2015</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27819,7 +27664,7 @@
       <TMUs>128</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-    <GPU name="K120Q">
+    <GPU name="GRID K120Q">
       <ChipName>GK107</ChipName>
       <Released>Jul 2nd, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27832,7 +27677,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="K220Q">
+    <GPU name="GRID K220Q">
       <ChipName>GK104</ChipName>
       <Released>Jul 2nd, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27845,7 +27690,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="K500">
+    <GPU name="GRID K500">
       <ChipName>GK104</ChipName>
       <Released>Jul 2nd, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27858,7 +27703,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="K520Q">
+    <GPU name="GRID K520Q">
       <ChipName>GK104</ChipName>
       <Released>Jul 2nd, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27871,7 +27716,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="K540Q">
+    <GPU name="GRID K540Q">
       <ChipName>GK104</ChipName>
       <Released>Jul 2nd, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27884,7 +27729,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="K560Q">
+    <GPU name="GRID K560Q">
       <ChipName>GK104</ChipName>
       <Released>Jul 2nd, 2014</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27897,7 +27742,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="K340">
+    <GPU name="GRID K340">
       <ChipName>GK107</ChipName>
       <Released>Jul 23rd, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27910,7 +27755,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="K520">
+    <GPU name="GRID K520">
       <ChipName>GK104</ChipName>
       <Released>Jul 23rd, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27923,7 +27768,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="K100">
+    <GPU name="GRID K100">
       <ChipName>GK107</ChipName>
       <Released>Jun 28th, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27936,7 +27781,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="K140Q">
+    <GPU name="GRID K140Q">
       <ChipName>GK107</ChipName>
       <Released>Jun 28th, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27949,7 +27794,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="K160Q">
+    <GPU name="GRID K160Q">
       <ChipName>GK107</ChipName>
       <Released>Jun 28th, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27962,7 +27807,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="K180Q">
+    <GPU name="GRID K180Q">
       <ChipName>GK107</ChipName>
       <Released>Jun 28th, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27975,7 +27820,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="K200">
+    <GPU name="GRID K200">
       <ChipName>GK104</ChipName>
       <Released>Jun 28th, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -27988,7 +27833,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="K240Q">
+    <GPU name="GRID K240Q">
       <ChipName>GK104</ChipName>
       <Released>Jun 28th, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -28001,7 +27846,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="K260Q">
+    <GPU name="GRID K260Q">
       <ChipName>GK104</ChipName>
       <Released>Jun 28th, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -28014,7 +27859,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="K280Q">
+    <GPU name="GRID K280Q">
       <ChipName>GK104</ChipName>
       <Released>Jun 28th, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -28027,7 +27872,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="K2">
+    <GPU name="GRID K2">
       <ChipName>GK104</ChipName>
       <Released>May 11th, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -28040,7 +27885,7 @@
       <TMUs>128</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="K1">
+    <GPU name="GRID K1">
       <ChipName>GK107</ChipName>
       <Released>Mar 18th, 2013</Released>
       <Bus>PCIe 3.0 x16</Bus>
@@ -28053,8 +27898,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
-    <GPU name="100">
+    <GPU name="GeForce2 Go 100">
       <ChipName>NV11B</ChipName>
       <Released>Feb 6th, 2001</Released>
       <Bus>AGP 4x</Bus>
@@ -28067,7 +27911,7 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="200">
+    <GPU name="GeForce2 Go 200">
       <ChipName>NV11B</ChipName>
       <Released>Feb 6th, 2001</Released>
       <Bus>AGP 4x</Bus>
@@ -28080,7 +27924,7 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="">
+    <GPU name="GeForce2 Go">
       <ChipName>NV11B</ChipName>
       <Released>Nov 11th, 2000</Released>
       <Bus>AGP 4x</Bus>
@@ -28093,7 +27937,7 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="">
+    <GPU name="GeForce2 Go">
       <ChipName>NV11B</ChipName>
       <Released>Nov 11th, 2000</Released>
       <Bus>AGP 4x</Bus>
@@ -28106,8 +27950,7 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
-    <GPU name="4200">
+    <GPU name="GeForce4 Go 4200">
       <ChipName>NV28</ChipName>
       <Released>Nov 14th, 2002</Released>
       <Bus>AGP 8x</Bus>
@@ -28198,7 +28041,6 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce FX Go5700">
       <ChipName>NV36</ChipName>
       <Released>Feb 1st, 2005</Released>
@@ -28368,8 +28210,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
-    <GPU name="200">
+    <GPU name="GeForce Go 6200">
       <ChipName>NV44</ChipName>
       <Released>Feb 1st, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28382,7 +28223,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="250">
+    <GPU name="GeForce Go 6250">
       <ChipName>NV44</ChipName>
       <Released>Feb 1st, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28395,7 +28236,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="400">
+    <GPU name="GeForce Go 6400">
       <ChipName>NV44</ChipName>
       <Released>Feb 1st, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28408,7 +28249,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="200 TE">
+    <GPU name="GeForce Go 6200 TE">
       <ChipName>NV43</ChipName>
       <Released>Sep 29th, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28421,7 +28262,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="600">
+    <GPU name="GeForce Go 6600">
       <ChipName>NV43</ChipName>
       <Released>Sep 29th, 2005</Released>
       <Bus>MXM-II</Bus>
@@ -28434,7 +28275,7 @@
       <TMUs>3</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="600 NPB 128M">
+    <GPU name="GeForce Go 6600 NPB 128M">
       <ChipName>NV43</ChipName>
       <Released>Sep 29th, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28447,7 +28288,7 @@
       <TMUs>3</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="600 TE">
+    <GPU name="GeForce Go 6600 TE">
       <ChipName>NV43</ChipName>
       <Released>Sep 29th, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28460,7 +28301,7 @@
       <TMUs>3</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="800 Ultra">
+    <GPU name="GeForce Go 6800 Ultra">
       <ChipName>NV41</ChipName>
       <Released>Feb 24th, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28473,7 +28314,7 @@
       <TMUs>5</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="800">
+    <GPU name="GeForce Go 6800">
       <ChipName>NV41</ChipName>
       <Released>Nov 8th, 2004</Released>
       <Bus>MXM-III</Bus>
@@ -28486,8 +28327,7 @@
       <TMUs>5</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-
-    <GPU name="950 GTX">
+    <GPU name="GeForce Go 7950 GTX">
       <ChipName>G71</ChipName>
       <Released>Oct 12th, 2006</Released>
       <Bus>MXM-III</Bus>
@@ -28500,7 +28340,7 @@
       <TMUs>8</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="200">
+    <GPU name="GeForce Go 7200">
       <ChipName>G72</ChipName>
       <Released>Sep 1st, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28513,7 +28353,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="600 GT">
+    <GPU name="GeForce Go 7600 GT">
       <ChipName>G73</ChipName>
       <Released>Aug 1st, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28526,7 +28366,7 @@
       <TMUs>5</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="700">
+    <GPU name="GeForce Go 7700">
       <ChipName>G73</ChipName>
       <Released>Aug 1st, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28539,7 +28379,7 @@
       <TMUs>5</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="900 GS">
+    <GPU name="GeForce Go 7900 GS">
       <ChipName>G71</ChipName>
       <Released>Apr 18th, 2006</Released>
       <Bus>MXM-II</Bus>
@@ -28552,7 +28392,7 @@
       <TMUs>7</TMUs>
       <ROPs>20</ROPs>
     </GPU>
-    <GPU name="900 GTX">
+    <GPU name="GeForce Go 7900 GTX">
       <ChipName>G71</ChipName>
       <Released>Apr 18th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28565,7 +28405,7 @@
       <TMUs>8</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-    <GPU name="900 SE">
+    <GPU name="GeForce Go 7900 SE">
       <ChipName>G73</ChipName>
       <Released>Apr 18th, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28578,7 +28418,7 @@
       <TMUs>5</TMUs>
       <ROPs>12</ROPs>
     </GPU>
-    <GPU name="800">
+    <GPU name="GeForce Go 7800">
       <ChipName>G70</ChipName>
       <Released>Mar 3rd, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28591,7 +28431,7 @@
       <TMUs>6</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="600">
+    <GPU name="GeForce Go 7600">
       <ChipName>G73</ChipName>
       <Released>Mar 1st, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28604,7 +28444,7 @@
       <TMUs>4</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="300">
+    <GPU name="GeForce Go 7300">
       <ChipName>G72</ChipName>
       <Released>Feb 1st, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28617,7 +28457,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="300T">
+    <GPU name="GeForce Go 7300T">
       <ChipName>G72</ChipName>
       <Released>Feb 1st, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28630,7 +28470,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="400">
+    <GPU name="GeForce Go 7400">
       <ChipName>G72</ChipName>
       <Released>Feb 1st, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28643,7 +28483,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="400">
+    <GPU name="GeForce Go 7400">
       <ChipName>G72</ChipName>
       <Released>Feb 1st, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28656,7 +28496,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="400T">
+    <GPU name="GeForce Go 7400T">
       <ChipName>G72</ChipName>
       <Released>Feb 1st, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28669,7 +28509,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="450">
+    <GPU name="GeForce Go 7450">
       <ChipName>G72</ChipName>
       <Released>Feb 1st, 2006</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28682,7 +28522,7 @@
       <TMUs>3</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="800 GTX">
+    <GPU name="GeForce Go 7800 GTX">
       <ChipName>G70</ChipName>
       <Released>Sep 29th, 2005</Released>
       <Bus>PCIe 1.0 x16</Bus>
@@ -28695,7 +28535,6 @@
       <TMUs>8</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-
     <GPU name="GeForce 8600M GT">
       <ChipName>G84</ChipName>
       <Released>Dec 31st, 2007</Released>
@@ -28826,7 +28665,6 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="GeForce 9800M GS">
       <ChipName>G94</ChipName>
       <Released>Nov 1st, 2008</Released>
@@ -29061,7 +28899,6 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="GeForce G105M">
       <ChipName>GT218</ChipName>
       <Released>Dec 14th, 2009</Released>
@@ -29201,7 +29038,6 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="GeForce GTX 285M">
       <ChipName>G92</ChipName>
       <Released>Feb 1st, 2010</Released>
@@ -29341,7 +29177,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce 315M">
       <ChipName>GT218</ChipName>
       <Released>Jan 5th, 2011</Released>
@@ -29529,7 +29364,6 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="GeForce GT 435M">
       <ChipName>GF106</ChipName>
       <Released>Jan 15th, 2011</Released>
@@ -29699,7 +29533,6 @@
       <TMUs>44</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
     <GPU name="GeForce GT 555M">
       <ChipName>GF116</ChipName>
       <Released>Mar 26th, 2012</Released>
@@ -29882,7 +29715,6 @@
       <TMUs>16</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce GTX 660M Mac Edition">
       <ChipName>GK107</ChipName>
       <Released>Apr 1st, 2013</Released>
@@ -30273,7 +30105,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce GT 730M">
       <ChipName>GK208</ChipName>
       <Released>Mar 6th, 2014</Released>
@@ -30599,7 +30430,6 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
     <GPU name="GeForce 845M">
       <ChipName>GM108</ChipName>
       <Released>Aug 26th, 2015</Released>
@@ -30678,7 +30508,7 @@
       <TMUs>8</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="">
+    <GPU name="GeForce 800M">
       <ChipName>GF117</ChipName>
       <Released>Mar 17th, 2014</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -30821,7 +30651,6 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="GeForce 940MX">
       <ChipName>GM107</ChipName>
       <Released>Jun 28th, 2016</Released>
@@ -31147,7 +30976,6 @@
       <TMUs>96</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-
     <GPU name="GeForce GTX 1050 Mobile 3 GB">
       <ChipName>GP107</ChipName>
       <Released>Feb 1st, 2019</Released>
@@ -31317,7 +31145,6 @@
       <TMUs>160</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-
     <GPU name="GeForce GTX 1650 Ti Mobile">
       <ChipName>TU116</ChipName>
       <Released>Apr 23rd, 2020</Released>
@@ -31435,7 +31262,6 @@
       <TMUs>96</TMUs>
       <ROPs>48</ROPs>
     </GPU>
-
     <GPU name="GeForce RTX 2070 SUPER MaxQ">
       <ChipName>TU104</ChipName>
       <Released>Apr 2nd, 2020</Released>
@@ -31618,7 +31444,6 @@
       <TMUs>184</TMUs>
       <ROPs>64</ROPs>
     </GPU>
-
     <GPU name="GeForce RTX 3050 MaxQ">
       <ChipName>GA107</ChipName>
       <Released>2021</Released>
@@ -31749,8 +31574,7 @@
       <TMUs>192</TMUs>
       <ROPs>96</ROPs>
     </GPU>
-
-    <GPU name="450 30.5W 10Gbps">
+    <GPU name="GeForce MX450 30.5W 10Gbps">
       <ChipName>TU117</ChipName>
       <Released>Aug 25th, 2020</Released>
       <Bus>PCIe 4.0 x4</Bus>
@@ -31763,7 +31587,7 @@
       <TMUs>56</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="450 30.5W 8Gbps">
+    <GPU name="GeForce MX450 30.5W 8Gbps">
       <ChipName>TU117</ChipName>
       <Released>Aug 25th, 2020</Released>
       <Bus>PCIe 4.0 x4</Bus>
@@ -31776,7 +31600,7 @@
       <TMUs>56</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="450 25W">
+    <GPU name="GeForce MX450 25W">
       <ChipName>TU117</ChipName>
       <Released>Aug 15th, 2020</Released>
       <Bus>PCIe 4.0 x4</Bus>
@@ -31789,7 +31613,7 @@
       <TMUs>56</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-    <GPU name="330">
+    <GPU name="GeForce MX330">
       <ChipName>GP108</ChipName>
       <Released>Feb 10th, 2020</Released>
       <Bus>PCIe 3.0 x4</Bus>
@@ -31802,7 +31626,7 @@
       <TMUs>24</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="350">
+    <GPU name="GeForce MX350">
       <ChipName>GP107</ChipName>
       <Released>Feb 10th, 2020</Released>
       <Bus>PCIe 3.0 x4</Bus>
@@ -31815,7 +31639,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="350">
+    <GPU name="GeForce MX350">
       <ChipName>GP107</ChipName>
       <Released>Feb 10th, 2020</Released>
       <Bus>PCIe 3.0 x4</Bus>
@@ -31828,7 +31652,7 @@
       <TMUs>32</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="150 GP107">
+    <GPU name="GeForce MX150 GP107">
       <ChipName>GP107</ChipName>
       <Released>Feb 23rd, 2019</Released>
       <Bus>PCIe 3.0 x4</Bus>
@@ -31841,7 +31665,7 @@
       <TMUs>24</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="230">
+    <GPU name="GeForce MX230">
       <ChipName>GP108</ChipName>
       <Released>Feb 21st, 2019</Released>
       <Bus>PCIe 3.0 x4</Bus>
@@ -31854,7 +31678,7 @@
       <TMUs>16</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="250">
+    <GPU name="GeForce MX250">
       <ChipName>GP108</ChipName>
       <Released>Feb 21st, 2019</Released>
       <Bus>PCIe 3.0 x4</Bus>
@@ -31867,7 +31691,7 @@
       <TMUs>24</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="250">
+    <GPU name="GeForce MX250">
       <ChipName>GP108B</ChipName>
       <Released>Unknown</Released>
       <Bus>PCIe 3.0 x4</Bus>
@@ -31880,7 +31704,7 @@
       <TMUs>24</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="110">
+    <GPU name="GeForce MX110">
       <ChipName>GM108</ChipName>
       <Released>Nov 17th, 2017</Released>
       <Bus>PCIe 3.0 x4</Bus>
@@ -31893,7 +31717,7 @@
       <TMUs>24</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="130">
+    <GPU name="GeForce MX130">
       <ChipName>GM108</ChipName>
       <Released>Nov 17th, 2017</Released>
       <Bus>PCIe 3.0 x4</Bus>
@@ -31906,7 +31730,7 @@
       <TMUs>24</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="150">
+    <GPU name="GeForce MX150">
       <ChipName>GP108</ChipName>
       <Released>May 17th, 2017</Released>
       <Bus>PCIe 3.0 x4</Bus>
@@ -31919,7 +31743,7 @@
       <TMUs>24</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-    <GPU name="150">
+    <GPU name="GeForce MX150">
       <ChipName>GP108</ChipName>
       <Released>May 17th, 2017</Released>
       <Bus>PCIe 3.0 x4</Bus>
@@ -31932,7 +31756,6 @@
       <TMUs>24</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
     <GPU name="GeForce 615">
       <ChipName>GF108</ChipName>
       <Released>May 15th, 2012</Released>
@@ -31959,7 +31782,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce 710A">
       <ChipName>GK107</ChipName>
       <Released>Mar 21st, 2015</Released>
@@ -32103,7 +31925,6 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
     <GPU name="GeForce 805A">
       <ChipName>GK208</ChipName>
       <Released>Jul 22nd, 2014</Released>
@@ -32143,7 +31964,7 @@
       <TMUs>16</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="">
+    <GPU name="GeForce 800A">
       <ChipName>GF119</ChipName>
       <Released>Mar 17th, 2014</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -32156,7 +31977,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="">
+    <GPU name="GeForce 800A">
       <ChipName>GF119</ChipName>
       <Released>Mar 17th, 2014</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -32208,7 +32029,6 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
     <GPU name="GeForce 920A">
       <ChipName>GK208B</ChipName>
       <Released>Mar 13th, 2015</Released>
@@ -32300,7 +32120,6 @@
       <TMUs>40</TMUs>
       <ROPs>16</ROPs>
     </GPU>
-
     <GPU name="NVS 5200M">
       <ChipName>GF108</ChipName>
       <Released>Sep 17th, 2012</Released>
@@ -32522,8 +32341,7 @@
       <TMUs>4</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-
-    <GPU name="">
+    <GPU name="Quadro2 Go">
       <ChipName>NV11B</ChipName>
       <Released>Aug 14th, 2001</Released>
       <Bus>AGP 4x</Bus>
@@ -32536,7 +32354,6 @@
       <TMUs>0</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
     <GPU name="Quadro4 700 Go GL">
       <ChipName>NV28</ChipName>
       <Released>Jun 5th, 2003</Released>
@@ -32563,8 +32380,7 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
-    <GPU name="1400">
+    <GPU name="Quadro FX Go1400">
       <ChipName>NV41</ChipName>
       <Released>Feb 25th, 2005</Released>
       <Bus>MXM-III</Bus>
@@ -32577,7 +32393,7 @@
       <TMUs>5</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="540">
+    <GPU name="Quadro FX Go540">
       <ChipName>NV43</ChipName>
       <Released>Aug 9th, 2004</Released>
       <Bus>MXM-II</Bus>
@@ -32590,7 +32406,7 @@
       <TMUs>4</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="1000">
+    <GPU name="Quadro FX Go1000">
       <ChipName>NV36</ChipName>
       <Released>Feb 25th, 2004</Released>
       <Bus>AGP 4x</Bus>
@@ -32603,7 +32419,7 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="700">
+    <GPU name="Quadro FX Go700">
       <ChipName>NV31</ChipName>
       <Released>Jun 25th, 2003</Released>
       <Bus>AGP 4x</Bus>
@@ -32616,7 +32432,6 @@
       <TMUs>3</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Quadro FX 380M">
       <ChipName>GT218</ChipName>
       <Released>Jan 7th, 2010</Released>
@@ -32877,7 +32692,6 @@
       <TMUs>8</TMUs>
       <ROPs>24</ROPs>
     </GPU>
-
     <GPU name="RTX A4 Mobile">
       <ChipName>GA107</ChipName>
       <Released>2021</Released>
@@ -33749,7 +33563,6 @@
       <TMUs>40</TMUs>
       <ROPs>32</ROPs>
     </GPU>
-
     <GPU name="GeForce2 MX + nForce 220">
       <ChipName>Crush11</ChipName>
       <Released>Jun 4th, 2001</Released>
@@ -33768,7 +33581,6 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce4 MX + nForce2">
       <ChipName>Crush17</ChipName>
       <Released>Oct 1st, 2002</Released>
@@ -33778,7 +33590,6 @@
       <TMUs>0</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce 6100">
       <ChipName>C51</ChipName>
       <Released>Oct 11th, 2004</Released>
@@ -33851,7 +33662,6 @@
       <TMUs>1</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-
     <GPU name="GeForce 7050 + nForce 610i">
       <ChipName>C73</ChipName>
       <Released>Jan 13th, 2008</Released>
@@ -33951,7 +33761,6 @@
       <TMUs>1</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
     <GPU name="GeForce 8100 + nForce 720a">
       <ChipName>C78</ChipName>
       <Released>Apr 17th, 2007</Released>
@@ -33979,7 +33788,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce 9100">
       <ChipName>C78</ChipName>
       <Released>Apr 17th, 2007</Released>
@@ -34043,7 +33851,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce Go 6100 + nForce Go 430">
       <ChipName>C51</ChipName>
       <Released>Feb 1st, 2006</Released>
@@ -34062,7 +33869,6 @@
       <TMUs>1</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
     <GPU name="GeForce 7150M + nForce 630M">
       <ChipName>C67</ChipName>
       <Released>Nov 16th, 2007</Released>
@@ -34081,7 +33887,6 @@
       <TMUs>1</TMUs>
       <ROPs>1</ROPs>
     </GPU>
-
     <GPU name="GeForce 8200M G mGPU AMD">
       <ChipName>C77</ChipName>
       <Released>Jun 3rd, 2008</Released>
@@ -34100,7 +33905,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="GeForce 9200M">
       <ChipName>C79</ChipName>
       <Released>Oct 15th, 2008</Released>
@@ -34155,7 +33959,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Quadro NVS 210S">
       <ChipName>C51</ChipName>
       <Released>Dec 22nd, 2003</Released>
@@ -34165,8 +33968,7 @@
       <TMUs>1</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-
-    <GPU name="">
+    <GPU name="ION">
       <ChipName>GT218</ChipName>
       <Released>Jun 3rd, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -34175,7 +33977,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="">
+    <GPU name="ION">
       <ChipName>ION</ChipName>
       <Released>Jun 3rd, 2008</Released>
       <Bus>PCI</Bus>
@@ -34184,7 +33986,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="">
+    <GPU name="ION">
       <ChipName>ION</ChipName>
       <Released>Jun 3rd, 2008</Released>
       <Bus>PCI</Bus>
@@ -34193,7 +33995,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="">
+    <GPU name="ION">
       <ChipName>C79</ChipName>
       <Released>Jun 3rd, 2008</Released>
       <Bus>PCI</Bus>
@@ -34202,7 +34004,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="">
+    <GPU name="ION">
       <ChipName>C7A-ION</ChipName>
       <Released>Jun 3rd, 2008</Released>
       <Bus>PCI</Bus>
@@ -34211,7 +34013,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="2">
+    <GPU name="ION 2">
       <ChipName>GT218</ChipName>
       <Released>Jun 3rd, 2008</Released>
       <Bus>PCIe 2.0 x16</Bus>
@@ -34220,7 +34022,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="HX">
+    <GPU name="ION HX">
       <ChipName>ION</ChipName>
       <Released>Jun 3rd, 2008</Released>
       <Bus>PCI</Bus>
@@ -34229,7 +34031,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="LE">
+    <GPU name="ION LE">
       <ChipName>ION</ChipName>
       <Released>Jun 3rd, 2008</Released>
       <Bus>PCI</Bus>
@@ -34238,7 +34040,6 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="Jetson Xavier NX GPU">
       <ChipName>GV10B</ChipName>
       <Released>May 14th, 2020</Released>
@@ -34293,7 +34094,7 @@
       <TMUs>8</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="4 GPU">
+    <GPU name="Tegra 4 GPU">
       <ChipName>Wayne</ChipName>
       <Released>Aug 1st, 2013</Released>
       <Bus>IGP</Bus>
@@ -34302,7 +34103,7 @@
       <TMUs>24</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-    <GPU name="4i GPU">
+    <GPU name="Tegra 4i GPU">
       <ChipName>Wayne</ChipName>
       <Released>Feb 19th, 2013</Released>
       <Bus>IGP</Bus>
@@ -34311,7 +34112,7 @@
       <TMUs>12</TMUs>
       <ROPs>2</ROPs>
     </GPU>
-    <GPU name="3 GPU">
+    <GPU name="Tegra 3 GPU">
       <ChipName>Kal-El</ChipName>
       <Released>Nov 9th, 2011</Released>
       <Bus>IGP</Bus>
@@ -34320,7 +34121,7 @@
       <TMUs>4</TMUs>
       <ROPs>8</ROPs>
     </GPU>
-    <GPU name="2 GPU">
+    <GPU name="Tegra 2 GPU">
       <ChipName>Tegra 2</ChipName>
       <Released>Jun 3rd, 2010</Released>
       <Bus>IGP</Bus>
@@ -34329,7 +34130,6 @@
       <TMUs>4</TMUs>
       <ROPs>4</ROPs>
     </GPU>
-
     <GPU name="CMP 50HX">
       <ChipName>TU102</ChipName>
       <Released>2021</Released>
@@ -34476,7 +34276,6 @@
   </Manufacture>
   <Manufacture name="Sony" />
   <Manufacture name="XGI">
-
     <GPU name="Volari 8300">
       <ChipName>XG47</ChipName>
       <Released>Nov 1st, 2005</Released>
