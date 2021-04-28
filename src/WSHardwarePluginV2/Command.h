@@ -23,6 +23,7 @@ namespace Hardware
 		WinBio, ///<Win10生物传感器相关
 		Battery, ///<电池相关
 		Monitor, ///<显示器相关
+		Bios, ///<Bios相关
 	};
 
 	/// @brief 命令类型

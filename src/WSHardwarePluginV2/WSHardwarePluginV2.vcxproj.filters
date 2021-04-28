@@ -271,13 +271,21 @@
     <ClInclude Include="CrystalDiskInfo\UtilityFx.h">
       <Filter>Hardware\Disk\CrystalDiskInfo</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Main</Filter>
-    </ClInclude>
     <ClInclude Include="GPUConfig.h">
       <Filter>Hardware\GPU</Filter>
     </ClInclude>
-    <ClInclude Include="XMLConfig.h" />
+    <ClInclude Include="BIOSManager.h">
+      <Filter>Hardware\BIOS</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Main\res</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLConfig.h">
+      <Filter>Main\res</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericBios.h">
+      <Filter>Hardware\BIOS\Impl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -523,7 +531,15 @@
     <ClCompile Include="GPUConfig.cpp">
       <Filter>Hardware\GPU</Filter>
     </ClCompile>
-    <ClCompile Include="XMLConfig.cpp" />
+    <ClCompile Include="BIOSManager.cpp">
+      <Filter>Hardware\BIOS</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLConfig.cpp">
+      <Filter>Main\res</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericBios.cpp">
+      <Filter>Hardware\BIOS\Impl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
@@ -733,6 +749,15 @@
     <Filter Include="Hardware\Netcard\Impl\WindowsAPI">
       <UniqueIdentifier>{7861fd88-0dd4-45bb-856d-7d6a88e876cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Hardware\BIOS">
+      <UniqueIdentifier>{87154c4e-2be1-4ffa-b791-40df2d3fe58a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\res">
+      <UniqueIdentifier>{a9ad8572-5b88-49fc-8734-06ededb90c2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\BIOS\Impl">
+      <UniqueIdentifier>{def7f446-6e39-49f9-99af-f3a750d33e34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="CPUDatabase.xml">
@@ -743,11 +768,11 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="WSHardwarePluginV2.rc">
-      <Filter>Main</Filter>
-    </ResourceCompile>
+    <None Include="xml2.bin" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="xml2.bin" />
+    <ResourceCompile Include="WSHardwarePluginV2.rc">
+      <Filter>Main\res</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

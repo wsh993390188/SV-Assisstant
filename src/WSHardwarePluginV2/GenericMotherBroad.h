@@ -11,15 +11,7 @@ namespace Hardware
 			std::string SerialNumber;
 		};
 
-		/// @brief BIOS通用数据信息，来自CPUZ
-		struct BiosCommonStruct
-		{
-			std::string Brand;
-			std::string Version;
-			std::string DataTime;
-		};
-
-		/// @brief 主板及BIOS通用初始化函数
+		/// @brief 主板通用初始化函数
 		class GenericMotherBroad
 		{
 		public:
@@ -46,18 +38,12 @@ namespace Hardware
 			/// @return @ref Data::ErrorType
 			Data::ErrorType GetElements(LPCSTR paramter, std::string& response);
 		protected:
-			/// @brief Bios信息，不支持双BIos，未来考虑一下
-			BiosCommonStruct BiosInfos;
 			/// @brief 主板信息
 			MotherBroadCommonStruct BroadInfo;
 		protected:
 			/// @brief 根据现有数据构建主板的Json信息
 			/// @return 含有Broad数据的Json对象
 			virtual Json::Value BuildBroadToJson();
-
-			/// @brief 根据现有数据构建Bios的Json信息
-			/// @return 含有Bios数据的Json对象
-			virtual Json::Value BuildBiosToJson();
 
 			/// @brief 根据初始化够结构构建JSON字符串
 			/// @return Utf-8格式的Json字符串

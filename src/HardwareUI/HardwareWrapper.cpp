@@ -132,6 +132,11 @@ namespace
 							ret.insert(ret.cend(), Caches.cbegin(), Caches.cend());
 						}
 					}
+					else if (node[member_name].isBool())
+					{
+						auto value_str = node[member_name].asBool();
+						ret.emplace_back(utf8_decode(member_name), value_str ? L"true" : L"false");
+					}
 				}
 			}
 		}
@@ -156,6 +161,11 @@ namespace
 				{
 					auto value_str = node[member_name].asUInt64();
 					ret.emplace_back(utf8_decode(member_name), std::to_wstring(value_str));
+				}
+				else if (node[member_name].isBool())
+				{
+					auto value_str = node[member_name].asBool();
+					ret.emplace_back(utf8_decode(member_name), value_str ? L"true" : L"false");
 				}
 			}
 		}
@@ -701,7 +711,7 @@ std::vector<std::pair<std::wstring, std::wstring>> Hardware::HardwareWrapper::Au
 std::vector<size_t> Hardware::HardwareWrapper::Bios::InitializeBios()
 {
 	BSTR data{};
-	PcmHardwareAction(PCM_HARDWARE_ACTION_BROAD_INIT, nullptr, &data);
+	PcmHardwareAction(PCM_HARDWARE_ACTION_BIOS_INIT, nullptr, &data);
 	if (data)
 	{
 		auto Str = utf8_encode(data);
@@ -733,7 +743,7 @@ std::vector<size_t> Hardware::HardwareWrapper::Bios::InitializeBios()
 std::vector<std::pair<std::wstring, std::wstring>> Hardware::HardwareWrapper::Bios::GetElements(const size_t& MemoryId)
 {
 	BSTR data{};
-	PcmHardwareAction(PCM_HARDWARE_ACTION_BROAD_GET, BuildElement(MemoryId, "BiosId").c_str(), &data);
+	PcmHardwareAction(PCM_HARDWARE_ACTION_BIOS_GET, BuildElement(MemoryId, "BiosId").c_str(), &data);
 	std::vector<std::pair<std::wstring, std::wstring>> ret{};
 	if (data)
 	{

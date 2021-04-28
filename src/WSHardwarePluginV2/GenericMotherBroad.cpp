@@ -13,10 +13,6 @@ Hardware::Data::ErrorType Hardware::MotherBroad::GenericMotherBroad::GetElements
 	if (reader.parse(paramter, root))
 	{
 		Json::Value ret;
-		if (root["BiosId"].isIntegral())
-		{
-			ret["Bios"] = BuildBiosToJson();
-		}
 
 		if (root["BroadId"].isIntegral())
 		{
@@ -58,37 +54,9 @@ Json::Value Hardware::MotherBroad::GenericMotherBroad::BuildBroadToJson()
 	return root;
 }
 
-Json::Value Hardware::MotherBroad::GenericMotherBroad::BuildBiosToJson()
-{
-	Json::Value root;
-	if (!BiosInfos.Brand.empty())
-	{
-		Json::Value TempValue;
-		TempValue["Brand"] = BiosInfos.Brand;
-		root.append(TempValue);
-	}
-
-	if (!BiosInfos.Version.empty())
-	{
-		Json::Value TempValue;
-		TempValue["Version"] = BiosInfos.Version;
-		root.append(TempValue);
-	}
-
-	if (!BiosInfos.DataTime.empty())
-	{
-		Json::Value TempValue;
-		TempValue["DataTime"] = BiosInfos.DataTime;
-		root.append(TempValue);
-	}
-	return root;
-}
-
 std::string Hardware::MotherBroad::GenericMotherBroad::BuildInitJson()
 {
-	// 这个暂时这样处理，便于以后增加多BIOS支持
 	Json::Value root;
-	root["BiosId"].append(1);
 	root["BroadId"].append(1);
 	if (root.isNull())
 		return {};

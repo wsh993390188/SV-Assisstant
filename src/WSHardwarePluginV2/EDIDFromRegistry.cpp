@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "winreg.hpp"
+#include <WinReg/WinReg.hpp>
 #include "EDIDFromRegistry.h"
 
 namespace Hardware

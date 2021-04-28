@@ -20,7 +20,7 @@ Data::ErrorType Hardware::Memory::SPDMemoryController::Initialize()
 			}
 		}
 	}
-	catch (std::exception& e)
+	catch (std::exception&)
 	{
 		spdlog::error("Platform Not Support IO Smbus Controller");
 	}

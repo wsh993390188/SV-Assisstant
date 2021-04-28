@@ -11,6 +11,7 @@
 #include "BatteryManager.h"
 #include "WinBioManager.h"
 #include "MonitorManager.h"
+#include "BIOSManager.h"
 
 namespace Hardware
 {
@@ -67,6 +68,7 @@ namespace Hardware
 			std::make_pair(ManagerType::Battery,std::make_shared<BatteryManager>()),
 			std::make_pair(ManagerType::WinBio,std::make_shared<WinBioManager>()),
 			std::make_pair(ManagerType::Monitor,std::make_shared<MonitorManager>()),
+			std::make_pair(ManagerType::Bios,std::make_shared<BIOSManager>()),
 		};
 	}
 

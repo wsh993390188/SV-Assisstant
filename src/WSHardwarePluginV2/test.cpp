@@ -428,14 +428,6 @@ namespace Hardware
 
 					if (reader.parse(InitializeJson, root))
 					{
-						for (const auto& MemoryEle : root["BiosId"])
-						{
-							if (MemoryEle.isUInt())
-							{
-								retValue["BiosId"] = MemoryEle;
-							}
-						}
-
 						for (const auto& MemoryEle : root["BroadId"])
 						{
 							if (MemoryEle.isUInt())
@@ -470,10 +462,68 @@ namespace Hardware
 					Json::Value root;
 					if (reader.parse(Str, root))
 					{
-						if (root["Bios"].isArray())
-							PrintElementJsonObject(root["Bios"]);
 						if (root["Broad"].isArray())
 							PrintElementJsonObject(root["Broad"]);
+					}
+				}
+				catch (Json::Exception& e)
+				{
+					return;
+				}
+				SysFreeString(data);
+				if (Str)
+					delete[] Str;
+			}
+		}
+
+		namespace BiosTest
+		{
+			std::string BuildJsonFromInitializeJson(const std::string& InitializeJson)
+			{
+				try
+				{
+					Json::Reader reader;
+					Json::Value root;
+					Json::Value retValue;
+
+					if (reader.parse(InitializeJson, root))
+					{
+						for (const auto& MemoryEle : root["BiosId"])
+						{
+							if (MemoryEle.isUInt())
+							{
+								retValue["BiosId"] = MemoryEle;
+							}
+						}
+					}
+					return Json::FastWriter().write(retValue);
+				}
+				catch (Json::Exception&)
+				{
+				}
+				return{};
+			}
+
+			void GetBiosTest()
+			{
+				PcmHardwareInitialize(nullptr, nullptr);
+				BSTR data{};
+				PcmHardwareAction(PCM_HARDWARE_ACTION_BIOS_INIT, nullptr, &data);
+				auto Str = _com_util::ConvertBSTRToString(data);
+				SysFreeString(data);
+				auto InitializeJson = BuildJsonFromInitializeJson(Str);
+				if (Str)
+					delete[] Str;
+				PcmHardwareAction(PCM_HARDWARE_ACTION_BIOS_GET, InitializeJson.c_str(), &data);
+				Str = _com_util::ConvertBSTRToString(data);
+				try
+				{
+					Json::Reader reader;
+					Json::Value root;
+					if (reader.parse(Str, root))
+					{
+						if (root["Bios"].isArray())
+							PrintElementJsonObject(root["Bios"]);
 					}
 				}
 				catch (Json::Exception& e)
@@ -827,6 +877,7 @@ int main()
 		// 	Hardware::Test::BatteryTest::GetBatteryTest();
 		// 	Hardware::Test::WinBioTest::GetWinBioTest();
 		// 	Hardware::Test::MonitorTest::GetMonitorTest();
+		// 	Hardware::Test::BiosTest::GetBiosTest();
 		Hardware::Test::GPUTest::GetGPUTest();
 		CoUninitialize();
 	}

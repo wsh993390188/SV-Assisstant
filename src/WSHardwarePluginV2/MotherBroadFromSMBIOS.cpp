@@ -5,37 +5,6 @@ using namespace Hardware;
 
 Data::ErrorType Hardware::MotherBroad::MotherBroadFromSMBIOS::Initialize(std::string& response)
 {
-	auto BiosInfo = Smbios::GetType(Smbios::SmbiosHeaderType::Type0());
-	try
-	{
-		BiosInfos.Brand = BiosInfo.VendorName();
-		Utils::trim(BiosInfos.Brand);
-	}
-	catch (const std::exception& e)
-	{
-		spdlog::error("Bios cant get vender name, error: {}", e.what());
-	}
-
-	try
-	{
-		BiosInfos.Version = BiosInfo.BiosVersion();
-		Utils::trim(BiosInfos.Version);
-	}
-	catch (const std::exception& e)
-	{
-		spdlog::error("Bios cant get version name, error: {}", e.what());
-	}
-
-	try
-	{
-		BiosInfos.DataTime = BiosInfo.BiosRelease();
-		Utils::trim(BiosInfos.DataTime);
-	}
-	catch (const std::exception& e)
-	{
-		spdlog::error("Bios cant get bios release date, error {}", e.what());
-	}
-
 	auto SmbiosBroadInfo = Smbios::GetType(Smbios::SmbiosHeaderType::Type2());
 	try
 	{

@@ -52,7 +52,7 @@ namespace Hardware
 			}
 		};
 
-		/// @brief 主板及BIOS管理者命令
+		/// @brief 主板管理者命令
 		class MotherBroadManagerCommand : virtual public Command
 		{
 		public:
@@ -136,6 +136,17 @@ namespace Hardware
 			}
 		};
 
+		/// @brief Bios管理者命令
+		class BiosManagerCommand : virtual public Command
+		{
+		public:
+			/// @brief 获取管理者类型
+			/// @return	@ref ManagerType
+			ManagerType GetManagerType() override final
+			{
+				return ManagerType::Bios;
+			}
+		};
 #pragma endregion
 
 #pragma region 操作命令
@@ -225,6 +236,7 @@ Hardware::CommandDataBase::CommandDataBase()
 	m_CommandDatabase.emplace(ManagerType::WinBio, std::move(InitCommand<WinBioManagerCommand>()));
 	m_CommandDatabase.emplace(ManagerType::Battery, std::move(InitCommand<BatteryManagerCommand>()));
 	m_CommandDatabase.emplace(ManagerType::Monitor, std::move(InitCommand<MonitorManagerCommand>()));
+	m_CommandDatabase.emplace(ManagerType::Bios, std::move(InitCommand<BiosManagerCommand>()));
 }
 
 std::shared_ptr<Hardware::Command> Hardware::CommandDataBase::SwitchToCommand(const std::string& Action)
@@ -271,6 +283,8 @@ Hardware::ManagerType Hardware::CommandDataBase::StringToMangerType(const std::s
 		return ManagerType::Battery;
 	else if (ManagerString.compare("MONITOR") == 0)
 		return ManagerType::Monitor;
+	else if (ManagerString.compare("BIOS") == 0)
+		return ManagerType::Bios;
 	return ManagerType::None;
 }
 

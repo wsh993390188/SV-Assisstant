@@ -22,3 +22,6 @@
 [submodule "Libcommon/spdlog"]
 	path = Libcommon/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "Libcommon/winreg"]
+	path = Libcommon/winreg
+	url = https://github.com/GiovanniDicanio/WinReg.git
