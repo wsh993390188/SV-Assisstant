@@ -10,19 +10,6 @@ Hardware::SIO::Nuvoton::Nuvoton()
 {
 }
 
-bool Hardware::SIO::Nuvoton::InitializeSIO(const USHORT& port)
-{
-	IoPtr.WriteByte(port, 0x87);
-	IoPtr.WriteByte(port, 0x87);
-	return true;
-}
-
-bool Hardware::SIO::Nuvoton::DeInitializeSIO(const USHORT& port)
-{
-	IoPtr.WriteByte(port, 0xAA);
-	return true;
-}
-
 void Hardware::SIO::Nuvoton::NuvotonDisableIOSpaceLock(const USHORT& port, const USHORT& data)
 {
 	DWORD options = 0;

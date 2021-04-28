@@ -58,9 +58,6 @@ namespace Hardware
 			/// @brief SIO占用的IO读取功能
 			Utils::Ring0::SafeIoHandle IoPtr;
 
-			/// @brief SIO的进入端口
-			std::array<std::pair<USHORT, USHORT>, 2> SIOPort;
-
 			/// @brief Chip的ID
 			const uint32_t CHIP_ID_REGISTER;
 			/// @brief Chip的Revision

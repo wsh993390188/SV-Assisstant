@@ -3,6 +3,10 @@
 
 using namespace Hardware;
 
+Hardware::MotherBroad::MotherBroadFromSMBIOS::MotherBroadFromSMBIOS() :SuperIO(nullptr)
+{
+}
+
 Data::ErrorType Hardware::MotherBroad::MotherBroadFromSMBIOS::Initialize(std::string& response)
 {
 	auto SmbiosBroadInfo = Smbios::GetType(Smbios::SmbiosHeaderType::Type2());

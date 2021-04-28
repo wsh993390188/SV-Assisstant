@@ -38,7 +38,7 @@ bool Hardware::SIO::SIOBase::SIOReadByte(const USHORT& port, const USHORT& data,
 	return false;
 }
 
-Hardware::SIO::SIOBase::SIOBase() : SIOPort{ std::make_pair(0x2Eu, 0x2fu), std::make_pair(0x4Eu, 0x4fu) }, active(false),
+Hardware::SIO::SIOBase::SIOBase() : active(false),
 CHIP_ID_REGISTER{ 0x20u }, CHIP_REVISION_REGISTER{ 0x21u }, BASE_ADDRESS_REGISTER{ 0x60u }
 {
 }

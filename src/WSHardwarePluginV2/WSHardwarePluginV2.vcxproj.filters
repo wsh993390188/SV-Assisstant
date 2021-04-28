@@ -209,22 +209,22 @@
       <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK</Filter>
     </ClInclude>
     <ClInclude Include="SIOBase.h">
-      <Filter>Hardware\SIO</Filter>
+      <Filter>Hardware\MotherBroad\Impl\SuperIO</Filter>
     </ClInclude>
     <ClInclude Include="SMSC.h">
-      <Filter>Hardware\SIO\SMSC</Filter>
+      <Filter>Hardware\MotherBroad\Impl\SuperIO\SMSC</Filter>
     </ClInclude>
     <ClInclude Include="ITE.h">
-      <Filter>Hardware\SIO\ITE</Filter>
+      <Filter>Hardware\MotherBroad\Impl\SuperIO\ITE</Filter>
     </ClInclude>
     <ClInclude Include="Fintek.h">
-      <Filter>Hardware\SIO\Fintek</Filter>
+      <Filter>Hardware\MotherBroad\Impl\SuperIO\Common\Fintek</Filter>
     </ClInclude>
     <ClInclude Include="Nuvoton.h">
-      <Filter>Hardware\SIO\Nuvoton</Filter>
+      <Filter>Hardware\MotherBroad\Impl\SuperIO\Common\Nuvoton</Filter>
     </ClInclude>
     <ClInclude Include="Winbond.h">
-      <Filter>Hardware\SIO\Winbond</Filter>
+      <Filter>Hardware\MotherBroad\Impl\SuperIO\Common\Winbond</Filter>
     </ClInclude>
     <ClInclude Include="Overdrive.h">
       <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD</Filter>
@@ -285,6 +285,12 @@
     </ClInclude>
     <ClInclude Include="GenericBios.h">
       <Filter>Hardware\BIOS\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="SIOCommon.h">
+      <Filter>Hardware\MotherBroad\Impl\SuperIO\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SIOFactory.h">
+      <Filter>Hardware\MotherBroad\Impl\SuperIO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -475,22 +481,22 @@
       <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK</Filter>
     </ClCompile>
     <ClCompile Include="SIOBase.cpp">
-      <Filter>Hardware\SIO</Filter>
+      <Filter>Hardware\MotherBroad\Impl\SuperIO</Filter>
     </ClCompile>
     <ClCompile Include="SMSC.cpp">
-      <Filter>Hardware\SIO\SMSC</Filter>
+      <Filter>Hardware\MotherBroad\Impl\SuperIO\SMSC</Filter>
     </ClCompile>
     <ClCompile Include="ITE.cpp">
-      <Filter>Hardware\SIO\ITE</Filter>
+      <Filter>Hardware\MotherBroad\Impl\SuperIO\ITE</Filter>
     </ClCompile>
     <ClCompile Include="Fintek.cpp">
-      <Filter>Hardware\SIO\Fintek</Filter>
+      <Filter>Hardware\MotherBroad\Impl\SuperIO\Common\Fintek</Filter>
     </ClCompile>
     <ClCompile Include="Nuvoton.cpp">
-      <Filter>Hardware\SIO\Nuvoton</Filter>
+      <Filter>Hardware\MotherBroad\Impl\SuperIO\Common\Nuvoton</Filter>
     </ClCompile>
     <ClCompile Include="Winbond.cpp">
-      <Filter>Hardware\SIO\Winbond</Filter>
+      <Filter>Hardware\MotherBroad\Impl\SuperIO\Common\Winbond</Filter>
     </ClCompile>
     <ClCompile Include="Overdrive.cpp">
       <Filter>Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD</Filter>
@@ -539,6 +545,12 @@
     </ClCompile>
     <ClCompile Include="GenericBios.cpp">
       <Filter>Hardware\BIOS\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="SIOCommon.cpp">
+      <Filter>Hardware\MotherBroad\Impl\SuperIO\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="SIOFactory.cpp">
+      <Filter>Hardware\MotherBroad\Impl\SuperIO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -719,24 +731,6 @@
     <Filter Include="Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK">
       <UniqueIdentifier>{27e95696-a765-4b82-8565-4e79f87a2b47}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Hardware\SIO">
-      <UniqueIdentifier>{f33dfcf0-f640-4b89-8b56-e12e7739aae1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Hardware\SIO\ITE">
-      <UniqueIdentifier>{969258c7-3fe3-4b7a-bc75-06ac8684e311}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Hardware\SIO\SMSC">
-      <UniqueIdentifier>{284479e8-3af7-4f08-a350-8776a430d01c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Hardware\SIO\Winbond">
-      <UniqueIdentifier>{4ef647eb-caae-4b07-9b0c-7a862a5d4fc2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Hardware\SIO\Fintek">
-      <UniqueIdentifier>{18ac4110-3400-442a-a51e-47fdf5c98632}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Hardware\SIO\Nuvoton">
-      <UniqueIdentifier>{f126675f-9772-417a-a1a6-171f81b87247}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Hardware\GPU\Device\DeviceImpl\AMD\ADLSDK\OD">
       <UniqueIdentifier>{8432958e-518f-44e5-9e3f-07c6367979b4}</UniqueIdentifier>
     </Filter>
@@ -757,6 +751,27 @@
     </Filter>
     <Filter Include="Hardware\BIOS\Impl">
       <UniqueIdentifier>{def7f446-6e39-49f9-99af-f3a750d33e34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\MotherBroad\Impl\SuperIO">
+      <UniqueIdentifier>{f33dfcf0-f640-4b89-8b56-e12e7739aae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\MotherBroad\Impl\SuperIO\ITE">
+      <UniqueIdentifier>{969258c7-3fe3-4b7a-bc75-06ac8684e311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\MotherBroad\Impl\SuperIO\SMSC">
+      <UniqueIdentifier>{284479e8-3af7-4f08-a350-8776a430d01c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\MotherBroad\Impl\SuperIO\Common">
+      <UniqueIdentifier>{942d7767-6ec5-497d-840b-e71b8b0e7d6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\MotherBroad\Impl\SuperIO\Common\Winbond">
+      <UniqueIdentifier>{4ef647eb-caae-4b07-9b0c-7a862a5d4fc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\MotherBroad\Impl\SuperIO\Common\Nuvoton">
+      <UniqueIdentifier>{f126675f-9772-417a-a1a6-171f81b87247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\MotherBroad\Impl\SuperIO\Common\Fintek">
+      <UniqueIdentifier>{18ac4110-3400-442a-a51e-47fdf5c98632}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

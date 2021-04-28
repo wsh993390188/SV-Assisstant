@@ -1,11 +1,10 @@
 #pragma once
-#include "SIOBase.h"
+#include "SIOCommon.h"
 namespace Hardware
 {
 	namespace SIO
 	{
-		class Fintek :
-			public SIOBase
+		class Fintek : public SIOCommon
 		{
 		};
 	}

@@ -278,6 +278,8 @@
     <ClInclude Include="PCIHandle.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SIOBase.h" />
+    <ClInclude Include="SIOCommon.h" />
+    <ClInclude Include="SIOFactory.h" />
     <ClInclude Include="SMSC.h" />
     <ClInclude Include="SPDMemoryController.h" />
     <ClInclude Include="stdafx.h" />
@@ -411,6 +413,8 @@
     <ClCompile Include="PCIGPUDetect.cpp" />
     <ClCompile Include="PCIHandle.cpp" />
     <ClCompile Include="SIOBase.cpp" />
+    <ClCompile Include="SIOCommon.cpp" />
+    <ClCompile Include="SIOFactory.cpp" />
     <ClCompile Include="SMSC.cpp" />
     <ClCompile Include="SPDMemoryController.cpp" />
     <ClCompile Include="stdafx.cpp">

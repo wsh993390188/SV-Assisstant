@@ -1,12 +1,14 @@
 #pragma once
-#include "SIOBase.h"
+#include "SIOCommon.h"
 namespace Hardware
 {
 	namespace SIO
 	{
-		class Winbond :
-			public SIOBase
+		class Winbond : public SIOCommon
 		{
+		public:
+			/// @brief
+			Winbond();
 		};
 	}
 }
