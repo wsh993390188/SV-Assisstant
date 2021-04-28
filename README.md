@@ -15,6 +15,7 @@ Hardware Information dynamic library(only windows platform)
     [utf-8](https://github.com/nemtrif/utfcpp)
 
 - GPU library
+
     [nvapi](https://developer.nvidia.com/nvapi)
 
     [adlsdk](https://github.com/GPUOpen-LibrariesAndSDKs/display-library)
