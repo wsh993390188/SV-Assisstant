@@ -150,7 +150,7 @@ namespace Hardware
 								auto EDIDValue = EDIDKey.TryGetBinaryValue(L"EDID");
 								if (EDIDValue)
 								{
-									memcpy_s(&EDIDbuffer, sizeof(EDIDbuffer), EDIDValue->data(), EDIDValue->size());
+									memcpy_s(&EDIDbuffer, sizeof(EDIDbuffer), EDIDValue->data(), EDIDValue->size() > sizeof(EDIDbuffer) ? sizeof(EDIDbuffer) : EDIDValue->size());
 									return true;
 								}
 							}
