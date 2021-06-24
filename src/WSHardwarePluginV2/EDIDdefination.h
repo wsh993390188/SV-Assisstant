@@ -410,62 +410,69 @@ namespace Hardware
 
 		struct EDID
 		{
-			BYTE Header[8];	//BYTE 0-7 Fixed header pattern: 00 FF FF FF FF FF FF 00
 			union
 			{
+				BYTE u[256];
+
 				struct
 				{
-					WORD _Third : 5;
-					WORD _Second : 5;
-					WORD _First : 5;
-					WORD Reserved : 1;
-				}bits;
-				WORD Manufacturer;
-			}Manufacturer;		//Byte 8-9 Manufacturer ID
-			WORD Productcode;	//Byte 10-11 Manufacturer product code. 16-bit number, little-endian.
-			DWORD SerialNumber; //Byte 12-15 Serial number. 32 bits, little endian.
-			BYTE Week;	//Byte16 Week of manufacture, or model year flag. Week numbering is not consistent between manufacturers.
-			BYTE Year;	//Byte17 Year of manufacture, less 1990 (1990–2245). If week=255, it is the model year instead.
-			BYTE EDIDVersion[2]; //Byte18-19 	EDID version such as 1.3 , usually Byte18 = 1 Byte19 = 3
-			BYTE VideoInputParameters; //Byte20 Video input parameters bitmap
-			BYTE HorizontalScreenSize; //Byte21 Horizontal screen size, in centimetres (range 1-255). If vsize=0, landscape aspect ratio (range 1.00-3.54), datavalue = (AR×100)-99 (example: 16:9 = 79, 4:3 = 34)
-			BYTE VerticalScreenSize; //Byte22 Vertical screen size, in centimetres. If hsize=0, portrait aspect ratio (range 0.28-0.99), datavalue = (100/AR)-99 (example: 9:16 = 79, 3:4 = 34). If either byte is 0, screen size and aspect ration are undefined (e.g. projector)
-			BYTE DisplayGamma;	//Byte23 Display gamma, factory default (range 1.00–3.54), datavalue = (gamma×100)-100 = (gamma−1)×100. If 225, gamma is defined by DI-EXT block.
-			BYTE Features;	//Byte24 	Supported features bitmap
-			BYTE RedAndGreen;	//Byte25 	Red and green least-significant bits (2−9, 2−10)
-			BYTE BlueAndWhite;	//Byte26 	Blue and white least-significant 2 bits
-			BYTE RedxValue;	//Byte27 Red x value most significant 8 bits (2−1,...,2−8). 0–255 encodes fractional 0–0.996 (255/256); 0–0.999 (1023/1024) with lsbits
-			BYTE RedyValue;	//Byte28 Red y value most significant 8 bits
-			BYTE GreenxyValue[2]; // Byte29-30 Green x and y value most significant 8 bits
-			BYTE BluexyValue[2]; // Byte31-32 Blue x and y value most significant 8 bits
-			BYTE WhitexyValue[2]; // Byte33-34 White x and y value most significant 8 bits
-			BYTE EstablishedTiming[3]; //Byte35-37 Established timing bitmap. Supported bitmap for (formerly) very common timing modes.
-			BYTE StandardTiming[16]; //Byte38-53 Standard timing information. Up to 8 2-byte fields describing standard display modes. Unused fields are filled with 01 01
-			union
-			{
-				EDID_Detailed_Timing_Descriptor DetailDesc;
-				EDID_Display_Serial_Number Display_Serial_Number;
-				EDID_Unspecified_Text Unspecified_Text;
-				EDID_Display_Range_Limits_Descriptor Display_Range_Limits_Descriptor;
-				EDID_Display_Name Display_Name;
-				EDID_Additional_White_Point_Descriptor Additional_White_Point_Descriptor;
-				EDID_Color_Management_Data_Descriptor Color_Management_Data_Descriptor;
-				EDID_CVT_Timing_Codes_Descriptor CVT_Timing_Codes_Descriptor;
-				EDID_Additional_Standard_Timings Additional_Standard_Timings;
-			}Descriptor[4];
-			//Byte54-71 Descriptor 1
-			//Byte72-89 Descriptor 2
-			//Byte90-107 Descriptor 3
-			//Byte108-125 Descriptor 4
-			/*
-			Descriptor blocks. Detailed timing descriptors, in decreasing preference order. After all detailed timing descriptors, additional descriptors are permitted:
-			Monitor range limits (required)
-			ASCII text (monitor name (required), monitor serial number or unstructured text)
-			6 Additional standard timing information blocks
-			Colour point data.*/
-			BYTE NumberOfExtensions;	//Byte126 Number of extensions to follow. 0 if no extensions.
-			BYTE Checksum;	//Byte127 Sum of all 128 bytes should equal 0 (mod 256).
-							//BYTE u[256];
+					BYTE Header[8];	//BYTE 0-7 Fixed header pattern: 00 FF FF FF FF FF FF 00
+					union
+					{
+						struct
+						{
+							WORD _Third : 5;
+							WORD _Second : 5;
+							WORD _First : 5;
+							WORD Reserved : 1;
+						}bits;
+						WORD Manufacturer;
+					}Manufacturer;		//Byte 8-9 Manufacturer ID
+					WORD Productcode;	//Byte 10-11 Manufacturer product code. 16-bit number, little-endian.
+					DWORD SerialNumber; //Byte 12-15 Serial number. 32 bits, little endian.
+					BYTE Week;	//Byte16 Week of manufacture, or model year flag. Week numbering is not consistent between manufacturers.
+					BYTE Year;	//Byte17 Year of manufacture, less 1990 (1990–2245). If week=255, it is the model year instead.
+					BYTE EDIDVersion[2]; //Byte18-19 	EDID version such as 1.3 , usually Byte18 = 1 Byte19 = 3
+					BYTE VideoInputParameters; //Byte20 Video input parameters bitmap
+					BYTE HorizontalScreenSize; //Byte21 Horizontal screen size, in centimetres (range 1-255). If vsize=0, landscape aspect ratio (range 1.00-3.54), datavalue = (AR×100)-99 (example: 16:9 = 79, 4:3 = 34)
+					BYTE VerticalScreenSize; //Byte22 Vertical screen size, in centimetres. If hsize=0, portrait aspect ratio (range 0.28-0.99), datavalue = (100/AR)-99 (example: 9:16 = 79, 3:4 = 34). If either byte is 0, screen size and aspect ration are undefined (e.g. projector)
+					BYTE DisplayGamma;	//Byte23 Display gamma, factory default (range 1.00–3.54), datavalue = (gamma×100)-100 = (gamma−1)×100. If 225, gamma is defined by DI-EXT block.
+					BYTE Features;	//Byte24 	Supported features bitmap
+					BYTE RedAndGreen;	//Byte25 	Red and green least-significant bits (2−9, 2−10)
+					BYTE BlueAndWhite;	//Byte26 	Blue and white least-significant 2 bits
+					BYTE RedxValue;	//Byte27 Red x value most significant 8 bits (2−1,...,2−8). 0–255 encodes fractional 0–0.996 (255/256); 0–0.999 (1023/1024) with lsbits
+					BYTE RedyValue;	//Byte28 Red y value most significant 8 bits
+					BYTE GreenxyValue[2]; // Byte29-30 Green x and y value most significant 8 bits
+					BYTE BluexyValue[2]; // Byte31-32 Blue x and y value most significant 8 bits
+					BYTE WhitexyValue[2]; // Byte33-34 White x and y value most significant 8 bits
+					BYTE EstablishedTiming[3]; //Byte35-37 Established timing bitmap. Supported bitmap for (formerly) very common timing modes.
+					BYTE StandardTiming[16]; //Byte38-53 Standard timing information. Up to 8 2-byte fields describing standard display modes. Unused fields are filled with 01 01
+					union
+					{
+						EDID_Detailed_Timing_Descriptor DetailDesc;
+						EDID_Display_Serial_Number Display_Serial_Number;
+						EDID_Unspecified_Text Unspecified_Text;
+						EDID_Display_Range_Limits_Descriptor Display_Range_Limits_Descriptor;
+						EDID_Display_Name Display_Name;
+						EDID_Additional_White_Point_Descriptor Additional_White_Point_Descriptor;
+						EDID_Color_Management_Data_Descriptor Color_Management_Data_Descriptor;
+						EDID_CVT_Timing_Codes_Descriptor CVT_Timing_Codes_Descriptor;
+						EDID_Additional_Standard_Timings Additional_Standard_Timings;
+					}Descriptor[4];
+					//Byte54-71 Descriptor 1
+					//Byte72-89 Descriptor 2
+					//Byte90-107 Descriptor 3
+					//Byte108-125 Descriptor 4
+					/*
+					Descriptor blocks. Detailed timing descriptors, in decreasing preference order. After all detailed timing descriptors, additional descriptors are permitted:
+					Monitor range limits (required)
+					ASCII text (monitor name (required), monitor serial number or unstructured text)
+					6 Additional standard timing information blocks
+					Colour point data.*/
+					BYTE NumberOfExtensions;	//Byte126 Number of extensions to follow. 0 if no extensions.
+					BYTE Checksum;	//Byte127 Sum of all 128 bytes should equal 0 (mod 256).
+				};
+			};
 		};
 		//获取当前正在使用的显示器信息
 #pragma pack(pop)

@@ -22,4 +22,5 @@ bool Hardware::SIO::SIOFactory::DetectSIO()
 	for (const auto& port : SIOPort)
 	{
 	}
+	return false;
 }
