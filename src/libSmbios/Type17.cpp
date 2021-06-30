@@ -97,7 +97,9 @@ namespace
 		("LPDDR4"),
 		{"Logical non-volatile device"},
 		{"HBM (High Bandwidth Memory)"},
-		{"HBM2 (High Bandwidth Memory Generation 2)"}
+		{"HBM2 (High Bandwidth Memory Generation 2)"},
+		{"DDR5"},
+		{"LPDDR5"}
 	};
 
 	const std::string MemoryTechnologyStrs[] =
@@ -267,32 +269,32 @@ std::string Smbios::Type17::FormFactor() const
 	return GetSmbiosInformationWrapper<ExceptionUsed, uint8_t, std::string>
 		(*pImpl, ::FormFactor, Type17Impl::GetFuncRealName(__FUNCTION__),
 			[](const uint8_t& num)
-	{
-		if (num < _countof(FormFactorStrs))
-		{
-			return FormFactorStrs[num];
-		}
-		else
-		{
-			return std::string();
-		}
-	});
+			{
+				if (num < _countof(FormFactorStrs))
+				{
+					return FormFactorStrs[num];
+				}
+				else
+				{
+					return std::string();
+				}
+			});
 }
 
 bool Smbios::Type17::FormFactor(std::string & Str) const noexcept
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, uint8_t>
 		(*pImpl, ::FormFactor, Type17Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& num)
-	{
-		if (num < _countof(FormFactorStrs))
-		{
-			return FormFactorStrs[num];
-		}
-		else
-		{
-			return std::string();
-		}
-	}, Str);
+			{
+				if (num < _countof(FormFactorStrs))
+				{
+					return FormFactorStrs[num];
+				}
+				else
+				{
+					return std::string();
+				}
+			}, Str);
 }
 
 std::uint8_t Smbios::Type17::DeviceSet() const
@@ -336,32 +338,32 @@ std::string Smbios::Type17::MemoryType() const
 	return GetSmbiosInformationWrapper<ExceptionUsed, uint8_t, std::string>
 		(*pImpl, ::MemoryType, Type17Impl::GetFuncRealName(__FUNCTION__),
 			[](const uint8_t& num)
-	{
-		if (num < _countof(MemoryDeviceTypeStrs))
-		{
-			return MemoryDeviceTypeStrs[num];
-		}
-		else
-		{
-			return std::string();
-		}
-	});
+			{
+				if (num < _countof(MemoryDeviceTypeStrs))
+				{
+					return MemoryDeviceTypeStrs[num];
+				}
+				else
+				{
+					return std::string();
+				}
+			});
 }
 
 bool Smbios::Type17::MemoryType(std::string & Str) const noexcept
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, uint8_t>
 		(*pImpl, ::MemoryType, Type17Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& num)
-	{
-		if (num < _countof(MemoryDeviceTypeStrs))
-		{
-			return MemoryDeviceTypeStrs[num];
-		}
-		else
-		{
-			return std::string();
-		}
-	}, Str);
+			{
+				if (num < _countof(MemoryDeviceTypeStrs))
+				{
+					return MemoryDeviceTypeStrs[num];
+				}
+				else
+				{
+					return std::string();
+				}
+			}, Str);
 }
 
 Smbios::MemoryTypeDetailField Smbios::Type17::TypeDetail() const
@@ -369,9 +371,9 @@ Smbios::MemoryTypeDetailField Smbios::Type17::TypeDetail() const
 	return GetSmbiosInformationWrapper<ExceptionUsed, uint16_t, Smbios::MemoryTypeDetailField>
 		(*pImpl, ::TypeDetail, Type17Impl::GetFuncRealName(__FUNCTION__),
 			[](const uint16_t& num)
-	{
-		return static_cast<Smbios::MemoryTypeDetailField>(num);
-	});
+			{
+				return static_cast<Smbios::MemoryTypeDetailField>(num);
+			});
 }
 
 bool Smbios::Type17::TypeDetail(Smbios::MemoryTypeDetailField & Str) const noexcept
@@ -379,9 +381,9 @@ bool Smbios::Type17::TypeDetail(Smbios::MemoryTypeDetailField & Str) const noexc
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, uint16_t>
 		(*pImpl, ::TypeDetail, Type17Impl::GetFuncRealName(__FUNCTION__),
 			[](const uint16_t& num)
-	{
-		return static_cast<Smbios::MemoryTypeDetailField>(num);
-	}, Str);
+			{
+				return static_cast<Smbios::MemoryTypeDetailField>(num);
+			}, Str);
 }
 
 std::uint16_t Smbios::Type17::Speed() const
@@ -449,9 +451,9 @@ Smbios::MemoryAttributeField Smbios::Type17::Attributes() const
 	return GetSmbiosInformationWrapper<ExceptionUsed, uint8_t, Smbios::MemoryAttributeField>
 		(*pImpl, ::Attributes, Type17Impl::GetFuncRealName(__FUNCTION__),
 			[](const uint8_t& num)
-	{
-		return static_cast<Smbios::MemoryAttributeField>(num);
-	});
+			{
+				return static_cast<Smbios::MemoryAttributeField>(num);
+			});
 }
 
 bool Smbios::Type17::Attributes(Smbios::MemoryAttributeField & Str) const noexcept
@@ -459,9 +461,9 @@ bool Smbios::Type17::Attributes(Smbios::MemoryAttributeField & Str) const noexce
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, uint8_t>
 		(*pImpl, ::Attributes, Type17Impl::GetFuncRealName(__FUNCTION__),
 			[](const uint8_t& num)
-	{
-		return static_cast<Smbios::MemoryAttributeField>(num);
-	}, Str);
+			{
+				return static_cast<Smbios::MemoryAttributeField>(num);
+			}, Str);
 }
 
 std::uint32_t Smbios::Type17::ExtentedSize() const
@@ -529,24 +531,24 @@ std::string Smbios::Type17::MemoryTechnology() const
 	return GetSmbiosInformationWrapper<ExceptionUsed, uint8_t, std::string>
 		(*pImpl, ::MemoryTechnology, Type17Impl::GetFuncRealName(__FUNCTION__),
 			[](const uint8_t& num)
-	{
-		if (num < _countof(MemoryTechnologyStrs))
-			return MemoryTechnologyStrs[num];
-		else
-			return std::string();
-	});
+			{
+				if (num < _countof(MemoryTechnologyStrs))
+					return MemoryTechnologyStrs[num];
+				else
+					return std::string();
+			});
 }
 
 bool Smbios::Type17::MemoryTechnology(std::string & Str) const noexcept
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, uint8_t>
 		(*pImpl, ::MemoryTechnology, Type17Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& num)
-	{
-		if (num < _countof(MemoryTechnologyStrs))
-			return MemoryTechnologyStrs[num];
-		else
-			return std::string();
-	}, Str);
+			{
+				if (num < _countof(MemoryTechnologyStrs))
+					return MemoryTechnologyStrs[num];
+				else
+					return std::string();
+			}, Str);
 }
 
 Smbios::MemoryModeCapability Smbios::Type17::MemoryOperatingModeCapability() const
@@ -554,9 +556,9 @@ Smbios::MemoryModeCapability Smbios::Type17::MemoryOperatingModeCapability() con
 	return GetSmbiosInformationWrapper<ExceptionUsed, uint16_t, Smbios::MemoryModeCapability>
 		(*pImpl, ::MemoryOperatingModeCapability, Type17Impl::GetFuncRealName(__FUNCTION__),
 			[](const uint16_t& num)
-	{
-		return static_cast<Smbios::MemoryModeCapability>(num);
-	});
+			{
+				return static_cast<Smbios::MemoryModeCapability>(num);
+			});
 }
 
 bool Smbios::Type17::MemoryOperatingModeCapability(Smbios::MemoryModeCapability & Str) const noexcept
@@ -564,9 +566,9 @@ bool Smbios::Type17::MemoryOperatingModeCapability(Smbios::MemoryModeCapability 
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, uint16_t>
 		(*pImpl, ::MemoryOperatingModeCapability, Type17Impl::GetFuncRealName(__FUNCTION__),
 			[](const uint16_t& num)
-	{
-		return static_cast<Smbios::MemoryModeCapability>(num);
-	}, Str);
+			{
+				return static_cast<Smbios::MemoryModeCapability>(num);
+			}, Str);
 }
 
 std::string Smbios::Type17::FirmwareVersion() const

@@ -368,6 +368,8 @@ namespace
 		"Socket BGA1392",
 		"Socket BGA1510",
 		"Socket BGA1528" /* 0x3C */
+		"Socket LGA4189" /* 0x3D */
+		"Socket LGA1200" /* 0x3E */
 	};
 }
 
@@ -476,30 +478,30 @@ std::string Smbios::Type4::ProcessorFamily()
 {
 	return GetSmbiosInformationWrapper<ExceptionUsed, uint8_t, std::string>(*pImpl, ::ProcessorFamily, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint8_t& ret) -> std::string {
-		if (ret < _countof(ProcessorFamilyStrs))
-		{
-			return ProcessorFamilyStrs[ret];
-		}
-		else
-		{
-			return {};
-		}
-	});
+			if (ret < _countof(ProcessorFamilyStrs))
+			{
+				return ProcessorFamilyStrs[ret];
+			}
+			else
+			{
+				return {};
+			}
+		});
 }
 
 bool Smbios::Type4::ProcessorFamily(std::string & Str)
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, uint8_t>(*pImpl, ::ProcessorFamily, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint8_t& ret) -> std::string {
-		if (ret < _countof(ProcessorFamilyStrs))
-		{
-			return ProcessorFamilyStrs[ret];
-		}
-		else
-		{
-			return {};
-		}
-	}, Str);
+			if (ret < _countof(ProcessorFamilyStrs))
+			{
+				return ProcessorFamilyStrs[ret];
+			}
+			else
+			{
+				return {};
+			}
+		}, Str);
 }
 
 std::string Smbios::Type4::Manufacturer()
@@ -516,22 +518,22 @@ std::string Smbios::Type4::ProcessorID()
 {
 	return GetSmbiosInformationWrapper<ExceptionUsed, uint64_t, std::string>(*pImpl, ::ProcessorID, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint64_t& ret) -> std::string
-	{
-		std::ostringstream oss;
-		oss << std::hex << std::setw(16) << std::setfill('0') << ret;
-		return oss.str();
-	});
+		{
+			std::ostringstream oss;
+			oss << std::hex << std::setw(16) << std::setfill('0') << ret;
+			return oss.str();
+		});
 }
 
 bool Smbios::Type4::ProcessorID(std::string & Str)
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, uint64_t>(*pImpl, ::ProcessorID, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint64_t& ret) -> std::string
-	{
-		std::ostringstream oss;
-		oss << std::hex << std::setw(16) << std::setfill('0') << ret;
-		return oss.str();
-	}, Str);
+		{
+			std::ostringstream oss;
+			oss << std::hex << std::setw(16) << std::setfill('0') << ret;
+			return oss.str();
+		}, Str);
 }
 
 std::string Smbios::Type4::ProcessorVersion()
@@ -548,128 +550,128 @@ std::string Smbios::Type4::Voltage()
 {
 	return GetSmbiosInformationWrapper<ExceptionUsed, uint8_t, std::string>(*pImpl, ::Voltage, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint8_t& numberic) -> std::string
-	{
-		if (numberic & 0x80)
-			return std::to_string(double((numberic & 0x7F) / 10.0)) + "V";
-		else
 		{
-			if (numberic & 0x01)
+			if (numberic & 0x80)
+				return std::to_string(double((numberic & 0x7F) / 10.0)) + "V";
+			else
 			{
-				return "5V";
+				if (numberic & 0x01)
+				{
+					return "5V";
+				}
+				else if (numberic & 0x02)
+					return "3.3V";
+				else if (numberic & 0x4)
+					return "2.9V";
+				return {};
 			}
-			else if (numberic & 0x02)
-				return "3.3V";
-			else if (numberic & 0x4)
-				return "2.9V";
-			return {};
-		}
-	});
+		});
 }
 
 bool Smbios::Type4::Voltage(std::string & Str)
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, uint8_t>(*pImpl, ::Voltage, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint8_t& numberic) -> std::string
-	{
-		if (numberic & 0x80)
-			return std::to_string(double((numberic & 0x7F) / 10.0)) + "V";
-		else
 		{
-			if (numberic & 0x01)
+			if (numberic & 0x80)
+				return std::to_string(double((numberic & 0x7F) / 10.0)) + "V";
+			else
 			{
-				return "5V";
+				if (numberic & 0x01)
+				{
+					return "5V";
+				}
+				else if (numberic & 0x02)
+					return "3.3V";
+				else if (numberic & 0x4)
+					return "2.9V";
+				return {};
 			}
-			else if (numberic & 0x02)
-				return "3.3V";
-			else if (numberic & 0x4)
-				return "2.9V";
-			return {};
-		}
-	}, Str);
+		}, Str);
 }
 
 std::string Smbios::Type4::ExtClock()
 {
 	return GetSmbiosInformationWrapper<ExceptionUsed, uint16_t, std::string>(*pImpl, ::ExternalClock, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint16_t& numberic) -> std::string
-	{
-		if (numberic)
-			return std::to_string(numberic) + "Mhz";
-		else
 		{
-			return {};
-		}
-	});
+			if (numberic)
+				return std::to_string(numberic) + "Mhz";
+			else
+			{
+				return {};
+			}
+		});
 }
 
 bool Smbios::Type4::ExtClock(std::string & Str)
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, uint16_t, std::string>(*pImpl, ::ExternalClock, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint16_t& numberic) -> std::string
-	{
-		if (numberic)
-			return std::to_string(numberic) + "Mhz";
-		else
 		{
-			return {};
-		}
-	}, Str);
+			if (numberic)
+				return std::to_string(numberic) + "Mhz";
+			else
+			{
+				return {};
+			}
+		}, Str);
 }
 
 std::string Smbios::Type4::MaxSpeed()
 {
 	return GetSmbiosInformationWrapper<ExceptionUsed, uint16_t, std::string>(*pImpl, ::MaxSpeed, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint16_t& numberic) -> std::string
-	{
-		if (numberic)
-			return std::to_string(numberic) + "Mhz";
-		else
 		{
-			return {};
-		}
-	});
+			if (numberic)
+				return std::to_string(numberic) + "Mhz";
+			else
+			{
+				return {};
+			}
+		});
 }
 
 bool Smbios::Type4::MaxSpeed(std::string & Str)
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, uint16_t, std::string>(*pImpl, ::MaxSpeed, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint16_t& numberic) -> std::string
-	{
-		if (numberic)
-			return std::to_string(numberic) + "Mhz";
-		else
 		{
-			return {};
-		}
-	}, Str);
+			if (numberic)
+				return std::to_string(numberic) + "Mhz";
+			else
+			{
+				return {};
+			}
+		}, Str);
 }
 
 std::string Smbios::Type4::CurrentSpeed()
 {
 	return GetSmbiosInformationWrapper<ExceptionUsed, uint16_t, std::string>(*pImpl, ::CurrentSpeed, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint16_t& numberic) -> std::string
-	{
-		if (numberic)
-			return std::to_string(numberic) + "Mhz";
-		else
 		{
-			return {};
-		}
-	});
+			if (numberic)
+				return std::to_string(numberic) + "Mhz";
+			else
+			{
+				return {};
+			}
+		});
 }
 
 bool Smbios::Type4::CurrentSpeed(std::string & Str)
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, uint16_t, std::string>(*pImpl, ::CurrentSpeed, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint16_t& numberic) -> std::string
-	{
-		if (numberic)
-			return std::to_string(numberic) + "Mhz";
-		else
 		{
-			return {};
-		}
-	}, Str);
+			if (numberic)
+				return std::to_string(numberic) + "Mhz";
+			else
+			{
+				return {};
+			}
+		}, Str);
 }
 
 uint8_t Smbios::Type4::Status()
@@ -686,30 +688,30 @@ std::string Smbios::Type4::ProcessorUpgrade()
 {
 	return GetSmbiosInformationWrapper<ExceptionUsed, uint8_t, std::string>(*pImpl, ::ProcessorUpgrade, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint8_t& ret) -> std::string {
-		if (ret < _countof(ProcessorSocketStrs))
-		{
-			return ProcessorSocketStrs[ret];
-		}
-		else
-		{
-			return {};
-		}
-	});
+			if (ret < _countof(ProcessorSocketStrs))
+			{
+				return ProcessorSocketStrs[ret];
+			}
+			else
+			{
+				return {};
+			}
+		});
 }
 
 bool Smbios::Type4::ProcessorUpgrade(std::string & Str)
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, uint8_t>(*pImpl, ::ProcessorUpgrade, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint8_t& ret) -> std::string {
-		if (ret < _countof(ProcessorSocketStrs))
-		{
-			return ProcessorSocketStrs[ret];
-		}
-		else
-		{
-			return {};
-		}
-	}, Str);
+			if (ret < _countof(ProcessorSocketStrs))
+			{
+				return ProcessorSocketStrs[ret];
+			}
+			else
+			{
+				return {};
+			}
+		}, Str);
 }
 
 uint16_t Smbios::Type4::L1CacheHandle()
@@ -815,30 +817,30 @@ std::string Smbios::Type4::ProcessorFamily2()
 {
 	return GetSmbiosInformationWrapper<ExceptionUsed, uint16_t, std::string>(*pImpl, ::ProcessorFamily2, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint16_t& ret) -> std::string {
-		if (ret < _countof(ProcessorFamilyStrs))
-		{
-			return ProcessorFamilyStrs[ret];
-		}
-		else
-		{
-			return {};
-		}
-	});
+			if (ret < _countof(ProcessorFamilyStrs))
+			{
+				return ProcessorFamilyStrs[ret];
+			}
+			else
+			{
+				return {};
+			}
+		});
 }
 
 bool Smbios::Type4::ProcessorFamily2(std::string & Str)
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, uint16_t>(*pImpl, ::ProcessorFamily2, Type4Impl::GetFuncRealName(__FUNCTION__),
 		[](const uint16_t& ret) -> std::string {
-		if (ret < _countof(ProcessorFamilyStrs))
-		{
-			return ProcessorFamilyStrs[ret];
-		}
-		else
-		{
-			return {};
-		}
-	}, Str);
+			if (ret < _countof(ProcessorFamilyStrs))
+			{
+				return ProcessorFamilyStrs[ret];
+			}
+			else
+			{
+				return {};
+			}
+		}, Str);
 }
 
 uint16_t Smbios::Type4::CoreCount2()

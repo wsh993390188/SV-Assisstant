@@ -57,7 +57,14 @@ namespace
 		("PCI Express Gen 3 SFF-8639"),
 		("PCI Express Mini 52-pin (CEM spec. 2.0) with bottom - side keep - outs.Use Slot Length field value 03h(short length) for \"half-Mini card\" - only support, 04h(long length) for \"full-Mini card\" or dual support."),
 		("PCI Express Mini 52-pin (CEM spec. 2.0) without	bottom - side keep - outs.Use Slot Length field value 03h(short length) for \"half-Mini card\" - only support, 04h(long length) for \"full-Mini card\" or dual support."),
-		("PCI Express Mini 76-pin (CEM spec. 2.0) Corresponds to Display - Mini card.")
+		("PCI Express Mini 76-pin (CEM spec. 2.0) Corresponds to Display - Mini card."),
+		("PCI Express Gen 4 SFF-8639 (U.2)"),
+		("PCI Express Gen 5 SFF-8639 (U.2)"),
+		("OCP NIC 3.0 Small Form Factor (SFF)"),
+		("OCP NIC 3.0 Large Form Factor (LFF)"),
+		("OCP NIC Prior to 3.0"),
+		(""), // 29H was empty
+		("CXL Flexbus 1.0 (deprecated, see note below)"),
 	};
 
 	//A0-BD
@@ -85,7 +92,20 @@ namespace
 		("PCI Express Gen 3 x2"),
 		("PCI Express Gen 3 x4"),
 		("PCI Express Gen 3 x8"),
-		("PCI Express Gen 3 x16")
+		("PCI Express Gen 3 x16"),
+		(""),//B7 was empty
+		("PCI Express Gen 4 (see note below)"),
+		("PCI Express Gen 4 x1"),
+		("PCI Express Gen 4 x2"),
+		("PCI Express Gen 4 x4"),
+		("PCI Express Gen 4 x8"),
+		("PCI Express Gen 4 x16"),
+		("PCI Express Gen 5 (see note below)"),
+		("PCI Express Gen 5 x1"),
+		("PCI Express Gen 5 x2"),
+		("PCI Express Gen 5 x4"),
+		("PCI Express Gen 5 x8"),
+		("PCI Express Gen 5 x16"),
 	};
 
 	const std::string SystemSlotDataBusWidth[] =
@@ -247,116 +267,116 @@ std::string Smbios::Type9::SlotType() const
 {
 	return GetSmbiosInformationWrapper<ExceptionUsed, std::uint8_t, std::string>
 		(*pImpl, ::SlotType, Type9Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& ret)
-	{
-		if (ret < _countof(SystemSlotsTypefirst))
-		{
-			return SystemSlotsTypefirst[ret];
-		}
+			{
+				if (ret < _countof(SystemSlotsTypefirst))
+				{
+					return SystemSlotsTypefirst[ret];
+				}
 
-		if (ret >= 0xA0)
-		{
-			if (ret - 0xA0 < _countof(SystemSlotsTypesecond))
-				return SystemSlotsTypesecond[ret - 0xA0];
-		}
-		return std::string();
-	});
+				if (ret >= 0xA0)
+				{
+					if (ret - 0xA0 < _countof(SystemSlotsTypesecond))
+						return SystemSlotsTypesecond[ret - 0xA0];
+				}
+				return std::string();
+			});
 }
 
 bool Smbios::Type9::SlotType(std::string & Str) const noexcept
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, std::uint8_t>
 		(*pImpl, ::SlotType, Type9Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& ret)
-	{
-		if (ret < _countof(SystemSlotsTypefirst))
-		{
-			return SystemSlotsTypefirst[ret];
-		}
+			{
+				if (ret < _countof(SystemSlotsTypefirst))
+				{
+					return SystemSlotsTypefirst[ret];
+				}
 
-		if (ret >= 0xA0)
-		{
-			if (ret - 0xA0 < _countof(SystemSlotsTypesecond))
-				return SystemSlotsTypesecond[ret - 0xA0];
-		}
-		return std::string();
-	}, Str);
+				if (ret >= 0xA0)
+				{
+					if (ret - 0xA0 < _countof(SystemSlotsTypesecond))
+						return SystemSlotsTypesecond[ret - 0xA0];
+				}
+				return std::string();
+			}, Str);
 }
 
 std::string Smbios::Type9::SlotDataBusWidth() const
 {
 	return GetSmbiosInformationWrapper<ExceptionUsed, std::uint8_t, std::string>
 		(*pImpl, ::SlotDataBusWidth, Type9Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& ret)
-	{
-		if (ret < _countof(SystemSlotDataBusWidth))
-		{
-			return SystemSlotDataBusWidth[ret];
-		}
-		return std::string();
-	});
+			{
+				if (ret < _countof(SystemSlotDataBusWidth))
+				{
+					return SystemSlotDataBusWidth[ret];
+				}
+				return std::string();
+			});
 }
 
 bool Smbios::Type9::SlotDataBusWidth(std::string & Str) const noexcept
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, std::uint8_t>
 		(*pImpl, ::SlotDataBusWidth, Type9Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& ret)
-	{
-		if (ret < _countof(SystemSlotDataBusWidth))
-		{
-			return SystemSlotDataBusWidth[ret];
-		}
-		return std::string();
-	}, Str);
+			{
+				if (ret < _countof(SystemSlotDataBusWidth))
+				{
+					return SystemSlotDataBusWidth[ret];
+				}
+				return std::string();
+			}, Str);
 }
 
 std::string Smbios::Type9::CurrentUsage() const
 {
 	return GetSmbiosInformationWrapper<ExceptionUsed, std::uint8_t, std::string>
 		(*pImpl, ::CurrentUsage, Type9Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& ret)
-	{
-		if (ret < _countof(SystemSlotCurrentUsage))
-		{
-			return SystemSlotCurrentUsage[ret];
-		}
-		return std::string();
-	});
+			{
+				if (ret < _countof(SystemSlotCurrentUsage))
+				{
+					return SystemSlotCurrentUsage[ret];
+				}
+				return std::string();
+			});
 }
 
 bool Smbios::Type9::CurrentUsage(std::string & Str) const noexcept
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, std::uint8_t>
 		(*pImpl, ::CurrentUsage, Type9Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& ret)
-	{
-		if (ret < _countof(SystemSlotCurrentUsage))
-		{
-			return SystemSlotCurrentUsage[ret];
-		}
-		return std::string();
-	}, Str);
+			{
+				if (ret < _countof(SystemSlotCurrentUsage))
+				{
+					return SystemSlotCurrentUsage[ret];
+				}
+				return std::string();
+			}, Str);
 }
 
 std::string Smbios::Type9::SlotLength() const
 {
 	return GetSmbiosInformationWrapper<ExceptionUsed, std::uint8_t, std::string>
 		(*pImpl, ::SlotLength, Type9Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& ret)
-	{
-		if (ret < _countof(SystemSlotLength))
-		{
-			return SystemSlotLength[ret];
-		}
-		return std::string();
-	});
+			{
+				if (ret < _countof(SystemSlotLength))
+				{
+					return SystemSlotLength[ret];
+				}
+				return std::string();
+			});
 }
 
 bool Smbios::Type9::SlotLength(std::string & Str) const noexcept
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, std::uint8_t>
 		(*pImpl, ::SlotLength, Type9Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& ret)
-	{
-		if (ret < _countof(SystemSlotLength))
-		{
-			return SystemSlotLength[ret];
-		}
-		return std::string();
-	}, Str);
+			{
+				if (ret < _countof(SystemSlotLength))
+				{
+					return SystemSlotLength[ret];
+				}
+				return std::string();
+			}, Str);
 }
 
 std::uint16_t Smbios::Type9::SlotID() const
@@ -375,36 +395,36 @@ Smbios::SlotCharacteristics1Field Smbios::Type9::SlotCharacteristics1() const
 {
 	return GetSmbiosInformationWrapper<ExceptionUsed, std::uint8_t, Smbios::SlotCharacteristics1Field>
 		(*pImpl, ::SlotCharacteristics1, Type9Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& ret)
-	{
-		return static_cast<Smbios::SlotCharacteristics1Field>(ret);
-	});
+			{
+				return static_cast<Smbios::SlotCharacteristics1Field>(ret);
+			});
 }
 
 bool Smbios::Type9::SlotCharacteristics1(Smbios::SlotCharacteristics1Field & Str) const noexcept
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, std::uint8_t>
 		(*pImpl, ::SlotCharacteristics1, Type9Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& ret)
-	{
-		return static_cast<Smbios::SlotCharacteristics1Field>(ret);
-	}, Str);
+			{
+				return static_cast<Smbios::SlotCharacteristics1Field>(ret);
+			}, Str);
 }
 
 Smbios::SlotCharacteristics2Field Smbios::Type9::SlotCharacteristics2() const
 {
 	return GetSmbiosInformationWrapper<ExceptionUsed, std::uint8_t, Smbios::SlotCharacteristics2Field>
 		(*pImpl, ::SlotCharacteristics2, Type9Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& ret)
-	{
-		return static_cast<Smbios::SlotCharacteristics2Field>(ret);
-	});
+			{
+				return static_cast<Smbios::SlotCharacteristics2Field>(ret);
+			});
 }
 
 bool Smbios::Type9::SlotCharacteristics2(Smbios::SlotCharacteristics2Field & Str) const noexcept
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, std::uint8_t>
 		(*pImpl, ::SlotCharacteristics2, Type9Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& ret)
-	{
-		return static_cast<Smbios::SlotCharacteristics2Field>(ret);
-	}, Str);
+			{
+				return static_cast<Smbios::SlotCharacteristics2Field>(ret);
+			}, Str);
 }
 
 std::uint16_t Smbios::Type9::SegmentGroupNum() const
@@ -435,18 +455,18 @@ Smbios::DeviceFuncField Smbios::Type9::DevFuncNum() const
 {
 	return GetSmbiosInformationWrapper<ExceptionUsed, std::uint8_t, Smbios::DeviceFuncField>
 		(*pImpl, ::DevFuncNum, Type9Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& ret)
-	{
-		return static_cast<Smbios::DeviceFuncField>(ret);
-	});
+			{
+				return static_cast<Smbios::DeviceFuncField>(ret);
+			});
 }
 
 bool Smbios::Type9::DevFuncNum(Smbios::DeviceFuncField & Str) const noexcept
 {
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, std::uint8_t>
 		(*pImpl, ::DevFuncNum, Type9Impl::GetFuncRealName(__FUNCTION__), [](const uint8_t& ret)
-	{
-		return static_cast<Smbios::DeviceFuncField>(ret);
-	}, Str);
+			{
+				return static_cast<Smbios::DeviceFuncField>(ret);
+			}, Str);
 }
 
 std::uint8_t Smbios::Type9::DataBusWidth() const
@@ -479,20 +499,20 @@ std::vector<uint64_t> Smbios::Type9::PeerGroups() const
 	return GetSmbiosInformationWrapper<ExceptionUsed, uint8_t, std::vector<uint64_t> >
 		(*pImpl, ::PeerGroups, Type9Impl::GetFuncRealName(__FUNCTION__),
 			[this, Number](const uint8_t&)
-	{
-		std::vector<uint64_t> ret;
-		for (auto i = 0; i < Number; i += 5)
-		{
-			NumbericConvertHelp NumberHelp;
-			NumberHelp.LowNumber32 = GetSmbiosInformation<uint32_t>(*pImpl, ::PeerGroups + i);
-			NumberHelp.HighNunber8_1 = GetSmbiosInformation<uint8_t>(*pImpl, ::PeerGroups + i + 4);
-			ret.emplace_back(NumberHelp.Number);
-		}
-		return ret;
-	});
+			{
+				std::vector<uint64_t> ret;
+				for (auto i = 0; i < Number; i += 5)
+				{
+					NumbericConvertHelp NumberHelp;
+					NumberHelp.LowNumber32 = GetSmbiosInformation<uint32_t>(*pImpl, ::PeerGroups + i);
+					NumberHelp.HighNunber8_1 = GetSmbiosInformation<uint8_t>(*pImpl, ::PeerGroups + i + 4);
+					ret.emplace_back(NumberHelp.Number);
+				}
+				return ret;
+			});
 }
 
-bool Smbios::Type9::PeerGroups(std::vector<uint64_t> & Str) const noexcept
+bool Smbios::Type9::PeerGroups(std::vector<uint64_t> &Str) const noexcept
 {
 	uint8_t Number{};
 	if (!PeerGroupingCount(Number))
@@ -502,15 +522,15 @@ bool Smbios::Type9::PeerGroups(std::vector<uint64_t> & Str) const noexcept
 	return GetSmbiosInformationWrapper<ExceptionNoUsed, uint8_t>
 		(*pImpl, ::PeerGroups, Type9Impl::GetFuncRealName(__FUNCTION__),
 			[this, Number](const uint8_t&)
-	{
-		std::vector<uint64_t> ret;
-		for (auto i = 0; i < Number; i += 5)
-		{
-			NumbericConvertHelp NumberHelp;
-			NumberHelp.LowNumber32 = GetSmbiosInformation<uint32_t>(*pImpl, ::PeerGroups + i);
-			NumberHelp.HighNunber8_1 = GetSmbiosInformation<uint8_t>(*pImpl, ::PeerGroups + i + 4);
-			ret.emplace_back(NumberHelp.Number);
-		}
-		return ret;
-	}, Str);
+			{
+				std::vector<uint64_t> ret;
+				for (auto i = 0; i < Number; i += 5)
+				{
+					NumbericConvertHelp NumberHelp;
+					NumberHelp.LowNumber32 = GetSmbiosInformation<uint32_t>(*pImpl, ::PeerGroups + i);
+					NumberHelp.HighNunber8_1 = GetSmbiosInformation<uint8_t>(*pImpl, ::PeerGroups + i + 4);
+					ret.emplace_back(NumberHelp.Number);
+				}
+				return ret;
+			}, Str);
 }
