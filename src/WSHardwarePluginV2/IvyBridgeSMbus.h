@@ -27,7 +27,7 @@ namespace Hardware
 			/// @return 解析是否成功
 			bool ParserSPD(const USHORT& DIMMId, MemoryCommonInformation& MemoryInfo)override final;
 
-			bool ReadSPD(const USHORT& DIMMId, DDR3_INFO& spd);
+			bool ReadSPD(const USHORT& DIMMId, DDR3_Normal_Info& spd);
 			void InitSmbuscontrol(const DWORD& Smbusbase);
 			bool WaitByteCmd(DWORD BaseAddress);
 			bool ClearStatus(DWORD BaseAddress);

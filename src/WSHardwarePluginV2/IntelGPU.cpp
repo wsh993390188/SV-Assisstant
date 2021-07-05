@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "IntelGPU.h"
 #include "DXGIGPUBase.h"
+#include "PCIUtils.h"
 
 #if defined(_MSC_VER)
 #pragma warning(disable : 4996)
@@ -22,7 +23,7 @@ Hardware::GPU::IntelGPU::IntelGPU(const GPUDevice& GpuData) :
 	if (GPUBaseData.BarAddress != GPU::InvaildMemoryBase)
 	{
 		m_Decorators.emplace_back(std::make_unique<IntelGPUTemperature>(this->GPUBaseData.BarAddress + INTELGPU_TEMPERATURE, "Temperature"));
-		//m_Decorators.emplace_back(std::make_unique<IntelGPUEngineClock>(this->GPUBaseData.BarAddress + INTELGPU_ENGINE_FREQUENCY, "Engine Clock"));
+		m_Decorators.emplace_back(std::make_unique<IntelGPUEngineClock>(this->GPUBaseData.BarAddress + INTELGPU_ENGINE_FREQUENCY, "Engine Clock"));
 		m_Decorators.emplace_back(std::make_unique<IntelGPUMemoryClock>(this->GPUBaseData.BarAddress + INTELGPU_MEMORY_FREQUERCY, "Memory Clock"));
 
 		auto MemoryPtr = std::make_shared<Utils::Ring0::SafeMemoryHandle>();
@@ -61,6 +62,14 @@ std::string Hardware::GPU::IntelGPU::UpdateGPUInfo()
 std::string Hardware::GPU::IntelGPU::GetGPUInfo()
 {
 	Json::Value root;
+
+	if (!SubVendor.empty())
+	{
+		Json::Value temp;
+		temp["Vendor"] = SubVendor;
+		root.append(temp);
+	}
+
 	{
 		if (GpuDatas.GPUMinFreq)
 		{
@@ -239,16 +248,20 @@ void Hardware::GPU::IntelGPUEngineClock::Update(std::weak_ptr<Utils::Ring0::Safe
 	if (!MemoryPtr.expired())
 	{
 		auto MemoryPtrReal = MemoryPtr.lock();
-		DWORD value{};
-		auto res = MemoryPtrReal->ReadDWORD(MemoryBase, value);
-		if (res && value)
+		DWORD value{}, count = 0;
+		while (count++ < 100000)
 		{
-			IsUpdate = true;
-			m_EngineClock = Utils::extract_bits(value, 8, 15) * INTELGPU_ENGINE_FREQUENCY_MULTIPLIER;
-		}
-		else
-		{
-			spdlog::error("IntelGPUEngineClock Read Memory {:x} Status:{} maybe read value:{}", MemoryBase, res ? "true" : "false", value);
+			auto res = MemoryPtrReal->ReadDWORD(MemoryBase, value);
+			if (res && value)
+			{
+				IsUpdate = true;
+				m_EngineClock = Utils::extract_bits(value, 8, 15) * INTELGPU_ENGINE_FREQUENCY_MULTIPLIER;
+				break;
+			}
+			else
+			{
+				//spdlog::error("IntelGPUEngineClock Read Memory {:x} Status:{} maybe read value:{}", MemoryBase, res ? "true" : "false", value);
+			}
 		}
 	}
 }

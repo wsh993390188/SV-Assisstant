@@ -42,22 +42,38 @@ namespace Hardware
 			/// @return 解析是否成功
 			bool ParserSPD(const USHORT& DIMMId, MemoryCommonInformation& MemoryInfo)override final;
 
-			/// @brief 读取DDR3的SPD信息
+			/// @brief 读取SPD信息
 			/// @param DIMMId DIMM id
-			/// @param spd spd信息
+			/// @param data SPD通用信息
 			/// @return 读取是否成功
-			bool ReadSPD(const USHORT& DIMMId, DDR3_INFO& spd);
+			bool ReadSPD(const USHORT& DIMMId, MemoryCommonInformation& data);
 
-			/// @brief 读取DDR4的SPD信息
+		private:
+
+			/// @brief 读取DDR3的SPD
 			/// @param DIMMId DIMM id
-			/// @param spd spd信息
 			/// @return 读取是否成功
-			bool ReadSPD(const USHORT& DIMMId, DDR4_INFO& spd);
+			bool ReadDDR3SPD(const USHORT& DIMMId);
+
+			/// @brief 读取DDR4的SPD
+			/// @param DIMMId DIMM id
+			/// @return 读取是否成功
+			bool ReadDDR4SPD(const USHORT& DIMMId);
+
+			/// @brief 读取DDR5的SPD
+			/// @param DIMMId DIMM id
+			/// @return 读取是否成功
+			bool ReadDDR5SPD(const USHORT& DIMMId);
 
 			/// @brief 用字节方式读取SPD中的信息
 			/// @param[in] Offset DIMM的便宜
 			/// @param[out] val 读取后的值
 			bool ReadSPDByte(const uint8_t& Offset, DWORD& val);
+
+			/// @brief 分配SPD的内存空间
+			/// @param DDRSize DDR的大小
+			/// @param DDRType DDR的类型
+			void AllocateSPDSize(const uint8_t& DDRSize, const uint8_t& DDRType);
 		private:
 			/// @brief 等待Smbus Ready
 			/// @return 是否Ready
@@ -88,6 +104,8 @@ namespace Hardware
 			USHORT SmbusBase;
 			/// @brief IO操作指针
 			Utils::Ring0::SafeIoHandle IoPtr;
+			/// @brief SPD的数据
+			std::vector<uint8_t> SPDData;
 		};
 	}
 }

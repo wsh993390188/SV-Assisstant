@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CommonSMBUS.h"
 #include "IoHandle.h"
-#include "ExecSpd.h"
+#include "ParserSPD.h"
 
 namespace Hardware
 {
@@ -61,23 +61,13 @@ namespace Hardware
 #pragma endregion
 
 #pragma region SMBUS Ready & Done
-		bool CommonSMBUS::ReadSPDByte(const uint8_t& Offset, DWORD& val)
-		{
-			if (!smbus_wait_until_ready())
-				return false;
-			IoPtr.WriteByte(SmbusBase + SMBUS_CONTROL_REG, Offset);
-			IoPtr.WriteByte(SmbusBase + SMBUS_COMMAND_REG, SMBUS_READ_BYTE_COMMAND);
-			if (smbus_wait_until_done() < 0)
-				return false;
-			IoPtr.ReadByte(SmbusBase + SMBUS_DATA0_REG, val);
-			return true;
-		}
 		bool CommonSMBUS::smbus_wait_until_ready()
 		{
 			ULONG loops = SMBUS_TIMEOUT;
 			do {
 				DWORD val = {};
-				IoPtr.ReadByte(SmbusBase + SMBUS_STATUS_REG, val);
+				if (!IoPtr.ReadByte(SmbusBase + SMBUS_STATUS_REG, val))
+					return false;
 				val &= 0x1f;
 				if (val == 0) {	/* ready now */
 					return true;
@@ -93,7 +83,8 @@ namespace Hardware
 			do {
 				DWORD val = {};
 
-				IoPtr.ReadByte(SmbusBase + SMBUS_STATUS_REG, val);
+				if (!IoPtr.ReadByte(SmbusBase + SMBUS_STATUS_REG, val))
+					return -6;
 				val &= 0x1f;	/* mask off reserved bits */
 				if (val & 0x1c) {
 					if ((val & SMBHSTSTS_DEV_ERR) == SMBHSTSTS_DEV_ERR)
@@ -239,106 +230,186 @@ namespace Hardware
 			return false;
 		}
 
+#pragma endregion
+
+#pragma region Read SPD
 		bool CommonSMBUS::ParserSPD(const USHORT& DIMMId, MemoryCommonInformation& MemoryInfo)
 		{
 			if (PrepareSmbus())
 			{
 				auto RealDIMMId = ConverterIdToDIMMId(DIMMId);
-				IoPtr.WriteByte(SmbusBase + SMBUS_HOST_CMD_REG, RealDIMMId | 1);
-				DWORD DDRType = 0;
-				if (ReadSPDByte(0x02, DDRType))
+
+				return ReadSPD(RealDIMMId, MemoryInfo);
+			}
+			return false;
+		}
+
+		bool CommonSMBUS::ReadSPD(const USHORT& DIMMId, MemoryCommonInformation& data)
+		{
+			IoPtr.WriteByte(SmbusBase + SMBUS_HOST_CMD_REG, DIMMId | 1);
+			DWORD DDRSize = 0, DDRType = 0;
+			if (ReadSPDByte(0x00, DDRSize) && ReadSPDByte(0x02, DDRType))
+			{
+				AllocateSPDSize(DDRSize, DDRType);
+				auto DeviceType = ParseDeviceType(DDRType);
+				if (IsDDR3Device(DeviceType))
 				{
-					if (IsDDR3(DDRType))
+					if (ReadDDR3SPD(DIMMId))
 					{
-						DDR3_INFO spd{};
-						if (ReadSPD(RealDIMMId, spd))
-						{
-							ExecMemoryDDR3 TempExec(spd);
-							TempExec.Execute(MemoryInfo);
-							return true;
-						}
-						else
-						{
-							spdlog::error("read ddr3 error");
-						}
+						ParserDDR3SPD Parser;
+						if (SPDData.size() >= sizeof(DDR3_INFO_FIRST_128))
+							Parser.ParserFirstSPD(reinterpret_cast<const DDR3_INFO_FIRST_128*>(SPDData.data()), data);
+						if (SPDData.size() >= sizeof(DDR3_INFO_FIRST_128) + sizeof(DDR3_INFO_SECOND_128))
+							Parser.ParserSecondSPD(reinterpret_cast<const DDR3_INFO_SECOND_128*>(SPDData.data() + sizeof(DDR3_INFO_FIRST_128)), data);
+						return true;
 					}
-					else if (IsDDR4(DDRType))
+				}
+				else if (IsDDR4Device(DeviceType))
+				{
+					if (ReadDDR4SPD(DIMMId))
 					{
-						DDR4_INFO spd{};
-						if (ReadSPD(RealDIMMId, spd))
+						ParserDDR4SPD Parser;
+						if (SPDData.size() >= sizeof(DDR4_INFO_FIRST_128))
+							Parser.ParserFirstSPD(reinterpret_cast<const DDR4_INFO_FIRST_128*>(SPDData.data()), data);
+						if (SPDData.size() >= sizeof(DDR4_INFO_FIRST_128) + sizeof(DDR4_INFO_SECOND_128))
+							Parser.ParserSecondSPD(reinterpret_cast<const DDR4_INFO_SECOND_128*>(SPDData.data() + sizeof(DDR4_INFO_FIRST_128)), data);
+						if (SPDData.size() >= sizeof(DDR4_INFO_FIRST_128) + sizeof(DDR4_INFO_SECOND_128) + sizeof(DDR4_INFO_THIRD_128))
+							Parser.ParserThirdSPD(reinterpret_cast<const DDR4_INFO_THIRD_128*>(SPDData.data() + sizeof(DDR4_INFO_FIRST_128) + sizeof(DDR4_INFO_SECOND_128)), data);
+						if (SPDData.size() >= sizeof(DDR4_INFO_FIRST_128) + sizeof(DDR4_INFO_SECOND_128) + sizeof(DDR4_INFO_THIRD_128) + sizeof(DDR4_INFO_FOURTH_128))
+							Parser.ParserFourthSPD(reinterpret_cast<const DDR4_INFO_FOURTH_128*>(SPDData.data() + sizeof(DDR4_INFO_FIRST_128) + sizeof(DDR4_INFO_SECOND_128) + sizeof(DDR4_INFO_THIRD_128)), data);
+						return true;
+					}
+				}
+				else if (IsDDR5Device(DeviceType))
+				{
+					if (ReadDDR5SPD(DIMMId))
+						return true;
+				}
+				else
+				{
+					spdlog::error("unknown device type ({})", DeviceType);
+				}
+			}
+			else
+			{
+				spdlog::error("read spd byte 0 | 2 error");
+			}
+			return false;
+		}
+
+		bool CommonSMBUS::ReadDDR3SPD(const USHORT& DIMMId)
+		{
+			assert(SPDData.size() <= 256);
+			if (PrepareSmbus())
+			{
+				IoPtr.WriteByte(SmbusBase + SMBUS_HOST_CMD_REG, DIMMId | 1);
+				for (ULONG offset = 0; offset < SPDData.size(); offset++)
+				{
+					DWORD val = 0;
+					if (ReadSPDByte(offset, val))
+						SPDData[offset] = (BYTE)val;
+				}
+				return true;
+			}
+			return false;
+		}
+
+		bool CommonSMBUS::ReadDDR4SPD(const USHORT& DIMMId)
+		{
+			assert(SPDData.size() <= 512);
+			if (PrepareSmbus())
+			{
+				IoPtr.WriteByte(SmbusBase + SMBUS_HOST_CMD_REG, DIMMId | 1);
+
+				if (SPDData.size() > 256)
+				{
+					for (ULONG offset = 0; offset < 0x100; offset++)
+					{
+						DWORD val = 0;
+						if (ReadSPDByte(offset, val))
+							SPDData[offset] = val;
+					}
+					if (SwitchToPage(0x6E))
+					{
+						IoPtr.WriteByte(SmbusBase + SMBUS_HOST_CMD_REG, DIMMId | 1);
+						for (ULONG offset = 0x00; offset < SPDData.size() - 0x100; offset++)
 						{
-							ExecMemoryDDR4 TempExec(spd);
-							TempExec.Execute(MemoryInfo);
-							return true;
-						}
-						else
-						{
-							spdlog::error("read ddr4 error");
+							DWORD val = 0;
+							if (ReadSPDByte(offset, val))
+								SPDData[offset + 0x100ul] = val;
 						}
 					}
 					else
 					{
-						spdlog::error("unknown ddr type({})", DDRType);
-					}
-				}
-			}
-			return false;
-		}
-#pragma endregion
-
-#pragma region Read SPD
-		bool CommonSMBUS::ReadSPD(const USHORT& DIMMId, DDR3_INFO& spd)
-		{
-			if (PrepareSmbus())
-			{
-				IoPtr.WriteByte(SmbusBase + SMBUS_HOST_CMD_REG, DIMMId | 1);
-				for (ULONG offset = 0; offset < 0x100; offset++)
-				{
-					if (!smbus_wait_until_ready())
 						return false;
-					IoPtr.WriteByte(SmbusBase + SMBUS_CONTROL_REG, offset);
-					IoPtr.WriteByte(SmbusBase + SMBUS_COMMAND_REG, SMBUS_READ_BYTE_COMMAND);
-					if (smbus_wait_until_done() < 0)
-						return false;
-					DWORD val = 0;
-					IoPtr.ReadByte(SmbusBase + SMBUS_DATA0_REG, val);
-					memcpy(reinterpret_cast<PBYTE>(&spd) + offset, &val, 1);
-				}
-				return true;
-			}
-			return false;
-		}
-
-		bool CommonSMBUS::ReadSPD(const USHORT& DIMMId, DDR4_INFO& spd)
-		{
-			if (PrepareSmbus())
-			{
-				IoPtr.WriteByte(SmbusBase + SMBUS_HOST_CMD_REG, DIMMId | 1);
-				for (ULONG offset = 0; offset < 0x100; offset++)
-				{
-					DWORD val = 0;
-					ReadSPDByte(offset, val);
-					memcpy(reinterpret_cast<PBYTE>(&spd) + offset, &val, 1);
-				}
-				if (SwitchToPage(0x6E))
-				{
-					IoPtr.WriteByte(SmbusBase + SMBUS_HOST_CMD_REG, DIMMId | 1);
-					for (ULONG offset = 0x00; offset < 128; offset++)
-					{
-						DWORD val = 0;
-						ReadSPDByte(offset, val);
-						memcpy(reinterpret_cast<PBYTE>(&spd) + offset + 0x100, &val, 1);
 					}
+					SwitchToPage(0x6C);
 				}
 				else
 				{
-					return false;
+					for (ULONG offset = 0; offset < SPDData.size(); offset++)
+					{
+						DWORD val = 0;
+						if (ReadSPDByte(offset, val))
+							SPDData[offset] = val;
+					}
 				}
-
-				SwitchToPage(0x6C);
 				return true;
 			}
 			return false;
+		}
+
+		bool CommonSMBUS::ReadDDR5SPD(const USHORT& DIMMId)
+		{
+			return false;
+		}
+
+		bool CommonSMBUS::ReadSPDByte(const uint8_t& Offset, DWORD& val)
+		{
+			if (!smbus_wait_until_ready())
+				return false;
+			IoPtr.WriteByte(SmbusBase + SMBUS_CONTROL_REG, Offset);
+			IoPtr.WriteByte(SmbusBase + SMBUS_COMMAND_REG, SMBUS_READ_BYTE_COMMAND);
+			if (smbus_wait_until_done() < 0)
+				return false;
+			return IoPtr.ReadByte(SmbusBase + SMBUS_DATA0_REG, val);
+		}
+
+		void CommonSMBUS::AllocateSPDSize(const uint8_t& DDRSize, const uint8_t& DDRType)
+		{
+			auto DDRTotalSize = Utils::extract_bits_ui(DDRSize, 4, 6);
+			auto DDRUsedSize = Utils::extract_bits_ui(DDRSize, 0, 3);
+			if ((DDRTotalSize == 0) && (DDRUsedSize == 0))
+			{
+				if (IsDDR3Device(DeviceType(DDRType)))
+					SPDData.resize(256, 0xFF);
+				else if (IsDDR4Device(DeviceType(DDRType)))
+					SPDData.resize(384, 0xFF);
+				else if (IsDDR5Device(DeviceType(DDRType)))
+					SPDData.resize(512, 0xFF);
+			}
+			else if ((DDRTotalSize != 0) && (DDRUsedSize == 0))
+			{
+				if (DDRTotalSize == 1)
+					SPDData.resize(256, 0xFF);
+				else if (DDRTotalSize == 2)
+					SPDData.resize(512, 0xFF);
+				else
+					spdlog::error("spd total size using reserved bit Byte: {0} TotalSize: {1}", DDRSize, DDRTotalSize);
+			}
+			else
+			{
+				if (DDRUsedSize == 0b0001)
+					SPDData.resize(128, 0xFF);
+				else if (DDRUsedSize == 0b0010)
+					SPDData.resize(256, 0xFF);
+				else if (DDRUsedSize == 0b0011)
+					SPDData.resize(384, 0xFF);
+				else if (DDRUsedSize == 0b0100)
+					SPDData.resize(512, 0xFF);
+				else
+					spdlog::error("spd used size using reserved bit Byte: {0} UsedSize: {1}", DDRSize, DDRUsedSize);
+			}
 		}
 #pragma endregion
 	}

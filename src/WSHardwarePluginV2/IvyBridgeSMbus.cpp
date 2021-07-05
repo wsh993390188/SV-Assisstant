@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "IvyBridgeSMbus.h"
-#include "ExecSpd.h"
+#include "ParserSPD.h"
 
 namespace Hardware
 {
@@ -46,11 +46,12 @@ namespace Hardware
 
 		bool IvyBridgeSMbus::ParserSPD(const USHORT& DIMMId, MemoryCommonInformation& MemoryInfo)
 		{
-			DDR3_INFO spd{};
+			DDR3_Normal_Info spd{};
 			if (ReadSPD(DIMMId, spd))
 			{
-				ExecMemoryDDR3 TempExec(spd);
-				TempExec.Execute(MemoryInfo);
+				ParserDDR3SPD Parser;
+				Parser.ParserFirstSPD(&spd.FirstInfo, MemoryInfo);
+				Parser.ParserSecondSPD(&spd.SecondInfo, MemoryInfo);
 				return true;
 			}
 			else
@@ -60,7 +61,7 @@ namespace Hardware
 			return false;
 		}
 
-		bool IvyBridgeSMbus::ReadSPD(const USHORT& DIMMId, DDR3_INFO& spd)
+		bool IvyBridgeSMbus::ReadSPD(const USHORT& DIMMId, DDR3_Normal_Info& spd)
 		{
 			auto DIMMInfo = ConverterIdToDIMMId(DIMMId);
 			if (!ClearStatus(DIMMInfo.SmbusBase))

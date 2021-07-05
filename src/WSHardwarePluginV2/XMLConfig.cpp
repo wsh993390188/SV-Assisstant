@@ -3,13 +3,13 @@
 
 extern HMODULE g_hModule;
 
-bool Hardware::XMLConfig::GetConfigXmlFromResource(std::string& configcontent, const size_t ResID)
+bool Hardware::XMLConfig::GetConfigXmlFromResource(std::string& configcontent, const size_t ResID, const std::wstring& ResourceType)
 {
 	HGLOBAL hGlobal = NULL;
 	bool ret = false;
 	do
 	{
-		HRSRC hRsrc = FindResourceEx(g_hModule, L"XML", MAKEINTRESOURCE(ResID), 0);
+		HRSRC hRsrc = FindResourceEx(g_hModule, ResourceType.c_str(), MAKEINTRESOURCE(ResID), 0);
 		if (NULL == hRsrc)
 			break;
 		DWORD dwSize = SizeofResource(g_hModule, hRsrc);

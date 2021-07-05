@@ -25,3 +25,6 @@
 [submodule "Libcommon/winreg"]
 	path = Libcommon/winreg
 	url = https://github.com/GiovanniDicanio/WinReg.git
+[submodule "Libcommon/pciids"]
+	path = Libcommon/pciids
+	url = https://github.com/pciutils/pciids.git

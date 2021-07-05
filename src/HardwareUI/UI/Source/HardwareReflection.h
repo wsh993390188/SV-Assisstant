@@ -39,7 +39,6 @@ namespace vl
 			DECL_TYPE_INFO(::Hardware::UI::CPUCoreTreeInternalProperty)
 			DECL_TYPE_INFO(::Hardware::UI::HardwareTreeInternalProperty)
 			DECL_TYPE_INFO(::Hardware::UI::IntWrapper)
-			DECL_TYPE_INFO(::Hardware::UI::StringWrapper)
 			DECL_TYPE_INFO(::Hardware::UI::TreeViewItemData)
 #endif
 

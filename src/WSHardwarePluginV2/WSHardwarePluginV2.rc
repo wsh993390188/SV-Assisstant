@@ -54,6 +54,18 @@ IDR_XML1                XML                     "CPUDatabase.xml"
 
 IDR_XML2                XML                     "GPUDatabase.xml"
 
+IDR_XML3                XML                     "MemoryDatabase.xml"
+
+IDR_XML4                XML                     "EDIDDatabase.xml"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// PCIIDS
+//
+
+IDR_PCIIDS2             PCIIDS                  "C:\\Users\\wangshuo20\\Documents\\Github\\SV-Assisstant\\Libcommon\\pciids\\pci.ids"
+
 #endif    // 中文(简体，中国) resources
 /////////////////////////////////////////////////////////////////////////////
 

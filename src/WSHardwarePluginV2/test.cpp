@@ -2,6 +2,7 @@
 #include "test.h"
 
 #ifndef _WINDLL
+
 #include <comutil.h>
 #include "WSHardwarePluginV2.h"
 
@@ -9,6 +10,9 @@ namespace Hardware
 {
 	namespace Test
 	{
+#if defined(_MSC_VER)
+#pragma warning(disable : 4996)
+#endif
 		namespace DiskTest
 		{
 			std::map<int, std::vector<std::string>> PaserInitJson(const std::string& JsonValue)
@@ -861,6 +865,10 @@ namespace Hardware
 				}
 			}
 		}
+
+#if defined(_MSC_VER)
+#pragma warning(default : 4996)
+#endif
 	}
 }
 
@@ -870,7 +878,7 @@ int main()
 	{
 		// 	Hardware::Test::DiskTest::GetDiskTest();
 		// 	Hardware::Test::CPUTest::GetCPUTest();
-		// 	Hardware::Test::MemoryTest::GetMemoryTest();
+		Hardware::Test::MemoryTest::GetMemoryTest();
 		// 	Hardware::Test::BroadTest::GetBroadTest();
 		// 	Hardware::Test::AudioTest::GetAudioTest();
 		// 	Hardware::Test::NICTest::GetNICTest();
@@ -878,7 +886,7 @@ int main()
 		// 	Hardware::Test::WinBioTest::GetWinBioTest();
 		// 	Hardware::Test::MonitorTest::GetMonitorTest();
 		// 	Hardware::Test::BiosTest::GetBiosTest();
-		Hardware::Test::GPUTest::GetGPUTest();
+		//Hardware::Test::GPUTest::GetGPUTest();
 		CoUninitialize();
 	}
 }

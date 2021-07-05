@@ -36,7 +36,6 @@ namespace vl
 			IMPL_CPP_TYPE_INFO(Hardware::UI::CPUCoreTreeInternalProperty)
 			IMPL_CPP_TYPE_INFO(Hardware::UI::HardwareTreeInternalProperty)
 			IMPL_CPP_TYPE_INFO(Hardware::UI::IntWrapper)
-			IMPL_CPP_TYPE_INFO(Hardware::UI::StringWrapper)
 			IMPL_CPP_TYPE_INFO(Hardware::UI::TreeViewItemData)
 
 #define _ ,
@@ -130,16 +129,6 @@ namespace vl
 				CLASS_MEMBER_PROPERTY_EVENT(Value, GetValue, SetValue, ValueChanged)
 			END_CLASS_MEMBER(::Hardware::UI::IntWrapper)
 
-			BEGIN_CLASS_MEMBER(::Hardware::UI::StringWrapper)
-				CLASS_MEMBER_BASE(::vl::reflection::DescriptableObject)
-				CLASS_MEMBER_CONSTRUCTOR(::vl::Ptr<::Hardware::UI::StringWrapper>(), NO_PARAMETER)
-				CLASS_MEMBER_CONSTRUCTOR(::vl::Ptr<::Hardware::UI::StringWrapper>(const ::vl::WString&), { L"value" })
-				CLASS_MEMBER_METHOD(GetValue, NO_PARAMETER)
-				CLASS_MEMBER_METHOD(SetValue, { L"__vwsn_value_" })
-				CLASS_MEMBER_FIELD(__vwsn_prop_Value)
-				CLASS_MEMBER_PROPERTY(Value, GetValue, SetValue)
-			END_CLASS_MEMBER(::Hardware::UI::StringWrapper)
-
 			BEGIN_CLASS_MEMBER(::Hardware::UI::TreeViewItemData)
 				CLASS_MEMBER_BASE(::vl::reflection::DescriptableObject)
 				CLASS_MEMBER_CONSTRUCTOR(::vl::Ptr<::Hardware::UI::TreeViewItemData>(), NO_PARAMETER)
@@ -165,7 +154,6 @@ namespace vl
 					ADD_TYPE_INFO(::Hardware::UI::CPUCoreTreeInternalProperty)
 					ADD_TYPE_INFO(::Hardware::UI::HardwareTreeInternalProperty)
 					ADD_TYPE_INFO(::Hardware::UI::IntWrapper)
-					ADD_TYPE_INFO(::Hardware::UI::StringWrapper)
 					ADD_TYPE_INFO(::Hardware::UI::TreeViewItemData)
 				}
 

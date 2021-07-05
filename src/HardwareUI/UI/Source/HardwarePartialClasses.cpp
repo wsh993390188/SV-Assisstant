@@ -1005,32 +1005,6 @@ namespace Hardware
 		}
 
 		/***********************************************************************
-		Class (::Hardware::UI::StringWrapper)
-		***********************************************************************/
-
-		::vl::WString StringWrapper::GetValue()
-		{
-			return this->__vwsn_prop_Value;
-		}
-
-		void StringWrapper::SetValue(const ::vl::WString& __vwsn_value_)
-		{
-			(this->__vwsn_prop_Value = __vwsn_value_);
-		}
-
-		StringWrapper::StringWrapper()
-			: __vwsn_prop_Value(::vl::WString(L"", false))
-		{
-			this->SetValue(::vl::WString(L"", false));
-		}
-
-		StringWrapper::StringWrapper(const ::vl::WString& value)
-			: __vwsn_prop_Value(::vl::WString(L"", false))
-		{
-			this->SetValue(value);
-		}
-
-		/***********************************************************************
 		Class (::Hardware::UI::TreeViewItemData)
 		***********************************************************************/
 

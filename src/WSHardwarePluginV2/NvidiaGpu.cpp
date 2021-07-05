@@ -84,6 +84,13 @@ std::string Hardware::GPU::NvidiaGpu::UpdateGPUInfo()
 std::string Hardware::GPU::NvidiaGpu::GetGPUInfo()
 {
 	Json::Value root;
+	if (!SubVendor.empty())
+	{
+		Json::Value temp;
+		temp["Vendor"] = SubVendor;
+		root.append(temp);
+	}
+
 	try
 	{
 		Json::Value temp;

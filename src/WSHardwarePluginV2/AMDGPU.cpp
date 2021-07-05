@@ -69,6 +69,12 @@ std::string Hardware::GPU::AMDGPU::UpdateGPUInfo()
 std::string Hardware::GPU::AMDGPU::GetGPUInfo()
 {
 	Json::Value root;
+	if (!SubVendor.empty())
+	{
+		Json::Value temp;
+		temp["Vendor"] = SubVendor;
+		root.append(temp);
+	}
 	try
 	{
 		Json::Value temp;

@@ -119,6 +119,12 @@ std::vector<GPU::GPUDevice> Hardware::GPU::PciGpuDetect::FindGPUDeviceOnPCI()
 							temp.DeviceId = DeviceId;
 						}
 
+						DWORD SubVendorId{ InvaildVendorId };
+						if (PciDeal.ReadWORD(bus, dev, func, 0x2C, SubVendorId))
+						{
+							temp.SubVendorId = SubVendorId;
+						}
+
 						if (VendorId == IntelVendorId)
 						{
 							temp.BarAddress = FindIntelMCHBAR(bus);

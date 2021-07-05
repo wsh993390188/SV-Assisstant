@@ -341,3 +341,4 @@ Libcommon/json/
 Libcommon/NVAPI/
 build/temp/tinyxml2/
 /build/Debug-Lib
+Tools/JEDEC/*.txt

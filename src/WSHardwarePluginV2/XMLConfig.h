@@ -26,6 +26,6 @@ namespace Hardware
 		/// @param configcontent XML配置文件中二进制数据
 		/// @param ResID 资源ID
 		/// @return 读取配置文件是否成功
-		bool GetConfigXmlFromResource(std::string& configcontent, const size_t ResID);
+		bool GetConfigXmlFromResource(std::string& configcontent, const size_t ResID, const std::wstring& ResourceType = L"XML");
 	};
 }

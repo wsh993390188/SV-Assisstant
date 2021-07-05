@@ -1,14 +1,22 @@
 #include "stdafx.h"
 #include "BaseSMBUS.h"
 
-bool Hardware::Memory::SMBUSControllerBase::IsDDR3(const uint8_t& DDRTypes)
+Hardware::Memory::DeviceType Hardware::Memory::SMBUSControllerBase::ParseDeviceType(const uint8_t& DDRTypes)
 {
-	// 待确认
-	return (DDRTypes == 11) || (DDRTypes == 15);
+	return DeviceType(DDRTypes);
 }
 
-bool Hardware::Memory::SMBUSControllerBase::IsDDR4(const uint8_t& DDRTypes)
+bool Hardware::Memory::SMBUSControllerBase::IsDDR3Device(const DeviceType& type)
 {
-	// 待确认
-	return(DDRTypes == 12) || (DDRTypes == 14) || (DDRTypes == 16);
+	return (type == DeviceType::DDR3SDRAM) || (type == DeviceType::LPDDR3SDRAM);
+}
+
+bool Hardware::Memory::SMBUSControllerBase::IsDDR4Device(const DeviceType& type)
+{
+	return (type == DeviceType::DDR4SDRAM) || (type == DeviceType::LPDDR4SDRAM) || (type == DeviceType::DDR4ESDRAM) || (type == DeviceType::LPDDR4XSDRAM);
+}
+
+bool Hardware::Memory::SMBUSControllerBase::IsDDR5Device(const DeviceType& type)
+{
+	return (type == DeviceType::DDR5SDRAM) || (type == DeviceType::LPDDR5SDRAM);
 }

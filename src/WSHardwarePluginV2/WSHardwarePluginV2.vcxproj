@@ -114,7 +114,8 @@
       <AdditionalManifestFiles>$(SolutionDir)..\Libcommon\CrystalDiskInfo\DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
     </Manifest>
     <PostBuildEvent>
-      <Command>COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -167,7 +168,8 @@
       <AdditionalManifestFiles>$(SolutionDir)..\Libcommon\CrystalDiskInfo\DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
     </Manifest>
     <PostBuildEvent>
-      <Command>COPY /Y $(ProjectDir)CPUDatabase.xml $(OutDir)CPUDatabase.xml</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -230,7 +232,6 @@
     <ClInclude Include="DXGIGPUBase.h" />
     <ClInclude Include="EDIDdefination.h" />
     <ClInclude Include="EDIDFromRegistry.h" />
-    <ClInclude Include="ExecSpd.h" />
     <ClInclude Include="Fintek.h" />
     <ClInclude Include="GenericAudio.h" />
     <ClInclude Include="GenericBattery.h" />
@@ -248,6 +249,7 @@
     <ClInclude Include="GPUManager.h" />
     <ClInclude Include="HardwareRing0.h" />
     <ClInclude Include="ITE.h" />
+    <ClInclude Include="JEDECConfig.h" />
     <ClInclude Include="NetMonitor.h" />
     <ClInclude Include="NICIFEntry.h" />
     <ClInclude Include="Nuvoton.h" />
@@ -274,8 +276,10 @@
     <ClInclude Include="OverDrive6.h" />
     <ClInclude Include="OverDrive8.h" />
     <ClInclude Include="OverDriveN.h" />
+    <ClInclude Include="ParserSPD.h" />
     <ClInclude Include="PCIGPUDetect.h" />
     <ClInclude Include="PCIHandle.h" />
+    <ClInclude Include="PCIUtils.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SIOBase.h" />
     <ClInclude Include="SIOCommon.h" />
@@ -369,7 +373,6 @@
     <ClCompile Include="DiskManager.cpp" />
     <ClCompile Include="DXGIGPUBase.cpp" />
     <ClCompile Include="EDIDFromRegistry.cpp" />
-    <ClCompile Include="ExecSpd.cpp" />
     <ClCompile Include="Fintek.cpp" />
     <ClCompile Include="GenericAudio.cpp" />
     <ClCompile Include="GenericBattery.cpp" />
@@ -386,6 +389,7 @@
     <ClCompile Include="GPUManager.cpp" />
     <ClCompile Include="HardwareRing0.cpp" />
     <ClCompile Include="ITE.cpp" />
+    <ClCompile Include="JEDECConfig.cpp" />
     <ClCompile Include="NetMonitor.cpp" />
     <ClCompile Include="NICIFEntry.cpp" />
     <ClCompile Include="Nuvoton.cpp" />
@@ -410,8 +414,10 @@
     <ClCompile Include="OverDrive6.cpp" />
     <ClCompile Include="OverDrive8.cpp" />
     <ClCompile Include="OverDriveN.cpp" />
+    <ClCompile Include="ParserSPD.cpp" />
     <ClCompile Include="PCIGPUDetect.cpp" />
     <ClCompile Include="PCIHandle.cpp" />
+    <ClCompile Include="PCIUtils.cpp" />
     <ClCompile Include="SIOBase.cpp" />
     <ClCompile Include="SIOCommon.cpp" />
     <ClCompile Include="SIOFactory.cpp" />
@@ -443,7 +449,9 @@
     <Xml Include="CPUDatabase.xml">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </Xml>
+    <Xml Include="EDIDDatabase.xml" />
     <Xml Include="GPUDatabase.xml" />
+    <Xml Include="MemoryDatabase.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libcommon\jsoncpp\build\src\lib_json\jsoncpp_static.vcxproj">
@@ -452,8 +460,8 @@
     <ProjectReference Include="..\..\Libcommon\spdlog\build\spdlog.vcxproj">
       <Project>{278f1521-4faa-3197-94d5-9fd87a771009}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\Libcommon\tinyxml2\tinyxml2\tinyxml2.vcxproj">
-      <Project>{d1c528b6-aa02-4d29-9d61-dc08e317a70d}</Project>
+    <ProjectReference Include="..\..\Libcommon\tinyxml2\vs\tinyxml2.vcxproj">
+      <Project>{7c72653a-e6f8-4584-b553-de3a0aee4356}</Project>
     </ProjectReference>
     <ProjectReference Include="..\libSmbios\libSmbios.vcxproj">
       <Project>{d85e9f42-fe3b-4de9-bcbe-87c26b30f1e7}</Project>
@@ -464,9 +472,6 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WSHardwarePluginV2.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="xml2.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

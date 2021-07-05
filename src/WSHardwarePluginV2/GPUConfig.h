@@ -20,6 +20,7 @@ namespace Hardware
 			explicit operator bool() const;
 		};
 
+		/// @brief GPUµƒ≈‰÷√±Ì
 		class GPUConfig final : public XMLConfig
 		{
 		private:

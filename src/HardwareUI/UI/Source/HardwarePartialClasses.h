@@ -45,7 +45,6 @@ namespace Hardware
 		class CPUCoreTreeInternalProperty;
 		class HardwareTreeInternalProperty;
 		class IntWrapper;
-		class StringWrapper;
 		class TreeViewItemData;
 
 	}
@@ -183,20 +182,6 @@ namespace Hardware
 			void SetValue(::vl::vint __vwsn_value_);
 			::vl::Event<void()> ValueChanged;
 			IntWrapper(::vl::vint value);
-		};
-
-		class StringWrapper : public ::vl::Object, public ::vl::reflection::Description<StringWrapper>
-		{
-#ifndef VCZH_DEBUG_NO_REFLECTION
-			friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<StringWrapper>;
-#endif
-		private:
-			::vl::WString __vwsn_prop_Value;
-		public:
-			::vl::WString GetValue();
-			void SetValue(const ::vl::WString& __vwsn_value_);
-			StringWrapper();
-			StringWrapper(const ::vl::WString& value);
 		};
 
 		class TreeViewItemData : public ::vl::Object, public ::vl::reflection::Description<TreeViewItemData>

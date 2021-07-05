@@ -30,16 +30,25 @@ namespace Hardware
 			/// @brief 主板平台的VendorId
 			USHORT PlatformId;
 
-			/// @brief 是否是DDR3的内存
+			/// @brief 解析内存的类型
 			/// @param DDRTypes SPD的Type位
+			/// @return 内存设备类型
+			DeviceType ParseDeviceType(const uint8_t& DDRTypes);
+
+			/// @brief 是否是DDR3的内存
+			/// @param type SPD的Type位
 			/// @return 是否是DDR3
-			bool IsDDR3(const uint8_t& DDRTypes);
+			bool IsDDR3Device(const DeviceType& type);
 
 			/// @brief 是否是DDR4的内存
-			/// @param DDRTypes SPD的Type位
+			/// @param type SPD的Type位
 			/// @return 是否是DDR4
-			bool IsDDR4(const uint8_t& DDRTypes);
+			bool IsDDR4Device(const DeviceType& type);
 
+			/// @brief 是否是DDR5的内存
+			/// @param type SPD的Type位
+			/// @return 是否是DDR5
+			bool IsDDR5Device(const DeviceType& type);
 		private:
 			SMBUSControllerBase(const SMBUSControllerBase&) = delete;
 			SMBUSControllerBase& operator=(const SMBUSControllerBase&) = delete;

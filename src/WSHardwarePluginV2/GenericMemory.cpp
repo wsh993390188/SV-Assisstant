@@ -121,6 +121,13 @@ std::string Hardware::Memory::GenericMemory::BuildMemoryCommonInformationToJson(
 			root.append(TempValue);
 		}
 
+		if (!Info.DRAMType.empty())
+		{
+			Json::Value TempValue;
+			TempValue["DRAMType"] = Info.DRAMType;
+			root.append(TempValue);
+		}
+
 		if (!Info.ModuleType.empty())
 		{
 			Json::Value TempValue;
@@ -184,11 +191,28 @@ std::string Hardware::Memory::GenericMemory::BuildMemoryCommonInformationToJson(
 			root.append(TempValue);
 		}
 
+		if (abs(Info.MemoryFrequency) >= 1e-6)
+		{
+			Json::Value TempValue;
+			TempValue["MemoryFrequency"] = Utils::to_string_with_precision(Info.MemoryFrequency) + " MHz";
+			root.append(TempValue);
+		}
+
 		if (!Info.Ranks_Banks.empty())
 		{
 			Json::Value TempValue;
 			TempValue["Ranks_Banks"] = Info.Ranks_Banks;
 			root.append(TempValue);
+		}
+
+		if (!Info.Times.empty())
+		{
+			for (const auto& time : Info.Times)
+			{
+				Json::Value tmp;
+				tmp[time.Name] = Utils::to_string_with_precision(time.Value) + " ns";
+				root.append(tmp);
+			}
 		}
 	}
 

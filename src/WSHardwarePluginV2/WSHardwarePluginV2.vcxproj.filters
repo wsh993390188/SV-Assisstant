@@ -73,9 +73,6 @@
     <ClInclude Include="MemoryManager.h">
       <Filter>Hardware\Memory</Filter>
     </ClInclude>
-    <ClInclude Include="ExecSpd.h">
-      <Filter>Hardware\Memory\Impl\SPD</Filter>
-    </ClInclude>
     <ClInclude Include="StringHelper.hpp">
       <Filter>Utils\String</Filter>
     </ClInclude>
@@ -292,6 +289,15 @@
     <ClInclude Include="SIOFactory.h">
       <Filter>Hardware\MotherBroad\Impl\SuperIO</Filter>
     </ClInclude>
+    <ClInclude Include="JEDECConfig.h">
+      <Filter>Hardware\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="ParserSPD.h">
+      <Filter>Hardware\Memory\Impl\SPD</Filter>
+    </ClInclude>
+    <ClInclude Include="PCIUtils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -353,9 +359,6 @@
     </ClCompile>
     <ClCompile Include="MemoryManager.cpp">
       <Filter>Hardware\Memory</Filter>
-    </ClCompile>
-    <ClCompile Include="ExecSpd.cpp">
-      <Filter>Hardware\Memory\Impl\SPD</Filter>
     </ClCompile>
     <ClCompile Include="CPUConfig.cpp">
       <Filter>Hardware\CPU</Filter>
@@ -551,6 +554,15 @@
     </ClCompile>
     <ClCompile Include="SIOFactory.cpp">
       <Filter>Hardware\MotherBroad\Impl\SuperIO</Filter>
+    </ClCompile>
+    <ClCompile Include="JEDECConfig.cpp">
+      <Filter>Hardware\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="ParserSPD.cpp">
+      <Filter>Hardware\Memory\Impl\SPD</Filter>
+    </ClCompile>
+    <ClCompile Include="PCIUtils.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -781,9 +793,12 @@
     <Xml Include="GPUDatabase.xml">
       <Filter>Config</Filter>
     </Xml>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="xml2.bin" />
+    <Xml Include="MemoryDatabase.xml">
+      <Filter>Config</Filter>
+    </Xml>
+    <Xml Include="EDIDDatabase.xml">
+      <Filter>Config</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WSHardwarePluginV2.rc">

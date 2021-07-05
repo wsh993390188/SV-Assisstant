@@ -10,9 +10,11 @@ Hardware Information dynamic library(only windows platform)
 
     [TinyXML](https://github.com/leethomason/tinyxml2)
 
-    [liblog](http://gitlab.xpaas.lenovo.com./cloudservice/windows/liblog)
+    [spdlog](https://github.com/gabime/spdlog)
 
     [utf-8](https://github.com/nemtrif/utfcpp)
+
+    [pciids](https://github.com/pciutils/pciids)
 
 - GPU library
 

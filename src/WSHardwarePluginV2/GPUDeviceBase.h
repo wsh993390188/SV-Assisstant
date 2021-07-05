@@ -12,6 +12,8 @@ namespace Hardware
 			uint64_t   BarAddress;///<内存的地址
 			uint16_t   VendorId;///<厂商ID
 			uint16_t   DeviceId;///<设备ID
+			uint16_t   SubVendorId;///<子厂商ID
+			uint16_t   SubDeviceId;///<子设备ID
 		};
 
 		/// @brief 非法的64位内存地址
@@ -52,7 +54,7 @@ namespace Hardware
 		public:
 			/// @brief 构造函数
 			/// @param[in] GpuData GPU的总线数据
-			explicit GPUDeviceBase(const GPUDevice& GpuData) : GPUBaseData(GpuData) {}
+			explicit GPUDeviceBase(const GPUDevice& GpuData);
 
 			/// @brief 虚析构函数
 			virtual ~GPUDeviceBase() = default;
@@ -67,6 +69,8 @@ namespace Hardware
 		protected:
 			/// @brief GPU的PCI总线数据
 			GPUDevice GPUBaseData;
+			/// @brief Sub Vendor
+			std::string SubVendor;
 		};
 	}
 }
