@@ -78,6 +78,16 @@ std::string Hardware::GPU::NvidiaGpu::UpdateGPUInfo()
 	{
 	}
 
+	try
+	{
+		Json::Value temp;
+		temp["GPU Usage"] = NVAPIHelper::Instance().GetGPUUsage(GPUBaseData.DeviceId);
+		root.append(temp);
+	}
+	catch (const std::exception&)
+	{
+	}
+
 	return Json::FastWriter().write(root);
 }
 

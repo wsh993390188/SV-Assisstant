@@ -132,6 +132,14 @@ namespace Hardware
 			/// @return 显卡核心频率
 			std::string GetGPUCoreClock(const uint32_t& DeviceId);
 
+			/// @brief 获取设备GPU的使用率
+			/// @param DeviceID 设备ID
+			/// @exception 会抛出异常
+			/// - @ref NVAPIException NVAPI未能加载
+			/// - @ref NVAPIDeviceNotExist 找不到设备
+			/// @return 设备名称信息
+			std::string GetGPUUsage(const uint32_t& DeviceID);
+
 		private:
 			/// @brief 帮助函数初始化
 			NVAPIHelper();
@@ -221,7 +229,7 @@ namespace Hardware
 			using TYPE_NvAPI_GPU_GetVoltages = NvAPI_Status(*)(HANDLE PhysicalGPU, NV_VOLTAGES* pPerfVoltages);
 			TYPE_NvAPI_GPU_GetVoltages NvAPI_GPU_GetVoltages;
 
-			enum class NV_POWER_TOPOLOGY_FLAGS : NvU32{
+			enum class NV_POWER_TOPOLOGY_FLAGS : NvU32 {
 				NV_POWER_TOPOLOGY_FLAG_UNKNOWN1,
 				NV_POWER_TOPOLOGY_FLAG_UNKNOWN2
 			};

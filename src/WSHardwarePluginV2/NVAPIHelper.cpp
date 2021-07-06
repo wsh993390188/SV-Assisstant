@@ -172,6 +172,35 @@ std::string Hardware::GPU::NVAPIHelper::GetGPUCoreClock(const uint32_t& DeviceId
 	throw NVAPIDeviceNotExist(DeviceId);
 }
 
+std::string Hardware::GPU::NVAPIHelper::GetGPUUsage(const uint32_t& DeviceID)
+{
+	if (!IsNvapiEnable)
+	{
+		throw NVAPINotExist();
+	}
+
+	for (const auto& gpu : GpuQueryDatas)
+	{
+		if (gpu.DeviceId == DeviceID)
+		{
+			NV_GPU_DYNAMIC_PSTATES_INFO_EX Usage{};
+			Usage.version = NV_GPU_DYNAMIC_PSTATES_INFO_EX_VER;
+			if (auto status = NvAPI_GPU_GetDynamicPstatesInfoEx(gpu.hPhysicalGpu, &Usage);  NvAPI_Success(status))
+			{
+				if (Usage.utilization[0].bIsPresent)
+				{
+					return std::to_string(Usage.utilization[0].percentage) + " %";
+				}
+			}
+			else
+			{
+				spdlog::warn("NvAPI_GPU_GetAllClockFrequencies Error: {}", GetNvAPIStatusString(status).c_str());
+			}
+		}
+	}
+	throw NVAPIDeviceNotExist(DeviceID);
+}
+
 Hardware::GPU::NVAPIHelper::NVAPIHelper() : IsNvapiEnable(false), NvAPI_GPU_GetVoltages(nullptr), NvAPI_GPU_ClientPowerTopologyGetStatus(nullptr)
 {
 	if (auto Status = NvAPI_Initialize(); NvAPI_Success(Status))
