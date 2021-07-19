@@ -107,7 +107,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>D3D11.lib;WinBio.lib;Shell32.lib;propsys.lib;IPHLPAPI.lib;ws2_32.lib;nvapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Cfgmgr32.lib;WinBio.lib;Shell32.lib;propsys.lib;IPHLPAPI.lib;ws2_32.lib;nvapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)..\LibCommon\NVAPI\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
@@ -123,7 +123,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;WSHARDWAREPLUGINV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>COOLite;_DEBUG;_WINDOWS;_USRDLL;WSHARDWAREPLUGINV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -132,7 +132,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>D3D11.lib;WinBio.lib;Shell32.lib;propsys.lib;IPHLPAPI.lib;ws2_32.lib;wlanapi.lib;nvapi64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Cfgmgr32.lib;WinBio.lib;Shell32.lib;propsys.lib;IPHLPAPI.lib;ws2_32.lib;wlanapi.lib;nvapi64.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)..\LibCommon\NVAPI\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
@@ -161,7 +161,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>D3D11.lib;WinBio.lib;Shell32.lib;propsys.lib;IPHLPAPI.lib;ws2_32.lib;nvapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Cfgmgr32.lib;WinBio.lib;Shell32.lib;propsys.lib;IPHLPAPI.lib;ws2_32.lib;nvapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)..\LibCommon\NVAPI\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
@@ -179,7 +179,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;WSHARDWAREPLUGINV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>COOLite;NDEBUG;_WINDOWS;_USRDLL;WSHARDWAREPLUGINV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -190,7 +190,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>D3D11.lib;WinBio.lib;Shell32.lib;propsys.lib;IPHLPAPI.lib;ws2_32.lib;wlanapi.lib;nvapi64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Cfgmgr32.lib;WinBio.lib;Shell32.lib;propsys.lib;IPHLPAPI.lib;ws2_32.lib;wlanapi.lib;nvapi64.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)..\LibCommon\NVAPI\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
@@ -226,6 +226,7 @@
     <ClInclude Include="CrystalDiskInfo\SPTIUtil.h" />
     <ClInclude Include="CrystalDiskInfo\StorageQuery.h" />
     <ClInclude Include="CrystalDiskInfo\UtilityFx.h" />
+    <ClInclude Include="D3DKMTGPUBase.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="DirectXFactory.h" />
     <ClInclude Include="DiskManager.h" />
@@ -252,6 +253,7 @@
     <ClInclude Include="JEDECConfig.h" />
     <ClInclude Include="NetMonitor.h" />
     <ClInclude Include="NICIFEntry.h" />
+    <ClInclude Include="NTD3DKMT.h" />
     <ClInclude Include="Nuvoton.h" />
     <ClInclude Include="NVAPIHelper.h" />
     <ClInclude Include="IntelCPU.h" />
@@ -295,6 +297,7 @@
     <ClInclude Include="WinBioImpl.h" />
     <ClInclude Include="WinBioManager.h" />
     <ClInclude Include="Winbond.h" />
+    <ClInclude Include="WindowsConfig.h" />
     <ClInclude Include="WinReg.hpp" />
     <ClInclude Include="WMI\WMI.h" />
     <ClInclude Include="WMI\WMIExtern.h" />
@@ -355,6 +358,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="D3DKMTGPUBase.cpp" />
     <ClCompile Include="DirectXFactory.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
@@ -454,6 +458,9 @@
     <Xml Include="MemoryDatabase.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Libcommon\CooLite\WinRing0.vcxproj">
+      <Project>{68feadcc-d5c0-40a0-9f61-c82ab47cda1d}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libcommon\jsoncpp\build\src\lib_json\jsoncpp_static.vcxproj">
       <Project>{73f61e0d-cc26-3f9c-990e-fb1659cd820b}</Project>
     </ProjectReference>

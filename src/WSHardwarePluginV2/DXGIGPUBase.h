@@ -18,25 +18,6 @@ namespace Hardware
 			LUID AdapterLuid;
 		};
 
-		/// @brief GPU的查询结构
-		struct GPUQuery
-		{
-			std::uint32_t VID;///<VendorId
-			std::uint32_t DID;///<DeviceId
-			/// @brief 初始化结构
-			/// @param vid VendorId
-			/// @param did DeviceId
-			GPUQuery(const uint32_t& vid, const uint32_t& did) : VID(vid), DID(did) {}
-
-			friend bool operator<(const GPUQuery& This, const GPUQuery& Other)
-			{
-				if (Other.VID != This.VID)
-					return Other.VID < This.VID;
-				else
-					return Other.DID < This.DID;
-			}
-		};
-
 		class DXGIGPUBase final
 		{
 		public:

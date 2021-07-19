@@ -238,5 +238,9 @@ namespace Hardware
 		/// @param guid guid
 		/// @return ANSI字符串
 		std::string GUIDToString(const GUID& guid);
+
+		/// @brief 获取Windows的版本信息
+		/// @return 版本信息
+		size_t GetWindowsVersion();
 	}
 }

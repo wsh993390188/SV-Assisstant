@@ -142,41 +142,42 @@ Hardware::Data::ErrorType Hardware::DiskManager::BuildJson(std::string& response
 			}
 			else if (Element.compare("Feature") == 0)
 			{
-				std::u8string Feature;
+				std::string Feature;
 				if (m_Ata.vars.at(CurrentId).IsSmartSupported)
 				{
-					Feature += u8"S.M.A.R.T., ";
+					Feature += "S.M.A.R.T., ";
 				}
 
 				if (m_Ata.vars.at(CurrentId).IsApmSupported)
 				{
-					Feature += u8"APM, ";
+					Feature += "APM, ";
 				}
 
 				if (m_Ata.vars.at(CurrentId).IsAamSupported)
 				{
-					Feature += u8"AAM, ";
+					Feature += "AAM, ";
 				}
 
 				if (m_Ata.vars.at(CurrentId).IsLba48Supported)
 				{
-					Feature += u8"48bit LBA, ";
+					Feature += "48bit LBA, ";
 				}
 
 				if (m_Ata.vars.at(CurrentId).IsNcqSupported)
 				{
-					Feature += u8"NCQ, ";
+					Feature += "NCQ, ";
 				}
 
 				if (m_Ata.vars.at(CurrentId).IsTrimSupported)
 				{
-					Feature += u8"TRIM, ";
+					Feature += "TRIM, ";
 				}
 				if (m_Ata.vars.at(CurrentId).IsDeviceSleepSupported)
 				{
-					Feature += u8"DevSleep, ";
+					Feature += "DevSleep, ";
 				}
-				TempValue["Feature"] = Feature.c_str();
+				Utils::trim(Feature);
+				TempValue["Feature"] = Feature;
 			}
 			else
 			{

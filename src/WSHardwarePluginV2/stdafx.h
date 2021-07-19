@@ -10,6 +10,7 @@
 #define WIN32_LEAN_AND_MEAN             // 从 Windows 头中排除极少使用的资料
 // Windows 头文件:
 #include <windows.h>
+#include <cfgmgr32.h>
 #include <tchar.h>
 #include <intrin.h>
 
@@ -31,3 +32,4 @@
 #include "Command.h"
 #include "Interface.h"
 #include "Utils.h"
+#include "WindowsConfig.h"

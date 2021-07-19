@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include <objbase.h>
 
+/// @brief DLLµÄÄ£¿éÃû
 HMODULE g_hModule = NULL;
 
 BOOL APIENTRY DllMain(HMODULE hModule,
@@ -12,6 +13,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
+		Hardware::Utils::GetWindowsVersion();
 		g_hModule = hModule;
 		CoInitializeEx(NULL, COINIT_MULTITHREADED | COINIT_DISABLE_OLE1DDE);
 		break;

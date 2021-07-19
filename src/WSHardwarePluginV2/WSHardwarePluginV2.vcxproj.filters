@@ -197,7 +197,7 @@
       <Filter>Utils\Ring0\Impl</Filter>
     </ClInclude>
     <ClInclude Include="DirectXFactory.h">
-      <Filter>Hardware\GPU\Device\DXGI\DirectX</Filter>
+      <Filter>Hardware\GPU\Device\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="NVAPIHelper.h">
       <Filter>Hardware\GPU\Device\DeviceImpl\NVIDIA\NVAPI</Filter>
@@ -296,6 +296,15 @@
       <Filter>Hardware\Memory\Impl\SPD</Filter>
     </ClInclude>
     <ClInclude Include="PCIUtils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DKMTGPUBase.h">
+      <Filter>Hardware\GPU\Device\D3DKMT</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsConfig.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="NTD3DKMT.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
@@ -475,7 +484,7 @@
       <Filter>Utils\Ring0\Impl</Filter>
     </ClCompile>
     <ClCompile Include="DirectXFactory.cpp">
-      <Filter>Hardware\GPU\Device\DXGI\DirectX</Filter>
+      <Filter>Hardware\GPU\Device\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="NVAPIHelper.cpp">
       <Filter>Hardware\GPU\Device\DeviceImpl\NVIDIA\NVAPI</Filter>
@@ -563,6 +572,9 @@
     </ClCompile>
     <ClCompile Include="PCIUtils.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DKMTGPUBase.cpp">
+      <Filter>Hardware\GPU\Device\D3DKMT</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -710,9 +722,6 @@
     <Filter Include="Hardware\GPU\Device">
       <UniqueIdentifier>{6abd2c06-a5c4-4cca-82cb-079217d5abb1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Hardware\GPU\Device\DXGI">
-      <UniqueIdentifier>{811bfcd9-b861-4a10-99e0-76cb56c0e62b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Hardware\GPU\Device\DeviceImpl">
       <UniqueIdentifier>{90ea831c-07e4-4f7d-a37c-be6129f02fbc}</UniqueIdentifier>
     </Filter>
@@ -733,9 +742,6 @@
     </Filter>
     <Filter Include="Utils\Ring0\TSC">
       <UniqueIdentifier>{babfc711-9e2a-4e21-810d-acbe34a3fcbe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Hardware\GPU\Device\DXGI\DirectX">
-      <UniqueIdentifier>{1c6dd28f-4292-496c-b766-8952cd55fc52}</UniqueIdentifier>
     </Filter>
     <Filter Include="Hardware\GPU\Device\DeviceImpl\NVIDIA\NVAPI">
       <UniqueIdentifier>{637f1d7b-c888-4788-ac30-2c175ce04d76}</UniqueIdentifier>
@@ -784,6 +790,15 @@
     </Filter>
     <Filter Include="Hardware\MotherBroad\Impl\SuperIO\Common\Fintek">
       <UniqueIdentifier>{18ac4110-3400-442a-a51e-47fdf5c98632}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\GPU\Device\DirectX">
+      <UniqueIdentifier>{1c6dd28f-4292-496c-b766-8952cd55fc52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\GPU\Device\DXGI">
+      <UniqueIdentifier>{811bfcd9-b861-4a10-99e0-76cb56c0e62b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\GPU\Device\D3DKMT">
+      <UniqueIdentifier>{4cc66aa3-4585-4c56-aa9b-2a84b149a815}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

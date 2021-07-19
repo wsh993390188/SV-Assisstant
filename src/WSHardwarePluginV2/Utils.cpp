@@ -160,3 +160,112 @@ std::string Hardware::Utils::GUIDToString(const GUID& guid)
 	sprintf_s(guidString, _countof(guidString), "{%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X}", guid.Data1, guid.Data2, guid.Data3, guid.Data4[0], guid.Data4[1], guid.Data4[2], guid.Data4[3], guid.Data4[4], guid.Data4[5], guid.Data4[6], guid.Data4[7]);
 	return guidString;
 }
+
+size_t Hardware::Utils::GetWindowsVersion()
+{
+	static bool b = false;
+	static size_t WindowsVersion = WINDOWS_UNKNOWN;
+	if (!b)
+	{
+		RTL_OSVERSIONINFOEXW versionInfo{};
+		ULONG majorVersion;
+		ULONG minorVersion;
+		ULONG buildVersion;
+
+		versionInfo.dwOSVersionInfoSize = sizeof(RTL_OSVERSIONINFOEXW);
+
+		LONG(WINAPI * pfnRtlGetVersion)(RTL_OSVERSIONINFOEXW*);
+		(FARPROC&)pfnRtlGetVersion = GetProcAddress(GetModuleHandle(_T("ntdll.dll")), "RtlGetVersion");
+		if (pfnRtlGetVersion(&versionInfo) >= 0)
+		{
+			majorVersion = versionInfo.dwMajorVersion;
+			minorVersion = versionInfo.dwMinorVersion;
+			buildVersion = versionInfo.dwBuildNumber;
+
+			if (majorVersion == 6 && minorVersion < 1 || majorVersion < 6)
+			{
+				WindowsVersion = WINDOWS_ANCIENT;
+			}
+			// Windows 7, Windows Server 2008 R2
+			else if (majorVersion == 6 && minorVersion == 1)
+			{
+				WindowsVersion = WINDOWS_7;
+			}
+			// Windows 8, Windows Server 2012
+			else if (majorVersion == 6 && minorVersion == 2)
+			{
+				WindowsVersion = WINDOWS_8;
+			}
+			// Windows 8.1, Windows Server 2012 R2
+			else if (majorVersion == 6 && minorVersion == 3)
+			{
+				WindowsVersion = WINDOWS_8_1;
+			}
+			// Windows 10, Windows Server 2016
+			else if (majorVersion == 10 && minorVersion == 0)
+			{
+				if (buildVersion >= 19043)
+				{
+					WindowsVersion = WINDOWS_10_21H1;
+				}
+				else if (buildVersion >= 19042)
+				{
+					WindowsVersion = WINDOWS_10_20H2;
+				}
+				else if (buildVersion >= 19041)
+				{
+					WindowsVersion = WINDOWS_10_20H1;
+				}
+				else if (buildVersion >= 18363)
+				{
+					WindowsVersion = WINDOWS_10_19H2;
+				}
+				else if (buildVersion >= 18362)
+				{
+					WindowsVersion = WINDOWS_10_19H1;
+				}
+				else if (buildVersion >= 17763)
+				{
+					WindowsVersion = WINDOWS_10_RS5;
+				}
+				else if (buildVersion >= 17134)
+				{
+					WindowsVersion = WINDOWS_10_RS4;
+				}
+				else if (buildVersion >= 16299)
+				{
+					WindowsVersion = WINDOWS_10_RS3;
+				}
+				else if (buildVersion >= 15063)
+				{
+					WindowsVersion = WINDOWS_10_RS2;
+				}
+				else if (buildVersion >= 14393)
+				{
+					WindowsVersion = WINDOWS_10_RS1;
+				}
+				else if (buildVersion >= 10586)
+				{
+					WindowsVersion = WINDOWS_10_TH2;
+				}
+				else if (buildVersion >= 10240)
+				{
+					WindowsVersion = WINDOWS_10;
+				}
+				else
+				{
+					WindowsVersion = WINDOWS_10;
+				}
+			}
+			else
+			{
+				WindowsVersion = WINDOWS_UNKNOWN;
+			}
+		}
+		else
+		{
+			WindowsVersion = WINDOWS_UNKNOWN;
+		}
+	}
+	return WindowsVersion;
+}

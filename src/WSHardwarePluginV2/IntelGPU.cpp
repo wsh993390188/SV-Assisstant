@@ -23,7 +23,7 @@ Hardware::GPU::IntelGPU::IntelGPU(const GPUDevice& GpuData) :
 	if (GPUBaseData.BarAddress != GPU::InvaildMemoryBase)
 	{
 		m_Decorators.emplace_back(std::make_unique<IntelGPUTemperature>(this->GPUBaseData.BarAddress + INTELGPU_TEMPERATURE, "Temperature"));
-		m_Decorators.emplace_back(std::make_unique<IntelGPUEngineClock>(this->GPUBaseData.BarAddress + INTELGPU_ENGINE_FREQUENCY, "Engine Clock"));
+		//m_Decorators.emplace_back(std::make_unique<IntelGPUEngineClock>(this->GPUBaseData.BarAddress + INTELGPU_ENGINE_FREQUENCY, "Engine Clock"));
 		m_Decorators.emplace_back(std::make_unique<IntelGPUMemoryClock>(this->GPUBaseData.BarAddress + INTELGPU_MEMORY_FREQUERCY, "Memory Clock"));
 
 		auto MemoryPtr = std::make_shared<Utils::Ring0::SafeMemoryHandle>();
