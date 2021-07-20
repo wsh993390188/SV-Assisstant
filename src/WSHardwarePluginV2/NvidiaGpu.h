@@ -10,7 +10,8 @@ namespace Hardware
 		public:
 			/// @brief 构造函数加载NVAPI
 			/// @param GpuData GPU的基础数据
-			NvidiaGpu(const GPUDevice& GpuData);
+			/// @param Adapter @ref GPUAdapter
+			NvidiaGpu(const GPUDevice& GpuData, std::unique_ptr<GPUAdapter>&& Adapter);
 
 			/// @brief 析构函数卸载NVAPI
 			~NvidiaGpu();

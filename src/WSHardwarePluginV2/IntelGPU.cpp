@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "IntelGPU.h"
-#include "DXGIGPUBase.h"
 #include "PCIUtils.h"
 
 #if defined(_MSC_VER)
@@ -17,8 +16,8 @@ namespace
 	constexpr auto INTELGPU_MEMORY_BASE_FREQUENCY = 400 / 3.0;
 }
 
-Hardware::GPU::IntelGPU::IntelGPU(const GPUDevice& GpuData) :
-	GPUDeviceBase(GpuData), GpuDatas{}
+Hardware::GPU::IntelGPU::IntelGPU(const GPUDevice& GpuData, std::unique_ptr<GPUAdapter>&& Adapter) :
+	GPUDeviceBase(GpuData, std::move(Adapter)), GpuDatas{}
 {
 	if (GPUBaseData.BarAddress != GPU::InvaildMemoryBase)
 	{
@@ -88,33 +87,30 @@ std::string Hardware::GPU::IntelGPU::GetGPUInfo()
 		}
 	}
 
-	GPUDXBaseData data;
-	if (DXGIGPUBase::Instance().QueryGPUInfo({ GPUBaseData.VendorId, GPUBaseData.DeviceId }, data) == Data::ErrorType::SUCCESS)
 	{
+		bool HasMemory = false;
+		if (this->m_Adapter)
 		{
-			bool HasMemory = false;
-			if (data.SharedSystemMemory)
+			if (this->m_Adapter->SharedMemory)
 			{
 				Json::Value temp;
-				temp["Shared memory"] = Utils::MemoryToStringWithUnit(data.SharedSystemMemory);
+				temp["Shared memory"] = Utils::MemoryToStringWithUnit(this->m_Adapter->SharedMemory);
 				root.append(temp);
-				HasMemory = true;
 			}
 
-			if (data.DedicatedVideoMemory)
+			if (this->m_Adapter->DedicatedMemory)
 			{
 				Json::Value temp;
-				temp["GPU memory"] = Utils::MemoryToStringWithUnit(data.DedicatedVideoMemory);
+				temp["GPU memory"] = Utils::MemoryToStringWithUnit(this->m_Adapter->DedicatedMemory);
 				root.append(temp);
-				HasMemory = true;
 			}
 
-			if (!data.Description.empty())
+			if (!this->m_Adapter->Descriptor.empty())
 			{
 				Json::Value temp;
-				temp["Description"] = Utils::wstringToUtf8(data.Description);
+				temp["Description"] = Utils::wstringToUtf8(this->m_Adapter->Descriptor);
 				root.append(temp);
-				if (auto QueryInfo = ParserGPUName(data.Description); QueryInfo)
+				if (auto QueryInfo = ParserGPUName(this->m_Adapter->Descriptor); QueryInfo)
 				{
 					if (auto GPUDBInfo = GPUConfig::Instance().FindElements(*QueryInfo); GPUDBInfo)
 					{
@@ -168,6 +164,26 @@ std::string Hardware::GPU::IntelGPU::GetGPUInfo()
 						}
 					}
 				}
+			}
+
+			LARGE_INTEGER nFreq, nBeginTime, nEndTime;
+			QueryPerformanceFrequency(&nFreq);
+			QueryPerformanceCounter(&nBeginTime);
+			for (auto& node : this->m_Adapter->Nodes)
+			{
+				this->UpdateNode(node);
+			}
+			QueryPerformanceCounter(&nEndTime);
+			auto elapsedTime = (DOUBLE)((nEndTime.QuadPart - nBeginTime.QuadPart) * 10000000ULL / nFreq.QuadPart);
+
+			for (const auto& node : this->m_Adapter->Nodes)
+			{
+				auto usage = node.Delta / elapsedTime;
+				if (usage > 1.0)
+					usage = 1.0;
+				//Json::Value temp;
+				//temp[node.Name] = std::format("{} %", usage);
+				//root.append(temp);
 			}
 		}
 	}

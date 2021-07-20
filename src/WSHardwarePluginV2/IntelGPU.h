@@ -95,7 +95,8 @@ namespace Hardware
 		public:
 			/// @brief 构造函数
 			/// @param GpuData GPU的PCI物理数据信息
-			IntelGPU(const GPUDevice& GpuData);
+			/// @param Adapter @ref GPUAdapter
+			IntelGPU(const GPUDevice& GpuData, std::unique_ptr<GPUAdapter>&& Adapter);
 
 			/// @brief 构建&更新GPU的信息
 			/// @return Utf8 Json字符串

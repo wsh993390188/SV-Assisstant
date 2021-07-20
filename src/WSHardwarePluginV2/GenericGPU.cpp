@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "GenericGPU.h"
 #include "PCIGPUDetect.h"
+#include "D3DKMTGPUBase.h"
+#include "CrystalDiskInfo/OsInfoFx.h"
 
 #if defined(_MSC_VER)
 #pragma warning(disable : 4996)
@@ -62,5 +64,5 @@ GPU::GPUInstanceFactory& Hardware::GPU::GPUInstanceFactory::Instance()
 
 std::unique_ptr<GPU::GenericGPU> Hardware::GPU::GPUInstanceFactory::CreateGPU()
 {
-	return std::make_unique<PciGpuDetect>();
+	return std::make_unique<D3DKMTGPUBase>();
 }

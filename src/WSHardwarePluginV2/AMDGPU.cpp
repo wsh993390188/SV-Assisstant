@@ -1,13 +1,12 @@
 #include "stdafx.h"
 #include "AMDGPU.h"
-#include "DXGIGPUBase.h"
 #include "ADLSDKHelper.h"
 
 #if defined(_MSC_VER)
 #pragma warning(disable : 4996)
 #endif
 
-Hardware::GPU::AMDGPU::AMDGPU(const GPUDevice& GpuData) : GPUDeviceBase(GpuData)
+Hardware::GPU::AMDGPU::AMDGPU(const GPUDevice& GpuData, std::unique_ptr<GPUAdapter>&& Adapter) : GPUDeviceBase(GpuData, std::move(Adapter))
 {
 }
 
@@ -115,20 +114,19 @@ std::string Hardware::GPU::AMDGPU::GetGPUInfo()
 	{
 	}
 
-	GPUDXBaseData data;
-	if (DXGIGPUBase::Instance().QueryGPUInfo({ GPUBaseData.VendorId, GPUBaseData.DeviceId }, data) == Data::ErrorType::SUCCESS)
+	if (this->m_Adapter)
 	{
-		if (data.SharedSystemMemory)
+		if (this->m_Adapter->SharedMemory)
 		{
 			Json::Value temp;
-			temp["Shared memory"] = Utils::MemoryToStringWithUnit(data.SharedSystemMemory);
+			temp["Shared memory"] = Utils::MemoryToStringWithUnit(this->m_Adapter->SharedMemory);
 			root.append(temp);
 		}
 
-		if (data.DedicatedVideoMemory)
+		if (this->m_Adapter->DedicatedMemory)
 		{
 			Json::Value temp;
-			temp["GPU memory"] = Utils::MemoryToStringWithUnit(data.DedicatedVideoMemory);
+			temp["GPU memory"] = Utils::MemoryToStringWithUnit(this->m_Adapter->DedicatedMemory);
 			root.append(temp);
 		}
 	}

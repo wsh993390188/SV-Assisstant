@@ -307,6 +307,9 @@
     <ClInclude Include="NTD3DKMT.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="D3DKMTHelper.h">
+      <Filter>Hardware\GPU\Device\D3DKMT</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -574,6 +577,9 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="D3DKMTGPUBase.cpp">
+      <Filter>Hardware\GPU\Device\D3DKMT</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DKMTHelper.cpp">
       <Filter>Hardware\GPU\Device\D3DKMT</Filter>
     </ClCompile>
   </ItemGroup>

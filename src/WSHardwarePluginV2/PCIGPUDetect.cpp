@@ -28,77 +28,10 @@ namespace
 	}
 }
 
-Hardware::GPU::PciGpuDetect::PciGpuDetect()
-{
-}
-
-Hardware::GPU::PciGpuDetect::~PciGpuDetect()
-{
-}
-
-Data::ErrorType Hardware::GPU::PciGpuDetect::Initialize(std::string& response)
-{
-	auto ret = InitializeDevice();
-	if (ret == Data::ErrorType::SUCCESS)
-	{
-		GPUConfig::Instance().Initialize();
-		response = BuildInitializeJson();
-	}
-	return ret;
-}
-
-Data::ErrorType Hardware::GPU::PciGpuDetect::Update(const std::string& Args, std::string& response)
-{
-	uint32_t GPUId;
-	if (ParserJson(Args, GPUId))
-	{
-		if (auto Itr = GPUInfos.find(GPUId); Itr != GPUInfos.end())
-		{
-			response = Itr->second->UpdateGPUInfo();
-			return Data::ErrorType::SUCCESS;
-		}
-	}
-	return Data::ErrorType::UNKNOWNJSON;
-}
-
-Data::ErrorType Hardware::GPU::PciGpuDetect::GetElements(LPCSTR paramter, std::string& response)
-{
-	uint32_t GPUId;
-	if (ParserJson(paramter, GPUId))
-	{
-		if (auto Itr = GPUInfos.find(GPUId); Itr != GPUInfos.end())
-		{
-			response = Itr->second->GetGPUInfo();
-			return Data::ErrorType::SUCCESS;
-		}
-	}
-	return Data::ErrorType::UNKNOWNJSON;
-}
-
-Data::ErrorType Hardware::GPU::PciGpuDetect::InitializeDevice()
-{
-	auto Devices = FindGPUDeviceOnPCI();
-	for (const auto& Device : Devices)
-	{
-		auto Dev = GPUDeviceFactory::Instance().CreateDevice(Device);
-		if (Dev)
-			this->GPUInfos.emplace(Device.pciAddress, std::move(Dev));
-		else
-		{
-			spdlog::error(R"(Cant create device vid:{:x}, did:{:x})", Device.VendorId, Device.DeviceId);
-		}
-	}
-
-	if (GPUInfos.empty())
-		return Data::ErrorType::DATAEMPTY;
-	return Data::ErrorType::SUCCESS;
-}
-
-std::vector<GPU::GPUDevice> Hardware::GPU::PciGpuDetect::FindGPUDeviceOnPCI()
+bool Hardware::GPU::PciGpuDetect::FindGPUDeviceOnPCI()
 {
 	DWORD VendorId = InvaildVendorId;
 	Utils::Ring0::SafePCIHandle PciDeal;
-	std::vector<GPUDevice> ret;
 	for (auto bus = 0; bus <= 255; ++bus)
 	{
 		for (auto dev = 0; dev < 31; ++dev)
@@ -139,13 +72,13 @@ std::vector<GPU::GPUDevice> Hardware::GPU::PciGpuDetect::FindGPUDeviceOnPCI()
 						}
 
 						spdlog::info("Find GPU VID: {:x}, DID: {:x}", temp.VendorId, temp.DeviceId);
-						ret.emplace_back(std::move(temp));
+						this->PciDevice.emplace_back(std::move(temp));
 					}
 				}
 			}
 		}
 	}
-	return ret;
+	return !this->PciDevice.empty();
 }
 
 std::uint64_t Hardware::GPU::PciGpuDetect::FindIntelMCHBAR(const uint32_t& bus)
@@ -179,4 +112,22 @@ std::uint64_t Hardware::GPU::PciGpuDetect::FindIntelMCHBAR(const uint32_t& bus)
 	}
 	spdlog::error("Not Find MCHBAR");
 	return InvaildMemoryBase;
+}
+
+bool Hardware::GPU::PciGpuDetect::FindDevice(const uint32_t VendorId, const uint32_t DeviceId, const uint8_t count,
+	Hardware::GPU::GPUDevice& Device)
+{
+	uint8_t times = 0;
+	for (const auto& Dev : PciDevice)
+	{
+		if ((Dev.VendorId == VendorId) && (Dev.DeviceId == DeviceId))
+		{
+			if (times++ == count)
+			{
+				Device = Dev;
+				return true;
+			}
+		}
+	}
+	return false;
 }

@@ -16,6 +16,32 @@ namespace Hardware
 			uint16_t   SubDeviceId;///<子设备ID
 		};
 
+		struct GPUNode
+		{
+			ULONG Index;
+			std::string Name;
+
+			ULONG64 Value;
+			ULONG64 Delta;
+		};
+
+		/// @brief GPU的适配器
+		struct GPUAdapter
+		{
+			LUID AdapterLuid; ///< LUID
+			ULONG SegmentCount; ///< Segment Count
+			std::vector<GPUNode> Nodes; ///< GPU的Nodes
+			std::wstring DeviceInterface; ///< 设备接口
+
+			std::wstring Descriptor; ///< 描述符
+			std::wstring DriverDate;
+			std::wstring DriverVersion;
+			std::wstring LocationInfo;
+			ULONG64 InstalledMemory;
+			uint64_t SharedMemory;
+			uint64_t DedicatedMemory;
+		};
+
 		/// @brief 非法的64位内存地址
 		constexpr auto InvaildMemoryBase = 0xFFFFFFFFFFFFFFFFull;
 
@@ -54,7 +80,7 @@ namespace Hardware
 		public:
 			/// @brief 构造函数
 			/// @param[in] GpuData GPU的总线数据
-			explicit GPUDeviceBase(const GPUDevice& GpuData);
+			explicit GPUDeviceBase(const GPUDevice& GpuData, std::unique_ptr<GPUAdapter>&& Adapter);
 
 			/// @brief 虚析构函数
 			virtual ~GPUDeviceBase() = default;
@@ -67,10 +93,17 @@ namespace Hardware
 			/// @return Utf8 Json字符串
 			virtual std::string GetGPUInfo() = 0;
 		protected:
+			/// @brief 更新GPU的Node信息
+			/// @param Node @ref GPUNode
+			/// @return 更新是否成功
+			bool UpdateNode(GPUNode& Node);
+		protected:
 			/// @brief GPU的PCI总线数据
 			GPUDevice GPUBaseData;
 			/// @brief Sub Vendor
 			std::string SubVendor;
+			/// @brief GPU的适配器接口
+			std::unique_ptr<GPUAdapter> m_Adapter;
 		};
 	}
 }

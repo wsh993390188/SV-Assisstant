@@ -31,16 +31,16 @@ namespace Hardware
 			/// @brief 根据VendorId创建显卡设备对象
 			/// @param AdapterData Dx信息
 			/// @return @ref Hardware::GPU::GPUDeviceBase
-			std::unique_ptr<GPUDeviceBase> CreateDevice(const GPU::GPUDevice& AdapterData)
+			std::unique_ptr<GPUDeviceBase> CreateDevice(const GPU::GPUDevice& AdapterData, std::unique_ptr<GPUAdapter>&& Adapter)
 			{
 				switch (AdapterData.VendorId)
 				{
 				case IntelVendorId:
-					return std::make_unique<IntelGPU>(AdapterData);
+					return std::make_unique<IntelGPU>(AdapterData, std::move(Adapter));
 				case NvidiaVendorId:
-					return std::make_unique<NvidiaGpu>(AdapterData);
+					return std::make_unique<NvidiaGpu>(AdapterData, std::move(Adapter));
 				case AMDVendorId:
-					return std::make_unique<AMDGPU>(AdapterData);
+					return std::make_unique<AMDGPU>(AdapterData, std::move(Adapter));
 				}
 				return nullptr;
 			}

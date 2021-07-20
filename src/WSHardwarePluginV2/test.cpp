@@ -878,7 +878,7 @@ int main()
 	{
 		// 	Hardware::Test::DiskTest::GetDiskTest();
 		// 	Hardware::Test::CPUTest::GetCPUTest();
-		Hardware::Test::MemoryTest::GetMemoryTest();
+		//Hardware::Test::MemoryTest::GetMemoryTest();
 		// 	Hardware::Test::BroadTest::GetBroadTest();
 		// 	Hardware::Test::AudioTest::GetAudioTest();
 		// 	Hardware::Test::NICTest::GetNICTest();
@@ -886,7 +886,7 @@ int main()
 		// 	Hardware::Test::WinBioTest::GetWinBioTest();
 		// 	Hardware::Test::MonitorTest::GetMonitorTest();
 		// 	Hardware::Test::BiosTest::GetBiosTest();
-		//Hardware::Test::GPUTest::GetGPUTest();
+		Hardware::Test::GPUTest::GetGPUTest();
 		CoUninitialize();
 	}
 }

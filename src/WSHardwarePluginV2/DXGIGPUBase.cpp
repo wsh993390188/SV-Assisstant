@@ -37,7 +37,7 @@ Data::ErrorType Hardware::GPU::DXGIGPUBase::Initialize()
 	return InitializeDevice();
 }
 
-Data::ErrorType Hardware::GPU::DXGIGPUBase::QueryGPUInfo(const GPUQuery& query, GPUDXBaseData& DxData)
+Data::ErrorType Hardware::GPU::DXGIGPUBase::QueryGPUInfo(const LUID& query, GPUDXBaseData& DxData)
 {
 	if (auto data = GPUDatas.find(query); data != GPUDatas.end())
 	{
@@ -45,7 +45,7 @@ Data::ErrorType Hardware::GPU::DXGIGPUBase::QueryGPUInfo(const GPUQuery& query, 
 		return Data::ErrorType::SUCCESS;
 	}
 
-	spdlog::error("Not Find Device VID:{:x}, DID:{:x} On DXGI", query.VID, query.DID);
+	spdlog::error("Not Find Device LUID:{} {} On DXGI", query.LowPart, query.HighPart);
 	return Data::ErrorType::DATAEMPTY;
 }
 
@@ -107,7 +107,7 @@ Data::ErrorType Hardware::GPU::DXGIGPUBase::InitializeDevice()
 		gpuData.DedicatedSystemMemory = AdapterDesc.DedicatedSystemMemory;
 		gpuData.SharedSystemMemory = AdapterDesc.SharedSystemMemory;
 		spdlog::info("Find Devive VID:{:x}, DID:{:x} on Dxgi", AdapterDesc.VendorId, AdapterDesc.DeviceId);
-		GPUDatas.emplace(GPUQuery(AdapterDesc.VendorId, AdapterDesc.DeviceId), std::move(gpuData));
+		GPUDatas.emplace(AdapterDesc.AdapterLuid, std::move(gpuData));
 	}
 	spdlog::info("End init Dxgi");
 	return Data::ErrorType::SUCCESS;

@@ -25,25 +25,24 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE 
+1 TEXTINCLUDE
 BEGIN
-    "resource.h\0"
+"resource.h\0"
 END
 
-2 TEXTINCLUDE 
+2 TEXTINCLUDE
 BEGIN
-    "#include ""winres.h""\r\n"
-    "\0"
+"#include ""winres.h""\r\n"
+"\0"
 END
 
-3 TEXTINCLUDE 
+3 TEXTINCLUDE
 BEGIN
-    "\r\n"
-    "\0"
+"\r\n"
+"\0"
 END
 
 #endif    // APSTUDIO_INVOKED
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -58,18 +57,15 @@ IDR_XML3                XML                     "MemoryDatabase.xml"
 
 IDR_XML4                XML                     "EDIDDatabase.xml"
 
-
 /////////////////////////////////////////////////////////////////////////////
 //
 // PCIIDS
 //
 
-IDR_PCIIDS2             PCIIDS                  "C:\\Users\\wangshuo20\\Documents\\Github\\SV-Assisstant\\Libcommon\\pciids\\pci.ids"
+IDR_PCIIDS2             PCIIDS                  "..\\..\\Libcommon\\pciids\\pci.ids"
 
 #endif    // 中文(简体，中国) resources
 /////////////////////////////////////////////////////////////////////////////
-
-
 
 #ifndef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -77,7 +73,5 @@ IDR_PCIIDS2             PCIIDS                  "C:\\Users\\wangshuo20\\Document
 // Generated from the TEXTINCLUDE 3 resource.
 //
 
-
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
-

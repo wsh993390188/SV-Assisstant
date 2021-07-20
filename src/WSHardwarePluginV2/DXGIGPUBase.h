@@ -18,6 +18,17 @@ namespace Hardware
 			LUID AdapterLuid;
 		};
 
+		struct LUIDCompare
+		{
+			bool operator()(const LUID& k1, const LUID& k2)const
+			{
+				if (k1.LowPart == k2.LowPart)
+					return k1.HighPart < k2.HighPart;
+				else
+					return k1.LowPart < k2.LowPart;
+			}
+		};
+
 		class DXGIGPUBase final
 		{
 		public:
@@ -26,9 +37,9 @@ namespace Hardware
 			static DXGIGPUBase& Instance();
 
 			/// @brief 根据VID和DID查询GPU的信息
-			/// @param query GPU的查询数据 @ref GPUQuery
+			/// @param query GPU的查询数据 @ref LUID
 			/// @return @ref Data::ErrorType
-			Data::ErrorType QueryGPUInfo(const GPUQuery& query, GPUDXBaseData& DxData);
+			Data::ErrorType QueryGPUInfo(const LUID& query, GPUDXBaseData& DxData);
 		private:
 			/// @brief 初始化设备
 			/// @return @ref Data::ErrorType
@@ -51,9 +62,9 @@ namespace Hardware
 			/// @brief CreateDXGIFactory函数对象
 			LPCREATEDXGIFACTORY pCreateDXGIFactory;
 			/// @brief GPU从DX中获取的数据
-			/// First:@ref GPUQuery
+			/// First:@ref LUID
 			/// Second:@ref GPUDXBaseData
-			std::map < GPUQuery, GPUDXBaseData> GPUDatas;
+			std::map <LUID, GPUDXBaseData, LUIDCompare> GPUDatas;
 		};
 	}
 }

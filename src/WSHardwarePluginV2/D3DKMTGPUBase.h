@@ -1,11 +1,14 @@
 #pragma once
 #include "GenericGPU.h"
+#include "PCIGPUDetect.h"
+#include "D3DKMTHelper.h"
+
 namespace Hardware
 {
 	namespace GPU
 	{
 		/// @brief 通过D3D接口获取GPU的信息
-		class D3DKMTGPUBase final : public GenericGPU
+		class D3DKMTGPUBase final : public GenericGPU, PciGpuDetect
 		{
 		public:
 			/// @brief 初始化GPU
@@ -28,6 +31,13 @@ namespace Hardware
 			/// @brief 初始化D3DKMT
 			/// @return 是否初始化成功
 			bool InitializeD3DKMT();
+
+			/// @brief 创建一个GPU的适配器
+			/// @return @ref GPUAdapter
+			std::unique_ptr<GPUAdapter> CreateAdapter(_In_ PWSTR DeviceInterface, _In_ D3DKMT_HANDLE AdapterHandle, _In_ const LUID& AdapterLuid, _In_ ULONG NumberOfSegments, _In_ ULONG NumberOfNodes);
+
+			/// @brief GPU的适配器，包含一些GPU相关的数据
+			std::map<uint64_t, std::shared_ptr<GPUAdapter>> GPUAdapters;
 		};
 	}
 }

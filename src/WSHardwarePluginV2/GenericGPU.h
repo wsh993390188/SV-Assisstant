@@ -5,7 +5,7 @@ namespace Hardware
 {
 	namespace GPU
 	{
-		/// @brief GPU的查询结构
+				/// @brief GPU的查询结构
 		struct GPUQuery
 		{
 			std::uint32_t VID;///<VendorId
@@ -23,7 +23,7 @@ namespace Hardware
 					return Other.DID < This.DID;
 			}
 		};
-
+		
 		/// @brief GPU通用初始化函数
 		class GenericGPU
 		{
@@ -61,7 +61,7 @@ namespace Hardware
 			std::string BuildInitializeJson();
 
 			/// @brief 构建显卡信息的JSON字符
-			/// @param[in] GPUId 显卡ID
+			/// @param[in] GPUId 显卡ID对应的查询对象
 			/// @return JSON字符
 			bool ParserJson(const std::string& JsonString, uint32_t& GPUId);
 		};
