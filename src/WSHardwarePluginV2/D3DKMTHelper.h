@@ -38,6 +38,6 @@ namespace Hardware
 		bool QueryAdapterMemoryInformation(_In_ D3DKMT_HANDLE  AdapterHandle, const LUID& AdapterLUID, uint64_t& SharedMemory, uint64_t& DedicatedMemory);
 		std::string GetNodeEngineTypeString(D3DKMT_NODEMETADATA NodeMetaData);
 
-		bool UpdateNodeInformation(_In_ const LUID& AdapterLUID, _In_ const ULONG NodeId, uint64_t& NewValue);
+		bool UpdateNodeInformation(_In_ const LUID& AdapterLUID, _In_ const ULONG& NodeId, uint64_t& NewValue);
 	}
 }

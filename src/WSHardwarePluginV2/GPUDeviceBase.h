@@ -16,13 +16,16 @@ namespace Hardware
 			uint16_t   SubDeviceId;///<子设备ID
 		};
 
-		struct GPUNode
+		struct GPUTimeCircle
+		{
+			ULONG64 Value;
+			ULONG64 Delta;
+		};
+
+		struct GPUNode : GPUTimeCircle
 		{
 			ULONG Index;
 			std::string Name;
-
-			ULONG64 Value;
-			ULONG64 Delta;
 		};
 
 		/// @brief GPU的适配器
@@ -104,6 +107,8 @@ namespace Hardware
 			std::string SubVendor;
 			/// @brief GPU的适配器接口
 			std::unique_ptr<GPUAdapter> m_Adapter;
+			/// @brief GPU的运行时间
+			GPUTimeCircle TotalRunningTime;
 		};
 	}
 }

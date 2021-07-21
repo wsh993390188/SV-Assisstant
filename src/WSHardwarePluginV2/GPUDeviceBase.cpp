@@ -17,19 +17,14 @@ Hardware::GPU::GPUDeviceBase::GPUDeviceBase(const GPUDevice& GpuData, std::uniqu
 {
 	SubVendor = Utils::PCIUtils::Instance().GetVendorName(GpuData.SubVendorId);
 	Utils::trim(SubVendor);
-
-	for (auto& Node : m_Adapter->Nodes)
-	{
-		UpdateNode(Node);
-	}
 }
 
 bool Hardware::GPU::GPUDeviceBase::UpdateNode(GPUNode& Node)
 {
-	if (!m_Adapter)
+	if (!this->m_Adapter)
 		return false;
 	uint64_t runningTime;
-	if (D3DKMTHelper::UpdateNodeInformation(m_Adapter->AdapterLuid, Node.Index, runningTime))
+	if (D3DKMTHelper::UpdateNodeInformation(this->m_Adapter->AdapterLuid, Node.Index, runningTime))
 	{
 		Node.Delta = runningTime - Node.Value;
 		Node.Value = runningTime;

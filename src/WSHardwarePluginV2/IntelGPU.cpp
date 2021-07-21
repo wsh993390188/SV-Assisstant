@@ -166,24 +166,27 @@ std::string Hardware::GPU::IntelGPU::GetGPUInfo()
 				}
 			}
 
-			LARGE_INTEGER nFreq, nBeginTime, nEndTime;
+			LARGE_INTEGER nFreq, nEndTime;
 			QueryPerformanceFrequency(&nFreq);
-			QueryPerformanceCounter(&nBeginTime);
 			for (auto& node : this->m_Adapter->Nodes)
 			{
 				this->UpdateNode(node);
 			}
 			QueryPerformanceCounter(&nEndTime);
-			auto elapsedTime = (DOUBLE)((nEndTime.QuadPart - nBeginTime.QuadPart) * 10000000ULL / nFreq.QuadPart);
-
+			TotalRunningTime.Delta = nEndTime.QuadPart - TotalRunningTime.Value;
+			TotalRunningTime.Value = nEndTime.QuadPart;
+			auto elapsedTime = (double)(TotalRunningTime.Delta * 100000ULL / nFreq.QuadPart);
 			for (const auto& node : this->m_Adapter->Nodes)
 			{
 				auto usage = node.Delta / elapsedTime;
-				if (usage > 1.0)
-					usage = 1.0;
-				//Json::Value temp;
-				//temp[node.Name] = std::format("{} %", usage);
-				//root.append(temp);
+				if (usage > 100.0)
+					usage = 100.0;
+				if (usage > 1e-2)
+				{
+					Json::Value temp;
+					temp[node.Name] = std::format("{:.2f} %", usage);
+					root.append(temp);
+				}
 			}
 		}
 	}

@@ -62,6 +62,29 @@ std::string Hardware::GPU::AMDGPU::UpdateGPUInfo()
 	catch (const std::exception&)
 	{
 	}
+
+	LARGE_INTEGER nFreq, nEndTime;
+	QueryPerformanceFrequency(&nFreq);
+	for (auto& node : this->m_Adapter->Nodes)
+	{
+		this->UpdateNode(node);
+	}
+	QueryPerformanceCounter(&nEndTime);
+	TotalRunningTime.Delta = nEndTime.QuadPart - TotalRunningTime.Value;
+	TotalRunningTime.Value = nEndTime.QuadPart;
+	auto elapsedTime = (double)(TotalRunningTime.Delta * 100000ULL / nFreq.QuadPart);
+	for (const auto& node : this->m_Adapter->Nodes)
+	{
+		auto usage = node.Delta / elapsedTime;
+		if (usage > 100.0)
+			usage = 100.0;
+		if (usage > 1e-2)
+		{
+			Json::Value temp;
+			temp[node.Name] = std::format("{:.2f} %", usage);
+			root.append(temp);
+		}
+	}
 	return Json::FastWriter().write(root);
 }
 

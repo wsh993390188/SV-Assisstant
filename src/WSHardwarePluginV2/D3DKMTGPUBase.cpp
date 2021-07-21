@@ -147,7 +147,7 @@ std::unique_ptr<Hardware::GPU::GPUAdapter> Hardware::GPU::D3DKMTGPUBase::CreateA
 	{
 		D3DKMTHelper::QueryAdapterMemoryInformation(AdapterHandle, AdapterLuid, Adapter.SharedMemory, Adapter.DedicatedMemory);
 
-		for (ULONG i = 0; i < NumberOfNodes; i++)
+		for (volatile ULONG i = 0; i < NumberOfNodes; i++)
 		{
 			D3DKMT_NODEMETADATA metaDataInfo{};
 			metaDataInfo.NodeOrdinalAndAdapterIndex = MAKEWORD(i, 0);
@@ -165,7 +165,7 @@ std::unique_ptr<Hardware::GPU::GPUAdapter> Hardware::GPU::D3DKMTGPUBase::CreateA
 
 			if (Node.Name.empty())
 			{
-				Node.Name = std::format("Engine {}", i);
+				Node.Name = std::format("Engine {}", std::remove_volatile_t<decltype(i)>(i));
 			}
 			Adapter.Nodes.emplace_back(Node);
 		}

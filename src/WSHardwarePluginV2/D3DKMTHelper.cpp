@@ -237,15 +237,19 @@ std::string Hardware::D3DKMTHelper::GetNodeEngineTypeString(
 	return {};
 }
 
-bool Hardware::D3DKMTHelper::UpdateNodeInformation(const LUID& AdapterLUID, const ULONG NodeId, uint64_t& NewValue)
+bool Hardware::D3DKMTHelper::UpdateNodeInformation(const LUID& AdapterLUID, const ULONG& NodeId, uint64_t& NewValue)
 {
 	D3DKMT_QUERYSTATISTICS queryStatistics{};
 	queryStatistics.Type = D3DKMT_QUERYSTATISTICS_NODE;
 	queryStatistics.AdapterLuid = AdapterLUID;
 	queryStatistics.QueryNode.NodeId = NodeId;
-	if (NT_SUCCESS(D3DKMTQueryStatistics(&queryStatistics)))
+
+	if (NT_SUCCESS(D3DKMTQueryStatistics((const D3DKMT_QUERYSTATISTICS*)&queryStatistics)))
 	{
 		NewValue = queryStatistics.QueryResult.NodeInformation.GlobalInformation.RunningTime.QuadPart;
 	}
+
+	// Todo 对优化代码做分析,为啥不加这句就出毛病
+	const auto FKComplier = std::to_wstring(NodeId);
 	return true;
 }
