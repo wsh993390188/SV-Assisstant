@@ -34,6 +34,44 @@ namespace Hardware
 			int64_t m_TjCurrent;
 		};
 
+		/// @brief 获取IntelGPU的功率
+		class IntelGPUEnergy : public GPUDecorator
+		{
+		public:
+			/// @brief 禁用默认构造函数
+			IntelGPUEnergy() = delete;
+			/// @brief 初始化函数，保存内存地址，当前修饰名
+			/// @param[in] MemoryBase 内存地址
+			/// @param[in] EnergyUnit Energy单位
+			/// @param[in] Name 当前名称
+			/// @return
+			explicit IntelGPUEnergy(const uint64_t& MemoryBase, const uint64_t& EnergyUnit, const std::string& Name);
+
+			/// @brief 获取装饰信息
+			/// @return 装饰信息
+			const std::string GetDecoratorValue() const override final;
+
+			/// @brief 更新信息
+			/// @param MemoryPtr 内存的指针
+			void Update(std::weak_ptr<Utils::Ring0::SafeMemoryHandle> MemoryPtr) override final;
+
+		private:
+			/// @brief 计算功率
+			void CalcPower();
+		private:
+			/// @brief 最新功率
+			double m_Power;
+			/// @brief 能耗
+			GPUTimeCircle m_EnergyStatus;
+			/// @brief 时间范围
+			GPUTimeCircle m_EnergyTime;
+			/// @brief 功率单元
+			const double m_EnergyUnit;
+
+			/// @brief 性能计数器的频率
+			LARGE_INTEGER PerformanceFrequency;
+		};
+
 		/// @brief 获取IntelGPU的Engine Clock
 		class IntelGPUEngineClock : public GPUDecorator
 		{

@@ -849,12 +849,16 @@ namespace Hardware
 					auto InitializeJson = BuildJsonFromInitializeJson(Str);
 					if (Str)
 						delete[] Str;
-					PcmHardwareAction(PCM_HARDWARE_ACTION_GPU_UPDATE, InitializeJson.c_str(), &data);
-					Str = _com_util::ConvertBSTRToString(data);
-					PrintElementJsonInfoNoArray(Str);
-					SysFreeString(data);
-					if (Str)
-						delete[] Str;
+					int i = 0;
+					while (i++ < 5)
+					{
+						PcmHardwareAction(PCM_HARDWARE_ACTION_GPU_UPDATE, InitializeJson.c_str(), &data);
+						Str = _com_util::ConvertBSTRToString(data);
+						PrintElementJsonInfoNoArray(Str);
+						SysFreeString(data);
+						if (Str)
+							delete[] Str;
+					}
 
 					PcmHardwareAction(PCM_HARDWARE_ACTION_GPU_GET, InitializeJson.c_str(), &data);
 					Str = _com_util::ConvertBSTRToString(data);

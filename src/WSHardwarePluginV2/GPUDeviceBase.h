@@ -18,8 +18,8 @@ namespace Hardware
 
 		struct GPUTimeCircle
 		{
-			ULONG64 Value;
-			ULONG64 Delta;
+			ULONG64 Value = 0;
+			ULONG64 Delta = 0;
 		};
 
 		struct GPUNode : GPUTimeCircle

@@ -8,12 +8,16 @@
 
 namespace
 {
-	constexpr auto INTELGPU_TEMPERATURE = 0x5980;
+	constexpr auto INTELGPU_PACKAGE_TEMPERATURE = 0x5978;
+	constexpr auto INTELGPU_IA_TEMPERATURE = 0x597C;
+	constexpr auto INTELGPU_GT_TEMPERATURE = 0x5980;
 	constexpr auto INTELGPU_ENGINE_FREQUENCY = 0x5948;
 	constexpr auto INTELGPU_MEMORY_FREQUERCY = 0x5E00;
 	constexpr auto INTELGPU_RP_FREQUENCY = 0x5998;
 	constexpr auto INTELGPU_ENGINE_FREQUENCY_MULTIPLIER = 50ull;
 	constexpr auto INTELGPU_MEMORY_BASE_FREQUENCY = 400 / 3.0;
+	constexpr auto INTELGPU_POWER_SKU_UNIT = 0x5938;///< Package power sku unit
+	constexpr auto INTELGPU_PACKAGE_ENERGY_STATUS = 0x593C;///< Package power sku unit
 }
 
 Hardware::GPU::IntelGPU::IntelGPU(const GPUDevice& GpuData, std::unique_ptr<GPUAdapter>&& Adapter) :
@@ -21,7 +25,9 @@ Hardware::GPU::IntelGPU::IntelGPU(const GPUDevice& GpuData, std::unique_ptr<GPUA
 {
 	if (GPUBaseData.BarAddress != GPU::InvaildMemoryBase)
 	{
-		m_Decorators.emplace_back(std::make_unique<IntelGPUTemperature>(this->GPUBaseData.BarAddress + INTELGPU_TEMPERATURE, "Temperature"));
+		m_Decorators.emplace_back(std::make_unique<IntelGPUTemperature>(this->GPUBaseData.BarAddress + INTELGPU_PACKAGE_TEMPERATURE, "Package Temperature"));
+		m_Decorators.emplace_back(std::make_unique<IntelGPUTemperature>(this->GPUBaseData.BarAddress + INTELGPU_IA_TEMPERATURE, "IA Temperature"));
+		m_Decorators.emplace_back(std::make_unique<IntelGPUTemperature>(this->GPUBaseData.BarAddress + INTELGPU_GT_TEMPERATURE, "GT Temperature"));
 		//m_Decorators.emplace_back(std::make_unique<IntelGPUEngineClock>(this->GPUBaseData.BarAddress + INTELGPU_ENGINE_FREQUENCY, "Engine Clock"));
 		m_Decorators.emplace_back(std::make_unique<IntelGPUMemoryClock>(this->GPUBaseData.BarAddress + INTELGPU_MEMORY_FREQUERCY, "Memory Clock"));
 
@@ -33,6 +39,15 @@ Hardware::GPU::IntelGPU::IntelGPU(const GPUDevice& GpuData, std::unique_ptr<GPUA
 			auto RP1 = Utils::extract_bits_ui(RPData, 8, 15);
 			GpuDatas.GPUMinFreq = (RPN < RP1 ? RPN : RP1) * 50;
 			GpuDatas.GPUMaxFreq = Utils::extract_bits_ui(RPData, 0, 7) * 50;
+		}
+
+		DWORD PowerSKUnit{};
+		if (MemoryPtr->ReadDWORD(this->GPUBaseData.BarAddress + INTELGPU_POWER_SKU_UNIT, PowerSKUnit) && PowerSKUnit)
+		{
+			auto TimeUnit = Utils::extract_bits_ui(PowerSKUnit, 16, 19);
+			auto EnergyUnit = Utils::extract_bits_ui(PowerSKUnit, 8, 12);
+			auto PowerUnit = Utils::extract_bits_ui(PowerSKUnit, 0, 3);
+			m_Decorators.emplace_back(std::make_unique<IntelGPUEnergy>(this->GPUBaseData.BarAddress + INTELGPU_PACKAGE_ENERGY_STATUS, PowerUnit, "Package Energy"));
 		}
 	}
 }
@@ -53,6 +68,31 @@ std::string Hardware::GPU::IntelGPU::UpdateGPUInfo()
 		catch (const std::exception&)
 		{
 			continue;
+		}
+	}
+
+	LARGE_INTEGER nFreq, nEndTime;
+	QueryPerformanceFrequency(&nFreq);
+	for (auto& node : this->m_Adapter->Nodes)
+	{
+		this->UpdateNode(node);
+	}
+	QueryPerformanceCounter(&nEndTime);
+	TotalRunningTime.Delta = nEndTime.QuadPart - TotalRunningTime.Value;
+	TotalRunningTime.Value = nEndTime.QuadPart;
+	auto elapsedTime = (double)(TotalRunningTime.Delta * 100000ULL / nFreq.QuadPart);
+	for (const auto& node : this->m_Adapter->Nodes)
+	{
+		auto usage = node.Delta / elapsedTime;
+		if (usage > 1e+3)
+			continue;
+		if (usage > 100.0)
+			usage = 100.0;
+		if (usage > 1e-2)
+		{
+			Json::Value temp;
+			temp[node.Name] = std::format("{:.2f} %", usage);
+			root.append(temp);
 		}
 	}
 	return Json::FastWriter().write(root);
@@ -163,29 +203,6 @@ std::string Hardware::GPU::IntelGPU::GetGPUInfo()
 							root.append(temp);
 						}
 					}
-				}
-			}
-
-			LARGE_INTEGER nFreq, nEndTime;
-			QueryPerformanceFrequency(&nFreq);
-			for (auto& node : this->m_Adapter->Nodes)
-			{
-				this->UpdateNode(node);
-			}
-			QueryPerformanceCounter(&nEndTime);
-			TotalRunningTime.Delta = nEndTime.QuadPart - TotalRunningTime.Value;
-			TotalRunningTime.Value = nEndTime.QuadPart;
-			auto elapsedTime = (double)(TotalRunningTime.Delta * 100000ULL / nFreq.QuadPart);
-			for (const auto& node : this->m_Adapter->Nodes)
-			{
-				auto usage = node.Delta / elapsedTime;
-				if (usage > 100.0)
-					usage = 100.0;
-				if (usage > 1e-2)
-				{
-					Json::Value temp;
-					temp[node.Name] = std::format("{:.2f} %", usage);
-					root.append(temp);
 				}
 			}
 		}
@@ -321,4 +338,53 @@ void Hardware::GPU::IntelGPUMemoryClock::Update(std::weak_ptr<Utils::Ring0::Safe
 			spdlog::error("IntelGPUMemoryClock Read Memory {:x} Status:%s maybe read value:{}", MemoryBase, res ? "true" : "false", value);
 		}
 	}
+}
+
+Hardware::GPU::IntelGPUEnergy::IntelGPUEnergy(const uint64_t& MemoryBase, const uint64_t& EnergyUnit, const std::string& Name) : GPUDecorator(MemoryBase, Name), m_EnergyUnit(pow(2, EnergyUnit)), m_Power((std::numeric_limits<decltype(m_Power)>::max)())
+{
+	QueryPerformanceFrequency(&this->PerformanceFrequency);
+}
+
+const std::string Hardware::GPU::IntelGPUEnergy::GetDecoratorValue() const
+{
+	if (m_Power != (std::numeric_limits<decltype(m_Power)>::max)())
+	{
+		if (IsUpdate)
+		{
+			IsUpdate = false;
+			return Utils::to_string_with_precision(m_Power) + " W";
+		}
+	}
+	throw std::exception("Cannot get IntelGPUMemoryClock");
+}
+
+void Hardware::GPU::IntelGPUEnergy::Update(std::weak_ptr<Utils::Ring0::SafeMemoryHandle> MemoryPtr)
+{
+	if (!MemoryPtr.expired())
+	{
+		auto MemoryPtrReal = MemoryPtr.lock();
+		DWORD value{};
+		auto res = MemoryPtrReal->ReadDWORD(MemoryBase, value);
+		if (res && value)
+		{
+			LARGE_INTEGER PerformanceCounter{};
+			QueryPerformanceCounter(&PerformanceCounter);
+			IsUpdate = true;
+			m_EnergyStatus.Delta = value - m_EnergyStatus.Value > 0 ? value - m_EnergyStatus.Value : (uint64_t)value + m_EnergyStatus.Value - (std::numeric_limits<decltype(value)>::max)();
+			m_EnergyStatus.Value = value;
+			m_EnergyTime.Delta = PerformanceCounter.QuadPart - m_EnergyTime.Value;
+			m_EnergyTime.Value = PerformanceCounter.QuadPart;
+			CalcPower();
+		}
+		else
+		{
+			spdlog::error("IntelGPUEnergy Read Memory {:x} Status:%s maybe read value:{}", MemoryBase, res ? "true" : "false", value);
+		}
+	}
+}
+
+void Hardware::GPU::IntelGPUEnergy::CalcPower()
+{
+	auto elapsedTime = (double)(m_EnergyTime.Delta * 100000ULL / PerformanceFrequency.QuadPart);
+	m_Power = m_EnergyStatus.Delta / m_EnergyUnit / elapsedTime;
 }
