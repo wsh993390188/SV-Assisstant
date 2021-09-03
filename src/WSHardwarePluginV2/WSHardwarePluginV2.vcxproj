@@ -136,8 +136,7 @@
       <AdditionalLibraryDirectories>$(SolutionDir)..\LibCommon\NVAPI\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>$(SolutionDir)..\Libcommon\CooLite\LnvSignTool.exe $(OutDir)$(TargetName)$(TargetExt)</Command>
     </PostBuildEvent>
     <Manifest>
       <AdditionalManifestFiles>$(SolutionDir)..\Libcommon\CrystalDiskInfo\DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
@@ -194,8 +193,7 @@
       <AdditionalLibraryDirectories>$(SolutionDir)..\LibCommon\NVAPI\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>$(SolutionDir)..\Libcommon\CooLite\LnvSignTool.exe $(OutDir)$(TargetName)$(TargetExt)</Command>
     </PostBuildEvent>
     <Manifest>
       <AdditionalManifestFiles>$(SolutionDir)..\Libcommon\CrystalDiskInfo\DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>

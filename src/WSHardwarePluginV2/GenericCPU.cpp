@@ -350,31 +350,31 @@ namespace Hardware
 
 			{
 				Json::Value TempValue;
-				TempValue["Family"] = soc.m_Data.Family;
+				TempValue["Family"] = Utils::to_string_hex(soc.m_Data.Family, 0);
 				Element.append(std::move(TempValue));
 			}
 
 			{
 				Json::Value TempValue;
-				TempValue["Model"] = soc.m_Data.Model;
+				TempValue["Model"] = Utils::to_string_hex(soc.m_Data.Model, 0);
 				Element.append(std::move(TempValue));
 			}
 
 			{
 				Json::Value TempValue;
-				TempValue["Stepping"] = soc.m_Data.Stepping;
+				TempValue["Stepping"] = Utils::to_string_hex(soc.m_Data.Stepping,0);
 				Element.append(std::move(TempValue));
 			}
 
 			{
 				Json::Value TempValue;
-				TempValue["Ext.Family"] = soc.m_Data.ExtFamily;
+				TempValue["Ext.Family"] = Utils::to_string_hex(soc.m_Data.ExtFamily, 0);
 				Element.append(std::move(TempValue));
 			}
 
 			{
 				Json::Value TempValue;
-				TempValue["Ext.Model"] = soc.m_Data.ExtModel;
+				TempValue["Ext.Model"] = Utils::to_string_hex(soc.m_Data.ExtModel, 0);
 				Element.append(std::move(TempValue));
 			}
 			{

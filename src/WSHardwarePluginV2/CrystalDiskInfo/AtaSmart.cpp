@@ -147,7 +147,7 @@ DWORD CAtaSmart::UpdateSmartInfo(DWORD i)
 			)
 		{
 			vars[i].Temperature = vars[i].SmartReadData[0x2] * 256 + vars[i].SmartReadData[0x1] - 273;
-			if (vars[i].Temperature == -273)
+			if (vars[i].Temperature == -273 || vars[i].Temperature > 200)
 			{
 				vars[i].Temperature = -1000;
 			}
@@ -3808,7 +3808,7 @@ VOID CAtaSmart::CheckSsdSupport(ATA_SMART_INFO& asi)
 			}
 			else if (asi.DiskVendorId == SSD_VENDOR_SANDFORCE || asi.DiskVendorId == SSD_VENDOR_OCZ_VECTOR || asi.DiskVendorId == SSD_VENDOR_CORSAIR || asi.DiskVendorId == SSD_VENDOR_KINGSTON || asi.DiskVendorId == SSD_VENDOR_REALTEK
 				  || asi.DiskVendorId == SSD_VENDOR_WDC || asi.DiskVendorId == SSD_VENDOR_SSSTC || asi.DiskVendorId == SSD_VENDOR_SKHYNIX || asi.DiskVendorId == SSD_VENDOR_PHISON || asi.DiskVendorId == SSD_VENDOR_SEAGATE || asi.DiskVendorId == SSD_VENDOR_MARVELL
-				  || asi.DiskVendorId == SSD_VENDOR_MAXIOTEK || asi.DiskVendorId == SSD_VENDOR_YMTC)
+				  || asi.DiskVendorId == SSD_VENDOR_MAXIOTEK || asi.DiskVendorId == SSD_VENDOR_YMTC || asi.DiskVendorId == SSD_VENDOR_MICRON_MU02)
 			{
 				if (asi.HostReadsWritesUnit == HOST_READS_WRITES_512B)
 				{
@@ -3957,7 +3957,7 @@ VOID CAtaSmart::CheckSsdSupport(ATA_SMART_INFO& asi)
 						asi.Attribute[j].RawValue[3], asi.Attribute[j].RawValue[4], asi.Attribute[j].RawValue[5])
 					/ 2 / 1024 / 1024);
 			}
-			else if (asi.DiskVendorId == SSD_VENDOR_PLEXTOR || asi.DiskVendorId == SSD_VENDOR_MICRON_MU02)
+			else if (asi.DiskVendorId == SSD_VENDOR_PLEXTOR)
 			{
 				asi.HostReads = (INT)(
 					B8toB64(asi.Attribute[j].RawValue[0], asi.Attribute[j].RawValue[1], asi.Attribute[j].RawValue[2],
@@ -4860,7 +4860,12 @@ BOOL CAtaSmart::IsSsdKioxia(ATA_SMART_INFO& asi)
 BOOL CAtaSmart::IsSsdApacer(ATA_SMART_INFO& asi)
 {
 	BOOL flagSmartType = FALSE;
-	if (asi.Model.Find(_T("Apacer")) >= 0)
+	if (asi.Model.Find(_T("Apacer")) == 0
+		|| asi.Model.Find(_T("ZADAK")) == 0
+		|| asi.FirmwareRev.Find(L"AP") == 0
+		|| asi.FirmwareRev.Find(L"SF") == 0
+		|| asi.FirmwareRev.Find(L"PN") == 0
+		)
 	{
 		flagSmartType = TRUE;
 		asi.HostReadsWritesUnit = HOST_READS_WRITES_512B;
@@ -10115,9 +10120,11 @@ DWORD CAtaSmart::CheckDiskStatus(DWORD i)
 	if (vars[i].DiskVendorId == SSD_VENDOR_NVME)
 	{
 		// https://github.com/hiyohiyo/CrystalDiskInfo/issues/99
-		if (vars[i].Model.Compare(_T("Parallels Virtual NVMe Disk")) == 0)
+		if (vars[i].Model.Find(_T("Parallels")) == 0
+			|| vars[i].Model.Find(_T("VMware")) == 0
+			|| vars[i].Model.Find(_T("QEMU")) == 0)
 		{
-			return DISK_STATUS_GOOD;
+			return DISK_STATUS_UNKNOWN;
 		}
 
 		if (vars[i].Attribute[0].RawValue[0] > 0)
@@ -10125,17 +10132,22 @@ DWORD CAtaSmart::CheckDiskStatus(DWORD i)
 			return DISK_STATUS_BAD;
 		}
 
-		if (vars[i].Life > 10)
+		if (vars[i].Attribute[2].RawValue[0] < vars[i].Attribute[3].RawValue[0])
 		{
-			return DISK_STATUS_GOOD;
+			return DISK_STATUS_BAD;
 		}
-		else if (vars[i].Life == 10)
+		else if (vars[i].Attribute[2].RawValue[0] == vars[i].Attribute[3].RawValue[0])
 		{
 			return DISK_STATUS_CAUTION;
 		}
-		else if (vars[i].Life < 10)
+
+		if (vars[i].Life > vars[i].ThresholdFF)
 		{
-			return DISK_STATUS_BAD;
+			return DISK_STATUS_GOOD;
+		}
+		else if (vars[i].Life <= vars[i].ThresholdFF)
+		{
+			return DISK_STATUS_CAUTION;
 		}
 	}
 

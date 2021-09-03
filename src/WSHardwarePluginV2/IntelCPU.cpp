@@ -1081,10 +1081,11 @@ void Hardware::CPU::IntelCPU::AddDynamicInfoForSocket()
 {
 	constexpr std::array < std::pair<uint64_t, const char*>, 4> MstEle =
 	{ {
-		{0x611, "PackagePower"},
-		{0x639, "CoresPower"},
-		{0x619, "DRAMPower"},
-		{0x641, "GTPower"},
+		{0x611, "Package Power"},
+		{0x639, "IA Cores Power"},
+		{0x641, "GT Power"},
+		{0x619, "DRAM Power"},
+
 	} };
 	for (auto& Soc : m_SystemRoot)
 	{
