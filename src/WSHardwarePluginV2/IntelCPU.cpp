@@ -496,7 +496,7 @@ void Hardware::CPU::IntelCPU::GetInfoFromCPUID1_7(Socket& soc)
 	soc.m_Data.ExtFamily = ((cpuid_args.array[0] & CPUID_Extended_Family) >> 20) + soc.m_Data.Family;
 	soc.m_Data.ExtModel = (((cpuid_args.array[0] & CPUID_Extended_Model) >> 16) << 4) + soc.m_Data.Model;
 	std::bitset<32> f1_ecx = cpuid_args.reg.ecx;
-	std::bitset<32> f1_edx = cpuid_args.reg.ebx;
+	std::bitset<32> f1_edx = cpuid_args.reg.edx;
 
 	if (f1_edx[23])
 		soc.m_Data.Instructions.append("MMX ");
@@ -534,9 +534,15 @@ void Hardware::CPU::IntelCPU::GetInfoFromCPUID1_7(Socket& soc)
 
 	Utils::GetCpuid(7, cpuid_args);
 	std::bitset<32> f7_ecx = cpuid_args.reg.ecx;
-	std::bitset<32> f7_ebx = cpuid_args.reg.edx;
+	std::bitset<32> f7_ebx = cpuid_args.reg.ebx;
 	if (f7_ebx[5])
 		soc.m_Data.Instructions.append("AVX2 ");
+
+	Utils::GetCpuid(0x80000002, cpuid_args);
+	if ((cpuid_args.reg.edx >> 29) & 0x1)
+	{
+		soc.m_Data.Instructions.append("EM64T ");
+	}
 }
 
 void Hardware::CPU::IntelCPU::GetInfoFromCPUID4(Socket& soc)
