@@ -642,6 +642,19 @@ namespace Hardware
 						}
 					}
 				}
+				else if (*TypeProp.Obj() == L"AUDIO")
+				{
+					NewList->Clear();
+					auto AudioId = CurrentItem->GetInternalProperty(L"AudioProp").Cast<UI::HardwareTreeInternalProperty>();
+					auto AudioDatas = HardwareWrapper::Audio::GetElements(AudioId.Obj()->GetId());
+					if (!AudioDatas.empty())
+					{
+						for (const auto& Data : AudioDatas)
+						{
+							NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+						}
+					}
+				}
 				else if (*TypeProp.Obj() == L"WINBIO")
 				{
 					NewList->Clear();
@@ -834,6 +847,22 @@ namespace Hardware
 							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Mother Broad " + std::to_wstring(BroadId)).c_str(), true))))));
 				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"BROAD"));
 				Item->SetInternalProperty(L"BroadProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(BroadId));
+				Root->Children().Add(Item);
+			}
+		}
+
+		auto Audio = HardwareWrapper::Audio::InitializeAudio();
+		if (!Audio.empty())
+		{
+			for (const auto& AudioId : Audio)
+			{
+				auto Item = ::vl::Ptr<::vl::presentation::controls::tree::MemoryNodeProvider>(
+					new ::vl::presentation::controls::tree::MemoryNodeProvider(
+						::vl::Ptr<::vl::reflection::DescriptableObject>(
+							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
+							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Audio " + std::to_wstring(AudioId)).c_str(), true))))));
+				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"AUDIO"));
+				Item->SetInternalProperty(L"AudioProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(AudioId));
 				Root->Children().Add(Item);
 			}
 		}

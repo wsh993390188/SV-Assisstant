@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include <Shlwapi.h>
 #include <comdef.h>
+#include <spdlog/sinks/basic_file_sink.h>
 #include "WSHardwarePluginV2.h"
 
 /// @brief 执行动作函数
@@ -30,7 +31,9 @@ Hardware::Data::ErrorType PcmHardwareActionPaserStr(LPCSTR action, LPCSTR paramt
 
 int PcmHardwareInitialize(LPCSTR paramter, PluginCallback callback)
 {
+	auto logger = spdlog::basic_logger_mt("hardware_logger", "logs/hardware.log");
 	spdlog::set_level(spdlog::level::info);
+	spdlog::set_default_logger(logger);
 	return S_OK;
 }
 

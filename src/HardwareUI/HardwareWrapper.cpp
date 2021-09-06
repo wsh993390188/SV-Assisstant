@@ -700,12 +700,62 @@ std::vector<std::pair<std::wstring, std::wstring>> Hardware::HardwareWrapper::Ne
 
 std::vector<size_t> Hardware::HardwareWrapper::Audio::InitializeAudio()
 {
-	return {};
+	BSTR data{};
+	PcmHardwareAction(PCM_HARDWARE_ACTION_AUDIO_INIT, nullptr, &data);
+	if (data)
+	{
+		auto Str = utf8_encode(data);
+		SysFreeString(data);
+		try
+		{
+			Json::Reader reader;
+			Json::Value root;
+			std::vector<size_t> ret;
+			if (reader.parse(Str, root))
+			{
+				for (const auto& MemoryEle : root["AudioIds"])
+				{
+					if (MemoryEle.isIntegral())
+					{
+						ret.emplace_back(MemoryEle.asUInt());
+					}
+				}
+			}
+			return ret;
+		}
+		catch (Json::Exception&)
+		{
+		}
+	}
+	return{};
 }
 
 std::vector<std::pair<std::wstring, std::wstring>> Hardware::HardwareWrapper::Audio::GetElements(const size_t& MemoryId)
 {
-	return std::vector<std::pair<std::wstring, std::wstring>>();
+	BSTR data{};
+	PcmHardwareAction(PCM_HARDWARE_ACTION_AUDIO_GET, BuildElement(MemoryId, "AudioId").c_str(), &data);
+	std::vector<std::pair<std::wstring, std::wstring>> ret{};
+	if (data)
+	{
+		try
+		{
+			Json::Reader reader;
+			Json::Value root;
+			if (reader.parse(utf8_encode(data), root))
+			{
+				if (root.isArray())
+				{
+					ret = ParserResponse(root);
+				}
+			}
+		}
+		catch (Json::Exception& e)
+		{
+		}
+		SysFreeString(data);
+		return ret;
+	}
+	return {};
 }
 
 std::vector<size_t> Hardware::HardwareWrapper::Bios::InitializeBios()
