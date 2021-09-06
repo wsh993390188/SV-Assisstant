@@ -236,10 +236,10 @@ BOOL Hardware::Utils::Ring0::WinRing0::WrMemory(IN LONGLONG Memory_Addr, IN USHO
 BOOL Hardware::Utils::Ring0::WinRing0::RdTsc(OUT DWORD64& Data)
 {
 	LARGE_INTEGER nFreq, nBeginTime, nEndTime;
+	QueryPerformanceFrequency(&nFreq);
 
 	uint32_t dummy = 0;
 	auto tsc1 = __rdtscp(&dummy);
-	QueryPerformanceFrequency(&nFreq);
 	QueryPerformanceCounter(&nBeginTime);
 	Sleep(1);
 	auto tsc2 = __rdtscp(&dummy);
