@@ -49,7 +49,7 @@ namespace Hardware
 			bool GetEDID(
 				const std::wstring& Model,
 				const std::wstring& Driver,
-				EDID& EDIDbuffer);
+				std::vector<uint8_t>& EDIDbuffer);
 		private:
 			/// @brief 显示器实际数据
 			std::vector<DISPLAY_DEVICE> Monitor;

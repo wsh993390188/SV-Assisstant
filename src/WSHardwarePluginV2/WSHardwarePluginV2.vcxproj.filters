@@ -163,9 +163,6 @@
     <ClInclude Include="EDIDdefination.h">
       <Filter>Hardware\Monitor\Impl\EDID</Filter>
     </ClInclude>
-    <ClInclude Include="WinReg.hpp">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="DXGIGPUBase.h">
       <Filter>Hardware\GPU\Device\DXGI</Filter>
     </ClInclude>
@@ -309,6 +306,9 @@
     </ClInclude>
     <ClInclude Include="D3DKMTHelper.h">
       <Filter>Hardware\GPU\Device\D3DKMT</Filter>
+    </ClInclude>
+    <ClInclude Include="PNPIDUtils.h">
+      <Filter>Hardware\Monitor\Impl\EDID</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -581,6 +581,9 @@
     </ClCompile>
     <ClCompile Include="D3DKMTHelper.cpp">
       <Filter>Hardware\GPU\Device\D3DKMT</Filter>
+    </ClCompile>
+    <ClCompile Include="PNPIDUtils.cpp">
+      <Filter>Hardware\Monitor\Impl\EDID</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

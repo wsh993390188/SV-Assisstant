@@ -20,11 +20,12 @@ namespace Hardware
 			{
 				std::wstring Model, Driver;
 				GetModelandDriver(i.DeviceID, Model, Driver);
-				EDID EdidBuffer{};
+				std::vector<uint8_t> EdidBuffer{};
 				if (GetEDID(Model, Driver, EdidBuffer))
 				{
 					MonitorDataStruct MonitorInfo;
-					MonitorInfo.emplace_back("Name", Utils::wstringToUtf8(i.DeviceString));
+					MonitorDataStruct::value_type::second_type tmp{ Utils::wstringToUtf8(i.DeviceString) };
+					MonitorInfo.emplace_back("Name", std::move(tmp));
 					if (ParserEDID(EdidBuffer, MonitorInfo))
 					{
 						MonitorInfos.emplace(Model, std::move(MonitorInfo));
@@ -114,7 +115,7 @@ namespace Hardware
 			return true;
 		}
 
-		bool EDIDFromRegistry::GetEDID(const std::wstring& Model, const std::wstring& Driver, EDID& EDIDbuffer)
+		bool EDIDFromRegistry::GetEDID(const std::wstring& Model, const std::wstring& Driver, std::vector<uint8_t>& EDIDbuffer)
 		{
 			constexpr auto RegistryMainKey = _T("SYSTEM\\CurrentControlSet\\Enum\\DISPLAY\\");
 			winreg::RegKey MonitorMainKey;
@@ -150,7 +151,7 @@ namespace Hardware
 								auto EDIDValue = EDIDKey.TryGetBinaryValue(L"EDID");
 								if (EDIDValue)
 								{
-									memcpy_s(&EDIDbuffer, sizeof(EDIDbuffer), EDIDValue->data(), EDIDValue->size() > sizeof(EDIDbuffer) ? sizeof(EDIDbuffer) : EDIDValue->size());
+									EDIDbuffer = EDIDValue.value();
 									return true;
 								}
 							}

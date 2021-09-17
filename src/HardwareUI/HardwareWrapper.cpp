@@ -1,5 +1,6 @@
 #include "framework.hpp"
 #include <filesystem>
+#include <format>
 #include "HardwareWrapper.h"
 
 using namespace Hardware::HardwareWrapper;
@@ -130,6 +131,22 @@ namespace
 						{
 							auto Caches = ParserCache(node[member_name]);
 							ret.insert(ret.cend(), Caches.cbegin(), Caches.cend());
+						}
+						else
+						{
+							auto i = 1;
+							for (const auto& value_str : node[member_name])
+							{
+								try
+								{
+									ret.emplace_back(utf8_decode(std::format("{} # {}", member_name, i)), utf8_decode(value_str.asString()));
+									++i;
+								}
+								catch (const std::exception&)
+								{
+									continue;
+								}
+							}
 						}
 					}
 					else if (node[member_name].isBool())

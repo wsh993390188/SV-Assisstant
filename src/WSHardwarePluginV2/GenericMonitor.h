@@ -5,7 +5,7 @@ namespace Hardware
 	namespace Monitor
 	{
 		/// @brief 显示器的信息数据结构
-		using MonitorDataStruct = std::vector<std::pair<std::string, std::string>>;
+		using MonitorDataStruct = std::vector<std::pair<std::string, std::vector<std::string>>>;
 
 		/// @brief 显示器通用初始化函数
 		class GenericMonitor
@@ -53,14 +53,57 @@ namespace Hardware
 			bool ParserJson(const std::string& JsonString, std::wstring& MonitorId);
 
 			/// @brief 解析EDID
-			/// @param[in] EDIDbuffer EDID的信息
+			/// @param[in] EDIDRawBuffer EDID的二进制信息
 			/// @return 是否成功
-			bool ParserEDID(const EDID& EDIDbuffer, MonitorDataStruct& MonitorInfo);
+			bool ParserEDID(const std::vector<uint8_t>& EDIDRawBuffer, MonitorDataStruct& MonitorInfo);
 
 			/// @brief 解析EDID制造商
 			/// @param EDIDbuffer
+			/// @return EDID厂商
+			const std::string GetMonitorName(const std::uint16_t& EDIDbuffer);
+
+		private:
+			/// @brief 增加描述中的信息
+			/// @param Descriptor 描述信息
+			/// @param Name 名称
+			/// @param MonitorInfo 显示器信息
+			/// @return 是否增加成功
+			bool AddDescriptorString(MonitorDataStruct& MonitorInfo, const EDID_Descriptor_Common_String& Descriptor, const std::string& Name);
+
+			/// @brief
+			/// @param MonitorInfo
+			/// @param Descriptor
 			/// @return
-			const std::string GetMonitorName(const Hardware::Monitor::EDID& EDIDbuffer);
+			bool AddDisplayRangeLimits(MonitorDataStruct& MonitorInfo, const EDID_Display_Range_Limits_Descriptor& Descriptor);
+
+			/// @brief
+			/// @param MonitorInfo
+			/// @param EstablishedTiming
+			/// @return
+			bool AddEstablishedTiming(MonitorDataStruct& MonitorInfo, const EDIDCommon::EstablishedTimingSection& EstablishedTiming);
+
+			/// @brief 增加标准时序（标准节）
+			/// @param MonitorInfo 存储的信息
+			/// @param StandardTiming 时序信息
+			/// @return 是否增加成功
+			bool AddStandardTiming(MonitorDataStruct& MonitorInfo, const EDIDCommon::StandardTimingSection& StandardTiming);
+
+			/// @brief 增加标准时序（描述符）
+			/// @param MonitorInfo 存储的信息
+			/// @param StandardTiming 时序信息
+			/// @return 是否增加成功
+			bool AddStandardTiming(MonitorDataStruct& MonitorInfo, const EDID_StandardTimingIdentifierDefinition& StandardTiming);
+
+			/// @brief 增加标准时序的实现
+			/// @param Timing 存储的容器
+			/// @param value 时序的存储代码
+			void AddStandardTimingImpl(std::vector<std::string>& Timing, const std::uint16_t value);
+
+			/// @brief 增加显示器的细节信息
+			/// @param MonitorInfo 存储的信息
+			/// @param DetailedTiming 显示器细节
+			/// @return 是否已经获取到了显示器的大小
+			bool AddPreferredDetailedTiming(MonitorDataStruct& MonitorInfo, const EDID_Detailed_Timing_Descriptor& DetailedTiming);
 		};
 	}
 }

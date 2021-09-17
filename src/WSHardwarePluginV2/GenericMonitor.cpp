@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "GenericMonitor.h"
+#include "PNPIDUtils.h"
+#include <format>
 
 #if defined(_MSC_VER)
 #pragma warning(disable : 4996)
@@ -24,12 +26,12 @@ namespace
 	{
 		struct
 		{
-			WORD _Third : 5;
-			WORD _Second : 5;
-			WORD _First : 5;
-			WORD Reserved : 1;
+			std::uint16_t _Third : 5;
+			std::uint16_t _Second : 5;
+			std::uint16_t _First : 5;
+			std::uint16_t Reserved : 1;
 		}bits;
-		WORD __Manufacturer;
+		std::uint16_t __Manufacturer;
 	};
 }
 
@@ -66,8 +68,18 @@ std::string Hardware::Monitor::GenericMonitor::BuildElementJson(const std::wstri
 	{
 		for (const auto& Ele : itr->second)
 		{
+			if (Ele.second.empty())
+				continue;
 			Json::Value temp;
-			temp[Ele.first] = Ele.second;
+			if (Ele.second.size() == 1)
+				temp[Ele.first] = Ele.second[0];
+			else
+			{
+				for (const auto& info : Ele.second)
+				{
+					temp[Ele.first].append(info);
+				}
+			}
 			root.append(std::move(temp));
 		}
 	}
@@ -107,189 +119,234 @@ bool Hardware::Monitor::GenericMonitor::ParserJson(const std::string& JsonString
 	return false;
 }
 
-bool Hardware::Monitor::GenericMonitor::ParserEDID(const EDID& EDIDbuffer, MonitorDataStruct& MonitorInfo)
+bool Hardware::Monitor::GenericMonitor::ParserEDID(const std::vector<uint8_t>& EDIDRawBuffer, MonitorDataStruct& MonitorInfo)
 {
-	bool HasSerialNumber = false;
+	if (EDIDRawBuffer.size() < sizeof(EDIDCommon))
 	{
-		auto Str = GetMonitorName(EDIDbuffer);
-		MonitorInfo.emplace_back("Manufacture", Str);
+		spdlog::error("EDID Raw Buffer {} was too small", EDIDRawBuffer.size());
+		return false;
 	}
-	MonitorInfo.emplace_back("ProductCode", Utils::to_string_hex(EDIDbuffer.Productcode));
-	MonitorInfo.emplace_back("Week/Year", std::to_string(EDIDbuffer.Week + 0) + "/" + std::to_string(EDIDbuffer.Year + 1990));
-	MonitorInfo.emplace_back("EDIDVersion", std::to_string(EDIDbuffer.EDIDVersion[0] + 0) + "." + std::to_string(EDIDbuffer.EDIDVersion[1] + 0));
-	MonitorInfo.emplace_back("Max.Vertical Size", std::to_string(EDIDbuffer.HorizontalScreenSize) + " cm");
-	MonitorInfo.emplace_back("Max.Horizontal Size", std::to_string(EDIDbuffer.VerticalScreenSize) + " cm");
-	MonitorInfo.emplace_back("Gamma", Utils::to_string_with_precision((EDIDbuffer.DisplayGamma + 100ull) / 100.0));
+	auto EDIDbuffer = reinterpret_cast<const EDIDCommon*>(EDIDRawBuffer.data());
+	if (EDIDbuffer->Header != 0x00ffffffffffff00)
+	{
+		spdlog::error("Header ({}) is not EDID Header", EDIDbuffer->Header);
+		return false;
+	}
+	bool HasSerialNumber = false, HasImageSize = false;
+	{
+		auto Str = GetMonitorName(EDIDbuffer->Identification.ManufacturerID.Manufacturer);
+		MonitorInfo.emplace_back("Manufacture", MonitorDataStruct::value_type::second_type{ Str });
+	}
+	MonitorInfo.emplace_back("ProductCode", MonitorDataStruct::value_type::second_type{ Utils::to_string_hex(EDIDbuffer->Identification.Productcode) });
+	MonitorInfo.emplace_back("Week/Year", MonitorDataStruct::value_type::second_type{ std::format("Week {}/{}",EDIDbuffer->Identification.Week , EDIDbuffer->Identification.Year + 1990) });
+	MonitorInfo.emplace_back("EDIDVersion", MonitorDataStruct::value_type::second_type{ std::format("{}.{}",EDIDbuffer->EDIDVersion.Version  ,EDIDbuffer->EDIDVersion.Revision) });
+
+	if (EDIDbuffer->BasicDisplayParametersAndFeatures.DisplayGamma != 0xFF)
+		MonitorInfo.emplace_back("Gamma", MonitorDataStruct::value_type::second_type{ Utils::to_string_with_precision((EDIDbuffer->BasicDisplayParametersAndFeatures.DisplayGamma + 100ull) / 100.0) });
+
+	if (!this->AddStandardTiming(MonitorInfo, EDIDbuffer->StandardTimings))
+	{
+		MonitorInfo.pop_back();
+		if (!this->AddEstablishedTiming(MonitorInfo, EDIDbuffer->EstablishedTimings))
+			MonitorInfo.pop_back();
+	}
+
 	for (auto i = 0; i < 4; ++i)
 	{
-		auto DescPtr = reinterpret_cast<const EDID_Other_Monitor_Descriptors*>(&EDIDbuffer.Descriptor[i]);
+		auto DescPtr = reinterpret_cast<const EDID_Other_Monitor_Descriptors*>(&EDIDbuffer->DataBlocks.Descriptor[i]);
 		if (DescPtr->Reserve == 0 && DescPtr->Reserved[0] == 0 && DescPtr->Reserved[1] == 0 && DescPtr->Reserved[2] == 0)
 		{
 			if (DescPtr->Descriptor_Type == 0xFF)
 			{
-				MonitorInfo.emplace_back("Serial Number", Utils::trim_copy(std::string(reinterpret_cast<const char*>(EDIDbuffer.Descriptor[i].Display_Serial_Number.Display_Serial_Number), 13)));
-				HasSerialNumber = true;
+				HasSerialNumber = this->AddDescriptorString(MonitorInfo, EDIDbuffer->DataBlocks.Descriptor[i].CommonDesc, "SerialNumber");
 			}
-			else if (DescPtr->Descriptor_Type == 0xFC)
+			else if (DescPtr->Descriptor_Type == 0xFE)
 			{
-				MonitorInfo.emplace_back("Model Type", Utils::trim_copy(std::string(reinterpret_cast<const char*>(EDIDbuffer.Descriptor[i].Display_Name.Display_Name), 13)));
+				this->AddDescriptorString(MonitorInfo, EDIDbuffer->DataBlocks.Descriptor[i].CommonDesc, "TagNumber");
 			}
 			else if (DescPtr->Descriptor_Type == 0xFD)
 			{
-				int minvoffset{}, minhoffset{}, maxvoffset{}, maxhoffset{};
-				EDIDbuffer.Descriptor[i].Display_Range_Limits_Descriptor.Offsets_for_display_range_limits.Offsets_for_display_range_limits & 0x1 ? minvoffset = 0xFF : minvoffset = 0;
-				EDIDbuffer.Descriptor[i].Display_Range_Limits_Descriptor.Offsets_for_display_range_limits.Offsets_for_display_range_limits & 0x2 ? minhoffset = 0xFF : minhoffset = 0;
-				EDIDbuffer.Descriptor[i].Display_Range_Limits_Descriptor.Offsets_for_display_range_limits.Offsets_for_display_range_limits & 0x4 ? maxvoffset = 0xFF : maxvoffset = 0;
-				EDIDbuffer.Descriptor[i].Display_Range_Limits_Descriptor.Offsets_for_display_range_limits.Offsets_for_display_range_limits & 0x8 ? maxhoffset = 0xFF : maxhoffset = 0;
-				MonitorInfo.emplace_back("Horizontal Frequency", std::to_string(EDIDbuffer.Descriptor[i].Display_Range_Limits_Descriptor.Minimum_horizontal_field_rate + minhoffset) + "-" +
-					std::to_string(EDIDbuffer.Descriptor[i].Display_Range_Limits_Descriptor.Maximum_horizontal_field_rate + maxhoffset) + " Khz");
-				MonitorInfo.emplace_back("Vertical Frequency", std::to_string(EDIDbuffer.Descriptor[i].Display_Range_Limits_Descriptor.Minimum_vertical_field_rate + minvoffset) + "-" +
-					std::to_string(EDIDbuffer.Descriptor[i].Display_Range_Limits_Descriptor.Maximum_vertical_field_rate + maxvoffset) + " hz");
-				MonitorInfo.emplace_back("Max. Pixel Clock	", std::to_string(EDIDbuffer.Descriptor[i].Display_Range_Limits_Descriptor.Maximum_pixel_clock_rate * 10) + " Mhz");
+				this->AddDisplayRangeLimits(MonitorInfo, EDIDbuffer->DataBlocks.Descriptor[i].Display_Range_Limits_Descriptor);
+			}
+			else if (DescPtr->Descriptor_Type == 0xFC)
+			{
+				this->AddDescriptorString(MonitorInfo, EDIDbuffer->DataBlocks.Descriptor[i].CommonDesc, "DisplayName");
+			}
+			else if (DescPtr->Descriptor_Type == 0xFB)
+			{
+				// Todo Color Point
+			}
+			else if (DescPtr->Descriptor_Type == 0xFA)
+			{
+				this->AddStandardTiming(MonitorInfo, EDIDbuffer->DataBlocks.Descriptor[i].StandardTimingIdentifierDefinition);
 			}
 		}
+		else
+		{
+			HasImageSize = this->AddPreferredDetailedTiming(MonitorInfo, EDIDbuffer->DataBlocks.Descriptor[i].DetailDesc);
+		}
 	}
-	if (!HasSerialNumber)
-		MonitorInfo.emplace_back("SerialNumber", Utils::to_string_hex(EDIDbuffer.SerialNumber));
+
+	if (!HasSerialNumber && EDIDbuffer->Identification.SerialNumber)
+		MonitorInfo.emplace_back("SerialNumber", MonitorDataStruct::value_type::second_type{ Utils::to_string_hex(EDIDbuffer->Identification.SerialNumber) });
+
+	if (!HasImageSize && EDIDbuffer->BasicDisplayParametersAndFeatures.HorizontalScreenSize && EDIDbuffer->BasicDisplayParametersAndFeatures.VerticalScreenSize)
+	{
+		MonitorInfo.emplace_back("Max.Horizontal Size", MonitorDataStruct::value_type::second_type{ std::format("{} cm",EDIDbuffer->BasicDisplayParametersAndFeatures.HorizontalScreenSize) });
+		MonitorInfo.emplace_back("Max.Vertical Size", MonitorDataStruct::value_type::second_type{ std::format("{} cm",EDIDbuffer->BasicDisplayParametersAndFeatures.VerticalScreenSize) });
+		MonitorInfo.emplace_back("Max Display Size", MonitorDataStruct::value_type::second_type{ std::format("{:.1f} Inches", std::sqrt(std::pow(EDIDbuffer->BasicDisplayParametersAndFeatures.VerticalScreenSize / 2.54,2) + std::pow(EDIDbuffer->BasicDisplayParametersAndFeatures.HorizontalScreenSize / 2.54,2))) });
+	}
+	// paser edid full information
+	// todo extension information
 	return true;
 }
 
-const std::string Hardware::Monitor::GenericMonitor::GetMonitorName(const Hardware::Monitor::EDID& EDIDbuffer)
+const std::string Hardware::Monitor::GenericMonitor::GetMonitorName(const std::uint16_t& Manufacturer)
 {
-	std::string edidname = {};
+	std::string PnpId(3, 0);
 	EDIDManufacturer  buf = {};
-	buf.__Manufacturer = EDIDbuffer.Manufacturer.Manufacturer;
+	buf.__Manufacturer = Manufacturer;
 	buf.__Manufacturer = ((buf.__Manufacturer & 0xFF) << 8) | ((buf.__Manufacturer & 0xFF00) >> 8);
-	char temp[4] = {};
-	temp[0] = buf.bits._First + 'A' - 1;
-	temp[1] = buf.bits._Second + 'A' - 1;
-	temp[2] = buf.bits._Third + 'A' - 1;
+	PnpId[0] = buf.bits._First + 'A' - 1;
+	PnpId[1] = buf.bits._Second + 'A' - 1;
+	PnpId[2] = buf.bits._Third + 'A' - 1;
 
-	if (strcmp(temp, "AAA") == 0)
-		edidname = "Avolites Ltd";
-	else if (strcmp(temp, "ACI") == 0)
-		edidname = "Ancor Communications Inc";
-	else if (strcmp(temp, "ACR") == 0)
-		edidname = "Acer Technologies";
-	else if (strcmp(temp, "ADA") == 0)
-		edidname = "Addi-Data GmbH";
-	else if (strcmp(temp, "APP") == 0)
-		edidname = "Apple Computer Inc";
-	else if (strcmp(temp, "ASK") == 0)
-		edidname = "Ask A/S";
-	else if (strcmp(temp, "AVT") == 0)
-		edidname = "Avtek (Electronics) Pty Ltd";
-	else if (strcmp(temp, "BNO") == 0)
-		edidname = "Bang & Olufsen";
-	else if (strcmp(temp, "CMN") == 0)
-		edidname = "Chimei Innolux Corporation";
-	else if (strcmp(temp, "CMO") == 0)
-		edidname = "Chi Mei Optoelectronics corp.";
-	else if (strcmp(temp, "CRO") == 0)
-		edidname = "Extraordinary Technologies PTY Limited";
-	else if (strcmp(temp, "DEL") == 0)
-		edidname = "Dell Inc.";
-	else if (strcmp(temp, "DGC") == 0)
-		edidname = "Data General Corporation";
-	else if (strcmp(temp, "DON") == 0)
-		edidname = "DENON, Ltd.";
-	else if (strcmp(temp, "ENC") == 0)
-		edidname = "Eizo Nanao Corporation";
-	else if (strcmp(temp, "EPH") == 0)
-		edidname = "Epiphan Systems Inc. ";
-	else if (strcmp(temp, "EXP") == 0)
-		edidname = "Data Export Corporation";
-	else if (strcmp(temp, "FNI") == 0)
-		edidname = "Funai Electric Co., Ltd.";
-	else if (strcmp(temp, "FUS") == 0)
-		edidname = "Fujitsu Siemens Computers GmbH";
-	else if (strcmp(temp, "GSM") == 0)
-		edidname = "Goldstar Company Ltd";
-	else if (strcmp(temp, "HIQ") == 0)
-		edidname = "Kaohsiung Opto Electronics Americas, Inc.";
-	else if (strcmp(temp, "HSD") == 0)
-		edidname = "HannStar Display Corp";
-	else if (strcmp(temp, "HTC") == 0)
-		edidname = "Hitachi Ltd";
-	else if (strcmp(temp, "HWP") == 0)
-		edidname = "Hewlett Packard";
-	else if (strcmp(temp, "INT") == 0)
-		edidname = "Interphase Corporation";
-	else if (strcmp(temp, "ITE") == 0)
-		edidname = "Integrated Tech Express Inc";
-	else if (strcmp(temp, "IVM") == 0)
-		edidname = "Iiyama North America";
-	else if (strcmp(temp, "LEN") == 0)
-		edidname = "Lenovo Group Limited";
-	else if (strcmp(temp, "MAX") == 0)
-		edidname = "Rogen Tech Distribution Inc";
-	else if (strcmp(temp, "MEG") == 0)
-		edidname = "Abeam Tech Ltd";
-	else if (strcmp(temp, "MEI") == 0)
-		edidname = "Panasonic Industry Company";
-	else if (strcmp(temp, "MTC") == 0)
-		edidname = "Mars-Tech Corporation";
-	else if (strcmp(temp, "MTX") == 0)
-		edidname = "Matrox";
-	else if (strcmp(temp, "NEC") == 0)
-		edidname = "NEC Corporation";
-	else if (strcmp(temp, "NEX") == 0)
-		edidname = "Nexgen Mediatech Inc.";
-	else if (strcmp(temp, "ONK") == 0)
-		edidname = "ONKYO Corporation";
-	else if (strcmp(temp, "ORN") == 0)
-		edidname = "ORION ELECTRIC CO., LTD.";
-	else if (strcmp(temp, "OTM") == 0)
-		edidname = "Optoma Corporation";
-	else if (strcmp(temp, "OVR") == 0)
-		edidname = "Oculus VR, Inc.";
-	else if (strcmp(temp, "PHL") == 0)
-		edidname = "Philips Consumer Electronics Company";
-	else if (strcmp(temp, "PIO") == 0)
-		edidname = "Pioneer Electronic Corporation";
-	else if (strcmp(temp, "PNR") == 0)
-		edidname = "Planar Systems, Inc.";
-	else if (strcmp(temp, "QDS") == 0)
-		edidname = "Quanta Display Inc.";
-	else if (strcmp(temp, "RAT") == 0)
-		edidname = "Rent-A-Tech";
-	else if (strcmp(temp, "REN") == 0)
-		edidname = "Renesas Technology Corp.";
-	else if (strcmp(temp, "SEC") == 0)
-		edidname = "Seiko Epson Corporation";
-	else if (strcmp(temp, "SHP") == 0)
-		edidname = "Sharp Corporation";
-	else if (strcmp(temp, "SII") == 0)
-		edidname = "Silicon Image, Inc.";
-	else if (strcmp(temp, "SNY") == 0)
-		edidname = "Sony";
-	else if (strcmp(temp, "STD") == 0)
-		edidname = "STD Computer Inc.";
-	else if (strcmp(temp, "SVS") == 0)
-		edidname = "SVSI";
-	else if (strcmp(temp, "SYN") == 0)
-		edidname = "Synaptics Inc.";
-	else if (strcmp(temp, "TCL") == 0)
-		edidname = "Technical Concepts Ltd";
-	else if (strcmp(temp, "TOP") == 0)
-		edidname = "Orion Communications Co., Ltd.";
-	else if (strcmp(temp, "TSB") == 0)
-		edidname = "Toshiba America Info Systems Inc.";
-	else if (strcmp(temp, "TST") == 0)
-		edidname = "Transtream Inc.";
-	else if (strcmp(temp, "VES") == 0)
-		edidname = "Vestel Elektronik Sanayi ve Ticaret A. S.";
-	else if (strcmp(temp, "VIZ") == 0)
-		edidname = "VIZIO, Inc.";
-	else if (strcmp(temp, "UNK") == 0)
-		edidname = "Unknown";
-	else if (strcmp(temp, "VSC") == 0)
-		edidname = "ViewSonic Corporation";
-	else if (strcmp(temp, "YMH") == 0)
-		edidname = "Yamaha Corporation";
-	else if (strcmp(temp, "SAM") == 0)
-		edidname = "Samsung Electric Company";
-	else
-		edidname = "Unknown Manufacturer";
-	return edidname;
+	return Utils::PNPIDUtils::Instance().QueryNameByPnpId(PnpId);
+}
+
+bool Hardware::Monitor::GenericMonitor::AddDescriptorString(MonitorDataStruct& MonitorInfo, const EDID_Descriptor_Common_String& Descriptor, const std::string& Name)
+{
+	MonitorInfo.emplace_back(Name, MonitorDataStruct::value_type::second_type{ Utils::trim_copy(std::string(reinterpret_cast<const char*>(Descriptor.Display_Name), 13)) });
+	return true;
+}
+
+bool Hardware::Monitor::GenericMonitor::AddDisplayRangeLimits(MonitorDataStruct& MonitorInfo, const EDID_Display_Range_Limits_Descriptor& DisplayRangeLimits)
+{
+	int minvoffset{}, minhoffset{}, maxvoffset{}, maxhoffset{};
+	DisplayRangeLimits.Offsets_for_display_range_limits.Offsets_for_display_range_limits & 0x1 ? minvoffset = 0xFF : minvoffset = 0;
+	DisplayRangeLimits.Offsets_for_display_range_limits.Offsets_for_display_range_limits & 0x2 ? minhoffset = 0xFF : minhoffset = 0;
+	DisplayRangeLimits.Offsets_for_display_range_limits.Offsets_for_display_range_limits & 0x4 ? maxvoffset = 0xFF : maxvoffset = 0;
+	DisplayRangeLimits.Offsets_for_display_range_limits.Offsets_for_display_range_limits & 0x8 ? maxhoffset = 0xFF : maxhoffset = 0;
+	MonitorInfo.emplace_back("Horizontal Frequency", MonitorDataStruct::value_type::second_type{ std::to_string(DisplayRangeLimits.Minimum_horizontal_field_rate + minhoffset) + "-" +
+		std::to_string(DisplayRangeLimits.Maximum_horizontal_field_rate + maxhoffset) + " Khz" });
+	MonitorInfo.emplace_back("Vertical Frequency", MonitorDataStruct::value_type::second_type{ std::to_string(DisplayRangeLimits.Minimum_vertical_field_rate + minvoffset) + "-" +
+		std::to_string(DisplayRangeLimits.Maximum_vertical_field_rate + maxvoffset) + " hz" });
+	MonitorInfo.emplace_back("Max. Pixel Clock	", MonitorDataStruct::value_type::second_type{ std::to_string(DisplayRangeLimits.Maximum_pixel_clock_rate * 10) + " Mhz" });
+	return true;
+}
+
+bool Hardware::Monitor::GenericMonitor::AddEstablishedTiming(MonitorDataStruct& MonitorInfo, const EDIDCommon::EstablishedTimingSection& EstablishedTiming)
+{
+	MonitorInfo.emplace_back(std::string("EstablishedTiming"), MonitorDataStruct::value_type::second_type{});
+	auto& Timings = MonitorInfo.back();
+	if (EstablishedTiming.EstablishedTiming1 & 0x80)
+		Timings.second.emplace_back("720x400 @ 70 Hz");
+	if (EstablishedTiming.EstablishedTiming1 & 0x40)
+		Timings.second.emplace_back("720x400 @ 88 Hz ");
+	if (EstablishedTiming.EstablishedTiming1 & 0x20)
+		Timings.second.emplace_back("640x480 @ 60 Hz ");
+	if (EstablishedTiming.EstablishedTiming1 & 0x10)
+		Timings.second.emplace_back("640x480 @ 67 Hz ");
+	if (EstablishedTiming.EstablishedTiming1 & 0x08)
+		Timings.second.emplace_back("640x480 @ 72 Hz ");
+	if (EstablishedTiming.EstablishedTiming1 & 0x04)
+		Timings.second.emplace_back("640x480 @ 75 Hz ");
+	if (EstablishedTiming.EstablishedTiming1 & 0x02)
+		Timings.second.emplace_back("800x600 @ 56 Hz ");
+	if (EstablishedTiming.EstablishedTiming1 & 0x01)
+		Timings.second.emplace_back("800x600 @ 60 Hz ");
+
+	if (EstablishedTiming.EstablishedTiming2 & 0x80)
+		Timings.second.emplace_back("800x600 @ 72 Hz ");
+	if (EstablishedTiming.EstablishedTiming2 & 0x40)
+		Timings.second.emplace_back("800x600 @ 75 Hz ");
+	if (EstablishedTiming.EstablishedTiming2 & 0x20)
+		Timings.second.emplace_back("832x624 @ 75 Hz ");
+	if (EstablishedTiming.EstablishedTiming2 & 0x10)
+		Timings.second.emplace_back("1024x768 @ 87 Hz ");
+	if (EstablishedTiming.EstablishedTiming2 & 0x08)
+		Timings.second.emplace_back("1024x768 @ 60 Hz ");
+	if (EstablishedTiming.EstablishedTiming2 & 0x04)
+		Timings.second.emplace_back("1024x768 @ 72 Hz ");
+	if (EstablishedTiming.EstablishedTiming2 & 0x02)
+		Timings.second.emplace_back("1024x768 @ 75 Hz ");
+	if (EstablishedTiming.EstablishedTiming2 & 0x01)
+		Timings.second.emplace_back("1280x1024 @ 75 Hz ");
+
+	if (EstablishedTiming.ManufacturerTiming & 0x80)
+		Timings.second.emplace_back("1152x870 @ 75Hz ");
+	return !Timings.second.empty();
+}
+
+bool Hardware::Monitor::GenericMonitor::AddStandardTiming(MonitorDataStruct& MonitorInfo, const EDIDCommon::StandardTimingSection& StandardTiming)
+{
+	MonitorInfo.emplace_back(std::string("StandardTiming"), MonitorDataStruct::value_type::second_type{});
+	auto& timings = MonitorInfo.back();
+	for (const auto& timing : StandardTiming.StandardTiming)
+	{
+		if (((timing & 0xFF) == 0) || timing == 0x0101)
+			continue;
+		AddStandardTimingImpl(timings.second, timing);
+	}
+
+	return !timings.second.empty();
+}
+
+bool Hardware::Monitor::GenericMonitor::AddStandardTiming(MonitorDataStruct& MonitorInfo, const EDID_StandardTimingIdentifierDefinition& StandardTiming)
+{
+	auto timings = std::find_if(MonitorInfo.begin(), MonitorInfo.end(), [](const MonitorDataStruct::value_type& ele)
+		{
+			return ele.first == "StandardTiming";
+		});
+	if (timings == MonitorInfo.end())
+	{
+		MonitorInfo.emplace_back(std::string("StandardTiming"), MonitorDataStruct::value_type::second_type{});
+		timings = --MonitorInfo.end();
+	}
+
+	for (const auto& timing : StandardTiming.Timing)
+	{
+		if (((timing & 0xFF) == 0) || timing == 0x0101)
+			continue;
+		AddStandardTimingImpl(timings->second, timing);
+	}
+	return false;
+}
+
+void Hardware::Monitor::GenericMonitor::AddStandardTimingImpl(std::vector<std::string>& Timing, const std::uint16_t value)
+{
+	auto horizontal = (Utils::extract_bits_ui(value, 0, 7) + 31) * 8;
+	auto RefreshRate = Utils::extract_bits_ui(value, 8, 13) + 60;
+	switch (Utils::extract_bits_ui(value, 14, 15))
+	{
+	case 0b00:
+		Timing.emplace_back(std::format("{} x {} (16:10) @ {} Hz", horizontal, (horizontal / 16 * 10), RefreshRate));
+		break;
+	case 0b01:
+		Timing.emplace_back(std::format("{} x {} (4:3) @ {} Hz", horizontal, (horizontal / 4 * 3), RefreshRate));
+		break;
+	case 0b10:
+		Timing.emplace_back(std::format("{} x {} (5:4) @ {} Hz", horizontal, (horizontal / 5 * 4), RefreshRate));
+		break;
+	case 0b11:
+		Timing.emplace_back(std::format("{} x {} (16:9) @ {} Hz", horizontal, (horizontal / 16 * 9), RefreshRate));
+		break;
+	}
+}
+
+bool Hardware::Monitor::GenericMonitor::AddPreferredDetailedTiming(MonitorDataStruct& MonitorInfo, const EDID_Detailed_Timing_Descriptor& DetailedTiming)
+{
+	MonitorInfo.emplace_back(std::string("PreferredDetailedTiming"), MonitorDataStruct::value_type::second_type{ std::format("{} x {}, Pixel Clock: {:.2f} Mhz",DetailedTiming.Horizental_pixels_upperbits.bits.Horizental_active_pixels << 8 | DetailedTiming.Horizental_active_pixels, DetailedTiming.Vertical_lines_msbits.bits.Vertical_active_pixels << 8 | DetailedTiming.Vertical_active_pixels ,DetailedTiming.Pixel_Clock / 100.0) });
+
+	auto Vertical = DetailedTiming.Image_Size_msbits.bits.Vertical_image_size << 8 | DetailedTiming.Vertical_image_size;
+	auto Horizontal = DetailedTiming.Image_Size_msbits.bits.Horizontal_image_size << 8 | DetailedTiming.Horizontal_image_size;
+
+	if (Vertical && Horizontal)
+	{
+		MonitorInfo.emplace_back("Max.Vertical Size", MonitorDataStruct::value_type::second_type{ std::format("{} mm",Vertical) });
+		MonitorInfo.emplace_back("Max.Horizontal Size", MonitorDataStruct::value_type::second_type{ std::format("{} mm",Horizontal) });
+		MonitorInfo.emplace_back("Max Display Size", MonitorDataStruct::value_type::second_type{ std::format("{:.1f} Inches", std::sqrt(std::pow(Vertical / 25.4,2) + std::pow(Horizontal / 25.4,2))) });
+		return true;
+	}
+	return false;
 }

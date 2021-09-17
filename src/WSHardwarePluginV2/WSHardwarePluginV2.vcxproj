@@ -281,6 +281,7 @@
     <ClInclude Include="PCIGPUDetect.h" />
     <ClInclude Include="PCIHandle.h" />
     <ClInclude Include="PCIUtils.h" />
+    <ClInclude Include="PNPIDUtils.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SIOBase.h" />
     <ClInclude Include="SIOCommon.h" />
@@ -297,7 +298,6 @@
     <ClInclude Include="WinBioManager.h" />
     <ClInclude Include="Winbond.h" />
     <ClInclude Include="WindowsConfig.h" />
-    <ClInclude Include="WinReg.hpp" />
     <ClInclude Include="WMI\WMI.h" />
     <ClInclude Include="WMI\WMIExtern.h" />
     <ClInclude Include="WSHardwarePluginV2.h" />
@@ -422,6 +422,7 @@
     <ClCompile Include="PCIGPUDetect.cpp" />
     <ClCompile Include="PCIHandle.cpp" />
     <ClCompile Include="PCIUtils.cpp" />
+    <ClCompile Include="PNPIDUtils.cpp" />
     <ClCompile Include="SIOBase.cpp" />
     <ClCompile Include="SIOCommon.cpp" />
     <ClCompile Include="SIOFactory.cpp" />
