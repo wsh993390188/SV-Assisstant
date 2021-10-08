@@ -54,6 +54,11 @@ namespace Hardware
 			void ParserFourthSPD(const DDR4_INFO_FOURTH_128* SpdInfo, MemoryCommonInformation& OutputData);
 
 		private:
+			/// @brief 解析DRAM的Revision
+			/// @param SpdInfo
+			/// @param OutputData
+			void ParseDRAMRevision(const DDR4_INFO_THIRD_128* SpdInfo, Hardware::Memory::MemoryCommonInformation& OutputData);
+
 			/// @brief 计算DDR4模块频率
 			/// @param SpdInfo SPD的信息 @ref Hardware::Memory::DDR4_INFO_FIRST_128
 			/// @param OutputData @ref Hardware::Memory::MemoryCommonInformation "内存的通用信息"

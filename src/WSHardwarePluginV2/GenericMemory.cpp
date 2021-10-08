@@ -214,6 +214,16 @@ std::string Hardware::Memory::GenericMemory::BuildMemoryCommonInformationToJson(
 				root.append(tmp);
 			}
 		}
+
+		if (!Info.MemoryTimings.empty())
+		{
+			for (const auto& time : Info.MemoryTimings)
+			{
+				Json::Value tmp;
+				tmp[time.Name] = time.Value;
+				root.append(tmp);
+			}
+		}
 	}
 
 	if (root.isNull())

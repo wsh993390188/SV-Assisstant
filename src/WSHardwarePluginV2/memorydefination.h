@@ -553,10 +553,11 @@ namespace Hardware
 #pragma pack(pop)
 
 		/// @brief 内存的时序信息(单位: ns)
+		template<typename T = double>
 		struct MemoryTimingType
 		{
-			double Value; ///< 数值
 			std::string Name; ///<名称
+			T Value; ///< 数值
 		};
 
 		struct MemoryPackageType
@@ -587,6 +588,8 @@ namespace Hardware
 			/// @brief 序列号
 			std::string SerialNumber;
 
+			std::string DRAMStepping;
+
 			/// @brief 内存大小
 			double ModuleSize;
 			/// @brief SPD的扩展信息（XMP等）
@@ -600,8 +603,9 @@ namespace Hardware
 			/// @brief 内存的工作频率
 			double MemoryFrequency = (std::numeric_limits<double>::min)();
 			std::vector<uint16_t> CASLatencies; ///< CAS Latencies Supported
+			std::vector<MemoryTimingType<std::string>> MemoryTimings; ///< 内存的时序信息
 			/// @brief 时序信息
-			std::vector<MemoryTimingType> Times;
+			std::vector<MemoryTimingType<>> Times;
 		};
 	}
 }

@@ -289,10 +289,26 @@ void Hardware::Memory::ParserDDR4SPD::ParserThirdSPD(const DDR4_INFO_THIRD_128* 
 	ParseModuleManufacture(SpdInfo, OutputData);
 	ParseDRAMManufacture(SpdInfo, OutputData);
 	ParseProduceDate(SpdInfo, OutputData);
+	ParseDRAMRevision(SpdInfo, OutputData);
 }
 
 void Hardware::Memory::ParserDDR4SPD::ParserFourthSPD(const DDR4_INFO_FOURTH_128* SpdInfo, MemoryCommonInformation& OutputData)
 {
+}
+
+void Hardware::Memory::ParserDDR4SPD::ParseDRAMRevision(const DDR4_INFO_THIRD_128* SpdInfo, Hardware::Memory::MemoryCommonInformation& OutputData)
+{
+	if (SpdInfo->DRAMStepping != 0xFF)
+	{
+		if (Utils::extract_bits_ui(SpdInfo->DRAMStepping, 4, 7) < 0xA)
+		{
+			OutputData.DRAMStepping = std::format("{:.1g}", SpdInfo->DRAMStepping / 10.0);
+		}
+		else
+		{
+			OutputData.DRAMStepping = std::format("{:x}", SpdInfo->DRAMStepping);
+		}
+	}
 }
 
 void Hardware::Memory::ParserDDR4SPD::CalcDIMMFrequency(const DDR4_INFO_FIRST_128* SpdInfo, Hardware::Memory::MemoryCommonInformation& OutputData)
@@ -303,47 +319,40 @@ void Hardware::Memory::ParserDDR4SPD::CalcDIMMFrequency(const DDR4_INFO_FIRST_12
 
 void Hardware::Memory::ParserDDR4SPD::CalcDDR4TimeBase(const DDR4_INFO_FIRST_128* SpdInfo, Hardware::Memory::MemoryCommonInformation& OutputData)
 {
-#define CalcTimeBaseImpl(X) TimeType.Value = GetTimeBase<int8_t>(SpdInfo->s##X##MTB, SpdInfo->s##X##FTB)
+#define CalcTimeBaseImpl(X, Element) Element.Value = GetTimeBase<int8_t>(SpdInfo->s##X##MTB, SpdInfo->s##X##FTB)
 
 	{
-		MemoryTimingType TimeType;
-		CalcTimeBaseImpl(tCKmin);
-		TimeType.Name = "Minimum Clock Cycle Time (tCK min)";
-		OutputData.Times.emplace_back(TimeType);
-	}
+		MemoryTimingType SDRAMMin;
+		CalcTimeBaseImpl(tCKmin, SDRAMMin);
+		SDRAMMin.Name = "Minimum Clock Cycle Time (tCK min)";
+		OutputData.Times.emplace_back(SDRAMMin);
 
-	{
-		MemoryTimingType TimeType;
-		CalcTimeBaseImpl(tCKmax);
-		TimeType.Name = "Maximum Clock Cycle Time (tCK max)";
-		OutputData.Times.emplace_back(TimeType);
-	}
+		MemoryTimingType SDRAMMax;
+		CalcTimeBaseImpl(tCKmax, SDRAMMax);
+		SDRAMMax.Name = "Maximum Clock Cycle Time (tCK max)";
+		OutputData.Times.emplace_back(SDRAMMax);
 
-	{
-		MemoryTimingType TimeType;
-		CalcTimeBaseImpl(tAAmin);
-		TimeType.Name = "CAS# Latency Time (tAA min)";
-		OutputData.Times.emplace_back(TimeType);
-	}
+		MemoryTimingType TCKAVG;
+		CalcTimeBaseImpl(tAAmin, TCKAVG);
+		TCKAVG.Name = "CAS# Latency Time (tAA min)";
+		OutputData.Times.emplace_back(TCKAVG);
 
-	{
-		MemoryTimingType TimeType;
-		CalcTimeBaseImpl(tRCDmin);
-		TimeType.Name = "RAS# to CAS# Delay Time (tRCD min)";
-		OutputData.Times.emplace_back(TimeType);
-	}
+		MemoryTimingType RCD;
+		CalcTimeBaseImpl(tRCDmin, RCD);
+		RCD.Name = "RAS# to CAS# Delay Time (tRCD min)";
+		OutputData.Times.emplace_back(RCD);
 
-	{
-		MemoryTimingType TimeType;
-		CalcTimeBaseImpl(tRPmin);
-		TimeType.Name = "Row Precharge Delay Time (tRP min)";
-		OutputData.Times.emplace_back(TimeType);
-	}
-	{
-		MemoryTimingType TimeType;
-		TimeType.Value = GetTimeBase<int16_t>(SpdInfo->sUpper_TRAS_TRCmin.bits.tRASminMostMTB << 8 | SpdInfo->stRASminLeastMTB, 0);
-		TimeType.Name = "Active to Precharge Delay Time (tRAS min)";
-		OutputData.Times.emplace_back(TimeType);
+		MemoryTimingType RP;
+		CalcTimeBaseImpl(tRPmin, RP);
+		RP.Name = "Row Precharge Delay Time (tRP min)";
+		OutputData.Times.emplace_back(RP);
+
+		MemoryTimingType RAS;
+		RAS.Value = GetTimeBase<int16_t>(SpdInfo->sUpper_TRAS_TRCmin.bits.tRASminMostMTB << 8 | SpdInfo->stRASminLeastMTB, 0);
+		RAS.Name = "Active to Precharge Delay Time (tRAS min)";
+		OutputData.Times.emplace_back(RAS);
+
+		OutputData.MemoryTimings.emplace_back("Memory Timings",std::format("{}-{}-{}-{}", std::ceil(TCKAVG.Value / SDRAMMin.Value), std::ceil(RCD.Value/SDRAMMin.Value), std::ceil(RP.Value / SDRAMMin.Value), std::ceil(RAS.Value / SDRAMMin.Value)));
 	}
 
 	{
@@ -375,17 +384,17 @@ void Hardware::Memory::ParserDDR4SPD::CalcDDR4TimeBase(const DDR4_INFO_FIRST_128
 	}
 
 	{
-		MemoryTimingType TimeType;
-		CalcTimeBaseImpl(tRRD_Smin);
-		TimeType.Name = "Short Row Active to Row Active Delay (tRRD_S min)";
-		OutputData.Times.emplace_back(TimeType);
+		MemoryTimingType RPD_SMin;
+		CalcTimeBaseImpl(tRRD_Smin, RPD_SMin);
+		RPD_SMin.Name = "Short Row Active to Row Active Delay (tRRD_S min)";
+		OutputData.Times.emplace_back(RPD_SMin);
 	}
 
 	{
-		MemoryTimingType TimeType;
-		CalcTimeBaseImpl(tRRD_Lmin);
-		TimeType.Name = "Long Row Active to Row Active Delay (tRRD_L min)";
-		OutputData.Times.emplace_back(TimeType);
+		MemoryTimingType RRD_LMin;
+		CalcTimeBaseImpl(tRRD_Lmin, RRD_LMin);
+		RRD_LMin.Name = "Long Row Active to Row Active Delay (tRRD_L min)";
+		OutputData.Times.emplace_back(RRD_LMin);
 	}
 
 	{
@@ -410,10 +419,10 @@ void Hardware::Memory::ParserDDR4SPD::CalcDDR4TimeBase(const DDR4_INFO_FIRST_128
 	}
 
 	{
-		MemoryTimingType TimeType;
-		CalcTimeBaseImpl(tCCD_Lmin);
-		TimeType.Name = "Long CAS to CAS Delay Time (tCCD_L min)";
-		OutputData.Times.emplace_back(TimeType);
+		MemoryTimingType CCD_LMin;
+		CalcTimeBaseImpl(tCCD_Lmin, CCD_LMin);
+		CCD_LMin.Name = "Long CAS to CAS Delay Time (tCCD_L min)";
+		OutputData.Times.emplace_back(CCD_LMin);
 	}
 
 	{
