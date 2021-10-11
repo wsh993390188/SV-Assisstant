@@ -72,7 +72,7 @@ namespace Hardware
 				if (val == 0) {	/* ready now */
 					return true;
 				}
-				IoPtr.WriteByte(SmbusBase + SMBUS_STATUS_REG, 0xFF);
+				IoPtr.WriteByte(SmbusBase + SMBUS_STATUS_REG, 0xFE);
 			} while (--loops);
 			return false;		/* time out */
 		}
@@ -137,8 +137,10 @@ namespace Hardware
 		}
 		bool CommonSMBUS::SwitchToPage(const UINT8& data)
 		{
-			IoPtr.WriteByte(SmbusBase + SMBUS_STATUS_REG, 0xFF);
+			IoPtr.WriteByte(SmbusBase + SMBUS_STATUS_REG, 0xFE);
 			IoPtr.WriteByte(SmbusBase + SMBUS_HOST_CMD_REG, data);
+			IoPtr.WriteByte(SmbusBase + SMBUS_DATA0_REG, 0);
+			IoPtr.WriteByte(SmbusBase + SMBUS_CONTROL_REG, 0);
 			IoPtr.WriteByte(SmbusBase + SMBUS_COMMAND_REG, 0x48);
 			return smbus_wait_until_ready();
 		}

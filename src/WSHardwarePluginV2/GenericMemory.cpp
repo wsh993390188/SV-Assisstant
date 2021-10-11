@@ -205,22 +205,22 @@ std::string Hardware::Memory::GenericMemory::BuildMemoryCommonInformationToJson(
 			root.append(TempValue);
 		}
 
-		if (!Info.Times.empty())
-		{
-			for (const auto& time : Info.Times)
-			{
-				Json::Value tmp;
-				tmp[time.Name] = Utils::to_string_with_precision(time.Value) + " ns";
-				root.append(tmp);
-			}
-		}
-
 		if (!Info.MemoryTimings.empty())
 		{
 			for (const auto& time : Info.MemoryTimings)
 			{
 				Json::Value tmp;
 				tmp[time.Name] = time.Value;
+				root.append(tmp);
+			}
+		}
+
+		if (!Info.Times.empty())
+		{
+			for (const auto& time : Info.Times)
+			{
+				Json::Value tmp;
+				tmp[time.Name] = Utils::to_string_with_precision(time.Value) + " ns";
 				root.append(tmp);
 			}
 		}
