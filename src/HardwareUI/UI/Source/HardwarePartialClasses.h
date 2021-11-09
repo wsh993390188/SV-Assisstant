@@ -16,12 +16,11 @@ https://github.com/vczh-libraries
 #if defined( _MSC_VER)
 #pragma warning(push)
 #pragma warning(disable:4250)
-#elif defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wparentheses-equality"
 #elif defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wparentheses-equality"
+#elif defined(__GNUC__)
+#pragma GCC diagnostic push
 #endif
 
 namespace vl_workflow_global
@@ -58,7 +57,7 @@ namespace Hardware
 		friend struct ::vl_workflow_global::__vwsnf5_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_;
 		friend struct ::vl_workflow_global::__vwsnf7_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_;
 		friend struct ::vl_workflow_global::__vwsno6_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_;
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 		friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<MainWindowConstructor>;
 #endif
 	protected:
@@ -90,7 +89,7 @@ namespace Hardware
 		friend struct ::vl_workflow_global::__vwsnf5_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_;
 		friend struct ::vl_workflow_global::__vwsnf7_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_;
 		friend struct ::vl_workflow_global::__vwsno6_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_;
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 		friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<MainWindow>;
 #endif
 	public:
@@ -121,7 +120,7 @@ namespace Hardware
 	{
 		class CPUCoreTreeInternalProperty : public ::vl::Object, public ::vl::reflection::Description<CPUCoreTreeInternalProperty>
 		{
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 			friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<CPUCoreTreeInternalProperty>;
 #endif
 		private:
@@ -152,7 +151,7 @@ namespace Hardware
 
 		class HardwareTreeInternalProperty : public ::vl::Object, public ::vl::reflection::Description<HardwareTreeInternalProperty>
 		{
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 			friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<HardwareTreeInternalProperty>;
 #endif
 		private:
@@ -172,7 +171,7 @@ namespace Hardware
 
 		class IntWrapper : public ::vl::Object, public ::vl::reflection::Description<IntWrapper>
 		{
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 			friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<IntWrapper>;
 #endif
 		private:
@@ -186,7 +185,7 @@ namespace Hardware
 
 		class TreeViewItemData : public ::vl::Object, public ::vl::reflection::Description<TreeViewItemData>
 		{
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 			friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<TreeViewItemData>;
 #endif
 		private:
@@ -307,10 +306,10 @@ Closures
 
 #if defined( _MSC_VER)
 #pragma warning(pop)
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
 #elif defined(__clang__)
 #pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC diagnostic pop
 #endif
 
 #endif

@@ -23,12 +23,11 @@ https://github.com/vczh-libraries
 #if defined( _MSC_VER)
 #pragma warning(push)
 #pragma warning(disable:4250)
-#elif defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wparentheses-equality"
 #elif defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wparentheses-equality"
+#elif defined(__GNUC__)
+#pragma GCC diagnostic push
 #endif
 
 #define GLOBAL_SYMBOL ::vl_workflow_global::Hardware::
@@ -264,7 +263,7 @@ namespace Hardware
 			::vl::__vwsn::This(this->self)->SetClientSize([&]() { ::vl::presentation::Size __vwsn_temp__; __vwsn_temp__.x = static_cast<::vl::vint>(640); __vwsn_temp__.y = static_cast<::vl::vint>(480); return __vwsn_temp__; }());
 		}
 		{
-			::vl::__vwsn::This(this->self)->SetText(::vl::WString(L"Hardware", false));
+			::vl::__vwsn::This(this->self)->SetText(::vl::WString::Unmanaged(L"Hardware"));
 		}
 		(this->__vwsn_precompile_0 = new ::vl::presentation::compositions::GuiTableComposition());
 		{
@@ -309,7 +308,7 @@ namespace Hardware
 			::vl::__vwsn::This(this->bindableTreeView)->SetHorizontalAlwaysVisible(false);
 		}
 		{
-			::vl::__vwsn::This(this->bindableTreeView)->SetAlt(::vl::WString(L"T", false));
+			::vl::__vwsn::This(this->bindableTreeView)->SetAlt(::vl::WString::Unmanaged(L"T"));
 		}
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_1)->AddChild(static_cast<::vl::presentation::compositions::GuiGraphicsComposition*>(::vl::__vwsn::This(this->bindableTreeView)->GetBoundsComposition()));
@@ -346,14 +345,14 @@ namespace Hardware
 			::vl::__vwsn::This(this->bindableListView)->SetHorizontalAlwaysVisible(false);
 		}
 		{
-			::vl::__vwsn::This(this->bindableListView)->SetAlt(::vl::WString(L"L", false));
+			::vl::__vwsn::This(this->bindableListView)->SetAlt(::vl::WString::Unmanaged(L"L"));
 		}
 		(this->__vwsn_precompile_5 = ::vl::Ptr<::vl::presentation::controls::list::ListViewColumn>(new ::vl::presentation::controls::list::ListViewColumn()));
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_5.Obj())->SetTextProperty(LAMBDA(::vl_workflow_global::__vwsnf4_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(this)));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_5.Obj())->SetText(::vl::WString(L"Name", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_5.Obj())->SetText(::vl::WString::Unmanaged(L"Name"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->bindableListView)->GetColumns());
@@ -364,7 +363,7 @@ namespace Hardware
 			::vl::__vwsn::This(this->__vwsn_precompile_6.Obj())->SetTextProperty(LAMBDA(::vl_workflow_global::__vwsnf5_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(this)));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_6.Obj())->SetText(::vl::WString(L"Description", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_6.Obj())->SetText(::vl::WString::Unmanaged(L"Description"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->bindableListView)->GetColumns());
@@ -388,7 +387,7 @@ namespace Hardware
 			::vl::__vwsn::This(__vwsn_this_)->AddSubscription(__vwsn_created_subscription_);
 		}
 		{
-			::vl::__vwsn::This(this->self)->SetCustomIcon(::vl::__vwsn::Ensure(::vl::__vwsn::SharedPtrCast<::vl::presentation::GuiImageData>(::vl::__vwsn::This(__vwsn_this_)->ResolveResource(::vl::WString(L"res", false), ::vl::WString(L"Images/MainWindowIcon", false), true).Obj())));
+			::vl::__vwsn::This(this->self)->SetCustomIcon(::vl::__vwsn::Ensure(::vl::__vwsn::SharedPtrCast<::vl::presentation::GuiImageData>(::vl::__vwsn::This(__vwsn_this_)->ResolveResource(::vl::WString::Unmanaged(L"res"), ::vl::WString::Unmanaged(L"Images/MainWindowIcon"), true).Obj())));
 		}
 	}
 
@@ -464,8 +463,8 @@ namespace Hardware
 				if (*TypeProp.Obj() == L"CPU")
 				{
 					NewList->Clear();
-					auto SocketId = CurrentItem->GetInternalProperty(L"SocketProp").Cast<::vl::ObjectBox<::vl::vint>>();
-					auto SocketDatas = HardwareWrapper::CPU::GetElements(SocketId.Obj()->Unbox());
+					auto SocketId = CurrentItem->GetInternalProperty(L"SocketProp").Cast<UI::HardwareTreeInternalProperty>();
+					auto SocketDatas = HardwareWrapper::CPU::GetElements(SocketId.Obj()->GetId());
 					if (!SocketDatas.empty())
 					{
 						for (const auto& Data : SocketDatas)
@@ -473,7 +472,7 @@ namespace Hardware
 							NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
 						}
 					}
-					auto SocketDynamicDatas = HardwareWrapper::CPU::UpdateElements(SocketId.Obj()->Unbox());
+					auto SocketDynamicDatas = HardwareWrapper::CPU::UpdateElements(SocketId.Obj()->GetId());
 					if (!SocketDynamicDatas.empty())
 					{
 						for (const auto& Data : SocketDynamicDatas)
@@ -678,7 +677,7 @@ namespace Hardware
 		, __vwsn_prop_nodesToBind(::vl::Ptr<::vl::presentation::controls::tree::MemoryNodeProvider>())
 		, __vwsn_prop_ListNodesToBind(::vl::Ptr<::vl::reflection::description::IValueObservableList>())
 	{
-		auto __vwsn_resource_ = ::vl::__vwsn::This(::vl::presentation::GetResourceManager())->GetResourceFromClassName(::vl::WString(L"Hardware::MainWindow", false));
+		auto __vwsn_resource_ = ::vl::__vwsn::This(::vl::presentation::GetResourceManager())->GetResourceFromClassName(::vl::WString::Unmanaged(L"Hardware::MainWindow"));
 		auto __vwsn_resolver_ = ::vl::Ptr<::vl::presentation::GuiResourcePathResolver>(new ::vl::presentation::GuiResourcePathResolver(__vwsn_resource_, ::vl::__vwsn::This(__vwsn_resource_.Obj())->GetWorkingDirectory()));
 		::vl::__vwsn::This(this)->SetResourceResolver(__vwsn_resolver_);
 		::vl::__vwsn::This(this)->__vwsn_Hardware_MainWindow_Initialize(this);
@@ -698,16 +697,16 @@ namespace Hardware
 					new ::vl::presentation::controls::tree::MemoryNodeProvider(
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
-							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"CPU " + std::to_wstring(Cpu.SocketID)).c_str(), true))))));
+							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"CPU " + std::to_wstring(Cpu.SocketID)).c_str()))))));
 				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"CPU"));
-				Item->SetInternalProperty(L"SocketProp", ::vl::MakePtr<::vl::ObjectBox<::vl::vint>>(Cpu.SocketID));
+				Item->SetInternalProperty(L"SocketProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(Cpu.SocketID));
 				for (const auto& Core : Cpu.Cores)
 				{
 					auto CoreItem = ::vl::Ptr<::vl::presentation::controls::tree::MemoryNodeProvider>(
 						new ::vl::presentation::controls::tree::MemoryNodeProvider(
 							::vl::Ptr<::vl::reflection::DescriptableObject>(
 								::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
-								(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Core " + std::to_wstring(Core.CoreId)).c_str(), true))))));
+								(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Core " + std::to_wstring(Core.CoreId)).c_str()))))));
 					auto ThreadList = ::vl::__vwsn::CreateObservableList();
 					for (const auto& ThreadId : Core.ThreadIds)
 					{
@@ -732,7 +731,7 @@ namespace Hardware
 					new ::vl::presentation::controls::tree::MemoryNodeProvider(
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
-							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"GPU " + std::to_wstring(Gpu.GPUId)).c_str(), true))))));
+							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"GPU " + std::to_wstring(Gpu.GPUId)).c_str()))))));
 				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"GPU"));
 				Item->SetInternalProperty(L"GPUProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(Gpu.GPUId));
 				Root->Children().Add(Item);
@@ -748,7 +747,7 @@ namespace Hardware
 					new ::vl::presentation::controls::tree::MemoryNodeProvider(
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
-							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Disk " + std::to_wstring(Disk.DiskId)).c_str(), true))))));
+							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Disk " + std::to_wstring(Disk.DiskId)).c_str()))))));
 				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"DISK"));
 				Item->SetInternalProperty(L"DiskProp", ::vl::MakePtr<DiskInternalProperty>(Disk));
 				Root->Children().Add(Item);
@@ -764,7 +763,7 @@ namespace Hardware
 					new ::vl::presentation::controls::tree::MemoryNodeProvider(
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
-							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Memory " + std::to_wstring(MemoryId)).c_str(), true))))));
+							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Memory " + std::to_wstring(MemoryId)).c_str()))))));
 				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"MEMORY"));
 				Item->SetInternalProperty(L"MemoryProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(MemoryId));
 				Root->Children().Add(Item);
@@ -780,7 +779,7 @@ namespace Hardware
 					new ::vl::presentation::controls::tree::MemoryNodeProvider(
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
-							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Battery " + std::to_wstring(BatteryId)).c_str(), true))))));
+							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Battery " + std::to_wstring(BatteryId)).c_str()))))));
 				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"BATTERY"));
 				Item->SetInternalProperty(L"BatteryProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(BatteryId));
 				Root->Children().Add(Item);
@@ -796,7 +795,7 @@ namespace Hardware
 					new ::vl::presentation::controls::tree::MemoryNodeProvider(
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
-							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Monitor " + utf8_decode(MonitorId)).c_str(), true))))));
+							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Monitor " + utf8_decode(MonitorId)).c_str()))))));
 				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"MONITOR"));
 				Item->SetInternalProperty(L"MonitorProp", ::vl::MakePtr<::vl::WString>(utf8_decode(MonitorId).c_str()));
 				Root->Children().Add(Item);
@@ -812,7 +811,7 @@ namespace Hardware
 					new ::vl::presentation::controls::tree::MemoryNodeProvider(
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
-							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Network " + std::to_wstring(NICId)).c_str(), true))))));
+							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Network " + std::to_wstring(NICId)).c_str()))))));
 				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"NET"));
 				Item->SetInternalProperty(L"NetProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(NICId));
 				Root->Children().Add(Item);
@@ -828,7 +827,7 @@ namespace Hardware
 					new ::vl::presentation::controls::tree::MemoryNodeProvider(
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
-							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Bios " + std::to_wstring(BiosId)).c_str(), true))))));
+							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Bios " + std::to_wstring(BiosId)).c_str()))))));
 				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"BIOS"));
 				Item->SetInternalProperty(L"BiosProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(BiosId));
 				Root->Children().Add(Item);
@@ -844,7 +843,7 @@ namespace Hardware
 					new ::vl::presentation::controls::tree::MemoryNodeProvider(
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
-							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Mother Broad " + std::to_wstring(BroadId)).c_str(), true))))));
+							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Mother Broad " + std::to_wstring(BroadId)).c_str()))))));
 				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"BROAD"));
 				Item->SetInternalProperty(L"BroadProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(BroadId));
 				Root->Children().Add(Item);
@@ -860,7 +859,7 @@ namespace Hardware
 					new ::vl::presentation::controls::tree::MemoryNodeProvider(
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
-							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Audio " + std::to_wstring(AudioId)).c_str(), true))))));
+							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Audio " + std::to_wstring(AudioId)).c_str()))))));
 				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"AUDIO"));
 				Item->SetInternalProperty(L"AudioProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(AudioId));
 				Root->Children().Add(Item);
@@ -876,7 +875,7 @@ namespace Hardware
 					new ::vl::presentation::controls::tree::MemoryNodeProvider(
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
-							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Windows biological " + std::to_wstring(WinbioId)).c_str(), true))))));
+							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Windows biological " + std::to_wstring(WinbioId)).c_str()))))));
 				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"WINBIO"));
 				Item->SetInternalProperty(L"WinBioProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(WinbioId));
 				Root->Children().Add(Item);
@@ -956,13 +955,13 @@ namespace Hardware
 		CPUCoreTreeInternalProperty::CPUCoreTreeInternalProperty(::vl::vint coreid, ::vl::vint socketid, ::vl::Ptr<::vl::reflection::description::IValueObservableList> threadIds)
 			: __vwsn_prop_CoreId(static_cast<::vl::vint>(0))
 			, __vwsn_prop_SocketId(static_cast<::vl::vint>(0))
-			, __vwsn_prop_Name(::vl::WString(L"", false))
+			, __vwsn_prop_Name(::vl::WString::Unmanaged(L""))
 			, __vwsn_prop_ThreadIds(::vl::Ptr<::vl::reflection::description::IValueObservableList>())
 		{
 			this->SetCoreId(coreid);
 			this->SetSocketId(socketid);
 			this->SetThreadIds(threadIds);
-			this->SetName(::vl::WString(L"", false));
+			this->SetName(::vl::WString::Unmanaged(L""));
 		}
 
 		/***********************************************************************
@@ -995,15 +994,15 @@ namespace Hardware
 
 		HardwareTreeInternalProperty::HardwareTreeInternalProperty(::vl::vint id)
 			: __vwsn_prop_Id(static_cast<::vl::vint>(0))
-			, __vwsn_prop_Name(::vl::WString(L"", false))
+			, __vwsn_prop_Name(::vl::WString::Unmanaged(L""))
 		{
 			this->SetId(id);
-			this->SetName(::vl::WString(L"", false));
+			this->SetName(::vl::WString::Unmanaged(L""));
 		}
 
 		HardwareTreeInternalProperty::HardwareTreeInternalProperty(::vl::vint id, const ::vl::WString& name)
 			: __vwsn_prop_Id(static_cast<::vl::vint>(0))
-			, __vwsn_prop_Name(::vl::WString(L"", false))
+			, __vwsn_prop_Name(::vl::WString::Unmanaged(L""))
 		{
 			this->SetId(id);
 			this->SetName(name);
@@ -1058,14 +1057,14 @@ namespace Hardware
 		}
 
 		TreeViewItemData::TreeViewItemData()
-			: __vwsn_prop_Name(::vl::WString(L"", false))
-			, __vwsn_prop_Desc(::vl::WString(L"", false))
+			: __vwsn_prop_Name(::vl::WString::Unmanaged(L""))
+			, __vwsn_prop_Desc(::vl::WString::Unmanaged(L""))
 		{
 		}
 
 		TreeViewItemData::TreeViewItemData(const ::vl::WString& name, const ::vl::WString& desc)
-			: __vwsn_prop_Name(::vl::WString(L"", false))
-			, __vwsn_prop_Desc(::vl::WString(L"", false))
+			: __vwsn_prop_Name(::vl::WString::Unmanaged(L""))
+			, __vwsn_prop_Desc(::vl::WString::Unmanaged(L""))
 		{
 			this->SetName(name);
 			this->SetDesc(desc);
@@ -1078,8 +1077,8 @@ namespace Hardware
 
 #if defined( _MSC_VER)
 #pragma warning(pop)
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
 #elif defined(__clang__)
 #pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC diagnostic pop
 #endif

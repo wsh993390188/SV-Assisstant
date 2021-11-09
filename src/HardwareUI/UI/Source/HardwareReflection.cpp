@@ -12,12 +12,11 @@ https://github.com/vczh-libraries
 #if defined( _MSC_VER)
 #pragma warning(push)
 #pragma warning(disable:4250)
-#elif defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wparentheses-equality"
 #elif defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wparentheses-equality"
+#elif defined(__GNUC__)
+#pragma GCC diagnostic push
 #endif
 
 /***********************************************************************
@@ -38,6 +37,7 @@ namespace vl
 			IMPL_CPP_TYPE_INFO(Hardware::UI::IntWrapper)
 			IMPL_CPP_TYPE_INFO(Hardware::UI::TreeViewItemData)
 
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 #define _ ,
 			BEGIN_CLASS_MEMBER(::Hardware::MainWindow)
 				CLASS_MEMBER_BASE(::vl::presentation::controls::GuiWindow)
@@ -162,10 +162,11 @@ namespace vl
 				}
 			};
 #endif
+#endif
 
 			bool LoadHardwareTypes()
 			{
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 				if (auto manager = GetGlobalTypeManager())
 				{
 					return manager->AddTypeLoader(MakePtr<HardwareTypeLoader>());
@@ -179,8 +180,8 @@ namespace vl
 
 #if defined( _MSC_VER)
 #pragma warning(pop)
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
 #elif defined(__clang__)
 #pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC diagnostic pop
 #endif
