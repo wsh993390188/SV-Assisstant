@@ -767,7 +767,7 @@ double Hardware::CPU::AMDFrequency::GetBusSpeedByTsc(const int32_t& coreid)
 	int i = 10;
 	double res = 0.0;
 	Utils::Ring0::SafeTscIntervalHandle TscReader(coreid);
-	uint64_t value;
+	double value;
 	while (i--)
 	{
 		TscReader.read(value);

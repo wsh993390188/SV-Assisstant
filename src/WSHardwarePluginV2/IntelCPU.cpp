@@ -1085,7 +1085,6 @@ void Hardware::CPU::IntelCPU::AddDynamicInfoForSocket()
 		{0x639, "IA Cores Power"},
 		{0x641, "GT Power"},
 		{0x619, "DRAM Power"},
-
 	} };
 	for (auto& Soc : m_SystemRoot)
 	{
@@ -1461,14 +1460,8 @@ void Hardware::CPU::IntelFrequency::Update(std::weak_ptr<Utils::Ring0::SafeMsrHa
 
 double Hardware::CPU::IntelFrequency::GetBusSpeedByTsc(const int32_t& coreid)
 {
-	int i = 10;
-	double res = 0.0;
 	Utils::Ring0::SafeTscIntervalHandle TscReader(coreid);
-	uint64_t value;
-	while (i--)
-	{
-		TscReader.read(value);
-		res += (value / 1000000.0);
-	}
-	return res / m_TscFrequencyMhz * 10.0;
+	double value;
+	TscReader.read(value);
+	return value / m_TscFrequencyMhz * 100.0;
 }

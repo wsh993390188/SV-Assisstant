@@ -217,6 +217,8 @@ namespace Hardware
 				BOOL WrMemory(IN LONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN ULONG Memory_Data);
 
 				BOOL RdTsc(OUT DWORD64& Data);
+
+				double GetTscFrequency();
 			private:
 #ifdef RUN_TIME_DYNAMIC_LINKING
 				HMODULE Hmodule;

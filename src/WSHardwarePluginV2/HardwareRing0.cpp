@@ -235,16 +235,43 @@ BOOL Hardware::Utils::Ring0::WinRing0::WrMemory(IN LONGLONG Memory_Addr, IN USHO
 
 BOOL Hardware::Utils::Ring0::WinRing0::RdTsc(OUT DWORD64& Data)
 {
-	LARGE_INTEGER nFreq, nBeginTime, nEndTime;
+	LARGE_INTEGER nFreq, nBeginTime, nEndTime, nCurrentTime;
+	constexpr auto time_span = 100000;
 	QueryPerformanceFrequency(&nFreq);
 
 	uint32_t dummy = 0;
 	auto tsc1 = __rdtscp(&dummy);
 	QueryPerformanceCounter(&nBeginTime);
-	Sleep(1);
+	do
+	{
+		QueryPerformanceCounter(&nCurrentTime);
+	} while (nCurrentTime.QuadPart - nBeginTime.QuadPart < time_span);
 	auto tsc2 = __rdtscp(&dummy);
 	QueryPerformanceCounter(&nEndTime);
-	auto time = (nEndTime.QuadPart - nBeginTime.QuadPart) / (nFreq.QuadPart * 1.0);
-	Data = (tsc2 - tsc1) / time;
+	Data = (double)(nFreq.QuadPart
+		* (tsc2 - tsc1)
+		/ (nEndTime.QuadPart - nBeginTime.QuadPart))
+		/ 1000000.0;
 	return TRUE;
+}
+
+double Hardware::Utils::Ring0::WinRing0::GetTscFrequency()
+{
+	LARGE_INTEGER nFreq, nBeginTime, nEndTime, nCurrentTime;
+	constexpr auto time_span = 100000;
+	QueryPerformanceFrequency(&nFreq);
+
+	uint32_t dummy = 0;
+	auto tsc1 = __rdtscp(&dummy);
+	QueryPerformanceCounter(&nBeginTime);
+	do
+	{
+		QueryPerformanceCounter(&nCurrentTime);
+	} while (nCurrentTime.QuadPart - nBeginTime.QuadPart < time_span);
+	auto tsc2 = __rdtscp(&dummy);
+	QueryPerformanceCounter(&nEndTime);
+	return (double)(nFreq.QuadPart
+		* (tsc2 - tsc1)
+		/ (nEndTime.QuadPart - nBeginTime.QuadPart))
+		/ 1000000.0;
 }

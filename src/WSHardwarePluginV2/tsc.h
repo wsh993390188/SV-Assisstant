@@ -23,7 +23,7 @@ namespace Hardware
 				/// @brief 读Tsc
 				/// @param[out] value Tsc返回值
 				/// @return 是否成功
-				bool read(uint64_t& value);
+				bool read(double& value);
 
 				/// @brief 获取CPU Id
 				/// @return CPUid
@@ -58,7 +58,7 @@ namespace Hardware
 				/// @brief 读Tsc
 				/// @param[out] value Tsc返回值
 				/// @return 是否成功
-				bool read(uint64_t& value) const
+				bool read(double& value) const
 				{
 					if (pHandle)
 					{
