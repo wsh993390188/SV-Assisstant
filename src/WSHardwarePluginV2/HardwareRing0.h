@@ -223,6 +223,7 @@ namespace Hardware
 #ifdef RUN_TIME_DYNAMIC_LINKING
 				HMODULE Hmodule;
 #endif
+				LARGE_INTEGER nFreq;
 			};
 		}
 	}

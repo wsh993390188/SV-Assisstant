@@ -1217,7 +1217,8 @@ void Hardware::CPU::IntelCPU::AddCoreFrequency(std::weak_ptr<HyperThread> thread
 					auto MaxNonTurboFre = Utils::extract_bits_ui(cvtds.ui32.Eax, 8, 15);
 					Utils::CPUID_INFO info;
 					Utils::GetCpuid(0, info);
-					if (info.reg.eax >= 0x15)
+					auto max_level = info.reg.eax;
+					if (max_level >= 0x15)
 					{
 						// From https://github.com/torvalds/linux/blob/master/tools/power/x86/turbostat/turbostat.c#L3436
 						unsigned int crystal_hz{ 0 };
@@ -1225,6 +1226,7 @@ void Hardware::CPU::IntelCPU::AddCoreFrequency(std::weak_ptr<HyperThread> thread
 						/*
 						 * CPUID 15H TSC/Crystal ratio, possibly Crystal Hz
 						 */
+						info = {};
 						Utils::GetCpuid(0x15, info);
 
 						if (info.reg.ebx != 0)
@@ -1251,9 +1253,16 @@ void Hardware::CPU::IntelCPU::AddCoreFrequency(std::weak_ptr<HyperThread> thread
 								TSCFrequency = (unsigned long long) crystal_hz * info.reg.ebx / info.reg.eax;
 							}
 						}
-						if (!TSCFrequency)
-							TSCFrequency = MaxNonTurboFre * 100;
 					}
+
+					if (max_level >= 0x16)
+					{
+						info = {};
+						Utils::GetCpuid(0x16, info);
+					}
+
+					if (!TSCFrequency)
+						TSCFrequency = MaxNonTurboFre * 100;
 				}
 				if (TSCFrequency)
 				{

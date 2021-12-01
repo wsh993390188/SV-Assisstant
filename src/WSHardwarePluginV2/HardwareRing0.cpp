@@ -25,7 +25,7 @@ Hardware::Utils::Ring0::WinRing0& Hardware::Utils::Ring0::WinRing0::Instance()
 	return inst;
 }
 
-Hardware::Utils::Ring0::WinRing0::WinRing0()
+Hardware::Utils::Ring0::WinRing0::WinRing0() : nFreq{}
 #ifdef RUN_TIME_DYNAMIC_LINKING
 	: Hmodule(NULL)
 #endif
@@ -39,6 +39,7 @@ Hardware::Utils::Ring0::WinRing0::WinRing0()
 #else
 	InitializeOls();
 #endif // RUN_TIME_DYNAMIC_LINKING
+	QueryPerformanceFrequency(&nFreq);
 }
 
 Hardware::Utils::Ring0::WinRing0::~WinRing0()
@@ -257,10 +258,8 @@ BOOL Hardware::Utils::Ring0::WinRing0::RdTsc(OUT DWORD64& Data)
 
 double Hardware::Utils::Ring0::WinRing0::GetTscFrequency()
 {
-	LARGE_INTEGER nFreq, nBeginTime, nEndTime, nCurrentTime;
+	LARGE_INTEGER  nBeginTime, nEndTime, nCurrentTime;
 	constexpr auto time_span = 100000;
-	QueryPerformanceFrequency(&nFreq);
-
 	uint32_t dummy = 0;
 	auto tsc1 = __rdtscp(&dummy);
 	QueryPerformanceCounter(&nBeginTime);

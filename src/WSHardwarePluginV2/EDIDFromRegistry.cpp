@@ -119,7 +119,7 @@ namespace Hardware
 		{
 			constexpr auto RegistryMainKey = _T("SYSTEM\\CurrentControlSet\\Enum\\DISPLAY\\");
 			winreg::RegKey MonitorMainKey;
-			auto ret = MonitorMainKey.TryOpen(HKEY_LOCAL_MACHINE, RegistryMainKey);
+			auto ret = MonitorMainKey.TryOpen(HKEY_LOCAL_MACHINE, RegistryMainKey, KEY_READ | KEY_WOW64_64KEY);
 			if (ret.Failed())
 				return false;
 
@@ -130,14 +130,14 @@ namespace Hardware
 				if (Utils::StringIsEqualsNoCase(Model, SubKey))
 				{
 					winreg::RegKey TargetModelKey;
-					ret = TargetModelKey.TryOpen(MonitorMainKey.Get(), SubKey);
+					ret = TargetModelKey.TryOpen(MonitorMainKey.Get(), SubKey, KEY_READ | KEY_WOW64_64KEY);
 					if (ret.Failed())
 						break;
 					auto ModelSubKeys = TargetModelKey.EnumSubKeys();
 					for (const auto& ModelSubKey : ModelSubKeys)
 					{
 						winreg::RegKey TargetDeviceKey;
-						ret = TargetDeviceKey.TryOpen(TargetModelKey.Get(), ModelSubKey);
+						ret = TargetDeviceKey.TryOpen(TargetModelKey.Get(), ModelSubKey, KEY_READ | KEY_WOW64_64KEY);
 						if (ret.Failed())
 							continue;
 
@@ -145,7 +145,7 @@ namespace Hardware
 						if (DriverStr && Utils::StringIsEqualsNoCase(Driver, DriverStr.value()))
 						{
 							winreg::RegKey EDIDKey;
-							ret = EDIDKey.TryOpen(TargetDeviceKey.Get(), L"Device Parameters");
+							ret = EDIDKey.TryOpen(TargetDeviceKey.Get(), L"Device Parameters", KEY_READ | KEY_WOW64_64KEY);
 							if (ret.IsOk())
 							{
 								auto EDIDValue = EDIDKey.TryGetBinaryValue(L"EDID");

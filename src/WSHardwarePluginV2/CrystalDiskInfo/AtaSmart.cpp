@@ -2065,7 +2065,7 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 		TCHAR szPath[MAX_PATH] = { 0 };
 		wsprintf(szPath, _T("%c:\\"), c);
 		cstr = szPath;
-		DebugPrint(cstr);
+		//DebugPrint(cstr);
 
 		if (GetDriveType(cstr) == DRIVE_FIXED)
 		{
@@ -2077,18 +2077,19 @@ VOID CAtaSmart::Init(BOOL useWmi, BOOL advancedDiskSearch, PBOOL flagChangeDisk,
 		}
 		else
 		{
-			DebugPrint(_T("Drive Letter Mapping - != DRIVE_FIXED"));
+			//DebugPrint(_T("Drive Letter Mapping - != DRIVE_FIXED"));
 			continue;
 		}
 
 		wsprintf(szPath, _T("\\\\.\\%c:"), c);
 		cstr = szPath;
-		DebugPrint(cstr);
+
 
 		HANDLE hHandle = CreateFile(szPath, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_WRITE | FILE_SHARE_READ,
 			NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		if (hHandle == INVALID_HANDLE_VALUE)
 		{
+			DebugPrint(cstr);
 			DebugPrint(_T("Drive Letter Mapping - INVALID_HANDLE_VALUE"));
 			continue;
 		}

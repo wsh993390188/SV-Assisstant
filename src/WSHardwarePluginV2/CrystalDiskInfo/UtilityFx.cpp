@@ -7,6 +7,7 @@
 
 #include "..\stdafx.h"
 #include "UtilityFx.h"
+#include "..\StringHelper.hpp"
 
 #include <io.h>
 #pragma comment(lib,"version.lib")
@@ -17,7 +18,8 @@
 
 void DebugPrint(const CString& cstr)
 {
-	spdlog::info(CT2A(cstr, CP_UTF8).m_psz);
+	auto log = Hardware::Utils::wstringToUtf8(cstr.GetString());
+	spdlog::info(log);
 }
 
 ////------------------------------------------------
