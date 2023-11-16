@@ -41,16 +41,16 @@
           class SmbiosTypaDataItem
           {
             prop Desc : string = "" {not observe}
-            prop Type : int = 0 {not observe}
-            prop Address : Int64 = 0 {not observe}
+            prop Type : int = 0 {}
+            prop Address : Int64 = 0 {}
             new()
             {
             }
-            new(desc : string)
+            new(smbios_type : int, desc : string, addr : Int64)
             {
               Desc = desc;
-              Type = 0;
-              Address = 0;
+              Type = smbios_type;
+              Address = addr;
             }
           }
 
@@ -58,16 +58,16 @@
           {
             prop Desc : string = "" {not observe}
             prop Display : string = "" {not observe}
-            prop SmbiosType : int = 0 {not observe}
+            prop SmbiosType : int = 0 {}
             prop SmbiosTypeValue : string = "" {not observe}
             new()
             {
             }
-            new(desc : string, display : string, value : string)
+            new(desc : string, display : string, smbios_type : int, value : string)
             {
               Desc = desc;
               Display = display;
-              SmbiosType = 0;
+              SmbiosType = smbios_type;
               SmbiosTypeValue = value;
             }
           }

@@ -23,7 +23,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.LogAreaLength();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -37,7 +37,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.LogHeaderStartOffset();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -51,7 +51,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.LogDataStartOffset();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -63,7 +63,7 @@ namespace Smbios
 					Item->SetText(L"Access Method");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.AccessMethod()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -77,7 +77,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.LogStatus().Number + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -91,7 +91,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.LogChangeToken();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -105,7 +105,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.AccessMethodAddress().Number + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -117,7 +117,7 @@ namespace Smbios
 					Item->SetText(L"Log Header Format");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.LogHeaderFormat()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -131,7 +131,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.NumofSupportedLogTypes() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -145,7 +145,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.LengthLogTypeDescriptor() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -161,7 +161,7 @@ namespace Smbios
 						std::wostringstream oss;
 						oss << Item;
 						SubItems.Add(oss.str().c_str());
-						Items.Add(Item);
+						Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 					}
 				}
 				catch (const std::exception&)

@@ -9,6 +9,8 @@
 */
 #pragma once
 #include <iostream>
+#include <iomanip>
+#include <sstream>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -16,6 +18,7 @@
 #include <locale>
 #include <codecvt>
 #include <wctype.h>
+#include "..\..\Libcommon\utfcpp\source\utf8.h"
 
 namespace Utils
 {
@@ -140,10 +143,19 @@ namespace Utils
 		/// 由于codecvt_utf8在C++17中被弃用，暂时没找到替代方式
 		/// @param[in] str 宽字符串
 		/// @return Utf8格式字符串
-		std::string wstringToUtf8(const std::wstring& str)
+		std::string wstringToUtf8(const std::wstring& wstr)
 		{
-			std::wstring_convert<std::codecvt_utf8<wchar_t> > strCnv;
-			return strCnv.to_bytes(str);
+			std::string utf8line;
+
+			if (wstr.empty())
+				return utf8line;
+
+#ifdef _MSC_VER
+			utf8::utf16to8(wstr.begin(), wstr.end(), std::back_inserter(utf8line));
+#else
+			utf8::utf32to8(wstr.begin(), wstr.end(), std::back_inserter(utf8line));
+#endif
+			return utf8line;
 		}
 
 		/// @brief Utf8格式字符串转宽字符串
@@ -153,8 +165,17 @@ namespace Utils
 
 		std::wstring utf8ToWstring(const std::string& str)
 		{
-			std::wstring_convert< std::codecvt_utf8<wchar_t> > strCnv;
-			return strCnv.from_bytes(str);
+			std::wstring wide_line;
+
+			if (str.empty())
+				return wide_line;
+
+#ifdef _MSC_VER
+			utf8::utf8to16(str.begin(), str.end(), std::back_inserter(wide_line));
+#else
+			utf8::utf8to32(str.begin(), str.end(), std::back_inserter(wide_line));
+#endif
+			return wide_line;
 		}
 
 		// trim from start (in place)
@@ -203,6 +224,14 @@ namespace Utils
 		std::basic_string<CharT> trim_copy(std::basic_string<CharT> s) {
 			trim(s);
 			return s;
+		}
+
+		template<typename Numberic, typename std::enable_if_t<std::is_integral<Numberic>::value, int> = 0>
+		std::string to_string_hex(const Numberic value, const int n = 2)
+		{
+			std::ostringstream out;
+			out << std::hex << std::uppercase << std::setw(n) << std::setfill('0') << value + 0;
+			return out.str();
 		}
 	}
 }

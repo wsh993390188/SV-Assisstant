@@ -20,7 +20,7 @@ namespace Smbios
 					Item->SetText(L"Interface Type");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.InterfaceType()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -34,7 +34,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.InterfaceDataLength() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -51,7 +51,7 @@ namespace Smbios
 						std::wostringstream oss;
 						oss << std::hex << std::setw(2) << std::setfill(L'0') << Data + 0;
 						SubItems.Add(oss.str().c_str());
-						Items.Add(Item);
+						Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 					}
 				}
 				catch (const std::exception&)
@@ -66,7 +66,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.NumberOfProtocol() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -84,7 +84,7 @@ namespace Smbios
 							std::wostringstream oss;
 							oss << Handle;
 							SubItems.Add(oss.str().c_str());
-							Items.Add(Item);
+							Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 						}
 					}
 				}

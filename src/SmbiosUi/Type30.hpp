@@ -20,7 +20,7 @@ namespace Smbios
 					Item->SetText(L"Manufacturer Name");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.ManufacturerName()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -35,7 +35,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.Connections().Number;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

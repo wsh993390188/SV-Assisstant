@@ -20,7 +20,7 @@ namespace Smbios
 					Item->SetText(L"Description");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.Description()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -32,7 +32,7 @@ namespace Smbios
 					Item->SetText(L"Type");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.Types()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -46,7 +46,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << L"0x" << std::hex << std::setw(8) << std::setfill(L'0') << Type.Address();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -58,7 +58,7 @@ namespace Smbios
 					Item->SetText(L"Address Type");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.AddressType()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

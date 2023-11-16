@@ -23,7 +23,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.LowerThresholdNoncritical();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -37,7 +37,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.UpperThresholdNoncritical();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -51,7 +51,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.LowerThresholdCritical();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -65,7 +65,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.UpperThresholdCritical();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -79,7 +79,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.LowerThresholdNonrecoverable();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -93,7 +93,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.UpperThresholdNonrecoverable();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

@@ -23,7 +23,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.StartingAddress();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -37,7 +37,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.EndingAddress();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -51,7 +51,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.MemoryDeviceHandle();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -65,7 +65,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.MemoryArrayMappedAddressHandle();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -79,7 +79,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.PartitionRowPosition() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -93,7 +93,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.InterleavePosition();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -107,7 +107,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.InterleaveDataDepth();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -121,7 +121,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ExtentedStartingAddress();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -135,7 +135,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ExtentedEndingAddress();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

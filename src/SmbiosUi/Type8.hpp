@@ -20,7 +20,7 @@ namespace Smbios
 					Item->SetText(L"Internal Reference Designator");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.InternalReferenceDesignator()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -32,7 +32,7 @@ namespace Smbios
 					Item->SetText(L"Internal Connector Type");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.InternalConnectorType()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -44,7 +44,7 @@ namespace Smbios
 					Item->SetText(L"External Reference Designator");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.ExternalReferenceDesignator()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -56,7 +56,7 @@ namespace Smbios
 					Item->SetText(L"External Connector Type");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.ExternalConnectorType()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -68,7 +68,7 @@ namespace Smbios
 					Item->SetText(L"Port Type");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.PortType()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

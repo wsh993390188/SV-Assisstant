@@ -18,7 +18,7 @@ namespace Smbios
 				Item->SetText(L"Manufacturer");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.Manufacturer()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -30,7 +30,7 @@ namespace Smbios
 				Item->SetText(L"Product Name");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.ProductName()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -42,7 +42,7 @@ namespace Smbios
 				Item->SetText(L"Version");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.Version()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -54,7 +54,7 @@ namespace Smbios
 				Item->SetText(L"Serial Number");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.SerialNumber()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -66,7 +66,7 @@ namespace Smbios
 				Item->SetText(L"UUID");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.UUID()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -111,7 +111,7 @@ namespace Smbios
 					SubItems.Add((std::wstring(L"Unknown Wake Type ") + std::to_wstring(ToUType(WakeType))).c_str());
 					break;
 				}
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -123,7 +123,7 @@ namespace Smbios
 				Item->SetText(L"SKU Number");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.SKUNumber()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -135,7 +135,7 @@ namespace Smbios
 				Item->SetText(L"Family");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.Family()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{

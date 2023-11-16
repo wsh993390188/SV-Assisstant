@@ -20,7 +20,7 @@ namespace Smbios
 					Item->SetText(L"ID");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.ID()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -32,7 +32,7 @@ namespace Smbios
 					Item->SetText(L"MTM");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.MTM()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -49,7 +49,7 @@ namespace Smbios
 						<< "."
 						<< Type.BIOSSpecVersionMinorNumber() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -66,7 +66,7 @@ namespace Smbios
 						<< "."
 						<< Type.EEPROMSpecVersionMinorNumber() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -83,7 +83,7 @@ namespace Smbios
 						<< "."
 						<< Type.PMSpecVersionMinorNumber() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -97,7 +97,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.SMIIoPort() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -111,7 +111,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.SoftwareSMITriggerValue() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -128,7 +128,7 @@ namespace Smbios
 						<< "."
 						<< Type.LENOVOSpecVersionMinorNumber() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

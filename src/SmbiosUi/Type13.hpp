@@ -22,7 +22,7 @@ namespace Smbios
 						Item->SetText(L"Installable Languages");
 						decltype(auto) SubItems = Item->GetSubItems();
 						SubItems.Add(utf8ToWstring(str).c_str());
-						Items.Add(Item);
+						Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 					}
 				}
 				catch (const std::exception&)
@@ -38,7 +38,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.Flags() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -50,7 +50,7 @@ namespace Smbios
 					Item->SetText(L"Current Language");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.CurrentLanguages()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

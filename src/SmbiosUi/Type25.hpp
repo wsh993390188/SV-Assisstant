@@ -23,7 +23,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.NextScheduledPoweronMonth() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -37,7 +37,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.NextScheduledPoweronDay() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -51,7 +51,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.NextScheduledPoweronHour() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -65,7 +65,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.NextScheduledPoweronMinute() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -79,7 +79,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.NextScheduledPoweronSecond() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

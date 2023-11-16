@@ -22,7 +22,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.HardwareSecuritySettings().Number;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

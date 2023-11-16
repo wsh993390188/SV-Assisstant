@@ -105,13 +105,13 @@ namespace
 	const std::string MemoryTechnologyStrs[] =
 	{
 		{},
-		u8"Other",
-		u8"Unknown",
-		u8"DRAM",
-		u8"NVDIMM - N",
-		u8"NVDIMM - F",
-		u8"NVDIMM - P",
-		u8"Intel® Optane™ DC Persistent Memory"
+		U8("Other"),
+		U8("Unknown"),
+		U8("DRAM"),
+		U8("NVDIMM - N"),
+		U8("NVDIMM - F"),
+		U8("NVDIMM - P"),
+		U8("Intel® Optane™ DC Persistent Memory")
 	};
 }
 

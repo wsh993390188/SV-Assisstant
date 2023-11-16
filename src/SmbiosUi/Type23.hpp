@@ -24,7 +24,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.Capabilities().Number;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -38,7 +38,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ResetCount();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -52,7 +52,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ResetLimit();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -66,7 +66,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.TimerInterval();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -80,7 +80,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.Timeout();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

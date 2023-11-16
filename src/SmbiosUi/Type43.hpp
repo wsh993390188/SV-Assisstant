@@ -20,7 +20,7 @@ namespace Smbios
 					Item->SetText(L"Vendor ID");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.VendorID()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -35,7 +35,7 @@ namespace Smbios
 					oss << std::dec << Type.MajorSpecVersion() + 0 << "."
 						<< Type.MinorSpecVersion();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -49,7 +49,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.FirmwareVersion1();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -63,7 +63,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.FirmwareVersion2();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -75,7 +75,7 @@ namespace Smbios
 					Item->SetText(L"TPM Description");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.Description()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -89,7 +89,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.Characteristics().Number;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -103,7 +103,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.OEMDefined();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

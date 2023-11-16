@@ -22,12 +22,11 @@ https://github.com/vczh-libraries
 #if defined( _MSC_VER)
 #pragma warning(push)
 #pragma warning(disable:4250)
-#elif defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wparentheses-equality"
 #elif defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wparentheses-equality"
+#elif defined(__GNUC__)
+#pragma GCC diagnostic push
 #endif
 
 #define GLOBAL_SYMBOL ::vl_workflow_global::Smbios::
@@ -39,25 +38,25 @@ Global Variables
 ***********************************************************************/
 
 BEGIN_GLOBAL_STORAGE_CLASS(vl_workflow_global_Smbios)
-vl_workflow_global::Smbios instance;
-INITIALIZE_GLOBAL_STORAGE_CLASS
-FINALIZE_GLOBAL_STORAGE_CLASS
+	vl_workflow_global::Smbios instance;
+	INITIALIZE_GLOBAL_STORAGE_CLASS
+	FINALIZE_GLOBAL_STORAGE_CLASS
 END_GLOBAL_STORAGE_CLASS(vl_workflow_global_Smbios)
 
 namespace vl_workflow_global
 {
-	/***********************************************************************
-	Global Functions
-	***********************************************************************/
+/***********************************************************************
+Global Functions
+***********************************************************************/
 
 	Smbios& Smbios::Instance()
 	{
 		return Getvl_workflow_global_Smbios().instance;
 	}
 
-	/***********************************************************************
-	Closures
-	***********************************************************************/
+/***********************************************************************
+Closures
+***********************************************************************/
 
 	//-------------------------------------------------------------------
 
@@ -219,24 +218,6 @@ namespace vl_workflow_global
 				::vl::__vwsn::This(__vwsnthis_0->listView)->SetView(::vl::presentation::controls::ListViewView::Detail);
 			}
 		}
-	}
-
-	//-------------------------------------------------------------------
-
-	__vwsnf23_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize_::__vwsnf23_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize_(::Smbios::TextEditorConstructor* __vwsnctorthis_0)
-		:__vwsnthis_0(::vl::__vwsn::This(__vwsnctorthis_0))
-	{
-	}
-
-	void __vwsnf23_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize_::operator()(const ::vl::reflection::description::Value& __vwsn_value_) const
-	{
-		auto __vwsn_old_ = ::vl::__vwsn::This(__vwsnthis_0->textLabel)->GetText();
-		auto __vwsn_new_ = ::vl::__vwsn::Unbox<::vl::WString>(__vwsn_value_);
-		if ((__vwsn_old_ == __vwsn_new_))
-		{
-			return;
-		}
-		::vl::__vwsn::This(__vwsnthis_0->textLabel)->SetText(__vwsn_new_);
 	}
 
 	//-------------------------------------------------------------------
@@ -437,7 +418,7 @@ namespace vl_workflow_global
 
 	::vl::vint __vwsnc1_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize__vl_presentation_controls_list_IDataSorter::Compare(const ::vl::reflection::description::Value& __vwsn_row1_, const ::vl::reflection::description::Value& __vwsn_row2_)
 	{
-		return LAMBDA(::vl_workflow_global::__vwsno1_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_Compare_(this, __vwsnthis_0))(::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::SmbiosTypaDataItem>>(__vwsn_row1_), ::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::SmbiosTypaDataItem>>(__vwsn_row2_));
+		return vl::Func(::vl_workflow_global::__vwsno1_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_Compare_(this, __vwsnthis_0))(::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::SmbiosTypaDataItem>>(__vwsn_row1_), ::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::SmbiosTypaDataItem>>(__vwsn_row2_));
 	}
 
 	//-------------------------------------------------------------------
@@ -453,7 +434,7 @@ namespace vl_workflow_global
 
 	::vl::vint __vwsnc2_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize__vl_presentation_controls_list_IDataSorter::Compare(const ::vl::reflection::description::Value& __vwsn_row1_, const ::vl::reflection::description::Value& __vwsn_row2_)
 	{
-		return LAMBDA(::vl_workflow_global::__vwsno4_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_Compare_(this, __vwsnthis_0))(::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::SmbiosTypaDataItem>>(__vwsn_row1_), ::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::SmbiosTypaDataItem>>(__vwsn_row2_));
+		return vl::Func(::vl_workflow_global::__vwsno4_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_Compare_(this, __vwsnthis_0))(::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::SmbiosTypaDataItem>>(__vwsn_row1_), ::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::SmbiosTypaDataItem>>(__vwsn_row2_));
 	}
 
 	//-------------------------------------------------------------------
@@ -469,7 +450,7 @@ namespace vl_workflow_global
 
 	::vl::vint __vwsnc3_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize__vl_presentation_controls_list_IDataSorter::Compare(const ::vl::reflection::description::Value& __vwsn_row1_, const ::vl::reflection::description::Value& __vwsn_row2_)
 	{
-		return LAMBDA(::vl_workflow_global::__vwsno9_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_Compare_(this, __vwsnthis_0))(::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row1_), ::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row2_));
+		return vl::Func(::vl_workflow_global::__vwsno9_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_Compare_(this, __vwsnthis_0))(::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row1_), ::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row2_));
 	}
 
 	//-------------------------------------------------------------------
@@ -485,7 +466,7 @@ namespace vl_workflow_global
 
 	::vl::vint __vwsnc4_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize__vl_presentation_controls_list_IDataSorter::Compare(const ::vl::reflection::description::Value& __vwsn_row1_, const ::vl::reflection::description::Value& __vwsn_row2_)
 	{
-		return LAMBDA(::vl_workflow_global::__vwsno12_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_Compare_(this, __vwsnthis_0))(::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row1_), ::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row2_));
+		return vl::Func(::vl_workflow_global::__vwsno12_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_Compare_(this, __vwsnthis_0))(::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row1_), ::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row2_));
 	}
 
 	//-------------------------------------------------------------------
@@ -501,7 +482,7 @@ namespace vl_workflow_global
 
 	::vl::vint __vwsnc5_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize__vl_presentation_controls_list_IDataSorter::Compare(const ::vl::reflection::description::Value& __vwsn_row1_, const ::vl::reflection::description::Value& __vwsn_row2_)
 	{
-		return LAMBDA(::vl_workflow_global::__vwsno15_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_Compare_(this, __vwsnthis_0))(::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row1_), ::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row2_));
+		return vl::Func(::vl_workflow_global::__vwsno15_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_Compare_(this, __vwsnthis_0))(::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row1_), ::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row2_));
 	}
 
 	//-------------------------------------------------------------------
@@ -517,130 +498,9 @@ namespace vl_workflow_global
 
 	::vl::vint __vwsnc6_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize__vl_presentation_controls_list_IDataSorter::Compare(const ::vl::reflection::description::Value& __vwsn_row1_, const ::vl::reflection::description::Value& __vwsn_row2_)
 	{
-		return LAMBDA(::vl_workflow_global::__vwsno18_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_Compare_(this, __vwsnthis_0))(::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row1_), ::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row2_));
+		return vl::Func(::vl_workflow_global::__vwsno18_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_Compare_(this, __vwsnthis_0))(::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row1_), ::vl::__vwsn::Unbox<::vl::Ptr<::Smbios::DisplayDataToSmbiosData>>(__vwsn_row2_));
 	}
 
-	//-------------------------------------------------------------------
-
-	__vwsnc7_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription::__vwsnc7_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription(::Smbios::TextEditorConstructor* __vwsnctorthis_0)
-		:__vwsnthis_0(::vl::__vwsn::This(__vwsnctorthis_0))
-	{
-		this->__vwsn_bind_cache_0 = static_cast<::Smbios::TextEditor*>(nullptr);
-		this->__vwsn_bind_handler_0_0 = ::vl::Ptr<::vl::reflection::description::IEventHandler>();
-		this->__vwsn_bind_opened_ = false;
-		this->__vwsn_bind_closed_ = false;
-	}
-
-	void __vwsnc7_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription::__vwsn_bind_activator_()
-	{
-		auto __vwsn_bind_activator_result_ = [&]() { try { return ::vl::__vwsn::Unbox<::vl::WString>(::vl::__vwsn::This(__vwsn_bind_cache_0)->GetCellValue()); } catch (...) { return ::vl::WString(L"", false); } }();
-		::vl::__vwsn::EventInvoke(this->ValueChanged)(::vl::__vwsn::Box(__vwsn_bind_activator_result_));
-	}
-
-	void __vwsnc7_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription::__vwsn_bind_callback_0_0(::vl::presentation::compositions::GuiGraphicsComposition* __vwsn_bind_callback_argument_0, ::vl::presentation::compositions::GuiEventArgs* __vwsn_bind_callback_argument_1)
-	{
-		this->__vwsn_bind_activator_();
-	}
-
-	bool __vwsnc7_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription::Open()
-	{
-		if ((!__vwsn_bind_opened_))
-		{
-			(__vwsn_bind_opened_ = true);
-			(__vwsn_bind_cache_0 = [&]() { try { return __vwsnthis_0->self; } catch (...) { return static_cast<::Smbios::TextEditor*>(nullptr); } }());
-			(__vwsn_bind_handler_0_0 = [&]() { try { return ::vl::__vwsn::EventAttach(::vl::__vwsn::This(__vwsn_bind_cache_0)->CellValueChanged, ::vl::Func<void(::vl::presentation::compositions::GuiGraphicsComposition*, ::vl::presentation::compositions::GuiEventArgs*)>(this, &__vwsnc7_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription::__vwsn_bind_callback_0_0)); } catch (...) { return ::vl::Ptr<::vl::reflection::description::IEventHandler>(); } }());
-			return true;
-		}
-		return false;
-	}
-
-	bool __vwsnc7_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription::Update()
-	{
-		if ((__vwsn_bind_opened_ && (!__vwsn_bind_closed_)))
-		{
-			this->__vwsn_bind_activator_();
-			return true;
-		}
-		return false;
-	}
-
-	bool __vwsnc7_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription::Close()
-	{
-		if ((!__vwsn_bind_closed_))
-		{
-			(__vwsn_bind_closed_ = true);
-			if (static_cast<bool>(__vwsn_bind_handler_0_0))
-			{
-				::vl::__vwsn::EventDetach(::vl::__vwsn::This(__vwsn_bind_cache_0)->CellValueChanged, __vwsn_bind_handler_0_0);
-				(__vwsn_bind_handler_0_0 = ::vl::Ptr<::vl::reflection::description::IEventHandler>());
-			}
-			(__vwsn_bind_cache_0 = static_cast<::Smbios::TextEditor*>(nullptr));
-			(__vwsn_bind_handler_0_0 = ::vl::Ptr<::vl::reflection::description::IEventHandler>());
-			return true;
-		}
-		return false;
-	}
-
-	//-------------------------------------------------------------------
-
-	__vwsnc8_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription::__vwsnc8_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription(::Smbios::TextEditorConstructor* __vwsnctorthis_0)
-		:__vwsnthis_0(::vl::__vwsn::This(__vwsnctorthis_0))
-	{
-		this->__vwsn_bind_cache_0 = static_cast<::vl::presentation::controls::GuiLabel*>(nullptr);
-		this->__vwsn_bind_handler_0_0 = ::vl::Ptr<::vl::reflection::description::IEventHandler>();
-		this->__vwsn_bind_opened_ = false;
-		this->__vwsn_bind_closed_ = false;
-	}
-
-	void __vwsnc8_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription::__vwsn_bind_activator_()
-	{
-		auto __vwsn_bind_activator_result_ = ::vl::__vwsn::Box(::vl::__vwsn::This(__vwsn_bind_cache_0)->GetText());
-		::vl::__vwsn::EventInvoke(this->ValueChanged)(__vwsn_bind_activator_result_);
-	}
-
-	void __vwsnc8_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription::__vwsn_bind_callback_0_0(::vl::presentation::compositions::GuiGraphicsComposition* __vwsn_bind_callback_argument_0, ::vl::presentation::compositions::GuiEventArgs* __vwsn_bind_callback_argument_1)
-	{
-		this->__vwsn_bind_activator_();
-	}
-
-	bool __vwsnc8_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription::Open()
-	{
-		if ((!__vwsn_bind_opened_))
-		{
-			(__vwsn_bind_opened_ = true);
-			(__vwsn_bind_cache_0 = [&]() { try { return __vwsnthis_0->textLabel; } catch (...) { return static_cast<::vl::presentation::controls::GuiLabel*>(nullptr); } }());
-			(__vwsn_bind_handler_0_0 = [&]() { try { return ::vl::__vwsn::EventAttach(::vl::__vwsn::This(__vwsn_bind_cache_0)->TextChanged, ::vl::Func<void(::vl::presentation::compositions::GuiGraphicsComposition*, ::vl::presentation::compositions::GuiEventArgs*)>(this, &__vwsnc8_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription::__vwsn_bind_callback_0_0)); } catch (...) { return ::vl::Ptr<::vl::reflection::description::IEventHandler>(); } }());
-			return true;
-		}
-		return false;
-	}
-
-	bool __vwsnc8_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription::Update()
-	{
-		if ((__vwsn_bind_opened_ && (!__vwsn_bind_closed_)))
-		{
-			this->__vwsn_bind_activator_();
-			return true;
-		}
-		return false;
-	}
-
-	bool __vwsnc8_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription::Close()
-	{
-		if ((!__vwsn_bind_closed_))
-		{
-			(__vwsn_bind_closed_ = true);
-			if (static_cast<bool>(__vwsn_bind_handler_0_0))
-			{
-				::vl::__vwsn::EventDetach(::vl::__vwsn::This(__vwsn_bind_cache_0)->TextChanged, __vwsn_bind_handler_0_0);
-				(__vwsn_bind_handler_0_0 = ::vl::Ptr<::vl::reflection::description::IEventHandler>());
-			}
-			(__vwsn_bind_cache_0 = static_cast<::vl::presentation::controls::GuiLabel*>(nullptr));
-			(__vwsn_bind_handler_0_0 = ::vl::Ptr<::vl::reflection::description::IEventHandler>());
-			return true;
-		}
-		return false;
-	}
 }
 
 /***********************************************************************
@@ -653,21 +513,21 @@ namespace Smbios
 	{
 		(this->self = __vwsn_this_);
 		{
-			::vl::__vwsn::This(this->self)->SetText(::vl::WString(L"Smbios信息", false));
+			::vl::__vwsn::This(this->self)->SetText(::vl::WString::Unmanaged(L"Smbios信息"));
 		}
 		(this->__vwsn_precompile_0 = new ::vl::presentation::compositions::GuiTableComposition());
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetCellPadding(static_cast<::vl::vint>(5));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetAlignmentToParent([&]() { ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(0); __vwsn_temp__.top = static_cast<::vl::vint>(0); __vwsn_temp__.right = static_cast<::vl::vint>(0); __vwsn_temp__.bottom = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetAlignmentToParent([&](){ ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(0); __vwsn_temp__.top = static_cast<::vl::vint>(0); __vwsn_temp__.right = static_cast<::vl::vint>(0); __vwsn_temp__.bottom = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
 		}
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetRowsAndColumns(static_cast<::vl::vint>(2), static_cast<::vl::vint>(2));
-			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetRowOption(static_cast<::vl::vint>(0), [&]() { ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::MinSize; return __vwsn_temp__; }());
-			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetRowOption(static_cast<::vl::vint>(1), [&]() { ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Percentage; __vwsn_temp__.percentage = static_cast<double>(1.0); return __vwsn_temp__; }());
-			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetColumnOption(static_cast<::vl::vint>(0), [&]() { ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Absolute; __vwsn_temp__.absolute = static_cast<::vl::vint>(150); return __vwsn_temp__; }());
-			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetColumnOption(static_cast<::vl::vint>(1), [&]() { ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Absolute; __vwsn_temp__.absolute = static_cast<::vl::vint>(150); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetRowOption(static_cast<::vl::vint>(0), [&](){ ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::MinSize; return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetRowOption(static_cast<::vl::vint>(1), [&](){ ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Percentage; __vwsn_temp__.percentage = static_cast<double>(1.0); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetColumnOption(static_cast<::vl::vint>(0), [&](){ ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Absolute; __vwsn_temp__.absolute = static_cast<::vl::vint>(150); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetColumnOption(static_cast<::vl::vint>(1), [&](){ ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Absolute; __vwsn_temp__.absolute = static_cast<::vl::vint>(150); return __vwsn_temp__; }());
 		}
 		(this->__vwsn_precompile_1 = new ::vl::presentation::compositions::GuiCellComposition());
 		{
@@ -678,7 +538,7 @@ namespace Smbios
 		}
 		(this->__vwsn_precompile_3 = ::vl::Ptr<::vl::presentation::controls::list::TextItem>(new ::vl::presentation::controls::list::TextItem()));
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_3.Obj())->SetText(::vl::WString(L"Tile", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_3.Obj())->SetText(::vl::WString::Unmanaged(L"Tile"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->__vwsn_precompile_2)->GetItems());
@@ -686,7 +546,7 @@ namespace Smbios
 		}
 		(this->__vwsn_precompile_4 = ::vl::Ptr<::vl::presentation::controls::list::TextItem>(new ::vl::presentation::controls::list::TextItem()));
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_4.Obj())->SetText(::vl::WString(L"Information", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_4.Obj())->SetText(::vl::WString::Unmanaged(L"Information"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->__vwsn_precompile_2)->GetItems());
@@ -694,7 +554,7 @@ namespace Smbios
 		}
 		(this->__vwsn_precompile_5 = ::vl::Ptr<::vl::presentation::controls::list::TextItem>(new ::vl::presentation::controls::list::TextItem()));
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_5.Obj())->SetText(::vl::WString(L"Detail", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_5.Obj())->SetText(::vl::WString::Unmanaged(L"Detail"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->__vwsn_precompile_2)->GetItems());
@@ -713,11 +573,11 @@ namespace Smbios
 			::vl::__vwsn::This(this->comboView)->SetSelectedIndex(static_cast<::vl::vint>(2));
 		}
 		{
-			::vl::__vwsn::This(this->comboView)->SetAlt(::vl::WString(L"V", false));
+			::vl::__vwsn::This(this->comboView)->SetAlt(::vl::WString::Unmanaged(L"V"));
 		}
 		(this->__vwsn_precompile_6 = ::vl::__vwsn::This(this->comboView)->GetBoundsComposition());
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_6)->SetPreferredMinSize([&]() { ::vl::presentation::Size __vwsn_temp__; __vwsn_temp__.x = static_cast<::vl::vint>(120); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_6)->SetPreferredMinSize([&](){ ::vl::presentation::Size __vwsn_temp__; __vwsn_temp__.x = static_cast<::vl::vint>(120); return __vwsn_temp__; }());
 		}
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_1)->AddChild(static_cast<::vl::presentation::compositions::GuiGraphicsComposition*>(::vl::__vwsn::This(this->comboView)->GetBoundsComposition()));
@@ -750,27 +610,27 @@ namespace Smbios
 			::vl::__vwsn::This(this->listView)->SetHorizontalAlwaysVisible(false);
 		}
 		{
-			::vl::__vwsn::This(this->listView)->SetAlt(::vl::WString(L"L", false));
+			::vl::__vwsn::This(this->listView)->SetAlt(::vl::WString::Unmanaged(L"L"));
 		}
 		(this->__vwsn_precompile_11 = ::vl::__vwsn::This(this->listView)->GetBoundsComposition());
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_11)->SetAlignmentToParent([&]() { ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(0); __vwsn_temp__.top = static_cast<::vl::vint>(0); __vwsn_temp__.right = static_cast<::vl::vint>(0); __vwsn_temp__.bottom = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_11)->SetAlignmentToParent([&](){ ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(0); __vwsn_temp__.top = static_cast<::vl::vint>(0); __vwsn_temp__.right = static_cast<::vl::vint>(0); __vwsn_temp__.bottom = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
 		}
 		(this->__vwsn_precompile_9 = ::vl::Ptr<::vl::presentation::controls::list::DataColumn>(new ::vl::presentation::controls::list::DataColumn()));
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetSorter(::vl::Ptr<::vl::presentation::controls::list::IDataSorter>(new ::vl_workflow_global::__vwsnc1_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize__vl_presentation_controls_list_IDataSorter(this)));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetValueProperty(LAMBDA(::vl_workflow_global::__vwsnf2_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_(this)));
+			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetValueProperty(vl::Func(::vl_workflow_global::__vwsnf2_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_(this)));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetTextProperty(LAMBDA(::vl_workflow_global::__vwsnf3_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_(this)));
+			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetTextProperty(vl::Func(::vl_workflow_global::__vwsnf3_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_(this)));
 		}
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetSize(static_cast<::vl::vint>(60));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetText(::vl::WString(L"Type", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetText(::vl::WString::Unmanaged(L"Type"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->listView)->GetColumns());
@@ -781,16 +641,16 @@ namespace Smbios
 			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetSorter(::vl::Ptr<::vl::presentation::controls::list::IDataSorter>(new ::vl_workflow_global::__vwsnc2_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize__vl_presentation_controls_list_IDataSorter(this)));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetValueProperty(LAMBDA(::vl_workflow_global::__vwsnf5_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_(this)));
+			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetValueProperty(vl::Func(::vl_workflow_global::__vwsnf5_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_(this)));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetTextProperty(LAMBDA(::vl_workflow_global::__vwsnf6_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_(this)));
+			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetTextProperty(vl::Func(::vl_workflow_global::__vwsnf6_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_(this)));
 		}
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetSize(static_cast<::vl::vint>(120));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetText(::vl::WString(L"描述", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetText(::vl::WString::Unmanaged(L"描述"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->listView)->GetColumns());
@@ -820,18 +680,18 @@ namespace Smbios
 			::vl::__vwsn::This(this->textList)->SetHorizontalAlwaysVisible(false);
 		}
 		{
-			::vl::__vwsn::This(this->textList)->SetAlt(::vl::WString(L"T", false));
+			::vl::__vwsn::This(this->textList)->SetAlt(::vl::WString::Unmanaged(L"T"));
 		}
 		(this->__vwsn_precompile_15 = ::vl::__vwsn::This(this->textList)->GetBoundsComposition());
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_15)->SetAlignmentToParent([&]() { ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(0); __vwsn_temp__.top = static_cast<::vl::vint>(0); __vwsn_temp__.right = static_cast<::vl::vint>(0); __vwsn_temp__.bottom = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_15)->SetAlignmentToParent([&](){ ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(0); __vwsn_temp__.top = static_cast<::vl::vint>(0); __vwsn_temp__.right = static_cast<::vl::vint>(0); __vwsn_temp__.bottom = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
 		}
 		(this->__vwsn_precompile_13 = ::vl::Ptr<::vl::presentation::controls::list::ListViewColumn>(new ::vl::presentation::controls::list::ListViewColumn()));
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_13.Obj())->SetSize(static_cast<::vl::vint>(60));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_13.Obj())->SetText(::vl::WString(L"名称", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_13.Obj())->SetText(::vl::WString::Unmanaged(L"名称"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->textList)->GetColumns());
@@ -839,7 +699,7 @@ namespace Smbios
 		}
 		(this->__vwsn_precompile_14 = ::vl::Ptr<::vl::presentation::controls::list::ListViewColumn>(new ::vl::presentation::controls::list::ListViewColumn()));
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_14.Obj())->SetText(::vl::WString(L"信息", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_14.Obj())->SetText(::vl::WString::Unmanaged(L"信息"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->textList)->GetColumns());
@@ -855,11 +715,11 @@ namespace Smbios
 			::vl::__vwsn::This(::vl::__vwsn::This(this->self)->GetContainerComposition())->AddChild(static_cast<::vl::presentation::compositions::GuiGraphicsComposition*>(this->__vwsn_precompile_0));
 		}
 		{
-			auto __vwsn_event_handler_ = LAMBDA(::vl_workflow_global::__vwsnf7_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_(this));
+			auto __vwsn_event_handler_ = vl::Func(::vl_workflow_global::__vwsnf7_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_(this));
 			::vl::__vwsn::EventAttach(::vl::__vwsn::This(this->comboView)->SelectedIndexChanged, __vwsn_event_handler_);
 		}
 		{
-			::vl::__vwsn::EventAttach(::vl::__vwsn::This(this->listView)->SelectionChanged, LAMBDA(::vl_workflow_global::__vwsno8_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_(__vwsn_this_, this)));
+			::vl::__vwsn::EventAttach(::vl::__vwsn::This(this->listView)->SelectionChanged, vl::Func(::vl_workflow_global::__vwsno8_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_(__vwsn_this_, this)));
 		}
 	}
 
@@ -887,9 +747,9 @@ namespace Smbios
 	{
 	}
 
-	/***********************************************************************
-	Class (::Smbios::DataGridTabPage)
-	***********************************************************************/
+/***********************************************************************
+Class (::Smbios::DataGridTabPage)
+***********************************************************************/
 
 	void DataGridTabPage::ListView_Selection_Changed(::vl::presentation::compositions::GuiGraphicsComposition* sender, ::vl::presentation::compositions::GuiEventArgs* arguments)
 	{/* USER_CONTENT_BEGIN(::Smbios::DataGridTabPage) */
@@ -899,7 +759,7 @@ namespace Smbios
 	DataGridTabPage::DataGridTabPage()
 		: ::vl::presentation::controls::GuiTabPage(::vl::presentation::theme::ThemeName::CustomControl)
 	{
-		auto __vwsn_resource_ = ::vl::__vwsn::This(::vl::presentation::GetResourceManager())->GetResourceFromClassName(::vl::WString(L"Smbios::DataGridTabPage", false));
+		auto __vwsn_resource_ = ::vl::__vwsn::This(::vl::presentation::GetResourceManager())->GetResourceFromClassName(::vl::WString::Unmanaged(L"Smbios::DataGridTabPage"));
 		auto __vwsn_resolver_ = ::vl::Ptr<::vl::presentation::GuiResourcePathResolver>(new ::vl::presentation::GuiResourcePathResolver(__vwsn_resource_, ::vl::__vwsn::This(__vwsn_resource_.Obj())->GetWorkingDirectory()));
 		::vl::__vwsn::This(this)->SetResourceResolver(__vwsn_resolver_);
 		::vl::__vwsn::This(this)->__vwsn_Smbios_DataGridTabPage_Initialize(this);
@@ -968,7 +828,7 @@ namespace Smbios
 		auto Types = Smbios::GetAllTypes();
 		for (const auto& Type : Types)
 		{
-			tempData.Add(vl::MakePtr<SmbiosTypaDataItem>(Type->GetHeader().type, Type->Descriptor().c_str(), reinterpret_cast<vl::vint64_t>(Type->GetVirtualBaseAddress())));
+			tempData.Add(::vl::Ptr(new SmbiosTypaDataItem(Type->GetHeader().type, Type->Descriptor().c_str(), reinterpret_cast<vl::vint64_t>(Type->GetVirtualBaseAddress()))));
 		}
 		::vl::__vwsn::This(this->listView)->SetItemSource(::vl::Ptr<::vl::reflection::description::IValueEnumerable>(tempData.list));
 		/* USER_CONTENT_END() */
@@ -998,7 +858,7 @@ namespace Smbios
 			std::wostringstream oss;
 			oss << std::dec << Dmi->type;
 			SubItems.Add(oss.str().c_str());
-			Items.Add(Item);
+			Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 		}
 
 		{
@@ -1008,7 +868,7 @@ namespace Smbios
 			std::wostringstream oss;
 			oss << std::dec << Dmi->length;
 			SubItems.Add(oss.str().c_str());
-			Items.Add(Item);
+			Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 		}
 
 		{
@@ -1018,7 +878,7 @@ namespace Smbios
 			std::wostringstream oss;
 			oss << std::dec << Dmi->handle;
 			SubItems.Add(oss.str().c_str());
-			Items.Add(Item);
+			Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 		}
 
 		auto itr = TypeFunctions.find(Dmi->type);
@@ -1064,9 +924,9 @@ namespace Smbios
 	}
 	/* USER_CONTENT_END() */
 
-	/***********************************************************************
-	Class (::Smbios::DisplayDataToSmbiosData)
-	***********************************************************************/
+/***********************************************************************
+Class (::Smbios::DisplayDataToSmbiosData)
+***********************************************************************/
 
 	::vl::WString DisplayDataToSmbiosData::GetDesc()
 	{
@@ -1095,7 +955,11 @@ namespace Smbios
 
 	void DisplayDataToSmbiosData::SetSmbiosType(::vl::vint __vwsn_value_)
 	{
-		(this->__vwsn_prop_SmbiosType = __vwsn_value_);
+		if ((this->__vwsn_prop_SmbiosType != __vwsn_value_))
+		{
+			(this->__vwsn_prop_SmbiosType = __vwsn_value_);
+			::vl::__vwsn::EventInvoke(this->SmbiosTypeChanged)();
+		}
 	}
 
 	::vl::WString DisplayDataToSmbiosData::GetSmbiosTypeValue()
@@ -1109,48 +973,48 @@ namespace Smbios
 	}
 
 	DisplayDataToSmbiosData::DisplayDataToSmbiosData()
-		: __vwsn_prop_Desc(::vl::WString(L"", false))
-		, __vwsn_prop_Display(::vl::WString(L"", false))
+		: __vwsn_prop_Desc(::vl::WString::Unmanaged(L""))
+		, __vwsn_prop_Display(::vl::WString::Unmanaged(L""))
 		, __vwsn_prop_SmbiosType(static_cast<::vl::vint>(0))
-		, __vwsn_prop_SmbiosTypeValue(::vl::WString(L"", false))
+		, __vwsn_prop_SmbiosTypeValue(::vl::WString::Unmanaged(L""))
 	{
 	}
 
-	DisplayDataToSmbiosData::DisplayDataToSmbiosData(const ::vl::WString& desc, const ::vl::WString& display, const ::vl::vint& type, const ::vl::WString& value)
-		: __vwsn_prop_Desc(::vl::WString(L"", false))
-		, __vwsn_prop_Display(::vl::WString(L"", false))
+	DisplayDataToSmbiosData::DisplayDataToSmbiosData(const ::vl::WString& desc, const ::vl::WString& display, ::vl::vint smbios_type, const ::vl::WString& value)
+		: __vwsn_prop_Desc(::vl::WString::Unmanaged(L""))
+		, __vwsn_prop_Display(::vl::WString::Unmanaged(L""))
 		, __vwsn_prop_SmbiosType(static_cast<::vl::vint>(0))
-		, __vwsn_prop_SmbiosTypeValue(::vl::WString(L"", false))
+		, __vwsn_prop_SmbiosTypeValue(::vl::WString::Unmanaged(L""))
 	{
 		this->SetDesc(desc);
 		this->SetDisplay(display);
-		this->SetSmbiosType(type);
+		this->SetSmbiosType(smbios_type);
 		this->SetSmbiosTypeValue(value);
 	}
 
-	/***********************************************************************
-	Class (::Smbios::MainWindowConstructor)
-	***********************************************************************/
+/***********************************************************************
+Class (::Smbios::MainWindowConstructor)
+***********************************************************************/
 
 	void MainWindowConstructor::__vwsn_Smbios_MainWindow_Initialize(::Smbios::MainWindow* __vwsn_this_)
 	{
 		(this->self = __vwsn_this_);
 		(this->__vwsn_precompile_4 = ::vl::__vwsn::This(this->self)->GetBoundsComposition());
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_4)->SetPreferredMinSize([&]() { ::vl::presentation::Size __vwsn_temp__; __vwsn_temp__.x = static_cast<::vl::vint>(640); __vwsn_temp__.y = static_cast<::vl::vint>(480); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_4)->SetPreferredMinSize([&](){ ::vl::presentation::Size __vwsn_temp__; __vwsn_temp__.x = static_cast<::vl::vint>(640); __vwsn_temp__.y = static_cast<::vl::vint>(480); return __vwsn_temp__; }());
 		}
 		{
-			::vl::__vwsn::This(this->self)->SetClientSize([&]() { ::vl::presentation::Size __vwsn_temp__; __vwsn_temp__.x = static_cast<::vl::vint>(640); __vwsn_temp__.y = static_cast<::vl::vint>(480); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->self)->SetClientSize([&](){ ::vl::presentation::Size __vwsn_temp__; __vwsn_temp__.x = static_cast<::vl::vint>(640); __vwsn_temp__.y = static_cast<::vl::vint>(480); return __vwsn_temp__; }());
 		}
 		{
-			::vl::__vwsn::This(this->self)->SetText(::vl::WString(L"SMBIOS", false));
+			::vl::__vwsn::This(this->self)->SetText(::vl::WString::Unmanaged(L"SMBIOS"));
 		}
 		{
 			(this->__vwsn_precompile_0 = new ::vl::presentation::controls::GuiTab(::vl::presentation::theme::ThemeName::Tab));
 		}
 		(this->__vwsn_precompile_2 = new ::Smbios::DataGridTabPage());
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_2)->SetAlt(::vl::WString(L"D", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_2)->SetAlt(::vl::WString::Unmanaged(L"D"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueObservableList>(::vl::__vwsn::This(this->__vwsn_precompile_0)->GetPages());
@@ -1158,7 +1022,7 @@ namespace Smbios
 		}
 		(this->__vwsn_precompile_3 = new ::Smbios::ProductInfoPage());
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_3)->SetAlt(::vl::WString(L"P", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_3)->SetAlt(::vl::WString::Unmanaged(L"P"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueObservableList>(::vl::__vwsn::This(this->__vwsn_precompile_0)->GetPages());
@@ -1166,7 +1030,7 @@ namespace Smbios
 		}
 		(this->__vwsn_precompile_1 = ::vl::__vwsn::This(this->__vwsn_precompile_0)->GetBoundsComposition());
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_1)->SetAlignmentToParent([&]() { ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(5); __vwsn_temp__.top = static_cast<::vl::vint>(5); __vwsn_temp__.right = static_cast<::vl::vint>(5); __vwsn_temp__.bottom = static_cast<::vl::vint>(5); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_1)->SetAlignmentToParent([&](){ ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(5); __vwsn_temp__.top = static_cast<::vl::vint>(5); __vwsn_temp__.right = static_cast<::vl::vint>(5); __vwsn_temp__.bottom = static_cast<::vl::vint>(5); return __vwsn_temp__; }());
 		}
 		{
 			::vl::__vwsn::This(this->self)->AddChild(static_cast<::vl::presentation::controls::GuiControl*>(this->__vwsn_precompile_0));
@@ -1183,14 +1047,14 @@ namespace Smbios
 	{
 	}
 
-	/***********************************************************************
-	Class (::Smbios::MainWindow)
-	***********************************************************************/
+/***********************************************************************
+Class (::Smbios::MainWindow)
+***********************************************************************/
 
 	MainWindow::MainWindow()
 		: ::vl::presentation::controls::GuiWindow(::vl::presentation::theme::ThemeName::Window)
 	{
-		auto __vwsn_resource_ = ::vl::__vwsn::This(::vl::presentation::GetResourceManager())->GetResourceFromClassName(::vl::WString(L"Smbios::MainWindow", false));
+		auto __vwsn_resource_ = ::vl::__vwsn::This(::vl::presentation::GetResourceManager())->GetResourceFromClassName(::vl::WString::Unmanaged(L"Smbios::MainWindow"));
 		auto __vwsn_resolver_ = ::vl::Ptr<::vl::presentation::GuiResourcePathResolver>(new ::vl::presentation::GuiResourcePathResolver(__vwsn_resource_, ::vl::__vwsn::This(__vwsn_resource_.Obj())->GetWorkingDirectory()));
 		::vl::__vwsn::This(this)->SetResourceResolver(__vwsn_resolver_);
 		::vl::__vwsn::This(this)->__vwsn_Smbios_MainWindow_Initialize(this);
@@ -1201,28 +1065,28 @@ namespace Smbios
 		this->FinalizeInstanceRecursively(static_cast<::vl::presentation::controls::GuiControlHost*>(this));
 	}
 
-	/***********************************************************************
-	Class (::Smbios::ProductInfoPageConstructor)
-	***********************************************************************/
+/***********************************************************************
+Class (::Smbios::ProductInfoPageConstructor)
+***********************************************************************/
 
 	void ProductInfoPageConstructor::__vwsn_Smbios_ProductInfoPage_Initialize(::Smbios::ProductInfoPage* __vwsn_this_)
 	{
 		(this->self = __vwsn_this_);
 		{
-			::vl::__vwsn::This(this->self)->SetText(::vl::WString(L"联想电脑需要的BIOS信息", false));
+			::vl::__vwsn::This(this->self)->SetText(::vl::WString::Unmanaged(L"联想电脑需要的BIOS信息"));
 		}
 		(this->__vwsn_precompile_0 = new ::vl::presentation::compositions::GuiTableComposition());
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetCellPadding(static_cast<::vl::vint>(5));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetAlignmentToParent([&]() { ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(0); __vwsn_temp__.top = static_cast<::vl::vint>(0); __vwsn_temp__.right = static_cast<::vl::vint>(0); __vwsn_temp__.bottom = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetAlignmentToParent([&](){ ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(0); __vwsn_temp__.top = static_cast<::vl::vint>(0); __vwsn_temp__.right = static_cast<::vl::vint>(0); __vwsn_temp__.bottom = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
 		}
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetRowsAndColumns(static_cast<::vl::vint>(2), static_cast<::vl::vint>(1));
-			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetRowOption(static_cast<::vl::vint>(0), [&]() { ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::MinSize; return __vwsn_temp__; }());
-			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetRowOption(static_cast<::vl::vint>(1), [&]() { ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Percentage; __vwsn_temp__.percentage = static_cast<double>(1.0); return __vwsn_temp__; }());
-			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetColumnOption(static_cast<::vl::vint>(0), [&]() { ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Percentage; __vwsn_temp__.percentage = static_cast<double>(1.0); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetRowOption(static_cast<::vl::vint>(0), [&](){ ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::MinSize; return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetRowOption(static_cast<::vl::vint>(1), [&](){ ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Percentage; __vwsn_temp__.percentage = static_cast<double>(1.0); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetColumnOption(static_cast<::vl::vint>(0), [&](){ ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Percentage; __vwsn_temp__.percentage = static_cast<double>(1.0); return __vwsn_temp__; }());
 		}
 		(this->__vwsn_precompile_1 = new ::vl::presentation::compositions::GuiCellComposition());
 		{
@@ -1233,7 +1097,7 @@ namespace Smbios
 		}
 		(this->__vwsn_precompile_3 = ::vl::Ptr<::vl::presentation::controls::list::TextItem>(new ::vl::presentation::controls::list::TextItem()));
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_3.Obj())->SetText(::vl::WString(L"Tile", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_3.Obj())->SetText(::vl::WString::Unmanaged(L"Tile"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->__vwsn_precompile_2)->GetItems());
@@ -1241,7 +1105,7 @@ namespace Smbios
 		}
 		(this->__vwsn_precompile_4 = ::vl::Ptr<::vl::presentation::controls::list::TextItem>(new ::vl::presentation::controls::list::TextItem()));
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_4.Obj())->SetText(::vl::WString(L"Information", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_4.Obj())->SetText(::vl::WString::Unmanaged(L"Information"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->__vwsn_precompile_2)->GetItems());
@@ -1249,7 +1113,7 @@ namespace Smbios
 		}
 		(this->__vwsn_precompile_5 = ::vl::Ptr<::vl::presentation::controls::list::TextItem>(new ::vl::presentation::controls::list::TextItem()));
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_5.Obj())->SetText(::vl::WString(L"Detail", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_5.Obj())->SetText(::vl::WString::Unmanaged(L"Detail"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->__vwsn_precompile_2)->GetItems());
@@ -1268,11 +1132,11 @@ namespace Smbios
 			::vl::__vwsn::This(this->comboView)->SetSelectedIndex(static_cast<::vl::vint>(2));
 		}
 		{
-			::vl::__vwsn::This(this->comboView)->SetAlt(::vl::WString(L"V", false));
+			::vl::__vwsn::This(this->comboView)->SetAlt(::vl::WString::Unmanaged(L"V"));
 		}
 		(this->__vwsn_precompile_6 = ::vl::__vwsn::This(this->comboView)->GetBoundsComposition());
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_6)->SetPreferredMinSize([&]() { ::vl::presentation::Size __vwsn_temp__; __vwsn_temp__.x = static_cast<::vl::vint>(120); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_6)->SetPreferredMinSize([&](){ ::vl::presentation::Size __vwsn_temp__; __vwsn_temp__.x = static_cast<::vl::vint>(120); return __vwsn_temp__; }());
 		}
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_1)->AddChild(static_cast<::vl::presentation::compositions::GuiGraphicsComposition*>(::vl::__vwsn::This(this->comboView)->GetBoundsComposition()));
@@ -1298,27 +1162,27 @@ namespace Smbios
 			::vl::__vwsn::This(this->listView)->SetHorizontalAlwaysVisible(false);
 		}
 		{
-			::vl::__vwsn::This(this->listView)->SetAlt(::vl::WString(L"L", false));
+			::vl::__vwsn::This(this->listView)->SetAlt(::vl::WString::Unmanaged(L"L"));
 		}
 		(this->__vwsn_precompile_12 = ::vl::__vwsn::This(this->listView)->GetBoundsComposition());
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_12)->SetAlignmentToParent([&]() { ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(0); __vwsn_temp__.top = static_cast<::vl::vint>(0); __vwsn_temp__.right = static_cast<::vl::vint>(0); __vwsn_temp__.bottom = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_12)->SetAlignmentToParent([&](){ ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(0); __vwsn_temp__.top = static_cast<::vl::vint>(0); __vwsn_temp__.right = static_cast<::vl::vint>(0); __vwsn_temp__.bottom = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
 		}
 		(this->__vwsn_precompile_8 = ::vl::Ptr<::vl::presentation::controls::list::DataColumn>(new ::vl::presentation::controls::list::DataColumn()));
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_8.Obj())->SetSorter(::vl::Ptr<::vl::presentation::controls::list::IDataSorter>(new ::vl_workflow_global::__vwsnc3_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize__vl_presentation_controls_list_IDataSorter(this)));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_8.Obj())->SetValueProperty(LAMBDA(::vl_workflow_global::__vwsnf10_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
+			::vl::__vwsn::This(this->__vwsn_precompile_8.Obj())->SetValueProperty(vl::Func(::vl_workflow_global::__vwsnf10_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_8.Obj())->SetTextProperty(LAMBDA(::vl_workflow_global::__vwsnf11_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
+			::vl::__vwsn::This(this->__vwsn_precompile_8.Obj())->SetTextProperty(vl::Func(::vl_workflow_global::__vwsnf11_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
 		}
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_8.Obj())->SetSize(static_cast<::vl::vint>(60));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_8.Obj())->SetText(::vl::WString(L"描述", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_8.Obj())->SetText(::vl::WString::Unmanaged(L"描述"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->listView)->GetColumns());
@@ -1329,16 +1193,16 @@ namespace Smbios
 			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetSorter(::vl::Ptr<::vl::presentation::controls::list::IDataSorter>(new ::vl_workflow_global::__vwsnc4_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize__vl_presentation_controls_list_IDataSorter(this)));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetValueProperty(LAMBDA(::vl_workflow_global::__vwsnf13_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
+			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetValueProperty(vl::Func(::vl_workflow_global::__vwsnf13_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetTextProperty(LAMBDA(::vl_workflow_global::__vwsnf14_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
+			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetTextProperty(vl::Func(::vl_workflow_global::__vwsnf14_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
 		}
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetSize(static_cast<::vl::vint>(120));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetText(::vl::WString(L"显示项", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_9.Obj())->SetText(::vl::WString::Unmanaged(L"显示项"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->listView)->GetColumns());
@@ -1349,16 +1213,16 @@ namespace Smbios
 			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetSorter(::vl::Ptr<::vl::presentation::controls::list::IDataSorter>(new ::vl_workflow_global::__vwsnc5_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize__vl_presentation_controls_list_IDataSorter(this)));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetValueProperty(LAMBDA(::vl_workflow_global::__vwsnf16_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
+			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetValueProperty(vl::Func(::vl_workflow_global::__vwsnf16_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetTextProperty(LAMBDA(::vl_workflow_global::__vwsnf17_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
+			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetTextProperty(vl::Func(::vl_workflow_global::__vwsnf17_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
 		}
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetSize(static_cast<::vl::vint>(120));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetText(::vl::WString(L"对应SmbiosType", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_10.Obj())->SetText(::vl::WString::Unmanaged(L"对应SmbiosType"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->listView)->GetColumns());
@@ -1369,16 +1233,16 @@ namespace Smbios
 			::vl::__vwsn::This(this->__vwsn_precompile_11.Obj())->SetSorter(::vl::Ptr<::vl::presentation::controls::list::IDataSorter>(new ::vl_workflow_global::__vwsnc6_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize__vl_presentation_controls_list_IDataSorter(this)));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_11.Obj())->SetValueProperty(LAMBDA(::vl_workflow_global::__vwsnf19_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
+			::vl::__vwsn::This(this->__vwsn_precompile_11.Obj())->SetValueProperty(vl::Func(::vl_workflow_global::__vwsnf19_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_11.Obj())->SetTextProperty(LAMBDA(::vl_workflow_global::__vwsnf20_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
+			::vl::__vwsn::This(this->__vwsn_precompile_11.Obj())->SetTextProperty(vl::Func(::vl_workflow_global::__vwsnf20_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this)));
 		}
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_11.Obj())->SetSize(static_cast<::vl::vint>(120));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_11.Obj())->SetText(::vl::WString(L"项名及项值", false));
+			::vl::__vwsn::This(this->__vwsn_precompile_11.Obj())->SetText(::vl::WString::Unmanaged(L"项名及项值"));
 		}
 		{
 			auto __vwsn_collection_ = ::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueList>(::vl::__vwsn::This(this->listView)->GetColumns());
@@ -1394,7 +1258,7 @@ namespace Smbios
 			::vl::__vwsn::This(::vl::__vwsn::This(this->self)->GetContainerComposition())->AddChild(static_cast<::vl::presentation::compositions::GuiGraphicsComposition*>(this->__vwsn_precompile_0));
 		}
 		{
-			auto __vwsn_event_handler_ = LAMBDA(::vl_workflow_global::__vwsnf21_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this));
+			auto __vwsn_event_handler_ = vl::Func(::vl_workflow_global::__vwsnf21_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(this));
 			::vl::__vwsn::EventAttach(::vl::__vwsn::This(this->comboView)->SelectedIndexChanged, __vwsn_event_handler_);
 		}
 	}
@@ -1419,14 +1283,14 @@ namespace Smbios
 	{
 	}
 
-	/***********************************************************************
-	Class (::Smbios::ProductInfoPage)
-	***********************************************************************/
+/***********************************************************************
+Class (::Smbios::ProductInfoPage)
+***********************************************************************/
 
 	ProductInfoPage::ProductInfoPage()
 		: ::vl::presentation::controls::GuiTabPage(::vl::presentation::theme::ThemeName::CustomControl)
 	{
-		auto __vwsn_resource_ = ::vl::__vwsn::This(::vl::presentation::GetResourceManager())->GetResourceFromClassName(::vl::WString(L"Smbios::ProductInfoPage", false));
+		auto __vwsn_resource_ = ::vl::__vwsn::This(::vl::presentation::GetResourceManager())->GetResourceFromClassName(::vl::WString::Unmanaged(L"Smbios::ProductInfoPage"));
 		auto __vwsn_resolver_ = ::vl::Ptr<::vl::presentation::GuiResourcePathResolver>(new ::vl::presentation::GuiResourcePathResolver(__vwsn_resource_, ::vl::__vwsn::This(__vwsn_resource_.Obj())->GetWorkingDirectory()));
 		::vl::__vwsn::This(this)->SetResourceResolver(__vwsn_resolver_);
 		::vl::__vwsn::This(this)->__vwsn_Smbios_ProductInfoPage_Initialize(this);
@@ -1438,73 +1302,73 @@ namespace Smbios
 		auto tempData = ::vl::__vwsn::CreateObservableList();
 		if (Smbios::LenovoDisplay::IsLenovo())
 		{
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"机器名", Smbios::LenovoDisplay::GetMachineTypeFromSMbios().c_str(), 1, L"Version"));
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"机器名", Smbios::LenovoDisplay::GetMachineTypeFromSMbios().c_str(), 1, L"Version")));
 		}
 		else
 		{
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"机器名", Smbios::LenovoDisplay::GetMachineTypeFromSMbios().c_str(), 1, L"ProductName"));
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"机器名", Smbios::LenovoDisplay::GetMachineTypeFromSMbios().c_str(), 1, L"ProductName")));
 		}
 
-		tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"机器SN", Smbios::LenovoDisplay::GetSNFromSMbios().c_str(), 1, L"Serial Number"));
+		tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"机器SN", Smbios::LenovoDisplay::GetSNFromSMbios().c_str(), 1, L"Serial Number")));
 		if (Smbios::LenovoDisplay::IsLenovo())
 		{
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"机器MT", Smbios::LenovoDisplay::GetMachineType().c_str(), 1, L"ProductName"));
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"机器MTM", Smbios::LenovoDisplay::GetMachineTypeModel().c_str(), 200, L"MTM"));
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"机器MT", Smbios::LenovoDisplay::GetMachineType().c_str(), 1, L"ProductName")));
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"机器MTM", Smbios::LenovoDisplay::GetMachineTypeModel().c_str(), 200, L"MTM")));
 		}
-		tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"机器UUID", Smbios::LenovoDisplay::GetMachineUUID().c_str(), 1, L"UUID"));
+		tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"机器UUID", Smbios::LenovoDisplay::GetMachineUUID().c_str(), 1, L"UUID")));
 
 		try
 		{
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"CPU", utf8ToWstring(Smbios::GetType(Smbios::SmbiosHeaderType::Type4()).at(0).ProcessorVersion()).c_str(), 4, L"Processor Version"));
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"CPU", utf8ToWstring(Smbios::GetType(Smbios::SmbiosHeaderType::Type4()).at(0).ProcessorVersion()).c_str(), 4, L"Processor Version")));
 		}
 		catch (const std::exception&)
 		{
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"CPU", L"读取错误请检查SMbios", 4, L"Processor Version"));
-		}
-
-		try
-		{
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"CPU核心数", std::to_wstring(Smbios::GetType(Smbios::SmbiosHeaderType::Type4()).at(0).CoreCount()).c_str(), 4, L"Core Count"));
-		}
-		catch (const std::exception&)
-		{
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"CPU核心数", L"读取错误请检查SMbios", 4, L"Core Count"));
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"CPU", L"读取错误请检查SMbios", 4, L"Processor Version")));
 		}
 
 		try
 		{
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"逻辑处理器个数", std::to_wstring(Smbios::GetType(Smbios::SmbiosHeaderType::Type4()).at(0).ThreadCount()).c_str(), 4, L"Thread Count"));
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"CPU核心数", std::to_wstring(Smbios::GetType(Smbios::SmbiosHeaderType::Type4()).at(0).CoreCount()).c_str(), 4, L"Core Count")));
 		}
 		catch (const std::exception&)
 		{
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"逻辑处理器个数", L"读取错误请检查SMbios", 4, L"Thread Count"));
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"CPU核心数", L"读取错误请检查SMbios", 4, L"Core Count")));
 		}
 
 		try
 		{
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"主频", utf8ToWstring(Smbios::GetType(Smbios::SmbiosHeaderType::Type4()).at(0).MaxSpeed()).c_str(), 4, L"Max Speed"));
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"逻辑处理器个数", std::to_wstring(Smbios::GetType(Smbios::SmbiosHeaderType::Type4()).at(0).ThreadCount()).c_str(), 4, L"Thread Count")));
 		}
 		catch (const std::exception&)
 		{
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"主频", L"读取错误请检查SMbios", 4, L"Max Speed"));
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"逻辑处理器个数", L"读取错误请检查SMbios", 4, L"Thread Count")));
 		}
 
 		try
 		{
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"外频", utf8ToWstring(Smbios::GetType(Smbios::SmbiosHeaderType::Type4()).at(0).ExtClock()).c_str(), 4, L"External Clock"));
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"主频", utf8ToWstring(Smbios::GetType(Smbios::SmbiosHeaderType::Type4()).at(0).MaxSpeed()).c_str(), 4, L"Max Speed")));
 		}
 		catch (const std::exception&)
 		{
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"外频", L"读取错误请检查SMbios", 4, L"External Clock"));
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"主频", L"读取错误请检查SMbios", 4, L"Max Speed")));
 		}
 
 		try
 		{
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"内存数量", std::to_wstring(Smbios::GetType(Smbios::SmbiosHeaderType::Type17()).size()).c_str(), 17, L"Type17 Numbers"));
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"外频", utf8ToWstring(Smbios::GetType(Smbios::SmbiosHeaderType::Type4()).at(0).ExtClock()).c_str(), 4, L"External Clock")));
 		}
 		catch (const std::exception&)
 		{
-			tempData.Add(vl::MakePtr<DisplayDataToSmbiosData>(L"内存数量", L"读取错误请检查SMbios", 17, L"Type17 Numbers"));
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"外频", L"读取错误请检查SMbios", 4, L"External Clock")));
+		}
+
+		try
+		{
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"内存数量", std::to_wstring(Smbios::GetType(Smbios::SmbiosHeaderType::Type17()).size()).c_str(), 17, L"Type17 Numbers")));
+		}
+		catch (const std::exception&)
+		{
+			tempData.Add(::vl::Ptr(new DisplayDataToSmbiosData(L"内存数量", L"读取错误请检查SMbios", 17, L"Type17 Numbers")));
 		}
 
 		::vl::__vwsn::This(this->listView)->SetItemSource(::vl::Ptr<::vl::reflection::description::IValueEnumerable>(tempData.list));
@@ -1515,9 +1379,9 @@ namespace Smbios
 		this->FinalizeInstanceRecursively(static_cast<::vl::presentation::controls::GuiCustomControl*>(this));
 	}
 
-	/***********************************************************************
-	Class (::Smbios::SmbiosTypaDataItem)
-	***********************************************************************/
+/***********************************************************************
+Class (::Smbios::SmbiosTypaDataItem)
+***********************************************************************/
 
 	::vl::WString SmbiosTypaDataItem::GetDesc()
 	{
@@ -1536,7 +1400,11 @@ namespace Smbios
 
 	void SmbiosTypaDataItem::SetType(::vl::vint __vwsn_value_)
 	{
-		(this->__vwsn_prop_Type = __vwsn_value_);
+		if ((this->__vwsn_prop_Type != __vwsn_value_))
+		{
+			(this->__vwsn_prop_Type = __vwsn_value_);
+			::vl::__vwsn::EventInvoke(this->TypeChanged)();
+		}
 	}
 
 	::vl::vint64_t SmbiosTypaDataItem::GetAddress()
@@ -1546,71 +1414,30 @@ namespace Smbios
 
 	void SmbiosTypaDataItem::SetAddress(::vl::vint64_t __vwsn_value_)
 	{
-		(this->__vwsn_prop_Address = __vwsn_value_);
+		if ((this->__vwsn_prop_Address != __vwsn_value_))
+		{
+			(this->__vwsn_prop_Address = __vwsn_value_);
+			::vl::__vwsn::EventInvoke(this->AddressChanged)();
+		}
 	}
 
 	SmbiosTypaDataItem::SmbiosTypaDataItem()
-		: __vwsn_prop_Desc(::vl::WString(L"", false))
+		: __vwsn_prop_Desc(::vl::WString::Unmanaged(L""))
 		, __vwsn_prop_Type(static_cast<::vl::vint>(0))
 		, __vwsn_prop_Address(static_cast<::vl::vint64_t>(0L))
 	{
 	}
 
-	SmbiosTypaDataItem::SmbiosTypaDataItem(const ::vl::vint& type, const ::vl::WString& desc, const ::vl::vint64_t& addr)
-		: __vwsn_prop_Desc(::vl::WString(L"", false))
+	SmbiosTypaDataItem::SmbiosTypaDataItem(::vl::vint smbios_type, const ::vl::WString& desc, ::vl::vint64_t addr)
+		: __vwsn_prop_Desc(::vl::WString::Unmanaged(L""))
 		, __vwsn_prop_Type(static_cast<::vl::vint>(0))
 		, __vwsn_prop_Address(static_cast<::vl::vint64_t>(0L))
 	{
 		this->SetDesc(desc);
-		this->SetType(type);
+		this->SetType(smbios_type);
 		this->SetAddress(addr);
 	}
 
-	/***********************************************************************
-	Class (::Smbios::TextEditorConstructor)
-	***********************************************************************/
-
-	void TextEditorConstructor::__vwsn_Smbios_TextEditor_Initialize(::Smbios::TextEditor* __vwsn_this_)
-	{
-		(this->self = __vwsn_this_);
-		{
-			(this->textLabel = new ::vl::presentation::controls::GuiLabel(::vl::presentation::theme::ThemeName::Label));
-		}
-		{
-			::vl::__vwsn::This(this->self)->AddChild(static_cast<::vl::presentation::compositions::GuiGraphicsComposition*>(::vl::__vwsn::This(this->textLabel)->GetBoundsComposition()));
-		}
-		{
-			auto __vwsn_created_subscription_ = ::vl::Ptr<::vl::reflection::description::IValueSubscription>(new ::vl_workflow_global::__vwsnc7_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription(this));
-			::vl::__vwsn::EventAttach(::vl::__vwsn::This(__vwsn_created_subscription_.Obj())->ValueChanged, LAMBDA(::vl_workflow_global::__vwsnf23_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize_(this)));
-			::vl::__vwsn::This(__vwsn_this_)->AddSubscription(__vwsn_created_subscription_);
-		}
-		{
-			::vl::__vwsn::This(this->self)->SetFocusControl(static_cast<::vl::presentation::controls::GuiControl*>(this->textLabel));
-		}
-	}
-
-	TextEditorConstructor::TextEditorConstructor()
-		: self(static_cast<::Smbios::TextEditor*>(nullptr))
-		, textLabel(static_cast<::vl::presentation::controls::GuiLabel*>(nullptr))
-	{
-	}
-
-	/***********************************************************************
-	Class (::Smbios::TextEditor)
-	***********************************************************************/
-
-	TextEditor::TextEditor()
-	{
-		auto __vwsn_resource_ = ::vl::__vwsn::This(::vl::presentation::GetResourceManager())->GetResourceFromClassName(::vl::WString(L"Smbios::TextEditor", false));
-		auto __vwsn_resolver_ = ::vl::Ptr<::vl::presentation::GuiResourcePathResolver>(new ::vl::presentation::GuiResourcePathResolver(__vwsn_resource_, ::vl::__vwsn::This(__vwsn_resource_.Obj())->GetWorkingDirectory()));
-		::vl::__vwsn::This(this)->SetResourceResolver(__vwsn_resolver_);
-		::vl::__vwsn::This(this)->__vwsn_Smbios_TextEditor_Initialize(this);
-	}
-
-	TextEditor::~TextEditor()
-	{
-		this->FinalizeInstanceRecursively(static_cast<::vl::presentation::templates::GuiTemplate*>(this));
-	}
 }
 #undef GLOBAL_SYMBOL
 #undef GLOBAL_NAME
@@ -1618,8 +1445,8 @@ namespace Smbios
 
 #if defined( _MSC_VER)
 #pragma warning(pop)
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
 #elif defined(__clang__)
 #pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC diagnostic pop
 #endif

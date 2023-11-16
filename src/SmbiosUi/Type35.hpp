@@ -20,7 +20,7 @@ namespace Smbios
 					Item->SetText(L"Description");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.Description()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -34,7 +34,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ManagementDeviceHandle();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -48,7 +48,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ComponentHandle();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -62,7 +62,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ThresholdHandle();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

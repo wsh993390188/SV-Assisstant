@@ -23,7 +23,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.NumofAdditionInfEntries() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -41,7 +41,7 @@ namespace Smbios
 							std::wostringstream oss;
 							oss << Handle;
 							SubItems.Add(oss.str().c_str());
-							Items.Add(Item);
+							Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 						}
 					}
 				}

@@ -14,15 +14,15 @@ namespace
 
 	const std::string ProcessorArchitectureTypesStrs[] =
 	{
-		u8"Reserved",
-		u8"IA32(x86)",
-		u8"x64(x86 - 64, Intel64, AMD64, EM64T)",
-		u8"Intel® Itanium® architecture",
-		u8"32 - bit ARM(Aarch32)",
-		u8"64 - bit ARM(Aarch64)",
-		u8"32 - bit RISC - V(RV32)",
-		u8"64 - bit RISC - V(RV64)",
-		u8"128 - bit RISC - V(RV128)"
+		U8("Reserved"),
+		U8("IA32(x86)"),
+		U8("x64(x86 - 64, Intel64, AMD64, EM64T)"),
+		U8("Intel® Itanium® architecture"),
+		U8("32 - bit ARM(Aarch32)"),
+		U8("64 - bit ARM(Aarch64)"),
+		U8("32 - bit RISC - V(RV32)"),
+		U8("64 - bit RISC - V(RV64)"),
+		U8("128 - bit RISC - V(RV128)")
 	};
 }
 

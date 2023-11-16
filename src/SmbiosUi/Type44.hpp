@@ -23,7 +23,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ReferencedHandle();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -39,7 +39,7 @@ namespace Smbios
 						Item->SetText(L"Processor-Specific Block");
 						decltype(auto) SubItems = Item->GetSubItems();
 						SubItems.Add(oss.str().c_str());
-						Items.Add(Item);
+						Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 					}
 				}
 				catch (const std::exception&)

@@ -38,7 +38,7 @@ namespace Smbios
 						Item->SetText(L"Error Detecting Method");
 						decltype(auto) SubItems = Item->GetSubItems();
 						SubItems.Add(DeviceInformationToString(Device).c_str());
-						Items.Add(Item);
+						Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 					}
 				}
 				catch (const std::exception&)

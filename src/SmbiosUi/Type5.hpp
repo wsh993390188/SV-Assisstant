@@ -25,7 +25,7 @@ namespace Smbios
 					Item->SetText(L"Error Detecting Method");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.ErrorDetectingMethod()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -40,7 +40,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ErrorCorrectingCapability().Number + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -52,7 +52,7 @@ namespace Smbios
 					Item->SetText(L"Supported Interleave");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.SupportedInterleave()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -64,7 +64,7 @@ namespace Smbios
 					Item->SetText(L"Current Interleave");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.CurrentInterleave()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -78,7 +78,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.MaximumMemoryMoudulesize() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -92,7 +92,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.SupportedSpeeds().Number + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -106,7 +106,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.SupportedMemoryTypes().Number + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -120,7 +120,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.MemoryModuleVoltage().Number + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -134,7 +134,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.NumofMemorySlots() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -152,7 +152,7 @@ namespace Smbios
 							std::wostringstream oss;
 							oss << std::dec << Handle + 0 << std::endl;
 							SubItems.Add(oss.str().c_str());
-							Items.Add(Item);
+							Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 						}
 					}
 				}
@@ -168,7 +168,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.EnabledErrorCorrectingCapabilities() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

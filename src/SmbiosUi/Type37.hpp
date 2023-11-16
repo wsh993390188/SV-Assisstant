@@ -20,7 +20,7 @@ namespace Smbios
 					Item->SetText(L"Channel Type");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.ChannelType()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -34,7 +34,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.MaximumChannelLoad() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -48,7 +48,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.MemoryDeviceCount() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -66,7 +66,7 @@ namespace Smbios
 							Item->SetText(L"Memory Devices");
 							decltype(auto) SubItems = Item->GetSubItems();
 							SubItems.Add(oss.str().c_str());
-							Items.Add(Item);
+							Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 						}
 					}
 				}

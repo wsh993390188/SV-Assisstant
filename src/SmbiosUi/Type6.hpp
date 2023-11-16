@@ -20,7 +20,7 @@ namespace Smbios
 					Item->SetText(L"Socket Designation");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.SocketDesignation()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -34,7 +34,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.BankConnections() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -48,7 +48,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.CurrentSpeed() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -62,7 +62,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.CurrentMemoryTypes().Number;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -76,7 +76,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.InstalledSize() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -90,7 +90,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.EnabledSize() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -104,7 +104,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ErrorStatus() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

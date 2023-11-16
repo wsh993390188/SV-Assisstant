@@ -80,7 +80,7 @@ namespace Smbios
 				Item->SetText(L"Manufacturer");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.Manufacturer()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -91,7 +91,7 @@ namespace Smbios
 				Item->SetText(L"Enclosure Type");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.Type()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -103,7 +103,7 @@ namespace Smbios
 				Item->SetText(L"Version");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.Version()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -115,7 +115,7 @@ namespace Smbios
 				Item->SetText(L"Serial Number");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.SerialNumber()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -127,7 +127,7 @@ namespace Smbios
 				Item->SetText(L"Asset Tag Number");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.AssetTag()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -139,7 +139,7 @@ namespace Smbios
 				Item->SetText(L"Boot-Up State");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(Type3EnumStatusTypeToString(Type.BootUpState()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -151,7 +151,7 @@ namespace Smbios
 				Item->SetText(L"Power Supply State");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(Type3EnumStatusTypeToString(Type.PowerSupplyState()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -163,7 +163,7 @@ namespace Smbios
 				Item->SetText(L"Thermal State");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(Type3EnumStatusTypeToString(Type.ThermalState()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -175,7 +175,7 @@ namespace Smbios
 				Item->SetText(L"Security State");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(Type3EnumSecurityStatusTypeToString(Type.SecurityState()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -189,7 +189,7 @@ namespace Smbios
 				std::wostringstream oss;
 				oss << std::dec << Type.OEMDefined();
 				SubItems.Add(oss.str().c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -203,7 +203,7 @@ namespace Smbios
 				std::wostringstream oss;
 				oss << std::dec << Type.Height() + 0;
 				SubItems.Add(oss.str().c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -217,7 +217,7 @@ namespace Smbios
 				std::wostringstream oss;
 				oss << std::dec << Type.NumberofPowerCords() + 0;
 				SubItems.Add(oss.str().c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -231,7 +231,7 @@ namespace Smbios
 				std::wostringstream oss;
 				oss << std::dec << Type.ContainedElementCount() + 0;
 				SubItems.Add(oss.str().c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -245,7 +245,7 @@ namespace Smbios
 				std::wostringstream oss;
 				oss << std::dec << Type.ContainedElementRecordLength() + 0;
 				SubItems.Add(oss.str().c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -263,7 +263,7 @@ namespace Smbios
 						Item->SetText(L"Contained Element");
 						decltype(auto) SubItems = Item->GetSubItems();
 						SubItems.Add(oss.str().c_str());
-						Items.Add(Item);
+						Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 					}
 				}
 			}
@@ -277,7 +277,7 @@ namespace Smbios
 				Item->SetText(L"SKU Number");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.SKUNumber()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{

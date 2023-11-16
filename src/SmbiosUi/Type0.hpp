@@ -19,7 +19,7 @@ namespace Smbios
 				Item->SetText(L"Vendor");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.VendorName()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -31,7 +31,7 @@ namespace Smbios
 				Item->SetText(L"Version");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.BiosVersion()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -45,7 +45,7 @@ namespace Smbios
 				std::wostringstream oss;
 				oss << L"0x" << std::setw(4) << std::setfill(L'0') << std::hex << Type.BiosStartAddress();
 				SubItems.Add(oss.str().c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -57,7 +57,7 @@ namespace Smbios
 				Item->SetText(L"Release Date");
 				decltype(auto) SubItems = Item->GetSubItems();
 				SubItems.Add(utf8ToWstring(Type.BiosRelease()).c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -71,7 +71,7 @@ namespace Smbios
 				std::wostringstream oss;
 				oss << std::dec << Type.BiosROMSize() << " KB";
 				SubItems.Add(oss.str().c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -86,7 +86,7 @@ namespace Smbios
 				std::wostringstream oss;
 				oss << L"0x" << std::hex << std::setw(16) << std::setfill(L'0') << Type.BIOSCharacteristics();
 				SubItems.Add(oss.str().c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -100,7 +100,7 @@ namespace Smbios
 				std::wostringstream oss;
 				oss << L"0x" << std::hex << std::setw(4) << std::setfill(L'0') << Type.BIOSCharacteristicsExtension();
 				SubItems.Add(oss.str().c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -114,7 +114,7 @@ namespace Smbios
 				std::wostringstream oss;
 				oss << std::dec << Type.BiosMajorRelease() + 0 << "." << Type.BiosMinorRelease() + 0;
 				SubItems.Add(oss.str().c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -128,7 +128,7 @@ namespace Smbios
 				std::wostringstream oss;
 				oss << std::dec << Type.EC_MajorRelease() + 0 << "." << Type.EC_MinorRelease() + 0;
 				SubItems.Add(oss.str().c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{
@@ -142,7 +142,7 @@ namespace Smbios
 				std::wostringstream oss;
 				oss << L"0x" << std::hex << std::setw(4) << std::setfill(L'0') << Type.BiosROMExtended();
 				SubItems.Add(oss.str().c_str());
-				Items.Add(Item);
+				Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 			}
 			catch (const std::exception&)
 			{

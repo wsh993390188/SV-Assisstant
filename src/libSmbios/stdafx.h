@@ -19,6 +19,8 @@
 #include <vector>
 #include <algorithm>
 
+#include "char8_t-remediation.h"
+
 #include "StringSplit.hpp"
 #include "Exception.hpp"
 #include "SmbiosDefination.h"

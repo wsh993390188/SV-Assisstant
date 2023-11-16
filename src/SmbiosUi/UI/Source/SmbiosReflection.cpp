@@ -12,12 +12,11 @@ https://github.com/vczh-libraries
 #if defined( _MSC_VER)
 #pragma warning(push)
 #pragma warning(disable:4250)
-#elif defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wparentheses-equality"
 #elif defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wparentheses-equality"
+#elif defined(__GNUC__)
+#pragma GCC diagnostic push
 #endif
 
 /***********************************************************************
@@ -39,9 +38,8 @@ namespace vl
 			IMPL_CPP_TYPE_INFO(Smbios::ProductInfoPage)
 			IMPL_CPP_TYPE_INFO(Smbios::ProductInfoPageConstructor)
 			IMPL_CPP_TYPE_INFO(Smbios::SmbiosTypaDataItem)
-			IMPL_CPP_TYPE_INFO(Smbios::TextEditor)
-			IMPL_CPP_TYPE_INFO(Smbios::TextEditorConstructor)
 
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 #define _ ,
 			BEGIN_CLASS_MEMBER(::Smbios::DataGridTabPage)
 				CLASS_MEMBER_BASE(::vl::presentation::controls::GuiTabPage)
@@ -80,7 +78,7 @@ namespace vl
 			BEGIN_CLASS_MEMBER(::Smbios::DisplayDataToSmbiosData)
 				CLASS_MEMBER_BASE(::vl::reflection::DescriptableObject)
 				CLASS_MEMBER_CONSTRUCTOR(::vl::Ptr<::Smbios::DisplayDataToSmbiosData>(), NO_PARAMETER)
-				CLASS_MEMBER_CONSTRUCTOR(::vl::Ptr<::Smbios::DisplayDataToSmbiosData>(const ::vl::WString&, const ::vl::WString&, const ::vl::WString&), { L"desc" _ L"display" _ L"value" })
+				CLASS_MEMBER_CONSTRUCTOR(::vl::Ptr<::Smbios::DisplayDataToSmbiosData>(const ::vl::WString&, const ::vl::WString&, ::vl::vint, const ::vl::WString&), { L"desc" _ L"display" _ L"smbios_type" _ L"value" })
 				CLASS_MEMBER_METHOD(GetDesc, NO_PARAMETER)
 				CLASS_MEMBER_METHOD(GetDisplay, NO_PARAMETER)
 				CLASS_MEMBER_METHOD(GetSmbiosType, NO_PARAMETER)
@@ -89,13 +87,14 @@ namespace vl
 				CLASS_MEMBER_METHOD(SetDisplay, { L"__vwsn_value_" })
 				CLASS_MEMBER_METHOD(SetSmbiosType, { L"__vwsn_value_" })
 				CLASS_MEMBER_METHOD(SetSmbiosTypeValue, { L"__vwsn_value_" })
+				CLASS_MEMBER_EVENT(SmbiosTypeChanged)
 				CLASS_MEMBER_FIELD(__vwsn_prop_Desc)
 				CLASS_MEMBER_FIELD(__vwsn_prop_Display)
 				CLASS_MEMBER_FIELD(__vwsn_prop_SmbiosType)
 				CLASS_MEMBER_FIELD(__vwsn_prop_SmbiosTypeValue)
 				CLASS_MEMBER_PROPERTY(Desc, GetDesc, SetDesc)
 				CLASS_MEMBER_PROPERTY(Display, GetDisplay, SetDisplay)
-				CLASS_MEMBER_PROPERTY(SmbiosType, GetSmbiosType, SetSmbiosType)
+				CLASS_MEMBER_PROPERTY_EVENT(SmbiosType, GetSmbiosType, SetSmbiosType, SmbiosTypeChanged)
 				CLASS_MEMBER_PROPERTY(SmbiosTypeValue, GetSmbiosTypeValue, SetSmbiosTypeValue)
 			END_CLASS_MEMBER(::Smbios::DisplayDataToSmbiosData)
 
@@ -149,34 +148,22 @@ namespace vl
 			BEGIN_CLASS_MEMBER(::Smbios::SmbiosTypaDataItem)
 				CLASS_MEMBER_BASE(::vl::reflection::DescriptableObject)
 				CLASS_MEMBER_CONSTRUCTOR(::vl::Ptr<::Smbios::SmbiosTypaDataItem>(), NO_PARAMETER)
-				CLASS_MEMBER_CONSTRUCTOR(::vl::Ptr<::Smbios::SmbiosTypaDataItem>(const ::vl::WString&), { L"desc" })
+				CLASS_MEMBER_CONSTRUCTOR(::vl::Ptr<::Smbios::SmbiosTypaDataItem>(::vl::vint, const ::vl::WString&, ::vl::vint64_t), { L"smbios_type" _ L"desc" _ L"addr" })
 				CLASS_MEMBER_METHOD(GetAddress, NO_PARAMETER)
 				CLASS_MEMBER_METHOD(GetDesc, NO_PARAMETER)
 				CLASS_MEMBER_METHOD(GetType, NO_PARAMETER)
 				CLASS_MEMBER_METHOD(SetAddress, { L"__vwsn_value_" })
 				CLASS_MEMBER_METHOD(SetDesc, { L"__vwsn_value_" })
 				CLASS_MEMBER_METHOD(SetType, { L"__vwsn_value_" })
+				CLASS_MEMBER_EVENT(AddressChanged)
+				CLASS_MEMBER_EVENT(TypeChanged)
 				CLASS_MEMBER_FIELD(__vwsn_prop_Address)
 				CLASS_MEMBER_FIELD(__vwsn_prop_Desc)
 				CLASS_MEMBER_FIELD(__vwsn_prop_Type)
-				CLASS_MEMBER_PROPERTY(Address, GetAddress, SetAddress)
+				CLASS_MEMBER_PROPERTY_EVENT(Address, GetAddress, SetAddress, AddressChanged)
 				CLASS_MEMBER_PROPERTY(Desc, GetDesc, SetDesc)
-				CLASS_MEMBER_PROPERTY(Type, GetType, SetType)
+				CLASS_MEMBER_PROPERTY_EVENT(Type, GetType, SetType, TypeChanged)
 			END_CLASS_MEMBER(::Smbios::SmbiosTypaDataItem)
-
-			BEGIN_CLASS_MEMBER(::Smbios::TextEditor)
-				CLASS_MEMBER_BASE(::vl::presentation::templates::GuiGridEditorTemplate)
-				CLASS_MEMBER_BASE(::Smbios::TextEditorConstructor)
-				CLASS_MEMBER_CONSTRUCTOR(::Smbios::TextEditor*(), NO_PARAMETER)
-			END_CLASS_MEMBER(::Smbios::TextEditor)
-
-			BEGIN_CLASS_MEMBER(::Smbios::TextEditorConstructor)
-				CLASS_MEMBER_BASE(::vl::reflection::DescriptableObject)
-				CLASS_MEMBER_CONSTRUCTOR(::vl::Ptr<::Smbios::TextEditorConstructor>(), NO_PARAMETER)
-				CLASS_MEMBER_METHOD(__vwsn_Smbios_TextEditor_Initialize, { L"__vwsn_this_" })
-				CLASS_MEMBER_FIELD(self)
-				CLASS_MEMBER_FIELD(textLabel)
-			END_CLASS_MEMBER(::Smbios::TextEditorConstructor)
 
 #undef _
 			class SmbiosTypeLoader : public Object, public ITypeLoader
@@ -192,8 +179,6 @@ namespace vl
 					ADD_TYPE_INFO(::Smbios::ProductInfoPage)
 					ADD_TYPE_INFO(::Smbios::ProductInfoPageConstructor)
 					ADD_TYPE_INFO(::Smbios::SmbiosTypaDataItem)
-					ADD_TYPE_INFO(::Smbios::TextEditor)
-					ADD_TYPE_INFO(::Smbios::TextEditorConstructor)
 				}
 
 				void Unload(ITypeManager* manager)
@@ -201,13 +186,14 @@ namespace vl
 				}
 			};
 #endif
+#endif
 
 			bool LoadSmbiosTypes()
 			{
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 				if (auto manager = GetGlobalTypeManager())
 				{
-					return manager->AddTypeLoader(MakePtr<SmbiosTypeLoader>());
+					return manager->AddTypeLoader(Ptr(new SmbiosTypeLoader));
 				}
 #endif
 				return false;
@@ -218,8 +204,8 @@ namespace vl
 
 #if defined( _MSC_VER)
 #pragma warning(pop)
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
 #elif defined(__clang__)
 #pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC diagnostic pop
 #endif

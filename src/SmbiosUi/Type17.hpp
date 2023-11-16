@@ -22,7 +22,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.PhysicalMemoryArrayHandle();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -36,7 +36,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.MemoryErrorInformationHandle();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -50,7 +50,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.MemoryTotalWidth();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -64,7 +64,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.Datawidth();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -78,7 +78,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.Size();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -90,7 +90,7 @@ namespace Smbios
 					Item->SetText(L"Form Factor");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.FormFactor()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -104,7 +104,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.DeviceSet() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -116,7 +116,7 @@ namespace Smbios
 					Item->SetText(L"Device Locator");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.DeviceLocator()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -128,7 +128,7 @@ namespace Smbios
 					Item->SetText(L"Bank Locator");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.BankLocator()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -140,7 +140,7 @@ namespace Smbios
 					Item->SetText(L"Memory Type");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.MemoryType()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -154,7 +154,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.TypeDetail().Number;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -168,7 +168,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.Speed();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -180,7 +180,7 @@ namespace Smbios
 					Item->SetText(L"Manufacturer");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.Manufacturer()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -192,7 +192,7 @@ namespace Smbios
 					Item->SetText(L"Serial Number");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.SerialNumber()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -204,7 +204,7 @@ namespace Smbios
 					Item->SetText(L"Asset Tag");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.AssetTag()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -216,7 +216,7 @@ namespace Smbios
 					Item->SetText(L"Part Number");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.PartNumber()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -230,7 +230,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.Attributes().Number + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -244,7 +244,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ExtentedSize();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -258,7 +258,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ConfiguredMemoryClockSpeed();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -272,7 +272,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.MinimumVoltage();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -286,7 +286,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.MaximumVoltage();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -300,7 +300,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ConfiguredVoltage();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -312,7 +312,7 @@ namespace Smbios
 					Item->SetText(L"Memory Technology");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.MemoryTechnology()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -326,7 +326,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.MemoryOperatingModeCapability().Number;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -338,7 +338,7 @@ namespace Smbios
 					Item->SetText(L"Firmware Version");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.FirmwareVersion()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -352,7 +352,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ModuleManufacturerID();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -366,7 +366,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ModuleProductID();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -380,7 +380,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.MemorySubsystemControllerManufacturerID();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -394,7 +394,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.MemorySubsystemControllerProductID();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -408,7 +408,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.NonVolatileSize();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -422,7 +422,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.VolatileSize();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -436,7 +436,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.CacheSize();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -450,7 +450,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.LogicalSize();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -464,7 +464,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ExtendedSpeed();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -478,7 +478,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.ExtendedConfiguredMemorySpeed();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

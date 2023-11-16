@@ -25,7 +25,7 @@ namespace Smbios
 						Item->SetText(L"Boot Status");
 						decltype(auto) SubItems = Item->GetSubItems();
 						SubItems.Add(oss.str().c_str());
-						Items.Add(Item);
+						Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 					}
 				}
 				catch (const std::exception&)

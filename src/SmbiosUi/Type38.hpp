@@ -20,7 +20,7 @@ namespace Smbios
 					Item->SetText(L"Interface Type");
 					decltype(auto) SubItems = Item->GetSubItems();
 					SubItems.Add(utf8ToWstring(Type.InterfaceType()).c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -35,7 +35,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.IPMISpecRev().Number;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -49,7 +49,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << L"0x" << std::hex << std::setw(2) << std::setfill(L'0') << Type.I2CSlaveAddress() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -63,7 +63,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << L"0x" << std::hex << std::setw(2) << std::setfill(L'0') << Type.NVStorageDeviceAddress() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -77,7 +77,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << L"0x" << std::hex << std::setw(16) << std::setfill(L'0') << Type.BaseAddress();
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -91,7 +91,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.BaseAddressModInterrupt().Number;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{
@@ -105,7 +105,7 @@ namespace Smbios
 					std::wostringstream oss;
 					oss << std::dec << Type.InterruptNumber() + 0;
 					SubItems.Add(oss.str().c_str());
-					Items.Add(Item);
+					Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 				}
 				catch (const std::exception&)
 				{

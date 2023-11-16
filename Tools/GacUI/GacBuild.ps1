@@ -74,7 +74,7 @@ try {
     if (Test-Path -Path "$($FileName).log") {
         Remove-Item -Path "$($FileName).log" -Recurse | Out-Null
     }
-    New-Item -ItemType "directory" "$($FileName).log" | Out-Null
+    New-Item -ItemType Directory "$($FileName).log" | Out-Null
 
     EnumerateResourceFiles $FileName
     if (-not (Test-Path -Path "$($FileName).log\ResourceFiles.txt")) {

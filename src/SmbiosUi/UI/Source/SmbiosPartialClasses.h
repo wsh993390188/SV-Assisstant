@@ -18,12 +18,11 @@ https://github.com/vczh-libraries
 #if defined( _MSC_VER)
 #pragma warning(push)
 #pragma warning(disable:4250)
-#elif defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wparentheses-equality"
 #elif defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wparentheses-equality"
+#elif defined(__GNUC__)
+#pragma GCC diagnostic push
 #endif
 
 namespace vl_workflow_global
@@ -37,8 +36,6 @@ namespace vl_workflow_global
 	struct __vwsnf19_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_;
 	struct __vwsnf20_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_;
 	struct __vwsnf21_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_;
-	struct __vwsnf22_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize_;
-	struct __vwsnf23_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize_;
 	struct __vwsnf2_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_;
 	struct __vwsnf3_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_;
 	struct __vwsnf5_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_;
@@ -57,8 +54,6 @@ namespace vl_workflow_global
 	class __vwsnc4_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize__vl_presentation_controls_list_IDataSorter;
 	class __vwsnc5_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize__vl_presentation_controls_list_IDataSorter;
 	class __vwsnc6_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize__vl_presentation_controls_list_IDataSorter;
-	class __vwsnc7_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription;
-	class __vwsnc8_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription;
 }
 
 namespace Smbios
@@ -71,8 +66,6 @@ namespace Smbios
 	class ProductInfoPageConstructor;
 	class ProductInfoPage;
 	class SmbiosTypaDataItem;
-	class TextEditorConstructor;
-	class TextEditor;
 
 	class DataGridTabPageConstructor : public ::vl::Object, public ::vl::reflection::Description<DataGridTabPageConstructor>
 	{
@@ -86,7 +79,7 @@ namespace Smbios
 		friend struct ::vl_workflow_global::__vwsno1_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_Compare_;
 		friend struct ::vl_workflow_global::__vwsno4_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_Compare_;
 		friend struct ::vl_workflow_global::__vwsno8_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_;
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 		friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<DataGridTabPageConstructor>;
 #endif
 	protected:
@@ -128,7 +121,7 @@ namespace Smbios
 		friend struct ::vl_workflow_global::__vwsno1_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_Compare_;
 		friend struct ::vl_workflow_global::__vwsno4_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_Compare_;
 		friend struct ::vl_workflow_global::__vwsno8_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_;
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 		friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<DataGridTabPage>;
 #endif
 	protected:
@@ -138,7 +131,7 @@ namespace Smbios
 		void __vwsn_instance_ctor_();
 		~DataGridTabPage();
 
-		/* USER_CONTENT_BEGIN(custom members of ::Smbios::DataGridTabPage) */
+	/* USER_CONTENT_BEGIN(custom members of ::Smbios::DataGridTabPage) */
 		decltype(auto) GetTestList() const
 		{
 			return textList;
@@ -147,12 +140,12 @@ namespace Smbios
 		std::map<int, std::function<void(void*, decltype(textList))>> TypeFunctions;
 		std::string Vendor;
 		void CreateTextlistData();
-		/* USER_CONTENT_END() */
+	/* USER_CONTENT_END() */
 	};
 
 	class DisplayDataToSmbiosData : public ::vl::Object, public ::vl::reflection::Description<DisplayDataToSmbiosData>
 	{
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 		friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<DisplayDataToSmbiosData>;
 #endif
 	private:
@@ -170,18 +163,20 @@ namespace Smbios
 	public:
 		::vl::vint GetSmbiosType();
 		void SetSmbiosType(::vl::vint __vwsn_value_);
+		::vl::Event<void()> SmbiosTypeChanged;
 	private:
 		::vl::WString __vwsn_prop_SmbiosTypeValue;
 	public:
 		::vl::WString GetSmbiosTypeValue();
 		void SetSmbiosTypeValue(const ::vl::WString& __vwsn_value_);
 		DisplayDataToSmbiosData();
-		DisplayDataToSmbiosData(const ::vl::WString& desc, const ::vl::WString& display, const ::vl::vint& type, const ::vl::WString& value);
+		DisplayDataToSmbiosData(const ::vl::WString& desc, const ::vl::WString& display, ::vl::vint smbios_type, const ::vl::WString& value);
+		auto operator<=>(const DisplayDataToSmbiosData&) const = default;
 	};
 
 	class MainWindowConstructor : public ::vl::Object, public ::vl::reflection::Description<MainWindowConstructor>
 	{
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 		friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<MainWindowConstructor>;
 #endif
 	protected:
@@ -199,7 +194,7 @@ namespace Smbios
 	class MainWindow : public ::vl::presentation::controls::GuiWindow, public ::Smbios::MainWindowConstructor, public ::vl::reflection::Description<MainWindow>
 	{
 		friend class ::Smbios::MainWindowConstructor;
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 		friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<MainWindow>;
 #endif
 	public:
@@ -226,7 +221,7 @@ namespace Smbios
 		friend struct ::vl_workflow_global::__vwsno15_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_Compare_;
 		friend struct ::vl_workflow_global::__vwsno18_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_Compare_;
 		friend struct ::vl_workflow_global::__vwsno9_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_Compare_;
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 		friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<ProductInfoPageConstructor>;
 #endif
 	protected:
@@ -271,7 +266,7 @@ namespace Smbios
 		friend struct ::vl_workflow_global::__vwsno15_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_Compare_;
 		friend struct ::vl_workflow_global::__vwsno18_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_Compare_;
 		friend struct ::vl_workflow_global::__vwsno9_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_Compare_;
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 		friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<ProductInfoPage>;
 #endif
 	public:
@@ -282,7 +277,7 @@ namespace Smbios
 
 	class SmbiosTypaDataItem : public ::vl::Object, public ::vl::reflection::Description<SmbiosTypaDataItem>
 	{
-#ifndef VCZH_DEBUG_NO_REFLECTION
+#ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 		friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<SmbiosTypaDataItem>;
 #endif
 	private:
@@ -295,46 +290,18 @@ namespace Smbios
 	public:
 		::vl::vint GetType();
 		void SetType(::vl::vint __vwsn_value_);
+		::vl::Event<void()> TypeChanged;
 	private:
 		::vl::vint64_t __vwsn_prop_Address;
 	public:
 		::vl::vint64_t GetAddress();
 		void SetAddress(::vl::vint64_t __vwsn_value_);
+		::vl::Event<void()> AddressChanged;
 		SmbiosTypaDataItem();
-		SmbiosTypaDataItem(const ::vl::vint& type, const ::vl::WString& desc, const ::vl::vint64_t& addr);
+		SmbiosTypaDataItem(::vl::vint smbios_type, const ::vl::WString& desc, ::vl::vint64_t addr);
+		auto operator<=>(const SmbiosTypaDataItem&) const = default;
 	};
 
-	class TextEditorConstructor : public ::vl::Object, public ::vl::reflection::Description<TextEditorConstructor>
-	{
-		friend class ::vl_workflow_global::__vwsnc7_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription;
-		friend class ::vl_workflow_global::__vwsnc8_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription;
-		friend struct ::vl_workflow_global::__vwsnf22_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize_;
-		friend struct ::vl_workflow_global::__vwsnf23_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize_;
-#ifndef VCZH_DEBUG_NO_REFLECTION
-		friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<TextEditorConstructor>;
-#endif
-	protected:
-		::Smbios::TextEditor* self;
-		::vl::presentation::controls::GuiLabel* textLabel;
-		void __vwsn_Smbios_TextEditor_Initialize(::Smbios::TextEditor* __vwsn_this_);
-	public:
-		TextEditorConstructor();
-	};
-
-	class TextEditor : public ::vl::presentation::templates::GuiGridEditorTemplate, public ::Smbios::TextEditorConstructor, public ::vl::reflection::Description<TextEditor>
-	{
-		friend class ::Smbios::TextEditorConstructor;
-		friend class ::vl_workflow_global::__vwsnc7_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription;
-		friend class ::vl_workflow_global::__vwsnc8_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription;
-		friend struct ::vl_workflow_global::__vwsnf22_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize_;
-		friend struct ::vl_workflow_global::__vwsnf23_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize_;
-#ifndef VCZH_DEBUG_NO_REFLECTION
-		friend struct ::vl::reflection::description::CustomTypeDescriptorSelector<TextEditor>;
-#endif
-	public:
-		TextEditor();
-		~TextEditor();
-	};
 }
 /***********************************************************************
 Global Variables and Functions
@@ -349,9 +316,9 @@ namespace vl_workflow_global
 		static Smbios& Instance();
 	};
 
-	/***********************************************************************
-	Closures
-	***********************************************************************/
+/***********************************************************************
+Closures
+***********************************************************************/
 
 	struct __vwsnf10_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_
 	{
@@ -432,24 +399,6 @@ namespace vl_workflow_global
 		__vwsnf21_Smbios_Smbios_ProductInfoPageConstructor___vwsn_Smbios_ProductInfoPage_Initialize_(::Smbios::ProductInfoPageConstructor* __vwsnctorthis_0);
 
 		void operator()(::vl::presentation::compositions::GuiGraphicsComposition* sender, ::vl::presentation::compositions::GuiEventArgs* arguments) const;
-	};
-
-	struct __vwsnf22_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize_
-	{
-		::Smbios::TextEditorConstructor* __vwsnthis_0;
-
-		__vwsnf22_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize_(::Smbios::TextEditorConstructor* __vwsnctorthis_0);
-
-		void operator()(const ::vl::reflection::description::Value& __vwsn_value_) const;
-	};
-
-	struct __vwsnf23_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize_
-	{
-		::Smbios::TextEditorConstructor* __vwsnthis_0;
-
-		__vwsnf23_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize_(::Smbios::TextEditorConstructor* __vwsnctorthis_0);
-
-		void operator()(const ::vl::reflection::description::Value& __vwsn_value_) const;
 	};
 
 	struct __vwsnf2_Smbios_Smbios_DataGridTabPageConstructor___vwsn_Smbios_DataGridTabPage_Initialize_
@@ -632,53 +581,14 @@ namespace vl_workflow_global
 		void SetCallback(::vl::presentation::controls::list::IDataProcessorCallback* value) override;
 		::vl::vint Compare(const ::vl::reflection::description::Value& __vwsn_row1_, const ::vl::reflection::description::Value& __vwsn_row2_) override;
 	};
-
-	class __vwsnc7_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription : public ::vl::Object, public virtual ::vl::reflection::description::IValueSubscription
-	{
-	public:
-		::Smbios::TextEditorConstructor* __vwsnthis_0;
-
-		__vwsnc7_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription(::Smbios::TextEditorConstructor* __vwsnctorthis_0);
-
-		::Smbios::TextEditor* __vwsn_bind_cache_0 = nullptr;
-		::vl::Ptr<::vl::reflection::description::IEventHandler> __vwsn_bind_handler_0_0;
-		bool __vwsn_bind_opened_ = false;
-		bool __vwsn_bind_closed_ = false;
-		void __vwsn_bind_activator_();
-		void __vwsn_bind_callback_0_0(::vl::presentation::compositions::GuiGraphicsComposition* __vwsn_bind_callback_argument_0, ::vl::presentation::compositions::GuiEventArgs* __vwsn_bind_callback_argument_1);
-		bool Open() override;
-		bool Update() override;
-		bool Close() override;
-	};
-
-	class __vwsnc8_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription : public ::vl::Object, public virtual ::vl::reflection::description::IValueSubscription
-	{
-	public:
-		::Smbios::TextEditorConstructor* __vwsnthis_0;
-
-		__vwsnc8_Smbios_Smbios_TextEditorConstructor___vwsn_Smbios_TextEditor_Initialize__vl_reflection_description_IValueSubscription(::Smbios::TextEditorConstructor* __vwsnctorthis_0);
-
-		::vl::presentation::controls::GuiLabel* __vwsn_bind_cache_0 = nullptr;
-		::vl::Ptr<::vl::reflection::description::IEventHandler> __vwsn_bind_handler_0_0;
-		bool __vwsn_bind_opened_ = false;
-		bool __vwsn_bind_closed_ = false;
-		void __vwsn_bind_activator_();
-		void __vwsn_bind_callback_0_0(::vl::presentation::compositions::GuiGraphicsComposition* __vwsn_bind_callback_argument_0, ::vl::presentation::compositions::GuiEventArgs* __vwsn_bind_callback_argument_1);
-		bool Open() override;
-		bool Update() override;
-		bool Close() override;
-	};
 }
 
 #if defined( _MSC_VER)
 #pragma warning(pop)
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
 #elif defined(__clang__)
 #pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC diagnostic pop
 #endif
 
 #endif
-// UNUSED_USER_CONTENT:
-//		/* USER_CONTENT_BEGIN(custom members of ::Smbios::ProductInfoPage) */
-//		/* USER_CONTENT_END() */

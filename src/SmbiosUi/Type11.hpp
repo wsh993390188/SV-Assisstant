@@ -23,7 +23,7 @@ namespace Smbios
 						Item->SetText(L"OEM Strings");
 						decltype(auto) SubItems = Item->GetSubItems();
 						SubItems.Add(utf8ToWstring(str).c_str());
-						Items.Add(Item);
+						Items.Add(::vl::Ptr<::vl::presentation::controls::list::ListViewItem>(Item));
 					}
 				}
 				catch (const std::exception&)
