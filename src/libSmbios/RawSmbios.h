@@ -2,7 +2,7 @@
 
 namespace Smbios
 {
-	//存储二进制的SMBIOS，全局唯一
+	//瀛樺偍浜岃繘鍒剁殑SMBIOS锛屽叏灞�鍞竴
 	class RawSmbios
 	{
 	public:

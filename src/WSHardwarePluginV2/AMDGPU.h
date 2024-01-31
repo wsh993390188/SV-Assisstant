@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "GPUDeviceBase.h"
 namespace Hardware
 {
@@ -9,12 +9,12 @@ namespace Hardware
 		public:
 			AMDGPU(const GPUDevice& GpuData, std::unique_ptr<GPUAdapter>&& Adapter);
 
-			/// @brief ¹¹½¨&¸üĞÂGPUµÄĞÅÏ¢
-			/// @return Utf8 Json×Ö·û´®
+			/// @brief æ„å»º&æ›´æ–°GPUçš„ä¿¡æ¯
+			/// @return Utf8 Jsonå­—ç¬¦ä¸²
 			std::string UpdateGPUInfo() override final;
 
-			/// @brief ¹¹½¨GPUµÄĞÅÏ¢
-			/// @return Utf8 Json×Ö·û´®
+			/// @brief æ„å»ºGPUçš„ä¿¡æ¯
+			/// @return Utf8 Jsonå­—ç¬¦ä¸²
 			std::string GetGPUInfo() override final;
 		};
 	}

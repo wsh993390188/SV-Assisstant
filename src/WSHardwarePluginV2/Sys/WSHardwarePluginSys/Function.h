@@ -18,9 +18,9 @@ Kernel-mode Driver Framework
 
 /*************************************************
 Copyright:
-Author:王硕
+Author:鐜嬬
 Date:2017-10-19
-Description:实现对硬件的读写操作
+Description:瀹炵幇瀵圭‖浠剁殑璇诲啓鎿嶄綔
 **************************************************/
 #ifndef FUNCTION_H
 #define FUNCTION_H

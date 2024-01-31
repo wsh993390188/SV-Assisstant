@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "D3DKMTHelper.h"
 #include <devpkey.h>
 #include "DXGIGPUBase.h"
@@ -232,7 +232,7 @@ std::string Hardware::D3DKMTHelper::GetNodeEngineTypeString(
 		return "Crypto";
 
 	default:
-		spdlog::debug("unknown engine type : {}", NodeMetaData.NodeData.EngineType);
+		spdlog::debug("unknown engine type : {}", int(NodeMetaData.NodeData.EngineType));
 	}
 	return {};
 }
@@ -249,7 +249,7 @@ bool Hardware::D3DKMTHelper::UpdateNodeInformation(const LUID& AdapterLUID, cons
 		NewValue = queryStatistics.QueryResult.NodeInformation.GlobalInformation.RunningTime.QuadPart;
 	}
 
-	// Todo ¶ÔÓÅ»¯´úÂë×ö·ÖÎö,ÎªÉ¶²»¼ÓÕâ¾ä¾Í³öÃ«²¡
+	// Todo å¯¹ä¼˜åŒ–ä»£ç åšåˆ†æ,ä¸ºå•¥ä¸åŠ è¿™å¥å°±å‡ºæ¯›ç—…
 	const auto FKComplier = std::to_wstring(NodeId);
 	return true;
 }

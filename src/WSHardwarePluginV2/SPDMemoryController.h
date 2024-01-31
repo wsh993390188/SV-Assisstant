@@ -9,23 +9,23 @@ namespace Hardware
 		class SPDMemoryController : public GenericMemory
 		{
 		public:
-			/// @brief ³õÊ¼»¯ÄÚ´æÊı¾İ
+			/// @brief åˆå§‹åŒ–å†…å­˜æ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Initialize() override final;
 
-			/// @brief ¸üĞÂÄÚ´æÊı¾İ
+			/// @brief æ›´æ–°å†…å­˜æ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Update() override final;
 
-			/// @brief ĞòÁĞ»¯SPDµÄÊı¾İ
-			/// @return @ref Data::ErrorType Ä¬ÈÏ²»Ö§³Ö
+			/// @brief åºåˆ—åŒ–SPDçš„æ•°æ®
+			/// @return @ref Data::ErrorType é»˜è®¤ä¸æ”¯æŒ
 			Data::ErrorType SerializationSPD() override final;
 		private:
-			/// @brief »ñÈ¡SPDµÄĞÅÏ¢
+			/// @brief è·å–SPDçš„ä¿¡æ¯
 			/// @return @ref Data::ErrorType
 			Data::ErrorType GetSPDInformation();
 
-			/// @brief SMBUS¶ÁÈ¡¿ØÖÆÆ÷
+			/// @brief SMBUSè¯»å–æ§åˆ¶å™¨
 			std::unique_ptr<SMBUSControllerBase> SMBUSController;
 		};
 	}

@@ -10,116 +10,116 @@ namespace Hardware
 
 		/**********************************************************************
 		*@Function				RdIOPort
-		*@brief					¶ÁÈ¡IO PortµÄÖµ
-		*@author				ÍõË¶
+		*@brief					è¯»å–IO Portçš„å€¼
+		*@author				ç‹ç¡•
 		*@param
-			*@IO_Port_Addr		IN IO PortµÄµØÖ·
-			*@IO_DataSize		IN IO Êä³öÊı¾İµÄ´óĞ¡ 1¡¢2¡¢4£¨8¡¢16¡¢32bits£©
-			*@IO_Data			OUT Êä³öµÄIO PortÖĞµÄÖµ
+			*@IO_Port_Addr		IN IO Portçš„åœ°å€
+			*@IO_DataSize		IN IO è¾“å‡ºæ•°æ®çš„å¤§å° 1ã€2ã€4ï¼ˆ8ã€16ã€32bitsï¼‰
+			*@IO_Data			OUT è¾“å‡ºçš„IO Portä¸­çš„å€¼
 		*@return
-		*@BOOL				ÊÇ·ñ³É¹¦
+		*@BOOL				æ˜¯å¦æˆåŠŸ
 		**************************************************************************/
 		BOOL RdIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, OUT DWORD& IO_Data);
 
 		/**********************************************************************
 		*@Function				WrIOPort
-		*@brief				Ğ´ÈëIO PortµÄÖµ
-		*@author			ÍõË¶
+		*@brief				å†™å…¥IO Portçš„å€¼
+		*@author			ç‹ç¡•
 		*@param
-			*@IO_Data			IN ÊäÈëIO PortµÄÖµ
-			*@IO_DataSize		IN IO Êä³öÊı¾İµÄ´óĞ¡ 1¡¢2¡¢4£¨8¡¢16¡¢32bits£©
-		*@IO_Port_Addr		IN ÊäÈëIO PortµÄµØÖ·
+			*@IO_Data			IN è¾“å…¥IO Portçš„å€¼
+			*@IO_DataSize		IN IO è¾“å‡ºæ•°æ®çš„å¤§å° 1ã€2ã€4ï¼ˆ8ã€16ã€32bitsï¼‰
+		*@IO_Port_Addr		IN è¾“å…¥IO Portçš„åœ°å€
 		*@return
-			*@BOOL				ÊÇ·ñ³É¹¦ 0³É¹¦ ÆäËûÖµ Ê§°Ü
+			*@BOOL				æ˜¯å¦æˆåŠŸ 0æˆåŠŸ å…¶ä»–å€¼ å¤±è´¥
 		**************************************************************************/
 		BOOL WrIOPort(IN USHORT IO_Port_Addr, IN USHORT IO_DataSize, IN ULONG IO_Data);
 
 		/**************************************************
 		*@Function				RdMsr
-		*@brief					»ñÈ¡MSRµÄÖµ
-		*@author				ÍõË¶
+		*@brief					è·å–MSRçš„å€¼
+		*@author				ç‹ç¡•
 		*@param
-			*@Index				IN ÊäÈëMSRµÄË÷Òı
-			*@Data				OUT Êä³öMSRµÄÖµ£¬64Î»
+			*@Index				IN è¾“å…¥MSRçš„ç´¢å¼•
+			*@Data				OUT è¾“å‡ºMSRçš„å€¼ï¼Œ64ä½
 		*@return
-			*@BOOL				ÊÇ·ñ³É¹¦ 0³É¹¦ ÆäËûÖµ Ê§°Ü
+			*@BOOL				æ˜¯å¦æˆåŠŸ 0æˆåŠŸ å…¶ä»–å€¼ å¤±è´¥
 		***************************************************/
 		BOOL RdMsr(IN DWORD Index, OUT DWORD64& Data);
 
 		/**************************************************
 		*@Function				WrMsr
-		*@brief					Ğ´MSRµÄÖµ
-		*@author				ÍõË¶
+		*@brief					å†™MSRçš„å€¼
+		*@author				ç‹ç¡•
 		*@param
-			*@Index				IN ÊäÈëMSRµÄË÷Òı
-			*@Data				IN ĞèÒªĞ´ÈëMSRµÄÖµ£¬64Î»
+			*@Index				IN è¾“å…¥MSRçš„ç´¢å¼•
+			*@Data				IN éœ€è¦å†™å…¥MSRçš„å€¼ï¼Œ64ä½
 		*@return
-			*@BOOL				ÊÇ·ñ³É¹¦ 0³É¹¦ ÆäËûÖµ Ê§°Ü
+			*@BOOL				æ˜¯å¦æˆåŠŸ 0æˆåŠŸ å…¶ä»–å€¼ å¤±è´¥
 		***************************************************/
 		BOOL WrMsr(IN DWORD Index, IN DWORD64 Data);
 
 		/**************************************************
 		*@Function				RdTsc
-		*@brief					»ñÈ¡TSCµÄÖµ
-		*@author				ÍõË¶
+		*@brief					è·å–TSCçš„å€¼
+		*@author				ç‹ç¡•
 		*@param
-			*@Data				OUT Êä³öTSCµÄÖµ£¬64Î»
+			*@Data				OUT è¾“å‡ºTSCçš„å€¼ï¼Œ64ä½
 		*@return
-			*@BOOL				ÊÇ·ñ³É¹¦ 0³É¹¦ ÆäËûÖµ Ê§°Ü
+			*@BOOL				æ˜¯å¦æˆåŠŸ 0æˆåŠŸ å…¶ä»–å€¼ å¤±è´¥
 		***************************************************/
 		BOOL RdTsc(OUT DWORD64& Data);
 		/**************************************************************************
 		*@Function				RdMemory
-		*@brief					¶ÁÈ¡ÄÚ´æµÄÖµ
-		*@author				ÍõË¶
+		*@brief					è¯»å–å†…å­˜çš„å€¼
+		*@author				ç‹ç¡•
 		*@param
-			*@IO_Port_Addr		IN ÊäÈëMemoryµÄµØÖ·
-			*@IO_DataSize		IN Memory Êä³öÊı¾İµÄ´óĞ¡ 1¡¢2¡¢4£¨8¡¢16¡¢32bits)
-			*@IO_Data			OUT Êä³öµÄMemoryÖĞµÄÖµ
+			*@IO_Port_Addr		IN è¾“å…¥Memoryçš„åœ°å€
+			*@IO_DataSize		IN Memory è¾“å‡ºæ•°æ®çš„å¤§å° 1ã€2ã€4ï¼ˆ8ã€16ã€32bits)
+			*@IO_Data			OUT è¾“å‡ºçš„Memoryä¸­çš„å€¼
 		*@return
-			*@BOOL				ÊÇ·ñ³É¹¦ 0³É¹¦ ÆäËûÖµ Ê§°Ü
+			*@BOOL				æ˜¯å¦æˆåŠŸ 0æˆåŠŸ å…¶ä»–å€¼ å¤±è´¥
 		***************************************************************************/
 		BOOL RdMemory(IN LONGLONG Memory_Addr, IN USHORT Mem_DataSize, OUT ULONG& Memory_Data);
 
 		/***************************************************************************
 		*@Function				WrMemory
-		*@brief					Ğ´ÈëÄÚ´æµÄÖµ
-		*@author				ÍõË¶
+		*@brief					å†™å…¥å†…å­˜çš„å€¼
+		*@author				ç‹ç¡•
 		*@param
-			*@IO_Data			IN ÊäÈëMemoryµÄÖµ
-			*@IO_DataSize		IN Memory Êä³öÊı¾İµÄ´óĞ¡ 1¡¢2¡¢4£¨8¡¢16¡¢32bits£©
-			*@IO_Port_Addr		IN ÊäÈëMemoryµÄµØÖ·
+			*@IO_Data			IN è¾“å…¥Memoryçš„å€¼
+			*@IO_DataSize		IN Memory è¾“å‡ºæ•°æ®çš„å¤§å° 1ã€2ã€4ï¼ˆ8ã€16ã€32bitsï¼‰
+			*@IO_Port_Addr		IN è¾“å…¥Memoryçš„åœ°å€
 		*@return
-			*@BOOL				ÊÇ·ñ³É¹¦ 0³É¹¦ ÆäËûÖµ Ê§°Ü
+			*@BOOL				æ˜¯å¦æˆåŠŸ 0æˆåŠŸ å…¶ä»–å€¼ å¤±è´¥
 		******************************************************************************/
 		BOOL WrMemory(IN LONGLONG Memory_Addr, IN USHORT Mem_DataSize, IN ULONG Memory_Data);
 
 		/*************************************************
 		*@Function				ReadPci
-		*@brief					¶ÁPCIÅäÖÃ¿Õ¼äµÄÊı¾İ
-		*@author				ÍõË¶
+		*@brief					è¯»PCIé…ç½®ç©ºé—´çš„æ•°æ®
+		*@author				ç‹ç¡•
 		*@param
-			*@bus				IN ÊäÈëbusµÄÖµ
-			*@dev				IN ÊäÈëdevµÄÖµ
-			*@func				IN ÊäÈëfuncµÄÖµ
-			*@pci_config		OUT Êä³öPciÅäÖÃ¿Õ¼äµÄÊı¾İ
+			*@bus				IN è¾“å…¥busçš„å€¼
+			*@dev				IN è¾“å…¥devçš„å€¼
+			*@func				IN è¾“å…¥funcçš„å€¼
+			*@pci_config		OUT è¾“å‡ºPcié…ç½®ç©ºé—´çš„æ•°æ®
 		*@return
-			*@BOOL				ÊÇ·ñ³É¹¦ 0³É¹¦ ÆäËûÖµ Ê§°Ü
+			*@BOOL				æ˜¯å¦æˆåŠŸ 0æˆåŠŸ å…¶ä»–å€¼ å¤±è´¥
 		**************************************************/
 		BOOL ReadPci(IN USHORT bus, IN USHORT dev, IN USHORT func, IN USHORT offset, IN USHORT DataSize, OUT DWORD& pci_config);
 
 		/*************************************************
 		*@Function				WritePci
-		*@brief					Ğ´PCIÅäÖÃ¿Õ¼äµÄÊı¾İ
-		*@author				ÍõË¶
+		*@brief					å†™PCIé…ç½®ç©ºé—´çš„æ•°æ®
+		*@author				ç‹ç¡•
 		*@param
-			*@bus				IN ÊäÈëbusµÄÖµ
-			*@dev				IN ÊäÈëdevµÄÖµ
-			*@func				IN ÊäÈëfuncµÄÖµ
-			*@offset			IN ÊäÈëÒªĞ´ÈëÆ«ÒÆÁ¿µÄÖµ
-			*@Data				IN ÊäÈëÒªĞ´ÈëÊı¾İµÄÖµ
+			*@bus				IN è¾“å…¥busçš„å€¼
+			*@dev				IN è¾“å…¥devçš„å€¼
+			*@func				IN è¾“å…¥funcçš„å€¼
+			*@offset			IN è¾“å…¥è¦å†™å…¥åç§»é‡çš„å€¼
+			*@Data				IN è¾“å…¥è¦å†™å…¥æ•°æ®çš„å€¼
 		*@return
-			*@BOOL				ÊÇ·ñ³É¹¦ 0³É¹¦ ÆäËûÖµ Ê§°Ü
+			*@BOOL				æ˜¯å¦æˆåŠŸ 0æˆåŠŸ å…¶ä»–å€¼ å¤±è´¥
 		**************************************************/
 		BOOL WritePci(IN USHORT bus, IN USHORT dev, IN USHORT func, IN UCHAR offset, IN USHORT DataSize, IN ULONG Data);
 	private:

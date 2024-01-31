@@ -4,24 +4,24 @@ namespace Hardware
 {
 	namespace GPU
 	{
-		/// @brief NvidiaGPUĞÅÏ¢»ñÈ¡
+		/// @brief NvidiaGPUä¿¡æ¯è·å–
 		class NvidiaGpu : public GPUDeviceBase
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı¼ÓÔØNVAPI
-			/// @param GpuData GPUµÄ»ù´¡Êı¾İ
+			/// @brief æ„é€ å‡½æ•°åŠ è½½NVAPI
+			/// @param GpuData GPUçš„åŸºç¡€æ•°æ®
 			/// @param Adapter @ref GPUAdapter
 			NvidiaGpu(const GPUDevice& GpuData, std::unique_ptr<GPUAdapter>&& Adapter);
 
-			/// @brief Îö¹¹º¯ÊıĞ¶ÔØNVAPI
+			/// @brief ææ„å‡½æ•°å¸è½½NVAPI
 			~NvidiaGpu();
 
-			/// @brief ¹¹½¨&¸üĞÂGPUµÄĞÅÏ¢
-			/// @return Utf8 Json×Ö·û´®
+			/// @brief æ„å»º&æ›´æ–°GPUçš„ä¿¡æ¯
+			/// @return Utf8 Jsonå­—ç¬¦ä¸²
 			std::string UpdateGPUInfo() override final;
 
-			/// @brief ¹¹½¨GPUµÄĞÅÏ¢
-			/// @return Utf8 Json×Ö·û´®
+			/// @brief æ„å»ºGPUçš„ä¿¡æ¯
+			/// @return Utf8 Jsonå­—ç¬¦ä¸²
 			std::string GetGPUInfo() override final;
 		};
 	}

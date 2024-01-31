@@ -3,31 +3,31 @@ namespace Hardware
 {
 	namespace Battery
 	{
-		/// @brief µç³ØÍ¨ÓÃ³õÊ¼»¯º¯Êı
+		/// @brief ç”µæ± é€šç”¨åˆå§‹åŒ–å‡½æ•°
 		class GenericBattery
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı£¬ÓÃÓÚ³õÊ¼»¯µç³ØĞÅÏ¢
+			/// @brief æ„é€ å‡½æ•°ï¼Œç”¨äºåˆå§‹åŒ–ç”µæ± ä¿¡æ¯
 			GenericBattery() = default;
 
-			/// @brief ĞéÎö¹¹º¯Êı
+			/// @brief è™šææ„å‡½æ•°
 			virtual ~GenericBattery() = default;
 
-			/// @brief ³õÊ¼»¯µç³Ø
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief åˆå§‹åŒ–ç”µæ± 
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Initialize(std::string& response) = 0;
 
-			/// @brief ¸üĞÂµç³ØĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°ç”µæ± ä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ®
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Update(const std::string& Args, std::string& response) = 0;
 
-			/// @brief »ñÈ¡µç³Ø»ù´¡²Ù×÷
-			/// Json¸ñÊ½ {"BatteryId": 0}
-			/// @param[in] paramter JSON²ÎÊı
-			/// @param[out] response JSON»ØÓ¦
+			/// @brief è·å–ç”µæ± åŸºç¡€æ“ä½œ
+			/// Jsonæ ¼å¼ {"BatteryId": 0}
+			/// @param[in] paramter JSONå‚æ•°
+			/// @param[out] response JSONå›åº”
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType GetElements(LPCSTR paramter, std::string& response) = 0;
 		};

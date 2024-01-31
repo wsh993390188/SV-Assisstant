@@ -1,4 +1,4 @@
-// WSHardwarePluginV2.cpp : ¶¨Òå DLL Ó¦ÓÃ³ÌĞòµÄµ¼³öº¯Êı¡£
+// WSHardwarePluginV2.cpp : å®šä¹‰ DLL åº”ç”¨ç¨‹åºçš„å¯¼å‡ºå‡½æ•°ã€‚
 //
 
 #include "stdafx.h"
@@ -7,11 +7,11 @@
 #include <spdlog/sinks/basic_file_sink.h>
 #include "WSHardwarePluginV2.h"
 
-/// @brief Ö´ĞĞ¶¯×÷º¯Êı
-///			¸ù¾İ²»Í¬µÄ¶¯×÷ĞÅÏ¢£¬Ö´ĞĞ²»Í¬µÄ¹¦ÄÜ
-/// @param[in] action ±¾´Î²Ù×÷µÄ¶¯×÷ĞÅÏ¢
-/// @param[in] paramter ±¾´Î²Ù×÷µÄ²ÎÊıJSON¸ñÊ½ĞÅÏ¢
-/// @param[out] response ±¾²Ù×÷»ØÓ¦µÄJsonĞÅÏ¢
+/// @brief æ‰§è¡ŒåŠ¨ä½œå‡½æ•°
+///			æ ¹æ®ä¸åŒçš„åŠ¨ä½œä¿¡æ¯ï¼Œæ‰§è¡Œä¸åŒçš„åŠŸèƒ½
+/// @param[in] action æœ¬æ¬¡æ“ä½œçš„åŠ¨ä½œä¿¡æ¯
+/// @param[in] paramter æœ¬æ¬¡æ“ä½œçš„å‚æ•°JSONæ ¼å¼ä¿¡æ¯
+/// @param[out] response æœ¬æ“ä½œå›åº”çš„Jsonä¿¡æ¯
 /// @return
 ///			@ref Hardware::Data::ErrorType
 Hardware::Data::ErrorType PcmHardwareActionPaserStr(LPCSTR action, LPCSTR paramter, std::string& response)

@@ -2,14 +2,14 @@
 #include "SIOBase.h"
 namespace Hardware
 {
-	/// @brief SuperIOģ��
+	/// @brief SuperIO模块
 	namespace SIO
 	{
-		/// @brief ͨ�õ�SuperIO�Ľṹ
+		/// @brief 通用的SuperIO的结构
 		class SIOCommon : public SIOBase
 		{
 		public:
-			// ͨ�� SIOBase �̳�
+			// 通过 SIOBase 继承
 			virtual bool InitializeSIO(const USHORT& port) override final;
 			virtual bool DeInitializeSIO(const USHORT& port) override final;
 			virtual ~SIOCommon() = default;

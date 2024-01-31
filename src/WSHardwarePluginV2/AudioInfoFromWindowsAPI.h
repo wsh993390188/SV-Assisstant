@@ -1,24 +1,24 @@
-#pragma once
+ï»¿#pragma once
 #include "GenericAudio.h"
 namespace Hardware
 {
 	namespace Audio
 	{
-		/// @brief ÒÀ¾İWindows Audio Core API»ñÈ¡Éù¿¨ĞÅÏ¢
+		/// @brief ä¾æ®Windows Audio Core APIè·å–å£°å¡ä¿¡æ¯
 		class AudioInfoFromWindowsAPI final : public GenericAudio
 		{
 		public:
-			/// @brief ³õÊ¼»¯Audio Coreº¯Êı
+			/// @brief åˆå§‹åŒ–Audio Coreå‡½æ•°
 			AudioInfoFromWindowsAPI();
-			/// @brief ³õÊ¼»¯Ö÷°å¼°BIOSĞÅÏ¢
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
-			/// Ä¿Ç°À´ËµÎŞ·µ»ØÊı¾İ
+			/// @brief åˆå§‹åŒ–ä¸»æ¿åŠBIOSä¿¡æ¯
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
+			/// ç›®å‰æ¥è¯´æ— è¿”å›æ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Initialize(std::string& response) override final;
 
-			/// @brief ¸üĞÂÖ÷°åĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ Ôİ²»ÊÊÓÃ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°ä¸»æ¿ä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ® æš‚ä¸é€‚ç”¨
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Update(const std::string& Args, std::string& response) override final;
 		};

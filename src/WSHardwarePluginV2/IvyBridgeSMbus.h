@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 #include "BaseSMBUS.h"
 #include "MemoryHandle.h"
 namespace Hardware
 {
 	namespace Memory
 	{
-		/// @brief IvyBridge¼Ü¹¹ÏÂSMbus¿ØÖÆÆ÷
+		/// @brief IvyBridgeæ¶æ„ä¸‹SMbusæ§åˆ¶å™¨
 		class IvyBridgeSMbus final : public SMBUSControllerBase
 		{
 		public:
@@ -21,10 +21,10 @@ namespace Hardware
 			IvyBridgeDIMMId ConverterIdToDIMMId(const USHORT& DIMMId);
 			bool IsDeviceOnline(const IvyBridgeDIMMId& DIMMId);
 
-			/// @brief ¶ÁÈ¡²¢½âÎöSPDµÄĞÅÏ¢
+			/// @brief è¯»å–å¹¶è§£æSPDçš„ä¿¡æ¯
 			/// @param DIMMId DIMM Id
-			/// @param MemoryInfo SPDÍ¨ÓÃĞÅÏ¢
-			/// @return ½âÎöÊÇ·ñ³É¹¦
+			/// @param MemoryInfo SPDé€šç”¨ä¿¡æ¯
+			/// @return è§£ææ˜¯å¦æˆåŠŸ
 			bool ParserSPD(const USHORT& DIMMId, MemoryCommonInformation& MemoryInfo)override final;
 
 			bool ReadSPD(const USHORT& DIMMId, DDR3_Normal_Info& spd);

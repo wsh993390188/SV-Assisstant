@@ -4,31 +4,31 @@
 #include <string>
 namespace Hardware
 {
-	/// @brief ÄÚ´æµ÷¶È½Ó¿ÚÀà
+	/// @brief å†…å­˜è°ƒåº¦æ¥å£ç±»
 	class MemoryManager : public Interface::Manager
 	{
 	public:
-		/// @brief ÄÚ´æµ÷¶È½Ó¿Ú¹¹Ôìº¯Êı
+		/// @brief å†…å­˜è°ƒåº¦æ¥å£æ„é€ å‡½æ•°
 		MemoryManager();
-		/// @brief ³õÊ¼»¯ÃüÁî²Ù×÷
-		/// @param[in] paramter JSON²ÎÊı
-		/// @param[out] response JSON»ØÓ¦
+		/// @brief åˆå§‹åŒ–å‘½ä»¤æ“ä½œ
+		/// @param[in] paramter JSONå‚æ•°
+		/// @param[out] response JSONå›åº”
 		/// @return @ref Data::ErrorType
 		Data::ErrorType Init(LPCSTR paramter, std::string& response) override final;
 
-		/// @brief ¸üĞÂÊı¾İÃüÁî²Ù×÷
-		/// @param[in] paramter JSON²ÎÊı
-		/// @param[out] response JSON»ØÓ¦
+		/// @brief æ›´æ–°æ•°æ®å‘½ä»¤æ“ä½œ
+		/// @param[in] paramter JSONå‚æ•°
+		/// @param[out] response JSONå›åº”
 		/// @return @ref Data::ErrorType
 		Data::ErrorType Update(LPCSTR paramter, std::string& response) override final;
 
-		/// @brief »ñÈ¡ÃüÁî²Ù×÷
-		/// @param[in] paramter JSON²ÎÊı
-		/// @param[out] response JSON»ØÓ¦
+		/// @brief è·å–å‘½ä»¤æ“ä½œ
+		/// @param[in] paramter JSONå‚æ•°
+		/// @param[out] response JSONå›åº”
 		/// @return @ref Data::ErrorType
 		Data::ErrorType GetElements(LPCSTR paramter, std::string& response) override final;
 	private:
-		/// @brief ÄÚ´æĞÅÏ¢ÊµÏÖÆ÷
+		/// @brief å†…å­˜ä¿¡æ¯å®ç°å™¨
 		std::unique_ptr<Memory::GenericMemory> MemoryControl;
 	private:
 	};

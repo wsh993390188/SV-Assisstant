@@ -169,7 +169,7 @@ namespace vl
 #ifdef VCZH_DESCRIPTABLEOBJECT_WITH_METADATA
 				if (auto manager = GetGlobalTypeManager())
 				{
-					return manager->AddTypeLoader(MakePtr<HardwareTypeLoader>());
+					return manager->AddTypeLoader(Ptr(new HardwareTypeLoader));
 				}
 #endif
 				return false;

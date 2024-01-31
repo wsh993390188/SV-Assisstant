@@ -1,11 +1,11 @@
 /*!
 * @file StringSplit.hpp
-* @brief ·Ö¸î±ê×¼¿â×Ö·û´®
+* @brief åˆ†å‰²æ ‡å‡†åº“å­—ç¬¦ä¸²
 *
 *
-* @author ÍõË¶(wangshuo20@lenovo.com)
+* @author ç‹ç¡•(wangshuo20@lenovo.com)
 * @version 1.0
-* @date 2020Äê5ÔÂ29ÈÕ
+* @date 2020å¹´5æœˆ29æ—¥
 */
 #pragma once
 #include <iostream>
@@ -24,21 +24,21 @@ namespace Utils
 {
 	inline namespace
 	{
-		/// @brief ·Ö¸î±ê×¼¿â×Ö·û´®
-	/// @param[in] str ±»·Ö¸îµÄ×Ö·û´®
-	/// @param[in] delim ·Ö¸ô·û
-	/// @return ·µ»ØÒ»¸östd::vectorÈİÆ÷ÀïÃæÈİÄÉ±»·Ö¸îºóµÄ×Ö·û´®
+		/// @brief åˆ†å‰²æ ‡å‡†åº“å­—ç¬¦ä¸²
+	/// @param[in] str è¢«åˆ†å‰²çš„å­—ç¬¦ä¸²
+	/// @param[in] delim åˆ†éš”ç¬¦
+	/// @return è¿”å›ä¸€ä¸ªstd::vectorå®¹å™¨é‡Œé¢å®¹çº³è¢«åˆ†å‰²åçš„å­—ç¬¦ä¸²
 		template <typename CharT>
 		decltype(auto) split(const std::basic_string<CharT>& str,
 			const std::basic_string<CharT>& delim)
 		{
 			std::vector<std::basic_string<CharT>> strVec{};
 
-			// ¿Õ×Ö·û´®²»·Ö¸î
+			// ç©ºå­—ç¬¦ä¸²ä¸åˆ†å‰²
 			if (str.empty())
 				return strVec;
 
-			// ¿Õ·Ö¸ô·û²»·Ö¸î
+			// ç©ºåˆ†éš”ç¬¦ä¸åˆ†å‰²
 			if (delim.empty()) {
 				strVec.push_back(str);
 				return strVec;
@@ -47,7 +47,7 @@ namespace Utils
 			typename std::basic_string<CharT>::size_type start{};
 			typename std::basic_string<CharT>::size_type end{};
 
-			// ÕÒ²»µ½·Ö¸ô·ûÌí¼ÓÔ­Ê¼´®
+			// æ‰¾ä¸åˆ°åˆ†éš”ç¬¦æ·»åŠ åŸå§‹ä¸²
 			end = str.find(delim, start);
 			if (end == std::basic_string<CharT>::npos) {
 				strVec.push_back(str);
@@ -58,7 +58,7 @@ namespace Utils
 				start = end + delim.length();
 			}
 
-			// ²»¶Ï·Ö¸îÌí¼Ó×Ó´®µ½ÈİÆ÷
+			// ä¸æ–­åˆ†å‰²æ·»åŠ å­ä¸²åˆ°å®¹å™¨
 			while (end != std::basic_string<CharT>::npos) {
 				end = str.find(delim, start);
 				strVec.push_back(std::move(str.substr(start, (end - start))));
@@ -68,12 +68,12 @@ namespace Utils
 			return strVec;
 		}
 
-		/// @brief ±ê×¼¿â×Ö·û´®Ìæ»»¹¦ÄÜ
-		/// @tparam CharT ×Ö·û´®ÀàĞÍ
-		/// @param[in,out] str Ìæ»»µÄ×Ö·û´®
-		/// @param[in] from ±»Ìæ»»µÄ×Ö·û
-		/// @param[in] to Ìæ»»µÄ×Ö·û
-		/// @return ²Ù×÷ÊÇ·ñ³É¹¦
+		/// @brief æ ‡å‡†åº“å­—ç¬¦ä¸²æ›¿æ¢åŠŸèƒ½
+		/// @tparam CharT å­—ç¬¦ä¸²ç±»å‹
+		/// @param[in,out] str æ›¿æ¢çš„å­—ç¬¦ä¸²
+		/// @param[in] from è¢«æ›¿æ¢çš„å­—ç¬¦
+		/// @param[in] to æ›¿æ¢çš„å­—ç¬¦
+		/// @return æ“ä½œæ˜¯å¦æˆåŠŸ
 		template <typename CharT>
 		bool replace(std::basic_string<CharT>& str,
 			const std::basic_string<CharT>& from,
@@ -86,12 +86,12 @@ namespace Utils
 			return true;
 		}
 
-		/// @brief ±ê×¼¿â×Ö·û´®È«²¿Ìæ»»¹¦ÄÜ
-		/// @tparam CharT ×Ö·û´®ÀàĞÍ
-		/// @param[in,out] str Ìæ»»µÄ×Ö·û´®
-		/// @param[in] from ±»Ìæ»»µÄ×Ö·û
-		/// @param[in] to Ìæ»»µÄ×Ö·û
-		/// @return ²Ù×÷ÊÇ·ñ³É¹¦
+		/// @brief æ ‡å‡†åº“å­—ç¬¦ä¸²å…¨éƒ¨æ›¿æ¢åŠŸèƒ½
+		/// @tparam CharT å­—ç¬¦ä¸²ç±»å‹
+		/// @param[in,out] str æ›¿æ¢çš„å­—ç¬¦ä¸²
+		/// @param[in] from è¢«æ›¿æ¢çš„å­—ç¬¦
+		/// @param[in] to æ›¿æ¢çš„å­—ç¬¦
+		/// @return æ“ä½œæ˜¯å¦æˆåŠŸ
 		template <typename CharT>
 		bool replaceAll(std::basic_string<CharT>& str,
 			const std::basic_string<CharT>& from,
@@ -110,10 +110,10 @@ namespace Utils
 			return res;
 		}
 
-		/// @brief ¿í×Ö·û´®²»Çø·Ö´óĞ¡Ğ´±È½Ï
-		/// @param[in] a ±È½ÏµÄµÚÒ»¸ö×Ö·û´®
-		/// @param[in] b ±È½ÏµÄµÚ¶ş¸ö×Ö·û´®
-		/// @return Á½¸ö×Ö·û´®ÊÇ·ñÒ»ÖÂ
+		/// @brief å®½å­—ç¬¦ä¸²ä¸åŒºåˆ†å¤§å°å†™æ¯”è¾ƒ
+		/// @param[in] a æ¯”è¾ƒçš„ç¬¬ä¸€ä¸ªå­—ç¬¦ä¸²
+		/// @param[in] b æ¯”è¾ƒçš„ç¬¬äºŒä¸ªå­—ç¬¦ä¸²
+		/// @return ä¸¤ä¸ªå­—ç¬¦ä¸²æ˜¯å¦ä¸€è‡´
 		bool StringIsEqualsNoCase(
 			const std::wstring& a,
 			const std::wstring& b)
@@ -124,10 +124,10 @@ namespace Utils
 				return towlower(a) == towlower(b);
 			});
 		}
-		/// @brief ×Ö·û´®²»Çø·Ö´óĞ¡Ğ´±È½Ï
-		/// @param[in] a ±È½ÏµÄµÚÒ»¸ö×Ö·û´®
-		/// @param[in] b ±È½ÏµÄµÚ¶ş¸ö×Ö·û´®
-		/// @return Á½¸ö×Ö·û´®ÊÇ·ñÒ»ÖÂ
+		/// @brief å­—ç¬¦ä¸²ä¸åŒºåˆ†å¤§å°å†™æ¯”è¾ƒ
+		/// @param[in] a æ¯”è¾ƒçš„ç¬¬ä¸€ä¸ªå­—ç¬¦ä¸²
+		/// @param[in] b æ¯”è¾ƒçš„ç¬¬äºŒä¸ªå­—ç¬¦ä¸²
+		/// @return ä¸¤ä¸ªå­—ç¬¦ä¸²æ˜¯å¦ä¸€è‡´
 		bool StringIsEqualsNoCase(
 			const std::string& a,
 			const std::string& b)
@@ -139,10 +139,10 @@ namespace Utils
 			});
 		}
 
-		/// @brief ¿í×Ö·û´®×ªUtf8¸ñÊ½×Ö·û´®
-		/// ÓÉÓÚcodecvt_utf8ÔÚC++17ÖĞ±»ÆúÓÃ£¬ÔİÊ±Ã»ÕÒµ½Ìæ´ú·½Ê½
-		/// @param[in] str ¿í×Ö·û´®
-		/// @return Utf8¸ñÊ½×Ö·û´®
+		/// @brief å®½å­—ç¬¦ä¸²è½¬Utf8æ ¼å¼å­—ç¬¦ä¸²
+		/// ç”±äºcodecvt_utf8åœ¨C++17ä¸­è¢«å¼ƒç”¨ï¼Œæš‚æ—¶æ²¡æ‰¾åˆ°æ›¿ä»£æ–¹å¼
+		/// @param[in] str å®½å­—ç¬¦ä¸²
+		/// @return Utf8æ ¼å¼å­—ç¬¦ä¸²
 		std::string wstringToUtf8(const std::wstring& wstr)
 		{
 			std::string utf8line;
@@ -158,10 +158,10 @@ namespace Utils
 			return utf8line;
 		}
 
-		/// @brief Utf8¸ñÊ½×Ö·û´®×ª¿í×Ö·û´®
-		///			ÓÉÓÚcodecvt_utf8ÔÚC++17ÖĞ±»ÆúÓÃ£¬ÔİÊ±Ã»ÕÒµ½Ìæ´ú·½Ê½
-		/// @param[in] str Utf8×Ö·û´®
-		/// @return ¿í×Ö·û´®
+		/// @brief Utf8æ ¼å¼å­—ç¬¦ä¸²è½¬å®½å­—ç¬¦ä¸²
+		///			ç”±äºcodecvt_utf8åœ¨C++17ä¸­è¢«å¼ƒç”¨ï¼Œæš‚æ—¶æ²¡æ‰¾åˆ°æ›¿ä»£æ–¹å¼
+		/// @param[in] str Utf8å­—ç¬¦ä¸²
+		/// @return å®½å­—ç¬¦ä¸²
 
 		std::wstring utf8ToWstring(const std::string& str)
 		{

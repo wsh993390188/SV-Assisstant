@@ -2,26 +2,26 @@
 #include "SIOBase.h"
 namespace Hardware
 {
-	/// @brief SuperIOÄ£¿é
+	/// @brief SuperIOæ¨¡å—
 	namespace SIO
 	{
-		/// @brief SuperIOµÄÉú²úÕß
+		/// @brief SuperIOçš„ç”Ÿäº§è€…
 		class SIOFactory final
 		{
-			/// @brief ¹¹Ôìº¯Êı
+			/// @brief æ„é€ å‡½æ•°
 			SIOFactory();
 			SIOFactory(const SIOFactory&) = delete;
 			SIOFactory& operator=(const SIOFactory&) = delete;
 		public:
-			/// @brief µ¥ÀıµÄÈë¿Úº¯Êı
+			/// @brief å•ä¾‹çš„å…¥å£å‡½æ•°
 			/// @return
 			static SIOFactory& Instance();
 
-			/// @brief Ì½²âSIOµÄËùÊô³§ÉÌ
-			/// @return ÊÇ·ñ´æÔÚSIO
+			/// @brief æ¢æµ‹SIOçš„æ‰€å±å‚å•†
+			/// @return æ˜¯å¦å­˜åœ¨SIO
 			bool DetectSIO();
 		private:
-			/// @brief SIOµÄ½øÈë¶Ë¿Ú
+			/// @brief SIOçš„è¿›å…¥ç«¯å£
 			std::array<std::pair<USHORT, USHORT>, 2> SIOPort;
 			std::unique_ptr<SIOBase> SuperIO;
 		};

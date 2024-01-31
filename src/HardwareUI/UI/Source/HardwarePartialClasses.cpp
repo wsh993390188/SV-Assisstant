@@ -68,25 +68,25 @@ namespace
 /* USER_CONTENT_END() */
 
 BEGIN_GLOBAL_STORAGE_CLASS(vl_workflow_global_Hardware)
-vl_workflow_global::Hardware instance;
-INITIALIZE_GLOBAL_STORAGE_CLASS
-FINALIZE_GLOBAL_STORAGE_CLASS
+	vl_workflow_global::Hardware instance;
+	INITIALIZE_GLOBAL_STORAGE_CLASS
+	FINALIZE_GLOBAL_STORAGE_CLASS
 END_GLOBAL_STORAGE_CLASS(vl_workflow_global_Hardware)
 
 namespace vl_workflow_global
 {
-	/***********************************************************************
-	Global Functions
-	***********************************************************************/
+/***********************************************************************
+Global Functions
+***********************************************************************/
 
 	Hardware& Hardware::Instance()
 	{
 		return Getvl_workflow_global_Hardware().instance;
 	}
 
-	/***********************************************************************
-	Closures
-	***********************************************************************/
+/***********************************************************************
+Closures
+***********************************************************************/
 
 	//-------------------------------------------------------------------
 
@@ -208,11 +208,11 @@ namespace vl_workflow_global
 
 	bool __vwsnc1_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize__vl_reflection_description_IValueSubscription::Open()
 	{
-		if ((!__vwsn_bind_opened_))
+		if ((! __vwsn_bind_opened_))
 		{
 			(__vwsn_bind_opened_ = true);
-			(__vwsn_bind_cache_0 = [&]() { try { return __vwsnthis_0->self; } catch (...) { return static_cast<::Hardware::MainWindow*>(nullptr); } }());
-			(__vwsn_bind_handler_0_0 = [&]() { try { return ::vl::__vwsn::EventAttach(::vl::__vwsn::This(__vwsn_bind_cache_0)->CustomIconChanged, ::vl::Func<void()>(this, &__vwsnc1_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize__vl_reflection_description_IValueSubscription::__vwsn_bind_callback_0_0)); } catch (...) { return ::vl::Ptr<::vl::reflection::description::IEventHandler>(); } }());
+			(__vwsn_bind_cache_0 = [&](){ try{ return __vwsnthis_0->self; } catch(...){ return static_cast<::Hardware::MainWindow*>(nullptr); } }());
+			(__vwsn_bind_handler_0_0 = [&](){ try{ return ::vl::__vwsn::EventAttach(::vl::__vwsn::This(__vwsn_bind_cache_0)->CustomIconChanged, ::vl::Func<void()>(this, &__vwsnc1_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize__vl_reflection_description_IValueSubscription::__vwsn_bind_callback_0_0)); } catch(...){ return ::vl::Ptr<::vl::reflection::description::IEventHandler>(); } }());
 			return true;
 		}
 		return false;
@@ -220,7 +220,7 @@ namespace vl_workflow_global
 
 	bool __vwsnc1_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize__vl_reflection_description_IValueSubscription::Update()
 	{
-		if ((__vwsn_bind_opened_ && (!__vwsn_bind_closed_)))
+		if ((__vwsn_bind_opened_ && (! __vwsn_bind_closed_)))
 		{
 			this->__vwsn_bind_activator_();
 			return true;
@@ -230,7 +230,7 @@ namespace vl_workflow_global
 
 	bool __vwsnc1_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize__vl_reflection_description_IValueSubscription::Close()
 	{
-		if ((!__vwsn_bind_closed_))
+		if ((! __vwsn_bind_closed_))
 		{
 			(__vwsn_bind_closed_ = true);
 			if (static_cast<bool>(__vwsn_bind_handler_0_0))
@@ -244,6 +244,7 @@ namespace vl_workflow_global
 		}
 		return false;
 	}
+
 }
 
 /***********************************************************************
@@ -257,10 +258,10 @@ namespace Hardware
 		(this->self = __vwsn_this_);
 		(this->__vwsn_precompile_8 = ::vl::__vwsn::This(this->self)->GetBoundsComposition());
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_8)->SetPreferredMinSize([&]() { ::vl::presentation::Size __vwsn_temp__; __vwsn_temp__.x = static_cast<::vl::vint>(640); __vwsn_temp__.y = static_cast<::vl::vint>(480); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_8)->SetPreferredMinSize([&](){ ::vl::presentation::Size __vwsn_temp__; __vwsn_temp__.x = static_cast<::vl::vint>(640); __vwsn_temp__.y = static_cast<::vl::vint>(480); return __vwsn_temp__; }());
 		}
 		{
-			::vl::__vwsn::This(this->self)->SetClientSize([&]() { ::vl::presentation::Size __vwsn_temp__; __vwsn_temp__.x = static_cast<::vl::vint>(640); __vwsn_temp__.y = static_cast<::vl::vint>(480); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->self)->SetClientSize([&](){ ::vl::presentation::Size __vwsn_temp__; __vwsn_temp__.x = static_cast<::vl::vint>(640); __vwsn_temp__.y = static_cast<::vl::vint>(480); return __vwsn_temp__; }());
 		}
 		{
 			::vl::__vwsn::This(this->self)->SetText(::vl::WString::Unmanaged(L"Hardware"));
@@ -273,13 +274,13 @@ namespace Hardware
 			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetCellPadding(static_cast<::vl::vint>(5));
 		}
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetAlignmentToParent([&]() { ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(5); __vwsn_temp__.top = static_cast<::vl::vint>(5); __vwsn_temp__.right = static_cast<::vl::vint>(5); __vwsn_temp__.bottom = static_cast<::vl::vint>(5); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetAlignmentToParent([&](){ ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(5); __vwsn_temp__.top = static_cast<::vl::vint>(5); __vwsn_temp__.right = static_cast<::vl::vint>(5); __vwsn_temp__.bottom = static_cast<::vl::vint>(5); return __vwsn_temp__; }());
 		}
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetRowsAndColumns(static_cast<::vl::vint>(1), static_cast<::vl::vint>(2));
-			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetRowOption(static_cast<::vl::vint>(0), [&]() { ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Percentage; __vwsn_temp__.percentage = static_cast<double>(1.0); return __vwsn_temp__; }());
-			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetColumnOption(static_cast<::vl::vint>(0), [&]() { ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Absolute; __vwsn_temp__.absolute = static_cast<::vl::vint>(150); return __vwsn_temp__; }());
-			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetColumnOption(static_cast<::vl::vint>(1), [&]() { ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Percentage; __vwsn_temp__.percentage = static_cast<double>(1.0); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetRowOption(static_cast<::vl::vint>(0), [&](){ ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Percentage; __vwsn_temp__.percentage = static_cast<double>(1.0); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetColumnOption(static_cast<::vl::vint>(0), [&](){ ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Absolute; __vwsn_temp__.absolute = static_cast<::vl::vint>(150); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_0)->SetColumnOption(static_cast<::vl::vint>(1), [&](){ ::vl::presentation::compositions::GuiCellOption __vwsn_temp__; __vwsn_temp__.composeType = ::vl::presentation::compositions::GuiCellOption::ComposeType::Percentage; __vwsn_temp__.percentage = static_cast<double>(1.0); return __vwsn_temp__; }());
 		}
 		(this->__vwsn_precompile_1 = new ::vl::presentation::compositions::GuiCellComposition());
 		{
@@ -289,17 +290,17 @@ namespace Hardware
 			(this->bindableTreeView = new ::vl::presentation::controls::GuiBindableTreeView(::vl::presentation::theme::ThemeName::TreeView));
 		}
 		{
-			::vl::__vwsn::This(this->bindableTreeView)->SetChildrenProperty(LAMBDA(::vl_workflow_global::__vwsnf1_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(this)));
+			::vl::__vwsn::This(this->bindableTreeView)->SetChildrenProperty(vl::Func(::vl_workflow_global::__vwsnf1_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(this)));
 		}
 		{
-			::vl::__vwsn::This(this->bindableTreeView)->SetImageProperty(LAMBDA(::vl_workflow_global::__vwsnf2_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(this)));
+			::vl::__vwsn::This(this->bindableTreeView)->SetImageProperty(vl::Func(::vl_workflow_global::__vwsnf2_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(this)));
 		}
 		{
-			::vl::__vwsn::This(this->bindableTreeView)->SetTextProperty(LAMBDA(::vl_workflow_global::__vwsnf3_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(this)));
+			::vl::__vwsn::This(this->bindableTreeView)->SetTextProperty(vl::Func(::vl_workflow_global::__vwsnf3_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(this)));
 		}
 		(this->__vwsn_precompile_2 = ::vl::__vwsn::This(this->bindableTreeView)->GetBoundsComposition());
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_2)->SetAlignmentToParent([&]() { ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(0); __vwsn_temp__.top = static_cast<::vl::vint>(0); __vwsn_temp__.right = static_cast<::vl::vint>(0); __vwsn_temp__.bottom = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_2)->SetAlignmentToParent([&](){ ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(0); __vwsn_temp__.top = static_cast<::vl::vint>(0); __vwsn_temp__.right = static_cast<::vl::vint>(0); __vwsn_temp__.bottom = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
 		}
 		{
 			::vl::__vwsn::This(this->bindableTreeView)->SetVerticalAlwaysVisible(false);
@@ -336,7 +337,7 @@ namespace Hardware
 		}
 		(this->__vwsn_precompile_7 = ::vl::__vwsn::This(this->bindableListView)->GetBoundsComposition());
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_7)->SetAlignmentToParent([&]() { ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(0); __vwsn_temp__.top = static_cast<::vl::vint>(0); __vwsn_temp__.right = static_cast<::vl::vint>(0); __vwsn_temp__.bottom = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
+			::vl::__vwsn::This(this->__vwsn_precompile_7)->SetAlignmentToParent([&](){ ::vl::presentation::Margin __vwsn_temp__; __vwsn_temp__.left = static_cast<::vl::vint>(0); __vwsn_temp__.top = static_cast<::vl::vint>(0); __vwsn_temp__.right = static_cast<::vl::vint>(0); __vwsn_temp__.bottom = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
 		}
 		{
 			::vl::__vwsn::This(this->bindableListView)->SetVerticalAlwaysVisible(false);
@@ -349,7 +350,7 @@ namespace Hardware
 		}
 		(this->__vwsn_precompile_5 = ::vl::Ptr<::vl::presentation::controls::list::ListViewColumn>(new ::vl::presentation::controls::list::ListViewColumn()));
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_5.Obj())->SetTextProperty(LAMBDA(::vl_workflow_global::__vwsnf4_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(this)));
+			::vl::__vwsn::This(this->__vwsn_precompile_5.Obj())->SetTextProperty(vl::Func(::vl_workflow_global::__vwsnf4_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(this)));
 		}
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_5.Obj())->SetText(::vl::WString::Unmanaged(L"Name"));
@@ -360,7 +361,7 @@ namespace Hardware
 		}
 		(this->__vwsn_precompile_6 = ::vl::Ptr<::vl::presentation::controls::list::ListViewColumn>(new ::vl::presentation::controls::list::ListViewColumn()));
 		{
-			::vl::__vwsn::This(this->__vwsn_precompile_6.Obj())->SetTextProperty(LAMBDA(::vl_workflow_global::__vwsnf5_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(this)));
+			::vl::__vwsn::This(this->__vwsn_precompile_6.Obj())->SetTextProperty(vl::Func(::vl_workflow_global::__vwsnf5_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(this)));
 		}
 		{
 			::vl::__vwsn::This(this->__vwsn_precompile_6.Obj())->SetText(::vl::WString::Unmanaged(L"Description"));
@@ -379,11 +380,11 @@ namespace Hardware
 			::vl::__vwsn::This(::vl::__vwsn::This(this->self)->GetContainerComposition())->AddChild(static_cast<::vl::presentation::compositions::GuiGraphicsComposition*>(this->__vwsn_precompile_0));
 		}
 		{
-			::vl::__vwsn::EventAttach(::vl::__vwsn::This(this->bindableTreeView)->SelectionChanged, LAMBDA(::vl_workflow_global::__vwsno6_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(__vwsn_this_, this)));
+			::vl::__vwsn::EventAttach(::vl::__vwsn::This(this->bindableTreeView)->SelectionChanged, vl::Func(::vl_workflow_global::__vwsno6_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(__vwsn_this_, this)));
 		}
 		{
 			auto __vwsn_created_subscription_ = ::vl::Ptr<::vl::reflection::description::IValueSubscription>(new ::vl_workflow_global::__vwsnc1_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize__vl_reflection_description_IValueSubscription(this));
-			::vl::__vwsn::EventAttach(::vl::__vwsn::This(__vwsn_created_subscription_.Obj())->ValueChanged, LAMBDA(::vl_workflow_global::__vwsnf7_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(this)));
+			::vl::__vwsn::EventAttach(::vl::__vwsn::This(__vwsn_created_subscription_.Obj())->ValueChanged, vl::Func(::vl_workflow_global::__vwsnf7_Hardware_Hardware_MainWindowConstructor___vwsn_Hardware_MainWindow_Initialize_(this)));
 			::vl::__vwsn::This(__vwsn_this_)->AddSubscription(__vwsn_created_subscription_);
 		}
 		{
@@ -407,9 +408,9 @@ namespace Hardware
 	{
 	}
 
-	/***********************************************************************
-	Class (::Hardware::MainWindow)
-	***********************************************************************/
+/***********************************************************************
+Class (::Hardware::MainWindow)
+***********************************************************************/
 
 	::vl::Ptr<::vl::presentation::GuiImageData> MainWindow::GetCustomIcon()
 	{
@@ -469,7 +470,7 @@ namespace Hardware
 					{
 						for (const auto& Data : SocketDatas)
 						{
-							NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+							NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 						}
 					}
 					auto SocketDynamicDatas = HardwareWrapper::CPU::UpdateElements(SocketId.Obj()->GetId());
@@ -477,7 +478,7 @@ namespace Hardware
 					{
 						for (const auto& Data : SocketDynamicDatas)
 						{
-							NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+							NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 						}
 					}
 				}
@@ -492,7 +493,7 @@ namespace Hardware
 					{
 						for (const auto& Data : SocketDatas)
 						{
-							NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+							NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 						}
 					}
 				}
@@ -505,7 +506,7 @@ namespace Hardware
 					{
 						for (const auto& Data : GPUDatas)
 						{
-							NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+							NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 						}
 					}
 					auto GPUDynamicDatas = HardwareWrapper::GPU::UpdateElements(GpuId.Obj()->GetId());
@@ -513,7 +514,7 @@ namespace Hardware
 					{
 						for (const auto& Data : GPUDynamicDatas)
 						{
-							NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+							NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 						}
 					}
 				}
@@ -527,7 +528,7 @@ namespace Hardware
 						{
 							for (const auto& Data : DiskDatas)
 							{
-								NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+								NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 							}
 						}
 					}
@@ -538,7 +539,7 @@ namespace Hardware
 						{
 							for (const auto& Data : DiskDatas)
 							{
-								NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+								NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 							}
 						}
 					}
@@ -552,7 +553,7 @@ namespace Hardware
 					{
 						for (const auto& Data : MemoryDatas)
 						{
-							NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+							NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 						}
 					}
 					auto MemoryDynamicDatas = HardwareWrapper::Memory::UpdateElements(MemoryId.Obj()->GetId());
@@ -560,7 +561,7 @@ namespace Hardware
 					{
 						for (const auto& Data : MemoryDynamicDatas)
 						{
-							NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+							NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 						}
 					}
 				}
@@ -573,7 +574,7 @@ namespace Hardware
 					{
 						for (const auto& Data : BatteryDatas)
 						{
-							NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+							NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 						}
 					}
 				}
@@ -586,7 +587,7 @@ namespace Hardware
 					{
 						for (const auto& Data : MonitorDatas)
 						{
-							NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+							NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 						}
 					}
 				}
@@ -600,7 +601,7 @@ namespace Hardware
 						{
 							for (const auto& Data : Datas)
 							{
-								NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+								NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 							}
 						}
 					}
@@ -610,7 +611,7 @@ namespace Hardware
 						{
 							for (const auto& Data : Datas)
 							{
-								NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+								NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 							}
 						}
 					}
@@ -624,7 +625,7 @@ namespace Hardware
 					{
 						for (const auto& Data : BiosDatas)
 						{
-							NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+							NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 						}
 					}
 				}
@@ -637,7 +638,7 @@ namespace Hardware
 					{
 						for (const auto& Data : BroadDatas)
 						{
-							NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+							NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 						}
 					}
 				}
@@ -650,7 +651,7 @@ namespace Hardware
 					{
 						for (const auto& Data : AudioDatas)
 						{
-							NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+							NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 						}
 					}
 				}
@@ -663,7 +664,7 @@ namespace Hardware
 					{
 						for (const auto& Data : WinBioDatas)
 						{
-							NewList->Add(::vl::__vwsn::Box(::vl::MakePtr<::Hardware::UI::TreeViewItemData>(Data.first.c_str(), Data.second.c_str())));
+							NewList->Add(::vl::__vwsn::Box(::vl::Ptr(new ::Hardware::UI::TreeViewItemData(Data.first.c_str(), Data.second.c_str()))));
 						}
 					}
 				}
@@ -686,7 +687,7 @@ namespace Hardware
 
 	void MainWindow::__vwsn_instance_ctor_()
 	{
-		/* USER_CONTENT_BEGIN(::Hardware::MainWindow) */
+				/* USER_CONTENT_BEGIN(::Hardware::MainWindow) */
 		auto Root = ::vl::Ptr<::vl::presentation::controls::tree::MemoryNodeProvider>(new ::vl::presentation::controls::tree::MemoryNodeProvider(::vl::Ptr<::vl::reflection::DescriptableObject>(::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>(new ::vl::presentation::controls::tree::TreeViewItem()))));
 		auto CPUs = HardwareWrapper::CPU::InitializeCPU();
 		if (!CPUs.empty())
@@ -698,8 +699,8 @@ namespace Hardware
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
 							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"CPU " + std::to_wstring(Cpu.SocketID)).c_str()))))));
-				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"CPU"));
-				Item->SetInternalProperty(L"SocketProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(Cpu.SocketID));
+				Item->SetInternalProperty(L"Type", ::vl::Ptr(new ::vl::WString(L"CPU")));
+				Item->SetInternalProperty(L"SocketProp", ::vl::Ptr (new UI::HardwareTreeInternalProperty(Cpu.SocketID)));
 				for (const auto& Core : Cpu.Cores)
 				{
 					auto CoreItem = ::vl::Ptr<::vl::presentation::controls::tree::MemoryNodeProvider>(
@@ -710,12 +711,12 @@ namespace Hardware
 					auto ThreadList = ::vl::__vwsn::CreateObservableList();
 					for (const auto& ThreadId : Core.ThreadIds)
 					{
-						ThreadList.Add(::vl::MakePtr<UI::IntWrapper>(ThreadId));
+						ThreadList.Add(::vl::Ptr (new UI::IntWrapper(ThreadId)));
 					}
-					auto CorePtr = ::vl::MakePtr<UI::CPUCoreTreeInternalProperty>(Core.CoreId, Cpu.SocketID, ThreadList.list);
+					auto CorePtr = ::vl::Ptr (new UI::CPUCoreTreeInternalProperty(Core.CoreId, Cpu.SocketID, ThreadList.list));
 
 					CoreItem->SetInternalProperty(L"CoreProp", CorePtr);
-					CoreItem->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"Core"));
+					CoreItem->SetInternalProperty(L"Type", ::vl::Ptr (new ::vl::WString(L"Core")));
 					Item.Obj()->Children().Add(CoreItem);
 				}
 				Root->Children().Add(Item);
@@ -732,8 +733,8 @@ namespace Hardware
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
 							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"GPU " + std::to_wstring(Gpu.GPUId)).c_str()))))));
-				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"GPU"));
-				Item->SetInternalProperty(L"GPUProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(Gpu.GPUId));
+				Item->SetInternalProperty(L"Type", ::vl::Ptr(new ::vl::WString(L"GPU")));
+				Item->SetInternalProperty(L"GPUProp", ::vl::Ptr(new UI::HardwareTreeInternalProperty(Gpu.GPUId)));
 				Root->Children().Add(Item);
 			}
 		}
@@ -748,8 +749,8 @@ namespace Hardware
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
 							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Disk " + std::to_wstring(Disk.DiskId)).c_str()))))));
-				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"DISK"));
-				Item->SetInternalProperty(L"DiskProp", ::vl::MakePtr<DiskInternalProperty>(Disk));
+				Item->SetInternalProperty(L"Type", ::vl::Ptr(new ::vl::WString(L"DISK")));
+				Item->SetInternalProperty(L"DiskProp", ::vl::Ptr(new DiskInternalProperty(Disk)));
 				Root->Children().Add(Item);
 			}
 		}
@@ -764,8 +765,8 @@ namespace Hardware
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
 							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Memory " + std::to_wstring(MemoryId)).c_str()))))));
-				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"MEMORY"));
-				Item->SetInternalProperty(L"MemoryProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(MemoryId));
+				Item->SetInternalProperty(L"Type", ::vl::Ptr (new ::vl::WString(L"MEMORY")));
+				Item->SetInternalProperty(L"MemoryProp", ::vl::Ptr(new UI::HardwareTreeInternalProperty(MemoryId)));
 				Root->Children().Add(Item);
 			}
 		}
@@ -780,8 +781,8 @@ namespace Hardware
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
 							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Battery " + std::to_wstring(BatteryId)).c_str()))))));
-				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"BATTERY"));
-				Item->SetInternalProperty(L"BatteryProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(BatteryId));
+				Item->SetInternalProperty(L"Type", ::vl::Ptr(new ::vl::WString(L"BATTERY")));
+				Item->SetInternalProperty(L"BatteryProp", ::vl::Ptr(new UI::HardwareTreeInternalProperty(BatteryId)));
 				Root->Children().Add(Item);
 			}
 		}
@@ -796,8 +797,8 @@ namespace Hardware
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
 							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Monitor " + utf8_decode(MonitorId)).c_str()))))));
-				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"MONITOR"));
-				Item->SetInternalProperty(L"MonitorProp", ::vl::MakePtr<::vl::WString>(utf8_decode(MonitorId).c_str()));
+				Item->SetInternalProperty(L"Type", ::vl::Ptr(new ::vl::WString(L"MONITOR")));
+				Item->SetInternalProperty(L"MonitorProp", ::vl::Ptr(new ::vl::WString(utf8_decode(MonitorId).c_str())));
 				Root->Children().Add(Item);
 			}
 		}
@@ -812,8 +813,8 @@ namespace Hardware
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
 							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Network " + std::to_wstring(NICId)).c_str()))))));
-				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"NET"));
-				Item->SetInternalProperty(L"NetProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(NICId));
+				Item->SetInternalProperty(L"Type", ::vl::Ptr(new ::vl::WString(L"NET")));
+				Item->SetInternalProperty(L"NetProp", ::vl::Ptr(new UI::HardwareTreeInternalProperty(NICId)));
 				Root->Children().Add(Item);
 			}
 		}
@@ -828,8 +829,8 @@ namespace Hardware
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
 							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Bios " + std::to_wstring(BiosId)).c_str()))))));
-				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"BIOS"));
-				Item->SetInternalProperty(L"BiosProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(BiosId));
+				Item->SetInternalProperty(L"Type", ::vl::Ptr(new ::vl::WString(L"BIOS")));
+				Item->SetInternalProperty(L"BiosProp", ::vl::Ptr(new UI::HardwareTreeInternalProperty(BiosId)));
 				Root->Children().Add(Item);
 			}
 		}
@@ -844,8 +845,8 @@ namespace Hardware
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
 							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Mother Broad " + std::to_wstring(BroadId)).c_str()))))));
-				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"BROAD"));
-				Item->SetInternalProperty(L"BroadProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(BroadId));
+				Item->SetInternalProperty(L"Type", ::vl::Ptr(new ::vl::WString(L"BROAD")));
+				Item->SetInternalProperty(L"BroadProp", ::vl::Ptr(new UI::HardwareTreeInternalProperty(BroadId)));
 				Root->Children().Add(Item);
 			}
 		}
@@ -860,8 +861,8 @@ namespace Hardware
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
 							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Audio " + std::to_wstring(AudioId)).c_str()))))));
-				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"AUDIO"));
-				Item->SetInternalProperty(L"AudioProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(AudioId));
+				Item->SetInternalProperty(L"Type", ::vl::Ptr(new ::vl::WString(L"AUDIO")));
+				Item->SetInternalProperty(L"AudioProp", ::vl::Ptr(new UI::HardwareTreeInternalProperty(AudioId)));
 				Root->Children().Add(Item);
 			}
 		}
@@ -876,8 +877,8 @@ namespace Hardware
 						::vl::Ptr<::vl::reflection::DescriptableObject>(
 							::vl::Ptr<::vl::presentation::controls::tree::TreeViewItem>
 							(new ::vl::presentation::controls::tree::TreeViewItem(nullptr, ::vl::WString((L"Windows biological " + std::to_wstring(WinbioId)).c_str()))))));
-				Item->SetInternalProperty(L"Type", ::vl::MakePtr<::vl::WString>(L"WINBIO"));
-				Item->SetInternalProperty(L"WinBioProp", ::vl::MakePtr<UI::HardwareTreeInternalProperty>(WinbioId));
+				Item->SetInternalProperty(L"Type", ::vl::Ptr(new ::vl::WString(L"WINBIO")));
+				Item->SetInternalProperty(L"WinBioProp", ::vl::Ptr(new UI::HardwareTreeInternalProperty(WinbioId)));
 				Root->Children().Add(Item);
 			}
 		}
@@ -894,9 +895,9 @@ namespace Hardware
 		this->FinalizeInstanceRecursively(static_cast<::vl::presentation::controls::GuiControlHost*>(this));
 	}
 
-	/***********************************************************************
-	Class (::Hardware::UI::CPUCoreTreeInternalProperty)
-	***********************************************************************/
+/***********************************************************************
+Class (::Hardware::UI::CPUCoreTreeInternalProperty)
+***********************************************************************/
 
 	namespace UI
 	{
@@ -964,9 +965,9 @@ namespace Hardware
 			this->SetName(::vl::WString::Unmanaged(L""));
 		}
 
-		/***********************************************************************
-		Class (::Hardware::UI::HardwareTreeInternalProperty)
-		***********************************************************************/
+/***********************************************************************
+Class (::Hardware::UI::HardwareTreeInternalProperty)
+***********************************************************************/
 
 		::vl::vint HardwareTreeInternalProperty::GetId()
 		{
@@ -1008,9 +1009,9 @@ namespace Hardware
 			this->SetName(name);
 		}
 
-		/***********************************************************************
-		Class (::Hardware::UI::IntWrapper)
-		***********************************************************************/
+/***********************************************************************
+Class (::Hardware::UI::IntWrapper)
+***********************************************************************/
 
 		::vl::vint IntWrapper::GetValue()
 		{
@@ -1032,9 +1033,9 @@ namespace Hardware
 			this->SetValue(value);
 		}
 
-		/***********************************************************************
-		Class (::Hardware::UI::TreeViewItemData)
-		***********************************************************************/
+/***********************************************************************
+Class (::Hardware::UI::TreeViewItemData)
+***********************************************************************/
 
 		::vl::WString TreeViewItemData::GetName()
 		{
@@ -1069,6 +1070,7 @@ namespace Hardware
 			this->SetName(name);
 			this->SetDesc(desc);
 		}
+
 	}
 }
 #undef GLOBAL_SYMBOL

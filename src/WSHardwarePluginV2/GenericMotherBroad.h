@@ -3,7 +3,7 @@ namespace Hardware
 {
 	namespace MotherBroad
 	{
-		/// @brief Ö÷°åÍ¨ÓÃÊı¾İ£¬À´×ÔCPUZ
+		/// @brief ä¸»æ¿é€šç”¨æ•°æ®ï¼Œæ¥è‡ªCPUZ
 		struct MotherBroadCommonStruct
 		{
 			std::string Manufacturer;
@@ -11,42 +11,42 @@ namespace Hardware
 			std::string SerialNumber;
 		};
 
-		/// @brief Ö÷°åÍ¨ÓÃ³õÊ¼»¯º¯Êı
+		/// @brief ä¸»æ¿é€šç”¨åˆå§‹åŒ–å‡½æ•°
 		class GenericMotherBroad
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı£¬ÓÃÓÚ³õÊ¼»¯Ö÷°åĞÅÏ¢
+			/// @brief æ„é€ å‡½æ•°ï¼Œç”¨äºåˆå§‹åŒ–ä¸»æ¿ä¿¡æ¯
 			GenericMotherBroad() = default;
 
-			/// @brief ĞéÎö¹¹º¯Êı
+			/// @brief è™šææ„å‡½æ•°
 			virtual ~GenericMotherBroad() = default;
 
-			/// @brief ³õÊ¼»¯Ö÷°å
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief åˆå§‹åŒ–ä¸»æ¿
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Initialize(std::string& response) = 0;
 
-			/// @brief ¸üĞÂÖ÷°åĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°ä¸»æ¿ä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ®
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Update(const std::string& Args, std::string& response) = 0;
 
-			/// @brief »ñÈ¡Ö÷°å»ù´¡Êı¾İ²Ù×÷
-			/// @param[in] paramter JSON²ÎÊı
-			/// @param[out] response JSON»ØÓ¦
+			/// @brief è·å–ä¸»æ¿åŸºç¡€æ•°æ®æ“ä½œ
+			/// @param[in] paramter JSONå‚æ•°
+			/// @param[out] response JSONå›åº”
 			/// @return @ref Data::ErrorType
 			Data::ErrorType GetElements(LPCSTR paramter, std::string& response);
 		protected:
-			/// @brief Ö÷°åĞÅÏ¢
+			/// @brief ä¸»æ¿ä¿¡æ¯
 			MotherBroadCommonStruct BroadInfo;
 		protected:
-			/// @brief ¸ù¾İÏÖÓĞÊı¾İ¹¹½¨Ö÷°åµÄJsonĞÅÏ¢
-			/// @return º¬ÓĞBroadÊı¾İµÄJson¶ÔÏó
+			/// @brief æ ¹æ®ç°æœ‰æ•°æ®æ„å»ºä¸»æ¿çš„Jsonä¿¡æ¯
+			/// @return å«æœ‰Broadæ•°æ®çš„Jsonå¯¹è±¡
 			virtual Json::Value BuildBroadToJson();
 
-			/// @brief ¸ù¾İ³õÊ¼»¯¹»½á¹¹¹¹½¨JSON×Ö·û´®
-			/// @return Utf-8¸ñÊ½µÄJson×Ö·û´®
+			/// @brief æ ¹æ®åˆå§‹åŒ–å¤Ÿç»“æ„æ„å»ºJSONå­—ç¬¦ä¸²
+			/// @return Utf-8æ ¼å¼çš„Jsonå­—ç¬¦ä¸²
 			std::string BuildInitJson();
 		};
 	}

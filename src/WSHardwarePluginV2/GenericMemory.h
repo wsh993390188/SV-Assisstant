@@ -4,84 +4,84 @@ namespace Hardware
 {
 	namespace Memory
 	{
-		/// @brief ÄÚ´æÊµÏÖ»ùÀà
-		/// Ä¿Ç°Ö»ÓĞÒ»¸öĞèÒªÓÃµ½£¬Ò»¸öÊÇSMBIOS×ÓÀà£¬Ò»¸öÊÇSMBUS
+		/// @brief å†…å­˜å®ç°åŸºç±»
+		/// ç›®å‰åªæœ‰ä¸€ä¸ªéœ€è¦ç”¨åˆ°ï¼Œä¸€ä¸ªæ˜¯SMBIOSå­ç±»ï¼Œä¸€ä¸ªæ˜¯SMBUS
 		class GenericMemory
 		{
 		protected:
-			/// @brief ÄÚ´æĞÅÏ¢£¬FirstÊÇÄÚ´æ±êºÅ£¨×Ô¶¨Òå£©£¬SecondÊÇÄÚ´æÍ¨ÓÃĞÅÏ¢
+			/// @brief å†…å­˜ä¿¡æ¯ï¼ŒFirstæ˜¯å†…å­˜æ ‡å·ï¼ˆè‡ªå®šä¹‰ï¼‰ï¼ŒSecondæ˜¯å†…å­˜é€šç”¨ä¿¡æ¯
 			std::map<USHORT, MemoryCommonInformation> MemoryInformation;
-			/// @brief ±¾»úÎïÀíÄÚ´æµÄ´óĞ¡
+			/// @brief æœ¬æœºç‰©ç†å†…å­˜çš„å¤§å°
 			uint64_t PhysicalMemoryTotalSize;
-			/// @brief ±¾»ú¿ÉÓÃµÄÄÚ´æÊıÁ¿£¨°üÀ¨²åÁËÄÚ´æºÍÃ»²åÄÚ´æ£©
+			/// @brief æœ¬æœºå¯ç”¨çš„å†…å­˜æ•°é‡ï¼ˆåŒ…æ‹¬æ’äº†å†…å­˜å’Œæ²¡æ’å†…å­˜ï¼‰
 			uint32_t MaxNumberOfMemory;
-			/// @brief ±¾»úÒÑ¾­²åÈëµÄÄÚ´æ±êºÅ
+			/// @brief æœ¬æœºå·²ç»æ’å…¥çš„å†…å­˜æ ‡å·
 			std::set<USHORT> AvailableMemoryIds;
 		public:
-			/// @brief ¹¹Ôìº¯Êı
+			/// @brief æ„é€ å‡½æ•°
 			GenericMemory();
 
-			/// @brief Îö¹¹º¯Êı
+			/// @brief ææ„å‡½æ•°
 			virtual ~GenericMemory() = default;
 
-			/// @brief ³õÊ¼»¯ÄÚ´æÊı¾İ
+			/// @brief åˆå§‹åŒ–å†…å­˜æ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Initialize() = 0;
 
-			/// @brief ¸üĞÂÄÚ´æÊı¾İ
+			/// @brief æ›´æ–°å†…å­˜æ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Update() = 0;
 
-			/// @brief ¹¹½¨³õÊ¼»¯JSONĞÅÏ¢
-			/// @param[out] response Utf-8¸ñÊ½JSON×Ö·û´®
+			/// @brief æ„å»ºåˆå§‹åŒ–JSONä¿¡æ¯
+			/// @param[out] response Utf-8æ ¼å¼JSONå­—ç¬¦ä¸²
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType BuildInitializeJson(std::string& response);
 
-			/// @brief ½âÎö»ñÈ¡ÔªËØµÄJson
-			/// @param[in] root Json¶ÔÏó
-			/// @param[out] DimmIds ÄÚ´æDimmIds
+			/// @brief è§£æè·å–å…ƒç´ çš„Json
+			/// @param[in] root Jsonå¯¹è±¡
+			/// @param[out] DimmIds å†…å­˜DimmIds
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType ParserDimmJson(const Json::Value& root, USHORT& DimmIds);
 
-			/// @brief ¸ù¾İDIMM Id¹¹ÔìJson
-			/// @param[in] DIMMIds ÄÚ´æDimmIds
-			/// @param[out] response Utf-8¸ñÊ½JSON×Ö·û´®
+			/// @brief æ ¹æ®DIMM Idæ„é€ Json
+			/// @param[in] DIMMIds å†…å­˜DimmIds
+			/// @param[out] response Utf-8æ ¼å¼JSONå­—ç¬¦ä¸²
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType BuildDIMMJson(const USHORT& DIMMIds, std::string& response);
 
-			/// @brief ĞòÁĞ»¯SPDµÄÊı¾İ
-			/// @return @ref Data::ErrorType Ä¬ÈÏ²»Ö§³Ö
+			/// @brief åºåˆ—åŒ–SPDçš„æ•°æ®
+			/// @return @ref Data::ErrorType é»˜è®¤ä¸æ”¯æŒ
 			virtual Data::ErrorType SerializationSPD()
 			{
 				return Data::ErrorType::NOTSUPPORT;
 			}
 
-			/// @brief »ñÈ¡ÄÚ´æĞÅÏ¢
+			/// @brief è·å–å†…å­˜ä¿¡æ¯
 			/// @return @ref MemoryInformation
 			std::add_const_t<decltype(Hardware::Memory::GenericMemory::MemoryInformation)>& GetMemoryInformation() const;
 
-			/// @brief »ñÈ¡±¾»úÄÚ´æ´óĞ¡
-			/// @return ±¾»úÄÚ´æ´óĞ¡
+			/// @brief è·å–æœ¬æœºå†…å­˜å¤§å°
+			/// @return æœ¬æœºå†…å­˜å¤§å°
 			std::add_const_t<decltype(PhysicalMemoryTotalSize)> GetMemoryTotalSize() const
 			{
 				return PhysicalMemoryTotalSize;
 			}
 		private:
-			/// @brief ´ÓSMBIOSÖĞ»ñÈ¡SPDµÄĞÅÏ¢,²¢´æÈë½á¹¹ÖĞ
-			/// @param[in] SMBIOSMemoryInfo Type17ÖĞÄÚ´æµÄĞÅÏ¢
-			/// @param[in] DIMMId ×Ô¶¨ÒåµÄDIMMId
+			/// @brief ä»SMBIOSä¸­è·å–SPDçš„ä¿¡æ¯,å¹¶å­˜å…¥ç»“æ„ä¸­
+			/// @param[in] SMBIOSMemoryInfo Type17ä¸­å†…å­˜çš„ä¿¡æ¯
+			/// @param[in] DIMMId è‡ªå®šä¹‰çš„DIMMId
 			/// @return @ref Data::ErrorType
 			Data::ErrorType GetSPDInformationFromSMBIOS(const Smbios::Type17& SMBIOSMemoryInfo, const USHORT& DIMMId);
 
-			/// @brief ´ÓSMBIOSÖĞ»ñÈ¡SPDµÄĞÅÏ¢,²¢´æÈë½á¹¹ÖĞ
-			/// @param[out] MemoryInfo SPD½âÎöºóµÃÄÚ´æĞÅÏ¢
-			/// @param[in] SMBIOSMemoryInfo Type17ÖĞÄÚ´æµÄĞÅÏ¢
+			/// @brief ä»SMBIOSä¸­è·å–SPDçš„ä¿¡æ¯,å¹¶å­˜å…¥ç»“æ„ä¸­
+			/// @param[out] MemoryInfo SPDè§£æåå¾—å†…å­˜ä¿¡æ¯
+			/// @param[in] SMBIOSMemoryInfo Type17ä¸­å†…å­˜çš„ä¿¡æ¯
 			/// @return @ref Data::ErrorType
 			Data::ErrorType GetSPDInformationFromSMBIOS(MemoryCommonInformation& MemoryInfo, const Smbios::Type17& SMBIOSMemoryInfo);
 
-			/// @brief ¸ù¾İÄÚ´æĞÅÏ¢¹¹ÔìJSON¶ÔÏó
-			/// @param[in] Info ÄÚ´æĞÅÏ¢
-			/// @return Utf-8¸ñÊ½JSON×Ö·û´®
+			/// @brief æ ¹æ®å†…å­˜ä¿¡æ¯æ„é€ JSONå¯¹è±¡
+			/// @param[in] Info å†…å­˜ä¿¡æ¯
+			/// @return Utf-8æ ¼å¼JSONå­—ç¬¦ä¸²
 			std::string BuildMemoryCommonInformationToJson(const MemoryCommonInformation& Info);
 		};
 	}

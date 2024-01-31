@@ -10,7 +10,7 @@
 // PCI Device Address to Function Number
 #define PciGetFunc(address)				(address&7)
 
-// Ö±½Ó²ÉÓÃWinIOµÄ·½Ê½ ±ÜÃâWin10 1809Ê¹ÓÃMM³ö´íµÄÎÊÌâ
+// ç›´æ¥é‡‡ç”¨WinIOçš„æ–¹å¼ é¿å…Win10 1809ä½¿ç”¨MMå‡ºé”™çš„é—®é¢˜
 struct WinIoPhysStruct
 {
 	DWORD64 dwPhysMemSizeInBytes;

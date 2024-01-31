@@ -1,91 +1,91 @@
-/*!
+ï»¿/*!
 * @file Comand.h
-* @brief µ÷ÓÃÃüÁî½Ó¿Ú
+* @brief è°ƒç”¨å‘½ä»¤æ¥å£
 *
-* @author ÍõË¶(wangshuo20@lenovo.com)
+* @author ç‹ç¡•(wangshuo20@lenovo.com)
 * @version 1.0
-* @date 2020Äê6ÔÂ3ÈÕ
+* @date 2020å¹´6æœˆ3æ—¥
 */
 #pragma once
 namespace Hardware
 {
-	/// @brief ¹ÜÀíÕßÀàĞÍ
+	/// @brief ç®¡ç†è€…ç±»å‹
 	enum class ManagerType : uint32_t
 	{
-		None = 0, ///< Î´ÖªµÄÀàĞÍ
-		Disk = 1, ///< Ó²ÅÌÏà¹Ø
-		CPU = 2, ///<CPUÏà¹Ø
-		Memory, ///<ÄÚ´æÏà¹Ø
-		Broad, ///<Ö÷°å¼°BiosÏà¹Ø
-		GPU, ///<ÏÔ¿¨Ïà¹Ø
-		Audio, ///<Éù¿¨Ïà¹Ø
-		Net, ///<Íø¿¨Ïà¹Ø
-		WinBio, ///<Win10ÉúÎï´«¸ĞÆ÷Ïà¹Ø
-		Battery, ///<µç³ØÏà¹Ø
-		Monitor, ///<ÏÔÊ¾Æ÷Ïà¹Ø
-		Bios, ///<BiosÏà¹Ø
+		None = 0, ///< æœªçŸ¥çš„ç±»å‹
+		Disk = 1, ///< ç¡¬ç›˜ç›¸å…³
+		CPU = 2, ///<CPUç›¸å…³
+		Memory, ///<å†…å­˜ç›¸å…³
+		Broad, ///<ä¸»æ¿åŠBiosç›¸å…³
+		GPU, ///<æ˜¾å¡ç›¸å…³
+		Audio, ///<å£°å¡ç›¸å…³
+		Net, ///<ç½‘å¡ç›¸å…³
+		WinBio, ///<Win10ç”Ÿç‰©ä¼ æ„Ÿå™¨ç›¸å…³
+		Battery, ///<ç”µæ± ç›¸å…³
+		Monitor, ///<æ˜¾ç¤ºå™¨ç›¸å…³
+		Bios, ///<Biosç›¸å…³
 	};
 
-	/// @brief ÃüÁîÀàĞÍ
+	/// @brief å‘½ä»¤ç±»å‹
 	enum class CommandType : uint32_t
 	{
-		None = 0,	///< Î´ÖªµÄÃüÁî
-		Init,		///<³õÊ¼»¯²Ù×÷(or ¸üĞÂÈ«²¿Êı¾İ)
-		Update,		///<¸üĞÂÏÖÓĞÊı¾İ
-		Get,			///<»ñÈ¡ÏÖÓĞÊı¾İ
+		None = 0,	///< æœªçŸ¥çš„å‘½ä»¤
+		Init,		///<åˆå§‹åŒ–æ“ä½œ(or æ›´æ–°å…¨éƒ¨æ•°æ®)
+		Update,		///<æ›´æ–°ç°æœ‰æ•°æ®
+		Get,			///<è·å–ç°æœ‰æ•°æ®
 	};
 
-	/// @brief Ö´ĞĞµÄÃüÁî
+	/// @brief æ‰§è¡Œçš„å‘½ä»¤
 	class Command
 	{
 	public:
-		/// @brief »ñÈ¡¹ÜÀíÕßÀàĞÍ
+		/// @brief è·å–ç®¡ç†è€…ç±»å‹
 		/// @return
 		///			@ref ManagerType
 		//////////////////////////////////////////////////////////////////////////
 		virtual ManagerType GetManagerType() = 0;
 
-		/// @brief »ñÈ¡ÃüÁîÀàĞÍ
+		/// @brief è·å–å‘½ä»¤ç±»å‹
 		/// @return
 		///			@ref CommandType
 		virtual CommandType GetCommandType() = 0;
 	};
 
-	/// @brief ÃüÁîÄ£Ê½Êı¾İ¿â£¬¸ºÔğ´Ó×Ö·û´®×ª³ÉÃüÁî
+	/// @brief å‘½ä»¤æ¨¡å¼æ•°æ®åº“ï¼Œè´Ÿè´£ä»å­—ç¬¦ä¸²è½¬æˆå‘½ä»¤
 	class CommandDataBase
 	{
 	public:
-		/// @brief ÃüÁîÊı¾İ¿âµ¥ÀıÈë¿Ú
-		/// @return ÃüÁîµÄµ¥Àı
+		/// @brief å‘½ä»¤æ•°æ®åº“å•ä¾‹å…¥å£
+		/// @return å‘½ä»¤çš„å•ä¾‹
 		static CommandDataBase* Instance();
 
-		/// @brief ³õÊ¼»¯ÃüÁîÄ£Ê½Êı¾İ¿â
-		/// @return ¿Õ
+		/// @brief åˆå§‹åŒ–å‘½ä»¤æ¨¡å¼æ•°æ®åº“
+		/// @return ç©º
 		CommandDataBase();
 
-		/// @brief ¶¯×÷×Ö·û´®×ªÃüÁîÀàĞÍ
-		/// @param[in] Action ´«ÈëµÄ¶¯×÷
-		/// @return ÃüÁîÀàĞÍ
+		/// @brief åŠ¨ä½œå­—ç¬¦ä¸²è½¬å‘½ä»¤ç±»å‹
+		/// @param[in] Action ä¼ å…¥çš„åŠ¨ä½œ
+		/// @return å‘½ä»¤ç±»å‹
 		std::shared_ptr<Command> SwitchToCommand(const std::string& Action);
 
 	private:
-		/// @brief ³õÊ¼»¯Ïà¹ØÃüÁî
-		/// @tparam ManagerCommand ¹ÜÀíÕßÃüÁî
-		/// @return ÃüÁîÊı¾İ¿â
+		/// @brief åˆå§‹åŒ–ç›¸å…³å‘½ä»¤
+		/// @tparam ManagerCommand ç®¡ç†è€…å‘½ä»¤
+		/// @return å‘½ä»¤æ•°æ®åº“
 		template<class ManagerCommand>
 		std::map<CommandType, std::shared_ptr<Command>> InitCommand();
 	private:
-		/// @brief ¹ÜÀíÕß×Ö·û´®×ªÀàĞÍ
+		/// @brief ç®¡ç†è€…å­—ç¬¦ä¸²è½¬ç±»å‹
 		/// @param[in] ManagerString
 		/// @return @ref ManagerType
 		ManagerType StringToMangerType(const std::string& ManagerString);
 
-		/// @brief ÃüÁî×Ö·û´®×ªÀàĞÍ
+		/// @brief å‘½ä»¤å­—ç¬¦ä¸²è½¬ç±»å‹
 		/// @param[in] OperatorString
 		/// @return @ref CommandType
 		CommandType StringToOperatorType(const std::string& OperatorString);
-		/// @brief Êı¾İ¿â
-		///		1.¹ÜÀíÕßÀàĞÍ,2.´æÃüÁîÀàĞÍ,3.Êµ¼Ê¶ÔÓ¦µÄÃüÁî¶ÔÏó
+		/// @brief æ•°æ®åº“
+		///		1.ç®¡ç†è€…ç±»å‹,2.å­˜å‘½ä»¤ç±»å‹,3.å®é™…å¯¹åº”çš„å‘½ä»¤å¯¹è±¡
 		std::map<ManagerType, std::map<CommandType, std::shared_ptr<Command>>> m_CommandDatabase;
 	};
 }

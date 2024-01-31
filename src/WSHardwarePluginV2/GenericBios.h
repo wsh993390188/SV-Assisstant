@@ -1,64 +1,64 @@
 #pragma once
 namespace Hardware
 {
-	/// @brief BIOSÏà¹ØĞÅÏ¢µÄ¿Õ¼ä
+	/// @brief BIOSç›¸å…³ä¿¡æ¯çš„ç©ºé—´
 	namespace BIOS
 	{
-		/// @brief BIOSÍ¨ÓÃÊı¾İĞÅÏ¢£¬À´×ÔCPUZ
+		/// @brief BIOSé€šç”¨æ•°æ®ä¿¡æ¯ï¼Œæ¥è‡ªCPUZ
 		struct BiosCommonStruct
 		{
 			std::string Brand;
 			std::string Version;
 			std::string DataTime;
-			bool UEFI; ///< ÊÇ·ñÎªUEFIÆô¶¯
-			bool SecureBoot; ///<ÊÇ·ñÎª°²È«Æô¶¯
+			bool UEFI; ///< æ˜¯å¦ä¸ºUEFIå¯åŠ¨
+			bool SecureBoot; ///<æ˜¯å¦ä¸ºå®‰å…¨å¯åŠ¨
 		};
 
-		/// @brief BIOSµÄÍ¨ÓÃ½Ó¿ÚÀà
+		/// @brief BIOSçš„é€šç”¨æ¥å£ç±»
 		class GenericBios final
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı£¬ÓÃÓÚ³õÊ¼»¯BIOSµÄĞÅÏ¢
+			/// @brief æ„é€ å‡½æ•°ï¼Œç”¨äºåˆå§‹åŒ–BIOSçš„ä¿¡æ¯
 			GenericBios() = default;
 
-			/// @brief ĞéÎö¹¹º¯Êı
+			/// @brief è™šææ„å‡½æ•°
 			~GenericBios() = default;
 
-			/// @brief ³õÊ¼»¯BIOS
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief åˆå§‹åŒ–BIOS
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Initialize(std::string& response);
 
-			/// @brief ¸üĞÂBIOSĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°BIOSä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ®
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Update(const std::string& Args, std::string& response);
 
-			/// @brief »ñÈ¡BIOS»ù´¡Êı¾İ²Ù×÷
-			/// @param[in] paramter JSON²ÎÊı
-			/// @param[out] response JSON»ØÓ¦
+			/// @brief è·å–BIOSåŸºç¡€æ•°æ®æ“ä½œ
+			/// @param[in] paramter JSONå‚æ•°
+			/// @param[out] response JSONå›åº”
 			/// @return @ref Data::ErrorType
 			Data::ErrorType GetElements(LPCSTR paramter, std::string& response);
 		protected:
-			/// @brief BiosĞÅÏ¢£¬²»Ö§³ÖË«BIos£¬Î´À´¿¼ÂÇÒ»ÏÂ
+			/// @brief Biosä¿¡æ¯ï¼Œä¸æ”¯æŒåŒBIosï¼Œæœªæ¥è€ƒè™‘ä¸€ä¸‹
 			BiosCommonStruct BiosInfos;
 
 		private:
-			/// @brief ¸ù¾İÏÖÓĞÊı¾İ¹¹½¨BiosµÄJsonĞÅÏ¢
-			/// @return º¬ÓĞBiosÊı¾İµÄJson¶ÔÏó
+			/// @brief æ ¹æ®ç°æœ‰æ•°æ®æ„å»ºBiosçš„Jsonä¿¡æ¯
+			/// @return å«æœ‰Biosæ•°æ®çš„Jsonå¯¹è±¡
 			Json::Value BuildBiosToJson();
 
-			/// @brief ¸ù¾İ³õÊ¼»¯¹»½á¹¹¹¹½¨JSON×Ö·û´®
-			/// @return Utf-8¸ñÊ½µÄJson×Ö·û´®
+			/// @brief æ ¹æ®åˆå§‹åŒ–å¤Ÿç»“æ„æ„å»ºJSONå­—ç¬¦ä¸²
+			/// @return Utf-8æ ¼å¼çš„Jsonå­—ç¬¦ä¸²
 			std::string BuildInitJson();
 
-			/// @brief ÅĞ¶ÏÏµÍ³ÊÇ·ñÎªUEFIÆô¶¯
-			/// @return ÊÇ·ñÊÇUEFIÆô¶¯
+			/// @brief åˆ¤æ–­ç³»ç»Ÿæ˜¯å¦ä¸ºUEFIå¯åŠ¨
+			/// @return æ˜¯å¦æ˜¯UEFIå¯åŠ¨
 			bool IsUEFI() const;
 
-			/// @brief °²È«Æô¶¯ÊÇ·ñ¿ªÆô
-			/// @return ¿ªÆô
+			/// @brief å®‰å…¨å¯åŠ¨æ˜¯å¦å¼€å¯
+			/// @return å¼€å¯
 			bool SecureBootEnabled();
 		};
 	}

@@ -5,47 +5,47 @@ namespace Hardware
 {
 	namespace Battery
 	{
-		/// @brief Í¨¹ı²¿·ÖÇı¶¯»ñÈ¡µç³ØĞÅÏ¢
+		/// @brief é€šè¿‡éƒ¨åˆ†é©±åŠ¨è·å–ç”µæ± ä¿¡æ¯
 		class BatteryFromSys final :public GenericBattery
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı
+			/// @brief æ„é€ å‡½æ•°
 			BatteryFromSys();
 
-			/// @brief ³õÊ¼»¯µç³Ø
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief åˆå§‹åŒ–ç”µæ± 
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Initialize(std::string& response) override final;
 
-			/// @brief ¸üĞÂµç³ØĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°ç”µæ± ä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ®
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Update(const std::string& Args, std::string& response) override final;
 
-			/// @brief »ñÈ¡µç³Ø»ù´¡²Ù×÷
-			/// Json¸ñÊ½ {"BatteryId": 0}
-			/// @param[in] paramter JSON²ÎÊı
-			/// @param[out] response JSON»ØÓ¦
+			/// @brief è·å–ç”µæ± åŸºç¡€æ“ä½œ
+			/// Jsonæ ¼å¼ {"BatteryId": 0}
+			/// @param[in] paramter JSONå‚æ•°
+			/// @param[out] response JSONå›åº”
 			/// @return @ref Data::ErrorType
 			Data::ErrorType GetElements(LPCSTR paramter, std::string& response) override final;
 		private:
-			/// @brief »ñÈ¡È«²¿µç³ØÉè±¸µÄÂ·¾¶
-			/// @param[out] DevicePath µç³ØÉè±¸¶ÔÏó
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief è·å–å…¨éƒ¨ç”µæ± è®¾å¤‡çš„è·¯å¾„
+			/// @param[out] DevicePath ç”µæ± è®¾å¤‡å¯¹è±¡
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool GetDevicePath();
 
-			/// @brief ¹¹Ôì³õÊ¼»¯JsonÖµ
-			/// @return Json×Ö·û
+			/// @brief æ„é€ åˆå§‹åŒ–Jsonå€¼
+			/// @return Jsonå­—ç¬¦
 			std::string BuildInitializeJson();
 
-			/// @brief ½âÎöJson×Ö·û
-			/// @param[in] JsonString JSON×Ö·û´®
-			/// @param[out] BatteryId ½âÎö³É¹¦ºóµÄµç³ØId
-			/// @return ½âÎöÊÇ·ñ³É¹¦
+			/// @brief è§£æJsonå­—ç¬¦
+			/// @param[in] JsonString JSONå­—ç¬¦ä¸²
+			/// @param[out] BatteryId è§£ææˆåŠŸåçš„ç”µæ± Id
+			/// @return è§£ææ˜¯å¦æˆåŠŸ
 			bool ParserJson(const std::string& JsonString, uint32_t& BatteryId);
 		protected:
-			/// @brief µç³ØĞÅÏ¢ÊµÌåÉè±¸ First¶ÔÓ¦µÄIdºÅ
+			/// @brief ç”µæ± ä¿¡æ¯å®ä½“è®¾å¤‡ Firstå¯¹åº”çš„Idå·
 			std::map<uint32_t, std::shared_ptr<BatteryElement>> DevicePath;
 		};
 	}

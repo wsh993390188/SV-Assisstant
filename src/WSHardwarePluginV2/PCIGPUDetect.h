@@ -4,28 +4,28 @@ namespace Hardware
 {
 	namespace GPU
 	{
-		/// @brief Í¨¹ıPCIE×ÜÏßÌ½²âGPUÉè±¸
+		/// @brief é€šè¿‡PCIEæ€»çº¿æ¢æµ‹GPUè®¾å¤‡
 		class PciGpuDetect
 		{
 		public:
-			/// @brief ²éÕÒÔÚPCI×ÜÏßÉÏµÄËùÓĞGPUÉè±¸
-			/// @return PCIµÄBDFÖµÊı×é
+			/// @brief æŸ¥æ‰¾åœ¨PCIæ€»çº¿ä¸Šçš„æ‰€æœ‰GPUè®¾å¤‡
+			/// @return PCIçš„BDFå€¼æ•°ç»„
 			bool FindGPUDeviceOnPCI();
 
-			/// @brief ²éÕÒPCIÉÏµÄGPUÉè±¸
+			/// @brief æŸ¥æ‰¾PCIä¸Šçš„GPUè®¾å¤‡
 			/// @param VendorId VendorID
 			/// @param DeviceId DeviceID
-			/// @param count ³öÏÖµÄ´ÎÊı
-			/// @param Device ²éÕÒµ½µÄÉè±¸
-			/// @return ²éÕÒÊÇ·ñ³É¹¦
+			/// @param count å‡ºç°çš„æ¬¡æ•°
+			/// @param Device æŸ¥æ‰¾åˆ°çš„è®¾å¤‡
+			/// @return æŸ¥æ‰¾æ˜¯å¦æˆåŠŸ
 			bool FindDevice(const uint32_t VendorId, const uint32_t DeviceId, const uint8_t count, GPUDevice& Device);
 		private:
-			/// @brief Ñ°ÕÒIntel MCHBAR
-			/// @param bus PciµÄbusºÅ
-			/// @return MCHBARµÄµØÖ·
+			/// @brief å¯»æ‰¾Intel MCHBAR
+			/// @param bus Pciçš„buså·
+			/// @return MCHBARçš„åœ°å€
 			std::uint64_t FindIntelMCHBAR(const uint32_t& bus);
 
-			/// @brief PCIÉÏµÄGPUÉè±¸
+			/// @brief PCIä¸Šçš„GPUè®¾å¤‡
 			std::vector<GPUDevice> PciDevice;
 		};
 	}

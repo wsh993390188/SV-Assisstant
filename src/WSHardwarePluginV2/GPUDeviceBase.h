@@ -5,15 +5,15 @@ namespace Hardware
 {
 	namespace GPU
 	{
-		/// @brief GPUµÄPCIÎïÀíÎ»ÖÃĞÅÏ¢
+		/// @brief GPUçš„PCIç‰©ç†ä½ç½®ä¿¡æ¯
 		struct GPUDevice
 		{
-			uint32_t   pciAddress;///<PCIµÄµØÖ·
-			uint64_t   BarAddress;///<ÄÚ´æµÄµØÖ·
-			uint16_t   VendorId;///<³§ÉÌID
-			uint16_t   DeviceId;///<Éè±¸ID
-			uint16_t   SubVendorId;///<×Ó³§ÉÌID
-			uint16_t   SubDeviceId;///<×ÓÉè±¸ID
+			uint32_t   pciAddress;///<PCIçš„åœ°å€
+			uint64_t   BarAddress;///<å†…å­˜çš„åœ°å€
+			uint16_t   VendorId;///<å‚å•†ID
+			uint16_t   DeviceId;///<è®¾å¤‡ID
+			uint16_t   SubVendorId;///<å­å‚å•†ID
+			uint16_t   SubDeviceId;///<å­è®¾å¤‡ID
 		};
 
 		struct GPUTimeCircle
@@ -28,15 +28,15 @@ namespace Hardware
 			std::string Name;
 		};
 
-		/// @brief GPUµÄÊÊÅäÆ÷
+		/// @brief GPUçš„é€‚é…å™¨
 		struct GPUAdapter
 		{
 			LUID AdapterLuid; ///< LUID
 			ULONG SegmentCount; ///< Segment Count
-			std::vector<GPUNode> Nodes; ///< GPUµÄNodes
-			std::wstring DeviceInterface; ///< Éè±¸½Ó¿Ú
+			std::vector<GPUNode> Nodes; ///< GPUçš„Nodes
+			std::wstring DeviceInterface; ///< è®¾å¤‡æ¥å£
 
-			std::wstring Descriptor; ///< ÃèÊö·û
+			std::wstring Descriptor; ///< æè¿°ç¬¦
 			std::wstring DriverDate;
 			std::wstring DriverVersion;
 			std::wstring LocationInfo;
@@ -45,31 +45,31 @@ namespace Hardware
 			uint64_t DedicatedMemory;
 		};
 
-		/// @brief ·Ç·¨µÄ64Î»ÄÚ´æµØÖ·
+		/// @brief éæ³•çš„64ä½å†…å­˜åœ°å€
 		constexpr auto InvaildMemoryBase = 0xFFFFFFFFFFFFFFFFull;
 
-		/// @brief GPU×°ÊÎ»ùÀà£¬ÓÃÀ´²ûÊöµ±Ç°CPUµÄÌØĞÔ
+		/// @brief GPUè£…é¥°åŸºç±»ï¼Œç”¨æ¥é˜è¿°å½“å‰CPUçš„ç‰¹æ€§
 		class GPUDecorator
 		{
 		public:
 			GPUDecorator() = delete;
-			/// @brief ³õÊ¼»¯º¯Êı£¬±£´æÄÚ´æµØÖ·£¬µ±Ç°ĞŞÊÎÃû
-			/// @param[in] MemoryBase ÄÚ´æµØÖ·
-			/// @param[in] Name µ±Ç°Ãû³Æ
+			/// @brief åˆå§‹åŒ–å‡½æ•°ï¼Œä¿å­˜å†…å­˜åœ°å€ï¼Œå½“å‰ä¿®é¥°å
+			/// @param[in] MemoryBase å†…å­˜åœ°å€
+			/// @param[in] Name å½“å‰åç§°
 			/// @return
 			explicit GPUDecorator(const uint64_t MemoryBase, const std::string& Name);
-			/// @brief Îö¹¹º¯Êı£¬Ê¹ÓÃÄ¬ÈÏÑ¡Ïî
+			/// @brief ææ„å‡½æ•°ï¼Œä½¿ç”¨é»˜è®¤é€‰é¡¹
 			virtual ~GPUDecorator() = default;
-			/// @brief »ñÈ¡×°ÊÎÃû³Æ
-			/// @return ×°ÊÎÃû³Æ
+			/// @brief è·å–è£…é¥°åç§°
+			/// @return è£…é¥°åç§°
 			const std::string GetDecoratorName() const;
 
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			virtual const std::string GetDecoratorValue() const = 0;
 
-			/// @brief ¸üĞÂĞÅÏ¢
-			/// @param MemoryPtr ÄÚ´æµÄÖ¸Õë
+			/// @brief æ›´æ–°ä¿¡æ¯
+			/// @param MemoryPtr å†…å­˜çš„æŒ‡é’ˆ
 			virtual void Update(std::weak_ptr<Utils::Ring0::SafeMemoryHandle> MemoryPtr) = 0;
 		protected:
 			const uint64_t MemoryBase;
@@ -77,37 +77,37 @@ namespace Hardware
 			mutable bool IsUpdate;
 		};
 
-		/// @brief GPUÍ¨ÓÃÊı¾İ
+		/// @brief GPUé€šç”¨æ•°æ®
 		class GPUDeviceBase
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı
-			/// @param[in] GpuData GPUµÄ×ÜÏßÊı¾İ
+			/// @brief æ„é€ å‡½æ•°
+			/// @param[in] GpuData GPUçš„æ€»çº¿æ•°æ®
 			explicit GPUDeviceBase(const GPUDevice& GpuData, std::unique_ptr<GPUAdapter>&& Adapter);
 
-			/// @brief ĞéÎö¹¹º¯Êı
+			/// @brief è™šææ„å‡½æ•°
 			virtual ~GPUDeviceBase() = default;
 
-			/// @brief ¸üĞÂGPUµÄĞÅÏ¢
-			/// @return Utf8 Json×Ö·û´®
+			/// @brief æ›´æ–°GPUçš„ä¿¡æ¯
+			/// @return Utf8 Jsonå­—ç¬¦ä¸²
 			virtual std::string UpdateGPUInfo() = 0;
 
-			/// @brief ¹¹½¨GPUµÄĞÅÏ¢
-			/// @return Utf8 Json×Ö·û´®
+			/// @brief æ„å»ºGPUçš„ä¿¡æ¯
+			/// @return Utf8 Jsonå­—ç¬¦ä¸²
 			virtual std::string GetGPUInfo() = 0;
 		protected:
-			/// @brief ¸üĞÂGPUµÄNodeĞÅÏ¢
+			/// @brief æ›´æ–°GPUçš„Nodeä¿¡æ¯
 			/// @param Node @ref GPUNode
-			/// @return ¸üĞÂÊÇ·ñ³É¹¦
+			/// @return æ›´æ–°æ˜¯å¦æˆåŠŸ
 			bool UpdateNode(GPUNode& Node);
 		protected:
-			/// @brief GPUµÄPCI×ÜÏßÊı¾İ
+			/// @brief GPUçš„PCIæ€»çº¿æ•°æ®
 			GPUDevice GPUBaseData;
 			/// @brief Sub Vendor
 			std::string SubVendor;
-			/// @brief GPUµÄÊÊÅäÆ÷½Ó¿Ú
+			/// @brief GPUçš„é€‚é…å™¨æ¥å£
 			std::unique_ptr<GPUAdapter> m_Adapter;
-			/// @brief GPUµÄÔËĞĞÊ±¼ä
+			/// @brief GPUçš„è¿è¡Œæ—¶é—´
 			GPUTimeCircle TotalRunningTime;
 		};
 	}

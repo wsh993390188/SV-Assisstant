@@ -1,17 +1,17 @@
 /*!
 * @file WSHardwarePluginV2.h
-* @brief Ӳ��ģ�鵼���ӿ�
+* @brief 硬件模块导出接口
 *
 *
 *
-* @author ��˶(wangshuo20@lenovo.com)
+* @author 王硕(wangshuo20@lenovo.com)
 * @version 1.0
-* @date 2020��6��2��
+* @date 2020年6月2日
 */
 
 #ifdef _WINDLL
 #ifdef WSHARDWAREPLUGINV2_EXPORTS
-/// @brief DLL ����or�����ӿڶ������
+/// @brief DLL 导入or导出接口定义符号
 #define WSHARDWAREPLUGINV2_API __declspec(dllexport)
 #else
 #define WSHARDWAREPLUGINV2_API __declspec(dllimport)
@@ -20,107 +20,107 @@
 #define WSHARDWAREPLUGINV2_API
 #endif
 
-/// @brief �ص���������
+/// @brief 回调函数类型
 using PluginCallback = int(*)(LPCSTR, const char*);
 
 #ifdef __cplusplus
 extern "C" {
 #endif // __
 
-	/// @brief Ӳ���ĵ��ö����ӿ�
-	///			����
-	/// @param[in] action ���εĶ�����Ϣ
-	/// @param[in] paramter ���εĲ���JSON��ʽ��Ϣ
-	/// @param[out] response ���β�����ɵĻ�ӦJson��Ϣ
+	/// @brief 硬件的调用动作接口
+	///			对外
+	/// @param[in] action 本次的动作信息
+	/// @param[in] paramter 本次的参数JSON格式信息
+	/// @param[out] response 本次操作完成的回应Json信息
 	/// @return
-	///			0 �����ɹ�
-	///			����ֵ ����ʧ��
+	///			0 操作成功
+	///			其他值 操作失败
 	WSHARDWAREPLUGINV2_API int PcmHardwareAction(LPCSTR action, LPCSTR paramter, BSTR* response);
 
-	/// @brief ��ʼ������ӿ�
-	///			ע������Ҫ�Ļص������Թ�֪ͨ��
-	/// @param[in] paramter ���εĲ���JSON��ʽ��Ϣ
-	/// @param[in] callback ���εĻص�����ָ��
+	/// @brief 初始化插件接口
+	///			注册所需要的回调函数以供通知用
+	/// @param[in] paramter 本次的参数JSON格式信息
+	/// @param[in] callback 本次的回调函数指针
 	/// @return
-	///			S_OK �����ɹ�
+	///			S_OK 操作成功
 	WSHARDWAREPLUGINV2_API int PcmHardwareInitialize(LPCSTR paramter, PluginCallback callback);
 
 #ifdef __cplusplus
 }
 #endif
-/// @brief ��ʼ��Ӳ����Ϣ
+/// @brief 初始化硬盘信息
 constexpr auto PCM_HARDWARE_ACTION_DISK_INIT = "PCM_HARDWARE_ACTION_DISK_INIT";
-/// @brief ����Ӳ����Ϣ
+/// @brief 更新硬盘信息
 constexpr auto PCM_HARDWARE_ACTION_DISK_UPDATE = "PCM_HARDWARE_ACTION_DISK_UPDATE";
-/// @brief ��ȡӲ����Ϣ
+/// @brief 获取硬盘信息
 constexpr auto PCM_HARDWARE_ACTION_DISK_GET = "PCM_HARDWARE_ACTION_DISK_GET";
 
-/// @brief ��ʼ��CPU��Ϣ
+/// @brief 初始化CPU信息
 constexpr auto PCM_HARDWARE_ACTION_CPU_INIT = "PCM_HARDWARE_ACTION_CPU_INIT";
-/// @brief ����CPU��Ϣ
+/// @brief 更新CPU信息
 constexpr auto PCM_HARDWARE_ACTION_CPU_UPDATE = "PCM_HARDWARE_ACTION_CPU_UPDATE";
-/// @brief ��ȡCPU��Ϣ
+/// @brief 获取CPU信息
 constexpr auto PCM_HARDWARE_ACTION_CPU_GET = "PCM_HARDWARE_ACTION_CPU_GET";
 
-/// @brief ��ʼ���ڴ���Ϣ
+/// @brief 初始化内存信息
 constexpr auto PCM_HARDWARE_ACTION_MEMORY_INIT = "PCM_HARDWARE_ACTION_MEMORY_INIT";
-/// @brief �����ڴ���Ϣ
+/// @brief 更新内存信息
 constexpr auto PCM_HARDWARE_ACTION_MEMORY_UPDATE = "PCM_HARDWARE_ACTION_MEMORY_UPDATE";
-/// @brief ��ȡ�ڴ���Ϣ
+/// @brief 获取内存信息
 constexpr auto PCM_HARDWARE_ACTION_MEMORY_GET = "PCM_HARDWARE_ACTION_MEMORY_GET";
 
-/// @brief ��ʼ��GPU��Ϣ
+/// @brief 初始化GPU信息
 constexpr auto PCM_HARDWARE_ACTION_GPU_INIT = "PCM_HARDWARE_ACTION_GPU_INIT";
-/// @brief ����GPU��Ϣ
+/// @brief 更新GPU信息
 constexpr auto PCM_HARDWARE_ACTION_GPU_UPDATE = "PCM_HARDWARE_ACTION_GPU_UPDATE";
-/// @brief ��ȡGPU��Ϣ
+/// @brief 获取GPU信息
 constexpr auto PCM_HARDWARE_ACTION_GPU_GET = "PCM_HARDWARE_ACTION_GPU_GET";
 
-/// @brief ��ʼ��������Ϣ
+/// @brief 初始化主板信息
 constexpr auto PCM_HARDWARE_ACTION_BROAD_INIT = "PCM_HARDWARE_ACTION_BROAD_INIT";
-/// @brief ����������Ϣ
+/// @brief 更新主板信息
 constexpr auto PCM_HARDWARE_ACTION_BROAD_UPDATE = "PCM_HARDWARE_ACTION_BROAD_UPDATE";
-/// @brief ��ȡ������Ϣ
+/// @brief 获取主板信息
 constexpr auto PCM_HARDWARE_ACTION_BROAD_GET = "PCM_HARDWARE_ACTION_BROAD_GET";
 
-/// @brief ��ʼ��������Ϣ
+/// @brief 初始化声卡信息
 constexpr auto PCM_HARDWARE_ACTION_AUDIO_INIT = "PCM_HARDWARE_ACTION_AUDIO_INIT";
-/// @brief ����������Ϣ
+/// @brief 更新声卡信息
 constexpr auto PCM_HARDWARE_ACTION_AUDIO_UPDATE = "PCM_HARDWARE_ACTION_AUDIO_UPDATE";
-/// @brief ��ȡ������Ϣ
+/// @brief 获取声卡信息
 constexpr auto PCM_HARDWARE_ACTION_AUDIO_GET = "PCM_HARDWARE_ACTION_AUDIO_GET";
 
-/// @brief ��ʼ��������Ϣ
+/// @brief 初始化网卡信息
 constexpr auto PCM_HARDWARE_ACTION_NIC_INIT = "PCM_HARDWARE_ACTION_NIC_INIT";
-/// @brief ����������Ϣ
+/// @brief 更新网卡信息
 constexpr auto PCM_HARDWARE_ACTION_NIC_UPDATE = "PCM_HARDWARE_ACTION_NIC_UPDATE";
-/// @brief ��ȡ������Ϣ
+/// @brief 获取网卡信息
 constexpr auto PCM_HARDWARE_ACTION_NIC_GET = "PCM_HARDWARE_ACTION_NIC_GET";
 
-/// @brief ��ʼ�������Ϣ
+/// @brief 初始化电池信息
 constexpr auto PCM_HARDWARE_ACTION_BATTERY_INIT = "PCM_HARDWARE_ACTION_BATTERY_INIT";
-/// @brief ���µ����Ϣ
+/// @brief 更新电池信息
 constexpr auto PCM_HARDWARE_ACTION_BATTERY_UPDATE = "PCM_HARDWARE_ACTION_BATTERY_UPDATE";
-/// @brief ��ȡ�����Ϣ
+/// @brief 获取电池信息
 constexpr auto PCM_HARDWARE_ACTION_BATTERY_GET = "PCM_HARDWARE_ACTION_BATTERY_GET";
 
-/// @brief ��ʼ����ʾ����Ϣ
+/// @brief 初始化显示器信息
 constexpr auto PCM_HARDWARE_ACTION_MONITOR_INIT = "PCM_HARDWARE_ACTION_MONITOR_INIT";
-/// @brief ������ʾ����Ϣ
+/// @brief 更新显示器信息
 constexpr auto PCM_HARDWARE_ACTION_MONITOR_UPDATE = "PCM_HARDWARE_ACTION_MONITOR_UPDATE";
-/// @brief ��ȡ��ʾ����Ϣ
+/// @brief 获取显示器信息
 constexpr auto PCM_HARDWARE_ACTION_MONITOR_GET = "PCM_HARDWARE_ACTION_MONITOR_GET";
 
-/// @brief ��ʼ��Win10���ﴫ������Ϣ
+/// @brief 初始化Win10生物传感器信息
 constexpr auto PCM_HARDWARE_ACTION_WINBIO_INIT = "PCM_HARDWARE_ACTION_WINBIO_INIT";
-/// @brief ����Win10���ﴫ������Ϣ
+/// @brief 更新Win10生物传感器信息
 constexpr auto PCM_HARDWARE_ACTION_WINBIO_UPDATE = "PCM_HARDWARE_ACTION_WINBIO_UPDATE";
-/// @brief ��ȡWin10���ﴫ������Ϣ
+/// @brief 获取Win10生物传感器信息
 constexpr auto PCM_HARDWARE_ACTION_WINBIO_GET = "PCM_HARDWARE_ACTION_WINBIO_GET";
 
-/// @brief ��ʼ��BIOS��Ϣ
+/// @brief 初始化BIOS信息
 constexpr auto PCM_HARDWARE_ACTION_BIOS_INIT = "PCM_HARDWARE_ACTION_BIOS_INIT";
-/// @brief ����BIOS��Ϣ
+/// @brief 更新BIOS信息
 constexpr auto PCM_HARDWARE_ACTION_BIOS_UPDATE = "PCM_HARDWARE_ACTION_BIOS_UPDATE";
-/// @brief ��ȡBIOS��Ϣ
+/// @brief 获取BIOS信息
 constexpr auto PCM_HARDWARE_ACTION_BIOS_GET = "PCM_HARDWARE_ACTION_BIOS_GET";

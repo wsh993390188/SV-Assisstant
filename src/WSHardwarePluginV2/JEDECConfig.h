@@ -5,47 +5,47 @@ namespace Hardware
 {
 	namespace Memory
 	{
-		/// @brief ÄÚ´æ³§ÉÌµÄÅäÖÃ±í
+		/// @brief å†…å­˜å‚å•†çš„é…ç½®è¡¨
 		class JEDECConfig final : public XMLConfig
 		{
-			/// @brief ÄÚ´æ³§ÉÌµÄBanks
+			/// @brief å†…å­˜å‚å•†çš„Banks
 			std::vector<std::map<size_t, std::string>> m_Banks;
 
-			/// @brief BankµÄ¹ÜÀí×éÖ¯
+			/// @brief Bankçš„ç®¡ç†ç»„ç»‡
 			using BanksType = decltype(m_Banks);
 
-			/// @brief BankµÄÄÚÈİ
+			/// @brief Bankçš„å†…å®¹
 			using BankType = BanksType::value_type;
 
-			/// @brief XMLÄ¬ÈÏ°æ±¾ºÅ
+			/// @brief XMLé»˜è®¤ç‰ˆæœ¬å·
 			std::string m_DefaultVersion;
-			/// @brief ÅäÖÃÎÄ¼ş¸üĞÂµÄËø
+			/// @brief é…ç½®æ–‡ä»¶æ›´æ–°çš„é”
 			mutable std::mutex m_Mutex;
 		public:
-			/// @brief ÄÚ´æ³§ÉÌµÄÅäÖÃ±íĞòÁĞ»¯µ¥Àı
-			/// @return µ¥ÀıÒıÓÃ @ref JEDECConfig
+			/// @brief å†…å­˜å‚å•†çš„é…ç½®è¡¨åºåˆ—åŒ–å•ä¾‹
+			/// @return å•ä¾‹å¼•ç”¨ @ref JEDECConfig
 			static JEDECConfig& Instance();
 
-			/// @brief ´ÓBankÖĞ»ñÈ¡³§ÉÌĞÅÏ¢
+			/// @brief ä»Bankä¸­è·å–å‚å•†ä¿¡æ¯
 			/// @param BankCode Bank Code
 			/// @param ContinuationCode Continuation Code
-			/// @return ³§ÉÌµÄU8Ãû
+			/// @return å‚å•†çš„U8å
 			std::string GetManufacture(const size_t BankCode, const size_t ContinuationCode) const;
 		private:
-			/// @brief Ä¬ÈÏ¹¹Ôì£¬½ûÖ¹Íâ²¿·ÃÎÊ¹¹Ôìº¯Êı
+			/// @brief é»˜è®¤æ„é€ ï¼Œç¦æ­¢å¤–éƒ¨è®¿é—®æ„é€ å‡½æ•°
 			JEDECConfig();
 
-			/// @brief ³õÊ¼»¯ÄÚ´æµÄÅäÖÃÎÄ¼ş
+			/// @brief åˆå§‹åŒ–å†…å­˜çš„é…ç½®æ–‡ä»¶
 			void Initialize();
 
-			/// @brief ½âÎöBank×Ö¶Î
-			/// @param BankElement ×Ö¶ÎÔªËØ
-			/// @param BanksDB ĞòÁĞ»¯Àà
+			/// @brief è§£æBankå­—æ®µ
+			/// @param BankElement å­—æ®µå…ƒç´ 
+			/// @param BanksDB åºåˆ—åŒ–ç±»
 			void ParserBank(tinyxml2::XMLElement const* const BankElement, BanksType& BanksDB);
 
-			/// @brief ½âÎöManufacture×Ö¶Î
-			/// @param ManufactureElement ×Ö¶ÎÔªËØ
-			/// @param BankDB ĞòÁĞ»¯Àà
+			/// @brief è§£æManufactureå­—æ®µ
+			/// @param ManufactureElement å­—æ®µå…ƒç´ 
+			/// @param BankDB åºåˆ—åŒ–ç±»
 			void ParserManufacture(tinyxml2::XMLElement const* const ManufactureElement, BankType& BankDB);
 		};
 	}

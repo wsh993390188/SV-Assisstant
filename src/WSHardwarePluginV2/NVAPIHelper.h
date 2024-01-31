@@ -5,173 +5,173 @@ namespace Hardware
 {
 	namespace GPU
 	{
-		/// @brief NVAPI²»´æÔÚµÄÒì³£
+		/// @brief NVAPIä¸å­˜åœ¨çš„å¼‚å¸¸
 		class NVAPINotExist :public std::exception
 		{
 		public:
-			/// @brief Òì³£ËµÃ÷
-			/// @return Òì³£ËµÃ÷
+			/// @brief å¼‚å¸¸è¯´æ˜
+			/// @return å¼‚å¸¸è¯´æ˜
 			char const* what() const override;
 		};
 
-		/// @brief NVAPIÉè±¸²»´æÔÚµÄÒì³£
+		/// @brief NVAPIè®¾å¤‡ä¸å­˜åœ¨çš„å¼‚å¸¸
 		class NVAPIDeviceNotExist :public std::exception
 		{
 		public:
-			/// @brief ³õÊ¼»¯Òì³£
-			/// @param DeviceId Éè±¸ID
+			/// @brief åˆå§‹åŒ–å¼‚å¸¸
+			/// @param DeviceId è®¾å¤‡ID
 			explicit NVAPIDeviceNotExist(const NvU32& DeviceId)
 			{
 				Msg = "NVAPI Cant find gpu " + std::to_string(DeviceId);
 			}
-			/// @brief Òì³£ËµÃ÷
-			/// @return Òì³£ËµÃ÷
+			/// @brief å¼‚å¸¸è¯´æ˜
+			/// @return å¼‚å¸¸è¯´æ˜
 			char const* what() const override;
 		private:
-			/// @brief Òì³£ÏûÏ¢
+			/// @brief å¼‚å¸¸æ¶ˆæ¯
 			std::string Msg;
 		};
 
-		/// @brief »ñÈ¡ÎÂ¶È·¢ÉúÒì³£Ê±Å×³ö
+		/// @brief è·å–æ¸©åº¦å‘ç”Ÿå¼‚å¸¸æ—¶æŠ›å‡º
 		class NVAPITemperatureExp :public std::exception
 		{
 		public:
-			/// @brief »ñÈ¡µÄÎÂ¶ÈĞÅÏ¢
-			/// @param target Ä¿±êÇøÓò
+			/// @brief è·å–çš„æ¸©åº¦ä¿¡æ¯
+			/// @param target ç›®æ ‡åŒºåŸŸ
 			NVAPITemperatureExp(const NV_THERMAL_TARGET& target) : target(target) {
 				Msg = "NVAPI Temperature zone: " + TargetToString();
 			}
 
-			/// @brief Òì³£ËµÃ÷
-			/// @return Òì³£ËµÃ÷
+			/// @brief å¼‚å¸¸è¯´æ˜
+			/// @return å¼‚å¸¸è¯´æ˜
 			char const* what()const override;
 		private:
-			/// @brief ÎÂ¶ÈµÄÄ¿±êÇøÓò
+			/// @brief æ¸©åº¦çš„ç›®æ ‡åŒºåŸŸ
 			NV_THERMAL_TARGET target;
-			/// @brief Ä¿±êÇøÓòµÄ×Ö·û´®ĞÅÏ¢
-			/// @return ×Ö·û´®ĞÅÏ¢
+			/// @brief ç›®æ ‡åŒºåŸŸçš„å­—ç¬¦ä¸²ä¿¡æ¯
+			/// @return å­—ç¬¦ä¸²ä¿¡æ¯
 			std::string TargetToString() const;
-			/// @brief Òì³£ÏûÏ¢
+			/// @brief å¼‚å¸¸æ¶ˆæ¯
 			std::string Msg;
 		};
-		/// @brief NVAPIµÄ°ïÖúÀà
+		/// @brief NVAPIçš„å¸®åŠ©ç±»
 		class NVAPIHelper final
 		{
 		public:
-			/// @brief NVAPI°ïÖúº¯ÊıµÄµ¥Àı
-			/// @return µ¥Àı
+			/// @brief NVAPIå¸®åŠ©å‡½æ•°çš„å•ä¾‹
+			/// @return å•ä¾‹
 			static NVAPIHelper& Instance();
 
-			/// @brief »ñÈ¡Éè±¸GPUµÄÎÂ¶ÈĞÅÏ¢
-			/// @param DeviceID Éè±¸ID
-			/// @exception »áÅ×³öÒì³£
-			/// - @ref NVAPIException NVAPIÎ´ÄÜ¼ÓÔØ
-			/// - @ref NVAPIDeviceNotExist ÕÒ²»µ½Éè±¸
-			/// - @ref NVAPITemperatureExp »ñÈ¡²»µ½Éè±¸µÄÎÂ¶È
-			/// @return Éè±¸µÄÎÂ¶È
+			/// @brief è·å–è®¾å¤‡GPUçš„æ¸©åº¦ä¿¡æ¯
+			/// @param DeviceID è®¾å¤‡ID
+			/// @exception ä¼šæŠ›å‡ºå¼‚å¸¸
+			/// - @ref NVAPIException NVAPIæœªèƒ½åŠ è½½
+			/// - @ref NVAPIDeviceNotExist æ‰¾ä¸åˆ°è®¾å¤‡
+			/// - @ref NVAPITemperatureExp è·å–ä¸åˆ°è®¾å¤‡çš„æ¸©åº¦
+			/// @return è®¾å¤‡çš„æ¸©åº¦
 			std::string GetTemperature(const uint32_t& DeviceID);
 
-			/// @brief »ñÈ¡Éè±¸GPUµÄ·çÉÈ×ªËÙ
-			/// @param DeviceID Éè±¸ID
-			/// @exception »áÅ×³öÒì³£
-			/// - @ref NVAPIException NVAPIÎ´ÄÜ¼ÓÔØ
-			/// - @ref NVAPIDeviceNotExist ÕÒ²»µ½Éè±¸
-			///	- @ref std::exception »ñÈ¡Ê§°Ü
-			/// @return Éè±¸µÄ×ªËÙ
+			/// @brief è·å–è®¾å¤‡GPUçš„é£æ‰‡è½¬é€Ÿ
+			/// @param DeviceID è®¾å¤‡ID
+			/// @exception ä¼šæŠ›å‡ºå¼‚å¸¸
+			/// - @ref NVAPIException NVAPIæœªèƒ½åŠ è½½
+			/// - @ref NVAPIDeviceNotExist æ‰¾ä¸åˆ°è®¾å¤‡
+			///	- @ref std::exception è·å–å¤±è´¥
+			/// @return è®¾å¤‡çš„è½¬é€Ÿ
 			std::string GetFanSpeed(const uint32_t& DeviceID);
 
-			/// @brief »ñÈ¡Éè±¸GPUµÄ¹¦ÂÊ
-			/// @param DeviceID Éè±¸ID
-			/// @exception »áÅ×³öÒì³£
-			/// - @ref NVAPIException NVAPIÎ´ÄÜ¼ÓÔØ
-			/// - @ref NVAPIDeviceNotExist ÕÒ²»µ½Éè±¸
-			///	- @ref std::exception »ñÈ¡Ê§°Ü
-			/// @return Éè±¸µÄ¹¦ÂÊ
+			/// @brief è·å–è®¾å¤‡GPUçš„åŠŸç‡
+			/// @param DeviceID è®¾å¤‡ID
+			/// @exception ä¼šæŠ›å‡ºå¼‚å¸¸
+			/// - @ref NVAPIException NVAPIæœªèƒ½åŠ è½½
+			/// - @ref NVAPIDeviceNotExist æ‰¾ä¸åˆ°è®¾å¤‡
+			///	- @ref std::exception è·å–å¤±è´¥
+			/// @return è®¾å¤‡çš„åŠŸç‡
 			std::string GetGPUPower(const uint32_t& DeviceID);
 
-			/// @brief »ñÈ¡Éè±¸GPUµÄºËĞÄµçÑ¹
-			/// @param DeviceID Éè±¸ID
-			/// @exception »áÅ×³öÒì³£
-			/// - @ref NVAPIException NVAPIÎ´ÄÜ¼ÓÔØ
-			/// - @ref NVAPIDeviceNotExist ÕÒ²»µ½Éè±¸
-			///	- @ref std::exception »ñÈ¡Ê§°Ü
-			/// @return Éè±¸µÄºËĞÄµçÑ¹
+			/// @brief è·å–è®¾å¤‡GPUçš„æ ¸å¿ƒç”µå‹
+			/// @param DeviceID è®¾å¤‡ID
+			/// @exception ä¼šæŠ›å‡ºå¼‚å¸¸
+			/// - @ref NVAPIException NVAPIæœªèƒ½åŠ è½½
+			/// - @ref NVAPIDeviceNotExist æ‰¾ä¸åˆ°è®¾å¤‡
+			///	- @ref std::exception è·å–å¤±è´¥
+			/// @return è®¾å¤‡çš„æ ¸å¿ƒç”µå‹
 			std::string GetVoltage(const uint32_t& DeviceID);
 
-			/// @brief »ñÈ¡Éè±¸GPUµÄÃû³ÆĞÅÏ¢
-			/// @param DeviceID Éè±¸ID
-			/// @exception »áÅ×³öÒì³£
-			/// - @ref NVAPIException NVAPIÎ´ÄÜ¼ÓÔØ
-			/// - @ref NVAPIDeviceNotExist ÕÒ²»µ½Éè±¸
-			/// @return Éè±¸Ãû³ÆĞÅÏ¢
+			/// @brief è·å–è®¾å¤‡GPUçš„åç§°ä¿¡æ¯
+			/// @param DeviceID è®¾å¤‡ID
+			/// @exception ä¼šæŠ›å‡ºå¼‚å¸¸
+			/// - @ref NVAPIException NVAPIæœªèƒ½åŠ è½½
+			/// - @ref NVAPIDeviceNotExist æ‰¾ä¸åˆ°è®¾å¤‡
+			/// @return è®¾å¤‡åç§°ä¿¡æ¯
 			std::string GetGPUName(const uint32_t& DeviceID);
 
-			/// @brief »ñÈ¡Éè±¸GPUµÄÇı¶¯°æ±¾
-			/// @exception »áÅ×³öÒì³£
-			/// - @ref NVAPIException NVAPIÎ´ÄÜ¼ÓÔØ
-			/// - @ref NVAPIDeviceNotExist ÕÒ²»µ½Éè±¸
-			///	- @ref std::exception »ñÈ¡Ê§°Ü
-			/// @return Çı¶¯°æ±¾
+			/// @brief è·å–è®¾å¤‡GPUçš„é©±åŠ¨ç‰ˆæœ¬
+			/// @exception ä¼šæŠ›å‡ºå¼‚å¸¸
+			/// - @ref NVAPIException NVAPIæœªèƒ½åŠ è½½
+			/// - @ref NVAPIDeviceNotExist æ‰¾ä¸åˆ°è®¾å¤‡
+			///	- @ref std::exception è·å–å¤±è´¥
+			/// @return é©±åŠ¨ç‰ˆæœ¬
 			std::string GetGPUDriverVersion();
 
-			/// @brief »ñÈ¡ÏÔ´æÆµÂÊĞÅÏ¢
-			/// @param AdapterId Ä¿±êÉè±¸µÄAdapterID
-			/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-			/// - @ref NVAPIException NVAPIÎ´ÄÜ¼ÓÔØ
-			/// - @ref NVAPIDeviceNotExist ÕÒ²»µ½Éè±¸
-			///	- @ref std::exception »ñÈ¡Ê§°Ü
-			/// @return ÏÔ´æÆµÂÊ
+			/// @brief è·å–æ˜¾å­˜é¢‘ç‡ä¿¡æ¯
+			/// @param AdapterId ç›®æ ‡è®¾å¤‡çš„AdapterID
+			/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+			/// - @ref NVAPIException NVAPIæœªèƒ½åŠ è½½
+			/// - @ref NVAPIDeviceNotExist æ‰¾ä¸åˆ°è®¾å¤‡
+			///	- @ref std::exception è·å–å¤±è´¥
+			/// @return æ˜¾å­˜é¢‘ç‡
 			std::string GetGPUMemoryClock(const uint32_t& DeviceId);
 
-			/// @brief »ñÈ¡ÏÔ¿¨ºËĞÄÆµÂÊĞÅÏ¢
-			/// @param AdapterId Ä¿±êÉè±¸µÄAdapterID
-			/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-			/// - @ref NVAPIException NVAPIÎ´ÄÜ¼ÓÔØ
-			/// - @ref NVAPIDeviceNotExist ÕÒ²»µ½Éè±¸
-			///	- @ref std::exception »ñÈ¡Ê§°Ü
-			/// @return ÏÔ¿¨ºËĞÄÆµÂÊ
+			/// @brief è·å–æ˜¾å¡æ ¸å¿ƒé¢‘ç‡ä¿¡æ¯
+			/// @param AdapterId ç›®æ ‡è®¾å¤‡çš„AdapterID
+			/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+			/// - @ref NVAPIException NVAPIæœªèƒ½åŠ è½½
+			/// - @ref NVAPIDeviceNotExist æ‰¾ä¸åˆ°è®¾å¤‡
+			///	- @ref std::exception è·å–å¤±è´¥
+			/// @return æ˜¾å¡æ ¸å¿ƒé¢‘ç‡
 			std::string GetGPUCoreClock(const uint32_t& DeviceId);
 
-			/// @brief »ñÈ¡Éè±¸GPUµÄÊ¹ÓÃÂÊ
-			/// @param DeviceID Éè±¸ID
-			/// @exception »áÅ×³öÒì³£
-			/// - @ref NVAPIException NVAPIÎ´ÄÜ¼ÓÔØ
-			/// - @ref NVAPIDeviceNotExist ÕÒ²»µ½Éè±¸
-			/// @return Éè±¸Ãû³ÆĞÅÏ¢
+			/// @brief è·å–è®¾å¤‡GPUçš„ä½¿ç”¨ç‡
+			/// @param DeviceID è®¾å¤‡ID
+			/// @exception ä¼šæŠ›å‡ºå¼‚å¸¸
+			/// - @ref NVAPIException NVAPIæœªèƒ½åŠ è½½
+			/// - @ref NVAPIDeviceNotExist æ‰¾ä¸åˆ°è®¾å¤‡
+			/// @return è®¾å¤‡åç§°ä¿¡æ¯
 			std::string GetGPUUsage(const uint32_t& DeviceID);
 
 		private:
-			/// @brief °ïÖúº¯Êı³õÊ¼»¯
+			/// @brief å¸®åŠ©å‡½æ•°åˆå§‹åŒ–
 			NVAPIHelper();
-			/// @brief °ïÖúº¯ÊıµÄÎö¹¹²Ù×÷
+			/// @brief å¸®åŠ©å‡½æ•°çš„ææ„æ“ä½œ
 			~NVAPIHelper();
 
-			/// @brief »ñÈ¡NVAPIµÄ´íÎóĞÅÏ¢
-			/// @param nvapiErrorStatus ´íÎó´úÂë
-			/// @return ´íÎóĞÅÏ¢
+			/// @brief è·å–NVAPIçš„é”™è¯¯ä¿¡æ¯
+			/// @param nvapiErrorStatus é”™è¯¯ä»£ç 
+			/// @return é”™è¯¯ä¿¡æ¯
 			std::string GetNvAPIStatusString(const NvAPI_Status& nvapiErrorStatus);
 
-			/// @brief Ã¶¾ÙGPU£¬½ö³õÊ¼»¯Ê±µ÷ÓÃ¼´¿É
+			/// @brief æšä¸¾GPUï¼Œä»…åˆå§‹åŒ–æ—¶è°ƒç”¨å³å¯
 			void EnumPhysicalGPUs();
 
-			/// @brief NVAPI½Ó¿Ú²éÑ¯GPUµ±Ç°ÎÂ¶È
-			/// @param GPUHandle GPUµÄ¾ä±ú
-			/// @param target GPUĞèÒª²éÑ¯µÄÎÂ¶ÈĞÅÏ¢
-			/// @exception »áÅ×³öÒì³£
-			/// - @ref NVAPITemperatureExp »ñÈ¡²»µ½Éè±¸µÄÎÂ¶È
-			/// @return ÎÂ¶ÈµÄĞÅÏ¢
+			/// @brief NVAPIæ¥å£æŸ¥è¯¢GPUå½“å‰æ¸©åº¦
+			/// @param GPUHandle GPUçš„å¥æŸ„
+			/// @param target GPUéœ€è¦æŸ¥è¯¢çš„æ¸©åº¦ä¿¡æ¯
+			/// @exception ä¼šæŠ›å‡ºå¼‚å¸¸
+			/// - @ref NVAPITemperatureExp è·å–ä¸åˆ°è®¾å¤‡çš„æ¸©åº¦
+			/// @return æ¸©åº¦çš„ä¿¡æ¯
 			NvS32 GetTemperatureImpl(const NvPhysicalGpuHandle& GPUHandle, const NV_THERMAL_TARGET& target);
 
-			/// @brief NVAPI½Ó¿Ú²éÑ¯GPUµÄ¶¯Ì¬ĞÅÏ¢
-			/// @param GPUHandle GPUµÄ¾ä±ú
-			/// @exception »áÅ×³öÒì³£
-			/// - @ref NVAPIException NVAPIÎ´ÄÜ¼ÓÔØ
-			/// - @ref NVAPIDeviceNotExist ÕÒ²»µ½Éè±¸
-			///	- @ref std::exception »ñÈ¡Ê§°Ü
-			/// @return ¶¯Ì¬ĞÅÏ¢
+			/// @brief NVAPIæ¥å£æŸ¥è¯¢GPUçš„åŠ¨æ€ä¿¡æ¯
+			/// @param GPUHandle GPUçš„å¥æŸ„
+			/// @exception ä¼šæŠ›å‡ºå¼‚å¸¸
+			/// - @ref NVAPIException NVAPIæœªèƒ½åŠ è½½
+			/// - @ref NVAPIDeviceNotExist æ‰¾ä¸åˆ°è®¾å¤‡
+			///	- @ref std::exception è·å–å¤±è´¥
+			/// @return åŠ¨æ€ä¿¡æ¯
 			void GetDynamicInfo(const NvPhysicalGpuHandle& GPUHandle);
 		private:
-			/// @brief N¿¨GPUµÄ²éÑ¯ĞÅÏ¢
+			/// @brief Nå¡GPUçš„æŸ¥è¯¢ä¿¡æ¯
 			struct NVGPUPhysicalInfo
 			{
 #pragma pack(push,1)
@@ -179,30 +179,30 @@ namespace Hardware
 				{
 					struct
 					{
-						NvU16 VendorId;///<³§ÉÌID
-						NvU16 DeviceId;///<Éè±¸ID
+						NvU16 VendorId;///<å‚å•†ID
+						NvU16 DeviceId;///<è®¾å¤‡ID
 					};
-					NvU32 MajorId;///<Ö÷ID
+					NvU32 MajorId;///<ä¸»ID
 				};
 
 				union
 				{
 					struct
 					{
-						NvU16 SubVendorId;///<×Ó³§ÉÌID
-						NvU16 SubDeviceId;///<×ÓÉè±¸ID
+						NvU16 SubVendorId;///<å­å‚å•†ID
+						NvU16 SubDeviceId;///<å­è®¾å¤‡ID
 					};
-					NvU32 SubId;///<´ÓID
+					NvU32 SubId;///<ä»ID
 				};
 #pragma pack(pop)
-				NvU32 RevisionId;///<ĞŞ¶©°æ±¾
-				NvU32 ExtDeviceId;///<×ÓÉè±¸ID
-				NvPhysicalGpuHandle hPhysicalGpu;///<NVAPI¶¨ÒåµÄÎïÀíGPU¾ä±ú
+				NvU32 RevisionId;///<ä¿®è®¢ç‰ˆæœ¬
+				NvU32 ExtDeviceId;///<å­è®¾å¤‡ID
+				NvPhysicalGpuHandle hPhysicalGpu;///<NVAPIå®šä¹‰çš„ç‰©ç†GPUå¥æŸ„
 			};
-			/// @brief NVAPI ÊÇ·ñ¿ÉÓÃ
+			/// @brief NVAPI æ˜¯å¦å¯ç”¨
 			bool IsNvapiEnable;
 
-			/// @brief GPUµÄ²éÑ¯ĞÅÏ¢
+			/// @brief GPUçš„æŸ¥è¯¢ä¿¡æ¯
 			std::vector<NVGPUPhysicalInfo> GpuQueryDatas;
 
 			struct NV_VOLTAGES_INFO
@@ -225,7 +225,7 @@ namespace Hardware
 				NvU32                                   max;
 				NV_VOLTAGES_INFO voltages[NVAPI_MAX_GPU_PERF_VOLTAGES];
 			};
-			/// @brief NvAPIÎ´µ¼³öµÄ²éÑ¯µçÑ¹µÄ½Ó¿Ú
+			/// @brief NvAPIæœªå¯¼å‡ºçš„æŸ¥è¯¢ç”µå‹çš„æ¥å£
 			using TYPE_NvAPI_GPU_GetVoltages = NvAPI_Status(*)(HANDLE PhysicalGPU, NV_VOLTAGES* pPerfVoltages);
 			TYPE_NvAPI_GPU_GetVoltages NvAPI_GPU_GetVoltages;
 

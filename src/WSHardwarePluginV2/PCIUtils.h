@@ -4,7 +4,7 @@ namespace Hardware
 {
 	namespace Utils
 	{
-		/// @brief Í¨¹ıPCI DB»ñÈ¡ĞÅÏ¢
+		/// @brief é€šè¿‡PCI DBè·å–ä¿¡æ¯
 		class PCIUtils : Hardware::XMLConfig
 		{
 			/*
@@ -13,19 +13,19 @@ namespace Hardware
 			*/
 			typedef std::pair< std::map<int, std::string>, std::map< int, std::map<int, std::string> > > PCIDB;
 
-			/// @brief ¹¹ÔìPCIĞÅÏ¢¿â
+			/// @brief æ„é€ PCIä¿¡æ¯åº“
 			PCIUtils();
 
-			/// @brief ¶ÔÏó
+			/// @brief å¯¹è±¡
 			PCIDB pciDB;
 		public:
-			/// @brief µ¥ÀıÄ£Ê½
+			/// @brief å•ä¾‹æ¨¡å¼
 			/// @return @ref PCIUtils
 			static PCIUtils& Instance();
 
-			/// @brief »ñÈ¡VID¶ÔÓ¦Ãû³Æ
+			/// @brief è·å–VIDå¯¹åº”åç§°
 			/// @param VendorID VID
-			/// @return ¶ÔÓ¦Ãû³Æ
+			/// @return å¯¹åº”åç§°
 			std::string GetVendorName(const int VendorID);
 
 			std::string GetDeviceName(const int VendorID, const int DeviceID);

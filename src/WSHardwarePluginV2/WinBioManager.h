@@ -4,31 +4,31 @@
 #include <string>
 namespace Hardware
 {
-	/// @brief Win10Ö§³ÖµÄÉúÎï´«¸ĞÆ÷µ÷¶È½Ó¿ÚÀà
+	/// @brief Win10æ”¯æŒçš„ç”Ÿç‰©ä¼ æ„Ÿå™¨è°ƒåº¦æ¥å£ç±»
 	class WinBioManager : public Interface::Manager
 	{
 	public:
-		/// @brief Win10Ö§³ÖµÄÉúÎï´«¸ĞÆ÷µ÷¶È½Ó¿Ú¹¹Ôìº¯Êı
+		/// @brief Win10æ”¯æŒçš„ç”Ÿç‰©ä¼ æ„Ÿå™¨è°ƒåº¦æ¥å£æ„é€ å‡½æ•°
 		WinBioManager();
-		/// @brief ³õÊ¼»¯ÃüÁî²Ù×÷
-		/// @param[in] paramter JSON²ÎÊı
-		/// @param[out] response JSON»ØÓ¦
+		/// @brief åˆå§‹åŒ–å‘½ä»¤æ“ä½œ
+		/// @param[in] paramter JSONå‚æ•°
+		/// @param[out] response JSONå›åº”
 		/// @return @ref Data::ErrorType
 		Data::ErrorType Init(LPCSTR paramter, std::string& response) override final;
 
-		/// @brief ¸üĞÂÊı¾İÃüÁî²Ù×÷
-		/// @param[in] paramter JSON²ÎÊı
-		/// @param[out] response JSON»ØÓ¦
+		/// @brief æ›´æ–°æ•°æ®å‘½ä»¤æ“ä½œ
+		/// @param[in] paramter JSONå‚æ•°
+		/// @param[out] response JSONå›åº”
 		/// @return @ref Data::ErrorType
 		Data::ErrorType Update(LPCSTR paramter, std::string& response) override final;
 
-		/// @brief »ñÈ¡ÃüÁî²Ù×÷
-		/// @param[in] paramter JSON²ÎÊı
-		/// @param[out] response JSON»ØÓ¦
+		/// @brief è·å–å‘½ä»¤æ“ä½œ
+		/// @param[in] paramter JSONå‚æ•°
+		/// @param[out] response JSONå›åº”
 		/// @return @ref Data::ErrorType
 		Data::ErrorType GetElements(LPCSTR paramter, std::string& response) override final;
 	private:
-		/// @brief Win10Ö§³ÖµÄÉúÎï´«¸ĞÆ÷¿ØÖÆÆ÷
+		/// @brief Win10æ”¯æŒçš„ç”Ÿç‰©ä¼ æ„Ÿå™¨æ§åˆ¶å™¨
 		std::unique_ptr<WinBio::GenericWinBio> WinBioController;
 	};
 }

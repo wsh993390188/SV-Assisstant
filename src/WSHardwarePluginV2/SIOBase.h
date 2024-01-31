@@ -3,66 +3,66 @@
 #include "IoHandle.h"
 namespace Hardware
 {
-	/// @brief SuperIOÄ£¿é
+	/// @brief SuperIOæ¨¡å—
 	namespace SIO
 	{
-		/// @brief SuperIOµÄ»ùÀà
+		/// @brief SuperIOçš„åŸºç±»
 		class SIOBase
 		{
 		public:
-			/// @brief ³õÊ¼»¯SIOµÄ»ù´¡Êı¾İ
+			/// @brief åˆå§‹åŒ–SIOçš„åŸºç¡€æ•°æ®
 			SIOBase();
 
-			/// @brief ĞéÎö¹¹º¯Êı
+			/// @brief è™šææ„å‡½æ•°
 			virtual ~SIOBase() = default;
 
-			/// @brief ³õÊ¼»¯SIO
-			/// @param port SIOµÄµØÖ·
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief åˆå§‹åŒ–SIO
+			/// @param port SIOçš„åœ°å€
+			/// @return æ˜¯å¦æˆåŠŸ
 			virtual bool InitializeSIO(const USHORT& port) = 0;
 
-			/// @brief ·´³õÊ¼»¯SIO£¬ÓÃÍê¾ÍÒªÏú»Ù£¬²»¿ÉÒ»Ö±Õ¼ÓÃ
-			/// @param port SIOµÄµØÖ·
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief ååˆå§‹åŒ–SIOï¼Œç”¨å®Œå°±è¦é”€æ¯ï¼Œä¸å¯ä¸€ç›´å ç”¨
+			/// @param port SIOçš„åœ°å€
+			/// @return æ˜¯å¦æˆåŠŸ
 			virtual bool DeInitializeSIO(const USHORT& port) = 0;
 
-			/// @brief Ğ¾Æ¬ÊÇ·ñ¿ÉÓÃ
-			/// @return ÊÇ·ñ¿ÉÓÃ
+			/// @brief èŠ¯ç‰‡æ˜¯å¦å¯ç”¨
+			/// @return æ˜¯å¦å¯ç”¨
 			bool IsActive()const;
 		protected:
-			/// @brief ÇĞ»»SIOµÄPage
-			/// @param port SIOµÄÎ»ÖÃ½Ó¿Ú
-			/// @param data SIOµÄÊı¾İ½Ó¿Ú
-			/// @param logicalDeviceNumber PageµÄNumber
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief åˆ‡æ¢SIOçš„Page
+			/// @param port SIOçš„ä½ç½®æ¥å£
+			/// @param data SIOçš„æ•°æ®æ¥å£
+			/// @param logicalDeviceNumber Pageçš„Number
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool SelectPage(const USHORT& port, const USHORT& data, const UCHAR& logicalDeviceNumber);
 
-			/// @brief SIO¶ÁÈ¡Ò»¸öWordµÄ·â×°
-			/// @param port	  SIOµÄÎ»ÖÃ½Ó¿Ú
-			/// @param data	  SIOµÄÊı¾İ½Ó¿Ú
-			/// @param offset ¶ÁÈ¡µÄÆ«ÒÆÁ¿
-			/// @param output Êä³öµÄÖµ
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief SIOè¯»å–ä¸€ä¸ªWordçš„å°è£…
+			/// @param port	  SIOçš„ä½ç½®æ¥å£
+			/// @param data	  SIOçš„æ•°æ®æ¥å£
+			/// @param offset è¯»å–çš„åç§»é‡
+			/// @param output è¾“å‡ºçš„å€¼
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool SIOReadWord(const USHORT& port, const USHORT& data, const DWORD& offset, DWORD& output);
-			/// @brief SIO¶ÁÈ¡Ò»¸öByteµÄ·â×°
-			/// @param port	  SIOµÄÎ»ÖÃ½Ó¿Ú
-			/// @param data	  SIOµÄÊı¾İ½Ó¿Ú
-			/// @param offset ¶ÁÈ¡µÄÆ«ÒÆÁ¿
-			/// @param output Êä³öµÄÖµ
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief SIOè¯»å–ä¸€ä¸ªByteçš„å°è£…
+			/// @param port	  SIOçš„ä½ç½®æ¥å£
+			/// @param data	  SIOçš„æ•°æ®æ¥å£
+			/// @param offset è¯»å–çš„åç§»é‡
+			/// @param output è¾“å‡ºçš„å€¼
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool SIOReadByte(const USHORT& port, const USHORT& data, const DWORD& offset, DWORD& output);
 		protected:
-			/// @brief ¸ÃĞ¾Æ¬ÊÇ·ñ¿ÉÓÃ
+			/// @brief è¯¥èŠ¯ç‰‡æ˜¯å¦å¯ç”¨
 			bool active;
 
-			/// @brief SIOÕ¼ÓÃµÄIO¶ÁÈ¡¹¦ÄÜ
+			/// @brief SIOå ç”¨çš„IOè¯»å–åŠŸèƒ½
 			Utils::Ring0::SafeIoHandle IoPtr;
 
-			/// @brief ChipµÄID
+			/// @brief Chipçš„ID
 			const uint32_t CHIP_ID_REGISTER;
-			/// @brief ChipµÄRevision
+			/// @brief Chipçš„Revision
 			const uint32_t CHIP_REVISION_REGISTER;
-			/// @brief LPCµØÖ·
+			/// @brief LPCåœ°å€
 			const uint32_t BASE_ADDRESS_REGISTER;
 		};
 	}

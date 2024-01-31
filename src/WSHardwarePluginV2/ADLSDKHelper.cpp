@@ -47,7 +47,7 @@ namespace
 		}
 		return nullptr;
 	}
-	/// @brief ADLSDKר�õ�VendorID
+	/// @brief ADLSDK专用的VendorID
 	constexpr auto AMDVendorIDADLOnly = 1002;
 }
 
@@ -281,7 +281,7 @@ bool Hardware::GPU::ADLSDKHelper::EnumAdapter()
 							spdlog::info("ADL Adapter DriverPath: {}", AdapterInfos[i].strDriverPath);
 							spdlog::info("ADL Adapter DriverPathExt: {}", AdapterInfos[i].strDriverPathExt);
 							spdlog::info("ADL Adapter PNPString: {}", AdapterInfos[i].strPNPString);
-							spdlog::info("ADL Adapter Present: [} Exist: {}", AdapterInfos[i].iPresent, AdapterInfos[i].iExist);
+							spdlog::info("ADL Adapter Present: {} Exist: {}", AdapterInfos[i].iPresent, AdapterInfos[i].iExist);
 							if (AdapterInfos[i].iExist == 1 &&
 								!FindDeviceOnQueryDatas(AdapterInfos[i].iBusNumber, AdapterInfos[i].iDeviceNumber, AdapterInfos[i].iFunctionNumber))
 							{

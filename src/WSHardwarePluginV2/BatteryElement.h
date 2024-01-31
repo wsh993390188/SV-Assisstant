@@ -3,22 +3,22 @@ namespace Hardware
 {
 	namespace Battery
 	{
-		/// @brief µç³ØµÄµ¥Î»
+		/// @brief ç”µæ± çš„å•ä½
 		enum class BatteryUnit
 		{
-			mW,///<ºÁÍß
-			W, ///< Íß
-			PerHour,///< Ã¿Ğ¡Ê±³äµçËÙÂÊ£¬½öÓÃÓÚRate
-			Percent,///< °Ù·Ö±È£¬½öÓÃÓÚµç³ØÈİÁ¿
+			mW,///<æ¯«ç“¦
+			W, ///< ç“¦
+			PerHour,///< æ¯å°æ—¶å……ç”µé€Ÿç‡ï¼Œä»…ç”¨äºRate
+			Percent,///< ç™¾åˆ†æ¯”ï¼Œä»…ç”¨äºç”µæ± å®¹é‡
 		};
 
-		/// @brief ´øµ¥Î»µÄµç³ØĞÅÏ¢
+		/// @brief å¸¦å•ä½çš„ç”µæ± ä¿¡æ¯
 		struct BatteryCapacity
 		{
-			std::string Value;///< µç³ØµÄĞÅÏ¢
-			BatteryUnit Unit;///< µç³Øµ¥Î» @ref BatteryUnit
+			std::string Value;///< ç”µæ± çš„ä¿¡æ¯
+			BatteryUnit Unit;///< ç”µæ± å•ä½ @ref BatteryUnit
 
-			/// @brief bool¶ÔÏó×ª»»º¯Êı£¬½öÆ¥ÅäÖµÊÇ·ñ´æÔÚ
+			/// @brief boolå¯¹è±¡è½¬æ¢å‡½æ•°ï¼Œä»…åŒ¹é…å€¼æ˜¯å¦å­˜åœ¨
 			explicit operator bool() const
 			{
 				return !Value.empty();
@@ -27,60 +27,60 @@ namespace Hardware
 			std::string Tou8String() const;
 		};
 
-		/// @brief µç³ØÍ¨ÓÃÊı¾İ
+		/// @brief ç”µæ± é€šç”¨æ•°æ®
 		struct BatteryCommonStruct
 		{
-			std::string	Chemistry;				///<»¯Ñ§³É·Ö
-			BatteryCapacity	DesignCapacity;		///<Éè¼ÆÈİÁ¿
-			BatteryCapacity	FullChargedCapacity;///<³äµçµÄÂúÈİÁ¿
-			BatteryCapacity BatteryDepletion;	///<µç³ØËğºÄ°Ù·Ö±È
-			BatteryCapacity	DefaultAlert1;		///<Ä¬ÈÏ¾¯¸æ1
-			BatteryCapacity	DefaultAlert2;		///<Ä¬ÈÏ¾¯¸æ2
-			std::string ManufactureDate;		///<ÖÆÔìÈÕÆÚ
-			std::string	Manufacture;			///<ÖÆÔìÉÌ
-			std::string	SerialNumber;			///<ĞòÁĞºÅ
-			std::string	UniqueID;				///<Î¨Ò»ID ĞòÁĞºÅ
-			std::string	PowerState;             ///<1µçÔ´Á¬½Ó£»2·Åµç£»3³äµç£»4µçÑ¹ÔÚ¼«ÏŞ£»5 µçÔ´Á¬½ÓÔÚ³äµç
-			BatteryCapacity	Capacity;           ///<ÊµÊ±ÈİÁ¿
-			std::string	Voltage;				///<µçÑ¹
-			BatteryCapacity		Rate;			///<³äµç·ÅµçËÙ¶È  ÕûÊıÊÇ³äµç£¬¸ºÊıÊÇ³äµç£¬0ÊÇÃ»·ÅµçÒ²Ã»³äµç
-			std::string Percentage;				///<µç³ØÊµÊ±ÈİÁ¿°Ù·Ö±È
-			std::string Temperature;			///<µç³ØµÄÎÂ¶È
-			std::string Technology;				///<µç³ØµÄ¼¼Êõ
-			std::string CycleCount;				///<³äµçÖÜÆÚ´ÎÊı£¬ ĞèÒªµç³ØÖ§³Ö
+			std::string	Chemistry;				///<åŒ–å­¦æˆåˆ†
+			BatteryCapacity	DesignCapacity;		///<è®¾è®¡å®¹é‡
+			BatteryCapacity	FullChargedCapacity;///<å……ç”µçš„æ»¡å®¹é‡
+			BatteryCapacity BatteryDepletion;	///<ç”µæ± æŸè€—ç™¾åˆ†æ¯”
+			BatteryCapacity	DefaultAlert1;		///<é»˜è®¤è­¦å‘Š1
+			BatteryCapacity	DefaultAlert2;		///<é»˜è®¤è­¦å‘Š2
+			std::string ManufactureDate;		///<åˆ¶é€ æ—¥æœŸ
+			std::string	Manufacture;			///<åˆ¶é€ å•†
+			std::string	SerialNumber;			///<åºåˆ—å·
+			std::string	UniqueID;				///<å”¯ä¸€ID åºåˆ—å·
+			std::string	PowerState;             ///<1ç”µæºè¿æ¥ï¼›2æ”¾ç”µï¼›3å……ç”µï¼›4ç”µå‹åœ¨æé™ï¼›5 ç”µæºè¿æ¥åœ¨å……ç”µ
+			BatteryCapacity	Capacity;           ///<å®æ—¶å®¹é‡
+			std::string	Voltage;				///<ç”µå‹
+			BatteryCapacity		Rate;			///<å……ç”µæ”¾ç”µé€Ÿåº¦  æ•´æ•°æ˜¯å……ç”µï¼Œè´Ÿæ•°æ˜¯å……ç”µï¼Œ0æ˜¯æ²¡æ”¾ç”µä¹Ÿæ²¡å……ç”µ
+			std::string Percentage;				///<ç”µæ± å®æ—¶å®¹é‡ç™¾åˆ†æ¯”
+			std::string Temperature;			///<ç”µæ± çš„æ¸©åº¦
+			std::string Technology;				///<ç”µæ± çš„æŠ€æœ¯
+			std::string CycleCount;				///<å……ç”µå‘¨æœŸæ¬¡æ•°ï¼Œ éœ€è¦ç”µæ± æ”¯æŒ
 		};
 
-		/// @brief µç³ØÔªËØµÄ»ù´¡Àà
+		/// @brief ç”µæ± å…ƒç´ çš„åŸºç¡€ç±»
 		class BatteryElement
 		{
 		public:
-			/// @brief ¸üĞÂµç³ØĞÅÏ¢
-			/// @param[in] BatterySlotId µç³ØId
-			/// @param[out] BatteryInfo µç³ØĞÅÏ¢
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief æ›´æ–°ç”µæ± ä¿¡æ¯
+			/// @param[in] BatterySlotId ç”µæ± Id
+			/// @param[out] BatteryInfo ç”µæ± ä¿¡æ¯
+			/// @return æ˜¯å¦æˆåŠŸ
 			virtual bool Update(const uint32_t& BatterySlotId, BatteryCommonStruct& BatteryInfo) = 0;
 
-			/// @brief ĞéÎö¹¹º¯Êı
+			/// @brief è™šææ„å‡½æ•°
 			virtual ~BatteryElement() = default;
 
-			/// @brief ½«µç³ØĞÅÏ¢×ª»»³ÉJson×Ö·û´®
-			/// @param[in] BatteryInfo µç³ØĞÅÏ¢
-			/// @return Json×Ö·û´®
+			/// @brief å°†ç”µæ± ä¿¡æ¯è½¬æ¢æˆJsonå­—ç¬¦ä¸²
+			/// @param[in] BatteryInfo ç”µæ± ä¿¡æ¯
+			/// @return Jsonå­—ç¬¦ä¸²
 			virtual std::string BuildBatteryElementToJsonString(const BatteryCommonStruct& BatteryInfo);
 		};
 
-		/// @brief µç³ØÔªËØ¹¤³§Àà
+		/// @brief ç”µæ± å…ƒç´ å·¥å‚ç±»
 		class BatteryElementFactory final
 		{
-			/// @brief Ä¬ÈÏ¹¹Ôìº¯Êı
+			/// @brief é»˜è®¤æ„é€ å‡½æ•°
 			BatteryElementFactory() = default;
 		public:
-			/// @brief µ¥Àıº¯Êı
-			/// @return µ¥Àı¶ÔÏó
+			/// @brief å•ä¾‹å‡½æ•°
+			/// @return å•ä¾‹å¯¹è±¡
 			static BatteryElementFactory& Instance();
-			/// @brief ´´½¨µç³Ø
-			/// @param[in] DevicePath µç³ØµÄÉè±¸Â·¾¶
-			/// @return µç³ØÔªËØ @ref BatteryElement
+			/// @brief åˆ›å»ºç”µæ± 
+			/// @param[in] DevicePath ç”µæ± çš„è®¾å¤‡è·¯å¾„
+			/// @return ç”µæ± å…ƒç´  @ref BatteryElement
 			std::shared_ptr<BatteryElement> CreateBattery(const std::wstring& DevicePath);
 		};
 	}

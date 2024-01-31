@@ -8,13 +8,13 @@ namespace Hardware
 		class Nuvoton : public SIOCommon
 		{
 		public:
-			/// @brief 初始化Novoton
+			/// @brief 鍒濆鍖朜ovoton
 			Nuvoton();
 
 		private:
-			/// @brief 禁用IO的锁
-			/// @param port SIO的接口地址
-			/// @param data SIO的数据地址
+			/// @brief 绂佺敤IO鐨勯攣
+			/// @param port SIO鐨勬帴鍙ｅ湴鍧�
+			/// @param data SIO鐨勬暟鎹湴鍧�
 			void NuvotonDisableIOSpaceLock(const USHORT& port, const USHORT& data);
 		};
 	}

@@ -8,17 +8,17 @@ namespace Hardware
 		class MotherBroadFromSMBIOS final : public GenericMotherBroad
 		{
 		public:
-			/// @brief Ö÷°åµÄ¹¹Ôìº¯Êı
+			/// @brief ä¸»æ¿çš„æ„é€ å‡½æ•°
 			MotherBroadFromSMBIOS();
-			/// @brief ³õÊ¼»¯Ö÷°å¼°BIOSĞÅÏ¢
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
-			/// Ä¿Ç°À´ËµÎŞ·µ»ØÊı¾İ
+			/// @brief åˆå§‹åŒ–ä¸»æ¿åŠBIOSä¿¡æ¯
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
+			/// ç›®å‰æ¥è¯´æ— è¿”å›æ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Initialize(std::string& response) override final;
 
-			/// @brief ¸üĞÂÖ÷°åĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°ä¸»æ¿ä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ®
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Update(const std::string& Args, std::string& response) override final;
 		private:

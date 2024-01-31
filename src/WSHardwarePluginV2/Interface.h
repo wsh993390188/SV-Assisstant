@@ -1,104 +1,104 @@
 /*!
 * @file Interface.h
-* @brief Ó²¼ş½Ó¿Ú
+* @brief ç¡¬ä»¶æ¥å£
 *
-* @author ÍõË¶(wangshuo20@lenovo.com)
+* @author ç‹ç¡•(wangshuo20@lenovo.com)
 * @version 1.0
-* @date 2020Äê6ÔÂ3ÈÕ
+* @date 2020å¹´6æœˆ3æ—¥
 */
 
 #pragma once
 
 #include "Data.h"
-/// @brief »Øµ÷º¯ÊıÀàĞÍ
+/// @brief å›è°ƒå‡½æ•°ç±»å‹
 using PluginCallback = int(*)(LPCSTR, const char*);
 
 namespace Hardware
 {
-	/// @brief Ó²¼ş½Ó¿ÚÀà£¬ÓÃÀ´¹ÜÀí¶àÖÖÓ²¼şÊµÏÖ
+	/// @brief ç¡¬ä»¶æ¥å£ç±»ï¼Œç”¨æ¥ç®¡ç†å¤šç§ç¡¬ä»¶å®ç°
 	namespace Interface
 	{
-		/// @brief ¹ÜÀíÕßµÄ½Ó¿Ú
+		/// @brief ç®¡ç†è€…çš„æ¥å£
 		class Manager
 		{
 		public:
-			/// @brief ³õÊ¼»¯»Øµ÷º¯ÊıÎª¿Õ
-			/// @return  ¿Õ
+			/// @brief åˆå§‹åŒ–å›è°ƒå‡½æ•°ä¸ºç©º
+			/// @return  ç©º
 			Manager() noexcept : m_CallBack(nullptr) {}
 
-			/// @brief Îö¹¹º¯Êı
-			/// @return ¿Õ
+			/// @brief ææ„å‡½æ•°
+			/// @return ç©º
 			virtual ~Manager() = default;
 
-			/// @brief Ö´ĞĞ»Øµ÷º¯Êı
-			///			ÓÉH5½çÃæorµ÷ÓÃ·½´«µİ»Øµ÷º¯Êı²¢ÓÉÄ£¿éÄÚÖ´ĞĞÍ¨Öª²Ù×÷£¬ÎŞ»Øµ÷º¯ÊıÔò²»Ö´ĞĞÈÎºÎ²Ù×÷
-			/// @param[in] category ±¾´ÎÍ¨ÖªµÄÀàĞÍ £¨ÓÉÄ£¿é¶¨Òå£©
-			/// @param[in] message ±¾´ÎÍ¨ÖªµÄÏûÏ¢£¨JSON¸ñÊ½£©
+			/// @brief æ‰§è¡Œå›è°ƒå‡½æ•°
+			///			ç”±H5ç•Œé¢orè°ƒç”¨æ–¹ä¼ é€’å›è°ƒå‡½æ•°å¹¶ç”±æ¨¡å—å†…æ‰§è¡Œé€šçŸ¥æ“ä½œï¼Œæ— å›è°ƒå‡½æ•°åˆ™ä¸æ‰§è¡Œä»»ä½•æ“ä½œ
+			/// @param[in] category æœ¬æ¬¡é€šçŸ¥çš„ç±»å‹ ï¼ˆç”±æ¨¡å—å®šä¹‰ï¼‰
+			/// @param[in] message æœ¬æ¬¡é€šçŸ¥çš„æ¶ˆæ¯ï¼ˆJSONæ ¼å¼ï¼‰
 			/// @return
-			///			0 Õı³£Á÷³ÌÖ´ĞĞÍê³É
-			///			ÆäËûÖµ Ö´ĞĞ³ö´í
+			///			0 æ­£å¸¸æµç¨‹æ‰§è¡Œå®Œæˆ
+			///			å…¶ä»–å€¼ æ‰§è¡Œå‡ºé”™
 			virtual int DoCallback(LPCSTR category, const char* message);
 
-			/// @brief ×¢²á»Øµ÷º¯Êı
-			///			¿ÉÒÔ¶à´Î×¢²á£¬µ«Ö»±£Áô×îĞÂµÄ»Øµ÷º¯Êı
+			/// @brief æ³¨å†Œå›è°ƒå‡½æ•°
+			///			å¯ä»¥å¤šæ¬¡æ³¨å†Œï¼Œä½†åªä¿ç•™æœ€æ–°çš„å›è°ƒå‡½æ•°
 			///
-			/// @param[in] CallBack »Øµ÷º¯Êı
+			/// @param[in] CallBack å›è°ƒå‡½æ•°
 			/// @return
-			///			<em>SUCCESS</em> Õı³£Á÷³ÌÖ´ĞĞÍê³É
+			///			<em>SUCCESS</em> æ­£å¸¸æµç¨‹æ‰§è¡Œå®Œæˆ
 			virtual void InitManager(PluginCallback CallBack);
 
-			/// @brief ÒÀ¾İÃüÁîÖ´ĞĞÏàÓ¦¶¯×÷
-			/// @param[in] command ÃüÁîÀàĞÍ
-			/// @param[in] paramter JSON²ÎÊı
-			/// @param[out] response »ØÓ¦µÄJSONÖµ
+			/// @brief ä¾æ®å‘½ä»¤æ‰§è¡Œç›¸åº”åŠ¨ä½œ
+			/// @param[in] command å‘½ä»¤ç±»å‹
+			/// @param[in] paramter JSONå‚æ•°
+			/// @param[out] response å›åº”çš„JSONå€¼
 			/// @return @ref Data::ErrorType
 			Data::ErrorType DoAction(const CommandType& command, LPCSTR paramter, std::string& response);
 		private:
-			/// @brief ³õÊ¼»¯ÃüÁî²Ù×÷
-			/// @param[in] paramter JSON²ÎÊı
-			/// @param[out] response JSON»ØÓ¦
+			/// @brief åˆå§‹åŒ–å‘½ä»¤æ“ä½œ
+			/// @param[in] paramter JSONå‚æ•°
+			/// @param[out] response JSONå›åº”
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Init(LPCSTR paramter, std::string& response) = 0;
 
-			/// @brief ¸üĞÂÊı¾İÃüÁî²Ù×÷
-			/// @param[in] paramter JSON²ÎÊı
-			/// @param[out] response JSON»ØÓ¦
+			/// @brief æ›´æ–°æ•°æ®å‘½ä»¤æ“ä½œ
+			/// @param[in] paramter JSONå‚æ•°
+			/// @param[out] response JSONå›åº”
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Update(LPCSTR paramter, std::string& response) = 0;
 
-			/// @brief »ñÈ¡ÃüÁî²Ù×÷
-			/// @param[in] paramter JSON²ÎÊı
-			/// @param[out] response JSON»ØÓ¦
+			/// @brief è·å–å‘½ä»¤æ“ä½œ
+			/// @param[in] paramter JSONå‚æ•°
+			/// @param[out] response JSONå›åº”
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType GetElements(LPCSTR paramter, std::string& response) = 0;
 		protected:
-			/// @brief ÒªÖ´ĞĞµÄ»Øµ÷º¯Êı
+			/// @brief è¦æ‰§è¡Œçš„å›è°ƒå‡½æ•°
 			PluginCallback m_CallBack;
 		};
 	}
 
-	/// @brief ¹ÜÀíÕß´´½¨¹¤³§
+	/// @brief ç®¡ç†è€…åˆ›å»ºå·¥å‚
 	class ManagerFactory final
 	{
 	public:
-		/// @brief ¹ÜÀíÕß¹¤³§µÄµ¥Àı½Ó¿Ú
-		/// @return ¹ÜÀíÕß¹¤³§µÄµ¥Àı
+		/// @brief ç®¡ç†è€…å·¥å‚çš„å•ä¾‹æ¥å£
+		/// @return ç®¡ç†è€…å·¥å‚çš„å•ä¾‹
 		static ManagerFactory* Instance();
 
-		/// @brief ³õÊ¼»¯¹ÜÀíÕß¹¤³§
-		/// @return ¿Õ
+		/// @brief åˆå§‹åŒ–ç®¡ç†è€…å·¥å‚
+		/// @return ç©º
 		ManagerFactory();
 
-		/// @brief Ïú»Ù¹ÜÀíÕß¹¤³§
-		/// @return ¿Õ
+		/// @brief é”€æ¯ç®¡ç†è€…å·¥å‚
+		/// @return ç©º
 		~ManagerFactory();
 
-		/// @brief ¸ù¾İ¹ÜÀíÕßÀàĞÍ»ñÈ¡µÄ¹ÜÀíÕß¶ÔÏó
-		/// @param[in] Type ¹ÜÀíÕßÀàĞÍ
-		/// @return	¹ÜÀíÕß¶ÔÏó
+		/// @brief æ ¹æ®ç®¡ç†è€…ç±»å‹è·å–çš„ç®¡ç†è€…å¯¹è±¡
+		/// @param[in] Type ç®¡ç†è€…ç±»å‹
+		/// @return	ç®¡ç†è€…å¯¹è±¡
 		std::shared_ptr<Interface::Manager> GetManager(const ManagerType& Type);
 	private:
-		/// @brief ÄÚ²¿´æ´¢µÄ¹ÜÀíÕß
+		/// @brief å†…éƒ¨å­˜å‚¨çš„ç®¡ç†è€…
 		std::map<ManagerType, std::shared_ptr<Interface::Manager>> m_Managers;
 	};
 }

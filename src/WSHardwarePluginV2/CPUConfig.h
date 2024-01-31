@@ -5,81 +5,81 @@ namespace Hardware
 {
 	namespace CPU
 	{
-		/// @brief ´ÓÅäÖÃÖĞ»ñÈ¡CPUĞÅÏ¢
+		/// @brief ä»é…ç½®ä¸­è·å–CPUä¿¡æ¯
 		struct CPUExtendedInfoFromCPUDB
 		{
-			XMLConfig::ExtendedInfo CodeName; ///< cpu´úºÅ
-			XMLConfig::ExtendedInfo SocketPackage; ///< cpu·â×°leixing
-			XMLConfig::ExtendedInfo MaxTDP;///<cpuµÄ±ê×¼×î´óµÄTDP
-			XMLConfig::ExtendedInfo Technology;///<cpuµÄ¹¤ÒÕ
+			XMLConfig::ExtendedInfo CodeName; ///< cpuä»£å·
+			XMLConfig::ExtendedInfo SocketPackage; ///< cpuå°è£…leixing
+			XMLConfig::ExtendedInfo MaxTDP;///<cpuçš„æ ‡å‡†æœ€å¤§çš„TDP
+			XMLConfig::ExtendedInfo Technology;///<cpuçš„å·¥è‰º
 			explicit operator bool() const;
 		};
 
-		/// @brief CPUÅäÖÃÎÄ¼şĞòÁĞ»¯Àà
+		/// @brief CPUé…ç½®æ–‡ä»¶åºåˆ—åŒ–ç±»
 		class CPUDB final : public XMLConfig
 		{
 		private:
-			/// @brief cpudbÖĞµÄĞÅÏ¢ĞòÁĞ»¯
+			/// @brief cpudbä¸­çš„ä¿¡æ¯åºåˆ—åŒ–
 			struct CpuInformationFromCpudb
 			{
-				/// @brief ´ÓCPUDBÖĞ»ñÈ¡µÄcpuĞÅÏ¢, FirstÊÇCPUÏµÁĞ SecondÊÇCPUÀ©Õ¹ĞÅÏ¢
+				/// @brief ä»CPUDBä¸­è·å–çš„cpuä¿¡æ¯, Firstæ˜¯CPUç³»åˆ— Secondæ˜¯CPUæ‰©å±•ä¿¡æ¯
 				std::map<std::string, CPUExtendedInfoFromCPUDB> Element;
 				explicit operator bool() const;
 			};
 
-			/// @brief cpudbÖĞµÄĞÅÏ¢ĞòÁĞ»¯
+			/// @brief cpudbä¸­çš„ä¿¡æ¯åºåˆ—åŒ–
 			struct CpuFamily
 			{
-				/// @brief ´ÓCPUDBÖĞ»ñÈ¡µÄcpuĞÅÏ¢, FirstÊÇCPUµÄ¼Ò×å SecondÊÇCPUÀ©Õ¹ĞÅÏ¢
+				/// @brief ä»CPUDBä¸­è·å–çš„cpuä¿¡æ¯, Firstæ˜¯CPUçš„å®¶æ— Secondæ˜¯CPUæ‰©å±•ä¿¡æ¯
 				std::map<std::string, CpuInformationFromCpudb> Element;
 				explicit operator bool() const;
 			};
-			/// @brief ´æ´¢Íâ²¿ĞÅÏ¢µÄÀà
-			/// FirstÊÇCPUµÄ³§ÉÌ£¬SecondÊÇCPUµÄ¼Ò×åĞÅÏ¢
+			/// @brief å­˜å‚¨å¤–éƒ¨ä¿¡æ¯çš„ç±»
+			/// Firstæ˜¯CPUçš„å‚å•†ï¼ŒSecondæ˜¯CPUçš„å®¶æ—ä¿¡æ¯
 			std::map<std::string, CpuFamily> m_CPUDB;
 
-			/// @brief XMLÄ¬ÈÏ°æ±¾ºÅ
+			/// @brief XMLé»˜è®¤ç‰ˆæœ¬å·
 			std::string m_DefaultVersion;
 
-			/// @brief ÅäÖÃÎÄ¼ş¸üĞÂµÄËø
+			/// @brief é…ç½®æ–‡ä»¶æ›´æ–°çš„é”
 			mutable std::mutex m_Mutex;
 		public:
-			/// @brief CPUĞòÁĞ»¯µ¥Àı
-			/// @return µ¥ÀıÒıÓÃ @ref CPUDB
+			/// @brief CPUåºåˆ—åŒ–å•ä¾‹
+			/// @return å•ä¾‹å¼•ç”¨ @ref CPUDB
 			static CPUDB& Instance();
 
-			/// @brief ³õÊ¼»¯CPUÅäÖÃÎÄ¼ş
+			/// @brief åˆå§‹åŒ–CPUé…ç½®æ–‡ä»¶
 			void Initialize();
 
-			/// @brief ¸ù¾İCPUµÄÌØÕ÷Ñ°ÕÒ²¿·ÖĞÅÏ¢
-			/// @param CpuManufacture CPUµÄ³§ÉÌ
-			/// @param CpuFamily CPUµÄ¼Ò×å
-			/// @param CpuModel CPUµÄĞÍºÅ
-			/// @return Cpu¶îÍâĞÅÏ¢µÄÖ¸Õë
+			/// @brief æ ¹æ®CPUçš„ç‰¹å¾å¯»æ‰¾éƒ¨åˆ†ä¿¡æ¯
+			/// @param CpuManufacture CPUçš„å‚å•†
+			/// @param CpuFamily CPUçš„å®¶æ—
+			/// @param CpuModel CPUçš„å‹å·
+			/// @return Cpué¢å¤–ä¿¡æ¯çš„æŒ‡é’ˆ
 			std::unique_ptr<CPUExtendedInfoFromCPUDB> FindElements(const QueryInfo& QueryInfo) const;
 
 		private:
-			/// @brief CPUĞòÁĞ»¯ÀàµÄÀàĞÍ
+			/// @brief CPUåºåˆ—åŒ–ç±»çš„ç±»å‹
 			using CPUDBType = decltype(m_CPUDB);
 
-			/// @brief Ä¬ÈÏ¹¹Ôì£¬½ûÖ¹Íâ²¿·ÃÎÊ¹¹Ôìº¯Êı
+			/// @brief é»˜è®¤æ„é€ ï¼Œç¦æ­¢å¤–éƒ¨è®¿é—®æ„é€ å‡½æ•°
 			CPUDB() = default;
 
-			/// @brief ½âÎöManufacture×Ö¶Î
-			/// @param ManufactureElement ×Ö¶ÎÔªËØ
-			/// @param CpuDB ĞòÁĞ»¯Àà
+			/// @brief è§£æManufactureå­—æ®µ
+			/// @param ManufactureElement å­—æ®µå…ƒç´ 
+			/// @param CpuDB åºåˆ—åŒ–ç±»
 			void ParserManufacture(tinyxml2::XMLElement const* const ManufactureElement, CPUDBType& CpuDB);
 
-			/// @brief ½âÎöFamily×Ö¶Î
-			/// @param FamilyElement ×Ö¶ÎÔªËØ
-			/// @param FamilyData ĞòÁĞ»¯Àà
-			/// @return ´íÎóÀàĞÍ @ref Data::ErrorType
+			/// @brief è§£æFamilyå­—æ®µ
+			/// @param FamilyElement å­—æ®µå…ƒç´ 
+			/// @param FamilyData åºåˆ—åŒ–ç±»
+			/// @return é”™è¯¯ç±»å‹ @ref Data::ErrorType
 			Data::ErrorType ParserCpuFamily(tinyxml2::XMLElement const* const FamilyElement, CpuFamily& FamilyData);
 
-			/// @brief ½âÎöCPU×Ö¶Î
-			/// @param CpuElement ×Ö¶ÎÔªËØ
-			/// @param CpuData ĞòÁĞ»¯Àà
-			/// @return ´íÎóÀàĞÍ @ref Data::ErrorType
+			/// @brief è§£æCPUå­—æ®µ
+			/// @param CpuElement å­—æ®µå…ƒç´ 
+			/// @param CpuData åºåˆ—åŒ–ç±»
+			/// @return é”™è¯¯ç±»å‹ @ref Data::ErrorType
 			Data::ErrorType ParserCpuInformaion(tinyxml2::XMLElement const* const CpuElement, CpuInformationFromCpudb& CpuData);
 		};
 	}

@@ -1,38 +1,38 @@
-#pragma once
+ï»¿#pragma once
 #include "..\..\Libcommon\adlsdk\include\adl_sdk.h"
 #include "Overdrive.h"
 namespace Hardware
 {
 	namespace GPU
 	{
-		/// @brief ADLÉè±¸²»´æÔÚµÄÒì³£
+		/// @brief ADLè®¾å¤‡ä¸å­˜åœ¨çš„å¼‚å¸¸
 		class ADLDeviceNotExist : public std::exception
 		{
 		public:
-			/// @brief ³õÊ¼»¯Òì³£
-			/// @param DeviceId Éè±¸ID
+			/// @brief åˆå§‹åŒ–å¼‚å¸¸
+			/// @param DeviceId è®¾å¤‡ID
 			explicit ADLDeviceNotExist(const uint32_t& DeviceId) {
 				Msg = "ADL Cant find gpu " + std::to_string(DeviceId);
 			}
-			/// @brief Òì³£ËµÃ÷
-			/// @return Òì³£ËµÃ÷
+			/// @brief å¼‚å¸¸è¯´æ˜
+			/// @return å¼‚å¸¸è¯´æ˜
 			char const* what() const override;
 		private:
-			/// @brief Òì³£ÏûÏ¢
+			/// @brief å¼‚å¸¸æ¶ˆæ¯
 			std::string Msg;
 		};
 
-		/// @brief ADLº¯Êı³É¹¦µÄ°ü×°
-		/// @param status ADLµÄº¯ÊıÖ´ĞĞ½á¹û
-		/// @return ÊÇ·ñÖ´ĞĞ³É¹¦
+		/// @brief ADLå‡½æ•°æˆåŠŸçš„åŒ…è£…
+		/// @param status ADLçš„å‡½æ•°æ‰§è¡Œç»“æœ
+		/// @return æ˜¯å¦æ‰§è¡ŒæˆåŠŸ
 		bool ADL_Success(const int& status);
 
-		/// @brief ADLÖ´ĞĞ×´Ì¬·­Òë³É×Ö·û´®ĞÎÊ½
-		/// @param status ADLº¯ÊıÖ´ĞĞ½á¹û
-		/// @return Ö´ĞĞ½á¹ûµÄ×Ö·û´®ĞÎÊ½
+		/// @brief ADLæ‰§è¡ŒçŠ¶æ€ç¿»è¯‘æˆå­—ç¬¦ä¸²å½¢å¼
+		/// @param status ADLå‡½æ•°æ‰§è¡Œç»“æœ
+		/// @return æ‰§è¡Œç»“æœçš„å­—ç¬¦ä¸²å½¢å¼
 		std::string GetADLStatus(const int& status);
 
-		/// @brief adl sdkµÄ°ïÖúº¯Êı
+		/// @brief adl sdkçš„å¸®åŠ©å‡½æ•°
 		class ADLSDKHelper final
 		{
 			typedef int(*ADL_MAIN_CONTROL_CREATE)(ADL_MAIN_MALLOC_CALLBACK, int);
@@ -82,7 +82,7 @@ namespace Hardware
 			typedef int(*ADL_OVERDRIVE_CAPS) (int iAdapterIndex, int* iSupported, int* iEnabled, int* iVersion);
 			typedef int(*ADL2_OVERDRIVE_CAPS) (ADL_CONTEXT_HANDLE context, int iAdapterIndex, int* iSupported, int* iEnabled, int* iVersion);
 
-			/// @brief ADL ²éÑ¯µÄÊı¾İ½á¹¹
+			/// @brief ADL æŸ¥è¯¢çš„æ•°æ®ç»“æ„
 			struct ADLQueryData
 			{
 				/// @brief The BUS number
@@ -91,131 +91,131 @@ namespace Hardware
 				uint32_t DeviceNumber;
 				/// @brief The function number.
 				uint32_t FunctionNumber;
-				/// @brief ÏÔ¿¨ÔÚADLÖĞµÄË÷Òı
+				/// @brief æ˜¾å¡åœ¨ADLä¸­çš„ç´¢å¼•
 				int AdapterIndex;
-				/// @brief Éè±¸ID
+				/// @brief è®¾å¤‡ID
 				uint32_t DeviceId;
-				/// @brief ÏÔ¿¨Ãû³Æ
+				/// @brief æ˜¾å¡åç§°
 				std::string FullName;
-				/// @brief ADLµÄÏÔ¿¨Î¨Ò»±êÊ¶
+				/// @brief ADLçš„æ˜¾å¡å”¯ä¸€æ ‡è¯†
 				std::string UDID;
-				/// @brief ODµÄ°æ±¾
+				/// @brief ODçš„ç‰ˆæœ¬
 				std::unique_ptr<ADLSDK::Overdrive> OD;
 			};
 		public:
 
-			/// @brief ADLÄ£¿éµÄµ¥ÀıÄ£Ê½
-			/// @return µ¥ÀıÄ£Ê½ @ref ADLSDKHelper
+			/// @brief ADLæ¨¡å—çš„å•ä¾‹æ¨¡å¼
+			/// @return å•ä¾‹æ¨¡å¼ @ref ADLSDKHelper
 			static ADLSDKHelper& Instance();
 
-			/// @brief »ñÈ¡ADLÄ£¿éÖ¸Õë
-			/// @return ADLÄ£¿éÖ¸Õë
+			/// @brief è·å–ADLæ¨¡å—æŒ‡é’ˆ
+			/// @return ADLæ¨¡å—æŒ‡é’ˆ
 			HMODULE GetADLModule() const;
 
-			/// @brief »ñÈ¡ÏÔ¿¨ÎÂ¶ÈĞÅÏ¢
-			/// @param DeviceId Ä¿±êÉè±¸µÄID
-			/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-			///	- @ref ADLDeviceNotExistÉè±¸²»´æÔÚ
-			///	- @ref std::exception »ñÈ¡Ê§°Ü
-			/// @return ÎÂ¶È
+			/// @brief è·å–æ˜¾å¡æ¸©åº¦ä¿¡æ¯
+			/// @param DeviceId ç›®æ ‡è®¾å¤‡çš„ID
+			/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+			///	- @ref ADLDeviceNotExistè®¾å¤‡ä¸å­˜åœ¨
+			///	- @ref std::exception è·å–å¤±è´¥
+			/// @return æ¸©åº¦
 			std::string GetTemperature(const uint32_t& DeviceId);
 
-			/// @brief »ñÈ¡ÏÔ¿¨·çÉÈ×ªËÙĞÅÏ¢
-			/// @param DeviceId Ä¿±êÉè±¸µÄID
-			/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-			///	- @ref ADLDeviceNotExistÉè±¸²»´æÔÚ
-			///	- @ref std::exception »ñÈ¡Ê§°Ü
-			/// @return ·çÉÈ×ªËÙ
+			/// @brief è·å–æ˜¾å¡é£æ‰‡è½¬é€Ÿä¿¡æ¯
+			/// @param DeviceId ç›®æ ‡è®¾å¤‡çš„ID
+			/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+			///	- @ref ADLDeviceNotExistè®¾å¤‡ä¸å­˜åœ¨
+			///	- @ref std::exception è·å–å¤±è´¥
+			/// @return é£æ‰‡è½¬é€Ÿ
 			std::string GetFanSpeed(const uint32_t& DeviceId);
 
-			/// @brief »ñÈ¡ÏÔ´æÆµÂÊĞÅÏ¢
-			/// @param AdapterId Ä¿±êÉè±¸µÄAdapterID
-			/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-			///	- @ref ADLDeviceNotExistÉè±¸²»´æÔÚ
-			///	- @ref std::exception »ñÈ¡Ê§°Ü
-			/// @return ÏÔ´æÆµÂÊ
+			/// @brief è·å–æ˜¾å­˜é¢‘ç‡ä¿¡æ¯
+			/// @param AdapterId ç›®æ ‡è®¾å¤‡çš„AdapterID
+			/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+			///	- @ref ADLDeviceNotExistè®¾å¤‡ä¸å­˜åœ¨
+			///	- @ref std::exception è·å–å¤±è´¥
+			/// @return æ˜¾å­˜é¢‘ç‡
 			std::string GetGPUMemoryClock(const uint32_t& DeviceId);
 
-			/// @brief »ñÈ¡ÏÔ¿¨ºËĞÄÆµÂÊĞÅÏ¢
-			/// @param AdapterId Ä¿±êÉè±¸µÄAdapterID
-			/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-			///	- @ref ADLDeviceNotExistÉè±¸²»´æÔÚ
-			///	- @ref std::exception »ñÈ¡Ê§°Ü
-			/// @return ÏÔ¿¨ºËĞÄÆµÂÊ
+			/// @brief è·å–æ˜¾å¡æ ¸å¿ƒé¢‘ç‡ä¿¡æ¯
+			/// @param AdapterId ç›®æ ‡è®¾å¤‡çš„AdapterID
+			/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+			///	- @ref ADLDeviceNotExistè®¾å¤‡ä¸å­˜åœ¨
+			///	- @ref std::exception è·å–å¤±è´¥
+			/// @return æ˜¾å¡æ ¸å¿ƒé¢‘ç‡
 			std::string GetGPUCoreClock(const uint32_t& DeviceId);
 
-			/// @brief »ñÈ¡ÏÔ¿¨µÄµÄµçÑ¹
-			/// @param DeviceId ÏÔ¿¨µÄÉè±¸ID
-			/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-			///	- @ref ADLDeviceNotExistÉè±¸²»´æÔÚ
-			///	- @ref std::exception »ñÈ¡Ê§°Ü
-			/// @return ÏÔ¿¨µçÑ¹
+			/// @brief è·å–æ˜¾å¡çš„çš„ç”µå‹
+			/// @param DeviceId æ˜¾å¡çš„è®¾å¤‡ID
+			/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+			///	- @ref ADLDeviceNotExistè®¾å¤‡ä¸å­˜åœ¨
+			///	- @ref std::exception è·å–å¤±è´¥
+			/// @return æ˜¾å¡ç”µå‹
 			std::string GetGPUVoltage(const uint32_t& DeviceId);
 
-			/// @brief »ñÈ¡ÏÔ¿¨µÄÃû³Æ
-			/// @param DeviceId ÏÔ¿¨µÄÉè±¸ID
-			/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-			/// - @ref ADLDeviceNotExistÉè±¸²»´æÔÚ
-			/// @return ÏÔ¿¨Ãû³Æ
+			/// @brief è·å–æ˜¾å¡çš„åç§°
+			/// @param DeviceId æ˜¾å¡çš„è®¾å¤‡ID
+			/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+			/// - @ref ADLDeviceNotExistè®¾å¤‡ä¸å­˜åœ¨
+			/// @return æ˜¾å¡åç§°
 			std::string GetGPUName(const uint32_t& DeviceId);
 
-			/// @brief »ñÈ¡ÏÔ¿¨Çı¶¯°æ±¾
-			/// @param DeviceId ÏÔ¿¨µÄÉè±¸ID
-			/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-			/// - @ref ADLDeviceNotExistÉè±¸²»´æÔÚ
-			/// @return ÏÔ¿¨Çı¶¯°æ±¾
+			/// @brief è·å–æ˜¾å¡é©±åŠ¨ç‰ˆæœ¬
+			/// @param DeviceId æ˜¾å¡çš„è®¾å¤‡ID
+			/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+			/// - @ref ADLDeviceNotExistè®¾å¤‡ä¸å­˜åœ¨
+			/// @return æ˜¾å¡é©±åŠ¨ç‰ˆæœ¬
 			std::string GetGPUDriverVersion(const uint32_t& DeviceId);
 
-			/// @brief »ñÈ¡ÏÔ¿¨µÄBIOS°æ±¾
-			/// @param DeviceId ÏÔ¿¨µÄÉè±¸ID
-			/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-			/// - @ref ADLDeviceNotExistÉè±¸²»´æÔÚ
-			/// @return BIOS°æ±¾
+			/// @brief è·å–æ˜¾å¡çš„BIOSç‰ˆæœ¬
+			/// @param DeviceId æ˜¾å¡çš„è®¾å¤‡ID
+			/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+			/// - @ref ADLDeviceNotExistè®¾å¤‡ä¸å­˜åœ¨
+			/// @return BIOSç‰ˆæœ¬
 			std::string GetGPUBIOSVersion(const uint32_t& DeviceId);
 
-			/// @brief »ñÈ¡ÏÔ¿¨µÄBIOSÈÕÆÚ
-			/// @param DeviceId ÏÔ¿¨µÄÉè±¸ID
-			/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-			/// - @ref ADLDeviceNotExistÉè±¸²»´æÔÚ
-			/// @return BIOSÈÕÆÚ
+			/// @brief è·å–æ˜¾å¡çš„BIOSæ—¥æœŸ
+			/// @param DeviceId æ˜¾å¡çš„è®¾å¤‡ID
+			/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+			/// - @ref ADLDeviceNotExistè®¾å¤‡ä¸å­˜åœ¨
+			/// @return BIOSæ—¥æœŸ
 			std::string GetGPUBIOSDate(const uint32_t& DeviceId);
 		private:
-			/// @brief Ã¶¾ÙËùÓĞ»î¶¯µÄA¿¨
-			/// @return ÊÇ·ñ´æÔÚA¿¨
+			/// @brief æšä¸¾æ‰€æœ‰æ´»åŠ¨çš„Aå¡
+			/// @return æ˜¯å¦å­˜åœ¨Aå¡
 			bool EnumAdapter();
 
-			/// @brief ²éÕÒÉè±¸ÊÇ·ñÒÑ¾­ÕÒµ½
+			/// @brief æŸ¥æ‰¾è®¾å¤‡æ˜¯å¦å·²ç»æ‰¾åˆ°
 			/// @param BusNumber The BUS number
 			/// @param DevNumber The Device number
 			/// @param FuncNumber The function number
-			/// @return Èç¹ûÕÒµ½ÔòÎªtrue
+			/// @return å¦‚æœæ‰¾åˆ°åˆ™ä¸ºtrue
 			bool FindDeviceOnQueryDatas(const uint32_t& BusNumber, const uint32_t& DevNumber, const uint32_t& FuncNumber);
 
-			/// @brief ¼ì²âADL OverdriveµÄ°æ±¾
-			/// @param AdapterIndex ÊÊÅäÆ÷µÄË÷Òı
+			/// @brief æ£€æµ‹ADL Overdriveçš„ç‰ˆæœ¬
+			/// @param AdapterIndex é€‚é…å™¨çš„ç´¢å¼•
 			/// @return @ref OverDriveVersion
 			ADLSDK::OverDriveVersion CheckOverDriveSupportVersion(const int& AdapterIndex);
 
 		private:
-			/// @brief °ïÖúº¯ÊıµÄ³õÊ¼»¯²Ù×÷
+			/// @brief å¸®åŠ©å‡½æ•°çš„åˆå§‹åŒ–æ“ä½œ
 			ADLSDKHelper();
 
-			/// @brief °ïÖúº¯ÊıµÄÎö¹¹²Ù×÷
+			/// @brief å¸®åŠ©å‡½æ•°çš„ææ„æ“ä½œ
 			~ADLSDKHelper();
 
-			/// @brief adlµÄÄ£¿éÖ¸Õë
+			/// @brief adlçš„æ¨¡å—æŒ‡é’ˆ
 			HMODULE hModule;
 
-			/// @brief ADLµÄÉÏÏÂÎÄ»·¾³
+			/// @brief ADLçš„ä¸Šä¸‹æ–‡ç¯å¢ƒ
 			ADL_CONTEXT_HANDLE context;
 
-			/// @brief ADLÊÇ·ñ¿ÉÓÃ
+			/// @brief ADLæ˜¯å¦å¯ç”¨
 			bool IsADLEnable;
 
-			/// @brief GPUµÄ²éÑ¯Æ¥ÅäĞÅÏ¢
+			/// @brief GPUçš„æŸ¥è¯¢åŒ¹é…ä¿¡æ¯
 			std::vector<ADLQueryData> GpuQueryDatas;
 
-			/// @brief »ñÈ¡ADLµÄÏÔ¿¨BIOSĞÅÏ¢
+			/// @brief è·å–ADLçš„æ˜¾å¡BIOSä¿¡æ¯
 			ADL_ADAPTER_VIDEOBIOSINFO_GET ADL_Adapter_VideoBiosInfo_Get;
 		};
 	}

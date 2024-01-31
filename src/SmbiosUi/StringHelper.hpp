@@ -8,10 +8,10 @@
 #include "..\..\Libcommon\utfcpp\source\utf8.h"
 
 inline namespace {
-	/// @brief ¿í×Ö·û´®×ªUtf8¸ñÊ½×Ö·û´®
-	///			ÓÉÓÚcodecvt_utf8ÔÚC++17ÖĞ±»ÆúÓÃ£¬ÔİÊ±Ã»ÕÒµ½Ìæ´ú·½Ê½
-	/// @param[in] str ¿í×Ö·û´®
-	/// @return Utf8¸ñÊ½×Ö·û´®
+	/// @brief å®½å­—ç¬¦ä¸²è½¬Utf8æ ¼å¼å­—ç¬¦ä¸²
+	///			ç”±äºcodecvt_utf8åœ¨C++17ä¸­è¢«å¼ƒç”¨ï¼Œæš‚æ—¶æ²¡æ‰¾åˆ°æ›¿ä»£æ–¹å¼
+	/// @param[in] str å®½å­—ç¬¦ä¸²
+	/// @return Utf8æ ¼å¼å­—ç¬¦ä¸²
 	std::string wstringToUtf8(const std::wstring& wstr)
 	{
 		std::string utf8line;
@@ -27,10 +27,10 @@ inline namespace {
 		return utf8line;
 	}
 
-	/// @brief Utf8¸ñÊ½×Ö·û´®×ª¿í×Ö·û´®
-	///			ÓÉÓÚcodecvt_utf8ÔÚC++17ÖĞ±»ÆúÓÃ£¬ÔİÊ±Ã»ÕÒµ½Ìæ´ú·½Ê½
-	/// @param[in] str Utf8×Ö·û´®
-	/// @return ¿í×Ö·û´®
+	/// @brief Utf8æ ¼å¼å­—ç¬¦ä¸²è½¬å®½å­—ç¬¦ä¸²
+	///			ç”±äºcodecvt_utf8åœ¨C++17ä¸­è¢«å¼ƒç”¨ï¼Œæš‚æ—¶æ²¡æ‰¾åˆ°æ›¿ä»£æ–¹å¼
+	/// @param[in] str Utf8å­—ç¬¦ä¸²
+	/// @return å®½å­—ç¬¦ä¸²
 
 	std::wstring utf8ToWstring(const std::string& str)
 	{

@@ -1,10 +1,10 @@
-/*!
+ï»¿/*!
 * @file AmdCPU.h
-* @brief »ñÈ¡AMD CPUĞÅÏ¢
+* @brief è·å–AMD CPUä¿¡æ¯
 *
-* @author ÍõË¶(wangshuo20@lenovo.com)
+* @author ç‹ç¡•(wangshuo20@lenovo.com)
 * @version 1.0
-* @date 2020Äê6ÔÂ5ÈÕ
+* @date 2020å¹´6æœˆ5æ—¥
 */
 #pragma once
 #include "GenericCPU.h"
@@ -18,11 +18,11 @@ namespace Hardware
 		public:
 			AMDTemperature() = delete;
 			explicit AMDTemperature(const uint64_t MsrRegistry, const std::string& Name, std::function<double(const uint32_t, const uint32_t)> DealTemperatureFn, const uint32_t Family, const uint32_t Model);
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			const std::string GetDecoratorValue() const override;
 
-			/// @brief ¸üĞÂĞÅÏ¢
+			/// @brief æ›´æ–°ä¿¡æ¯
 			void Update(std::weak_ptr<Utils::Ring0::SafeMsrHandle> Msr) override;
 		private:
 			const uint32_t m_Family;
@@ -35,11 +35,11 @@ namespace Hardware
 		{
 		public:
 			explicit AMDFrequency(const uint64_t MsrRegistry, const std::string& Name, const uint32_t Family, std::function<double(const uint32_t, const uint32_t)> DealValueFn, const uint32_t MaxClockSpeed);
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			const std::string GetDecoratorValue() const override;
 
-			/// @brief ¸üĞÂĞÅÏ¢
+			/// @brief æ›´æ–°ä¿¡æ¯
 			void Update(std::weak_ptr<Utils::Ring0::SafeMsrHandle> Msr) override;
 		private:
 			double GetBusSpeedByTsc(const int32_t& coreid);
@@ -54,11 +54,11 @@ namespace Hardware
 		{
 		public:
 			explicit AMDVoltage(const uint64_t MsrRegistry, const std::string& Name, const uint32_t Family, std::function<double(const uint32_t, const uint32_t)> DealValueFn);
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			const std::string GetDecoratorValue() const override;
 
-			/// @brief ¸üĞÂĞÅÏ¢
+			/// @brief æ›´æ–°ä¿¡æ¯
 			void Update(std::weak_ptr<Utils::Ring0::SafeMsrHandle> Msr) override;
 		private:
 			std::function<double(const uint32_t, const uint32_t)> m_DealValueFn;
@@ -66,7 +66,7 @@ namespace Hardware
 			double m_CurrentVoltage;
 		};
 
-		/// @brief AMD CPUĞÅÏ¢»ñÈ¡
+		/// @brief AMD CPUä¿¡æ¯è·å–
 		class AmdCPU final : public GenericCPU
 		{
 		public:
@@ -76,47 +76,47 @@ namespace Hardware
 		private:
 			bool InitializeSocketFromAPIC();
 			bool InitializeSocketFromWMI();
-			/// @brief ´ÓCPUIDÖĞ»ñÈ¡CPUĞÅÏ¢
+			/// @brief ä»CPUIDä¸­è·å–CPUä¿¡æ¯
 			void GetInfoFromCPUID();
-			/// @brief ´ÓCPUID1ºÍ80000001ÖĞ»ñÈ¡CPUĞÅÏ¢
-			/// @param[in,out] soc cpuĞÅÏ¢
+			/// @brief ä»CPUID1å’Œ80000001ä¸­è·å–CPUä¿¡æ¯
+			/// @param[in,out] soc cpuä¿¡æ¯
 			void GetInfoFromCPUID1_80000001(Socket& soc);
 
-			/// @brief ´ÓCPUID80000005 80000006ÖĞ»ñÈ¡CacheĞÅÏ¢
-			/// @param[in,out] soc cpuĞÅÏ¢
+			/// @brief ä»CPUID80000005 80000006ä¸­è·å–Cacheä¿¡æ¯
+			/// @param[in,out] soc cpuä¿¡æ¯
 			void GetInfoFromCPUID80000005_6(Socket& soc);
 
-			/// @brief ´ÓCPUID 80000002ÖĞ»ñÈ¡CPUĞÅÏ¢
-			/// @param[in,out] soc cpuĞÅÏ¢
+			/// @brief ä»CPUID 80000002ä¸­è·å–CPUä¿¡æ¯
+			/// @param[in,out] soc cpuä¿¡æ¯
 			void GetInfoFromCPUID80000002(Socket& soc);
 
-			/// @brief ´ÓCPUDBÖĞ»ñÈ¡CPUĞÅÏ¢
-			/// @param[in,out] soc cpuĞÅÏ¢
+			/// @brief ä»CPUDBä¸­è·å–CPUä¿¡æ¯
+			/// @param[in,out] soc cpuä¿¡æ¯
 			void GetInfoFromCPUDB(Socket& soc);
 
-			/// @brief ¼ÓÈë¶¯Ì¬ĞÅÏ¢
+			/// @brief åŠ å…¥åŠ¨æ€ä¿¡æ¯
 			void AddDynamicInfo();
 
-			/// @brief Õë¶ÔSocket¼ÓÈë¶¯Ì¬ĞÅÏ¢
+			/// @brief é’ˆå¯¹SocketåŠ å…¥åŠ¨æ€ä¿¡æ¯
 			void AddDynamicInfoForSocket();
 
-			/// @brief Õë¶Ô³¬Ïß³Ì¼ÓÈë¶¯Ì¬ĞÅÏ¢
+			/// @brief é’ˆå¯¹è¶…çº¿ç¨‹åŠ å…¥åŠ¨æ€ä¿¡æ¯
 			void AddDynamicInfoForHyperThead();
 
-			/// @brief ÎªSocketÔö¼Ó·â×°ÎÂ¶ÈĞÅÏ¢
+			/// @brief ä¸ºSocketå¢åŠ å°è£…æ¸©åº¦ä¿¡æ¯
 			/// @param[in] soc Socket
 			void AddPackageTemperature(Socket& soc);
 
-			/// @brief ¶ÔÃ¿¸ö³¬Ïß³ÌÔö¼ÓºËµçÑ¹ĞÅÏ¢
-			/// @param[in] thread ³¬Ïß³Ì
-			/// @param[in] Family Family´úºÅ
-			/// @param[in] Model Model´úºÅ
+			/// @brief å¯¹æ¯ä¸ªè¶…çº¿ç¨‹å¢åŠ æ ¸ç”µå‹ä¿¡æ¯
+			/// @param[in] thread è¶…çº¿ç¨‹
+			/// @param[in] Family Familyä»£å·
+			/// @param[in] Model Modelä»£å·
 			void AddCoreVoltage(std::weak_ptr<HyperThread> thread, const uint32_t Family, const uint32_t Model);
 
-			/// @brief ¶ÔÃ¿¸ö³¬Ïß³ÌÔö¼ÓºËÆµÂÊĞÅÏ¢
-			/// @param[in] thread ³¬Ïß³Ì
-			/// @param[in] Family Family´úºÅ
-			/// @param[in] Model Model´úºÅ
+			/// @brief å¯¹æ¯ä¸ªè¶…çº¿ç¨‹å¢åŠ æ ¸é¢‘ç‡ä¿¡æ¯
+			/// @param[in] thread è¶…çº¿ç¨‹
+			/// @param[in] Family Familyä»£å·
+			/// @param[in] Model Modelä»£å·
 			void AddCoreFrequency(std::weak_ptr<HyperThread> thread, const uint32_t Family, const uint32_t Model);
 		private:
 			std::vector<TopologyEntry> topology;

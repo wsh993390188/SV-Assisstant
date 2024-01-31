@@ -4,31 +4,31 @@ namespace Hardware
 {
 	namespace WinBio
 	{
-		/// @brief WinBioµÄ¹¹ÔìÊµÏÖº¯Êı
+		/// @brief WinBioçš„æ„é€ å®ç°å‡½æ•°
 		class WinBioImpl :
 			public GenericWinBio
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı
+			/// @brief æ„é€ å‡½æ•°
 			WinBioImpl();
 
-			/// @brief ³õÊ¼»¯Win10µÄÉúÎï´«¸ĞÆ÷
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief åˆå§‹åŒ–Win10çš„ç”Ÿç‰©ä¼ æ„Ÿå™¨
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Initialize(std::string& response) override final;
 
-			/// @brief ¸üĞÂWin10µÄÉúÎï´«¸ĞÆ÷ĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°Win10çš„ç”Ÿç‰©ä¼ æ„Ÿå™¨ä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ®
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Update(const std::string& Args, std::string& response) override final;
 		private:
-			/// @brief WinBioÉè±¸ĞòºÅ
+			/// @brief WinBioè®¾å¤‡åºå·
 			uint32_t Number;
 
-			/// @brief Ã¶¾ÙWinbio¿ÉÓÃµÄÉè±¸
-			/// @param[in] Type Éè±¸ÀàĞÍ
-			/// @return ½á¹û
+			/// @brief æšä¸¾Winbioå¯ç”¨çš„è®¾å¤‡
+			/// @param[in] Type è®¾å¤‡ç±»å‹
+			/// @return ç»“æœ
 			bool EnumerateSensors(const uint32_t& Type);
 		};
 	}

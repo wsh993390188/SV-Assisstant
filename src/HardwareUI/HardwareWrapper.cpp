@@ -1,4 +1,4 @@
-#include "framework.hpp"
+ï»¿#include "framework.hpp"
 #include <filesystem>
 #include <format>
 #include "HardwareWrapper.h"
@@ -112,7 +112,7 @@ namespace
 			for (const auto& node : root)
 			{
 				Json::Value::Members arrayMember = node.getMemberNames();
-				for (auto iter = arrayMember.begin(); iter != arrayMember.end(); ++iter) //±éÀújson³ÉÔ±
+				for (auto iter = arrayMember.begin(); iter != arrayMember.end(); ++iter) //éå†jsonæˆå‘˜
 				{
 					std::string member_name = *iter;
 					if (node[member_name].isString())
@@ -166,7 +166,7 @@ namespace
 		for (const auto& node : root)
 		{
 			Json::Value::Members arrayMember = node.getMemberNames();
-			for (auto iter = arrayMember.begin(); iter != arrayMember.end(); ++iter) //±éÀújson³ÉÔ±
+			for (auto iter = arrayMember.begin(); iter != arrayMember.end(); ++iter) //éå†jsonæˆå‘˜
 			{
 				std::string member_name = *iter;
 				if (node[member_name].isString())

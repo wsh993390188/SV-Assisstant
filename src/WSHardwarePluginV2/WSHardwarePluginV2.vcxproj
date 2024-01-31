@@ -101,7 +101,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;WSHARDWAREPLUGINV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)..\Libcommon\spdlog\include;$(SolutionDir)..\Libcommon\winreg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -126,7 +126,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;WSHARDWAREPLUGINV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)..\Libcommon\spdlog\include;$(SolutionDir)..\Libcommon\winreg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -152,7 +152,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;WSHARDWAREPLUGINV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)..\Libcommon\spdlog\include;$(SolutionDir)..\Libcommon\winreg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -181,7 +181,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;WSHARDWAREPLUGINV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)..\Libcommon\spdlog\include;$(SolutionDir)..\Libcommon\winreg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -460,13 +460,13 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libcommon\jsoncpp\build\src\lib_json\jsoncpp_static.vcxproj">
-      <Project>{73f61e0d-cc26-3f9c-990e-fb1659cd820b}</Project>
+      <Project>{3954dc1c-a353-3816-a851-897a1527689b}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Libcommon\spdlog\build\spdlog.vcxproj">
-      <Project>{278f1521-4faa-3197-94d5-9fd87a771009}</Project>
+      <Project>{3e7ab893-aeb8-339c-96df-a854565d70db}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\Libcommon\tinyxml2\vs\tinyxml2.vcxproj">
-      <Project>{7c72653a-e6f8-4584-b553-de3a0aee4356}</Project>
+    <ProjectReference Include="..\..\Libcommon\tinyxml2\build\tinyxml2.vcxproj">
+      <Project>{c9bccb28-7d00-3b41-bca4-64c157981270}</Project>
     </ProjectReference>
     <ProjectReference Include="..\libSmbios\libSmbios.vcxproj">
       <Project>{d85e9f42-fe3b-4de9-bcbe-87c26b30f1e7}</Project>

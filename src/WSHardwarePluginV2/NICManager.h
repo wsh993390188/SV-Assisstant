@@ -4,27 +4,27 @@
 #include <string>
 namespace Hardware
 {
-	/// @brief Íø¿¨µ÷¶È½Ó¿ÚÀà
+	/// @brief ç½‘å¡è°ƒåº¦æ¥å£ç±»
 	class NICManager : public Interface::Manager
 	{
 	public:
-		/// @brief Íø¿¨µ÷¶È½Ó¿Ú¹¹Ôìº¯Êı
+		/// @brief ç½‘å¡è°ƒåº¦æ¥å£æ„é€ å‡½æ•°
 		NICManager();
-		/// @brief ³õÊ¼»¯ÃüÁî²Ù×÷
-		/// @param[in] paramter JSON²ÎÊı
-		/// @param[out] response JSON»ØÓ¦
+		/// @brief åˆå§‹åŒ–å‘½ä»¤æ“ä½œ
+		/// @param[in] paramter JSONå‚æ•°
+		/// @param[out] response JSONå›åº”
 		/// @return @ref Data::ErrorType
 		Data::ErrorType Init(LPCSTR paramter, std::string& response) override final;
 
-		/// @brief ¸üĞÂÊı¾İÃüÁî²Ù×÷
-		/// @param[in] paramter JSON²ÎÊı
-		/// @param[out] response JSON»ØÓ¦
+		/// @brief æ›´æ–°æ•°æ®å‘½ä»¤æ“ä½œ
+		/// @param[in] paramter JSONå‚æ•°
+		/// @param[out] response JSONå›åº”
 		/// @return @ref Data::ErrorType
 		Data::ErrorType Update(LPCSTR paramter, std::string& response) override final;
 
-		/// @brief »ñÈ¡ÃüÁî²Ù×÷
-		/// @param[in] paramter JSON²ÎÊı
-		/// @param[out] response JSON»ØÓ¦
+		/// @brief è·å–å‘½ä»¤æ“ä½œ
+		/// @param[in] paramter JSONå‚æ•°
+		/// @param[out] response JSONå›åº”
 		/// @return @ref Data::ErrorType
 		Data::ErrorType GetElements(LPCSTR paramter, std::string& response) override final;
 	private:

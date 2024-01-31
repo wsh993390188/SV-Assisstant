@@ -1,4 +1,4 @@
-#include "stdafx.h"
+Ôªø#include "stdafx.h"
 #include <initguid.h>
 #include <winioctl.h>
 #include "BatteryElementCommon.h"
@@ -127,7 +127,7 @@ bool Hardware::Battery::BatteryInforamtion::QueryBatteryInfo(BATTERY_INFORMATION
 	batteryQueryInfo.BatteryTag = CurrentBatTag;
 	batteryQueryInfo.InformationLevel = BatteryInformation;
 	DWORD BytesReturned;
-	//»°µ√–≈œ¢
+	//ÂèñÂæó‰ø°ÊÅØ
 	auto result = ::DeviceIoControl(BatteryHandle.get(), IOCTL_BATTERY_QUERY_INFORMATION, &batteryQueryInfo
 		, sizeof(batteryQueryInfo), &BatteryInfo, sizeof(BatteryInfo), &BytesReturned, NULL);
 	if (!result)
@@ -144,7 +144,7 @@ bool Hardware::Battery::BatteryInforamtion::QueryBatteryManufactureDate(BATTERY_
 	batteryQueryInfo.BatteryTag = CurrentBatTag;
 	batteryQueryInfo.InformationLevel = BatteryManufactureDate;
 	DWORD BytesReturned;
-	//»°µ√–≈œ¢
+	//ÂèñÂæó‰ø°ÊÅØ
 	auto result = ::DeviceIoControl(BatteryHandle.get(), IOCTL_BATTERY_QUERY_INFORMATION, &batteryQueryInfo
 		, sizeof(batteryQueryInfo), &BatteryDate, sizeof(BatteryDate), &BytesReturned, NULL);
 	if (result == FALSE)
@@ -180,7 +180,7 @@ bool Hardware::Battery::BatteryInforamtion::QueryBatteryTemperature(std::string&
 	batteryQueryInfo.InformationLevel = BatteryTemperature;
 	DWORD BytesReturned;
 	ULONG TempTemperature = 0;
-	//»°µ√–≈œ¢
+	//ÂèñÂæó‰ø°ÊÅØ
 	auto result = ::DeviceIoControl(BatteryHandle.get(), IOCTL_BATTERY_QUERY_INFORMATION, &batteryQueryInfo
 		, sizeof(batteryQueryInfo), &TempTemperature, sizeof(TempTemperature), &BytesReturned, NULL);
 	if (!result)

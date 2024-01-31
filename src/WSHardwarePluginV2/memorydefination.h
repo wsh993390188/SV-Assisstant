@@ -6,7 +6,7 @@ namespace Hardware
 {
 	namespace Memory
 	{
-		/// @brief ÄÚ´æÉè±¸µÄÀàĞÍ
+		/// @brief å†…å­˜è®¾å¤‡çš„ç±»å‹
 		enum class DeviceType : uint8_t
 		{
 			Undefined = 0,
@@ -200,8 +200,8 @@ namespace Hardware
 					{
 						struct
 						{
-							BYTE ExtendedTemRange : 1; // Extended Temperature Range 1 = Normal and	extended operating temperature range 0 - 95 ¡ãC supported 0 = Normal operating temperature range	0 - 85 ¡ãC supported
-							BYTE ExtendedTemRefreshRate : 1; // Extended Temperature Refresh Rate 1 = Extended operating temperature range from 85 - 95 ¡ãC supported with standard 1X refresh rate	0 = Use in extended	operating temperature range from 85 - 95 ¡ãC requires 2X refresh	rate
+							BYTE ExtendedTemRange : 1; // Extended Temperature Range 1 = Normal and	extended operating temperature range 0 - 95 Â°C supported 0 = Normal operating temperature range	0 - 85 Â°C supported
+							BYTE ExtendedTemRefreshRate : 1; // Extended Temperature Refresh Rate 1 = Extended operating temperature range from 85 - 95 Â°C supported with standard 1X refresh rate	0 = Use in extended	operating temperature range from 85 - 95 Â°C requires 2X refresh	rate
 							BYTE ASR : 1; //Auto Self Refresh 1 = ASR is supported and the SDRAM will determine the proper refresh rate for any supported	temperature 0 = ASR is not supported
 							BYTE ODTS : 1; // On-die Thermal Sensor(ODTS) Readout 1 = On - die thermal sensor readout is supported 0 = On - die thermal sensor readout is not supported(pending ballot of ODTS)
 							BYTE Reserved : 3; // Reserved
@@ -252,7 +252,7 @@ namespace Hardware
 					BYTE RevisionCode[2]; // Bytes 146 ~ 147: Module Revision Code
 					BYTE DRAMManufacturerIDLeast; // Byte 148: DRAM Manufacturer ID Code, Least Significant Byte
 					BYTE DRAMManufacturerIDMost; // Byte 149: DRAM Manufacturer ID Code, Most Significant Byte
-					BYTE ManufacturerSpecificData[26]; // Bytes 150 ~ 175: Manufacturer¡¯s Specific Data
+					BYTE ManufacturerSpecificData[26]; // Bytes 150 ~ 175: Manufacturerâ€™s Specific Data
 					BYTE CustomerUse[80]; // Open for Customer Use
 				};
 				BYTE DIMM_Bits[128];
@@ -552,12 +552,12 @@ namespace Hardware
 
 #pragma pack(pop)
 
-		/// @brief ÄÚ´æµÄÊ±ĞòĞÅÏ¢(µ¥Î»: ns)
+		/// @brief å†…å­˜çš„æ—¶åºä¿¡æ¯(å•ä½: ns)
 		template<typename T = double>
 		struct MemoryTimingType
 		{
-			std::string Name; ///<Ãû³Æ
-			T Value; ///< ÊıÖµ
+			std::string Name; ///<åç§°
+			T Value; ///< æ•°å€¼
 		};
 
 		struct MemoryPackageType
@@ -566,45 +566,45 @@ namespace Hardware
 			std::string PackageType;
 		};
 
-		/// @brief ÄÚ´æÍ¨ÓÃµÄÊı¾İ½á¹¹£¬À´×ÔCPUZµÄÏÔÊ¾
+		/// @brief å†…å­˜é€šç”¨çš„æ•°æ®ç»“æ„ï¼Œæ¥è‡ªCPUZçš„æ˜¾ç¤º
 		struct MemoryCommonInformation
 		{
-			/// @brief ¹¹Ôìº¯Êı£¬ÉèÖÃÊı¾İÄ¬ÈÏÖµ
+			/// @brief æ„é€ å‡½æ•°ï¼Œè®¾ç½®æ•°æ®é»˜è®¤å€¼
 			MemoryCommonInformation() = default;
-			/// @brief Ä£¿éÀàĞÍ
+			/// @brief æ¨¡å—ç±»å‹
 			std::string ModuleType;
-			/// @brief DRAMÀàĞÍ
+			/// @brief DRAMç±»å‹
 			std::string DRAMType;
-			/// @brief ×î´ó´ø¿í
+			/// @brief æœ€å¤§å¸¦å®½
 			std::string MaxBandWidth;
-			/// @brief Êı¾İ¿í¶È
+			/// @brief æ•°æ®å®½åº¦
 			std::string DataBits;
-			/// @brief Ä£¿éÖÆÔìÉÌ
+			/// @brief æ¨¡å—åˆ¶é€ å•†
 			std::string ModuleManufacturer;
-			/// @brief DieÖÆÔìÉÌ
+			/// @brief Dieåˆ¶é€ å•†
 			std::string DRAMManufacturer;
 			/// @brief PartNumber
 			std::string PartNumber;
-			/// @brief ĞòÁĞºÅ
+			/// @brief åºåˆ—å·
 			std::string SerialNumber;
 
 			std::string DRAMStepping;
 
-			/// @brief ÄÚ´æ´óĞ¡
+			/// @brief å†…å­˜å¤§å°
 			double ModuleSize;
-			/// @brief SPDµÄÀ©Õ¹ĞÅÏ¢£¨XMPµÈ£©
+			/// @brief SPDçš„æ‰©å±•ä¿¡æ¯ï¼ˆXMPç­‰ï¼‰
 			std::string SPDExt;
-			/// @brief Éú²úÈÕÆÚ
+			/// @brief ç”Ÿäº§æ—¥æœŸ
 			std::string ProductDate;
-			/// @brief Rank&Bank ÊıÁ¿
+			/// @brief Rank&Bank æ•°é‡
 			std::string Ranks_Banks;
-			/// @brief ÄÚ´æµÄ±ê×¼µçÑ¹
+			/// @brief å†…å­˜çš„æ ‡å‡†ç”µå‹
 			std::string Voltages;
-			/// @brief ÄÚ´æµÄ¹¤×÷ÆµÂÊ
+			/// @brief å†…å­˜çš„å·¥ä½œé¢‘ç‡
 			double MemoryFrequency = (std::numeric_limits<double>::min)();
 			std::vector<uint16_t> CASLatencies; ///< CAS Latencies Supported
-			std::vector<MemoryTimingType<std::string>> MemoryTimings; ///< ÄÚ´æµÄÊ±ĞòĞÅÏ¢
-			/// @brief Ê±ĞòĞÅÏ¢
+			std::vector<MemoryTimingType<std::string>> MemoryTimings; ///< å†…å­˜çš„æ—¶åºä¿¡æ¯
+			/// @brief æ—¶åºä¿¡æ¯
 			std::vector<MemoryTimingType<>> Times;
 		};
 	}

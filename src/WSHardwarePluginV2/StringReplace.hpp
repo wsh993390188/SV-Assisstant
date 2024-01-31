@@ -1,11 +1,11 @@
 /*!
 * @file StringReplace.hpp
-* @brief ²Ù×÷±ê×¼¿â×Ö·û´®
+* @brief æ“ä½œæ ‡å‡†åº“å­—ç¬¦ä¸²
 *
 *
-* @author ÍõË¶(wangshuo20@lenovo.com)
+* @author ç‹ç¡•(wangshuo20@lenovo.com)
 * @version 1.0
-* @date 2020Äê5ÔÂ29ÈÕ
+* @date 2020å¹´5æœˆ29æ—¥
 */
 #pragma once
 #include <string>
@@ -14,12 +14,12 @@
 #include <wctype.h>
 
 inline namespace {
-	/// @brief ±ê×¼¿â×Ö·û´®Ìæ»»¹¦ÄÜ
-	/// @tparam CharT ×Ö·û´®ÀàĞÍ
-	/// @param[in,out] str Ìæ»»µÄ×Ö·û´®
-	/// @param[in] from ±»Ìæ»»µÄ×Ö·û
-	/// @param[in] to Ìæ»»µÄ×Ö·û
-	/// @return ²Ù×÷ÊÇ·ñ³É¹¦
+	/// @brief æ ‡å‡†åº“å­—ç¬¦ä¸²æ›¿æ¢åŠŸèƒ½
+	/// @tparam CharT å­—ç¬¦ä¸²ç±»å‹
+	/// @param[in,out] str æ›¿æ¢çš„å­—ç¬¦ä¸²
+	/// @param[in] from è¢«æ›¿æ¢çš„å­—ç¬¦
+	/// @param[in] to æ›¿æ¢çš„å­—ç¬¦
+	/// @return æ“ä½œæ˜¯å¦æˆåŠŸ
 	template <typename CharT>
 	bool replace(std::basic_string<CharT>& str,
 		const std::basic_string<CharT>& from,
@@ -32,10 +32,10 @@ inline namespace {
 		return true;
 	}
 
-	/// @brief ¿í×Ö·û´®²»Çø·Ö´óĞ¡Ğ´±È½Ï
-	/// @param[in] a ±È½ÏµÄµÚÒ»¸ö×Ö·û´®
-	/// @param[in] b ±È½ÏµÄµÚ¶ş¸ö×Ö·û´®
-	/// @return Á½¸ö×Ö·û´®ÊÇ·ñÒ»ÖÂ
+	/// @brief å®½å­—ç¬¦ä¸²ä¸åŒºåˆ†å¤§å°å†™æ¯”è¾ƒ
+	/// @param[in] a æ¯”è¾ƒçš„ç¬¬ä¸€ä¸ªå­—ç¬¦ä¸²
+	/// @param[in] b æ¯”è¾ƒçš„ç¬¬äºŒä¸ªå­—ç¬¦ä¸²
+	/// @return ä¸¤ä¸ªå­—ç¬¦ä¸²æ˜¯å¦ä¸€è‡´
 	bool StringIsEqualsNoCase(
 		const std::wstring& a,
 		const std::wstring& b)
@@ -46,10 +46,10 @@ inline namespace {
 				return towlower(a) == towlower(b);
 			});
 	}
-	/// @brief ×Ö·û´®²»Çø·Ö´óĞ¡Ğ´±È½Ï
-	/// @param[in] a ±È½ÏµÄµÚÒ»¸ö×Ö·û´®
-	/// @param[in] b ±È½ÏµÄµÚ¶ş¸ö×Ö·û´®
-	/// @return Á½¸ö×Ö·û´®ÊÇ·ñÒ»ÖÂ
+	/// @brief å­—ç¬¦ä¸²ä¸åŒºåˆ†å¤§å°å†™æ¯”è¾ƒ
+	/// @param[in] a æ¯”è¾ƒçš„ç¬¬ä¸€ä¸ªå­—ç¬¦ä¸²
+	/// @param[in] b æ¯”è¾ƒçš„ç¬¬äºŒä¸ªå­—ç¬¦ä¸²
+	/// @return ä¸¤ä¸ªå­—ç¬¦ä¸²æ˜¯å¦ä¸€è‡´
 	bool StringIsEqualsNoCase(
 		const std::string& a,
 		const std::string& b)
@@ -61,20 +61,20 @@ inline namespace {
 			});
 	}
 
-	/// @brief ¿í×Ö·û´®×ªUtf8¸ñÊ½×Ö·û´®
-	///			ÓÉÓÚcodecvt_utf8ÔÚC++17ÖĞ±»ÆúÓÃ£¬ÔİÊ±Ã»ÕÒµ½Ìæ´ú·½Ê½
-	/// @param[in] str ¿í×Ö·û´®
-	/// @return Utf8¸ñÊ½×Ö·û´®
+	/// @brief å®½å­—ç¬¦ä¸²è½¬Utf8æ ¼å¼å­—ç¬¦ä¸²
+	///			ç”±äºcodecvt_utf8åœ¨C++17ä¸­è¢«å¼ƒç”¨ï¼Œæš‚æ—¶æ²¡æ‰¾åˆ°æ›¿ä»£æ–¹å¼
+	/// @param[in] str å®½å­—ç¬¦ä¸²
+	/// @return Utf8æ ¼å¼å­—ç¬¦ä¸²
 	std::string wstringToUtf8(const std::wstring& str)
 	{
 		std::wstring_convert<std::codecvt_utf8<wchar_t> > strCnv;
 		return strCnv.to_bytes(str);
 	}
 
-	/// @brief Utf8¸ñÊ½×Ö·û´®×ª¿í×Ö·û´®
-	///			ÓÉÓÚcodecvt_utf8ÔÚC++17ÖĞ±»ÆúÓÃ£¬ÔİÊ±Ã»ÕÒµ½Ìæ´ú·½Ê½
-	/// @param[in] str Utf8×Ö·û´®
-	/// @return ¿í×Ö·û´®
+	/// @brief Utf8æ ¼å¼å­—ç¬¦ä¸²è½¬å®½å­—ç¬¦ä¸²
+	///			ç”±äºcodecvt_utf8åœ¨C++17ä¸­è¢«å¼ƒç”¨ï¼Œæš‚æ—¶æ²¡æ‰¾åˆ°æ›¿ä»£æ–¹å¼
+	/// @param[in] str Utf8å­—ç¬¦ä¸²
+	/// @return å®½å­—ç¬¦ä¸²
 	std::wstring utf8ToWstring(std::string str)
 	{
 		std::wstring_convert< std::codecvt_utf8<wchar_t> > strCnv;

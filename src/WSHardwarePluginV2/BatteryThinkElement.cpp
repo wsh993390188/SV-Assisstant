@@ -1,9 +1,9 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "BatteryThinkElement.h"
 
 Hardware::Battery::BatteryThinkElement::BatteryThinkElement(const std::wstring& DevicePath) : BatteryInforamtion(DevicePath), ThinkQueryBatteryInfo(nullptr), hModule(NULL)
 {
-	//Todo Lenovo Ç©ÃûÑéÖ¤
+	//Todo Lenovo ç­¾åéªŒè¯
 	hModule = LoadLibrary(_T("ThinkPowerPlugin.dll"));
 	if (hModule)
 	{

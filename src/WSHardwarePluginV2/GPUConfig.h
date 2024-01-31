@@ -4,10 +4,10 @@ namespace Hardware
 {
 	namespace GPU
 	{
-		/// @brief ´ÓÅäÖÃÖĞ»ñÈ¡CPUĞÅÏ¢
+		/// @brief ä»é…ç½®ä¸­è·å–CPUä¿¡æ¯
 		struct GPUExtendedInfoFromGPUDB
 		{
-			XMLConfig::ExtendedInfo ChipName; ///< Ğ¾Æ¬Ãû
+			XMLConfig::ExtendedInfo ChipName; ///< èŠ¯ç‰‡å
 			XMLConfig::ExtendedInfo Released; ///< Released Date
 			XMLConfig::ExtendedInfo MemorySize;///< Memory Size
 			XMLConfig::ExtendedInfo MemoryType;///< Memory Type
@@ -20,58 +20,58 @@ namespace Hardware
 			explicit operator bool() const;
 		};
 
-		/// @brief GPUµÄÅäÖÃ±í
+		/// @brief GPUçš„é…ç½®è¡¨
 		class GPUConfig final : public XMLConfig
 		{
 		private:
-			/// @brief cpudbÖĞµÄĞÅÏ¢ĞòÁĞ»¯
+			/// @brief cpudbä¸­çš„ä¿¡æ¯åºåˆ—åŒ–
 			struct InformationFromDB
 			{
-				/// @brief ´ÓCPUDBÖĞ»ñÈ¡µÄcpuĞÅÏ¢, FirstÊÇCPUÏµÁĞ SecondÊÇCPUÀ©Õ¹ĞÅÏ¢
+				/// @brief ä»CPUDBä¸­è·å–çš„cpuä¿¡æ¯, Firstæ˜¯CPUç³»åˆ— Secondæ˜¯CPUæ‰©å±•ä¿¡æ¯
 				std::map<std::string, GPUExtendedInfoFromGPUDB> Element;
 				explicit operator bool() const;
 			};
 
-			/// @brief ´æ´¢Íâ²¿ĞÅÏ¢µÄÀà
-			/// FirstÊÇCPUµÄ³§ÉÌ£¬SecondÊÇCPUµÄ¼Ò×åĞÅÏ¢
+			/// @brief å­˜å‚¨å¤–éƒ¨ä¿¡æ¯çš„ç±»
+			/// Firstæ˜¯CPUçš„å‚å•†ï¼ŒSecondæ˜¯CPUçš„å®¶æ—ä¿¡æ¯
 			std::map<std::string, InformationFromDB> m_GPUDB;
 
-			/// @brief XMLÄ¬ÈÏ°æ±¾ºÅ
+			/// @brief XMLé»˜è®¤ç‰ˆæœ¬å·
 			std::string m_DefaultVersion;
 
-			/// @brief ÅäÖÃÎÄ¼ş¸üĞÂµÄËø
+			/// @brief é…ç½®æ–‡ä»¶æ›´æ–°çš„é”
 			mutable std::mutex m_Mutex;
 		public:
-			/// @brief CPUĞòÁĞ»¯µ¥Àı
-			/// @return µ¥ÀıÒıÓÃ @ref CPUDB
+			/// @brief CPUåºåˆ—åŒ–å•ä¾‹
+			/// @return å•ä¾‹å¼•ç”¨ @ref CPUDB
 			static GPUConfig& Instance();
 
-			/// @brief ³õÊ¼»¯CPUÅäÖÃÎÄ¼ş
+			/// @brief åˆå§‹åŒ–CPUé…ç½®æ–‡ä»¶
 			void Initialize();
 
-			/// @brief ¸ù¾İCPUµÄÌØÕ÷Ñ°ÕÒ²¿·ÖĞÅÏ¢
-			/// @param CpuManufacture CPUµÄ³§ÉÌ
-			/// @param CpuFamily CPUµÄ¼Ò×å
-			/// @param CpuModel CPUµÄĞÍºÅ
-			/// @return Cpu¶îÍâĞÅÏ¢µÄÖ¸Õë
+			/// @brief æ ¹æ®CPUçš„ç‰¹å¾å¯»æ‰¾éƒ¨åˆ†ä¿¡æ¯
+			/// @param CpuManufacture CPUçš„å‚å•†
+			/// @param CpuFamily CPUçš„å®¶æ—
+			/// @param CpuModel CPUçš„å‹å·
+			/// @return Cpué¢å¤–ä¿¡æ¯çš„æŒ‡é’ˆ
 			std::unique_ptr<GPUExtendedInfoFromGPUDB> FindElements(const QueryInfo& QueryInfo) const;
 
 		private:
-			/// @brief CPUĞòÁĞ»¯ÀàµÄÀàĞÍ
+			/// @brief CPUåºåˆ—åŒ–ç±»çš„ç±»å‹
 			using GPUDBType = decltype(m_GPUDB);
 
-			/// @brief Ä¬ÈÏ¹¹Ôì£¬½ûÖ¹Íâ²¿·ÃÎÊ¹¹Ôìº¯Êı
+			/// @brief é»˜è®¤æ„é€ ï¼Œç¦æ­¢å¤–éƒ¨è®¿é—®æ„é€ å‡½æ•°
 			GPUConfig() = default;
 
-			/// @brief ½âÎöManufacture×Ö¶Î
-			/// @param ManufactureElement ×Ö¶ÎÔªËØ
-			/// @param CpuDB ĞòÁĞ»¯Àà
+			/// @brief è§£æManufactureå­—æ®µ
+			/// @param ManufactureElement å­—æ®µå…ƒç´ 
+			/// @param CpuDB åºåˆ—åŒ–ç±»
 			void ParserManufacture(tinyxml2::XMLElement const* const ManufactureElement, GPUDBType& DB);
 
-			/// @brief ½âÎöCPU×Ö¶Î
-			/// @param CpuElement ×Ö¶ÎÔªËØ
-			/// @param CpuData ĞòÁĞ»¯Àà
-			/// @return ´íÎóÀàĞÍ @ref Data::ErrorType
+			/// @brief è§£æCPUå­—æ®µ
+			/// @param CpuElement å­—æ®µå…ƒç´ 
+			/// @param CpuData åºåˆ—åŒ–ç±»
+			/// @return é”™è¯¯ç±»å‹ @ref Data::ErrorType
 			Data::ErrorType ParserInformaion(tinyxml2::XMLElement const* const CpuElement, InformationFromDB& Data);
 		};
 	}

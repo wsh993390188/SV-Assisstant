@@ -6,65 +6,65 @@ namespace Hardware
 	{
 		namespace ADLSDK
 		{
-			/// @brief OverDrive°æ±¾
+			/// @brief OverDriveç‰ˆæœ¬
 			enum class OverDriveVersion
 			{
-				NotSupport,///<²»Ö§³ÖOverDrive
+				NotSupport,///<ä¸æ”¯æŒOverDrive
 				OverDrive5,///< Version 5
 				OverDrive6,///< Version 6
 				OverDrive8,///< Version 8
 				OverDriveN,///< Next Version
 			};
 
-			/// @brief ODÖ§³ÖµÄ¹¦ÄÜ
+			/// @brief ODæ”¯æŒçš„åŠŸèƒ½
 			struct ODSupport
 			{
-				bool Temperature = false;///<ÎÂ¶È
-				bool FanSpeed = false;///<·çÉÈ×ªËÙ
-				bool Power = false;///<¹¦ºÄ
+				bool Temperature = false;///<æ¸©åº¦
+				bool FanSpeed = false;///<é£Žæ‰‡è½¬é€Ÿ
+				bool Power = false;///<åŠŸè€—
 			};
 
-			/// @brief ODµÄ»ùÀà
+			/// @brief ODçš„åŸºç±»
 			class Overdrive
 			{
 			public:
-				/// @brief ODµÄÎö¹¹º¯Êý
+				/// @brief ODçš„æžæž„å‡½æ•°
 				virtual ~Overdrive() = default;
 
-				/// @brief »ñÈ¡ÏÔ¿¨ÎÂ¶ÈÐÅÏ¢
-				/// @param AdapterId Ä¿±êÉè±¸µÄAdapterID
-				/// @param hModule ADLµÄÄ£¿éµØÖ·
-				/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-				///	- @ref std::exception »ñÈ¡Ê§°Ü
-				/// @return ÎÂ¶È
+				/// @brief èŽ·å–æ˜¾å¡æ¸©åº¦ä¿¡æ¯
+				/// @param AdapterId ç›®æ ‡è®¾å¤‡çš„AdapterID
+				/// @param hModule ADLçš„æ¨¡å—åœ°å€
+				/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+				///	- @ref std::exception èŽ·å–å¤±è´¥
+				/// @return æ¸©åº¦
 				virtual std::string GetTemperature(const uint32_t& AdapterId) = 0;
 
-				/// @brief »ñÈ¡ÏÔ¿¨·çÉÈ×ªËÙÐÅÏ¢
-				/// @param AdapterId Ä¿±êÉè±¸µÄAdapterID
-				/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-				///	- @ref std::exception »ñÈ¡Ê§°Ü
-				/// @return ·çÉÈ×ªËÙ
+				/// @brief èŽ·å–æ˜¾å¡é£Žæ‰‡è½¬é€Ÿä¿¡æ¯
+				/// @param AdapterId ç›®æ ‡è®¾å¤‡çš„AdapterID
+				/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+				///	- @ref std::exception èŽ·å–å¤±è´¥
+				/// @return é£Žæ‰‡è½¬é€Ÿ
 				virtual std::string GetFanSpeed(const uint32_t& AdapterId) = 0;
 
-				/// @brief »ñÈ¡ÏÔ´æÆµÂÊÐÅÏ¢
-				/// @param AdapterId Ä¿±êÉè±¸µÄAdapterID
-				/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-				///	- @ref std::exception »ñÈ¡Ê§°Ü
-				/// @return ÏÔ´æÆµÂÊ
+				/// @brief èŽ·å–æ˜¾å­˜é¢‘çŽ‡ä¿¡æ¯
+				/// @param AdapterId ç›®æ ‡è®¾å¤‡çš„AdapterID
+				/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+				///	- @ref std::exception èŽ·å–å¤±è´¥
+				/// @return æ˜¾å­˜é¢‘çŽ‡
 				virtual std::string GetGPUMemoryClock(const uint32_t& AdapterId) = 0;
 
-				/// @brief »ñÈ¡ÏÔ¿¨ºËÐÄÆµÂÊÐÅÏ¢
-				/// @param AdapterId Ä¿±êÉè±¸µÄAdapterID
-				/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-				///	- @ref std::exception »ñÈ¡Ê§°Ü
-				/// @return ÏÔ¿¨ºËÐÄÆµÂÊ
+				/// @brief èŽ·å–æ˜¾å¡æ ¸å¿ƒé¢‘çŽ‡ä¿¡æ¯
+				/// @param AdapterId ç›®æ ‡è®¾å¤‡çš„AdapterID
+				/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+				///	- @ref std::exception èŽ·å–å¤±è´¥
+				/// @return æ˜¾å¡æ ¸å¿ƒé¢‘çŽ‡
 				virtual std::string GetGPUCoreClock(const uint32_t& AdapterId) = 0;
 
-				/// @brief »ñÈ¡ÏÔ¿¨µçÑ¹ÐÅÏ¢
-				/// @param AdapterId Ä¿±êÉè±¸µÄAdapterID
-				/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-				///	- @ref std::exception »ñÈ¡Ê§°Ü
-				/// @return ÏÔ¿¨µçÑ¹
+				/// @brief èŽ·å–æ˜¾å¡ç”µåŽ‹ä¿¡æ¯
+				/// @param AdapterId ç›®æ ‡è®¾å¤‡çš„AdapterID
+				/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+				///	- @ref std::exception èŽ·å–å¤±è´¥
+				/// @return æ˜¾å¡ç”µåŽ‹
 				virtual std::string GetGPUVoltage(const uint32_t& AdapterId) = 0;
 			};
 		}

@@ -3,88 +3,88 @@ namespace Hardware
 {
 	namespace NIC
 	{
-		/// @brief IPµØÖ·µÄ½á¹¹
+		/// @brief IPåœ°å€çš„ç»“æ„
 		struct IPAddress
 		{
-			/// @brief IPµØÖ·ÀàĞÍ
+			/// @brief IPåœ°å€ç±»å‹
 			enum class IPAddressType : uint16_t
 			{
-				UNKNOWN = 0xFFFF,///< Î´ÖªÀàĞÍ
-				IPV4 = 2,///< IPV4ÀàĞÍ
-				IPV6 = 23,///< IPV6ÀàĞÍ
+				UNKNOWN = 0xFFFF,///< æœªçŸ¥ç±»å‹
+				IPV4 = 2,///< IPV4ç±»å‹
+				IPV6 = 23,///< IPV6ç±»å‹
 			};
 
-			IPAddressType Type; ///<IPµØÖ·µÄÀàĞÍ
-			std::string Address;///<IPµØÖ·
+			IPAddressType Type; ///<IPåœ°å€çš„ç±»å‹
+			std::string Address;///<IPåœ°å€
 		};
 
-		/// @brief Íø¿¨ĞÅÏ¢
+		/// @brief ç½‘å¡ä¿¡æ¯
 		struct NetStruct
 		{
-			uint32_t	If_Index;///<½Ó¿ÚµÄË÷Òı(ÓÉÏµÍ³·ÖÅä)
-			bool		IsWifi;///< ÊÇ·ñÎªWifiÉè±¸
-			GUID		IfGuid;///<ÊÊÅäÆ÷µÄGUID
-			std::string Description;///<Íø¿¨ÃèÊö
-			std::string ConnectionName;///<Á¬½ÓÃû³Æ
-			std::string InterfaceType;///<½Ó¿ÚÀàĞÍ
-			std::string MacAddress;///<Ó²¼şµØÖ·
-			uint64_t ConnectionSpeed;///<Á¬½ÓËÙ¶È
+			uint32_t	If_Index;///<æ¥å£çš„ç´¢å¼•(ç”±ç³»ç»Ÿåˆ†é…)
+			bool		IsWifi;///< æ˜¯å¦ä¸ºWifiè®¾å¤‡
+			GUID		IfGuid;///<é€‚é…å™¨çš„GUID
+			std::string Description;///<ç½‘å¡æè¿°
+			std::string ConnectionName;///<è¿æ¥åç§°
+			std::string InterfaceType;///<æ¥å£ç±»å‹
+			std::string MacAddress;///<ç¡¬ä»¶åœ°å€
+			uint64_t ConnectionSpeed;///<è¿æ¥é€Ÿåº¦
 			uint32_t MTU;///<MTU
-			std::vector<IPAddress> UniAddress;///< µ¥²¥µØÖ·
+			std::vector<IPAddress> UniAddress;///< å•æ’­åœ°å€
 
-			// ¶¯Ì¬ĞÅÏ¢
-			uint64_t InOctets;///<½ÓÊÕµ½µÄPackagesÊıÁ¿
-			uint64_t OutOctets;///<·¢ËÍµÄpackagesÊıÁ¿
+			// åŠ¨æ€ä¿¡æ¯
+			uint64_t InOctets;///<æ¥æ”¶åˆ°çš„Packagesæ•°é‡
+			uint64_t OutOctets;///<å‘é€çš„packagesæ•°é‡
 		};
 
-		/// @brief Íø¿¨Í¨ÓÃ³õÊ¼»¯º¯Êı
+		/// @brief ç½‘å¡é€šç”¨åˆå§‹åŒ–å‡½æ•°
 		class GenericNIC
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı£¬ÓÃÓÚ³õÊ¼»¯Íø¿¨ĞÅÏ¢
+			/// @brief æ„é€ å‡½æ•°ï¼Œç”¨äºåˆå§‹åŒ–ç½‘å¡ä¿¡æ¯
 			GenericNIC() = default;
 
-			/// @brief ĞéÎö¹¹º¯Êı
+			/// @brief è™šææ„å‡½æ•°
 			virtual ~GenericNIC() = default;
 
-			/// @brief ³õÊ¼»¯Íø¿¨
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief åˆå§‹åŒ–ç½‘å¡
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Initialize(std::string& response) = 0;
 
-			/// @brief ¸üĞÂÍø¿¨ĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°ç½‘å¡ä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ®
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Update(const std::string& Args, std::string& response) = 0;
 
-			/// @brief »ñÈ¡Íø¿¨»ù´¡Êı¾İ²Ù×÷
-			/// @param[in] paramter JSON²ÎÊı
-			/// @param[out] response JSON»ØÓ¦
+			/// @brief è·å–ç½‘å¡åŸºç¡€æ•°æ®æ“ä½œ
+			/// @param[in] paramter JSONå‚æ•°
+			/// @param[out] response JSONå›åº”
 			/// @return @ref Data::ErrorType
 			Data::ErrorType GetElements(LPCSTR paramter, std::string& response);
 		protected:
-			/// @brief Íø¿¨ĞÅÏ¢´æ´¢Êı¾İ
+			/// @brief ç½‘å¡ä¿¡æ¯å­˜å‚¨æ•°æ®
 			std::map<uint32_t, NetStruct> NICInfos;
 		protected:
-			/// @brief ¹¹½¨³õÊ¼»¯JSONÊı¾İ
-			/// @return JSON Utf-8×Ö·û
+			/// @brief æ„å»ºåˆå§‹åŒ–JSONæ•°æ®
+			/// @return JSON Utf-8å­—ç¬¦
 			std::string BuildInitializeJson();
 
-			/// @brief ¹¹½¨Íø¿¨ĞÅÏ¢µÄJSON×Ö·û
-			/// @param[in] NICId Íø¿¨ID
-			/// @return JSON×Ö·û
+			/// @brief æ„å»ºç½‘å¡ä¿¡æ¯çš„JSONå­—ç¬¦
+			/// @param[in] NICId ç½‘å¡ID
+			/// @return JSONå­—ç¬¦
 			std::string BuildElementJson(const uint32_t& NICId);
 
-			/// @brief ¹¹½¨Íø¿¨µÄ¶¯Ì¬ĞÅÏ¢
-			/// @param Info Íø¿¨µÄ¶¯Ì¬ĞÅÏ¢
-			/// @return JSON×Ö·û
+			/// @brief æ„å»ºç½‘å¡çš„åŠ¨æ€ä¿¡æ¯
+			/// @param Info ç½‘å¡çš„åŠ¨æ€ä¿¡æ¯
+			/// @return JSONå­—ç¬¦
 			std::string BuildElementUpdateJson(const NetStruct& Info);
 
-			/// @brief ½âÎöJson×Ö·û
-			/// @param[in] JsonString JSON×Ö·û´®
-			/// @param[out] NICId ½âÎö³É¹¦ºóµÄÍø¿¨Id
-			/// @return ½âÎöÊÇ·ñ³É¹¦
+			/// @brief è§£æJsonå­—ç¬¦
+			/// @param[in] JsonString JSONå­—ç¬¦ä¸²
+			/// @param[out] NICId è§£ææˆåŠŸåçš„ç½‘å¡Id
+			/// @return è§£ææ˜¯å¦æˆåŠŸ
 			bool ParserJson(const std::string& JsonString, uint32_t& NICId);
 		};
 	}

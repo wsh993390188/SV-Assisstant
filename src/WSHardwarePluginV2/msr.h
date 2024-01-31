@@ -7,32 +7,32 @@ namespace Hardware
 	{
 		namespace Ring0
 		{
-			/// @brief ·ÇÏß³Ì°²È«µÄMsrHandle
+			/// @brief éçº¿ç¨‹å®‰å…¨çš„MsrHandle
 			class MsrHandle final
 			{
-				/// @brief Ö´ĞĞMsrµÄCPUId
+				/// @brief æ‰§è¡ŒMsrçš„CPUId
 				uint32_t cpu_id;
 				MsrHandle() = delete;
 				MsrHandle(const MsrHandle&) = delete;
 				MsrHandle& operator = (const MsrHandle&) = delete;
 			public:
-				/// @brief ³õÊ¼»¯Msr
+				/// @brief åˆå§‹åŒ–Msr
 				/// @param[in] cpu CPU Id
 				MsrHandle(uint32_t cpu);
 
-				/// @brief ¶ÁMsr
-				/// @param[in] msr_number Msr¼Ä´æÆ÷µØÖ·
-				/// @param[out] value Msr·µ»ØÖµ
-				/// @return ÊÇ·ñ³É¹¦
+				/// @brief è¯»Msr
+				/// @param[in] msr_number Msrå¯„å­˜å™¨åœ°å€
+				/// @param[out] value Msrè¿”å›å€¼
+				/// @return æ˜¯å¦æˆåŠŸ
 				bool read(uint64_t msr_number, uint64_t& value);
 
-				/// @brief Ğ´Msr
-				/// @param[in] msr_number Msr¼Ä´æÆ÷µØÖ·
-				/// @param[in] value MsrĞ´ÈëÖµ
-				/// @return ÊÇ·ñ³É¹¦
+				/// @brief å†™Msr
+				/// @param[in] msr_number Msrå¯„å­˜å™¨åœ°å€
+				/// @param[in] value Msrå†™å…¥å€¼
+				/// @return æ˜¯å¦æˆåŠŸ
 				bool write(uint64_t msr_number, uint64_t value);
 
-				/// @brief »ñÈ¡CPU Id
+				/// @brief è·å–CPU Id
 				/// @return CPUid
 				int32_t getCoreId()
 				{
@@ -41,31 +41,31 @@ namespace Hardware
 				~MsrHandle() = default;
 			};
 
-			/// @brief Ïß³Ì°²È«µÄMsrHandle
+			/// @brief çº¿ç¨‹å®‰å…¨çš„MsrHandle
 			class SafeMsrHandle final
 			{
 				/// @brief Msr Handle
 				std::shared_ptr<MsrHandle> pHandle;
-				/// @brief Ïß³Ì°²È«±£»¤»¥³âÁ¿
+				/// @brief çº¿ç¨‹å®‰å…¨ä¿æŠ¤äº’æ–¥é‡
 				std::mutex mutex;
 
 				SafeMsrHandle(const SafeMsrHandle&) = delete;               // forbidden
 				SafeMsrHandle& operator = (const SafeMsrHandle&) = delete; // forbidden
 
 			public:
-				/// @brief ³õÊ¼»¯MsrÎª¿Õ
+				/// @brief åˆå§‹åŒ–Msrä¸ºç©º
 				/// @return
 				SafeMsrHandle() :pHandle{} { }
 
-				/// @brief Õı³£³õÊ¼»¯Msr
+				/// @brief æ­£å¸¸åˆå§‹åŒ–Msr
 				/// @param[in] core_id Cpu Id
 				SafeMsrHandle(uint32_t core_id) : pHandle(new MsrHandle(core_id))
 				{ }
 
-				/// @brief ¶ÁMsr
-				/// @param[in] msr_number Msr¼Ä´æÆ÷µØÖ·
-				/// @param[out] value Msr·µ»ØÖµ
-				/// @return ÊÇ·ñ³É¹¦
+				/// @brief è¯»Msr
+				/// @param[in] msr_number Msrå¯„å­˜å™¨åœ°å€
+				/// @param[out] value Msrè¿”å›å€¼
+				/// @return æ˜¯å¦æˆåŠŸ
 				bool read(uint64_t msr_number, uint64_t& value)
 				{
 					if (pHandle)
@@ -79,10 +79,10 @@ namespace Hardware
 					return false;
 				}
 
-				/// @brief Ğ´Msr
-				/// @param[in] msr_number Msr¼Ä´æÆ÷µØÖ·
-				/// @param[in] value MsrĞ´ÈëÖµ
-				/// @return ÊÇ·ñ³É¹¦
+				/// @brief å†™Msr
+				/// @param[in] msr_number Msrå¯„å­˜å™¨åœ°å€
+				/// @param[in] value Msrå†™å…¥å€¼
+				/// @return æ˜¯å¦æˆåŠŸ
 				bool write(uint64_t msr_number, uint64_t value)
 				{
 					if (pHandle)
@@ -94,7 +94,7 @@ namespace Hardware
 					return false;
 				}
 
-				/// @brief »ñÈ¡CPU Id
+				/// @brief è·å–CPU Id
 				/// @return CPUid
 				int32_t getCoreId()
 				{

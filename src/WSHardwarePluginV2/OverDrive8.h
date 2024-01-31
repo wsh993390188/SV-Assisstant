@@ -6,57 +6,57 @@ namespace Hardware
 	{
 		namespace ADLSDK
 		{
-			/// @brief OD8µÄ°ü×°
+			/// @brief OD8çš„åŒ…è£…
 			class OverDrive8 final : public Overdrive
 			{
 			public:
-				/// @brief ³õÊ¼»¯OD8
-				/// @param hModule ADLµÄÄ£¿éµØÖ·
+				/// @brief åˆå§‹åŒ–OD8
+				/// @param hModule ADLçš„æ¨¡å—åœ°å€
 				explicit OverDrive8(HMODULE hModule);
 
-				/// @brief ´øÉÏÏÂÎÄµÄ³õÊ¼»¯OD 8
-				/// @param hModule ADLµÄÄ£¿éµØÖ·
-				/// @param context ADLµÄÉÏÏÂÎÄ
+				/// @brief å¸¦ä¸Šä¸‹æ–‡çš„åˆå§‹åŒ–OD 8
+				/// @param hModule ADLçš„æ¨¡å—åœ°å€
+				/// @param context ADLçš„ä¸Šä¸‹æ–‡
 				explicit OverDrive8(HMODULE hModule, ADL_CONTEXT_HANDLE context);
-				/// @brief »ñÈ¡ÏÔ¿¨ÎÂ¶ÈĞÅÏ¢
-				/// @param AdapterId Ä¿±êÉè±¸µÄAdapterID
-				/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-				///	- @ref std::exception »ñÈ¡Ê§°Ü
-				/// @return ÎÂ¶È
+				/// @brief è·å–æ˜¾å¡æ¸©åº¦ä¿¡æ¯
+				/// @param AdapterId ç›®æ ‡è®¾å¤‡çš„AdapterID
+				/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+				///	- @ref std::exception è·å–å¤±è´¥
+				/// @return æ¸©åº¦
 				std::string GetTemperature(const uint32_t& AdapterId) override final;
 
-				/// @brief »ñÈ¡ÏÔ¿¨·çÉÈ×ªËÙĞÅÏ¢
-				/// @param AdapterId Ä¿±êÉè±¸µÄAdapterID
-				/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-				///	- @ref std::exception »ñÈ¡Ê§°Ü
-				/// @return ·çÉÈ×ªËÙ
+				/// @brief è·å–æ˜¾å¡é£æ‰‡è½¬é€Ÿä¿¡æ¯
+				/// @param AdapterId ç›®æ ‡è®¾å¤‡çš„AdapterID
+				/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+				///	- @ref std::exception è·å–å¤±è´¥
+				/// @return é£æ‰‡è½¬é€Ÿ
 				std::string GetFanSpeed(const uint32_t& AdapterId)  override final;
 
-				/// @brief »ñÈ¡ÏÔ´æÆµÂÊĞÅÏ¢
-				/// @param AdapterId Ä¿±êÉè±¸µÄAdapterID
-				/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-				///	- @ref std::exception »ñÈ¡Ê§°Ü
-				/// @return ÏÔ´æÆµÂÊ
+				/// @brief è·å–æ˜¾å­˜é¢‘ç‡ä¿¡æ¯
+				/// @param AdapterId ç›®æ ‡è®¾å¤‡çš„AdapterID
+				/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+				///	- @ref std::exception è·å–å¤±è´¥
+				/// @return æ˜¾å­˜é¢‘ç‡
 				std::string GetGPUMemoryClock(const uint32_t& AdapterId) override final;
 
-				/// @brief »ñÈ¡ÏÔ¿¨ºËĞÄÆµÂÊĞÅÏ¢
-				/// @param AdapterId Ä¿±êÉè±¸µÄAdapterID
-				/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-				///	- @ref std::exception »ñÈ¡Ê§°Ü
-				/// @return ÏÔ¿¨ºËĞÄÆµÂÊ
+				/// @brief è·å–æ˜¾å¡æ ¸å¿ƒé¢‘ç‡ä¿¡æ¯
+				/// @param AdapterId ç›®æ ‡è®¾å¤‡çš„AdapterID
+				/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+				///	- @ref std::exception è·å–å¤±è´¥
+				/// @return æ˜¾å¡æ ¸å¿ƒé¢‘ç‡
 				std::string GetGPUCoreClock(const uint32_t& AdapterId)  override final;
 
-				/// @brief »ñÈ¡ÏÔ¿¨µçÑ¹ĞÅÏ¢
-				/// @param AdapterId Ä¿±êÉè±¸µÄAdapterID
-				/// @throw ¿ÉÄÜÅ×³öÒÔÏÂÒì³£
-				///	- @ref std::exception »ñÈ¡Ê§°Ü
-				/// @return ÏÔ¿¨µçÑ¹
+				/// @brief è·å–æ˜¾å¡ç”µå‹ä¿¡æ¯
+				/// @param AdapterId ç›®æ ‡è®¾å¤‡çš„AdapterID
+				/// @throw å¯èƒ½æŠ›å‡ºä»¥ä¸‹å¼‚å¸¸
+				///	- @ref std::exception è·å–å¤±è´¥
+				/// @return æ˜¾å¡ç”µå‹
 				std::string GetGPUVoltage(const uint32_t& AdapterId) override final;
 			private:
 				typedef int(*ADL2_NEW_QUERYPMLOGDATA_GET) (ADL_CONTEXT_HANDLE, int, ADLPMLogDataOutput*);
-				/// @brief OD8µÄ´«¸ĞÆ÷½Ó¿Ú
+				/// @brief OD8çš„ä¼ æ„Ÿå™¨æ¥å£
 				ADL2_NEW_QUERYPMLOGDATA_GET ADL2_New_QueryPMLogData_Get;
-				/// @brief ADLµÄÉÏÏÂÎÄ»·¾³
+				/// @brief ADLçš„ä¸Šä¸‹æ–‡ç¯å¢ƒ
 				ADL_CONTEXT_HANDLE context;
 			};
 		}

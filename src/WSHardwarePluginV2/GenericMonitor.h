@@ -4,70 +4,70 @@ namespace Hardware
 {
 	namespace Monitor
 	{
-		/// @brief ÏÔÊ¾Æ÷µÄĞÅÏ¢Êı¾İ½á¹¹
+		/// @brief æ˜¾ç¤ºå™¨çš„ä¿¡æ¯æ•°æ®ç»“æ„
 		using MonitorDataStruct = std::vector<std::pair<std::string, std::vector<std::string>>>;
 
-		/// @brief ÏÔÊ¾Æ÷Í¨ÓÃ³õÊ¼»¯º¯Êı
+		/// @brief æ˜¾ç¤ºå™¨é€šç”¨åˆå§‹åŒ–å‡½æ•°
 		class GenericMonitor
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı£¬ÓÃÓÚ³õÊ¼»¯ÏÔÊ¾Æ÷ĞÅÏ¢
+			/// @brief æ„é€ å‡½æ•°ï¼Œç”¨äºåˆå§‹åŒ–æ˜¾ç¤ºå™¨ä¿¡æ¯
 			GenericMonitor() = default;
 
-			/// @brief ĞéÎö¹¹º¯Êı
+			/// @brief è™šææ„å‡½æ•°
 			virtual ~GenericMonitor() = default;
 
-			/// @brief ³õÊ¼»¯ÏÔÊ¾Æ÷
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief åˆå§‹åŒ–æ˜¾ç¤ºå™¨
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Initialize(std::string& response) = 0;
 
-			/// @brief ¸üĞÂÏÔÊ¾Æ÷ĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°æ˜¾ç¤ºå™¨ä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ®
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Update(const std::string& Args, std::string& response) = 0;
 
-			/// @brief »ñÈ¡ÏÔÊ¾Æ÷»ù´¡Êı¾İ²Ù×÷
-			/// @param[in] paramter JSON²ÎÊı
-			/// @param[out] response JSON»ØÓ¦
+			/// @brief è·å–æ˜¾ç¤ºå™¨åŸºç¡€æ•°æ®æ“ä½œ
+			/// @param[in] paramter JSONå‚æ•°
+			/// @param[out] response JSONå›åº”
 			/// @return @ref Data::ErrorType
 			Data::ErrorType GetElements(LPCSTR paramter, std::string& response);
 		protected:
-			/// @brief ÏÔÊ¾Æ÷ĞÅÏ¢´æ´¢Êı¾İ
+			/// @brief æ˜¾ç¤ºå™¨ä¿¡æ¯å­˜å‚¨æ•°æ®
 			std::map<std::wstring, MonitorDataStruct> MonitorInfos;
 		protected:
-			/// @brief ¹¹½¨³õÊ¼»¯JSONÊı¾İ
-			/// @return JSON Utf-8×Ö·û
+			/// @brief æ„å»ºåˆå§‹åŒ–JSONæ•°æ®
+			/// @return JSON Utf-8å­—ç¬¦
 			std::string BuildInitializeJson();
 
-			/// @brief ¹¹½¨ÏÔÊ¾Æ÷ĞÅÏ¢µÄJSON×Ö·û
-			/// @param[in] MonitorId ÏÔÊ¾Æ÷ID
-			/// @return JSON×Ö·û
+			/// @brief æ„å»ºæ˜¾ç¤ºå™¨ä¿¡æ¯çš„JSONå­—ç¬¦
+			/// @param[in] MonitorId æ˜¾ç¤ºå™¨ID
+			/// @return JSONå­—ç¬¦
 			std::string BuildElementJson(const std::wstring& MonitorId);
 
-			/// @brief ½âÎöJson×Ö·û
-			/// @param[in] JsonString JSON×Ö·û´®
-			/// @param[out] MonitorId ½âÎö³É¹¦ºóµÄÏÔÊ¾Æ÷Id
-			/// @return ½âÎöÊÇ·ñ³É¹¦
+			/// @brief è§£æJsonå­—ç¬¦
+			/// @param[in] JsonString JSONå­—ç¬¦ä¸²
+			/// @param[out] MonitorId è§£ææˆåŠŸåçš„æ˜¾ç¤ºå™¨Id
+			/// @return è§£ææ˜¯å¦æˆåŠŸ
 			bool ParserJson(const std::string& JsonString, std::wstring& MonitorId);
 
-			/// @brief ½âÎöEDID
-			/// @param[in] EDIDRawBuffer EDIDµÄ¶ş½øÖÆĞÅÏ¢
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief è§£æEDID
+			/// @param[in] EDIDRawBuffer EDIDçš„äºŒè¿›åˆ¶ä¿¡æ¯
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool ParserEDID(const std::vector<uint8_t>& EDIDRawBuffer, MonitorDataStruct& MonitorInfo);
 
-			/// @brief ½âÎöEDIDÖÆÔìÉÌ
+			/// @brief è§£æEDIDåˆ¶é€ å•†
 			/// @param EDIDbuffer
-			/// @return EDID³§ÉÌ
+			/// @return EDIDå‚å•†
 			const std::string GetMonitorName(const std::uint16_t& EDIDbuffer);
 
 		private:
-			/// @brief Ôö¼ÓÃèÊöÖĞµÄĞÅÏ¢
-			/// @param Descriptor ÃèÊöĞÅÏ¢
-			/// @param Name Ãû³Æ
-			/// @param MonitorInfo ÏÔÊ¾Æ÷ĞÅÏ¢
-			/// @return ÊÇ·ñÔö¼Ó³É¹¦
+			/// @brief å¢åŠ æè¿°ä¸­çš„ä¿¡æ¯
+			/// @param Descriptor æè¿°ä¿¡æ¯
+			/// @param Name åç§°
+			/// @param MonitorInfo æ˜¾ç¤ºå™¨ä¿¡æ¯
+			/// @return æ˜¯å¦å¢åŠ æˆåŠŸ
 			bool AddDescriptorString(MonitorDataStruct& MonitorInfo, const EDID_Descriptor_Common_String& Descriptor, const std::string& Name);
 
 			/// @brief
@@ -82,27 +82,27 @@ namespace Hardware
 			/// @return
 			bool AddEstablishedTiming(MonitorDataStruct& MonitorInfo, const EDIDCommon::EstablishedTimingSection& EstablishedTiming);
 
-			/// @brief Ôö¼Ó±ê×¼Ê±Ğò£¨±ê×¼½Ú£©
-			/// @param MonitorInfo ´æ´¢µÄĞÅÏ¢
-			/// @param StandardTiming Ê±ĞòĞÅÏ¢
-			/// @return ÊÇ·ñÔö¼Ó³É¹¦
+			/// @brief å¢åŠ æ ‡å‡†æ—¶åºï¼ˆæ ‡å‡†èŠ‚ï¼‰
+			/// @param MonitorInfo å­˜å‚¨çš„ä¿¡æ¯
+			/// @param StandardTiming æ—¶åºä¿¡æ¯
+			/// @return æ˜¯å¦å¢åŠ æˆåŠŸ
 			bool AddStandardTiming(MonitorDataStruct& MonitorInfo, const EDIDCommon::StandardTimingSection& StandardTiming);
 
-			/// @brief Ôö¼Ó±ê×¼Ê±Ğò£¨ÃèÊö·û£©
-			/// @param MonitorInfo ´æ´¢µÄĞÅÏ¢
-			/// @param StandardTiming Ê±ĞòĞÅÏ¢
-			/// @return ÊÇ·ñÔö¼Ó³É¹¦
+			/// @brief å¢åŠ æ ‡å‡†æ—¶åºï¼ˆæè¿°ç¬¦ï¼‰
+			/// @param MonitorInfo å­˜å‚¨çš„ä¿¡æ¯
+			/// @param StandardTiming æ—¶åºä¿¡æ¯
+			/// @return æ˜¯å¦å¢åŠ æˆåŠŸ
 			bool AddStandardTiming(MonitorDataStruct& MonitorInfo, const EDID_StandardTimingIdentifierDefinition& StandardTiming);
 
-			/// @brief Ôö¼Ó±ê×¼Ê±ĞòµÄÊµÏÖ
-			/// @param Timing ´æ´¢µÄÈİÆ÷
-			/// @param value Ê±ĞòµÄ´æ´¢´úÂë
+			/// @brief å¢åŠ æ ‡å‡†æ—¶åºçš„å®ç°
+			/// @param Timing å­˜å‚¨çš„å®¹å™¨
+			/// @param value æ—¶åºçš„å­˜å‚¨ä»£ç 
 			void AddStandardTimingImpl(std::vector<std::string>& Timing, const std::uint16_t value);
 
-			/// @brief Ôö¼ÓÏÔÊ¾Æ÷µÄÏ¸½ÚĞÅÏ¢
-			/// @param MonitorInfo ´æ´¢µÄĞÅÏ¢
-			/// @param DetailedTiming ÏÔÊ¾Æ÷Ï¸½Ú
-			/// @return ÊÇ·ñÒÑ¾­»ñÈ¡µ½ÁËÏÔÊ¾Æ÷µÄ´óĞ¡
+			/// @brief å¢åŠ æ˜¾ç¤ºå™¨çš„ç»†èŠ‚ä¿¡æ¯
+			/// @param MonitorInfo å­˜å‚¨çš„ä¿¡æ¯
+			/// @param DetailedTiming æ˜¾ç¤ºå™¨ç»†èŠ‚
+			/// @return æ˜¯å¦å·²ç»è·å–åˆ°äº†æ˜¾ç¤ºå™¨çš„å¤§å°
 			bool AddPreferredDetailedTiming(MonitorDataStruct& MonitorInfo, const EDID_Detailed_Timing_Descriptor& DetailedTiming);
 		};
 	}

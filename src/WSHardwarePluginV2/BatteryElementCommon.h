@@ -5,96 +5,96 @@ namespace Hardware
 {
 	namespace Battery
 	{
-		/// @brief µç³ØĞÅÏ¢»ñÈ¡º¯Êı
+		/// @brief ç”µæ± ä¿¡æ¯è·å–å‡½æ•°
 		class BatteryInforamtion : public BatteryElement
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı
-			/// @param[in] DevicePath Éè±¸Â·¾¶
+			/// @brief æ„é€ å‡½æ•°
+			/// @param[in] DevicePath è®¾å¤‡è·¯å¾„
 			explicit BatteryInforamtion(const std::wstring& DevicePath);
 
-			/// @brief ¸üĞÂµç³ØĞÅÏ¢
+			/// @brief æ›´æ–°ç”µæ± ä¿¡æ¯
 			/// @param[in] BatterySlotId
 			/// @param[out] BatteryInfo
-			/// @return ÊÇ·ñ³É¹¦
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool Update(const uint32_t& BatterySlotId, BatteryCommonStruct& BatteryInfo) override;
 		private:
-			/// @brief »ñÈ¡Ò»¸öĞÂµÄTag
+			/// @brief è·å–ä¸€ä¸ªæ–°çš„Tag
 			/// @return
 			ULONG GetNewTag();
 
-			/// @brief »ñÈ¡µç³ØÏà¹ØĞÅÏ¢
-			/// @param[in] batQueryInfo ÊäÈë²éÑ¯ĞÅÏ¢½á¹¹
-			/// @param[out] csOutStr Êä³öÏà¹ØĞÅÏ¢×Ö·û´®
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief è·å–ç”µæ± ç›¸å…³ä¿¡æ¯
+			/// @param[in] batQueryInfo è¾“å…¥æŸ¥è¯¢ä¿¡æ¯ç»“æ„
+			/// @param[out] csOutStr è¾“å‡ºç›¸å…³ä¿¡æ¯å­—ç¬¦ä¸²
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool QueryString(BATTERY_QUERY_INFORMATION& batQueryInfo, std::string& csOutStr);
 
-			/// @brief »ñÈ¡µç³ØÏà¹ØĞÅÏ¢
-			/// @param[out] BatteryInfo µç³ØĞÅÏ¢
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief è·å–ç”µæ± ç›¸å…³ä¿¡æ¯
+			/// @param[out] BatteryInfo ç”µæ± ä¿¡æ¯
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool QueryBatteryInfo(BATTERY_INFORMATION& BatteryInfo);
 
-			/// @brief »ñÈ¡µç³ØÉú²úÈÕÆÚ
-			/// @param[out] BatteryDate µç³ØÉú²úÈÕÆÚ
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief è·å–ç”µæ± ç”Ÿäº§æ—¥æœŸ
+			/// @param[out] BatteryDate ç”µæ± ç”Ÿäº§æ—¥æœŸ
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool QueryBatteryManufactureDate(BATTERY_MANUFACTURE_DATE& BatteryDate);
 
-			/// @brief »ñÈ¡µç³ØµÄ×´Ì¬
-			/// @param[out] BatteryStatus µç³ØµÄ×´Ì¬
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief è·å–ç”µæ± çš„çŠ¶æ€
+			/// @param[out] BatteryStatus ç”µæ± çš„çŠ¶æ€
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool QueryBatteryStatus(BATTERY_STATUS& BatteryStatus);
 
-			/// @brief »ñÈ¡µç³ØµÄÎÂ¶ÈĞÅÏ¢
-			/// @param[out] Temperature Êä³öµç³ØÎÂ¶È
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief è·å–ç”µæ± çš„æ¸©åº¦ä¿¡æ¯
+			/// @param[out] Temperature è¾“å‡ºç”µæ± æ¸©åº¦
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool QueryBatteryTemperature(std::string& Temperature);
 
-			/// @brief »ñÈ¡µç³ØµÄµ±Ç°Ê£ÓàµçÁ¿ĞÅÏ¢
-			/// @param[out] CurrentPercent Êä³öµ±Ç°Ê£ÓàµçÁ¿
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief è·å–ç”µæ± çš„å½“å‰å‰©ä½™ç”µé‡ä¿¡æ¯
+			/// @param[out] CurrentPercent è¾“å‡ºå½“å‰å‰©ä½™ç”µé‡
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool QuertBatteryCurrentPercent(std::string& CurrentPercent);
 		private:
-			/// @brief ĞòÁĞ»¯µç³Ø×´Ì¬
-			/// @param[in] BatteryStatus µç³ØµÄ×´Ì¬
-			/// @return ĞòÁĞ»¯ºóµÄµç³Ø×´Ì¬
+			/// @brief åºåˆ—åŒ–ç”µæ± çŠ¶æ€
+			/// @param[in] BatteryStatus ç”µæ± çš„çŠ¶æ€
+			/// @return åºåˆ—åŒ–åçš„ç”µæ± çŠ¶æ€
 			std::string BatteryPowerStatusToString(const BATTERY_STATUS& BatteryStatus);
 
-			/// @brief ĞòÁĞ»¯µç³ØµçÑ¹Öµ
-			/// @param[in] BatteryStatus µç³ØµÄ×´Ì¬ĞÅÏ¢
-			/// @return µçÑ¹Öµ
+			/// @brief åºåˆ—åŒ–ç”µæ± ç”µå‹å€¼
+			/// @param[in] BatteryStatus ç”µæ± çš„çŠ¶æ€ä¿¡æ¯
+			/// @return ç”µå‹å€¼
 			std::string BatteryVoltageToString(const BATTERY_STATUS& BatteryStatus);
 
-			/// @brief ĞòÁĞ»¯µç³ØÈİÁ¿Öµ
-			/// @param[in] CapacityValue µç³ØÈİÁ¿Öµ
-			/// @param[in] Unit µç³Ø×´Ì¬µÄµ¥Î»
-			/// @return ÈİÁ¿Öµ @ref BatteryCapacity
+			/// @brief åºåˆ—åŒ–ç”µæ± å®¹é‡å€¼
+			/// @param[in] CapacityValue ç”µæ± å®¹é‡å€¼
+			/// @param[in] Unit ç”µæ± çŠ¶æ€çš„å•ä½
+			/// @return å®¹é‡å€¼ @ref BatteryCapacity
 			BatteryCapacity BatteryCapacityToObject(const ULONG& CapacityValue, const ULONG& Unit);
 
-			/// @brief ĞòÁĞ»¯µç³Øµ±Ç°ËÙÂÊ
-			/// @param[in] RateValue µç³ØËÙÂÊĞÅÏ¢
-			/// @param[in] Unit µç³Ø×´Ì¬µÄµ¥Î»
-			/// @return ËÙÂÊĞÅÏ¢ @ref BatteryCapacity
+			/// @brief åºåˆ—åŒ–ç”µæ± å½“å‰é€Ÿç‡
+			/// @param[in] RateValue ç”µæ± é€Ÿç‡ä¿¡æ¯
+			/// @param[in] Unit ç”µæ± çŠ¶æ€çš„å•ä½
+			/// @return é€Ÿç‡ä¿¡æ¯ @ref BatteryCapacity
 			BatteryCapacity BatteryRateToObject(const ULONG& RateValue, const ULONG& Unit);
 
-			/// @brief µç³ØµÄ»¯³É³É·Ö×ªString
-			/// @param[in] Chemistry »¯Ñ§³É·Ö¼ò³Æ
-			/// @return »¯Ñ§³É·ÖÈ«³Æ
+			/// @brief ç”µæ± çš„åŒ–æˆæˆåˆ†è½¬String
+			/// @param[in] Chemistry åŒ–å­¦æˆåˆ†ç®€ç§°
+			/// @return åŒ–å­¦æˆåˆ†å…¨ç§°
 			std::string BatteryChemistryToString(const std::string& Chemistry);
 
-			/// @brief µç³ØµÄ¼¼Êõ×ª»»³É×Ö·û´®
-			/// @param[in] Technology ¼¼ÊõµÄÊıÖµ
-			/// @return ¼¼ÊõµÄ×Ö·û´®
+			/// @brief ç”µæ± çš„æŠ€æœ¯è½¬æ¢æˆå­—ç¬¦ä¸²
+			/// @param[in] Technology æŠ€æœ¯çš„æ•°å€¼
+			/// @return æŠ€æœ¯çš„å­—ç¬¦ä¸²
 			std::string BatteryTechnologyToString(const UCHAR& Technology);
 
-			/// @brief ¼ÆËãµç³ØËğºÄ
-			/// @param[in] FullCapacity µ±Ç°ÂúµçÈİÁ¿
-			/// @param[in] DesignCapacity Éè¼ÆÈİÁ¿
-			/// @return ËğºÄ°Ù·Ö±È @ref BatteryCapacity
+			/// @brief è®¡ç®—ç”µæ± æŸè€—
+			/// @param[in] FullCapacity å½“å‰æ»¡ç”µå®¹é‡
+			/// @param[in] DesignCapacity è®¾è®¡å®¹é‡
+			/// @return æŸè€—ç™¾åˆ†æ¯” @ref BatteryCapacity
 			BatteryCapacity BatteryCalcDepletion(const ULONG& FullCapacity, const ULONG& DesignCapacity);
 		private:
-			/// @brief µç³ØÉè±¸¶ÔÏó¾ä±ú
+			/// @brief ç”µæ± è®¾å¤‡å¯¹è±¡å¥æŸ„
 			Utils::HANDLE_unique_ptr BatteryHandle;
-			/// @brief ×îĞÂµç³ØµÄTag
+			/// @brief æœ€æ–°ç”µæ± çš„Tag
 			ULONG CurrentBatTag;
 		};
 	}

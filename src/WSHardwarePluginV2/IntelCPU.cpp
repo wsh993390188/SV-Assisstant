@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include <array>
 #include <bitset>
 #include <assert.h>
@@ -104,7 +104,7 @@ bool Hardware::CPU::IntelCPU::InitializeSocket()
 	uint32_t coreMaskWidth = 0;
 	uint32_t num_cores = 0;
 
-	// IntelÃ»¼ÓÕâ¸öÅĞ¶ÏCPUIDµÄ±£»¤£¬ÊÇ²»ÊÇ¿ÉÒÔÈ¥µôÁË
+	// Intelæ²¡åŠ è¿™ä¸ªåˆ¤æ–­CPUIDçš„ä¿æŠ¤ï¼Œæ˜¯ä¸æ˜¯å¯ä»¥å»æ‰äº†
 	if (nIds >= 0xB)
 	{
 		Utils::ThreadGroupTempAffinity aff0(0);
@@ -289,7 +289,7 @@ bool Hardware::CPU::IntelCPU::InitializeSocketFromWMI()
 
 std::unique_ptr<Hardware::XMLConfig::QueryInfo> Hardware::CPU::IntelCPU::ParserCPUBrandName(Socket& soc)
 {
-	// ²»È·¶¨ÈçºÎ²Ù×÷
+	// ä¸ç¡®å®šå¦‚ä½•æ“ä½œ
 	try
 	{
 		Hardware::XMLConfig::QueryInfo QueryInfo;
@@ -472,7 +472,7 @@ std::unique_ptr<Hardware::XMLConfig::QueryInfo> Hardware::CPU::IntelCPU::ParserC
 	return nullptr;
 }
 
-#pragma region CPUIDÏà¹Ø
+#pragma region CPUIDç›¸å…³
 
 void Hardware::CPU::IntelCPU::GetInfoFromCPUID()
 {
@@ -872,7 +872,7 @@ void Hardware::CPU::IntelCPU::GetTechnology(Socket& soc)
 }
 #pragma endregion
 
-#pragma region ¶¯Ì¬ĞÅÏ¢Ïà¹Ø
+#pragma region åŠ¨æ€ä¿¡æ¯ç›¸å…³
 void Hardware::CPU::IntelCPU::GetSpecPower(Socket& soc)
 {
 	constexpr auto MSR_RAPL_POWER_UNIT = 0x606;
@@ -1386,7 +1386,7 @@ void Hardware::CPU::IntelPower::Update(std::weak_ptr<Utils::Ring0::SafeMsrHandle
 			std::chrono::duration<double> deltaTime = CurrentTime - m_LastEnergyTime;
 			if (deltaTime.count() < 0.01)
 			{
-				// ¼ä¸ôÊ±¼äÌ«¶Ì»áµ¼ÖÂ¶ÁÈ¡Êı¾İ²»×¼£¬½«¶ªÆú´Ë´ÎÊı¾İ
+				// é—´éš”æ—¶é—´å¤ªçŸ­ä¼šå¯¼è‡´è¯»å–æ•°æ®ä¸å‡†ï¼Œå°†ä¸¢å¼ƒæ­¤æ¬¡æ•°æ®
 				spdlog::debug("read tsc too fast ,from: {}", m_Name.c_str());
 				return;
 			}
@@ -1426,7 +1426,7 @@ void Hardware::CPU::IntelVoltage::Update(std::weak_ptr<Utils::Ring0::SafeMsrHand
 		auto res = MsrPtr->read(m_MsrRegistry, value.ui64);
 		if (res && value.ui32.Edx)
 		{
-			// TODO ·½·¨È·ÈÏ
+			// TODO æ–¹æ³•ç¡®è®¤
 			IsUpdate = true;
 			m_CurrentVoltage = Utils::extract_bits(value.ui64, 32, 45) / (double)pow(2, 13);
 		}

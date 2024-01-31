@@ -1,10 +1,10 @@
 /*!
 * @file DiskManager.h
-* @brief Ó²ÅÌ¹ÜÀíÕß
+* @brief ç¡¬ç›˜ç®¡ç†è€…
 *
-* @author ÍõË¶(wangshuo20@lenovo.com)
+* @author ç‹ç¡•(wangshuo20@lenovo.com)
 * @version 1.0
-* @date 2020Äê6ÔÂ3ÈÕ
+* @date 2020å¹´6æœˆ3æ—¥
 */
 #pragma once
 #include "Interface.h"
@@ -12,12 +12,12 @@
 
 namespace Hardware
 {
-	/// @brief Ó²ÅÌ¹ÜÀíÕßÀà
+	/// @brief ç¡¬ç›˜ç®¡ç†è€…ç±»
 	class DiskManager final :public Interface::Manager
 	{
 	public:
-		/// @brief ³õÊ¼»¯Ó²ÅÌ¹ÜÀíÕß
-		/// @return ¿Õ
+		/// @brief åˆå§‹åŒ–ç¡¬ç›˜ç®¡ç†è€…
+		/// @return ç©º
 		DiskManager() = default;
 
 	private:
@@ -27,17 +27,17 @@ namespace Hardware
 
 		Data::ErrorType GetElements(LPCSTR paramter, std::string& response) override;
 	private:
-		/// @brief ½âÎö¸üĞÂÊı¾İ
-		/// @param[in] paramter ÊäÈëJSONÊı¾İ
-		/// @param[out] CurrentId Êä³ö¸üĞÂµÄId
-		/// @param[out] Elements ĞèÒª¸üĞÂµÄÔªËØ
+		/// @brief è§£ææ›´æ–°æ•°æ®
+		/// @param[in] paramter è¾“å…¥JSONæ•°æ®
+		/// @param[out] CurrentId è¾“å‡ºæ›´æ–°çš„Id
+		/// @param[out] Elements éœ€è¦æ›´æ–°çš„å…ƒç´ 
 		/// @return @ref Data::ErrorType
 		Data::ErrorType PaserUpdateJson(LPCSTR paramter, int& CurrentId, std::vector<std::string>& Elements);
 
-		/// @brief ¹¹½¨´«ÊäJsonÊı¾İ
-		/// @param[out] response JSON´«ÊäÊı¾İ
-		/// @param[in] CurrentId ¸üĞÂµÄId
-		/// @param[in] Elements ¸üĞÂµÄÔªËØ
+		/// @brief æ„å»ºä¼ è¾“Jsonæ•°æ®
+		/// @param[out] response JSONä¼ è¾“æ•°æ®
+		/// @param[in] CurrentId æ›´æ–°çš„Id
+		/// @param[in] Elements æ›´æ–°çš„å…ƒç´ 
 		/// @return @ref Data::ErrorType
 		Data::ErrorType BuildJson(std::string& response, const int CurrentId, const std::vector<std::string>& Elements);
 
@@ -47,12 +47,12 @@ namespace Hardware
 		void BuildDynamicJson(Json::Value& Element, const CAtaSmart::ATA_SMART_INFO& var);
 
 	private:
-		/// @brief CrystalDiskµÄÓ²ÅÌÊı¾İ½á¹¹
+		/// @brief CrystalDiskçš„ç¡¬ç›˜æ•°æ®ç»“æ„
 		CAtaSmart m_Ata;
 
-		/// @brief Ó²ÅÌ´óĞ¡×ªStringĞÎÊ½
+		/// @brief ç¡¬ç›˜å¤§å°è½¬Stringå½¢å¼
 		/// @param DiskSize
-		/// @return Ó²ÅÌ´óĞ¡
+		/// @return ç¡¬ç›˜å¤§å°
 		std::string DiskSizeToString(const uint64_t& DiskSize);
 	};
 }

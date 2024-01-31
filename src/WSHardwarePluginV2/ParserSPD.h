@@ -4,75 +4,75 @@ namespace Hardware
 {
 	namespace Memory
 	{
-		/// @brief ½âÎöDDR3µÄspdĞÅÏ¢
+		/// @brief è§£æDDR3çš„spdä¿¡æ¯
 		class ParserDDR3SPD
 		{
 		public:
-			/// @brief ½âÎöÍ·128Î»µÄSPDĞÅÏ¢
-			/// @param SpdInfo spdĞÅÏ¢
-			/// @param OutputData ½âÎöºóµÄÊı¾İ
+			/// @brief è§£æå¤´128ä½çš„SPDä¿¡æ¯
+			/// @param SpdInfo spdä¿¡æ¯
+			/// @param OutputData è§£æåçš„æ•°æ®
 			void ParserFirstSPD(const DDR3_INFO_FIRST_128* SpdInfo, MemoryCommonInformation& OutputData);
 
-			/// @brief ½âÎöºó128Î»µÄSPDĞÅÏ¢
-			/// @param SpdInfo spdĞÅÏ¢
-			/// @param OutputData ½âÎöºóµÄÊı¾İ
+			/// @brief è§£æå128ä½çš„SPDä¿¡æ¯
+			/// @param SpdInfo spdä¿¡æ¯
+			/// @param OutputData è§£æåçš„æ•°æ®
 			void ParserSecondSPD(const DDR3_INFO_SECOND_128* SpdInfo, MemoryCommonInformation& OutputData);
 		private:
-			/// @brief ¼ÆËãDDR3Ä£¿éÆµÂÊ
-			/// @param SpdInfo SPDµÄĞÅÏ¢ @ref Hardware::Memory::DDR3_INFO_FIRST_128
-			/// @param OutputData @ref Hardware::Memory::MemoryCommonInformation "ÄÚ´æµÄÍ¨ÓÃĞÅÏ¢"
+			/// @brief è®¡ç®—DDR3æ¨¡å—é¢‘ç‡
+			/// @param SpdInfo SPDçš„ä¿¡æ¯ @ref Hardware::Memory::DDR3_INFO_FIRST_128
+			/// @param OutputData @ref Hardware::Memory::MemoryCommonInformation "å†…å­˜çš„é€šç”¨ä¿¡æ¯"
 			void CalcDDR3TimeBase(const Hardware::Memory::DDR3_INFO_FIRST_128* SpdInfo, Hardware::Memory::MemoryCommonInformation& OutputData);
 
-			/// @brief ¼ÆËãDDR3Ä£¿éÆµÂÊ
-			/// @param SpdInfo SPDµÄĞÅÏ¢ @ref Hardware::Memory::DDR3_INFO_FIRST_128
-			/// @param OutputData @ref Hardware::Memory::MemoryCommonInformation "ÄÚ´æµÄÍ¨ÓÃĞÅÏ¢"
+			/// @brief è®¡ç®—DDR3æ¨¡å—é¢‘ç‡
+			/// @param SpdInfo SPDçš„ä¿¡æ¯ @ref Hardware::Memory::DDR3_INFO_FIRST_128
+			/// @param OutputData @ref Hardware::Memory::MemoryCommonInformation "å†…å­˜çš„é€šç”¨ä¿¡æ¯"
 			void CalcDIMMFrequency(const DDR3_INFO_FIRST_128* SpdInfo, Hardware::Memory::MemoryCommonInformation& OutputData);
 		};
 
-		/// @brief ½âÎöDDR4µÄSPDĞÅÏ¢
+		/// @brief è§£æDDR4çš„SPDä¿¡æ¯
 		class ParserDDR4SPD
 		{
 		public:
-			/// @brief ½âÎöµÚÒ»¿éµÄSPDĞÅÏ¢
-			/// @param SpdInfo spdĞÅÏ¢
-			/// @param OutputData ½âÎöºóµÄÊı¾İ
+			/// @brief è§£æç¬¬ä¸€å—çš„SPDä¿¡æ¯
+			/// @param SpdInfo spdä¿¡æ¯
+			/// @param OutputData è§£æåçš„æ•°æ®
 			void ParserFirstSPD(const DDR4_INFO_FIRST_128* SpdInfo, MemoryCommonInformation& OutputData);
 
-			/// @brief ½âÎöµÚ¶ş¿éµÄSPDĞÅÏ¢
-			/// @param SpdInfo spdĞÅÏ¢
-			/// @param OutputData ½âÎöºóµÄÊı¾İ
+			/// @brief è§£æç¬¬äºŒå—çš„SPDä¿¡æ¯
+			/// @param SpdInfo spdä¿¡æ¯
+			/// @param OutputData è§£æåçš„æ•°æ®
 			void ParserSecondSPD(const DDR4_INFO_SECOND_128* SpdInfo, MemoryCommonInformation& OutputData);
 
-			/// @brief ½âÎöµÚÈı¿éµÄSPDĞÅÏ¢
-			/// @param SpdInfo spdĞÅÏ¢
-			/// @param OutputData ½âÎöºóµÄÊı¾İ
+			/// @brief è§£æç¬¬ä¸‰å—çš„SPDä¿¡æ¯
+			/// @param SpdInfo spdä¿¡æ¯
+			/// @param OutputData è§£æåçš„æ•°æ®
 			void ParserThirdSPD(const DDR4_INFO_THIRD_128* SpdInfo, MemoryCommonInformation& OutputData);
 
-			/// @brief ½âÎöµÚËÄ¿éµÄSPDĞÅÏ¢
-			/// @param SpdInfo spdĞÅÏ¢
-			/// @param OutputData ½âÎöºóµÄÊı¾İ
+			/// @brief è§£æç¬¬å››å—çš„SPDä¿¡æ¯
+			/// @param SpdInfo spdä¿¡æ¯
+			/// @param OutputData è§£æåçš„æ•°æ®
 			void ParserFourthSPD(const DDR4_INFO_FOURTH_128* SpdInfo, MemoryCommonInformation& OutputData);
 
 		private:
-			/// @brief ½âÎöDRAMµÄRevision
+			/// @brief è§£æDRAMçš„Revision
 			/// @param SpdInfo
 			/// @param OutputData
 			void ParseDRAMRevision(const DDR4_INFO_THIRD_128* SpdInfo, Hardware::Memory::MemoryCommonInformation& OutputData);
 
-			/// @brief ¼ÆËãDDR4Ä£¿éÆµÂÊ
-			/// @param SpdInfo SPDµÄĞÅÏ¢ @ref Hardware::Memory::DDR4_INFO_FIRST_128
-			/// @param OutputData @ref Hardware::Memory::MemoryCommonInformation "ÄÚ´æµÄÍ¨ÓÃĞÅÏ¢"
+			/// @brief è®¡ç®—DDR4æ¨¡å—é¢‘ç‡
+			/// @param SpdInfo SPDçš„ä¿¡æ¯ @ref Hardware::Memory::DDR4_INFO_FIRST_128
+			/// @param OutputData @ref Hardware::Memory::MemoryCommonInformation "å†…å­˜çš„é€šç”¨ä¿¡æ¯"
 			void CalcDIMMFrequency(const DDR4_INFO_FIRST_128* SpdInfo, Hardware::Memory::MemoryCommonInformation& OutputData);
 
-			/// @brief ¼ÆËãDDR4µÄÄ£¿éÊ±ĞòĞÅÏ¢
-			/// @param SpdInfo SPDµÄĞÅÏ¢ @ref Hardware::Memory::DDR4_INFO_FIRST_128
-			/// @param OutputData @ref Hardware::Memory::MemoryCommonInformation "ÄÚ´æµÄÍ¨ÓÃĞÅÏ¢"
+			/// @brief è®¡ç®—DDR4çš„æ¨¡å—æ—¶åºä¿¡æ¯
+			/// @param SpdInfo SPDçš„ä¿¡æ¯ @ref Hardware::Memory::DDR4_INFO_FIRST_128
+			/// @param OutputData @ref Hardware::Memory::MemoryCommonInformation "å†…å­˜çš„é€šç”¨ä¿¡æ¯"
 			void CalcDDR4TimeBase(const DDR4_INFO_FIRST_128* SpdInfo, Hardware::Memory::MemoryCommonInformation& OutputData);
 
-			/// @brief ½âÎöÊ±ĞòĞÅÏ¢
+			/// @brief è§£ææ—¶åºä¿¡æ¯
 			/// @param tXX_MTB Medium Timebase
 			/// @param tXX_FTB Fine Timebase
-			/// @return ¼ÆËã³öµÄÊ±ĞòÖµ
+			/// @return è®¡ç®—å‡ºçš„æ—¶åºå€¼
 			template<typename T>
 			std::enable_if_t<std::is_integral_v<T>, double> GetTimeBase(const T tXX_MTB, const T tXX_FTB) const
 			{

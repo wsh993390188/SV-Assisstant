@@ -7,36 +7,36 @@ namespace Hardware
 {
 	namespace GPU
 	{
-		/// @brief Í¨¹ıD3D½Ó¿Ú»ñÈ¡GPUµÄĞÅÏ¢
+		/// @brief é€šè¿‡D3Dæ¥å£è·å–GPUçš„ä¿¡æ¯
 		class D3DKMTGPUBase final : public GenericGPU, PciGpuDetect
 		{
 		public:
-			/// @brief ³õÊ¼»¯GPU
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief åˆå§‹åŒ–GPU
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Initialize(std::string& response) override;
-			/// @brief ¸üĞÂGPUĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°GPUä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ®
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Update(const std::string& Args, std::string& response) override;
 
-			/// @brief »ñÈ¡GPU»ù´¡²Ù×÷
-			/// Json¸ñÊ½ {"SocketId": 0}
-			/// @param[in] paramter JSON²ÎÊı
-			/// @param[out] response JSON»ØÓ¦
+			/// @brief è·å–GPUåŸºç¡€æ“ä½œ
+			/// Jsonæ ¼å¼ {"SocketId": 0}
+			/// @param[in] paramter JSONå‚æ•°
+			/// @param[out] response JSONå›åº”
 			/// @return @ref Data::ErrorType
 			Data::ErrorType GetElements(LPCSTR paramter, std::string& response) override;
 		private:
-			/// @brief ³õÊ¼»¯D3DKMT
-			/// @return ÊÇ·ñ³õÊ¼»¯³É¹¦
+			/// @brief åˆå§‹åŒ–D3DKMT
+			/// @return æ˜¯å¦åˆå§‹åŒ–æˆåŠŸ
 			bool InitializeD3DKMT();
 
-			/// @brief ´´½¨Ò»¸öGPUµÄÊÊÅäÆ÷
+			/// @brief åˆ›å»ºä¸€ä¸ªGPUçš„é€‚é…å™¨
 			/// @return @ref GPUAdapter
 			std::unique_ptr<GPUAdapter> CreateAdapter(_In_ PWSTR DeviceInterface, _In_ D3DKMT_HANDLE AdapterHandle, _In_ const LUID& AdapterLuid, _In_ ULONG NumberOfSegments, _In_ ULONG NumberOfNodes);
 
-			/// @brief GPUµÄÊÊÅäÆ÷£¬°üº¬Ò»Ğ©GPUÏà¹ØµÄÊı¾İ
+			/// @brief GPUçš„é€‚é…å™¨ï¼ŒåŒ…å«ä¸€äº›GPUç›¸å…³çš„æ•°æ®
 			std::map<uint64_t, std::shared_ptr<GPUAdapter>> GPUAdapters;
 		};
 	}

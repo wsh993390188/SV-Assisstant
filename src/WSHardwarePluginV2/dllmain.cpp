@@ -1,8 +1,8 @@
-// dllmain.cpp : ���� DLL Ӧ�ó������ڵ㡣
+// dllmain.cpp : 定义 DLL 应用程序的入口点。
 #include "stdafx.h"
 #include <objbase.h>
 
-/// @brief DLL��ģ����
+/// @brief DLL的模块名
 HMODULE g_hModule = NULL;
 
 BOOL APIENTRY DllMain(HMODULE hModule,

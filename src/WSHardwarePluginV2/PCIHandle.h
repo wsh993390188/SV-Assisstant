@@ -5,13 +5,13 @@ namespace Hardware
 	{
 		namespace Ring0
 		{
-			/// @brief PCI 处理的帮助类
+			/// @brief PCI 澶勭悊鐨勫府鍔╃被
 			class PCIHandle final
 			{
 				PCIHandle(const PCIHandle&) = delete;
 				PCIHandle& operator = (const PCIHandle&) = delete;
 			public:
-				/// @brief 初始化PCI
+				/// @brief 鍒濆鍖朠CI
 				PCIHandle() = default;
 
 				bool ReadByte(const USHORT bus, const USHORT dev, const USHORT func, const USHORT offset, DWORD& value);
@@ -25,12 +25,12 @@ namespace Hardware
 				~PCIHandle() = default;
 			};
 
-			/// @brief 线程安全的PCI 处理的帮助类
+			/// @brief 绾跨▼瀹夊叏鐨凱CI 澶勭悊鐨勫府鍔╃被
 			class SafePCIHandle final
 			{
 				std::shared_ptr<PCIHandle> pHandle;
 			public:
-				/// @brief 初始化PCI
+				/// @brief 鍒濆鍖朠CI
 				SafePCIHandle() : pHandle(std::make_shared<PCIHandle>()) {}
 
 				bool ReadByte(const USHORT bus, const USHORT dev, const USHORT func, const USHORT offset, DWORD& value)

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Interface.h"
 
 #include "DiskManager.h"
@@ -17,7 +17,7 @@ namespace Hardware
 {
 	namespace Interface
 	{
-#pragma region ¹ÜÀíÕß
+#pragma region ç®¡ç†è€…
 		int Manager::DoCallback(LPCSTR category, const char* message)
 		{
 			if (m_CallBack)
@@ -47,7 +47,7 @@ namespace Hardware
 		}
 #pragma endregion
 	}
-#pragma region ¹ÜÀíÕß¹¤³§
+#pragma region ç®¡ç†è€…å·¥å‚
 	ManagerFactory* ManagerFactory::Instance()
 	{
 		static ManagerFactory inst;

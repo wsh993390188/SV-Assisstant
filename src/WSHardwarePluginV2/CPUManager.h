@@ -1,10 +1,10 @@
 /*!
 * @file CPUManager.h
-* @brief CPU¹ÜÀíÕß
+* @brief CPUç®¡ç†è€…
 *
-* @author ÍõË¶(wangshuo20@lenovo.com)
+* @author ç‹ç¡•(wangshuo20@lenovo.com)
 * @version 1.0
-* @date 2020Äê6ÔÂ3ÈÕ
+* @date 2020å¹´6æœˆ3æ—¥
 */
 #pragma once
 #include "Interface.h"
@@ -12,46 +12,46 @@
 
 namespace Hardware
 {
-	/// @brief CPU¹ÜÀíÕßÀà
+	/// @brief CPUç®¡ç†è€…ç±»
 	class CPUManager : public Interface::Manager
 	{
 	public:
-		/// @brief ³õÊ¼»¯ÃüÁî²Ù×÷
-		/// @param[in] paramter JSON²ÎÊı
-		/// @param[out] response JSON»ØÓ¦
+		/// @brief åˆå§‹åŒ–å‘½ä»¤æ“ä½œ
+		/// @param[in] paramter JSONå‚æ•°
+		/// @param[out] response JSONå›åº”
 		/// @return @ref Data::ErrorType
 		Data::ErrorType Init(LPCSTR paramter, std::string& response) override;
 
-		/// @brief ¸üĞÂÊı¾İÃüÁî²Ù×÷
-		/// @param[in] paramter JSON²ÎÊı
-		/// @param[out] response JSON»ØÓ¦
+		/// @brief æ›´æ–°æ•°æ®å‘½ä»¤æ“ä½œ
+		/// @param[in] paramter JSONå‚æ•°
+		/// @param[out] response JSONå›åº”
 		/// @return @ref Data::ErrorType
 		Data::ErrorType Update(LPCSTR paramter, std::string& response) override;
 
-		/// @brief »ñÈ¡ÃüÁî²Ù×÷
-		/// @param[in] paramter JSON²ÎÊı
-		/// @param[out] response JSON»ØÓ¦
+		/// @brief è·å–å‘½ä»¤æ“ä½œ
+		/// @param[in] paramter JSONå‚æ•°
+		/// @param[out] response JSONå›åº”
 		/// @return @ref Data::ErrorType
 		Data::ErrorType GetElements(LPCSTR paramter, std::string& response) override;
 	private:
-		/// @brief CPUÀàĞÍ
-		/// @TODO ARM CPUÓ¦ÈçºÎ´¦Àí
+		/// @brief CPUç±»å‹
+		/// @TODO ARM CPUåº”å¦‚ä½•å¤„ç†
 		enum class CPU_Brands
 		{
-			/// @brief Î´ÖªµÄCPU
+			/// @brief æœªçŸ¥çš„CPU
 			Unknown,
 			/// @brief IntelCPU
 			Intel,
 			/// @brief AmdCPU
 			Amd,
-			/// @brief Õ×Ğ¾CPU
+			/// @brief å…†èŠ¯CPU
 			Zhaoxin
 		};
-		/// @brief ´ÓCPUIDÖĞ»ñÈ¡CPUÆ·ÅÆ
+		/// @brief ä»CPUIDä¸­è·å–CPUå“ç‰Œ
 		/// @return @ref CPU_Brands
 		static const CPU_Brands GetCPUBrandsFromCPUID() noexcept;
 	private:
-		/// @brief CPUÊı¾İÊµ¼Ê´æ´¢Î»ÖÃ
+		/// @brief CPUæ•°æ®å®é™…å­˜å‚¨ä½ç½®
 		std::unique_ptr<CPU::GenericCPU> m_CPUs;
 	};
 }

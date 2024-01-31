@@ -5,15 +5,15 @@
 
 namespace Hardware
 {
-	/// @brief »ñÈ¡Ó²¼şĞÅÏ¢µÄ¸¨Öú¹¤¾ß
+	/// @brief è·å–ç¡¬ä»¶ä¿¡æ¯çš„è¾…åŠ©å·¥å…·
 	namespace Utils
 	{
 #define GET_VARIABLE_NAME(Variable) (#Variable)
 #define MAKE_VARIABLE_TO_NAME(Variable, Name) (Variable##Name)
-		/// @brief ÉèÖÃÏß³ÌÇ×ÔµĞÔ°ïÖúÀà
+		/// @brief è®¾ç½®çº¿ç¨‹äº²ç¼˜æ€§å¸®åŠ©ç±»
 		class ThreadGroupTempAffinity final
 		{
-			/// @brief ÉÏÒ»´ÎÏß³ÌÔËĞĞµÄCPUÇ×ÔµĞÔÊı¾İ
+			/// @brief ä¸Šä¸€æ¬¡çº¿ç¨‹è¿è¡Œçš„CPUäº²ç¼˜æ€§æ•°æ®
 			GROUP_AFFINITY PreviousGroupAffinity;
 
 			ThreadGroupTempAffinity() = delete;
@@ -21,89 +21,89 @@ namespace Hardware
 			ThreadGroupTempAffinity& operator = (const ThreadGroupTempAffinity&) = delete;
 
 		public:
-			/// @brief ÉèÖÃÏß³ÌÇ×ÔµĞÔ
-			/// @param[in] core_id Ïß³ÌĞèÒªÔËĞĞµÄÇ×ÔµĞÔID
-			/// @param[in] checkStatus ÊÇ·ñ¼ì²éÉèÖÃ×´Ì¬£¬³ö´í»áÅ×³öÒì³££¬Ä¬ÈÏ²»¼ì²é
+			/// @brief è®¾ç½®çº¿ç¨‹äº²ç¼˜æ€§
+			/// @param[in] core_id çº¿ç¨‹éœ€è¦è¿è¡Œçš„äº²ç¼˜æ€§ID
+			/// @param[in] checkStatus æ˜¯å¦æ£€æŸ¥è®¾ç½®çŠ¶æ€ï¼Œå‡ºé”™ä¼šæŠ›å‡ºå¼‚å¸¸ï¼Œé»˜è®¤ä¸æ£€æŸ¥
 			ThreadGroupTempAffinity(uint32_t core_id, bool checkStatus = false);
-			/// @brief »Ö¸´Ïß³ÌÇ×ÔµĞÔ
+			/// @brief æ¢å¤çº¿ç¨‹äº²ç¼˜æ€§
 			~ThreadGroupTempAffinity();
 		};
 
-		/// @brief CPUIDµÄĞÅÏ¢
+		/// @brief CPUIDçš„ä¿¡æ¯
 		union CPUID_INFO
 		{
-			/// @brief Êı×é¸ñÊ½
+			/// @brief æ•°ç»„æ ¼å¼
 			int array[4];
-			/// @brief ¼Ä´æÆ÷¸ñÊ½
+			/// @brief å¯„å­˜å™¨æ ¼å¼
 			struct { unsigned int eax, ebx, ecx, edx; } reg;
 		};
 
-		/// @brief 32Î»Êı¾İºÍ64Î»Êı¾İ»¥×ª½á¹¹,ÓÃÓÚÓÅ»¯WinRing0´«²Î
+		/// @brief 32ä½æ•°æ®å’Œ64ä½æ•°æ®äº’è½¬ç»“æ„,ç”¨äºä¼˜åŒ–WinRing0ä¼ å‚
 		union CvtDs
 		{
-			/// @brief 64Î»Êı¾İ
+			/// @brief 64ä½æ•°æ®
 			UINT64 ui64;
 			struct
 			{
-				/// @brief 64Î»Êı¾İµÄµÍ32Î»Êı¾İ
+				/// @brief 64ä½æ•°æ®çš„ä½32ä½æ•°æ®
 				DWORD Eax;
-				/// @brief 64Î»Êı¾İµÄ¸ß32Î»Êı¾İ
+				/// @brief 64ä½æ•°æ®çš„é«˜32ä½æ•°æ®
 				DWORD Edx;
 			} ui32;
 		};
 
-		/// @brief »ñÈ¡CPUIDĞÅÏ¢
-		/// @param[in] leaf CPUIDÒ³Ãæ
-		/// @param[out] info COUID»ñÈ¡µÃĞÅÏ¢
+		/// @brief è·å–CPUIDä¿¡æ¯
+		/// @param[in] leaf CPUIDé¡µé¢
+		/// @param[out] info COUIDè·å–å¾—ä¿¡æ¯
 		void GetCpuid(const int leaf, CPUID_INFO& info);
 
-		/// @brief »ñÈ¡CPUIDĞÅÏ¢
-		/// @param[in] leaf CPUIDÒ³Ãæ
-		/// @param[in] subleaf CPUID×ÓÒ³Ãæ
-		/// @param[out] info COUID»ñÈ¡µÃĞÅÏ¢
+		/// @brief è·å–CPUIDä¿¡æ¯
+		/// @param[in] leaf CPUIDé¡µé¢
+		/// @param[in] subleaf CPUIDå­é¡µé¢
+		/// @param[out] info COUIDè·å–å¾—ä¿¡æ¯
 		void GetCpuid(const unsigned leaf, const unsigned subleaf, CPUID_INFO& info);
 
-		/// @brief ¹¹½¨»ñÈ¡µÄBitsÑÚÂë£¬32Î»º¯Êı
-		/// @param[in] beg ÑÚÂë¿ªÊ¼
-		/// @param[in] end ÑÚÂë½áÊø
-		/// @return ÑÚÂë
+		/// @brief æ„å»ºè·å–çš„Bitsæ©ç ï¼Œ32ä½å‡½æ•°
+		/// @param[in] beg æ©ç å¼€å§‹
+		/// @param[in] end æ©ç ç»“æŸ
+		/// @return æ©ç 
 		uint32_t build_bit_ui(uint32_t beg, uint32_t end);
 
-		/// @brief »ñÈ¡Ö¸¶¨Î»ÖÃµÄBitsĞÅÏ¢£¬ 32Î»º¯Êı
-		/// @param[in] myin Ô­Ê¼Êı¾İ
-		/// @param[in] beg ¿ªÊ¼Î»ÖÃ
-		/// @param[in] end ½áÊøÎ»ÖÃ
-		/// @return µÃµ½µÄÊı¾İ
+		/// @brief è·å–æŒ‡å®šä½ç½®çš„Bitsä¿¡æ¯ï¼Œ 32ä½å‡½æ•°
+		/// @param[in] myin åŸå§‹æ•°æ®
+		/// @param[in] beg å¼€å§‹ä½ç½®
+		/// @param[in] end ç»“æŸä½ç½®
+		/// @return å¾—åˆ°çš„æ•°æ®
 		uint32_t extract_bits_ui(uint32_t myin, uint32_t beg, uint32_t end);
 
-		/// @brief ¹¹½¨»ñÈ¡µÄBitsÑÚÂë£¬64Î»º¯Êı
-		/// @param[in] beg ÑÚÂë¿ªÊ¼
-		/// @param[in] end ÑÚÂë½áÊø
-		/// @return ÑÚÂë
+		/// @brief æ„å»ºè·å–çš„Bitsæ©ç ï¼Œ64ä½å‡½æ•°
+		/// @param[in] beg æ©ç å¼€å§‹
+		/// @param[in] end æ©ç ç»“æŸ
+		/// @return æ©ç 
 		uint64_t build_bit(uint32_t beg, uint32_t end);
 
-		/// @brief »ñÈ¡Ö¸¶¨Î»ÖÃµÄBitsĞÅÏ¢£¬ 64Î»º¯Êı
-		/// @param[in] myin Ô­Ê¼Êı¾İ
-		/// @param[in] beg ¿ªÊ¼Î»ÖÃ
-		/// @param[in] end ½áÊøÎ»ÖÃ
-		/// @return µÃµ½µÄÊı¾İ
+		/// @brief è·å–æŒ‡å®šä½ç½®çš„Bitsä¿¡æ¯ï¼Œ 64ä½å‡½æ•°
+		/// @param[in] myin åŸå§‹æ•°æ®
+		/// @param[in] beg å¼€å§‹ä½ç½®
+		/// @param[in] end ç»“æŸä½ç½®
+		/// @return å¾—åˆ°çš„æ•°æ®
 		uint64_t extract_bits(uint64_t myin, uint32_t beg, uint32_t end);
 
-		/// @brief Ç¿Ã¶¾ÙÀàĞÍ×ª³Éµ×²ã´æ´¢¸ñÊ½
-		/// @tparam T Ã¶¾ÙÀàĞÍ
-		/// @param[in] enumerator Ã¶¾Ù¶ÔÏó
-		/// @return µ×²ã´æ´¢ÀàĞÍ
+		/// @brief å¼ºæšä¸¾ç±»å‹è½¬æˆåº•å±‚å­˜å‚¨æ ¼å¼
+		/// @tparam T æšä¸¾ç±»å‹
+		/// @param[in] enumerator æšä¸¾å¯¹è±¡
+		/// @return åº•å±‚å­˜å‚¨ç±»å‹
 		template<typename T>
 		constexpr decltype(auto) ToUType(T enumerator)
 		{
 			return static_cast<std::underlying_type_t<T>>(enumerator);
 		}
 
-		/// @brief ¹Ø±ÕHandleµÄº¯Êı
+		/// @brief å…³é—­Handleçš„å‡½æ•°
 		struct HANDLEDeleter
 		{
-			/// @brief ¹Ø±ÕÖ÷Ìå
-			/// @param[in] handle ¹Ø±Õ¾ä±ú
+			/// @brief å…³é—­ä¸»ä½“
+			/// @param[in] handle å…³é—­å¥æŸ„
 			void operator()(HANDLE handle) const
 			{
 				if (handle != INVALID_HANDLE_VALUE && handle)
@@ -111,26 +111,26 @@ namespace Hardware
 			}
 		};
 
-		/// @brief ¾ä±úµÄÖÇÄÜÖ¸Õë
+		/// @brief å¥æŸ„çš„æ™ºèƒ½æŒ‡é’ˆ
 		using HANDLE_unique_ptr = std::unique_ptr<void, HANDLEDeleter>;
-		/// @brief ´´½¨¾ä±úÖÇÄÜÖ¸Õë
-		/// @param[in] handle Òª´´½¨µÄ¾ä±ú
-		/// @return ¾ä±úµÄÖÇÄÜÖ¸Õë
+		/// @brief åˆ›å»ºå¥æŸ„æ™ºèƒ½æŒ‡é’ˆ
+		/// @param[in] handle è¦åˆ›å»ºçš„å¥æŸ„
+		/// @return å¥æŸ„çš„æ™ºèƒ½æŒ‡é’ˆ
 		HANDLE_unique_ptr make_HANDLE_unique(HANDLE handle);
 
-		/// @brief Win32API·¢Éú´íÎóÊ±£¬´íÎóÂë
-		/// @param[in] lpszFunction µ÷ÓÃº¯ÊıÃû
+		/// @brief Win32APIå‘ç”Ÿé”™è¯¯æ—¶ï¼Œé”™è¯¯ç 
+		/// @param[in] lpszFunction è°ƒç”¨å‡½æ•°å
 		void ErrorCode(LPCSTR lpszFunction);
 
-		/// @brief Win32API·¢Éú´íÎóÊ±£¬´íÎóÂë
-		/// @param[in] lpszFunction µ÷ÓÃº¯ÊıÃû
-		/// @param[in] error ´íÎóÖµ
+		/// @brief Win32APIå‘ç”Ÿé”™è¯¯æ—¶ï¼Œé”™è¯¯ç 
+		/// @param[in] lpszFunction è°ƒç”¨å‡½æ•°å
+		/// @param[in] error é”™è¯¯å€¼
 		void ErrorCode(LPCSTR lpszFunction, const DWORD error);
 
-		/// @brief ´ø¾«¶È¿ØÖÆµÄToString
-		/// @tparam T ¸¡µãÊıÀàĞÍ
-		/// @param[in] a_value ĞèÒª×ª»»µÄ¸¡µãÊı
-		/// @param[in] n ¾«¶ÈÎ»Êı
+		/// @brief å¸¦ç²¾åº¦æ§åˆ¶çš„ToString
+		/// @tparam T æµ®ç‚¹æ•°ç±»å‹
+		/// @param[in] a_value éœ€è¦è½¬æ¢çš„æµ®ç‚¹æ•°
+		/// @param[in] n ç²¾åº¦ä½æ•°
 		/// @return String
 		template<typename T,
 			typename std::enable_if_t < std::is_floating_point<T>::value, int > = 0 >
@@ -154,11 +154,11 @@ namespace Hardware
 			return str;
 		}
 
-		/// @brief Êı×Ö×ªÊ®Áù½øÖÆ×Ö·û´®
-		/// @tparam T Êı×ÖÀàĞÍ
-		/// @param value ÊıÖµ
-		/// @param n ¶ÔÆë¾«¶È
-		/// @return Ê®Áù½øÖÆ×Ö·û´®
+		/// @brief æ•°å­—è½¬åå…­è¿›åˆ¶å­—ç¬¦ä¸²
+		/// @tparam T æ•°å­—ç±»å‹
+		/// @param value æ•°å€¼
+		/// @param n å¯¹é½ç²¾åº¦
+		/// @return åå…­è¿›åˆ¶å­—ç¬¦ä¸²
 		template<typename T, typename std::enable_if_t<std::is_integral_v<T>, int> = 0>
 		std::string to_string_hex(const T value, const int n = 2)
 		{
@@ -167,10 +167,10 @@ namespace Hardware
 			return out.str();
 		}
 
-		/// @brief ÄÚ´æ´óĞ¡Êı×Ö×ª´øµ¥Î»µÄ×Ö·û´®
-		/// @tparam Numberic Êı×ÖÀàĞÍ
-		/// @param num ÊıÖµ
-		/// @return ´øµ¥Î»×Ö·û´®
+		/// @brief å†…å­˜å¤§å°æ•°å­—è½¬å¸¦å•ä½çš„å­—ç¬¦ä¸²
+		/// @tparam Numberic æ•°å­—ç±»å‹
+		/// @param num æ•°å€¼
+		/// @return å¸¦å•ä½å­—ç¬¦ä¸²
 		template<typename Numberic, class = std::enable_if_t<std::is_integral_v<Numberic>>>
 		std::string MemoryToStringWithUnit(Numberic num)
 		{
@@ -178,21 +178,21 @@ namespace Hardware
 			{
 				return std::to_string(num) + "B";
 			}
-			else if (num / 1024 < 1024) { //Ğ¡ÓÚ1MB£¬Ôò×ª»¯³ÉKB
+			else if (num / 1024 < 1024) { //å°äº1MBï¼Œåˆ™è½¬åŒ–æˆKB
 				return to_string_with_precision(num / 1024.0) + "KB";
 			}
-			else if (num / (1024 * 1024) < 1024) { //Ğ¡ÓÚ1GB£¬Ôò×ª»¯³ÉMB
+			else if (num / (1024 * 1024) < 1024) { //å°äº1GBï¼Œåˆ™è½¬åŒ–æˆMB
 				return to_string_with_precision(num / (1024.0 * 1024.0)) + "MB";
 			}
-			else { //ÆäËû×ª»¯³ÉGB
+			else { //å…¶ä»–è½¬åŒ–æˆGB
 				return to_string_with_precision(num / (1024 * 1024 * 1024.0)) + "GB";
 			}
 		}
 
-		/// @brief ÍøÂç°üÊıÁ¿×ª´øµ¥Î»µÄ×Ö·û´®
-		/// @tparam Numberic Êı×ÖÀàĞÍ
-		/// @param num ÊıÖµ
-		/// @return ×Ö·û´®
+		/// @brief ç½‘ç»œåŒ…æ•°é‡è½¬å¸¦å•ä½çš„å­—ç¬¦ä¸²
+		/// @tparam Numberic æ•°å­—ç±»å‹
+		/// @param num æ•°å€¼
+		/// @return å­—ç¬¦ä¸²
 		template<typename Numberic, class = std::enable_if_t<std::is_integral_v<Numberic>>>
 		std::string NetSpeedToStringWithUnit(Numberic num)
 		{
@@ -203,19 +203,19 @@ namespace Hardware
 			else if (num / 1000 < 1000) {
 				return to_string_with_precision(num / 1000.0) + " Kbps";
 			}
-			else if (num / (1000 * 1000) < 1000) { //Ğ¡ÓÚ1GB£¬Ôò×ª»¯³ÉMB
+			else if (num / (1000 * 1000) < 1000) { //å°äº1GBï¼Œåˆ™è½¬åŒ–æˆMB
 				return to_string_with_precision(num / (1000.0 * 1000.0)) + " Mbps";
 			}
-			else { //ÆäËû×ª»¯³ÉGB
+			else { //å…¶ä»–è½¬åŒ–æˆGB
 				return to_string_with_precision(num / (1000.0 * 1000.0 * 1000.0)) + " Gbps";
 			}
 		}
 
-		/// @brief »ñÈ¡Ä£¿éµÄº¯ÊıÖ¸Õë
-		/// @tparam Func º¯ÊıÖ¸ÕëÀàĞÍ
-		/// @param hModule Ä£¿é¾ä±ú
-		/// @param FuncName º¯ÊıÃû
-		/// @return º¯ÊıÖ¸Õë
+		/// @brief è·å–æ¨¡å—çš„å‡½æ•°æŒ‡é’ˆ
+		/// @tparam Func å‡½æ•°æŒ‡é’ˆç±»å‹
+		/// @param hModule æ¨¡å—å¥æŸ„
+		/// @param FuncName å‡½æ•°å
+		/// @return å‡½æ•°æŒ‡é’ˆ
 		template<typename Func>
 		decltype(auto) GetADLFuncAddress(HMODULE hModule, const std::string& FuncName)
 		{
@@ -234,13 +234,13 @@ namespace Hardware
 			return reinterpret_cast<Func>(nullptr);
 		}
 
-		/// @brief GUID×ª×Ö·û´®
+		/// @brief GUIDè½¬å­—ç¬¦ä¸²
 		/// @param guid guid
-		/// @return ANSI×Ö·û´®
+		/// @return ANSIå­—ç¬¦ä¸²
 		std::string GUIDToString(const GUID& guid);
 
-		/// @brief »ñÈ¡WindowsµÄ°æ±¾ĞÅÏ¢
-		/// @return °æ±¾ĞÅÏ¢
+		/// @brief è·å–Windowsçš„ç‰ˆæœ¬ä¿¡æ¯
+		/// @return ç‰ˆæœ¬ä¿¡æ¯
 		size_t GetWindowsVersion();
 	}
 }

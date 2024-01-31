@@ -3,48 +3,48 @@ namespace Hardware
 {
 	namespace Audio
 	{
-		/// @brief Í¨ÓÃĞÅÏ¢
+		/// @brief é€šç”¨ä¿¡æ¯
 		struct CommonInfo
 		{
-			std::wstring id; ///< ×¢²á±íÉè±¸id
-			std::wstring state; ///< Éè±¸×´Ì¬
-			std::wstring name;///<Éè±¸Ãû
-			std::wstring desc;///<Éè±¸ÃèÊö
-			std::wstring audioif;///<ÎïÀíÉè±¸Ãû³Æ
+			std::wstring id; ///< æ³¨å†Œè¡¨è®¾å¤‡id
+			std::wstring state; ///< è®¾å¤‡çŠ¶æ€
+			std::wstring name;///<è®¾å¤‡å
+			std::wstring desc;///<è®¾å¤‡æè¿°
+			std::wstring audioif;///<ç‰©ç†è®¾å¤‡åç§°
 		};
 
-		/// @brief Éè±¸ĞÅÏ¢
+		/// @brief è®¾å¤‡ä¿¡æ¯
 		struct DeviceInfo
 		{
-			std::map<uint32_t, CommonInfo> Audios;///<´æÔÚµÄ·¢ÉùÉè±¸
-			std::map<uint32_t, CommonInfo> Mics;///<´æÔÚµÄÂó¿Ë·çÉè±¸
+			std::map<uint32_t, CommonInfo> Audios;///<å­˜åœ¨çš„å‘å£°è®¾å¤‡
+			std::map<uint32_t, CommonInfo> Mics;///<å­˜åœ¨çš„éº¦å…‹é£è®¾å¤‡
 		};
 
-		/// @brief Éù¿¨Í¨ÓÃ³õÊ¼»¯º¯Êı
+		/// @brief å£°å¡é€šç”¨åˆå§‹åŒ–å‡½æ•°
 		class GenericAudio
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı£¬ÓÃÓÚ³õÊ¼»¯Éù¿¨ĞÅÏ¢
+			/// @brief æ„é€ å‡½æ•°ï¼Œç”¨äºåˆå§‹åŒ–å£°å¡ä¿¡æ¯
 			GenericAudio() = default;
 
-			/// @brief ³õÊ¼»¯Éù¿¨
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief åˆå§‹åŒ–å£°å¡
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Initialize(std::string& response) = 0;
 
-			/// @brief ¸üĞÂÉù¿¨ĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°å£°å¡ä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ®
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Update(const std::string& Args, std::string& response) = 0;
 
-			/// @brief »ñÈ¡Éù¿¨»ù´¡Êı¾İ²Ù×÷
-			/// @param[in] paramter JSON²ÎÊı
-			/// @param[out] response JSON»ØÓ¦
+			/// @brief è·å–å£°å¡åŸºç¡€æ•°æ®æ“ä½œ
+			/// @param[in] paramter JSONå‚æ•°
+			/// @param[out] response JSONå›åº”
 			/// @return @ref Data::ErrorType
 			Data::ErrorType GetElements(LPCSTR paramter, std::string& response);
 		protected:
-			/// @brief Éù¿¨ĞÅÏ¢´æ´¢Êı¾İ
+			/// @brief å£°å¡ä¿¡æ¯å­˜å‚¨æ•°æ®
 			DeviceInfo AudioInfos;
 
 			enum class DeviceType
@@ -53,21 +53,21 @@ namespace Hardware
 				Mic,
 			};
 		protected:
-			/// @brief ¹¹½¨³õÊ¼»¯Json
-			/// @return Json×Ö·û
+			/// @brief æ„å»ºåˆå§‹åŒ–Json
+			/// @return Jsonå­—ç¬¦
 			std::string BuildInitializeJson();
 
-			/// @brief ½âÎöJson
-			/// @param[in] JsonString Json×Ö·û
-			/// @param[out] AudioId ÒôÆµId
-			/// @param[out] DeviceType ÒôÆµÀàĞÍ @ref DeviceType
-			/// @return ÊÇ·ñ½âÎö³É¹¦
+			/// @brief è§£æJson
+			/// @param[in] JsonString Jsonå­—ç¬¦
+			/// @param[out] AudioId éŸ³é¢‘Id
+			/// @param[out] DeviceType éŸ³é¢‘ç±»å‹ @ref DeviceType
+			/// @return æ˜¯å¦è§£ææˆåŠŸ
 			bool ParserJson(const std::string& JsonString, uint32_t& AudioId, DeviceType& DevType);
 
-			/// @brief ¹¹½¨ÒôÆµÔªËØJson×Ö·û
-			/// @param[in] DeviceInfos Éè±¸ĞÅÏ¢¼¯ºÏ
-			/// @param[in] AudioId Éè±¸Id
-			/// @return Json×Ö·û
+			/// @brief æ„å»ºéŸ³é¢‘å…ƒç´ Jsonå­—ç¬¦
+			/// @param[in] DeviceInfos è®¾å¤‡ä¿¡æ¯é›†åˆ
+			/// @param[in] AudioId è®¾å¤‡Id
+			/// @return Jsonå­—ç¬¦
 			std::string BuildElementJson(const std::map<uint32_t, CommonInfo>& DeviceInfos, const uint32_t& AudioId);
 		};
 	}

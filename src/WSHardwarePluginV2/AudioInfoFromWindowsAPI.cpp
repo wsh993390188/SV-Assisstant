@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include <wrl.h>
 #include <propvarutil.h>
 #include <mmdeviceapi.h>
@@ -9,13 +9,13 @@ using namespace Hardware;
 
 namespace
 {
-	/// @brief ÖÇÄÜÖ¸Õë·â×°
+	/// @brief æ™ºèƒ½æŒ‡é’ˆå°è£…
 	using prop_string_t = std::unique_ptr<WCHAR, decltype(&CoTaskMemFree)>;
 
 #define prop_string_null prop_string_t(nullptr, CoTaskMemFree)
-	/// @brief »ñÈ¡Éè±¸ID
-	/// @param[in] device COM´ò¿ªµÄÉè±¸
-	/// @return WCHAR×Ö·û´®£¬ÓÉÖÇÄÜÖ¸Õë×ö¹ÜÀí
+	/// @brief è·å–è®¾å¤‡ID
+	/// @param[in] device COMæ‰“å¼€çš„è®¾å¤‡
+	/// @return WCHARå­—ç¬¦ä¸²ï¼Œç”±æ™ºèƒ½æŒ‡é’ˆåšç®¡ç†
 	prop_string_t GetDeviceId(IN Microsoft::WRL::ComPtr<IMMDevice> const& device) {
 		LPWSTR buffer = nullptr;
 		if SUCCEEDED(device->GetId(&buffer)) {
@@ -24,9 +24,9 @@ namespace
 		return prop_string_null;
 	}
 
-	/// @brief »ñÈ¡Éè±¸×´Ì¬
-	/// @param[in] device COM´ò¿ªµÄÉè±¸
-	/// @return Éè±¸×´Ì¬×Ö·û´®
+	/// @brief è·å–è®¾å¤‡çŠ¶æ€
+	/// @param[in] device COMæ‰“å¼€çš„è®¾å¤‡
+	/// @return è®¾å¤‡çŠ¶æ€å­—ç¬¦ä¸²
 	std::wstring GetDeviceState(IN Microsoft::WRL::ComPtr<IMMDevice> const& device) {
 		DWORD state = 0;
 		if SUCCEEDED(device->GetState(&state))
@@ -45,10 +45,10 @@ namespace
 		return L"UNKNOWN";
 	}
 
-	/// @brief ×Ö·û´®·â×°
-	/// @param[in] prop ÊôĞÔ¼¯ºÏ
-	/// @param[in] key ĞèÒª²éÑ¯µÄÊôĞÔÃû
-	/// @return ÊôĞÔÃû×Ö·û
+	/// @brief å­—ç¬¦ä¸²å°è£…
+	/// @param[in] prop å±æ€§é›†åˆ
+	/// @param[in] key éœ€è¦æŸ¥è¯¢çš„å±æ€§å
+	/// @return å±æ€§åå­—ç¬¦
 	prop_string_t GetPropString(IN Microsoft::WRL::ComPtr<IPropertyStore> const& prop,
 		IN PROPERTYKEY const& key) {
 		PROPVARIANT var;
@@ -64,31 +64,31 @@ namespace
 		return prop_string_null;
 	}
 
-	/// @brief Ã¶¾ÙÉè±¸
-	/// @param[in] enumerator ´ò¿ªµÄÒôÆµ¹ÜÀíÕß
-	/// @param[out] AudioInfos ÒôÆµÉè±¸ĞÅÏ¢
-	/// @param[in] DataType Ã¶¾ÙµÄÀàĞÍ
+	/// @brief æšä¸¾è®¾å¤‡
+	/// @param[in] enumerator æ‰“å¼€çš„éŸ³é¢‘ç®¡ç†è€…
+	/// @param[out] AudioInfos éŸ³é¢‘è®¾å¤‡ä¿¡æ¯
+	/// @param[in] DataType æšä¸¾çš„ç±»å‹
 	void EnumRenderDevice(Microsoft::WRL::ComPtr<IMMDeviceEnumerator>& enumerator, std::map<uint32_t, Hardware::Audio::CommonInfo>& AudioInfos, const EDataFlow& DataType = EDataFlow::eRender)
 	{
-		// ³öÁ¦ÏÈ¥Ç¥Ğ¥¤¥¹¤òÁĞ’¤
+		// å‡ºåŠ›å…ˆãƒ‡ãƒã‚¤ã‚¹ã‚’åˆ—æŒ™
 		Microsoft::WRL::ComPtr<IMMDeviceCollection> devices;
 		if SUCCEEDED(enumerator->EnumAudioEndpoints(DataType, // eRender, eCapture, eAll
 			DEVICE_STATE_ACTIVE | DEVICE_STATE_DISABLED,
-			// DEVICE_STATE_ACTIVE: ÓĞ„¿»¯¤µ¤ì¤Æ¤¤¤ë
-			// DEVICE_STATE_DISABLED: Ÿo„¿»¯¤µ¤ì¤Æ¤¤¤ë
-			// DEVICE_STATE_NOTPRESENT: ¥·¥¹¥Æ¥à¤ËŸoµÇåh
-			// DEVICE_STATE_UNPLUGGED: ÎïÀíµÄ¤Ë½Ó¾A¤µ¤ì¤Æ¤¤¤Ê¤¤
+			// DEVICE_STATE_ACTIVE: æœ‰åŠ¹åŒ–ã•ã‚Œã¦ã„ã‚‹
+			// DEVICE_STATE_DISABLED: ç„¡åŠ¹åŒ–ã•ã‚Œã¦ã„ã‚‹
+			// DEVICE_STATE_NOTPRESENT: ã‚·ã‚¹ãƒ†ãƒ ã«ç„¡ç™»éŒ²
+			// DEVICE_STATE_UNPLUGGED: ç‰©ç†çš„ã«æ¥ç¶šã•ã‚Œã¦ã„ãªã„
 			devices.ReleaseAndGetAddressOf())) {
-			// ¥Ç¥Ğ¥¤¥¹Êı¤òÈ¡µÃ.
+			// ãƒ‡ãƒã‚¤ã‚¹æ•°ã‚’å–å¾—.
 			UINT uNumDevices;
 			if SUCCEEDED(devices->GetCount(&uNumDevices)) {
 				for (UINT i = 0; i < uNumDevices; ++i) {
-					// ¥Ç¥Ğ¥¤¥¹¤òÈ¡µÃ
+					// ãƒ‡ãƒã‚¤ã‚¹ã‚’å–å¾—
 					Microsoft::WRL::ComPtr<IMMDevice> device;
 					if SUCCEEDED(devices->Item(i, device.ReleaseAndGetAddressOf())) {
-						// ¥Ç¥Ğ¥¤¥¹¤ÎÇéˆó¤òÈ¡µÃ
-						auto const id = GetDeviceId(device); // ¥Ç¥Ğ¥¤¥¹ID
-						auto const state = GetDeviceState(device);// ¥Ç¥Ğ¥¤¥¹¤Î×´‘B
+						// ãƒ‡ãƒã‚¤ã‚¹ã®æƒ…å ±ã‚’å–å¾—
+						auto const id = GetDeviceId(device); // ãƒ‡ãƒã‚¤ã‚¹ID
+						auto const state = GetDeviceState(device);// ãƒ‡ãƒã‚¤ã‚¹ã®çŠ¶æ…‹
 
 						Microsoft::WRL::ComPtr<IMMEndpoint> endpoint;
 						device.As<IMMEndpoint>(&endpoint);
@@ -96,9 +96,9 @@ namespace
 						Microsoft::WRL::ComPtr<IPropertyStore> prop;
 						if SUCCEEDED(device->OpenPropertyStore(STGM_READ, prop.ReleaseAndGetAddressOf()))
 						{
-							auto const name = GetPropString(prop, PKEY_Device_FriendlyName); // ¥Õ¥ë¥Í©`¥à
-							auto const desc = GetPropString(prop, PKEY_Device_DeviceDesc); // ¥·¥ç©`¥È¥Í©`¥à
-							auto const audioif = GetPropString(prop, PKEY_DeviceInterface_FriendlyName); // ÎïÀí¥Ç¥Ğ¥¤¥¹Ãû
+							auto const name = GetPropString(prop, PKEY_Device_FriendlyName); // ãƒ•ãƒ«ãƒãƒ¼ãƒ 
+							auto const desc = GetPropString(prop, PKEY_Device_DeviceDesc); // ã‚·ãƒ§ãƒ¼ãƒˆãƒãƒ¼ãƒ 
+							auto const audioif = GetPropString(prop, PKEY_DeviceInterface_FriendlyName); // ç‰©ç†ãƒ‡ãƒã‚¤ã‚¹å
 							Hardware::Audio::CommonInfo temp
 							{
 								id.get() ? id.get() : L"",

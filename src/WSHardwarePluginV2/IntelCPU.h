@@ -1,10 +1,10 @@
 /*!
 * @file IntelCPU.h
-* @brief »ñÈ¡Intel CPUĞÅÏ¢
+* @brief è·å–Intel CPUä¿¡æ¯
 *
-* @author ÍõË¶(wangshuo20@lenovo.com)
+* @author ç‹ç¡•(wangshuo20@lenovo.com)
 * @version 1.0
-* @date 2020Äê6ÔÂ5ÈÕ
+* @date 2020å¹´6æœˆ5æ—¥
 */
 #pragma once
 #include "GenericCPU.h"
@@ -17,16 +17,16 @@ namespace Hardware
 		{
 		public:
 			explicit IntelTemperature(const uint64_t MsrRegistry, const std::string& Name, const int64_t TjMax);
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			const std::string GetDecoratorValue() const override;
 
-			/// @brief ¸üĞÂĞÅÏ¢
+			/// @brief æ›´æ–°ä¿¡æ¯
 			void Update(std::weak_ptr<Utils::Ring0::SafeMsrHandle> Msr) override;
 		private:
-			/// @brief ÎÂ¶È×î´óÖµ
+			/// @brief æ¸©åº¦æœ€å¤§å€¼
 			const int64_t m_Tjmax;
-			/// @brief ×îĞÂÎÂ¶È
+			/// @brief æœ€æ–°æ¸©åº¦
 			int64_t m_TjCurrent;
 		};
 
@@ -34,15 +34,15 @@ namespace Hardware
 		{
 		public:
 			explicit IntelPower(const uint64_t MsrRegistry, const std::string& Name, const double energyUnitMultiplier, const uint32_t lastEnergyConsumed);
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			const std::string GetDecoratorValue() const override;
 
-			/// @brief ¸üĞÂĞÅÏ¢
+			/// @brief æ›´æ–°ä¿¡æ¯
 			void Update(std::weak_ptr<Utils::Ring0::SafeMsrHandle> Msr) override;
 		protected:
 		private:
-			/// @brief ×îĞÂ¹¦ÂÊ
+			/// @brief æœ€æ–°åŠŸç‡
 			double m_CurrentPower;
 			const double m_EnergyUnitMultiplier;
 			uint32_t m_LastEnergyConsumed;
@@ -53,152 +53,152 @@ namespace Hardware
 		{
 		public:
 			explicit IntelVoltage(const uint64_t MsrRegistry, const std::string& Name);
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			const std::string GetDecoratorValue() const override;
 
-			/// @brief ¸üĞÂĞÅÏ¢
+			/// @brief æ›´æ–°ä¿¡æ¯
 			void Update(std::weak_ptr<Utils::Ring0::SafeMsrHandle> Msr) override;
 		protected:
 		private:
-			/// @brief ×îĞÂµçÑ¹
+			/// @brief æœ€æ–°ç”µå‹
 			double m_CurrentVoltage;
 		};
 
-		/// @brief intelµÄCPUÆµÂÊĞÅÏ¢
+		/// @brief intelçš„CPUé¢‘ç‡ä¿¡æ¯
 		class IntelFrequency final : public CPUDecorator
 		{
 		public:
 			explicit IntelFrequency(const uint64_t MsrRegistry, const std::string& Name, const uint64_t TscFrequencyMhz);
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			const std::string GetDecoratorValue() const override;
 
-			/// @brief ¸üĞÂĞÅÏ¢
+			/// @brief æ›´æ–°ä¿¡æ¯
 			void Update(std::weak_ptr<Utils::Ring0::SafeMsrHandle> Msr) override;
 		protected:
 		private:
-			/// @brief ´ÓTSC»ñÈ¡BusSpeed
-			/// @param[in] coreid ĞèÒªµÄcoreId
+			/// @brief ä»TSCè·å–BusSpeed
+			/// @param[in] coreid éœ€è¦çš„coreId
 			/// @return Bus Speed
 			double GetBusSpeedByTsc(const int32_t& coreid);
 		private:
-			/// @brief ×îĞÂÆµÂÊ
+			/// @brief æœ€æ–°é¢‘ç‡
 			double m_CurrentFrequency;
-			/// @brief Éè¶¨µÄTSC¹Ì¶¨ÆµÂÊ
+			/// @brief è®¾å®šçš„TSCå›ºå®šé¢‘ç‡
 			double m_TscFrequencyMhz;
 		};
 
-		/// @brief IntelCPUĞÅÏ¢»ñÈ¡
+		/// @brief IntelCPUä¿¡æ¯è·å–
 		class IntelCPU final : public GenericCPU
 		{
 		public:
-			/// @brief ÅäÖÃIntelCPU±ØĞë²ÎÊı
+			/// @brief é…ç½®IntelCPUå¿…é¡»å‚æ•°
 			/// @return
 			IntelCPU() noexcept;
 
-			/// @brief ÊÍ·ÅIntelCPUÕ¼ÓÃµÄ×ÊÔ´
+			/// @brief é‡Šæ”¾IntelCPUå ç”¨çš„èµ„æº
 			~IntelCPU() noexcept;
 
 			Data::ErrorType Initialize(std::string& response) override final;
 			Data::ErrorType Update(const std::string& Args, std::string& response) override final;
 		private:
-			/// @brief ´ÓCPUIDÖĞ³õÊ¼»¯Socket×ÊÔ´£¬Ö§³ÖDual Socket
-			/// @return true ²Ù×÷³É¹¦
+			/// @brief ä»CPUIDä¸­åˆå§‹åŒ–Socketèµ„æºï¼Œæ”¯æŒDual Socket
+			/// @return true æ“ä½œæˆåŠŸ
 			bool InitializeSocket();
 
-			/// @brief ´ÓWMIÖĞ³õÊ¼»¯Socket×ÊÔ´,½öÖ§³ÖSingle Socket
-			/// @return true ²Ù×÷³É¹¦
+			/// @brief ä»WMIä¸­åˆå§‹åŒ–Socketèµ„æº,ä»…æ”¯æŒSingle Socket
+			/// @return true æ“ä½œæˆåŠŸ
 			bool InitializeSocketFromWMI();
 
-			/// @brief ½âÎöIntel CPUBrandĞÅÏ¢
-			/// @param[in,out] soc cpuĞÅÏ¢
+			/// @brief è§£æIntel CPUBrandä¿¡æ¯
+			/// @param[in,out] soc cpuä¿¡æ¯
 			/// @return @ref Hardware::XMLConfig::QueryInfo
 			std::unique_ptr<Hardware::XMLConfig::QueryInfo> ParserCPUBrandName(Socket& soc);
 
-			/// @brief ´ÓCPUIDÖĞ»ñÈ¡CPUĞÅÏ¢
+			/// @brief ä»CPUIDä¸­è·å–CPUä¿¡æ¯
 			void GetInfoFromCPUID();
 
-			/// @brief ´ÓCPUID1ºÍ7ÖĞ»ñÈ¡CPUĞÅÏ¢
-			/// @param[in,out] soc cpuĞÅÏ¢
+			/// @brief ä»CPUID1å’Œ7ä¸­è·å–CPUä¿¡æ¯
+			/// @param[in,out] soc cpuä¿¡æ¯
 			void GetInfoFromCPUID1_7(Socket& soc);
 
-			/// @brief ´ÓCPUID4ÖĞ»ñÈ¡CacheĞÅÏ¢
-			/// @param[in,out] soc cpuĞÅÏ¢
+			/// @brief ä»CPUID4ä¸­è·å–Cacheä¿¡æ¯
+			/// @param[in,out] soc cpuä¿¡æ¯
 			void GetInfoFromCPUID4(Socket& soc);
 
-			/// @brief ´ÓCPUID 80000002ÖĞ»ñÈ¡CPUĞÅÏ¢
-			/// @param[in,out] soc cpuĞÅÏ¢
+			/// @brief ä»CPUID 80000002ä¸­è·å–CPUä¿¡æ¯
+			/// @param[in,out] soc cpuä¿¡æ¯
 			void GetInfoFromCPUID80000002(Socket& soc);
 
-			/// @brief ´ÓCPUDBÖĞ»ñÈ¡CPUĞÅÏ¢
-			/// @param[in,out] soc cpuĞÅÏ¢
+			/// @brief ä»CPUDBä¸­è·å–CPUä¿¡æ¯
+			/// @param[in,out] soc cpuä¿¡æ¯
 			void GetInfoFromCPUDB(Socket& soc);
 
-			/// @brief ¸ù¾İCPUµÄFMS»ñÈ¡¼Ü¹¹ĞÅÏ¢
-			/// @param[in,out] soc cpuĞÅÏ¢
+			/// @brief æ ¹æ®CPUçš„FMSè·å–æ¶æ„ä¿¡æ¯
+			/// @param[in,out] soc cpuä¿¡æ¯
 			void GetCodeName(Socket& soc);
 
-			/// @brief ¸ù¾İCPUµÄFMS»ñÈ¡¹¤ÒÕĞÅÏ¢
-			/// @param[in,out] soc cpuĞÅÏ¢
+			/// @brief æ ¹æ®CPUçš„FMSè·å–å·¥è‰ºä¿¡æ¯
+			/// @param[in,out] soc cpuä¿¡æ¯
 			void GetTechnology(Socket& soc);
 
-			/// @brief ¸ù¾İCPU MSR»ñÈ¡Spec TDP
-			/// @param[in,out] soc cpuĞÅÏ¢
+			/// @brief æ ¹æ®CPU MSRè·å–Spec TDP
+			/// @param[in,out] soc cpuä¿¡æ¯
 			void GetSpecPower(Socket& soc);
 
-			/// @brief ´ÓSMBIOSÖĞ»ñÈ¡cpuµÄ·â×°ĞÅÏ¢
-			/// @param[in,out] soc cpuĞÅÏ¢
+			/// @brief ä»SMBIOSä¸­è·å–cpuçš„å°è£…ä¿¡æ¯
+			/// @param[in,out] soc cpuä¿¡æ¯
 			void GetSocketPackageFromSmbios(Socket& soc);
 
-			/// @brief »ñÈ¡CPUµÄ×î´óÎÂ¶ÈãĞÖµ
-			/// @param[in] soc cpuĞÅÏ¢
-			/// @param[in] msr Msr½Ó¿ÚÖ¸Õë
-			/// @return ÎÂ¶È×î´óÖµ
+			/// @brief è·å–CPUçš„æœ€å¤§æ¸©åº¦é˜ˆå€¼
+			/// @param[in] soc cpuä¿¡æ¯
+			/// @param[in] msr Msræ¥å£æŒ‡é’ˆ
+			/// @return æ¸©åº¦æœ€å¤§å€¼
 			uint64_t GetTjMax(const Socket& soc, const std::shared_ptr<Hardware::Utils::Ring0::SafeMsrHandle>& msr);
 
-			/// @brief ´ÓMsrÖĞ»ñÈ¡ÎÂ¶È×î´óÖµ,»ñÈ¡²»µ½Ê±Ä¬ÈÏÎª100
-			/// @param[in] msr Msr½Ó¿ÚÖ¸Õë
-			/// @return ÎÂ¶È×î´óÖµ
+			/// @brief ä»Msrä¸­è·å–æ¸©åº¦æœ€å¤§å€¼,è·å–ä¸åˆ°æ—¶é»˜è®¤ä¸º100
+			/// @param[in] msr Msræ¥å£æŒ‡é’ˆ
+			/// @return æ¸©åº¦æœ€å¤§å€¼
 			uint64_t GetTjMaxFromMsr(const std::shared_ptr<Hardware::Utils::Ring0::SafeMsrHandle>& msr);
 
-			/// @brief ¼ÓÈë¶¯Ì¬ĞÅÏ¢
+			/// @brief åŠ å…¥åŠ¨æ€ä¿¡æ¯
 			void AddDynamicInfo();
 
-			/// @brief Õë¶ÔSocket¼ÓÈë¶¯Ì¬ĞÅÏ¢
+			/// @brief é’ˆå¯¹SocketåŠ å…¥åŠ¨æ€ä¿¡æ¯
 			void AddDynamicInfoForSocket();
 
-			/// @brief Õë¶Ô³¬Ïß³Ì¼ÓÈë¶¯Ì¬ĞÅÏ¢
+			/// @brief é’ˆå¯¹è¶…çº¿ç¨‹åŠ å…¥åŠ¨æ€ä¿¡æ¯
 			void AddDynamicInfoForHyperThead();
 
-			/// @brief ÎªSocketÔö¼Ó·â×°ÎÂ¶ÈĞÅÏ¢
+			/// @brief ä¸ºSocketå¢åŠ å°è£…æ¸©åº¦ä¿¡æ¯
 			/// @param[in] soc Socket
 			void AddPackageTemperature(Socket& soc);
 
-			/// @brief ¶ÔÃ¿¸ö³¬Ïß³ÌÔö¼ÓºËÎÂ¶ÈĞÅÏ¢
+			/// @brief å¯¹æ¯ä¸ªè¶…çº¿ç¨‹å¢åŠ æ ¸æ¸©åº¦ä¿¡æ¯
 			/// @param[in] soc Socket
-			/// @param[in] thread ³¬Ïß³Ì
+			/// @param[in] thread è¶…çº¿ç¨‹
 			void AddCoreTemperature(const Socket& soc, std::weak_ptr<HyperThread> thread);
-			/// @brief ¶ÔÃ¿¸ö³¬Ïß³ÌÔö¼ÓºËµçÑ¹ĞÅÏ¢
-			/// @param[in] thread ³¬Ïß³Ì
+			/// @brief å¯¹æ¯ä¸ªè¶…çº¿ç¨‹å¢åŠ æ ¸ç”µå‹ä¿¡æ¯
+			/// @param[in] thread è¶…çº¿ç¨‹
 			void AddCoreVoltage(std::weak_ptr<HyperThread> thread);
 
-			/// @brief ¶ÔÃ¿¸ö³¬Ïß³ÌÔö¼ÓºËÆµÂÊĞÅÏ¢
-			/// @param[in] thread ³¬Ïß³Ì
+			/// @brief å¯¹æ¯ä¸ªè¶…çº¿ç¨‹å¢åŠ æ ¸é¢‘ç‡ä¿¡æ¯
+			/// @param[in] thread è¶…çº¿ç¨‹
 			void AddCoreFrequency(std::weak_ptr<HyperThread> thread);
 
-			/// @brief ¶ÔSocketÔö¼Ó¹¦ÂÊĞÅÏ¢
+			/// @brief å¯¹Socketå¢åŠ åŠŸç‡ä¿¡æ¯
 			/// @param[in] soc Socket
-			/// @param[in] MsrRegistry ¹¦ÂÊ¶ÔÓ¦µÄMSR¼Ä´æÆ÷µØÖ·
-			/// @param[in] PowerName ¹¦ÂÊÃû³Æ
+			/// @param[in] MsrRegistry åŠŸç‡å¯¹åº”çš„MSRå¯„å­˜å™¨åœ°å€
+			/// @param[in] PowerName åŠŸç‡åç§°
 			void AddPower(Socket& soc, const uint64_t MsrRegistry, const std::string& PowerName);
 
 		private:
-			/// @brief ²éÕÒCPUºËĞÄorÏß³ÌµÄ¸¨ÖúÊı¾İ½á¹¹
+			/// @brief æŸ¥æ‰¾CPUæ ¸å¿ƒorçº¿ç¨‹çš„è¾…åŠ©æ•°æ®ç»“æ„
 			std::vector<TopologyEntry> topology;
-			/// @brief ĞŞ¶©ºóÖ÷CPUµÄFamily
+			/// @brief ä¿®è®¢åä¸»CPUçš„Family
 			uint32_t DisplayFamily;
-			/// @brief ĞŞ¶©ºóÖ÷CPUµÄModel
+			/// @brief ä¿®è®¢åä¸»CPUçš„Model
 			uint32_t DisplayModel;
 		};
 	}

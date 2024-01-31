@@ -1,26 +1,26 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Command.h"
 
 namespace Hardware
 {
 	namespace
 	{
-#pragma region ÃüÁîÄ£Ê½Éú³ÉÆ÷
-		/// @brief ÃüÁîÄ£Ê½Éú³ÉÆ÷
-		/// @tparam ManagerCommand ¹ÜÀíÕßÃüÁîÀàĞÍ
-		/// @tparam OperatorCommand ²Ù×÷ÃüÁîÀàĞÍ
+#pragma region å‘½ä»¤æ¨¡å¼ç”Ÿæˆå™¨
+		/// @brief å‘½ä»¤æ¨¡å¼ç”Ÿæˆå™¨
+		/// @tparam ManagerCommand ç®¡ç†è€…å‘½ä»¤ç±»å‹
+		/// @tparam OperatorCommand æ“ä½œå‘½ä»¤ç±»å‹
 		template<class ManagerCommand, class OperatorCommand>
 		class GenerateCommand final : public ManagerCommand, public OperatorCommand
 		{
 		};
 #pragma endregion
 
-#pragma region ¹ÜÀíÕßÃüÁî
-		/// @brief Ó²ÅÌ¹ÜÀíÕßÃüÁî
+#pragma region ç®¡ç†è€…å‘½ä»¤
+		/// @brief ç¡¬ç›˜ç®¡ç†è€…å‘½ä»¤
 		class DiskManagerCommand : virtual public Command
 		{
 		public:
-			/// @brief »ñÈ¡¹ÜÀíÕßÀàĞÍ
+			/// @brief è·å–ç®¡ç†è€…ç±»å‹
 			/// @return	@ref ManagerType
 			ManagerType GetManagerType() override final
 			{
@@ -28,11 +28,11 @@ namespace Hardware
 			}
 		};
 
-		/// @brief CPU¹ÜÀíÕßÃüÁî
+		/// @brief CPUç®¡ç†è€…å‘½ä»¤
 		class CpuManagerCommand : virtual public Command
 		{
 		public:
-			/// @brief »ñÈ¡¹ÜÀíÕßÀàĞÍ
+			/// @brief è·å–ç®¡ç†è€…ç±»å‹
 			/// @return	@ref ManagerType
 			ManagerType GetManagerType() override final
 			{
@@ -40,11 +40,11 @@ namespace Hardware
 			}
 		};
 
-		/// @brief ÄÚ´æ¹ÜÀíÕßÃüÁî
+		/// @brief å†…å­˜ç®¡ç†è€…å‘½ä»¤
 		class MemoryManagerCommand : virtual public Command
 		{
 		public:
-			/// @brief »ñÈ¡¹ÜÀíÕßÀàĞÍ
+			/// @brief è·å–ç®¡ç†è€…ç±»å‹
 			/// @return	@ref ManagerType
 			ManagerType GetManagerType() override final
 			{
@@ -52,11 +52,11 @@ namespace Hardware
 			}
 		};
 
-		/// @brief Ö÷°å¹ÜÀíÕßÃüÁî
+		/// @brief ä¸»æ¿ç®¡ç†è€…å‘½ä»¤
 		class MotherBroadManagerCommand : virtual public Command
 		{
 		public:
-			/// @brief »ñÈ¡¹ÜÀíÕßÀàĞÍ
+			/// @brief è·å–ç®¡ç†è€…ç±»å‹
 			/// @return	@ref ManagerType
 			ManagerType GetManagerType() override final
 			{
@@ -64,11 +64,11 @@ namespace Hardware
 			}
 		};
 
-		/// @brief ÏÔ¿¨¹ÜÀíÕßÃüÁî
+		/// @brief æ˜¾å¡ç®¡ç†è€…å‘½ä»¤
 		class GPUManagerCommand : virtual public Command
 		{
 		public:
-			/// @brief »ñÈ¡¹ÜÀíÕßÀàĞÍ
+			/// @brief è·å–ç®¡ç†è€…ç±»å‹
 			/// @return	@ref ManagerType
 			ManagerType GetManagerType() override final
 			{
@@ -76,11 +76,11 @@ namespace Hardware
 			}
 		};
 
-		/// @brief Éù¿¨¹ÜÀíÕßÃüÁî
+		/// @brief å£°å¡ç®¡ç†è€…å‘½ä»¤
 		class AudioManagerCommand : virtual public Command
 		{
 		public:
-			/// @brief »ñÈ¡¹ÜÀíÕßÀàĞÍ
+			/// @brief è·å–ç®¡ç†è€…ç±»å‹
 			/// @return	@ref ManagerType
 			ManagerType GetManagerType() override final
 			{
@@ -88,11 +88,11 @@ namespace Hardware
 			}
 		};
 
-		/// @brief Íø¿¨¹ÜÀíÕßÃüÁî
+		/// @brief ç½‘å¡ç®¡ç†è€…å‘½ä»¤
 		class NetManagerCommand : virtual public Command
 		{
 		public:
-			/// @brief »ñÈ¡¹ÜÀíÕßÀàĞÍ
+			/// @brief è·å–ç®¡ç†è€…ç±»å‹
 			/// @return	@ref ManagerType
 			ManagerType GetManagerType() override final
 			{
@@ -100,11 +100,11 @@ namespace Hardware
 			}
 		};
 
-		/// @brief Win10ÉúÎï´«¸ĞÆ÷¹ÜÀíÕßÃüÁî
+		/// @brief Win10ç”Ÿç‰©ä¼ æ„Ÿå™¨ç®¡ç†è€…å‘½ä»¤
 		class WinBioManagerCommand : virtual public Command
 		{
 		public:
-			/// @brief »ñÈ¡¹ÜÀíÕßÀàĞÍ
+			/// @brief è·å–ç®¡ç†è€…ç±»å‹
 			/// @return	@ref ManagerType
 			ManagerType GetManagerType() override final
 			{
@@ -112,11 +112,11 @@ namespace Hardware
 			}
 		};
 
-		/// @brief µç³Ø¹ÜÀíÕßÃüÁî
+		/// @brief ç”µæ± ç®¡ç†è€…å‘½ä»¤
 		class BatteryManagerCommand : virtual public Command
 		{
 		public:
-			/// @brief »ñÈ¡¹ÜÀíÕßÀàĞÍ
+			/// @brief è·å–ç®¡ç†è€…ç±»å‹
 			/// @return	@ref ManagerType
 			ManagerType GetManagerType() override final
 			{
@@ -124,11 +124,11 @@ namespace Hardware
 			}
 		};
 
-		/// @brief ÏÔÊ¾Æ÷¹ÜÀíÕßÃüÁî
+		/// @brief æ˜¾ç¤ºå™¨ç®¡ç†è€…å‘½ä»¤
 		class MonitorManagerCommand : virtual public Command
 		{
 		public:
-			/// @brief »ñÈ¡¹ÜÀíÕßÀàĞÍ
+			/// @brief è·å–ç®¡ç†è€…ç±»å‹
 			/// @return	@ref ManagerType
 			ManagerType GetManagerType() override final
 			{
@@ -136,11 +136,11 @@ namespace Hardware
 			}
 		};
 
-		/// @brief Bios¹ÜÀíÕßÃüÁî
+		/// @brief Biosç®¡ç†è€…å‘½ä»¤
 		class BiosManagerCommand : virtual public Command
 		{
 		public:
-			/// @brief »ñÈ¡¹ÜÀíÕßÀàĞÍ
+			/// @brief è·å–ç®¡ç†è€…ç±»å‹
 			/// @return	@ref ManagerType
 			ManagerType GetManagerType() override final
 			{
@@ -149,37 +149,37 @@ namespace Hardware
 		};
 #pragma endregion
 
-#pragma region ²Ù×÷ÃüÁî
-		/// @brief ³õÊ¼»¯ÃüÁî
+#pragma region æ“ä½œå‘½ä»¤
+		/// @brief åˆå§‹åŒ–å‘½ä»¤
 		class InitOperatorCommand : virtual public Command
 		{
 		public:
-			/// @brief »ñÈ¡ÃüÁîÀàĞÍ
-			/// @return ÃüÁîÀàĞÍ@ref CommandType
+			/// @brief è·å–å‘½ä»¤ç±»å‹
+			/// @return å‘½ä»¤ç±»å‹@ref CommandType
 			CommandType GetCommandType() override final
 			{
 				return CommandType::Init;
 			}
 		};
 
-		/// @brief Êı¾İ¸üĞÂÃüÁî
+		/// @brief æ•°æ®æ›´æ–°å‘½ä»¤
 		class UpdateOperatorCommand : virtual public Command
 		{
 		public:
-			/// @brief »ñÈ¡ÃüÁîÀàĞÍ
-			/// @return ÃüÁîÀàĞÍ@ref CommandType
+			/// @brief è·å–å‘½ä»¤ç±»å‹
+			/// @return å‘½ä»¤ç±»å‹@ref CommandType
 			CommandType GetCommandType() override final
 			{
 				return CommandType::Update;
 			}
 		};
 
-		/// @brief »ñÈ¡Êı¾İÃüÁî
+		/// @brief è·å–æ•°æ®å‘½ä»¤
 		class GetOperatorCommand : virtual public Command
 		{
 		public:
-			/// @brief »ñÈ¡ÃüÁîÀàĞÍ
-			/// @return ÃüÁîÀàĞÍ@ref CommandType
+			/// @brief è·å–å‘½ä»¤ç±»å‹
+			/// @return å‘½ä»¤ç±»å‹@ref CommandType
 			CommandType GetCommandType() override final
 			{
 				return CommandType::Get;
@@ -187,7 +187,7 @@ namespace Hardware
 		};
 #pragma endregion
 
-#pragma region ÃüÁîÎ»ÖÃ
+#pragma region å‘½ä»¤ä½ç½®
 
 		template<typename T>
 		constexpr decltype(auto) ToUType(T enumerator)
@@ -216,7 +216,7 @@ Hardware::CommandDataBase* Hardware::CommandDataBase::Instance()
 template<class ManagerCommand>
 std::map<Hardware::CommandType, std::shared_ptr<Hardware::Command>> Hardware::CommandDataBase::InitCommand()
 {
-	// TODO ÓÅ»¯ÃüÁî
+	// TODO ä¼˜åŒ–å‘½ä»¤
 	std::map<CommandType, std::shared_ptr<Command>> temp;
 	temp.emplace(CommandType::Init, std::make_shared<GenerateCommand<ManagerCommand, InitOperatorCommand>>());
 	temp.emplace(CommandType::Update, std::make_shared<GenerateCommand<ManagerCommand, UpdateOperatorCommand>>());

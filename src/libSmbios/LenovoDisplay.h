@@ -6,43 +6,43 @@ namespace Smbios
 	namespace LenovoDisplay
 	{
 		/// <summary>
-		///	»ñÈ¡»úÆ÷µÄSNÂë
+		///	è·å–æœºå™¨çš„SNç 
 		/// </summary>
-		/// <returns>SNÂë</returns>
+		/// <returns>SNç </returns>
 		std::wstring GetSNFromSMbios();
 
 		/// <summary>
-		/// »ñÈ¡»úÆ÷µÄÃû³Æ
+		/// è·å–æœºå™¨çš„åç§°
 		/// </summary>
-		/// <returns>»úÆ÷ÏÔÊ¾Ãû</returns>
+		/// <returns>æœºå™¨æ˜¾ç¤ºå</returns>
 		std::wstring GetMachineTypeFromSMbios();
 
 		/// <summary>
-		/// »ñÈ¡»úÆ÷µÄMT
+		/// è·å–æœºå™¨çš„MT
 		/// </summary>
 		/// <returns>MT</returns>
 		std::wstring GetMachineType();
 
 		/// <summary>
-		/// »ñÈ¡»úÆ÷µÄMTM
+		/// è·å–æœºå™¨çš„MTM
 		/// </summary>
 		/// <returns>MTM</returns>
 		std::wstring GetMachineTypeModel();
 
 		/// <summary>
-		/// »ñÈ¡»úÆ÷µÄUUID
+		/// è·å–æœºå™¨çš„UUID
 		/// </summary>
 		/// <returns>UUID</returns>
 		std::wstring GetMachineUUID();
 
 		/// <summary>
-		/// ÅĞ¶ÏÄãÊÇ·ñÊÇÁªÏëµÄBIOS
+		/// åˆ¤æ–­ä½ æ˜¯å¦æ˜¯è”æƒ³çš„BIOS
 		/// </summary>
 		/// <returns></returns>
 		bool IsLenovo();
 
 		/// <summary>
-		/// ÅĞ¶ÏÊÇ·ñÊÇThinkÏµÁĞ»úĞÍ
+		/// åˆ¤æ–­æ˜¯å¦æ˜¯Thinkç³»åˆ—æœºå‹
 		/// </summary>
 		/// <returns></returns>
 		bool IsThink();

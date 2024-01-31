@@ -1,10 +1,10 @@
 /*!
 * @file GenericCPU.h
-* @brief CPUÍ¨ÓÃ½Ó¿Ú
+* @brief CPUé€šç”¨æ¥å£
 *
-* @author ÍõË¶(wangshuo20@lenovo.com)
+* @author ç‹ç¡•(wangshuo20@lenovo.com)
 * @version 1.0
-* @date 2020Äê6ÔÂ5ÈÕ
+* @date 2020å¹´6æœˆ5æ—¥
 */
 #pragma once
 #include "Data.h"
@@ -15,27 +15,27 @@ namespace Hardware
 {
 	namespace CPU
 	{
-		/// @brief CPU×°ÊÎ»ùÀà£¬ÓÃÀ´²ûÊöµ±Ç°CPUµÄÌØĞÔ
+		/// @brief CPUè£…é¥°åŸºç±»ï¼Œç”¨æ¥é˜è¿°å½“å‰CPUçš„ç‰¹æ€§
 		class CPUDecorator
 		{
 		public:
 			CPUDecorator() = delete;
-			/// @brief ³õÊ¼»¯º¯Êı£¬³õÊ¼»¯Msr¼Ä´æÆ÷£¬µ±Ç°ĞŞÊÎÃû
-			/// @param[in] MsrRegistry Msr¼Ä´æÆ÷
-			/// @param[in] Name µ±Ç°Ãû³Æ
+			/// @brief åˆå§‹åŒ–å‡½æ•°ï¼Œåˆå§‹åŒ–Msrå¯„å­˜å™¨ï¼Œå½“å‰ä¿®é¥°å
+			/// @param[in] MsrRegistry Msrå¯„å­˜å™¨
+			/// @param[in] Name å½“å‰åç§°
 			/// @return
 			explicit CPUDecorator(const uint64_t MsrRegistry, const std::string& Name);
-			/// @brief Îö¹¹º¯Êı£¬Ê¹ÓÃÄ¬ÈÏÑ¡Ïî
+			/// @brief ææ„å‡½æ•°ï¼Œä½¿ç”¨é»˜è®¤é€‰é¡¹
 			virtual ~CPUDecorator() = default;
-			/// @brief »ñÈ¡×°ÊÎÃû³Æ
-			/// @return ×°ÊÎÃû³Æ
+			/// @brief è·å–è£…é¥°åç§°
+			/// @return è£…é¥°åç§°
 			const std::string GetDecoratorName() const;
 
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			virtual const std::string GetDecoratorValue() const = 0;
 
-			/// @brief ¸üĞÂĞÅÏ¢
+			/// @brief æ›´æ–°ä¿¡æ¯
 			virtual void Update(std::weak_ptr<Utils::Ring0::SafeMsrHandle> Msr) = 0;
 		protected:
 			const uint64_t m_MsrRegistry;
@@ -50,7 +50,7 @@ namespace Hardware
 #define CPUID_Extended_Model				0x000F0000
 #define CPUID_Extended_Family				0x0FF00000
 
-		/// @brief CPUJsonµÄĞÅÏ¢
+		/// @brief CPUJsonçš„ä¿¡æ¯
 		struct CPUJsonInfo
 		{
 			/// @brief Socket Id
@@ -61,205 +61,205 @@ namespace Hardware
 			int32_t ThreadId;
 			CPUJsonInfo() : SocketId(-1), CoreId(-1), ThreadId(-1) {}
 		};
-		/// @brief CacheĞÅÏ¢
+		/// @brief Cacheä¿¡æ¯
 		struct Cache_info
 		{
-			char Cache_type;///< CacheÀàĞÍ
-			unsigned int Cache_level;///< Cache¼¶±ğ
-			unsigned int NumberOfCache;///< CacheÊıÁ¿
+			char Cache_type;///< Cacheç±»å‹
+			unsigned int Cache_level;///< Cacheçº§åˆ«
+			unsigned int NumberOfCache;///< Cacheæ•°é‡
 			unsigned int Cache_Ways;
 			unsigned int Cache_line_size;
 			unsigned int Cache_partitions;
 			unsigned int Cache_Set;
-			unsigned int Cache_Size;///< Cache´óĞ¡
+			unsigned int Cache_Size;///< Cacheå¤§å°
 		};
 
-		/// @brief CPUÍ¨ÓÃĞÅÏ¢£¬À´Ô´×ÔCPUZ½çÃæ
+		/// @brief CPUé€šç”¨ä¿¡æ¯ï¼Œæ¥æºè‡ªCPUZç•Œé¢
 		struct CPUCommonInformation
 		{
-			/// @brief CPUÏÔÊ¾Ãû³Æ
+			/// @brief CPUæ˜¾ç¤ºåç§°
 			std::string Name;
-			std::string CodeName; ///< cpu´úºÅ
-			std::string SocketPackage; ///< cpu·â×°leixing
-			std::string MaxTDP;///<cpuµÄ±ê×¼×î´óµÄTDP
-			std::string Technology;///<cpuµÄ¹¤ÒÕ
-			/// @brief CPUÖ§³ÖµÄÌØĞÔ
+			std::string CodeName; ///< cpuä»£å·
+			std::string SocketPackage; ///< cpuå°è£…leixing
+			std::string MaxTDP;///<cpuçš„æ ‡å‡†æœ€å¤§çš„TDP
+			std::string Technology;///<cpuçš„å·¥è‰º
+			/// @brief CPUæ”¯æŒçš„ç‰¹æ€§
 			std::string Instructions;
-			/// @brief CPUÏµÁĞ
+			/// @brief CPUç³»åˆ—
 			uint32_t Family;
-			/// @brief CPUÀ©Õ¹ÏµÁĞ
+			/// @brief CPUæ‰©å±•ç³»åˆ—
 			uint32_t ExtFamily;
-			/// @brief CPUĞÍºÅ
+			/// @brief CPUå‹å·
 			uint32_t Model;
-			/// @brief CPUÀ©Õ¹ĞÍºÅ
+			/// @brief CPUæ‰©å±•å‹å·
 			uint32_t ExtModel;
-			/// @brief CPU²½½ø
+			/// @brief CPUæ­¥è¿›
 			uint32_t Stepping;
-			/// @brief CacheĞÅÏ¢
+			/// @brief Cacheä¿¡æ¯
 			std::vector<Cache_info> Cache;
-			/// @brief ĞŞ¶©ºóµÄFamily
+			/// @brief ä¿®è®¢åçš„Family
 			uint32_t DisplayFamily;
-			/// @brief ĞŞ¶©ºóµÄModel
+			/// @brief ä¿®è®¢åçš„Model
 			uint32_t DisplayModel;
-			/// @brief CPUĞŞ¶©°æ±¾
-			/// ×¢ÊÍÔ­Òò£¬²»ÖªµÀÈçºÎ»ñÈ¡
+			/// @brief CPUä¿®è®¢ç‰ˆæœ¬
+			/// æ³¨é‡ŠåŸå› ï¼Œä¸çŸ¥é“å¦‚ä½•è·å–
 			//uint32_t Revision;
 		};
 
-		/// @brief ³¬Ïß³ÌÊı¾İÀà
+		/// @brief è¶…çº¿ç¨‹æ•°æ®ç±»
 		class HyperThread final
 		{
 		public:
-			/// @brief ÅäÖÃ³¬Ïß³ÌÊı¾İ
-			/// @param[in] ThreadID ±¾³¬Ïß³ÌID
-			/// @param[in] OsID OS²ãID
-			/// @param[in] CoreID Core ID,ÓÃÀ´´´½¨Msr Handle
+			/// @brief é…ç½®è¶…çº¿ç¨‹æ•°æ®
+			/// @param[in] ThreadID æœ¬è¶…çº¿ç¨‹ID
+			/// @param[in] OsID OSå±‚ID
+			/// @param[in] CoreID Core ID,ç”¨æ¥åˆ›å»ºMsr Handle
 			HyperThread(const std::int32_t ThreadID, const int32_t OsID, const int32_t CoreID);
 
-			/// @brief ¸üĞÂÊı¾İ
+			/// @brief æ›´æ–°æ•°æ®
 			void Update();
 
-			/// @brief ¹¹½¨¸üĞÂÊı¾İJson
-			/// @return JsonÊı¾İ
+			/// @brief æ„å»ºæ›´æ–°æ•°æ®Json
+			/// @return Jsonæ•°æ®
 			Json::Value BuildJson();
 
-			/// @brief È¡µÃMsr²Ù×÷È¨ÏŞ
-			/// @return MsrÖ¸Õë
+			/// @brief å–å¾—Msræ“ä½œæƒé™
+			/// @return MsræŒ‡é’ˆ
 			std::weak_ptr<Utils::Ring0::SafeMsrHandle> GetMsr();
 
-			/// @brief »ñÈ¡Os Id
+			/// @brief è·å–Os Id
 			/// @return osID
 			const int32_t osID() const;
-			/// @brief »ñÈ¡Thread Id
+			/// @brief è·å–Thread Id
 			/// @return ThreadID
 			const int32_t ThreadID() const;
 
-			/// @brief ¼ÓÈëDecorator
-			/// @param[in] Decorator ¶¯Ì¬Êı¾İÀàĞÍ
+			/// @brief åŠ å…¥Decorator
+			/// @param[in] Decorator åŠ¨æ€æ•°æ®ç±»å‹
 			void AddDecorator(std::unique_ptr<CPUDecorator> Decorator);
 		private:
-			/// @brief Ring0¼¶µ÷ÓÃ±¾Ïß³ÌMsr¼Ä´æÆ÷Ö¸Õë
+			/// @brief Ring0çº§è°ƒç”¨æœ¬çº¿ç¨‹Msrå¯„å­˜å™¨æŒ‡é’ˆ
 			std::shared_ptr<Utils::Ring0::SafeMsrHandle> m_MsrHandle;
 
-			/// @brief CPU ¶¯Ì¬ĞÅÏ¢
+			/// @brief CPU åŠ¨æ€ä¿¡æ¯
 			std::vector<std::shared_ptr<CPUDecorator>> m_Decorators;
 			/// @brief Thread Id
 			int32_t m_ThreadID;
-			/// @brief OS ²ãÃæÉÏµÄID
+			/// @brief OS å±‚é¢ä¸Šçš„ID
 			int32_t m_OsID;
 		};
 
-		/// @brief ÎïÀíºËĞÄÊı¾İÀà
+		/// @brief ç‰©ç†æ ¸å¿ƒæ•°æ®ç±»
 		class Core final
 		{
 		public:
-			/// @brief ÅäÖÃÎïÀíºËĞÄ
-			/// @param[in] CoreID ºËĞÄID
-			/// @param[in] TileID Tile ID ÓÃÓÚSocket²éÕÒ
-			/// @param[in] SocketID ËùÊôSocket ID
+			/// @brief é…ç½®ç‰©ç†æ ¸å¿ƒ
+			/// @param[in] CoreID æ ¸å¿ƒID
+			/// @param[in] TileID Tile ID ç”¨äºSocketæŸ¥æ‰¾
+			/// @param[in] SocketID æ‰€å±Socket ID
 			Core(const int32_t CoreID, const int32_t TileID, const int32_t SocketID);
 
-			/// @brief Ôö¼ÓÒ»¸ö³¬Ïß³Ì
-			/// @param[in] ThreadID ³¬Ïß³ÌµÄID
-			/// @param[in] OsID ³¬Ïß³ÌµÄOS²ãID
+			/// @brief å¢åŠ ä¸€ä¸ªè¶…çº¿ç¨‹
+			/// @param[in] ThreadID è¶…çº¿ç¨‹çš„ID
+			/// @param[in] OsID è¶…çº¿ç¨‹çš„OSå±‚ID
 			void AddThread(const int32_t ThreadID, const int32_t OsID);
 
-			/// @brief Í¨¹ıOsId²éÕÒ³¬Ïß³Ì
+			/// @brief é€šè¿‡OsIdæŸ¥æ‰¾è¶…çº¿ç¨‹
 			/// @param[in] OsID OsId
-			/// @return ³¬Ïß³ÌÖ¸Õë
+			/// @return è¶…çº¿ç¨‹æŒ‡é’ˆ
 			std::weak_ptr < HyperThread> findThreadByOSID(const int32_t osID);
 
-			/// @brief »ñÈ¡³¬Ïß³Ì
-			/// @return ³¬Ïß³ÌÊı×é
+			/// @brief è·å–è¶…çº¿ç¨‹
+			/// @return è¶…çº¿ç¨‹æ•°ç»„
 			std::vector<std::shared_ptr<HyperThread>>& Threads();
 
-			/// @brief »ñÈ¡Core ID
+			/// @brief è·å–Core ID
 			/// @return CoreID
 			const int32_t CoreID() const;
 
-			/// @brief »ñÈ¡Tile ID
+			/// @brief è·å–Tile ID
 			/// @return TileID
 			const int32_t TileID() const;
 
-			/// @brief »ñÈ¡Socket ID
+			/// @brief è·å–Socket ID
 			/// @return SocketID
 			const int32_t SocketID() const;
 		private:
-			/// @brief ³¬Ïß³Ì´æ´¢Êı¾İ
+			/// @brief è¶…çº¿ç¨‹å­˜å‚¨æ•°æ®
 			std::vector<std::shared_ptr<HyperThread>> m_Thread;
 			/// @brief Core Id
 			int32_t m_CoreID;
-			/// @brief ÓÃÓÚSocket²éÕÒCoreµÄId
+			/// @brief ç”¨äºSocketæŸ¥æ‰¾Coreçš„Id
 			int32_t m_TileID;
-			/// @brief ÉÏ²ãSocketId
+			/// @brief ä¸Šå±‚SocketId
 			int32_t m_SocketID;
 		};
 
-		/// @brief ÏµÍ³ÖĞ´æÔÚµÄSocket
+		/// @brief ç³»ç»Ÿä¸­å­˜åœ¨çš„Socket
 		class Socket final
 		{
 		public:
-			/// @brief ÅäÖÃId
+			/// @brief é…ç½®Id
 			/// @param[in] ApicID Apic ID
 			/// @param[in] LogicalID Socket ID
 			/// @return
 			Socket(const int32_t ApicID, const int32_t LogicalID);
 
-			/// @brief ²ÉÓÃÄ¬ÈÏ·½Ê½Îö¹¹
+			/// @brief é‡‡ç”¨é»˜è®¤æ–¹å¼ææ„
 			~Socket() = default;
 
-			/// @brief Ôö¼ÓÒ»¸öCore
+			/// @brief å¢åŠ ä¸€ä¸ªCore
 			/// @param[in] CoreID
 			/// @param[in] TileID
 			/// @param[in] SocketID
 			void AddCore(const int32_t CoreID, const int32_t TileID, const int32_t SocketID);
 
-			/// @brief Ôö¼ÓÒ»¸öCore
-			/// @param[in] core Core¿ÉÒÆ¶¯¸±±¾
+			/// @brief å¢åŠ ä¸€ä¸ªCore
+			/// @param[in] core Coreå¯ç§»åŠ¨å‰¯æœ¬
 			void AddCore(Core&& core);
 
-			/// @brief ¼ÓÈëDecorator
-			/// @param[in] Decorator ¶¯Ì¬Êı¾İÀàĞÍ
+			/// @brief åŠ å…¥Decorator
+			/// @param[in] Decorator åŠ¨æ€æ•°æ®ç±»å‹
 			void AddDecorator(std::unique_ptr<CPUDecorator> Decorator);
 
-			/// @brief Í¨¹ıOsId²éÕÒ³¬Ïß³Ì
+			/// @brief é€šè¿‡OsIdæŸ¥æ‰¾è¶…çº¿ç¨‹
 			/// @param[in] OsID OsId
-			/// @return ³¬Ïß³ÌÖ¸Õë
+			/// @return è¶…çº¿ç¨‹æŒ‡é’ˆ
 			std::weak_ptr<HyperThread> findThreadByOSID(const int32_t OsID);
 
-			/// @brief Í¨¹ıTileID²éÕÒÎïÀíºËĞÄ
+			/// @brief é€šè¿‡TileIDæŸ¥æ‰¾ç‰©ç†æ ¸å¿ƒ
 			/// @param[in] tileID
-			/// @return ÎïÀíºËĞÄÖ¸Õë
+			/// @return ç‰©ç†æ ¸å¿ƒæŒ‡é’ˆ
 			std::weak_ptr<Core> findCoreByTileID(const int32_t tileID);
-			/// @brief »ñÈ¡ApicId
+			/// @brief è·å–ApicId
 			/// @return ApicId
 			const int32_t ApicId() const;
 
-			/// @brief ¹¹½¨¸üĞÂÊı¾İJson
-			/// @return JsonÊı¾İ
+			/// @brief æ„å»ºæ›´æ–°æ•°æ®Json
+			/// @return Jsonæ•°æ®
 			Json::Value BuildJson();
 
-			/// @brief ¸üĞÂÊı¾İ
+			/// @brief æ›´æ–°æ•°æ®
 			void Update();
 
-			/// @brief »ñÈ¡ÎïÀíºËĞÄ
-			/// @return ÎïÀíºËĞÄÊı×é
+			/// @brief è·å–ç‰©ç†æ ¸å¿ƒ
+			/// @return ç‰©ç†æ ¸å¿ƒæ•°ç»„
 			std::vector<std::shared_ptr<Core>>& Cores();
 
-			/// @brief »ñÈ¡ÎïÀíºËĞÄ,Constº¯Êı
-			/// @return ÎïÀíºËĞÄÊı×é
+			/// @brief è·å–ç‰©ç†æ ¸å¿ƒ,Constå‡½æ•°
+			/// @return ç‰©ç†æ ¸å¿ƒæ•°ç»„
 			const std::vector<std::shared_ptr<Core>>& Cores() const;
-			/// @brief »ñÈ¡SocketId
+			/// @brief è·å–SocketId
 			/// @return SocketId
 			const int32_t SocketId() const;
 		public:
-			/// @brief CPUĞÅÏ¢£¬²ÉÓÃCPUZµÄĞÅÏ¢
+			/// @brief CPUä¿¡æ¯ï¼Œé‡‡ç”¨CPUZçš„ä¿¡æ¯
 			CPUCommonInformation m_Data;
 		private:
-			/// @brief CPU ¶¯Ì¬ĞÅÏ¢
+			/// @brief CPU åŠ¨æ€ä¿¡æ¯
 			std::vector<std::shared_ptr<CPUDecorator>> m_Decorators;
 
-			/// @brief ÎïÀíºË´æ´¢Êı¾İ
+			/// @brief ç‰©ç†æ ¸å­˜å‚¨æ•°æ®
 			std::vector<std::shared_ptr<Core>> m_Core;
 			/// @brief Apic id
 			int32_t   m_ApicID;
@@ -267,83 +267,83 @@ namespace Hardware
 			int32_t   m_LogicalID;
 		};
 
-		/// @brief ºËĞÄÃèÊö·ûÓÃÀ´²éÕÒCPUºËĞÄorÏß³Ì
+		/// @brief æ ¸å¿ƒæè¿°ç¬¦ç”¨æ¥æŸ¥æ‰¾CPUæ ¸å¿ƒorçº¿ç¨‹
 		struct TopologyEntry // decribes a core
 		{
-			/// @brief ÏµÍ³Ïß³ÌId
+			/// @brief ç³»ç»Ÿçº¿ç¨‹Id
 			int32_t os_id;
-			/// @brief Ïß³ÌId
+			/// @brief çº¿ç¨‹Id
 			int32_t thread_id;
-			/// @brief ºËĞÄId
+			/// @brief æ ¸å¿ƒId
 			int32_t core_id;
-			/// @brief ºËĞÄ²éÕÒId
+			/// @brief æ ¸å¿ƒæŸ¥æ‰¾Id
 			int32_t tile_id; // tile is a constalation of 1 or more cores sharing salem L2 cache. Unique for entire system
 			/// @brief Socket Id
 			int32_t socket;
 			TopologyEntry() : os_id(-1), thread_id(-1), core_id(-1), tile_id(-1), socket(-1) { }
 		};
 
-		/// @brief Í¨ÓÃCPU
+		/// @brief é€šç”¨CPU
 		class GenericCPU
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı£¬ÓÃÓÚ³õÊ¼»¯CPUĞÅÏ¢
+			/// @brief æ„é€ å‡½æ•°ï¼Œç”¨äºåˆå§‹åŒ–CPUä¿¡æ¯
 			GenericCPU();
 
-			/// @brief ĞéÎö¹¹º¯Êı
+			/// @brief è™šææ„å‡½æ•°
 			virtual ~GenericCPU() = default;
 
-			/// @brief ³õÊ¼»¯CPU
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief åˆå§‹åŒ–CPU
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Initialize(std::string& response) = 0;
 
-			/// @brief ¸üĞÂCPUĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°CPUä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ®
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Update(const std::string& Args, std::string& response) = 0;
 
-			/// @brief »ñÈ¡CPU»ù´¡²Ù×÷
-			/// Json¸ñÊ½ {"SocketId": 0}
-			/// @param[in] paramter JSON²ÎÊı
-			/// @param[out] response JSON»ØÓ¦
+			/// @brief è·å–CPUåŸºç¡€æ“ä½œ
+			/// Jsonæ ¼å¼ {"SocketId": 0}
+			/// @param[in] paramter JSONå‚æ•°
+			/// @param[out] response JSONå›åº”
 			/// @return @ref Data::ErrorType
 			Data::ErrorType GetElements(LPCSTR paramter, std::string& response);
 		protected:
-			/// @brief Ôö¼ÓÒ»¸öSocket
+			/// @brief å¢åŠ ä¸€ä¸ªSocket
 			/// @param[in] ApicID Apic Id
 			/// @param[in] LogicalID Logical Id
 			void AddSocket(const int32_t ApicID, const int32_t LogicalID);
 
-			/// @brief Ôö¼ÓÒ»¸öSocket
-			/// @param[in] soc Socket¿ÉÒÆ¶¯¸±±¾d
+			/// @brief å¢åŠ ä¸€ä¸ªSocket
+			/// @param[in] soc Socketå¯ç§»åŠ¨å‰¯æœ¬d
 			void AddSocket(Socket&& soc);
 
-			/// @brief ½âÎö¸üĞÂ²Ù×÷µÄJson
-			/// @param[in] paramter JsonÊı¾İ
-			/// @return ½âÎöºóµÄ²Ù×÷Êı×é
+			/// @brief è§£ææ›´æ–°æ“ä½œçš„Json
+			/// @param[in] paramter Jsonæ•°æ®
+			/// @return è§£æåçš„æ“ä½œæ•°ç»„
 			std::vector<CPUJsonInfo> PaserUpdateJson(const std::string& paramter);
 
-			/// @brief ¹¹½¨³õÊ¼»¯JSONÊı¾İ
-			/// @return Utf-8¸ñÊ½µÄJSONÊı¾İ
+			/// @brief æ„å»ºåˆå§‹åŒ–JSONæ•°æ®
+			/// @return Utf-8æ ¼å¼çš„JSONæ•°æ®
 			std::string BuildInitializeJson();
 
-			/// @brief ·µ»ØÃ¿¸ösocµÄ¾²Ì¬ĞÅÏ¢
-			/// @param Element JSon¶ÔÏó
-			/// @param soc socµÄÊı¾İ½á¹¹
-			/// @return Utf-8¸ñÊ½µÄJSONÊı¾İ
+			/// @brief è¿”å›æ¯ä¸ªsocçš„é™æ€ä¿¡æ¯
+			/// @param Element JSonå¯¹è±¡
+			/// @param soc socçš„æ•°æ®ç»“æ„
+			/// @return Utf-8æ ¼å¼çš„JSONæ•°æ®
 			std::string BuildInitializeStaticJson(const Socket& soc);
 
-			/// @brief ¸ù¾İÏµÍ³API¸üĞÂCacheµÄÊıÁ¿
-			/// @param l1Data L1CacheÊı¾İ»º´æÊıÁ¿
-			/// @param l1Inst L1CacheÖ¸Áî»º´æÊıÁ¿
-			/// @param l2 L2»º´æÊıÁ¿
-			/// @param l3 L3»º´æÊıÁ¿
+			/// @brief æ ¹æ®ç³»ç»ŸAPIæ›´æ–°Cacheçš„æ•°é‡
+			/// @param l1Data L1Cacheæ•°æ®ç¼“å­˜æ•°é‡
+			/// @param l1Inst L1CacheæŒ‡ä»¤ç¼“å­˜æ•°é‡
+			/// @param l2 L2ç¼“å­˜æ•°é‡
+			/// @param l3 L3ç¼“å­˜æ•°é‡
 			void UpdateCacheNumber(int& l1Data, int& l1Inst, int& l2, int& l3);
 		protected:
-			/// @brief ´æ´¢CPUĞÅÏ¢µÄÀà
-			/// FirstÊÇSocket ApicID, SecondÊÇSocketÊı¾İ
+			/// @brief å­˜å‚¨CPUä¿¡æ¯çš„ç±»
+			/// Firstæ˜¯Socket ApicID, Secondæ˜¯Socketæ•°æ®
 			std::map<uint32_t, Socket> m_SystemRoot;
 		private:
 		};

@@ -12,7 +12,7 @@ namespace Hardware
 
 		Data::ErrorType EDIDFromRegistry::Initialize(std::string& response)
 		{
-			//³õÊ¼»¯±äÁ¿ĞÅÏ¢
+			//åˆå§‹åŒ–å˜é‡ä¿¡æ¯
 			Monitor.clear();
 			MonitorInfos.clear();
 			GetCurrentMonitor(Monitor);
@@ -46,8 +46,8 @@ namespace Hardware
 		bool EDIDFromRegistry::GetCurrentMonitor(std::vector<DISPLAY_DEVICE>& Monitor)
 		{
 			DWORD MointorIndex = 0, AdapterIndex = 0;
-			DISPLAY_DEVICE Adapter;//µ±Ç°ÏÔÊ¾Éè±¸ĞÅÏ¢
-			DISPLAY_DEVICE Monitortmp;//µ±Ç°ÏÔÊ¾Éè±¸ÁÙÊ±´æ´¢ĞÅÏ¢
+			DISPLAY_DEVICE Adapter;//å½“å‰æ˜¾ç¤ºè®¾å¤‡ä¿¡æ¯
+			DISPLAY_DEVICE Monitortmp;//å½“å‰æ˜¾ç¤ºè®¾å¤‡ä¸´æ—¶å­˜å‚¨ä¿¡æ¯
 			ZeroMemory(&Adapter, sizeof(Adapter));
 			Adapter.cb = sizeof(DISPLAY_DEVICE);
 			while (

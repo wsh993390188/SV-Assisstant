@@ -10,149 +10,149 @@ namespace Hardware
 {
 	namespace GPU
 	{
-		/// @brief »ñÈ¡IntelGPUµÄÎÂ¶È
+		/// @brief è·å–IntelGPUçš„æ¸©åº¦
 		class IntelGPUTemperature : public GPUDecorator
 		{
 		public:
-			/// @brief ½ûÓÃÄ¬ÈÏ¹¹Ôìº¯Êı
+			/// @brief ç¦ç”¨é»˜è®¤æ„é€ å‡½æ•°
 			IntelGPUTemperature() = delete;
-			/// @brief ³õÊ¼»¯º¯Êı£¬±£´æÄÚ´æµØÖ·£¬µ±Ç°ĞŞÊÎÃû
-			/// @param[in] MemoryBase ÄÚ´æµØÖ·
-			/// @param[in] Name µ±Ç°Ãû³Æ
+			/// @brief åˆå§‹åŒ–å‡½æ•°ï¼Œä¿å­˜å†…å­˜åœ°å€ï¼Œå½“å‰ä¿®é¥°å
+			/// @param[in] MemoryBase å†…å­˜åœ°å€
+			/// @param[in] Name å½“å‰åç§°
 			/// @return
 			explicit IntelGPUTemperature(const uint64_t& MemoryBase, const std::string& Name);
 
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			const std::string GetDecoratorValue() const override final;
 
-			/// @brief ¸üĞÂĞÅÏ¢
-			/// @param MemoryPtr ÄÚ´æµÄÖ¸Õë
+			/// @brief æ›´æ–°ä¿¡æ¯
+			/// @param MemoryPtr å†…å­˜çš„æŒ‡é’ˆ
 			void Update(std::weak_ptr<Utils::Ring0::SafeMemoryHandle> MemoryPtr) override final;
 		private:
-			/// @brief ×îĞÂÎÂ¶È
+			/// @brief æœ€æ–°æ¸©åº¦
 			int64_t m_TjCurrent;
 		};
 
-		/// @brief »ñÈ¡IntelGPUµÄ¹¦ÂÊ
+		/// @brief è·å–IntelGPUçš„åŠŸç‡
 		class IntelGPUEnergy : public GPUDecorator
 		{
 		public:
-			/// @brief ½ûÓÃÄ¬ÈÏ¹¹Ôìº¯Êı
+			/// @brief ç¦ç”¨é»˜è®¤æ„é€ å‡½æ•°
 			IntelGPUEnergy() = delete;
-			/// @brief ³õÊ¼»¯º¯Êı£¬±£´æÄÚ´æµØÖ·£¬µ±Ç°ĞŞÊÎÃû
-			/// @param[in] MemoryBase ÄÚ´æµØÖ·
-			/// @param[in] EnergyUnit Energyµ¥Î»
-			/// @param[in] Name µ±Ç°Ãû³Æ
+			/// @brief åˆå§‹åŒ–å‡½æ•°ï¼Œä¿å­˜å†…å­˜åœ°å€ï¼Œå½“å‰ä¿®é¥°å
+			/// @param[in] MemoryBase å†…å­˜åœ°å€
+			/// @param[in] EnergyUnit Energyå•ä½
+			/// @param[in] Name å½“å‰åç§°
 			/// @return
 			explicit IntelGPUEnergy(const uint64_t& MemoryBase, const uint64_t& EnergyUnit, const std::string& Name);
 
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			const std::string GetDecoratorValue() const override final;
 
-			/// @brief ¸üĞÂĞÅÏ¢
-			/// @param MemoryPtr ÄÚ´æµÄÖ¸Õë
+			/// @brief æ›´æ–°ä¿¡æ¯
+			/// @param MemoryPtr å†…å­˜çš„æŒ‡é’ˆ
 			void Update(std::weak_ptr<Utils::Ring0::SafeMemoryHandle> MemoryPtr) override final;
 
 		private:
-			/// @brief ¼ÆËã¹¦ÂÊ
+			/// @brief è®¡ç®—åŠŸç‡
 			void CalcPower();
 		private:
-			/// @brief ×îĞÂ¹¦ÂÊ
+			/// @brief æœ€æ–°åŠŸç‡
 			double m_Power;
-			/// @brief ÄÜºÄ
+			/// @brief èƒ½è€—
 			GPUTimeCircle m_EnergyStatus;
-			/// @brief Ê±¼ä·¶Î§
+			/// @brief æ—¶é—´èŒƒå›´
 			GPUTimeCircle m_EnergyTime;
-			/// @brief ¹¦ÂÊµ¥Ôª
+			/// @brief åŠŸç‡å•å…ƒ
 			const double m_EnergyUnit;
 
-			/// @brief ĞÔÄÜ¼ÆÊıÆ÷µÄÆµÂÊ
+			/// @brief æ€§èƒ½è®¡æ•°å™¨çš„é¢‘ç‡
 			LARGE_INTEGER PerformanceFrequency;
 		};
 
-		/// @brief »ñÈ¡IntelGPUµÄEngine Clock
+		/// @brief è·å–IntelGPUçš„Engine Clock
 		class IntelGPUEngineClock : public GPUDecorator
 		{
 		public:
-			/// @brief ½ûÓÃÄ¬ÈÏ¹¹Ôìº¯Êı
+			/// @brief ç¦ç”¨é»˜è®¤æ„é€ å‡½æ•°
 			IntelGPUEngineClock() = delete;
-			/// @brief ³õÊ¼»¯º¯Êı£¬±£´æÄÚ´æµØÖ·£¬µ±Ç°ĞŞÊÎÃû
-			/// @param[in] MemoryBase ÄÚ´æµØÖ·
-			/// @param[in] Name µ±Ç°Ãû³Æ
+			/// @brief åˆå§‹åŒ–å‡½æ•°ï¼Œä¿å­˜å†…å­˜åœ°å€ï¼Œå½“å‰ä¿®é¥°å
+			/// @param[in] MemoryBase å†…å­˜åœ°å€
+			/// @param[in] Name å½“å‰åç§°
 			/// @return
 			explicit IntelGPUEngineClock(const uint64_t& MemoryBase, const std::string& Name);
 
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			const std::string GetDecoratorValue() const override final;
 
-			/// @brief ¸üĞÂĞÅÏ¢
-			/// @param MemoryPtr ÄÚ´æµÄÖ¸Õë
+			/// @brief æ›´æ–°ä¿¡æ¯
+			/// @param MemoryPtr å†…å­˜çš„æŒ‡é’ˆ
 			void Update(std::weak_ptr<Utils::Ring0::SafeMemoryHandle> MemoryPtr) override final;
 		private:
-			/// @brief ×îĞÂµÄEngineClock
+			/// @brief æœ€æ–°çš„EngineClock
 			int64_t m_EngineClock;
 		};
 
-		/// @brief »ñÈ¡IntelGPUµÄMemory Clock
+		/// @brief è·å–IntelGPUçš„Memory Clock
 		class IntelGPUMemoryClock : public GPUDecorator
 		{
 		public:
-			/// @brief ½ûÓÃÄ¬ÈÏ¹¹Ôìº¯Êı
+			/// @brief ç¦ç”¨é»˜è®¤æ„é€ å‡½æ•°
 			IntelGPUMemoryClock() = delete;
-			/// @brief ³õÊ¼»¯º¯Êı£¬±£´æÄÚ´æµØÖ·£¬µ±Ç°ĞŞÊÎÃû
-			/// @param[in] MemoryBase ÄÚ´æµØÖ·
-			/// @param[in] Name µ±Ç°Ãû³Æ
+			/// @brief åˆå§‹åŒ–å‡½æ•°ï¼Œä¿å­˜å†…å­˜åœ°å€ï¼Œå½“å‰ä¿®é¥°å
+			/// @param[in] MemoryBase å†…å­˜åœ°å€
+			/// @param[in] Name å½“å‰åç§°
 			/// @return
 			explicit IntelGPUMemoryClock(const uint64_t& MemoryBase, const std::string& Name);
 
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			const std::string GetDecoratorValue() const override final;
 
-			/// @brief ¸üĞÂĞÅÏ¢
-			/// @param MemoryPtr ÄÚ´æµÄÖ¸Õë
+			/// @brief æ›´æ–°ä¿¡æ¯
+			/// @param MemoryPtr å†…å­˜çš„æŒ‡é’ˆ
 			void Update(std::weak_ptr<Utils::Ring0::SafeMemoryHandle> MemoryPtr) override final;
 		private:
-			/// @brief ×îĞÂµÄMemoryClock
+			/// @brief æœ€æ–°çš„MemoryClock
 			double m_MemoryClock;
 		};
 
-		/// @brief Intel GPUµÄÊı¾İ½á¹¹
+		/// @brief Intel GPUçš„æ•°æ®ç»“æ„
 		struct IntelGpuData
 		{
-			uint32_t GPUMaxFreq;///<GPUµÄ×î´óÆµÂÊ
-			uint32_t GPUMinFreq;///<GPUµÄ×îĞ¡ÆµÂÊ
+			uint32_t GPUMaxFreq;///<GPUçš„æœ€å¤§é¢‘ç‡
+			uint32_t GPUMinFreq;///<GPUçš„æœ€å°é¢‘ç‡
 		};
 
-		/// @brief Intel GPU²Ù×÷¶ÔÏó
+		/// @brief Intel GPUæ“ä½œå¯¹è±¡
 		class IntelGPU :public GPUDeviceBase
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı
-			/// @param GpuData GPUµÄPCIÎïÀíÊı¾İĞÅÏ¢
+			/// @brief æ„é€ å‡½æ•°
+			/// @param GpuData GPUçš„PCIç‰©ç†æ•°æ®ä¿¡æ¯
 			/// @param Adapter @ref GPUAdapter
 			IntelGPU(const GPUDevice& GpuData, std::unique_ptr<GPUAdapter>&& Adapter);
 
-			/// @brief ¹¹½¨&¸üĞÂGPUµÄĞÅÏ¢
-			/// @return Utf8 Json×Ö·û´®
+			/// @brief æ„å»º&æ›´æ–°GPUçš„ä¿¡æ¯
+			/// @return Utf8 Jsonå­—ç¬¦ä¸²
 			std::string UpdateGPUInfo() override final;
 
-			/// @brief ¹¹½¨GPUµÄĞÅÏ¢
-			/// @return Utf8 Json×Ö·û´®
+			/// @brief æ„å»ºGPUçš„ä¿¡æ¯
+			/// @return Utf8 Jsonå­—ç¬¦ä¸²
 			std::string GetGPUInfo() override final;
 		private:
-			/// @brief ½âÎöGPUÃû³Æ
-			/// @param GPUName ¶ÁÈ¡µÄGPUÃû³Æ
-			/// @return ²éÑ¯ĞÅÏ¢ @ref Hardware::XMLConfig::QueryInfo
+			/// @brief è§£æGPUåç§°
+			/// @param GPUName è¯»å–çš„GPUåç§°
+			/// @return æŸ¥è¯¢ä¿¡æ¯ @ref Hardware::XMLConfig::QueryInfo
 			std::unique_ptr<Hardware::XMLConfig::QueryInfo> ParserGPUName(std::wstring GPUName);
 		private:
-			/// @brief CPU ¶¯Ì¬ĞÅÏ¢
+			/// @brief CPU åŠ¨æ€ä¿¡æ¯
 			std::vector<std::shared_ptr<GPUDecorator>> m_Decorators;
 
-			/// @brief GPUµÄÊı¾İ£¬Intel×¨ÓÃ
+			/// @brief GPUçš„æ•°æ®ï¼ŒIntelä¸“ç”¨
 			IntelGpuData GpuDatas;
 		};
 	}

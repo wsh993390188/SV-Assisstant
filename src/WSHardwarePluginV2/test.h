@@ -1,18 +1,18 @@
 /*!
 * @file test.h
-* @brief Ó²¼şÄ£¿é²âÊÔºÍÑùÀı
+* @brief ç¡¬ä»¶æ¨¡å—æµ‹è¯•å’Œæ ·ä¾‹
 *
 *
 *
-* @author ÍõË¶(wangshuo20@lenovo.com)
+* @author ç‹ç¡•(wangshuo20@lenovo.com)
 * @version 1.0
-* @date 2020Äê6ÔÂ2ÈÕ
+* @date 2020å¹´6æœˆ2æ—¥
 */
 #pragma once
 
 namespace Hardware
 {
-	/// @brief Ó²¼ş²âÊÔorÊ¹ÓÃÑùÀı
+	/// @brief ç¡¬ä»¶æµ‹è¯•orä½¿ç”¨æ ·ä¾‹
 	namespace Test
 	{
 	}

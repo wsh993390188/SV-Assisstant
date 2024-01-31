@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ Éú³ÉµÄ°üº¬ÎÄ¼ş¡£
-// ¹© WSHardwarePluginV2.rc Ê¹ÓÃ
+// Microsoft Visual C++ ç”Ÿæˆçš„åŒ…å«æ–‡ä»¶ã€‚
+// ä¾› WSHardwarePluginV2.rc ä½¿ç”¨
 //
 #define IDR_XML1                        101
 #define IDR_XML2                        103

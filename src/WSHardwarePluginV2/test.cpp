@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "test.h"
 
 #ifndef _WINDLL
@@ -101,7 +101,7 @@ namespace Hardware
 						for (const auto& node : arrayValue)
 						{
 							Json::Value::Members arrayMember = node.getMemberNames();
-							for (auto iter = arrayMember.begin(); iter != arrayMember.end(); ++iter) //±éÀújson³ÉÔ±
+							for (auto iter = arrayMember.begin(); iter != arrayMember.end(); ++iter) //éå†jsonæˆå‘˜
 							{
 								std::string member_name = *iter;
 								std::string value_str = node[member_name].asString();
@@ -124,7 +124,7 @@ namespace Hardware
 							for (const auto& node : arrayValue)
 							{
 								Json::Value::Members arrayMember = node.getMemberNames();
-								for (auto iter = arrayMember.begin(); iter != arrayMember.end(); ++iter) //±éÀújson³ÉÔ±
+								for (auto iter = arrayMember.begin(); iter != arrayMember.end(); ++iter) //éå†jsonæˆå‘˜
 								{
 									std::string member_name = *iter;
 									std::string value_str = node[member_name].asString();
@@ -145,7 +145,7 @@ namespace Hardware
 				for (const auto& node : Ele)
 				{
 					Json::Value::Members arrayMember = node.getMemberNames();
-					for (auto iter = arrayMember.begin(); iter != arrayMember.end(); ++iter) //±éÀújson³ÉÔ±
+					for (auto iter = arrayMember.begin(); iter != arrayMember.end(); ++iter) //éå†jsonæˆå‘˜
 					{
 						std::string member_name = *iter;
 						if (node[member_name].isString())
@@ -164,7 +164,7 @@ namespace Hardware
 							{
 								std::cout << member_name << ":" << std::endl;
 								auto SubarrayMember = SubNode.getMemberNames();
-								for (auto subiter = SubarrayMember.begin(); subiter != SubarrayMember.end(); ++subiter) //±éÀújson³ÉÔ±
+								for (auto subiter = SubarrayMember.begin(); subiter != SubarrayMember.end(); ++subiter) //éå†jsonæˆå‘˜
 								{
 									std::string Submember_name = *subiter;
 									if (SubNode[Submember_name].isString())

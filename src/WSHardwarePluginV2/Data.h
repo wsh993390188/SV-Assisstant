@@ -1,33 +1,33 @@
 /*!
 * @file Data.h
-* @brief Í¨ÓÃÊı¾İ½Ó¿Ú
+* @brief é€šç”¨æ•°æ®æ¥å£
 *
-* @author ÍõË¶(wangshuo20@lenovo.com)
+* @author ç‹ç¡•(wangshuo20@lenovo.com)
 * @version 1.0
-* @date 2020Äê6ÔÂ3ÈÕ
+* @date 2020å¹´6æœˆ3æ—¥
 */
 #pragma once
 
 namespace Hardware
 {
-	/// @brief Í¨ÓÃÊı¾İ
+	/// @brief é€šç”¨æ•°æ®
 	namespace Data
 	{
-		/// @brief ·µ»ØÖµÀàĞÍ
+		/// @brief è¿”å›å€¼ç±»å‹
 		enum class ErrorType : int
 		{
-			SUCCESS = 0,		///< ²Ù×÷³É¹¦
-			UNKNOWN,			///< Î´ÖªµÄ´íÎó
-			UNKNOWNCOMMAND,		///< Î´ÖªµÄÃüÁî
-			UNKNOWNJSON,		///<²»Ê¶±ğµÄJSONÊı¾İ
-			UNKNOWNCPU,			///<Î´ÖªµÄCPU
-			OVERBOUND,			///<Ë÷ÒıÔ½½ç
-			NOTINITIALIZE,		///<Î´½øĞĞ³õÊ¼»¯¾ÍÖ´ĞĞ±¾º¯Êı
-			NOTIMPLEMENTED,		///<Î´ÊµÏÖµÄ¹¦ÄÜ
-			NOTSUPPORT,			///<²»Ö§³ÖµÄ¹¦ÄÜ
-			XMLERROR,			///<XMLÅäÖÃÎÄ¼ş´íÎó
-			DATAEMPTY,			///<Êı¾İÎª¿Õ
-			COMCREATEERROR,		///<´´½¨ComÊı¾İÊ±³ö´í
+			SUCCESS = 0,		///< æ“ä½œæˆåŠŸ
+			UNKNOWN,			///< æœªçŸ¥çš„é”™è¯¯
+			UNKNOWNCOMMAND,		///< æœªçŸ¥çš„å‘½ä»¤
+			UNKNOWNJSON,		///<ä¸è¯†åˆ«çš„JSONæ•°æ®
+			UNKNOWNCPU,			///<æœªçŸ¥çš„CPU
+			OVERBOUND,			///<ç´¢å¼•è¶Šç•Œ
+			NOTINITIALIZE,		///<æœªè¿›è¡Œåˆå§‹åŒ–å°±æ‰§è¡Œæœ¬å‡½æ•°
+			NOTIMPLEMENTED,		///<æœªå®ç°çš„åŠŸèƒ½
+			NOTSUPPORT,			///<ä¸æ”¯æŒçš„åŠŸèƒ½
+			XMLERROR,			///<XMLé…ç½®æ–‡ä»¶é”™è¯¯
+			DATAEMPTY,			///<æ•°æ®ä¸ºç©º
+			COMCREATEERROR,		///<åˆ›å»ºComæ•°æ®æ—¶å‡ºé”™
 		};
 	}
 }

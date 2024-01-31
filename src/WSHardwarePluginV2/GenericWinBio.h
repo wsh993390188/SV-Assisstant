@@ -3,60 +3,60 @@ namespace Hardware
 {
 	namespace WinBio
 	{
-		/// @brief Win10µÄÉúÎï´«¸ĞÆ÷Í¨ÓÃĞÅÏ¢
+		/// @brief Win10çš„ç”Ÿç‰©ä¼ æ„Ÿå™¨é€šç”¨ä¿¡æ¯
 		struct WinBioCommonInfo
 		{
-			std::string Type; ///<´«¸ĞÆ÷ÀàĞÍ
-			std::string Desc; ///<´«¸ĞÆ÷ÃèÊö
-			std::string SerialNumber; ///<´«¸ĞÆ÷ĞòºÅ
-			std::string Manufacturer; ///<´«¸ĞÆ÷Éú²ú³§ÉÌ
-			std::string Model; ///<´«¸ĞÆ÷ĞÍºÅ
-			std::string Firmware; ///<´«¸ĞÆ÷¹Ì¼ş°æ±¾
+			std::string Type; ///<ä¼ æ„Ÿå™¨ç±»å‹
+			std::string Desc; ///<ä¼ æ„Ÿå™¨æè¿°
+			std::string SerialNumber; ///<ä¼ æ„Ÿå™¨åºå·
+			std::string Manufacturer; ///<ä¼ æ„Ÿå™¨ç”Ÿäº§å‚å•†
+			std::string Model; ///<ä¼ æ„Ÿå™¨å‹å·
+			std::string Firmware; ///<ä¼ æ„Ÿå™¨å›ºä»¶ç‰ˆæœ¬
 		};
 
-		/// @brief Win10µÄÉúÎï´«¸ĞÆ÷Í¨ÓÃ³õÊ¼»¯º¯Êı
+		/// @brief Win10çš„ç”Ÿç‰©ä¼ æ„Ÿå™¨é€šç”¨åˆå§‹åŒ–å‡½æ•°
 		class GenericWinBio
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı£¬ÓÃÓÚ³õÊ¼»¯Win10µÄÉúÎï´«¸ĞÆ÷ĞÅÏ¢
+			/// @brief æ„é€ å‡½æ•°ï¼Œç”¨äºåˆå§‹åŒ–Win10çš„ç”Ÿç‰©ä¼ æ„Ÿå™¨ä¿¡æ¯
 			GenericWinBio() = default;
 
-			/// @brief ĞéÎö¹¹º¯Êı
+			/// @brief è™šææ„å‡½æ•°
 			virtual ~GenericWinBio() = default;
 
-			/// @brief ³õÊ¼»¯Win10µÄÉúÎï´«¸ĞÆ÷
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief åˆå§‹åŒ–Win10çš„ç”Ÿç‰©ä¼ æ„Ÿå™¨
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Initialize(std::string& response) = 0;
 
-			/// @brief ¸üĞÂWin10µÄÉúÎï´«¸ĞÆ÷ĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°Win10çš„ç”Ÿç‰©ä¼ æ„Ÿå™¨ä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ®
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Update(const std::string& Args, std::string& response) = 0;
 
-			/// @brief »ñÈ¡Win10µÄÉúÎï´«¸ĞÆ÷»ù´¡Êı¾İ²Ù×÷
-			/// @param[in] paramter JSON²ÎÊı
-			/// @param[out] response JSON»ØÓ¦
+			/// @brief è·å–Win10çš„ç”Ÿç‰©ä¼ æ„Ÿå™¨åŸºç¡€æ•°æ®æ“ä½œ
+			/// @param[in] paramter JSONå‚æ•°
+			/// @param[out] response JSONå›åº”
 			/// @return @ref Data::ErrorType
 			Data::ErrorType GetElements(LPCSTR paramter, std::string& response);
 		protected:
-			/// @brief ¹¹½¨³õÊ¼»¯JSONÊı¾İ
-			/// @return JSON Utf-8×Ö·û
+			/// @brief æ„å»ºåˆå§‹åŒ–JSONæ•°æ®
+			/// @return JSON Utf-8å­—ç¬¦
 			std::string BuildInitializeJson();
 
-			/// @brief ¹¹½¨Win10µÄÉúÎï´«¸ĞÆ÷ĞÅÏ¢µÄJSON×Ö·û
-			/// @param[in] WinBioId Win10µÄÉúÎï´«¸ĞÆ÷ID
-			/// @return JSON×Ö·û
+			/// @brief æ„å»ºWin10çš„ç”Ÿç‰©ä¼ æ„Ÿå™¨ä¿¡æ¯çš„JSONå­—ç¬¦
+			/// @param[in] WinBioId Win10çš„ç”Ÿç‰©ä¼ æ„Ÿå™¨ID
+			/// @return JSONå­—ç¬¦
 			std::string BuildElementJson(const uint32_t& WinBioId);
 
-			/// @brief ½âÎöJson×Ö·û
-			/// @param[in] JsonString JSON×Ö·û´®
-			/// @param[out] WinBioId ½âÎö³É¹¦ºóµÄÍø¿¨Id
-			/// @return ½âÎöÊÇ·ñ³É¹¦
+			/// @brief è§£æJsonå­—ç¬¦
+			/// @param[in] JsonString JSONå­—ç¬¦ä¸²
+			/// @param[out] WinBioId è§£ææˆåŠŸåçš„ç½‘å¡Id
+			/// @return è§£ææ˜¯å¦æˆåŠŸ
 			bool ParserJson(const std::string& JsonString, uint32_t& WinBioId);
 
-			/// @brief Win10µÄÉúÎï´«¸ĞÆ÷×ÜµÄĞÅÏ¢
+			/// @brief Win10çš„ç”Ÿç‰©ä¼ æ„Ÿå™¨æ€»çš„ä¿¡æ¯
 			std::map<uint32_t, WinBioCommonInfo> WinBioInfos;
 		};
 	}

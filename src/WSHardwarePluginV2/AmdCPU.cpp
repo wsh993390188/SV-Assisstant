@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include <bitset>
 #include "AmdCPU.h"
 #include "CPUWMI.h"
@@ -56,7 +56,7 @@
 
 namespace
 {
-	// Todo AMD ¶¯Ì¬ĞÅÏ¢
+	// Todo AMD åŠ¨æ€ä¿¡æ¯
 	unsigned int AMD_L2_L3_Way_Associativity(unsigned int value)
 	{
 		switch (value) {
@@ -335,7 +335,7 @@ Hardware::Data::ErrorType Hardware::CPU::AmdCPU::Update(const std::string& Args,
 
 bool Hardware::CPU::AmdCPU::InitializeSocketFromAPIC()
 {
-	// TODO ÕÒ¸öAMDÆ½Ì¨²âÊÔAPIC
+	// TODO æ‰¾ä¸ªAMDå¹³å°æµ‹è¯•APIC
 	uint32_t num_Thread = 0;
 	uint32_t num_core = 0;
 	std::unique_ptr<char[]>slpi(new char[sizeof(SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX)]);
@@ -549,7 +549,7 @@ void Hardware::CPU::AmdCPU::GetInfoFromCPUID80000002(Socket& soc)
 
 void Hardware::CPU::AmdCPU::GetInfoFromCPUDB(Socket& soc)
 {
-	//Todo AMD ParserCPU Name·½Ê½²»Ì«È·¶¨ ÔİÁô¿Õ
+	//Todo AMD ParserCPU Nameæ–¹å¼ä¸å¤ªç¡®å®š æš‚ç•™ç©º
 }
 
 void Hardware::CPU::AmdCPU::AddDynamicInfo()

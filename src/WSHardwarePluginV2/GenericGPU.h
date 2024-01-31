@@ -1,16 +1,16 @@
-/// @bug Ä¿Ç°¶¼ÊÇÓÃDeviceID²éÕÒGPUÉè±¸µÄ£¬Èç¹ûÓöµ½ÏàÍ¬µÄDID¾ÍÏ¹ÁË
+/// @bug ç›®å‰éƒ½æ˜¯ç”¨DeviceIDæŸ¥æ‰¾GPUè®¾å¤‡çš„ï¼Œå¦‚æœé‡åˆ°ç›¸åŒçš„DIDå°±çäº†
 #pragma once
 #include "GPUDeviceBase.h"
 namespace Hardware
 {
 	namespace GPU
 	{
-				/// @brief GPUµÄ²éÑ¯½á¹¹
+				/// @brief GPUçš„æŸ¥è¯¢ç»“æ„
 		struct GPUQuery
 		{
 			std::uint32_t VID;///<VendorId
 			std::uint32_t DID;///<DeviceId
-			/// @brief ³õÊ¼»¯½á¹¹
+			/// @brief åˆå§‹åŒ–ç»“æ„
 			/// @param vid VendorId
 			/// @param did DeviceId
 			GPUQuery(const uint32_t& vid, const uint32_t& did) : VID(vid), DID(did) {}
@@ -24,60 +24,60 @@ namespace Hardware
 			}
 		};
 		
-		/// @brief GPUÍ¨ÓÃ³õÊ¼»¯º¯Êı
+		/// @brief GPUé€šç”¨åˆå§‹åŒ–å‡½æ•°
 		class GenericGPU
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı£¬ÓÃÓÚ³õÊ¼»¯GPUĞÅÏ¢
+			/// @brief æ„é€ å‡½æ•°ï¼Œç”¨äºåˆå§‹åŒ–GPUä¿¡æ¯
 			GenericGPU();
 
-			/// @brief ĞéÎö¹¹º¯Êı
+			/// @brief è™šææ„å‡½æ•°
 			virtual ~GenericGPU() = default;
 
-			/// @brief ³õÊ¼»¯GPU
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief åˆå§‹åŒ–GPU
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Initialize(std::string& response) = 0;
 
-			/// @brief ¸üĞÂGPUĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°GPUä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ®
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType Update(const std::string& Args, std::string& response) = 0;
 
-			/// @brief »ñÈ¡GPU»ù´¡²Ù×÷
-			/// Json¸ñÊ½ {"SocketId": 0}
-			/// @param[in] paramter JSON²ÎÊı
-			/// @param[out] response JSON»ØÓ¦
+			/// @brief è·å–GPUåŸºç¡€æ“ä½œ
+			/// Jsonæ ¼å¼ {"SocketId": 0}
+			/// @param[in] paramter JSONå‚æ•°
+			/// @param[out] response JSONå›åº”
 			/// @return @ref Data::ErrorType
 			virtual Data::ErrorType GetElements(LPCSTR paramter, std::string& response) = 0;
 
 		protected:
-			/// @brief GPUµÄÊµÀıÀà
+			/// @brief GPUçš„å®ä¾‹ç±»
 			std::map<uint32_t, std::shared_ptr<GPUDeviceBase>> GPUInfos;
 		protected:
-			/// @brief ¹¹½¨³õÊ¼»¯JSONÊı¾İ
-			/// @return JSON Utf-8×Ö·û
+			/// @brief æ„å»ºåˆå§‹åŒ–JSONæ•°æ®
+			/// @return JSON Utf-8å­—ç¬¦
 			std::string BuildInitializeJson();
 
-			/// @brief ¹¹½¨ÏÔ¿¨ĞÅÏ¢µÄJSON×Ö·û
-			/// @param[in] GPUId ÏÔ¿¨ID¶ÔÓ¦µÄ²éÑ¯¶ÔÏó
-			/// @return JSON×Ö·û
+			/// @brief æ„å»ºæ˜¾å¡ä¿¡æ¯çš„JSONå­—ç¬¦
+			/// @param[in] GPUId æ˜¾å¡IDå¯¹åº”çš„æŸ¥è¯¢å¯¹è±¡
+			/// @return JSONå­—ç¬¦
 			bool ParserJson(const std::string& JsonString, uint32_t& GPUId);
 		};
 
-		/// @brief ÏÔ¿¨¿ØÖÆ¶ÔÏó¹¤³§Àà
+		/// @brief æ˜¾å¡æ§åˆ¶å¯¹è±¡å·¥å‚ç±»
 		class GPUInstanceFactory final
 		{
-			/// @brief Ä¬ÈÏ¹¹Ôìº¯Êı
+			/// @brief é»˜è®¤æ„é€ å‡½æ•°
 			GPUInstanceFactory() = default;
 		public:
-			/// @brief µ¥Àıº¯Êı
-			/// @return µ¥Àı¶ÔÏó
+			/// @brief å•ä¾‹å‡½æ•°
+			/// @return å•ä¾‹å¯¹è±¡
 			static GPUInstanceFactory& Instance();
-			/// @brief ´´½¨µç³Ø
-			/// @param[in] DevicePath µç³ØµÄÉè±¸Â·¾¶
-			/// @return µç³ØÔªËØ @ref BatteryElement
+			/// @brief åˆ›å»ºç”µæ± 
+			/// @param[in] DevicePath ç”µæ± çš„è®¾å¤‡è·¯å¾„
+			/// @return ç”µæ± å…ƒç´  @ref BatteryElement
 			std::unique_ptr<GenericGPU> CreateGPU();
 		};
 	}

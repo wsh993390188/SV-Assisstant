@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "BaseSMBUS.h"
 #include "IoHandle.h"
 
@@ -6,105 +6,105 @@ namespace Hardware
 {
 	namespace Memory
 	{
-		/// @brief Í¨ÓÃµÄSMBUS¶ÁÈ¡ÄÚ´æĞÅÏ¢
+		/// @brief é€šç”¨çš„SMBUSè¯»å–å†…å­˜ä¿¡æ¯
 		class CommonSMBUS final : public SMBUSControllerBase
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı
+			/// @brief æ„é€ å‡½æ•°
 			CommonSMBUS();
-			/// @brief ÅĞ¶ÏDIMM¶ÔÓ¦ÄÚ´æÊÇ·ñ´æÔÚ
+			/// @brief åˆ¤æ–­DIMMå¯¹åº”å†…å­˜æ˜¯å¦å­˜åœ¨
 			/// @param[in] DIMMId DIMMId
-			/// @return ÊÇ·ñ´æÔÚÄÚ´æÉè±¸
+			/// @return æ˜¯å¦å­˜åœ¨å†…å­˜è®¾å¤‡
 			bool IsDeviceOnline(const USHORT& DIMMId) override;
 
 		private:
-			/// @brief ½«0-7×ª³ÉSMBUS¿ÉÊ¶±ğµÄDIMMId,½öÓÃÓÚPublicº¯ÊıµÄDIMMId
-			/// @param[in] id idºÅ
+			/// @brief å°†0-7è½¬æˆSMBUSå¯è¯†åˆ«çš„DIMMId,ä»…ç”¨äºPublicå‡½æ•°çš„DIMMId
+			/// @param[in] id idå·
 			/// @return DIMMId
 			USHORT ConverterIdToDIMMId(const USHORT& id);
 
-			/// @brief »ñÈ¡SMBUSµÄIOµØÖ·
-			/// @param[in] VendorID VendorÃû
-			/// @param[out] SMbusBaseAddress IOµØÖ·
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief è·å–SMBUSçš„IOåœ°å€
+			/// @param[in] VendorID Vendorå
+			/// @param[out] SMbusBaseAddress IOåœ°å€
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool GetSMbusBaseAddr(const USHORT& VendorID, USHORT& SMbusBaseAddress);
 
-			/// @brief Ñ°ÕÒSMBUSµÄPCIÉè±¸£¬½öIntel¿ÉÓÃ
-			/// @param[in] bus busºÅ
-			/// @param[in] dev devºÅ
-			/// @param[out] func funcºÅ
-			/// @return ²éÕÒÊÇ·ñ³É¹¦
+			/// @brief å¯»æ‰¾SMBUSçš„PCIè®¾å¤‡ï¼Œä»…Intelå¯ç”¨
+			/// @param[in] bus buså·
+			/// @param[in] dev devå·
+			/// @param[out] func funcå·
+			/// @return æŸ¥æ‰¾æ˜¯å¦æˆåŠŸ
 			bool FindIntelSmbusControl(const USHORT& bus, const USHORT& dev, USHORT& func);
 
-			/// @brief ¶ÁÈ¡²¢½âÎöSPDµÄĞÅÏ¢
+			/// @brief è¯»å–å¹¶è§£æSPDçš„ä¿¡æ¯
 			/// @param DIMMId DIMM Id
-			/// @param MemoryInfo SPDÍ¨ÓÃĞÅÏ¢
-			/// @return ½âÎöÊÇ·ñ³É¹¦
+			/// @param MemoryInfo SPDé€šç”¨ä¿¡æ¯
+			/// @return è§£ææ˜¯å¦æˆåŠŸ
 			bool ParserSPD(const USHORT& DIMMId, MemoryCommonInformation& MemoryInfo)override final;
 
-			/// @brief ¶ÁÈ¡SPDĞÅÏ¢
+			/// @brief è¯»å–SPDä¿¡æ¯
 			/// @param DIMMId DIMM id
-			/// @param data SPDÍ¨ÓÃĞÅÏ¢
-			/// @return ¶ÁÈ¡ÊÇ·ñ³É¹¦
+			/// @param data SPDé€šç”¨ä¿¡æ¯
+			/// @return è¯»å–æ˜¯å¦æˆåŠŸ
 			bool ReadSPD(const USHORT& DIMMId, MemoryCommonInformation& data);
 
 		private:
 
-			/// @brief ¶ÁÈ¡DDR3µÄSPD
+			/// @brief è¯»å–DDR3çš„SPD
 			/// @param DIMMId DIMM id
-			/// @return ¶ÁÈ¡ÊÇ·ñ³É¹¦
+			/// @return è¯»å–æ˜¯å¦æˆåŠŸ
 			bool ReadDDR3SPD(const USHORT& DIMMId);
 
-			/// @brief ¶ÁÈ¡DDR4µÄSPD
+			/// @brief è¯»å–DDR4çš„SPD
 			/// @param DIMMId DIMM id
-			/// @return ¶ÁÈ¡ÊÇ·ñ³É¹¦
+			/// @return è¯»å–æ˜¯å¦æˆåŠŸ
 			bool ReadDDR4SPD(const USHORT& DIMMId);
 
-			/// @brief ¶ÁÈ¡DDR5µÄSPD
+			/// @brief è¯»å–DDR5çš„SPD
 			/// @param DIMMId DIMM id
-			/// @return ¶ÁÈ¡ÊÇ·ñ³É¹¦
+			/// @return è¯»å–æ˜¯å¦æˆåŠŸ
 			bool ReadDDR5SPD(const USHORT& DIMMId);
 
-			/// @brief ÓÃ×Ö½Ú·½Ê½¶ÁÈ¡SPDÖĞµÄĞÅÏ¢
-			/// @param[in] Offset DIMMµÄ±ãÒË
-			/// @param[out] val ¶ÁÈ¡ºóµÄÖµ
+			/// @brief ç”¨å­—èŠ‚æ–¹å¼è¯»å–SPDä¸­çš„ä¿¡æ¯
+			/// @param[in] Offset DIMMçš„ä¾¿å®œ
+			/// @param[out] val è¯»å–åçš„å€¼
 			bool ReadSPDByte(const uint8_t& Offset, DWORD& val);
 
-			/// @brief ·ÖÅäSPDµÄÄÚ´æ¿Õ¼ä
-			/// @param DDRSize DDRµÄ´óĞ¡
-			/// @param DDRType DDRµÄÀàĞÍ
+			/// @brief åˆ†é…SPDçš„å†…å­˜ç©ºé—´
+			/// @param DDRSize DDRçš„å¤§å°
+			/// @param DDRType DDRçš„ç±»å‹
 			void AllocateSPDSize(const uint8_t& DDRSize, const uint8_t& DDRType);
 		private:
-			/// @brief µÈ´ıSmbus Ready
-			/// @return ÊÇ·ñReady
+			/// @brief ç­‰å¾…Smbus Ready
+			/// @return æ˜¯å¦Ready
 			bool smbus_wait_until_ready();
 
-			/// @brief µÈ´ıSmbus²Ù×÷ÊÇ·ñÍê³É
-			/// @return 0Îª³É¹¦£¬¸ºÖµÎªÊ§°Ü
+			/// @brief ç­‰å¾…Smbusæ“ä½œæ˜¯å¦å®Œæˆ
+			/// @return 0ä¸ºæˆåŠŸï¼Œè´Ÿå€¼ä¸ºå¤±è´¥
 			int smbus_wait_until_done();
 
-			/// @brief Ô¤³õÊ¼»¯SMBUS
-			/// @return ÊÇ·ñ³É¹¦³õÊ¼»¯SMBUS
+			/// @brief é¢„åˆå§‹åŒ–SMBUS
+			/// @return æ˜¯å¦æˆåŠŸåˆå§‹åŒ–SMBUS
 			bool PrepareSmbus();
 
-			/// @brief Ğ´ÈëPm¼Ä´æÆ÷
-			/// @param reg ¼Ä´æÆ÷µØÖ·
-			/// @param data ¼Ä´æÆ÷Êı¾İ
+			/// @brief å†™å…¥Pmå¯„å­˜å™¨
+			/// @param reg å¯„å­˜å™¨åœ°å€
+			/// @param data å¯„å­˜å™¨æ•°æ®
 			void writePmReg(const UINT8& reg, const UINT8& data);
 
-			/// @brief ÉèÖÃÍ¬²½
+			/// @brief è®¾ç½®åŒæ­¥
 			void setupFch();
 
-			/// @brief ÇĞ»»Ò³±í
-			/// @param data ¼Ä´æÆ÷Êı¾İ
-			/// @return ÊÇ·ñ³É¹¦ÇĞ»»SPD
+			/// @brief åˆ‡æ¢é¡µè¡¨
+			/// @param data å¯„å­˜å™¨æ•°æ®
+			/// @return æ˜¯å¦æˆåŠŸåˆ‡æ¢SPD
 			bool SwitchToPage(const UINT8& data);
 		private:
-			/// @brief SMbus»ùµØÖ·
+			/// @brief SMbusåŸºåœ°å€
 			USHORT SmbusBase;
-			/// @brief IO²Ù×÷Ö¸Õë
+			/// @brief IOæ“ä½œæŒ‡é’ˆ
 			Utils::Ring0::SafeIoHandle IoPtr;
-			/// @brief SPDµÄÊı¾İ
+			/// @brief SPDçš„æ•°æ®
 			std::vector<uint8_t> SPDData;
 		};
 	}

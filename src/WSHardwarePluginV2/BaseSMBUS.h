@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <windows.h>
 #include "PCIHandle.h"
 #include "memorydefination.h"
@@ -27,27 +27,27 @@ namespace Hardware
 			virtual bool ParserSPD(const USHORT& DIMMId, MemoryCommonInformation& MemoryInfo) = 0;
 
 		protected:
-			/// @brief Ö÷°åÆ½Ì¨µÄVendorId
+			/// @brief ä¸»æ¿å¹³å°çš„VendorId
 			USHORT PlatformId;
 
-			/// @brief ½âÎöÄÚ´æµÄÀàĞÍ
-			/// @param DDRTypes SPDµÄTypeÎ»
-			/// @return ÄÚ´æÉè±¸ÀàĞÍ
+			/// @brief è§£æå†…å­˜çš„ç±»å‹
+			/// @param DDRTypes SPDçš„Typeä½
+			/// @return å†…å­˜è®¾å¤‡ç±»å‹
 			DeviceType ParseDeviceType(const uint8_t& DDRTypes);
 
-			/// @brief ÊÇ·ñÊÇDDR3µÄÄÚ´æ
-			/// @param type SPDµÄTypeÎ»
-			/// @return ÊÇ·ñÊÇDDR3
+			/// @brief æ˜¯å¦æ˜¯DDR3çš„å†…å­˜
+			/// @param type SPDçš„Typeä½
+			/// @return æ˜¯å¦æ˜¯DDR3
 			bool IsDDR3Device(const DeviceType& type);
 
-			/// @brief ÊÇ·ñÊÇDDR4µÄÄÚ´æ
-			/// @param type SPDµÄTypeÎ»
-			/// @return ÊÇ·ñÊÇDDR4
+			/// @brief æ˜¯å¦æ˜¯DDR4çš„å†…å­˜
+			/// @param type SPDçš„Typeä½
+			/// @return æ˜¯å¦æ˜¯DDR4
 			bool IsDDR4Device(const DeviceType& type);
 
-			/// @brief ÊÇ·ñÊÇDDR5µÄÄÚ´æ
-			/// @param type SPDµÄTypeÎ»
-			/// @return ÊÇ·ñÊÇDDR5
+			/// @brief æ˜¯å¦æ˜¯DDR5çš„å†…å­˜
+			/// @param type SPDçš„Typeä½
+			/// @return æ˜¯å¦æ˜¯DDR5
 			bool IsDDR5Device(const DeviceType& type);
 		private:
 			SMBUSControllerBase(const SMBUSControllerBase&) = delete;

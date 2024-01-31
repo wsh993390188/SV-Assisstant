@@ -1,10 +1,10 @@
 /*!
 * @file ZhaoXinCPU.h
-* @brief »ñÈ¡Õ×Ğ¾CPUĞÅÏ¢
+* @brief è·å–å…†èŠ¯CPUä¿¡æ¯
 *
-* @author ÍõË¶(wangshuo20@lenovo.com)
+* @author ç‹ç¡•(wangshuo20@lenovo.com)
 * @version 1.0
-* @date 2020Äê6ÔÂ5ÈÕ
+* @date 2020å¹´6æœˆ5æ—¥
 */
 #pragma once
 #include "GenericCPU.h"
@@ -17,49 +17,49 @@ namespace Hardware
 		{
 		public:
 			explicit ZhaoxinTemperature(const uint64_t MsrRegistry, const std::string& Name);
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			const std::string GetDecoratorValue() const override;
 
-			/// @brief ¸üĞÂĞÅÏ¢
+			/// @brief æ›´æ–°ä¿¡æ¯
 			void Update(std::weak_ptr<Utils::Ring0::SafeMsrHandle> Msr) override;
 		protected:
 		private:
-			/// @brief ×îĞÂÎÂ¶È
+			/// @brief æœ€æ–°æ¸©åº¦
 			double m_CurrentTemperature;
 		};
 		class ZhaoxinVoltage final : public CPUDecorator
 		{
 		public:
 			explicit ZhaoxinVoltage(const uint64_t MsrRegistry, const std::string& Name);
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			const std::string GetDecoratorValue() const override;
 
-			/// @brief ¸üĞÂĞÅÏ¢
+			/// @brief æ›´æ–°ä¿¡æ¯
 			void Update(std::weak_ptr<Utils::Ring0::SafeMsrHandle> Msr) override;
 		protected:
 		private:
-			/// @brief ×îĞÂµçÑ¹
+			/// @brief æœ€æ–°ç”µå‹
 			double m_CurrentVoltage;
 		};
 		class ZhaoxinFrequency final : public CPUDecorator
 		{
 		public:
 			explicit ZhaoxinFrequency(const uint64_t MsrRegistry, const std::string& Name, const double BusSpeed);
-			/// @brief »ñÈ¡×°ÊÎĞÅÏ¢
-			/// @return ×°ÊÎĞÅÏ¢
+			/// @brief è·å–è£…é¥°ä¿¡æ¯
+			/// @return è£…é¥°ä¿¡æ¯
 			const std::string GetDecoratorValue() const override;
 
-			/// @brief ¸üĞÂĞÅÏ¢
+			/// @brief æ›´æ–°ä¿¡æ¯
 			void Update(std::weak_ptr<Utils::Ring0::SafeMsrHandle> Msr) override;
 		protected:
 		private:
-			/// @brief ×îĞÂÆµÂÊ
+			/// @brief æœ€æ–°é¢‘ç‡
 			double m_CurrentFrequency;
 			double m_BusSpeed;
 		};
-		/// @brief Õ×Ğ¾CPUĞÅÏ¢»ñÈ¡
+		/// @brief å…†èŠ¯CPUä¿¡æ¯è·å–
 		class ZhaoXinCPU final : public GenericCPU
 		{
 		public:
@@ -73,28 +73,28 @@ namespace Hardware
 			void GetInfoFromCPUID80000005_6(Socket& soc);
 			void GetInfoFromCPUID80000002(Socket& soc);
 
-			/// @brief ¼ÓÈë¶¯Ì¬ĞÅÏ¢
+			/// @brief åŠ å…¥åŠ¨æ€ä¿¡æ¯
 			void AddDynamicInfo();
 
-			/// @brief Õë¶ÔSocket¼ÓÈë¶¯Ì¬ĞÅÏ¢
+			/// @brief é’ˆå¯¹SocketåŠ å…¥åŠ¨æ€ä¿¡æ¯
 			void AddDynamicInfoForSocket();
 
-			/// @brief Õë¶Ô³¬Ïß³Ì¼ÓÈë¶¯Ì¬ĞÅÏ¢
+			/// @brief é’ˆå¯¹è¶…çº¿ç¨‹åŠ å…¥åŠ¨æ€ä¿¡æ¯
 			void AddDynamicInfoForHyperThead();
 
-			/// @brief ÎªSocketÔö¼Ó·â×°ÎÂ¶ÈĞÅÏ¢
+			/// @brief ä¸ºSocketå¢åŠ å°è£…æ¸©åº¦ä¿¡æ¯
 			/// @param[in] soc Socket
 			void AddPackageTemperature(Socket& soc);
 
-			/// @brief ¶ÔÃ¿¸ö³¬Ïß³ÌÔö¼ÓºËµçÑ¹ĞÅÏ¢
-			/// @param[in] thread ³¬Ïß³Ì
+			/// @brief å¯¹æ¯ä¸ªè¶…çº¿ç¨‹å¢åŠ æ ¸ç”µå‹ä¿¡æ¯
+			/// @param[in] thread è¶…çº¿ç¨‹
 			void AddCoreVoltage(std::weak_ptr<HyperThread> thread);
 
-			/// @brief ¶ÔÃ¿¸ö³¬Ïß³ÌÔö¼ÓºËÆµÂÊĞÅÏ¢
-			/// @param[in] thread ³¬Ïß³Ì
+			/// @brief å¯¹æ¯ä¸ªè¶…çº¿ç¨‹å¢åŠ æ ¸é¢‘ç‡ä¿¡æ¯
+			/// @param[in] thread è¶…çº¿ç¨‹
 			void AddCoreFrequency(std::weak_ptr<HyperThread> thread);
 		private:
-			/// @brief ²éÕÒCPUºËĞÄorÏß³ÌµÄ¸¨ÖúÊı¾İ½á¹¹
+			/// @brief æŸ¥æ‰¾CPUæ ¸å¿ƒorçº¿ç¨‹çš„è¾…åŠ©æ•°æ®ç»“æ„
 			std::vector<TopologyEntry> topology;
 		};
 	}

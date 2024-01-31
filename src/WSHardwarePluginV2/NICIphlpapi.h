@@ -10,38 +10,38 @@ namespace Hardware
 		class NICIphlpapi final :public GenericNIC
 		{
 		public:
-			/// @brief ³õÊ¼»¯º¯Êı
+			/// @brief åˆå§‹åŒ–å‡½æ•°
 			NICIphlpapi();
-			/// @brief Îö¹¹º¯Êı
+			/// @brief ææ„å‡½æ•°
 			~NICIphlpapi();
-			/// @brief ³õÊ¼»¯Íø¿¨
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief åˆå§‹åŒ–ç½‘å¡
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Initialize(std::string& response) override final;
 
-			/// @brief ¸üĞÂÍø¿¨ĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°ç½‘å¡ä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ®
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Update(const std::string& Args, std::string& response) override final;
 		private:
-			/// @brief »ñÈ¡Íø¿¨µÄÉè±¸½Ó¿ÚÀàĞÍ
-			/// @param[in] state Éè±¸½Ó¿ÚÖµ
-			/// @return Éè±¸½Ó¿Ú×Ö·û´®
+			/// @brief è·å–ç½‘å¡çš„è®¾å¤‡æ¥å£ç±»å‹
+			/// @param[in] state è®¾å¤‡æ¥å£å€¼
+			/// @return è®¾å¤‡æ¥å£å­—ç¬¦ä¸²
 			std::string ConvertDeviceIFToString(const DWORD& state);
 
-			/// @brief Ã¶¾ÙÍø¿¨Éè±¸
+			/// @brief æšä¸¾ç½‘å¡è®¾å¤‡
 			/// @return @ref Data::ErrorType
 			Data::ErrorType EnumCurrentDevice();
 
-			/// @brief ³õÊ¼»¯WSA
-			/// @return WSAÊÇ·ñ³É¹¦³õÊ¼»¯
+			/// @brief åˆå§‹åŒ–WSA
+			/// @return WSAæ˜¯å¦æˆåŠŸåˆå§‹åŒ–
 			bool InitWSA();
 		private:
-			/// @brief WSAÊÇ·ñÒÑ¾­³õÊ¼»¯
+			/// @brief WSAæ˜¯å¦å·²ç»åˆå§‹åŒ–
 			bool WSAInit;
 
-			/// @brief ²éÑ¯InterfaceµÄĞÅÏ¢
+			/// @brief æŸ¥è¯¢Interfaceçš„ä¿¡æ¯
 			std::unique_ptr<NICIFEnry> IfQuery;
 		};
 	}

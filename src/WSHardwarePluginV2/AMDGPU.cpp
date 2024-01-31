@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "AMDGPU.h"
 #include "ADLSDKHelper.h"
 

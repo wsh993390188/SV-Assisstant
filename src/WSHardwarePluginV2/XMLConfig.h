@@ -4,28 +4,28 @@ namespace Hardware
 	class XMLConfig
 	{
 	public:
-		/// @brief ÅäÖÃµÄÀ©Õ¹ĞÅÏ¢
+		/// @brief é…ç½®çš„æ‰©å±•ä¿¡æ¯
 		struct ExtendedInfo
 		{
-			std::string Element;///<ĞÅÏ¢ÄÚÈİ
-			bool Priority = true;///< ÊÇ·ñÓÅÏÈÊ¹ÓÃ,²»ÓÅÏÈÔòÊ¹ÓÃ´úÂëÅĞ±ğµÄÄÚÈİ,Ä¬ÈÏÓÅÏÈÊ¹ÓÃ
+			std::string Element;///<ä¿¡æ¯å†…å®¹
+			bool Priority = true;///< æ˜¯å¦ä¼˜å…ˆä½¿ç”¨,ä¸ä¼˜å…ˆåˆ™ä½¿ç”¨ä»£ç åˆ¤åˆ«çš„å†…å®¹,é»˜è®¤ä¼˜å…ˆä½¿ç”¨
 			operator bool() const;
 		};
 
-		/// @brief ´ÓÊı¾İ¿âÖĞ²éÑ¯ĞÅÏ¢
+		/// @brief ä»æ•°æ®åº“ä¸­æŸ¥è¯¢ä¿¡æ¯
 		struct QueryInfo
 		{
-			std::string Manufacture; ///<³§ÉÌ
-			std::string Family; ///<¼Ò×å
-			std::string Model; ///<ÀàĞÍ
+			std::string Manufacture; ///<å‚å•†
+			std::string Family; ///<å®¶æ—
+			std::string Model; ///<ç±»å‹
 			explicit operator bool() const;
 		};
 
 	protected:
-		/// @brief ´Ó×ÊÔ´ÖĞ¶ÁÈ¡XMLÅäÖÃÎÄ¼şÖĞµÄĞÅÏ¢
-		/// @param configcontent XMLÅäÖÃÎÄ¼şÖĞ¶ş½øÖÆÊı¾İ
-		/// @param ResID ×ÊÔ´ID
-		/// @return ¶ÁÈ¡ÅäÖÃÎÄ¼şÊÇ·ñ³É¹¦
+		/// @brief ä»èµ„æºä¸­è¯»å–XMLé…ç½®æ–‡ä»¶ä¸­çš„ä¿¡æ¯
+		/// @param configcontent XMLé…ç½®æ–‡ä»¶ä¸­äºŒè¿›åˆ¶æ•°æ®
+		/// @param ResID èµ„æºID
+		/// @return è¯»å–é…ç½®æ–‡ä»¶æ˜¯å¦æˆåŠŸ
 		bool GetConfigXmlFromResource(std::string& configcontent, const size_t ResID, const std::wstring& ResourceType = L"XML");
 	};
 }

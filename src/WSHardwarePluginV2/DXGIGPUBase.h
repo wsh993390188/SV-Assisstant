@@ -6,7 +6,7 @@ namespace Hardware
 {
 	namespace GPU
 	{
-		/// @brief ¸ù¾İDX·µ»ØµÄGPU»ù´¡Êı¾İ
+		/// @brief æ ¹æ®DXè¿”å›çš„GPUåŸºç¡€æ•°æ®
 		struct GPUDXBaseData
 		{
 			std::wstring Description;
@@ -32,36 +32,36 @@ namespace Hardware
 		class DXGIGPUBase final
 		{
 		public:
-			/// @brief @ref DXGIGPUBaseµÄµ¥ÀıÄ£Ê½
-			/// @return DXGIGPUBaseµÄµ¥Àı
+			/// @brief @ref DXGIGPUBaseçš„å•ä¾‹æ¨¡å¼
+			/// @return DXGIGPUBaseçš„å•ä¾‹
 			static DXGIGPUBase& Instance();
 
-			/// @brief ¸ù¾İVIDºÍDID²éÑ¯GPUµÄĞÅÏ¢
-			/// @param query GPUµÄ²éÑ¯Êı¾İ @ref LUID
+			/// @brief æ ¹æ®VIDå’ŒDIDæŸ¥è¯¢GPUçš„ä¿¡æ¯
+			/// @param query GPUçš„æŸ¥è¯¢æ•°æ® @ref LUID
 			/// @return @ref Data::ErrorType
 			Data::ErrorType QueryGPUInfo(const LUID& query, GPUDXBaseData& DxData);
 		private:
-			/// @brief ³õÊ¼»¯Éè±¸
+			/// @brief åˆå§‹åŒ–è®¾å¤‡
 			/// @return @ref Data::ErrorType
 			Data::ErrorType InitializeDevice();
 
-			/// @brief ¹¹Ôìº¯Êı
+			/// @brief æ„é€ å‡½æ•°
 			DXGIGPUBase();
 
-			/// @brief Îö¹¹º¯Êı
+			/// @brief ææ„å‡½æ•°
 			~DXGIGPUBase();
 
-			/// @brief ³õÊ¼»¯DXGIÖĞGPUĞÅÏ¢
+			/// @brief åˆå§‹åŒ–DXGIä¸­GPUä¿¡æ¯
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Initialize();
 		private:
-			/// @brief DXGIÄ£¿éÖ¸Õë
+			/// @brief DXGIæ¨¡å—æŒ‡é’ˆ
 			HMODULE hDxgi;
-			/// @brief CreateDXGIFactoryº¯ÊıÖ¸Õë
+			/// @brief CreateDXGIFactoryå‡½æ•°æŒ‡é’ˆ
 			using LPCREATEDXGIFACTORY = HRESULT(WINAPI*)(REFIID riid, void** ppFactory);
-			/// @brief CreateDXGIFactoryº¯Êı¶ÔÏó
+			/// @brief CreateDXGIFactoryå‡½æ•°å¯¹è±¡
 			LPCREATEDXGIFACTORY pCreateDXGIFactory;
-			/// @brief GPU´ÓDXÖĞ»ñÈ¡µÄÊı¾İ
+			/// @brief GPUä»DXä¸­è·å–çš„æ•°æ®
 			/// First:@ref LUID
 			/// Second:@ref GPUDXBaseData
 			std::map <LUID, GPUDXBaseData, LUIDCompare> GPUDatas;

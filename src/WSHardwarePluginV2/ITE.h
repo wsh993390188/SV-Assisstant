@@ -4,21 +4,21 @@ namespace Hardware
 {
 	namespace SIO
 	{
-		/// @brief ITE SIOÌ½²âÆ÷
+		/// @brief ITE SIOæ¢æµ‹å™¨
 		class ITE : public SIOBase
 		{
 		public:
-			/// @brief ³õÊ¼»¯ITE SIO
+			/// @brief åˆå§‹åŒ–ITE SIO
 			ITE();
 
-			/// @brief ³õÊ¼»¯SIO
-			/// @param port SIOµÄµØÖ·
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief åˆå§‹åŒ–SIO
+			/// @param port SIOçš„åœ°å€
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool InitializeSIO(const USHORT& port) override;
 
-			/// @brief ·´³õÊ¼»¯SIO£¬ÓÃÍê¾ÍÒªÏú»Ù£¬²»¿ÉÒ»Ö±Õ¼ÓÃ
-			/// @param port SIOµÄµØÖ·
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief ååˆå§‹åŒ–SIOï¼Œç”¨å®Œå°±è¦é”€æ¯ï¼Œä¸å¯ä¸€ç›´å ç”¨
+			/// @param port SIOçš„åœ°å€
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool DeInitializeSIO(const USHORT& port) override;
 		private:
 			/// @brief ITE Enrironment register

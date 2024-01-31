@@ -7,25 +7,25 @@ namespace Hardware
 	{
 		namespace Ring0
 		{
-			/// @brief ·ÇÏß³Ì°²È«µÄ»ñÈ¡1msµÄTsc¼ä¸ô
+			/// @brief éçº¿ç¨‹å®‰å…¨çš„è·å–1msçš„Tscé—´éš”
 			class TscIntervalHandle final
 			{
-				/// @brief Ö´ĞĞMsrµÄCPUId
+				/// @brief æ‰§è¡ŒMsrçš„CPUId
 				uint32_t cpu_id;
 				TscIntervalHandle() = delete;
 				TscIntervalHandle(const TscIntervalHandle&) = delete;
 				TscIntervalHandle& operator = (const TscIntervalHandle&) = delete;
 			public:
-				/// @brief ³õÊ¼»¯Msr
+				/// @brief åˆå§‹åŒ–Msr
 				/// @param[in] cpu CPU Id
 				TscIntervalHandle(uint32_t cpu);
 
-				/// @brief ¶ÁTsc
-				/// @param[out] value Tsc·µ»ØÖµ
-				/// @return ÊÇ·ñ³É¹¦
+				/// @brief è¯»Tsc
+				/// @param[out] value Tscè¿”å›å€¼
+				/// @return æ˜¯å¦æˆåŠŸ
 				bool read(double& value);
 
-				/// @brief »ñÈ¡CPU Id
+				/// @brief è·å–CPU Id
 				/// @return CPUid
 				int32_t getCoreId()
 				{
@@ -34,30 +34,30 @@ namespace Hardware
 				~TscIntervalHandle() = default;
 			};
 
-			/// @brief Ïß³Ì°²È«µÄTsc¼ä¸ô
+			/// @brief çº¿ç¨‹å®‰å…¨çš„Tscé—´éš”
 			class SafeTscIntervalHandle final
 			{
 				/// @brief Tsc Handle
 				std::shared_ptr<TscIntervalHandle> pHandle;
-				/// @brief Ïß³Ì°²È«±£»¤»¥³âÁ¿
+				/// @brief çº¿ç¨‹å®‰å…¨ä¿æŠ¤äº’æ–¥é‡
 				mutable std::mutex mutex;
 
 				SafeTscIntervalHandle(const SafeTscIntervalHandle&) = delete;               // forbidden
 				SafeTscIntervalHandle& operator = (const SafeTscIntervalHandle&) = delete; // forbidden
 
 			public:
-				/// @brief ³õÊ¼»¯TscÎª¿Õ
+				/// @brief åˆå§‹åŒ–Tscä¸ºç©º
 				/// @return
 				SafeTscIntervalHandle() :pHandle{} { }
 
-				/// @brief Õı³£³õÊ¼»¯Tsc
+				/// @brief æ­£å¸¸åˆå§‹åŒ–Tsc
 				/// @param[in] core_id Cpu Id
 				SafeTscIntervalHandle(uint32_t core_id) : pHandle(std::make_shared<TscIntervalHandle>(core_id))
 				{ }
 
-				/// @brief ¶ÁTsc
-				/// @param[out] value Tsc·µ»ØÖµ
-				/// @return ÊÇ·ñ³É¹¦
+				/// @brief è¯»Tsc
+				/// @param[out] value Tscè¿”å›å€¼
+				/// @return æ˜¯å¦æˆåŠŸ
 				bool read(double& value) const
 				{
 					if (pHandle)
@@ -71,7 +71,7 @@ namespace Hardware
 					return false;
 				}
 
-				/// @brief »ñÈ¡CPU Id
+				/// @brief è·å–CPU Id
 				/// @return CPUid
 				int32_t getCoreId()
 				{

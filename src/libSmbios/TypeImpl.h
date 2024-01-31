@@ -2,17 +2,17 @@
 #include <type_traits>
 namespace Smbios
 {
-	//»ñÈ¡Ã¿¸öÀàĞÍµÄÈë¿ÚµØÖ·
+	//è·å–æ¯ä¸ªç±»å‹çš„å…¥å£åœ°å€
 	class EntryPoint
 	{
 	public:
 		EntryPoint();
 		~EntryPoint() = default;
 
-		//»ñÈ¡×Ö·û¶ÎÖĞÏàÓ¦×Ö·û´®
+		//è·å–å­—ç¬¦æ®µä¸­ç›¸åº”å­—ç¬¦ä¸²
 		std::string DMIToString(uint8_t Targetstring) const;
 
-		//ÇĞ»»µ½¶ÔÓ¦µÄTypeµØÖ·£¬TypeNumÊÇTypeºÅ£¬TargetTableÊÇ¶ÔÓ¦±íºÅ¡£
+		//åˆ‡æ¢åˆ°å¯¹åº”çš„Typeåœ°å€ï¼ŒTypeNumæ˜¯Typeå·ï¼ŒTargetTableæ˜¯å¯¹åº”è¡¨å·ã€‚
 		void SwitchToTypePhyAddress(uint8_t TypeNum, int8_t TargetTable = 0);
 
 		void ResetPhyAddress();

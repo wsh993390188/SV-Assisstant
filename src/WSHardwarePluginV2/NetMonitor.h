@@ -6,15 +6,15 @@ namespace Hardware
 {
 	namespace NIC
 	{
-		/// @brief WifiÖÊÁ¿·Ö¼¶
+		/// @brief Wifiè´¨é‡åˆ†çº§
 		enum class WiFiQuality
 		{
-			DisConnect,		  ///< ÎŞÍøÂç
-			Unknown,		  ///< ×´Ì¬Î´Öª
-			Weak,             ///< ¼«²î (-INF, -70dBm)
-			Fair,             ///< Ò»°ã [-70dBm, -60dBm)
-			Good,             ///< ½ÏºÃ [-60dBm, -50dBm)
-			Excellent         ///< ×îºÃ [-50dBm, +INF)
+			DisConnect,		  ///< æ— ç½‘ç»œ
+			Unknown,		  ///< çŠ¶æ€æœªçŸ¥
+			Weak,             ///< æå·® (-INF, -70dBm)
+			Fair,             ///< ä¸€èˆ¬ [-70dBm, -60dBm)
+			Good,             ///< è¾ƒå¥½ [-60dBm, -50dBm)
+			Excellent         ///< æœ€å¥½ [-50dBm, +INF)
 		};
 
 		class NetworkMonitor final

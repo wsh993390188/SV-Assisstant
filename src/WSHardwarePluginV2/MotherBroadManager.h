@@ -5,31 +5,31 @@
 
 namespace Hardware
 {
-	/// @brief Ö÷°åµ÷¶È½Ó¿ÚÀà
+	/// @brief ä¸»æ¿è°ƒåº¦æ¥å£ç±»
 	class MotherBroadManager : public Interface::Manager
 	{
 	public:
-		/// @brief Ö÷°åµ÷¶È½Ó¿Ú¹¹Ôìº¯Êı
+		/// @brief ä¸»æ¿è°ƒåº¦æ¥å£æ„é€ å‡½æ•°
 		MotherBroadManager();
-		/// @brief ³õÊ¼»¯ÃüÁî²Ù×÷
-		/// @param[in] paramter JSON²ÎÊı
-		/// @param[out] response JSON»ØÓ¦
+		/// @brief åˆå§‹åŒ–å‘½ä»¤æ“ä½œ
+		/// @param[in] paramter JSONå‚æ•°
+		/// @param[out] response JSONå›åº”
 		/// @return @ref Data::ErrorType
 		Data::ErrorType Init(LPCSTR paramter, std::string& response) override final;
 
-		/// @brief ¸üĞÂÊı¾İÃüÁî²Ù×÷
-		/// @param[in] paramter JSON²ÎÊı
-		/// @param[out] response JSON»ØÓ¦
+		/// @brief æ›´æ–°æ•°æ®å‘½ä»¤æ“ä½œ
+		/// @param[in] paramter JSONå‚æ•°
+		/// @param[out] response JSONå›åº”
 		/// @return @ref Data::ErrorType
 		Data::ErrorType Update(LPCSTR paramter, std::string& response) override final;
 
-		/// @brief »ñÈ¡ÃüÁî²Ù×÷
-		/// @param[in] paramter JSON²ÎÊı
-		/// @param[out] response JSON»ØÓ¦
+		/// @brief è·å–å‘½ä»¤æ“ä½œ
+		/// @param[in] paramter JSONå‚æ•°
+		/// @param[out] response JSONå›åº”
 		/// @return @ref Data::ErrorType
 		Data::ErrorType GetElements(LPCSTR paramter, std::string& response) override final;
 	private:
-		/// @brief Ö÷°åÏà¹Ø·ÃÎÊ¿ØÖÆÆ÷
+		/// @brief ä¸»æ¿ç›¸å…³è®¿é—®æ§åˆ¶å™¨
 		std::unique_ptr<MotherBroad::GenericMotherBroad> MotherBroadControl;
 	private:
 	};

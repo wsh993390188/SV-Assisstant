@@ -4,39 +4,39 @@ namespace Hardware
 {
 	namespace Utils
 	{
-		/// @brief ¶ÁÈ¡PNPIdµÄÅäÖÃÄ£¿é
+		/// @brief è¯»å–PNPIdçš„é…ç½®æ¨¡å—
 		class PNPIDUtils final : public XMLConfig
 		{
-			/// @brief ¹¹Ôìº¯Êı
+			/// @brief æ„é€ å‡½æ•°
 			PNPIDUtils();
 
-			/// @brief XMLÄ¬ÈÏ°æ±¾ºÅ
+			/// @brief XMLé»˜è®¤ç‰ˆæœ¬å·
 			std::string m_DefaultVersion;
 
-			/// @brief ÅäÖÃÎÄ¼ş¸üĞÂµÄËø
+			/// @brief é…ç½®æ–‡ä»¶æ›´æ–°çš„é”
 			mutable std::mutex m_Mutex;
 
-			/// @brief PNPIDsµÄÊı¾İ¿â
+			/// @brief PNPIDsçš„æ•°æ®åº“
 			std::map<std::string, XMLConfig::ExtendedInfo> m_PNPIDs;
 		public:
-			/// @brief µ¥ÀıÄ£Ê½
+			/// @brief å•ä¾‹æ¨¡å¼
 			/// @return @ref PNPIDUtils
 			static PNPIDUtils& Instance();
 
-			/// @brief Í¨¹ıPNPID²éÑ¯Ãû³Æ
+			/// @brief é€šè¿‡PNPIDæŸ¥è¯¢åç§°
 			/// @param PnpId PNPID
-			/// @return Ãû³Æ
+			/// @return åç§°
 			std::string QueryNameByPnpId(const std::string& PnpId);
 		private:
-			/// @brief PNPIDĞòÁĞ»¯ÀàµÄÀàĞÍ
+			/// @brief PNPIDåºåˆ—åŒ–ç±»çš„ç±»å‹
 			using PNPIDDBType = decltype(m_PNPIDs);
 
-			/// @brief ³õÊ¼»¯PNP IDÅäÖÃÎÄ¼ş
+			/// @brief åˆå§‹åŒ–PNP IDé…ç½®æ–‡ä»¶
 			void Initialize();
 
-			/// @brief ½âÎöPNPID×Ö¶Î
-			/// @param PNPIDElement ×Ö¶ÎÔªËØ
-			/// @param PnpidDB ĞòÁĞ»¯Àà
+			/// @brief è§£æPNPIDå­—æ®µ
+			/// @param PNPIDElement å­—æ®µå…ƒç´ 
+			/// @param PnpidDB åºåˆ—åŒ–ç±»
 			void ParserPNPID(tinyxml2::XMLElement const* const PNPIDElement, PNPIDDBType& PnpidDB);
 		};
 	}

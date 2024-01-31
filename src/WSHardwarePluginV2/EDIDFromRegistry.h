@@ -4,54 +4,54 @@ namespace Hardware
 {
 	namespace Monitor
 	{
-		/// @brief ´Ó×¢²á±íÖĞ¶ÁÈ¡EDID
+		/// @brief ä»æ³¨å†Œè¡¨ä¸­è¯»å–EDID
 		class EDIDFromRegistry : public GenericMonitor
 		{
 		public:
-			/// @brief ¹¹Ôìº¯Êı
+			/// @brief æ„é€ å‡½æ•°
 			EDIDFromRegistry();
 
-			/// @brief Îö¹¹º¯Êı
+			/// @brief ææ„å‡½æ•°
 			~EDIDFromRegistry() = default;
 
-			/// @brief ³õÊ¼»¯ÏÔÊ¾Æ÷
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief åˆå§‹åŒ–æ˜¾ç¤ºå™¨
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Initialize(std::string& response);
 
-			/// @brief ¸üĞÂÏÔÊ¾Æ÷ĞÅÏ¢
-			/// @param[in] Args JsonÊı¾İ
-			/// @param[out] response »ØÓ¦µÄJsonÊı¾İ
+			/// @brief æ›´æ–°æ˜¾ç¤ºå™¨ä¿¡æ¯
+			/// @param[in] Args Jsonæ•°æ®
+			/// @param[out] response å›åº”çš„Jsonæ•°æ®
 			/// @return @ref Data::ErrorType
 			Data::ErrorType Update(const std::string& Args, std::string& response);
 		private:
-			/// @brief »ñÈ¡µ±Ç°ÏÔÊ¾Æ÷µÄĞÅÏ¢
-			/// @param Monitor Êä³öÏÔÊ¾Æ÷ÔÚµçÄÔ¶Ë¶ÔÓ¦µÄDeviceµÈĞÅÏ¢
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief è·å–å½“å‰æ˜¾ç¤ºå™¨çš„ä¿¡æ¯
+			/// @param Monitor è¾“å‡ºæ˜¾ç¤ºå™¨åœ¨ç”µè„‘ç«¯å¯¹åº”çš„Deviceç­‰ä¿¡æ¯
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool GetCurrentMonitor(std::vector<DISPLAY_DEVICE>& Monitor);
 
-			/// @brief »ñÈ¡ÏÔÊ¾Æ÷µÄModelºÍDriverĞÅÏ¢
-			/// @param[in] lpDeviceid ÏÔÊ¾Æ÷µÄDeviceID
-			/// @param[out] Model ÏÔÊ¾Æ÷µÄModel
-			/// @param[out] Driver ÏÔÊ¾Æ÷µÄDriver
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief è·å–æ˜¾ç¤ºå™¨çš„Modelå’ŒDriverä¿¡æ¯
+			/// @param[in] lpDeviceid æ˜¾ç¤ºå™¨çš„DeviceID
+			/// @param[out] Model æ˜¾ç¤ºå™¨çš„Model
+			/// @param[out] Driver æ˜¾ç¤ºå™¨çš„Driver
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool GetModelandDriver(
 				const std::wstring& lpDeviceid,
 				std::wstring& Model,
 				std::wstring& Driver
 			);
 
-			/// @brief ¸ù¾İModelºÍDriver¶¨Î»×¢²á±í »ñÈ¡µ±Ç°ÏÔÊ¾Æ÷µÄEDID
-			/// @param[in] Model ÏÔÊ¾Æ÷µÄModel
-			/// @param[in] Driver ÏÔÊ¾Æ÷µÄDriver
-			/// @param[out] EDIDbuffer Êä³ö»º³åÇøµØÖ·
-			/// @return ÊÇ·ñ³É¹¦
+			/// @brief æ ¹æ®Modelå’ŒDriverå®šä½æ³¨å†Œè¡¨ è·å–å½“å‰æ˜¾ç¤ºå™¨çš„EDID
+			/// @param[in] Model æ˜¾ç¤ºå™¨çš„Model
+			/// @param[in] Driver æ˜¾ç¤ºå™¨çš„Driver
+			/// @param[out] EDIDbuffer è¾“å‡ºç¼“å†²åŒºåœ°å€
+			/// @return æ˜¯å¦æˆåŠŸ
 			bool GetEDID(
 				const std::wstring& Model,
 				const std::wstring& Driver,
 				std::vector<uint8_t>& EDIDbuffer);
 		private:
-			/// @brief ÏÔÊ¾Æ÷Êµ¼ÊÊı¾İ
+			/// @brief æ˜¾ç¤ºå™¨å®é™…æ•°æ®
 			std::vector<DISPLAY_DEVICE> Monitor;
 		};
 	}

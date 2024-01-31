@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "CommonSMBUS.h"
 #include "IoHandle.h"
 #include "ParserSPD.h"
@@ -289,7 +289,7 @@ namespace Hardware
 				}
 				else
 				{
-					spdlog::error("unknown device type ({})", DeviceType);
+					spdlog::error("unknown device type ({})", int(DeviceType));
 				}
 			}
 			else

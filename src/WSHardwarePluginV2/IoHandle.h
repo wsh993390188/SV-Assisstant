@@ -5,13 +5,13 @@ namespace Hardware
 	{
 		namespace Ring0
 		{
-			/// @brief PCI 处理的帮助类
+			/// @brief PCI 澶勭悊鐨勫府鍔╃被
 			class IoHandle final
 			{
 				IoHandle(const IoHandle&) = delete;
 				IoHandle& operator = (const IoHandle&) = delete;
 			public:
-				/// @brief 初始化PCI
+				/// @brief 鍒濆鍖朠CI
 				IoHandle() = default;
 
 				bool ReadByte(const USHORT IoAddress, DWORD& value);
@@ -25,12 +25,12 @@ namespace Hardware
 				~IoHandle() = default;
 			};
 
-			/// @brief 线程安全的PCI 处理的帮助类
+			/// @brief 绾跨▼瀹夊叏鐨凱CI 澶勭悊鐨勫府鍔╃被
 			class SafeIoHandle final
 			{
 				std::shared_ptr<IoHandle> pHandle;
 			public:
-				/// @brief 初始化PCI
+				/// @brief 鍒濆鍖朠CI
 				SafeIoHandle() : pHandle(std::make_shared<IoHandle>()) {}
 
 				bool ReadByte(const USHORT IoAddress, DWORD& value)
